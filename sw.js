@@ -1,5 +1,5 @@
 /* Gold Cup Matchboard service worker: network first, offline fallback */
-const C="gcmb-v4";
+const C="gcmb-v5";
 const CORE=["./","index.html","app.css","app.js","teaminfo.json","people.json","roster.json","results.json","brand/lockup.webp","brand/ssl.png","fonts/GeneralSans-Regular.woff2","fonts/GeneralSans-Medium.woff2","fonts/GeneralSans-Semibold.woff2","icons/icon-192.png"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(CORE)).catch(()=>{}));self.skipWaiting()});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
