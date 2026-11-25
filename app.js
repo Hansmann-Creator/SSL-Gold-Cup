@@ -431,7 +431,7 @@ document.addEventListener("keydown",e=>{if(e.target.matches("input,select,textar
   if(e.key=="/"){const i=$("#q");if(i){e.preventDefault();i.focus()}}
   if(view=="board"&&(e.key=="ArrowRight"||e.key=="ArrowLeft")){const ids=D.rounds.map(r=>r.id),i=ids.indexOf(round)+(e.key=="ArrowRight"?1:-1);if(ids[i]){round=ids[i];go("round-"+round)}}});
 setInterval(()=>{stand();if(view=="board"&&!$("#tmd").open&&!document.hidden&&!(document.activeElement&&document.activeElement.matches("input,select")))render(true)},60000);
-setInterval(async()=>{if(document.hidden)return;if(await pullFile()){render(true);if($("#tmd").open&&openCode){const y=$("#tmd").scrollTop;openTeam(openCode);$("#tmd").scrollTop=y}}else stand()},120000);
+setInterval(async()=>{if(document.hidden)return;if(await pullFile()){render(true);if($("#tmd").open&&openCode){const y=$("#tmd").scrollTop;openTeam(openCode);$("#tmd").scrollTop=y}}else stand()},60000);
 document.addEventListener("visibilitychange",async()=>{if(!document.hidden&&await pullFile())render(true)});
 await pullFile();live=true;
 round=current();

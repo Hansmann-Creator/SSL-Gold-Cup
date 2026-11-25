@@ -1,0 +1,60 @@
+name: Live results (every minute)
+
+# Race days, 11:00-19:00 Rio time (UTC-3) = 14:00-22:00 UTC.
+# A job may run at most 6 h, so two jobs cover the day; the second replaces the first.
+on:
+  schedule:
+    - cron: "0 14 * 11,12 *"
+    - cron: "40 19 * 11,12 *"
+  workflow_dispatch:
+    inputs:
+      minutes:
+        description: "How long to run (minutes)"
+        default: "5"
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: live
+  cancel-in-progress: true
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Race day in Rio?
+        id: day
+        run: |
+          D=$(TZ=America/Sao_Paulo date +%F)
+          case "$D" in 2026-11-2[6-9]|2026-12-0[2-5]|2026-12-0[7-9]|2026-12-10|2026-12-1[23]) RD=true;; *) RD=false;; esac
+          [ "${{ github.event_name }}" = "workflow_dispatch" ] && RD=true
+          echo "run=$RD" >> $GITHUB_OUTPUT; echo "Rio $D race-day=$RD"
+      - uses: actions/setup-python@v5
+        if: steps.day.outputs.run == 'true'
+        with: { python-version: "3.12" }
+      - name: Check every minute
+        if: steps.day.outputs.run == 'true'
+        run: |
+          pip install -q beautifulsoup4
+          git config user.name "results-bot"; git config user.email "results-bot@users.noreply.github.com"
+          START=$(date +%s)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then END=$((START + ${{ inputs.minutes || 5 }} * 60)); else
+            END=$((START + 345 * 60)); STOP=$(date -u -d "today 22:00" +%s); [ $END -gt $STOP ] && END=$STOP; fi
+          LAST=0
+          while [ "$(date +%s)" -lt "$END" ]; do
+            git pull -q --rebase origin main || { git rebase --abort; git reset -q --hard origin/main; }
+            NOW=$(date +%s); STAMP=""; [ $((NOW - LAST)) -ge 600 ] && STAMP="--stamp"
+            if timeout 50 python scripts/update_results.py $STAMP; then
+              if ! git diff --quiet results.json; then
+                git add results.json; git commit -qm "results $(date -u +%FT%TZ)"
+                if git push -q origin main; then gh workflow run deploy.yml --ref main && LAST=$NOW; else git reset -q --hard origin/main; fi
+              fi
+            else echo "check failed, retrying next minute"; git checkout -q results.json; fi
+            sleep $((60 - $(date +%s) % 60))
+          done

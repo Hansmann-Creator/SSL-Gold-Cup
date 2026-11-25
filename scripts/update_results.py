@@ -126,23 +126,21 @@ def merge(old, found):
 
 
 def main():
-    force = "--force" in sys.argv
+    """--stamp: also save checkedAt when nothing changed (so the app can show 'checked x min ago')."""
+    stamp = "--stamp" in sys.argv
     old = json.load(open(FILE, encoding="utf-8"))
     html = fetch(URL)
     found = parse(html)
-    print("parsed:", {k: sorted(v) for k, v in found.items()})
     new = merge(old, found)
     changed = json.dumps(new["rounds"], sort_keys=True) != json.dumps(old["rounds"], sort_keys=True)
     t = now()
-    new["checkedAt"] = t
-    new["source"] = URL
-    if changed:
-        new["updatedAt"] = t
-    json.dump(new, open(FILE, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
-    print("changed" if changed else "no change", t)
-    if os.environ.get("GITHUB_OUTPUT"):
-        with open(os.environ["GITHUB_OUTPUT"], "a") as f:
-            f.write(f"changed={'true' if changed else 'false'}\n")
+    if changed or stamp:
+        new["checkedAt"] = t
+        new["source"] = URL
+        if changed:
+            new["updatedAt"] = t
+        json.dump(new, open(FILE, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    print(t, "CHANGED" if changed else "no change", "(stamped)" if stamp and not changed else "")
 
 
 if __name__ == "__main__":
