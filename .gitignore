@@ -5,3 +5,4 @@ version.json
 __pycache__/
 videos.json
 trk/
+__pycache__/
