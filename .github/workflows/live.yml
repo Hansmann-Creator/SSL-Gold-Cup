@@ -52,6 +52,11 @@ jobs:
           while [ "$(date +%s)" -lt "$END" ]; do
             git pull -q --rebase origin main || { git rebase --abort; git reset -q --hard origin/main; }
             NOW=$(date +%s); STAMP=""; [ $((NOW - LAST)) -ge 600 ] && STAMP="--stamp"
+            # live video of the SSL channel, every 2 minutes
+            if [ $(( $(date +%s) / 60 % 2 )) -eq 0 ]; then
+              timeout 30 python scripts/live_video.py || true
+              if ! git diff --quiet live.json; then git add live.json; git commit -qm "live video $(date -u +%H:%M)" && { git push -q origin main && gh workflow run deploy.yml --ref main || git reset -q --hard origin/main; }; fi
+            fi
             cp results.json /tmp/old.json
             if timeout 50 python scripts/update_results.py $STAMP; then
               if ! git diff --quiet results.json; then
