@@ -622,6 +622,14 @@ round=current();
 if(!location.hash){const v=LS.get("view","");if(v&&!/^team-/.test(v))try{location.hash=v}catch(e){}}
 route();
 
+/* ---------- app updates: reload automatically when a new version is published ---------- */
+let VER=null,NEWVER=false;
+async function checkVer(){try{const r=await fetch("version.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const v=(await r.json()).v;if(!v)return;if(VER==null)VER=v;else if(v!==VER)NEWVER=true}catch(e){}tryReload()}
+function tryReload(){if(!NEWVER||document.hidden||$("#tmd").open||(document.activeElement&&document.activeElement.matches("input,select")))return;NEWVER=false;location.reload()}
+checkVer();setInterval(checkVer,120000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)checkVer()});
+$("#tmd").addEventListener("close",()=>setTimeout(tryReload,300));
+
 /* ---------- offline / home-screen app (own hosting only; artifact frames refuse service workers) ---------- */
 try{if("serviceWorker" in navigator&&window.top===window&&location.protocol=="https:"&&!/claude/.test(location.hostname))navigator.serviceWorker.register("sw.js").catch(()=>{})}catch(e){}
 
