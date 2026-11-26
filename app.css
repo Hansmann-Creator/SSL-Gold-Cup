@@ -819,3 +819,4 @@ td.t .bdg,td.t>.tag{margin-inline-start:30px}
 .plk>span:nth-child(2){flex:1;min-width:0}.plk b{display:block;font-size:15px}.plk small{display:block;color:var(--mute);font-size:12px}
 .plc{color:var(--mute)}
 .pli .sslg{object-fit:contain;padding:4px;background:#fff}
+.mine .capr{margin:0 0 4px}.mine h3+.capr{margin-top:2px}.sfh{margin:6px 0 2px}

@@ -6,7 +6,7 @@ const LANGS={en:"English",de:"Deutsch",fr:"Français",es:"Español",pt:"Portugu�
 const RTL=l=>l=="ar"||l=="ur";
 const LOC=()=>({ar:"ar-u-nu-latn",zh:"zh-CN",pt:"pt-BR",hi:"hi-IN-u-nu-latn",bn:"bn-BD-u-nu-latn",ur:"ur-PK-u-nu-latn",id:"id-ID"})[lang]||lang;
 let lang=LS.get("lang",null);if(!LANGS[lang])lang=["de","fr","es","pt","zh","ar","hi","bn","ur","id"].find(l=>(navigator.language||"").toLowerCase().startsWith(l))||"en";
-let theme=LS.get("theme","auto"),favs=new Set(LS.get("favs",[]));
+let theme=LS.get("theme","auto"),favs=new Set(LS.get("favs",[])),sfavs=new Set(LS.get("sfavs",[]));
 
 let TRK={};try{const r=await fetch("tracking.json",{cache:"no-cache"});if(r.ok)TRK=await r.json()}catch(e){}
 let INFO={};try{INFO=await (await fetch("teaminfo.json",{cache:"no-cache"})).json()}catch(e){}
@@ -502,6 +502,8 @@ fr:{aboutT:"Biographie",srcSSL:"Bio officielle · Star Sailors League",careerT:"
 es:{aboutT:"Biografía",srcSSL:"Bio oficial · Star Sailors League",careerT:"Trayectoria",evN:"resultados",podN:"podios",medRate:"tasa de medallas",bestR:"mejor resultado",showAll:"Ver todo",sslPts:"Puntos SSL",heightT:"Altura",weightT:"Peso",moreT:"Más",sslProf:"Perfil oficial SSL",teamSite:"Web del equipo"},
 pt:{aboutT:"Sobre",srcSSL:"Bio oficial · Star Sailors League",careerT:"Carreira",evN:"resultados",podN:"pódios",medRate:"taxa de medalhas",bestR:"melhor resultado",showAll:"Mostrar tudo",sslPts:"Pontos SSL",heightT:"Altura",weightT:"Peso",moreT:"Mais",sslProf:"Perfil oficial SSL",teamSite:"Site da equipe"}};
 for(const l in SPF)Object.assign(S[l],SPF[l]);
+const SSF={en:{mySailors:"My sailors",sFavHint:"Tap ☆ on a sailor's page to follow them – they'll show up here."},de:{mySailors:"Meine Segler",sFavHint:"Tippe auf ☆ auf der Seite eines Seglers, um ihm zu folgen – er erscheint dann hier."},fr:{mySailors:"Mes marins",sFavHint:"Touchez ☆ sur la page d'un marin pour le suivre – il apparaîtra ici."},es:{mySailors:"Mis regatistas",sFavHint:"Toca ☆ en la página de un regatista para seguirlo; aparecerá aquí."},pt:{mySailors:"Meus velejadores",sFavHint:"Toque em ☆ na página de um velejador para segui-lo – ele aparecerá aqui."}};
+for(const l in SSF)Object.assign(S[l],SSF[l]);
 const T=k=>S[lang][k]??S.en[k];
 const ord=n=>ORD[lang](n);
 
@@ -669,8 +671,10 @@ function gtable(r,g,clickable){const gs=gState(g,r),started=g.rows.some(x=>x.r.s
     const lt=lc&&lc[i]?`<span class="tag ${lc[i]=="clinch"?"w":"o"}">${T(lc[i]=="clinch"?"clinched":"elim")}</span>`:"";
     return `<tr class="${c}${lc&&lc[i]=="elim"?" x":""}" data-t="${esc(x.team)}"><td class="p">${started?i+1:""}</td><td class="t"><span class="tnm">${nm}${clickable&&tm?`<span class="chev">›</span>`:""}</span>${o?(o[0]=="w"&&["r32","r16","r8","r4","sf"].includes(r.id)?`<span class="bdg" title="${esc(o[1])}">${esc(ord(i+1))}</span>`:`<span class="tag ${o[0]}">${esc(o[1])}</span>`):lt}</td>${x.r.map(v=>`<td class="r">${esc(v)||"–"}</td>`).join("")}<td class="tot">${String(x.total??"").trim()?esc(x.total):x.r.some(v=>String(v).trim()!=="")?`<span class="run" title="provisional">${x.r.reduce((s,v)=>s+num(v),0)}</span>`:"–"}</td></tr>${started&&gs!="done"&&i==1&&g.rows.length>2&&QNX[r.id]?qsep(r,g):""}`}).join("")
   }</tbody></table>${note(g)?`<div class="note">${esc(note(g))}</div>`:""}${clickable&&advText(r,g)?`<div class="adv">${esc(advText(r,g))}</div>`:""}`}
-function mine(){if(!favs.size)return"";const TT=teams().filter(t=>favs.has(t.code));if(!TT.length)return"";
-  return `<div class="mine"><h3>★ ${T("myTeams")}</h3>${TT.map(t=>`<button data-t="${esc(t.code)}" class="tmx"><span>${t.flag}</span><span><b>${esc(t.name)}</b><br><small>${esc(t.txt)}</small></span></button>`).join("")}</div>`}
+function favSailors(){const out=[];for(const k of sfavs){const j=k.indexOf("|"),c=k.slice(0,j),n=k.slice(j+1);try{const p=squad(c).ppl.find(x=>x.name==n);if(p)out.push({c,p})}catch(e){}}return out}
+function sCarousel(L){return `<div class="capr">${L.map(({c,p})=>`<button class="capc" data-sc="${esc(c)}" data-si="${p.i}"><span class="cpa">${p.img?`<img src="${esc(p.img)}" alt="" loading="lazy">`:`<b>${esc(ini(p.name))}</b>`}</span><span class="cpn"><small>${esc(givenN(p.name))}</small>${esc(surname(p.name))}</span><span class="cpf">${FL(c)}${esc(c)}</span></button>`).join("")}</div>`}
+function mine(){const TT=favs.size?teams().filter(t=>favs.has(t.code)):[],SF=favSailors();if(!TT.length&&!SF.length)return"";
+  return `<div class="mine">${TT.length?`<h3>★ ${T("myTeams")}</h3>${TT.map(t=>`<button data-t="${esc(t.code)}" class="tmx"><span>${t.flag}</span><span><b>${esc(t.name)}</b><br><small>${esc(t.txt)}</small></span></button>`).join("")}`:""}${SF.length?`<h3>★ ${T("mySailors")}</h3>${sCarousel(SF)}`:""}</div>`}
 function board(){const r=D.rounds.find(x=>x.id==round)||D.rounds[0],s=rState(r),n=r.groups[0].rows[0].r.length;
   let h=delayBanner()+mine();const td=today();
   h+=`<div class="rhead"><h2>${esc(RNm(r))}</h2><p>${esc(range(r))} · ${T("races")(n)} · ${s=="live"&&td>=r.start&&td<=r.end?T("raceDay")(...raceDay(r)):T("st")[s]}</p></div>`;
@@ -782,7 +786,7 @@ function more(){const I=T("inst");
   h+=pushMore();
   h+=`<div class="mlist"><button class="mrow" data-sptg="1" role="switch" aria-checked="${SPOIL}"><span class="mic">🙈</span><span><b>${T("spRow")}</b><small>${T("spSub")}</small></span><i class="tgl${SPOIL?" on":""}" aria-hidden="true"></i></button></div>`;
   h+=`<h3 class="sec">Rio 2026</h3><div class="mlist"><button class="mrow" data-more="venue">${svg('<path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>')}<span><b>${T("vnT")}</b><small>${T("vnSub")}</small></span></button><button class="mrow" data-more="merch">${svg('<path d="M6 7h12l1 13H5z"/><path d="M9 7a3 3 0 016 0"/>')}<span><b>${T("mcT")}</b><small>${T("mcSub")}</small></span></button><button class="mrow" data-more="sust">${svg('<path d="M5 19c8 0 14-6 14-14-8 0-14 6-14 14z"/><path d="M5 19l7-7"/>')}<span><b>${T("suT")}</b><small>${T("suSub")}</small></span></button></div>`;
-  h+=`<h3 class="sec">${T("links")}</h3><div class="mlist">${row("https://www.youtube.com/@Starsailors/streams",'<path d="M5 4l14 8-14 8z"/>',T("stream").replace("▶ ",""),"YouTube")}${row("https://app.georacing.com/?application_id=46",'<path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',T("tracking"),"Georacing")}${row("https://sslgoldcup.worldofsailors.com/results/",TI.board,T("official"),"sslgoldcup.worldofsailors.com")}${row("https://sslgoldcup.worldofsailors.com/schedule/",'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',T("schedule"),"")}</div>`;
+  h+=`<h3 class="sec">${T("links")}</h3><div class="mlist">${row("https://www.youtube.com/@Starsailors/streams",'<path d="M5 4l14 8-14 8z"/>',T("stream").replace("▶ ",""),"YouTube")}${row("https://sslgoldcup.worldofsailors.com/results/",TI.board,T("official"),"sslgoldcup.worldofsailors.com")}${row("https://sslgoldcup.worldofsailors.com/schedule/",'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',T("schedule"),"")}</div>`;
   h+=`<h3 class="sec">${T("how")?T("howT"):""}</h3><div class="card pad"><ul class="howl">${T("how").map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
   h+=`<h3 class="sec">${T("about")}</h3><div class="card pad"><p>${esc(T("aboutT"))}</p><p class="warn">${esc(T("foot"))}</p></div>`;
   return h}
@@ -800,6 +804,7 @@ function sailorsView(){const TT=teams(),byC={};TT.forEach(t=>byC[t.code]=t);
     L.sort((a,b)=>(b.p.img?1:0)-(a.p.img?1:0)||NM(a.c).localeCompare(NM(b.c),lang)||(+a.p.no||99)-(+b.p.no||99));
     const shown=L.slice(0,200);
     return h+(L.length?`<div class="slist">${shown.map(({c,p})=>`<button class="srow" data-sc="${esc(c)}" data-si="${p.i}">${av(p,1)}<span><span class="nmx">${NMH(p.name)}</span><small>${FL(c)}${esc(NM(c))}${p.k?" · "+esc(p.k):p.cap?" · "+esc(T("captain")):""}</small></span></button>`).join("")}</div>`:`<p>${T("noTeam")}</p>`)}
+  const SF=favSailors();h+=SF.length?`<h3 class="sec">★ ${T("mySailors")}</h3>${sCarousel(SF)}`:`<p class="warn sfh">☆ ${esc(T("sFavHint"))}</p>`;
   /* captains */
   const caps=codes.map(c=>{const pp=squad(c).ppl;const p=pp.find(x=>x.cap)||pp.find(x=>x.k=="Captain");return p?{c,p}:null}).filter(Boolean).sort((a,b)=>(b.p.img?1:0)-(a.p.img?1:0));
   if(caps.length)h+=`<h3 class="sec">${T("sCaps")}</h3><div class="capr">${caps.map(({c,p})=>`<button class="capc" data-sc="${esc(c)}" data-si="${p.i}"><span class="cpa">${p.img?`<img src="${esc(p.img)}" alt="" loading="lazy">`:`<b>${esc(ini(p.name))}</b>`}</span><span class="cpn"><small>${esc(givenN(p.name))}</small>${esc(surname(p.name))}</span><span class="cpf">${FL(c)}${esc(c)}</span></button>`).join("")}</div>`;
@@ -807,7 +812,7 @@ function sailorsView(){const TT=teams(),byC={};TT.forEach(t=>byC[t.code]=t);
   h+=`<h3 class="sec">${T("sTeams")}</h3><p class="warn">${T("sHint")}</p><div class="sacc">${codes.map(c=>{const sq=squad(c),pp=sq.ppl.filter(p=>!p.extra),t=o(c),pics=pp.filter(p=>p.img).slice(0,4);
     const crew=[...pp].sort((a,b)=>(b.cap?1:0)-(a.cap?1:0)||(/^\d+$/.test(a.no)?+a.no:99)-(/^\d+$/.test(b.no)?+b.no:99));
     return `<details data-sq="${esc(c)}"${sOpen.has(c)?" open":""}${t.out?' class="out"':""}><summary><span class="sqf">${FL(c)}</span><span class="sqn"><b>${esc(NM(c))}${favs.has(c)?' <span class="star">★</span>':""}</b><small>${sq.n?`<span class="tnk">${esc(sq.n)}</span> · `:""}${pp.length} ${esc(T("sailors"))}${t.out?" · "+esc(T("stOut")):""}</small></span><span class="sqs" aria-hidden="true">${pics.map(p=>`<img src="${esc(p.img)}" alt="" loading="lazy">`).join("")}</span><span class="sqc" aria-hidden="true">›</span></summary>
-      <div class="sgrid">${crew.map(p=>`<button class="stile" data-sc="${esc(c)}" data-si="${p.i}"><span class="stp">${p.img?`<img src="${esc(p.img)}" alt="" loading="lazy">`:`<b>${esc(ini(p.name))}</b>`}${/^\d+$/.test(p.no)?`<i>${esc(p.no)}</i>`:""}</span><span class="sgn"><small>${esc(givenN(p.name))}</small><b>${esc(surname(p.name))}</b></span><small>${esc(p.k?(T("roles")[p.k]?p.k:p.k):p.cap?T("captain"):"")}</small></button>`).join("")}</div><button class="sqteam" data-t="${esc(c)}">${T("sTeamPage")} ›</button></details>`}).join("")}</div>`;
+      <div class="sgrid">${crew.map(p=>`<button class="stile" data-sc="${esc(c)}" data-si="${p.i}"><span class="stp">${p.img?`<img src="${esc(p.img)}" alt="" loading="lazy">`:`<b>${esc(ini(p.name))}</b>`}${/^\d+$/.test(p.no)?`<i>${esc(p.no)}</i>`:""}</span><span class="sgn"><small>${esc(givenN(p.name))}</small><b>${esc(surname(p.name))}${sfavs.has(c+"|"+p.name)?' <span class="star">★</span>':""}</b></span><small>${esc(p.k?(T("roles")[p.k]?p.k:p.k):p.cap?T("captain"):"")}</small></button>`).join("")}</div><button class="sqteam" data-t="${esc(c)}">${T("sTeamPage")} ›</button></details>`}).join("")}</div>`;
   return h}
 /* ---------- team numbers ---------- */
 function teamStats(TM){if(!TM)return"";let races=0,wins=0,pl=[],pts=0;const hist=[];
@@ -895,7 +900,7 @@ function givenN(n){const sn=surname(n),w=String(n).trim();return w.endsWith(sn)?
 function surname(n){const w=String(n).trim().split(/\s+/);if(w.length<2)return w[0]||"";let i=w.length-1;while(i>1&&/^(de|da|do|dos|das|del|della|di|van|von|der|den|ter|le|la|al|el|bin|ben|mac|st\.?)$/i.test(w[i-1]))i--;return w.slice(i).join(" ")}
 function show(d){if(!d.querySelector(".ob,.trkv"))d.classList.remove("full");if(!d.open){lockScroll();d.showModal();try{history.pushState({sheet:1},"")}catch(e){}}d.scrollTop=0;const th=d.querySelector(".th");if(th){th.tabIndex=-1;th.focus({preventScroll:true})}}
 function openSailor(code,i){const d=$("#tmd"),sq=squad(code),p=sq.ppl[i];if(!p)return;openCode=code;const PE=pinfo(code,p),TM=teams().find(x=>x.code==code),n=sq.ppl.length;
-  const q2=encodeURIComponent;let h=`<div class="th"><button class="bk">${T("back")}</button><div class="thb"><button class="pv" aria-label="previous">‹</button><button class="nx2" aria-label="next">›</button><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">`;
+  const q2=encodeURIComponent;let h=`<div class="th"><button class="bk">${T("back")}</button><div class="thb"><button class="fv ${sfavs.has(code+"|"+p.name)?"on":""}" data-sfv="1" aria-pressed="${sfavs.has(code+"|"+p.name)}" title="${esc(T("sFavHint"))}">${sfavs.has(code+"|"+p.name)?"★":"☆"}</button><button class="pv" aria-label="previous">‹</button><button class="nx2" aria-label="next">›</button><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">`;
   h+=`<div class="shero">${p.img?`<img src="${esc(p.img)}" alt="${esc(p.name)}">`:`<span class="big">${esc(ini(p.name))}</span>`}<div><div class="nick">${FL(code)} ${esc(NM(code))}${sq.n?" · "+esc(sq.n):""}</div><h2 class="snh">${NMH(p.name)}</h2>${p.cap?`<span class="ctag">${T("capTag")}</span>`:""}</div></div>`;
   h+=`<div class="sstats"><div class="sl"><small>${T("position")}</small><b>${esc(p.k||(p.cap?T("captain"):T("posTbc")))}</b>${p.k?`<em style="color:var(--mute)">${esc(T("roles")[p.k])}</em>`:""}</div><div class="sl"><small>${T("jersey")}</small><b>${/^\d+$/.test(p.no)?"#"+esc(p.no):"–"}</b></div>${PE&&PE.rank?`<a class="sl" href="https://worldofsailors.com/ranking/men" target="_blank" rel="noopener"><small>${T("indRank")}</small><b>#${PE.rank}</b><em>${T("rankBoard")}</em></a>`:""}<button class="sl" data-tm="1"><small>${T("team")}</small><b>${FL(code)} ${esc(NM(code))}</b><em>${esc(TM?TM.txt:"")}</em></button></div>`;
   const hl=PE&&PE.b&&(PE.b[lang]||PE.b.en);
@@ -906,6 +911,7 @@ function openSailor(code,i){const d=$("#tmd"),sq=squad(code),p=sq.ppl[i];if(!p)r
   h+=`<h3>${T("mates")}</h3><div class="grp mates">${sq.ppl.filter(x=>x.i!=i).map(x=>`<button data-pi="${x.i}">${av(x,1)}<span>${NMH(x.name)}</span></button>`).join("")}</div></div>`;
   d.innerHTML=h;
   d.querySelector(".x").onclick=()=>d.close();d.querySelector(".bk").onclick=()=>openTeam(code);d.querySelector("[data-tm]").onclick=()=>openTeam(code);
+  d.querySelector("[data-sfv]").onclick=()=>{const k=code+"|"+p.name;const on=!sfavs.has(k);on?sfavs.add(k):sfavs.delete(k);LS.set("sfavs",[...sfavs]);toast(on?"★ "+T("mySailors"):"☆");const y=d.scrollTop;openSailor(code,i);d.scrollTop=y;render(true)};
   d.querySelector(".pv").onclick=()=>openSailor(code,(i-1+n)%n);d.querySelector(".nx2").onclick=()=>openSailor(code,(i+1)%n);
   d.querySelectorAll("[data-pi]").forEach(el=>el.onclick=()=>openSailor(code,+el.dataset.pi));d.querySelectorAll("[data-more]").forEach(b=>b.onclick=()=>{b.parentNode.classList.add("open");b.remove()});
   d.onkeydown=e=>{if(!d.querySelector(".shero"))return;if(e.key=="ArrowLeft")openSailor(code,(i-1+n)%n);if(e.key=="ArrowRight")openSailor(code,(i+1)%n)};
@@ -1024,7 +1030,7 @@ async function trkRun(x,ev,rc){const Lf=await loadLeaflet().catch(()=>null);cons
   const map=tk.map=Lf.map("tkm",{zoomControl:false,attributionControl:false,preferCanvas:false}).setView([-22.92,-43.155],13);
   Lf.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:18,maxNativeZoom:17}).addTo(map);
   ["touchstart","wheel","mousedown"].forEach(ev2=>map.getContainer().addEventListener(ev2,()=>{tk.follow=false},{passive:true}));
-  const boatIcon=(c,h)=>`<svg viewBox="-12 -16 24 32" width="22" height="30" style="transform:rotate(${h||0}deg)"><path d="M0-15C5-8 6 0 5 14H-5C-6 0-5-8 0-15z" fill="${c}" stroke="#0a1730" stroke-width="2"/></svg>`;
+  const boatIcon=(c,h)=>`<svg viewBox="-12 -16 24 32" width="22" height="30" style="transform:rotate(${h||0}deg)"><path d="M0-15C5-8 6 0 5 14H-5C-6 0-5-8 0-15z" fill="${c}" stroke="#fff" stroke-width="1.6"/></svg>`;
   const lay={boats:new Map(),trails:new Map(),marks:new Map(),course:Lf.layerGroup().addTo(map)};
   const at=(id,t)=>{const a=tk.tr.get(id);if(!a||!a.length||a[0].t>t)return null;let lo=0,hi=a.length-1;while(lo<hi){const m=(lo+hi+1)>>1;if(a[m].t<=t)lo=m;else hi=m-1}const p=a[lo],q=a[lo+1];if(!q||q.t-p.t>2e4||t-p.t>12e4&&!q)return t-p.t>18e4?null:p;const f=(t-p.t)/(q.t-p.t);let dh=((q.h??0)-(p.h??0)+540)%360-180;return {...p,lt:p.lt+(q.lt-p.lt)*f,lg:p.lg+(q.lg-p.lg)*f,h:((p.h??0)+dh*f+360)%360}};
   const range=()=>{let mn=Infinity,mx=0;for(const [id,a] of tk.tr)if(ACT.has(id)&&a.length){mn=Math.min(mn,a[0].t);mx=Math.max(mx,a[a.length-1].t)}return mn<Infinity?[Math.max(mn,S0-3e5),mx]:null};
@@ -1039,7 +1045,7 @@ async function trkRun(x,ev,rc){const Lf=await loadLeaflet().catch(()=>null);cons
     for(const o of objs){const ps=(o.course_elements||[]).map(e=>at(+e.id,t)).filter(Boolean);if(!ps.length)continue;
       if(ps.length>1&&(o.role=="start"||o.role=="finish"||o.type=="gate"))Lf.polyline(ps.map(p=>[p.lt,p.lg]),{color:o.role=="finish"?"#e8c547":o.role=="start"?"#fff":"#ffb347",weight:2,dashArray:o.type=="gate"&&o.role!="start"&&o.role!="finish"?"4 4":null,opacity:.9}).addTo(lay.course);
       pts.push([ps.reduce((s,p)=>s+p.lt,0)/ps.length,ps.reduce((s,p)=>s+p.lg,0)/ps.length])}
-    if(pts.length>1)Lf.polyline(pts,{color:"#fff",weight:1.2,opacity:.45,dashArray:"2 6"}).addTo(lay.course)}
+    if(pts.length>1)Lf.polyline(pts,{color:"#fff",weight:1,opacity:.3,dashArray:"2 7"}).addTo(lay.course)}
   function frame(fit){const t=tk.t;
     for(const [id,m] of MK){const p=at(id,t);let mk=lay.marks.get(id);if(!p){if(mk){mk.remove();lay.marks.delete(id)}continue}
       if(!mk){mk=m.jury?Lf.circleMarker([p.lt,p.lg],{radius:4,color:"#fff",weight:2,fillColor:"#1a4486",fillOpacity:1}).addTo(map):Lf.circleMarker([p.lt,p.lg],{radius:5,color:"#0a1730",weight:2,fillColor:m.color,fillOpacity:1}).addTo(map);lay.marks.set(id,mk)}else mk.setLatLng([p.lt,p.lg])}
@@ -1057,7 +1063,7 @@ async function trkRun(x,ev,rc){const Lf=await loadLeaflet().catch(()=>null);cons
     rows.sort((a,b)=>{const fa=ft.get(a.id),fb=ft.get(b.id);if(fa||fb)return (fa||Infinity)-(fb||Infinity);const ra=a.p&&a.p.r||99,rb=b.p&&b.p.r||99;return ra-rb||((b.p&&b.p.d)||0)-((a.p&&a.p.d)||0)});
     const lead=rows[0]&&rows[0].p;
     rk.innerHTML=rows.map((o,i)=>{const f=ft.get(o.id),p=o.p,leg=p&&p.cl!=null&&p.cl!=255&&p.cl>0?p.cl:null;
-      const gap=f?mmss(f-S0):i&&lead&&p&&lead.d!=null&&p.d!=null&&!ft.size?`−${Math.max(0,Math.round(lead.d-p.d))} m`:"";
+      const gap=f?mmss(f-S0):i&&t>=S0&&lead&&p&&lead.d!=null&&p.d!=null&&!ft.size?`−${Math.max(0,Math.round(lead.d-p.d))} m`:"";
       return `<div class="tkrow"><span class="tkp">${f||p&&p.r?i+1:"–"}</span><span class="tkc" style="background:${esc(o.A.color)}"></span>${FL(o.A.code)}<span class="tkn"><b>${esc(NM(o.A.code)||o.A.name)}</b><small>${f?`✓ ${esc(T("done"))}`:leg?`${esc(T("tkLeg"))} ${leg}/${legs||"?"}`:p?esc(t<S0?T("tkPre"):""):esc(T("tkNoPos"))}</small></span><span class="tkv"><b>${f?mmss(f-S0):kn(p&&p.s)}</b><small>${f?"":"kn"}</small></span>${gap&&!f?`<span class="tkg">${gap}</span>`:""}</div>`}).join("");
     /* hud */
     const w=(all.weathers||[]).filter(z=>z.wind_direction!=null&&Date.parse(z.time)<=t).pop();const ldr=rows.find(r=>r.p);
@@ -1079,7 +1085,8 @@ async function trkRun(x,ev,rc){const Lf=await loadLeaflet().catch(()=>null);cons
     tk.poll=setTimeout(pollLive,ok?2000:5000)}
   tk.live=isLive();
   const rg=range();
-  if(!rg&&!tk.live){msg.innerHTML=Date.now()<AV?`${esc(T("tkOpens"))} <b>${esc(rioClock(AV))}</b> ${esc(T("rioT"))}<br><small>${esc(T("tkStart"))} ${esc(rioClock(S0))}</small>`:esc(T("tkNoData"));
+  if(!rg&&!tk.live){msg.innerHTML=`<div>${Date.now()<AV?`${esc(T("tkOpens"))} <b>${esc(rioClock(AV))}</b> ${esc(T("rioT"))}<br><small>${esc(T("tkStart"))} ${esc(rioClock(S0))} ${esc(T("rioT"))}</small>`:esc(T("tkNoData"))}</div>`;
+    rk.innerHTML=[...ACT.values()].map(A=>`<div class="tkrow"><span class="tkp">–</span><span class="tkc" style="background:${esc(A.color)}"></span>${FL(A.code)}<span class="tkn"><b>${esc(NM(A.code)||A.name)}</b><small>${esc(T("tkStart"))} ${esc(rioClock(S0))}</small></span></div>`).join("");
     if(Date.now()<AV){tk.allPoll=setInterval(()=>{if(Date.now()>=AV-3e4){clearInterval(tk.allPoll);if(!tk.dead){trkStop();openTrack(x)}}},15e3)}return}
   msg.hidden=true;tl.hidden=false;lv.hidden=!tk.live;
   if(tk.live){tk.atLive=true;tk.t=Date.now()-delay;pollLive();tk.allPoll=setInterval(async()=>{try{const a2=await geoJ(`trk/${rc}.json?t=${Date.now()}`);all.splittimes=a2.splittimes;all.weathers=a2.weathers}catch(e){}if(!isLive()){tk.live=false;lv.hidden=true}},2e4)}
@@ -1327,7 +1334,7 @@ document.querySelector(".tabs").addEventListener("click",e=>{const b=e.target.cl
 $("#ladder").addEventListener("click",e=>{const b=e.target.closest("button");if(b){round=b.dataset.r;go("round-"+round)}});
 $("#main").addEventListener("click",e=>{
   const lvb=e.target.closest("[data-live]");if(lvb){openLive(SCH.filter(x=>rState2(x)=="now")[0]||null);return}
-  const tu=e.target.closest("[data-trkurl],a[href^=\"https://app.georacing.com\"]");if(tu){e.preventDefault();openTrack({url:"https://app.georacing.com/?application_id=46"});return}
+  const tu=e.target.closest("[data-trkurl],a[href^=\"https://app.georacing.com\"]");if(tu){e.preventDefault();const n=nowMs(),W=SCH.filter(x=>trkUrl(x));const b=W.filter(x=>at(x)<=n).sort((a,c)=>at(c)-at(a))[0]||W.sort((a,c)=>at(a)-at(c))[0];if(b)openTrack(b);else toast(T("tkNone"));return}
   const vd=e.target.closest("[data-vid]");if(vd){openVideo(vd.dataset.vid);return}
   const tk=e.target.closest("[data-trk]");if(tk){e.preventDefault();const x=raceBy(tk.dataset.trk);if(x)openTrack(x);return}
   const rc=e.target.closest("[data-race]");if(rc){openRace(raceBy(rc.dataset.race));return}
