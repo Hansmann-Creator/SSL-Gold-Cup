@@ -8,7 +8,8 @@ Needs env ONESIGNAL_REST_KEY; the App ID comes from config.js. Never fails the c
 """
 import json, os, re, sys, urllib.request
 
-LANGS = ["en", "de", "fr", "es", "pt", "zh-Hans", "ar"]
+LANGS = ["en", "de", "fr", "es", "pt", "zh-Hans", "ar", "hi", "bn", "ur", "id"]
+APPL = {"zh-Hans": "zh"}  # tag value "l" = app language code
 RN = {
  "en": {"r32": "1/32 Finals", "r16": "1/16 Finals", "r8": "1/8 Finals", "r4": "Quarter-finals", "sf": "Semi-finals", "pf": "Petit Final", "f": "Grand Final"},
  "de": {"r32": "1/32-Finale", "r16": "1/16-Finale", "r8": "Achtelfinale", "r4": "Viertelfinale", "sf": "Halbfinale", "pf": "Kleines Finale", "f": "Grand Final"},
@@ -17,6 +18,10 @@ RN = {
  "pt": {"r32": "1/32 de final", "r16": "1/16 de final", "r8": "Oitavas de final", "r4": "Quartas de final", "sf": "Semifinais", "pf": "Petit Final", "f": "Grande Final"},
  "zh-Hans": {"r32": "1/32 决赛", "r16": "1/16 决赛", "r8": "1/8 决赛", "r4": "四分之一决赛", "sf": "半决赛", "pf": "小决赛", "f": "总决赛"},
  "ar": {"r32": "نهائيات 1/32", "r16": "نهائيات 1/16", "r8": "نهائيات 1/8", "r4": "ربع النهائي", "sf": "نصف النهائي", "pf": "النهائي الصغير", "f": "النهائي الكبير"},
+ "hi": {"r32": "1/32 फ़ाइनल", "r16": "1/16 फ़ाइनल", "r8": "1/8 फ़ाइनल", "r4": "क्वार्टर फ़ाइनल", "sf": "सेमीफ़ाइनल", "pf": "पेटिट फ़ाइनल", "f": "ग्रैंड फ़ाइनल"},
+ "bn": {"r32": "1/32 ফাইনাল", "r16": "1/16 ফাইনাল", "r8": "1/8 ফাইনাল", "r4": "কোয়ার্টার ফাইনাল", "sf": "সেমিফাইনাল", "pf": "পেটিট ফাইনাল", "f": "গ্র্যান্ড ফাইনাল"},
+ "ur": {"r32": "1/32 فائنلز", "r16": "1/16 فائنلز", "r8": "1/8 فائنلز", "r4": "کوارٹر فائنل", "sf": "سیمی فائنل", "pf": "پیٹٹ فائنل", "f": "گرینڈ فائنل"},
+ "id": {"r32": "Final 1/32", "r16": "Final 1/16", "r8": "Final 1/8", "r4": "Perempat final", "sf": "Semifinal", "pf": "Final Kecil", "f": "Grand Final"},
 }
 W = {  # group, race, through, out, champion, decided
  "en": ("Group", "Race", "through to", "out", "World Champion", "decided"),
@@ -26,6 +31,10 @@ W = {  # group, race, through, out, champion, decided
  "pt": ("Grupo", "Regata", "avançam para", "eliminados", "Campeão mundial", "decidido"),
  "zh-Hans": ("小组", "第", "晋级", "出局", "世界冠军", "已决出"),
  "ar": ("المجموعة", "السباق", "يتأهلان إلى", "خرجا", "بطل العالم", "حُسمت"),
+ "hi": ("ग्रुप", "रेस", "आगे:", "बाहर", "विश्व चैंपियन", "तय"),
+ "bn": ("গ্রুপ", "রেস", "পরের পর্বে:", "বাদ", "বিশ্বচ্যাম্পিয়ন", "নির্ধারিত"),
+ "ur": ("گروپ", "ریس", "اگلے مرحلے میں:", "باہر", "عالمی چیمپئن", "طے"),
+ "id": ("Grup", "Lomba", "lolos ke", "tersingkir", "Juara Dunia", "selesai"),
 }
 NEXT = {"r32": "r16", "r16": "r8", "r8": "r4", "r4": "sf", "sf": "f"}
 SITE = "https://hansmann-creator.github.io/SSL-Gold-Cup/"
@@ -79,12 +88,12 @@ def message(rid, gid, g, k, n, info):
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     dry = "--dry" in sys.argv
-    key = os.environ.get("ONESIGNAL_REST_KEY", "").strip()
+    key_ = os.environ.get("ONESIGNAL_REST_KEY", "").strip()
     try:
         app = re.search(r'push\s*:\s*"([^"]*)"', open("config.js", encoding="utf-8").read()).group(1).strip()
     except Exception:
         app = ""
-    if not dry and (not key or not app):
+    if not dry and (not key_ or not app):
         print("push: not configured, skipping"); return
     try:
         old, new = (json.load(open(p, encoding="utf-8")) for p in args[:2])
@@ -106,20 +115,29 @@ def main():
         print(f"push: {len(out)} groups changed at once, skipping to avoid spam"); return
     for rid, gid, g, k, n in out:
         head, body, teams = message(rid, gid, g, k, n, info)
-        filters = [{"field": "tag", "key": "all", "relation": "exists"}]
-        for t in teams: filters += [{"operator": "OR"}, {"field": "tag", "key": "team_" + t, "relation": "exists"}]
-        payload = {"app_id": app, "target_channel": "push", "filters": filters, "headings": head, "contents": body,
-                   "url": f"{SITE}#round-{rid}", "web_push_topic": f"{rid}-{gid}", "ttl": 3 * 3600,
-                   "chrome_web_icon": SITE + "icons/icon-192.png"}
         if dry:
-            print(json.dumps({"headings": head["de"], "contents": body["de"], "en": body["en"]}, ensure_ascii=False, indent=1)); continue
-        req = urllib.request.Request("https://api.onesignal.com/notifications?c=push", data=json.dumps(payload).encode(),
-                                     headers={"Content-Type": "application/json; charset=utf-8", "Authorization": "Key " + key}, method="POST")
-        try:
-            with urllib.request.urlopen(req, timeout=20) as r:
-                print("push:", rid, gid, "race", k, "->", r.status, r.read()[:200].decode("utf-8", "replace"))
-        except Exception as e:
-            print("push: send failed for", rid, gid, ":", e)
+            print(json.dumps({"headings": head["de"], "contents": body["de"], "en": body["en"], "ur": body["ur"]}, ensure_ascii=False, indent=1)); continue
+        # one send per app language (tag "l"), text always in the "en" slot: works for every language,
+        # also those OneSignal has no language code for. Users in spoiler-free mode get nothing.
+        for L in LANGS:
+            lv = APPL.get(L, L)
+            filters = []
+            for key in ["all"] + ["team_" + t for t in teams]:
+                if filters: filters.append({"operator": "OR"})
+                filters += [{"field": "tag", "key": key, "relation": "exists"}, {"field": "tag", "key": "l", "relation": "=", "value": lv},
+                            {"field": "tag", "key": "spoiler", "relation": "not_exists"}]
+            send(app, key_, {"app_id": app, "target_channel": "push", "filters": filters, "headings": {"en": head[L]}, "contents": {"en": body[L]},
+                   "url": f"{SITE}#round-{rid}", "web_push_topic": f"{rid}-{gid}", "ttl": 3 * 3600,
+                   "chrome_web_icon": SITE + "icons/icon-192.png"}, f"{rid} {gid} race {k} [{lv}]")
+
+def send(app, key_, payload, label):
+    req = urllib.request.Request("https://api.onesignal.com/notifications?c=push", data=json.dumps(payload).encode(),
+                                 headers={"Content-Type": "application/json; charset=utf-8", "Authorization": "Key " + key_}, method="POST")
+    try:
+        with urllib.request.urlopen(req, timeout=20) as r:
+            print("push:", label, "->", r.status, r.read()[:160].decode("utf-8", "replace"))
+    except Exception as e:
+        print("push: send failed for", label, ":", e)
 
 if __name__ == "__main__":
     try: main()
