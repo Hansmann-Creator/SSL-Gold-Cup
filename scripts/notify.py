@@ -8,7 +8,7 @@ Needs env ONESIGNAL_REST_KEY; the App ID comes from config.js. Never fails the c
 """
 import json, os, re, sys, urllib.request
 
-LANGS = ["en", "de", "fr", "es", "pt", "zh-Hans", "ar", "hi", "bn", "ur", "id"]
+LANGS = ["en", "de", "fr", "es", "pt", "zh-Hans", "ar", "hi", "bn", "ur", "id", "ms", "ja", "th", "hu", "cs", "uk"]
 APPL = {"zh-Hans": "zh"}  # tag value "l" = app language code
 RN = {
  "en": {"r32": "1/32 Finals", "r16": "1/16 Finals", "r8": "1/8 Finals", "r4": "Quarter-finals", "sf": "Semi-finals", "pf": "Petit Final", "f": "Grand Final"},
@@ -22,6 +22,12 @@ RN = {
  "bn": {"r32": "1/32 ফাইনাল", "r16": "1/16 ফাইনাল", "r8": "1/8 ফাইনাল", "r4": "কোয়ার্টার ফাইনাল", "sf": "সেমিফাইনাল", "pf": "পেটিট ফাইনাল", "f": "গ্র্যান্ড ফাইনাল"},
  "ur": {"r32": "1/32 فائنلز", "r16": "1/16 فائنلز", "r8": "1/8 فائنلز", "r4": "کوارٹر فائنل", "sf": "سیمی فائنل", "pf": "پیٹٹ فائنل", "f": "گرینڈ فائنل"},
  "id": {"r32": "Final 1/32", "r16": "Final 1/16", "r8": "Final 1/8", "r4": "Perempat final", "sf": "Semifinal", "pf": "Final Kecil", "f": "Grand Final"},
+ "ms": {"r32": "Final 1/32", "r16": "Final 1/16", "r8": "Final 1/8", "r4": "Suku akhir", "sf": "Separuh akhir", "pf": "Final Kecil", "f": "Final Besar"},
+ "ja": {"r32": "1/32ファイナル", "r16": "1/16ファイナル", "r8": "1/8ファイナル", "r4": "準々決勝", "sf": "準決勝", "pf": "3位決定戦", "f": "グランドファイナル"},
+ "th": {"r32": "รอบ 1/32", "r16": "รอบ 1/16", "r8": "รอบ 1/8", "r4": "รอบก่อนรองชนะเลิศ", "sf": "รอบรองชนะเลิศ", "pf": "ชิงอันดับ 3", "f": "แกรนด์ไฟนอล"},
+ "hu": {"r32": "1/32-es döntő", "r16": "1/16-os döntő", "r8": "Nyolcaddöntő", "r4": "Negyeddöntő", "sf": "Elődöntő", "pf": "Kisdöntő", "f": "Nagydöntő"},
+ "cs": {"r32": "1/32 finále", "r16": "1/16 finále", "r8": "Osmifinále", "r4": "Čtvrtfinále", "sf": "Semifinále", "pf": "Malé finále", "f": "Velké finále"},
+ "uk": {"r32": "1/32 фіналу", "r16": "1/16 фіналу", "r8": "1/8 фіналу", "r4": "Чвертьфінали", "sf": "Півфінали", "pf": "Малий фінал", "f": "Гранд-фінал"},
 }
 W = {  # group, race, through, out, champion, decided
  "en": ("Group", "Race", "through to", "out", "World Champion", "decided"),
@@ -35,6 +41,12 @@ W = {  # group, race, through, out, champion, decided
  "bn": ("গ্রুপ", "রেস", "পরের পর্বে:", "বাদ", "বিশ্বচ্যাম্পিয়ন", "নির্ধারিত"),
  "ur": ("گروپ", "ریس", "اگلے مرحلے میں:", "باہر", "عالمی چیمپئن", "طے"),
  "id": ("Grup", "Lomba", "lolos ke", "tersingkir", "Juara Dunia", "selesai"),
+ "ms": ("Kumpulan", "Perlumbaan", "mara ke", "tersingkir", "Juara Dunia", "ditentukan"),
+ "ja": ("グループ", "レース", "勝ち上がり:", "敗退", "世界チャンピオン", "決定"),
+ "th": ("กลุ่ม", "เรซ", "ผ่านเข้า", "ตกรอบ", "แชมป์โลก", "ตัดสินแล้ว"),
+ "hu": ("Csoport", "futam", "továbbjut:", "kiesett", "Világbajnok", "eldőlt"),
+ "cs": ("Skupina", "Rozjížďka", "postup:", "vypadli", "Mistr světa", "rozhodnuto"),
+ "uk": ("Група", "Гонка", "проходять у", "вибули", "Чемпіон світу", "визначено"),
 }
 NEXT = {"r32": "r16", "r16": "r8", "r8": "r4", "r4": "sf", "sf": "f"}
 SITE = "https://hansmann-creator.github.io/SSL-Gold-Cup/"
