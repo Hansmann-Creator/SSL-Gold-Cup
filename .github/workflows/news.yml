@@ -1,0 +1,29 @@
+name: News from worldofsailors.com
+on:
+  schedule:
+    - cron: "7,27,47 * * 11,12 *"
+  push:
+    branches: [main]
+    paths: ["scripts/news.py", ".github/workflows/news.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: write
+concurrency: { group: news, cancel-in-progress: false }
+jobs:
+  news:
+    runs-on: ubuntu-latest
+    env: { GH_TOKEN: "${{ github.token }}" }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: |
+          pip install -q beautifulsoup4
+          git config user.name "news-bot"; git config user.email "news-bot@users.noreply.github.com"
+          if python scripts/news.py | tee /tmp/n.txt | grep -q '^changed'; then
+            git add news.json; git commit -qm "news $(date -u +%FT%TZ)"
+            for i in 1 2 3; do git pull -q --rebase origin main && git push -q origin main && break; sleep 5; done
+            gh workflow run deploy.yml --ref main || true
+          fi
+          cat /tmp/n.txt

@@ -1432,6 +1432,7 @@ function home(){let h=liveBar()+delayBanner()+champ()+`<section class="hero"><im
   const lr=latestRound();
   if(lr)h+=`<h3 class="sec">${T("latest")} · ${esc(RNm(lr))}</h3><div class="lat">${lr.groups.map(g=>mbox(lr,g,{go:"round-"+lr.id,nob:1})).join("")}</div><p class="more1"><a href="#round-${lr.id}">${T("showRound")}</a></p>`;
   h+=videosHome();
+  h+=newsHome();
   h+=`<h3 class="sec">${T("explore")}</h3><div class="tiles">${["board","bracket","teams","sailors","qualifying","gc2023"].map(k=>`<button data-go="${k=="board"?"round-"+current():k}">${svg(TI[k])}<b>${esc(T("tiles")[k][0])}</b><small>${esc(T("tiles")[k][1])}</small></button>`).join("")}</div>`;
   return h}
 
@@ -1528,7 +1529,11 @@ let openCode=null;
 let PGS=null,NOBACK=false;
 const pgHash=e=>e.t=="set"?"settings":e.t=="chg"?"changes":e.t=="rank"?"ranking":e.t=="team"?`team-${e.a}`:e.t=="sailor"?`sailor-${e.a}-${e.i}`:`race-${e.k.replace(/\|/g,"-")}`;
 function pgParse(h){let m;if(h=="settings")return{t:"set"};if(h=="changes")return{t:"chg"};if(h=="ranking")return{t:"rank"};if(m=h.match(/^team-([A-Z]{3})$/))return{t:"team",a:m[1]};if(m=h.match(/^sailor-([A-Z]{3})-(\d+)$/))return{t:"sailor",a:m[1],i:+m[2]};if(m=h.match(/^race-(\w+)-([A-D])-(\d+)$/))return{t:"race",k:`${m[1]}|${m[2]}|${m[3]}`};return null}
-function pgRender(e){PGS=e;if(e.t=="set")pSettings();else if(e.t=="chg")pChanges();else if(e.t=="rank")pRank();else if(e.t=="team")pTeam(e.a);else if(e.t=="sailor")pSailor(e.a,e.i);else{const x=raceBy(e.k);if(x)pRace(x);else pgHide()}}
+/* bottom tab follows what is on screen: team page -> Teams, sailor -> Sailors, race -> Competition */
+function tabSync(){const COMP=["board","bracket","qualifying","gc2023","results"].includes(view),P=$("#pg"),pg=P&&!P.hidden&&PGS?PGS.t:"";
+  const want=pg=="team"||pg=="rank"?"teams":pg=="sailor"?"sailors":pg=="race"?"comp":pg=="set"||pg=="chg"?"more":COMP?"comp":view;
+  document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.v==want))}
+function pgRender(e){PGS=e;setTimeout(tabSync,0);if(e.t=="set")pSettings();else if(e.t=="chg")pChanges();else if(e.t=="rank")pRank();else if(e.t=="team")pTeam(e.a);else if(e.t=="sailor")pSailor(e.a,e.i);else{const x=raceBy(e.k);if(x)pRace(x);else pgHide()}}
 function pgGo(e,replace){const d=$("#tmd");if(d.open){NOBACK=true;replace=replace||!!(history.state&&history.state.sheet);d.close()}
   const same=PGS&&!$("#pg").hidden&&pgHash(PGS)==pgHash(e);
   try{const H=history.state||{},cd=H.d||0;if(replace||same)history.replaceState({pg:e,d:H.sheet?Math.max(1,cd):cd},"","#"+pgHash(e));else history.pushState({pg:e,d:cd+1},"","#"+pgHash(e))}catch(x){}
@@ -1538,7 +1543,7 @@ function pgShow(d){const first=d.hidden;d.hidden=false;lockScroll();document.doc
   if(first){d.classList.remove("pgin");void d.offsetWidth;d.classList.add("pgin")}}
 function pgBack(){if(history.state&&history.state.pg&&history.state.d>0)history.back();else{pgHide();try{history.replaceState(null,"","#"+(LS.get("view","")||"home"))}catch(e){}route()}}
 let PGPUSHED=false;
-function pgHide(){const d=$("#pg");if(d.hidden)return;d.hidden=true;d.innerHTML="";PGS=null;openCode=null;document.documentElement.classList.remove("pgon");unlockScroll()}
+function pgHide(){const d=$("#pg");if(d.hidden)return;d.hidden=true;d.innerHTML="";PGS=null;openCode=null;document.documentElement.classList.remove("pgon");unlockScroll();tabSync()}
 function pgRefresh(){if(PGS&&!$("#pg").hidden){const d=$("#pg"),y=d.scrollTop;pgRender(PGS);d.scrollTop=y}}
 /* ---------- settings page ---------- */
 let PP=LS.get("pp",{});const ppSave=()=>LS.set("pp",PP);
@@ -2210,6 +2215,16 @@ function openVideo(id){const v=VIDS.find(x=>x.id==id);if(!v)return;const d=$("#t
   d.querySelector(".x").onclick=()=>d.close();show(d);gcEvent("video")}
 /* ---------- venue, sustainability, merch ---------- */
 const VENUE={lat:-22.9196,lng:-43.1700,q:"AXIA Marina da Glória, Av. Infante Dom Henrique, Rio de Janeiro"};
+const NWS={"en":"News","de":"News","fr":"Actualités","es":"Noticias","pt":"Notícias","zh":"新闻","ar":"الأخبار","hi":"समाचार","bn":"খবর","ur":"خبریں","id":"Berita","ms":"Berita","ja":"ニュース","th":"ข่าว","hu":"Hírek","cs":"Zprávy","uk":"Новини","pl":"Aktualności"},NSRC={"en":"Source: worldofsailors.com (Star Sailors League)","de":"Quelle: worldofsailors.com (Star Sailors League)","pt":"Fonte: worldofsailors.com (Star Sailors League)","es":"Fuente: worldofsailors.com (Star Sailors League)","fr":"Source : worldofsailors.com (Star Sailors League)"};
+/* news mirrored from worldofsailors.com (news.json, workflow news.yml) */
+let NEWS=null;async function pullNews(){try{const r=await fetch("news.json?t="+Math.floor(Date.now()/3e5),{cache:"no-store"});if(r.ok){const j=await r.json(),ch=JSON.stringify(j)!==JSON.stringify(NEWS);NEWS=j;if(ch&&view=="home")try{render(true)}catch(e){}}}catch(e){}}
+pullNews();setInterval(()=>{if(!document.hidden)pullNews()},5*6e4);
+function newsHome(){const L=(NEWS&&NEWS.items||[]).slice(0,8);if(!L.length)return"";
+  return `<h3 class="sec">${esc(NWS[lang]||NWS.en)}</h3><div class="newsr">${L.map((n,i)=>`<button class="newsc" data-news="${i}">${n.img?`<span class="nwi"><img src="${esc(n.img)}" alt="" loading="lazy"></span>`:""}<span class="nwt"><small>${esc(n.d||"")}</small><b>${esc(n.t)}</b></span></button>`).join("")}</div>`}
+function newsSheet(i){const n=NEWS&&NEWS.items&&NEWS.items[i];if(!n)return;
+  const d=sheetWrap(n.d||"",n.t,`${n.img?`<img class="nwhero" src="${esc(n.img)}" alt="">`:""}<div class="nwbody">${n.html||`<p>${esc(n.x||"")}</p>`}</div><p class="vsrc">${esc(NSRC[lang]||NSRC.en)}</p>`);
+  d.querySelectorAll(".nwbody a").forEach(a=>a.replaceWith(...a.childNodes));gcEvent("news")}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-news]");if(b){e.preventDefault();newsSheet(+b.dataset.news)}});
 function sheetWrap(nick,title,body){const d=$("#tmd");openCode=null;d.innerHTML=`<div class="th"><div><div class="nick">${esc(nick)}</div><h2>${esc(title)}</h2></div><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">${body}</div>`;d.querySelector(".x").onclick=()=>d.close();show(d);return d}
 function venueSheet(){const q=encodeURIComponent(VENUE.q),bb=[VENUE.lng-.012,VENUE.lat-.008,VENUE.lng+.012,VENUE.lat+.008].join(",");
   sheetWrap("SSL Gold Cup · Rio 2026",T("vnT"),`<div class="map"><iframe src="https://www.openstreetmap.org/export/embed.html?bbox=${bb}&layer=mapnik&marker=${VENUE.lat},${VENUE.lng}" title="Map" loading="lazy"></iframe></div>
@@ -2438,7 +2453,7 @@ let GOOD=null;
 function render(keepScroll){try{render0(keepScroll);GOOD=D;const F=$("#foot");if(F)F.hidden=!["board","bracket"].includes(view)}catch(e){console.error(e);if(GOOD&&GOOD!==D){D=GOOD;try{render0(keepScroll)}catch(e2){}}}}
 function render0(keepScroll){const y=scrollY;chrome();
   const COMP=["board","bracket","qualifying","gc2023","results"].includes(view);
-  document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.v==view||(b.dataset.v=="comp"&&COMP)));
+  tabSync();
   {const C=$("#cseg");if(C){C.hidden=!COMP;if(COMP){const cv=view=="board"?"board":view=="results"?"results":"bracket";if(cv!="results")LS.set("compv",cv);const h=`<div class="sgc" role="tablist">${[["board",T("rounds")],["bracket",T("bracket")],["results",RS_(0)]].map(([k,l])=>`<button role="tab" data-cs="${k}" class="${k==cv?"on":""}" aria-selected="${k==cv}">${esc(l)}</button>`).join("")}</div>`;if(C.dataset.h!==h){C.innerHTML=h;C.dataset.h=h}}}}
   ladder();const M=$("#main");const dir=COMP?RDIR:0;RDIR=0;
   M.innerHTML=(["home","board","bracket","teams"].includes(view)?spoilBanner():"")+(view=="home"?home():view=="more"?more():view=="sailors"?sailorsView():view=="board"?board():view=="bracket"?bracket():view=="qualifying"?qualifying():view=="gc2023"?gc23():view=="results"?results():teamView());
