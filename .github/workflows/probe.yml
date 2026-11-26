@@ -1,0 +1,9 @@
+name: Temporary probe
+on: workflow_dispatch
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for u in "https://player.georacing.com/?event=1&race=1&application_id=46" "https://player.georacing.com/" "https://app.georacing.com/?application_id=46"; do echo "== $u"; curl -sIL "$u" | grep -iE "^(HTTP|x-frame|content-security|location)"; done
+          echo "== body meta"; curl -sL "https://player.georacing.com/" | grep -ioE "frame-ancestors[^\"]*|top\.location|self *!==? *top|window\.top" | head
