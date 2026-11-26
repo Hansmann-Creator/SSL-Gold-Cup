@@ -1252,3 +1252,7 @@ header.top>#nxc .dov{font-size:13px!important;color:#fff!important;letter-spacin
 .races li.rc.done .rtab.ready::after{display:none}
 .rcb.rrep.inc{background:rgba(255,255,255,.1)!important;color:rgba(255,255,255,.6)!important;cursor:default}
 .rcb.rrep .rrinc{font-style:normal;margin-inline-start:auto;font-size:12px;font-weight:700;opacity:.9}
+/* race report: champagne tone (variant B) */
+.races li.rc.done .rtab:not(.inc){background:linear-gradient(180deg,#f4e7b4,#e6d38a);color:#1d2b4f}
+.rcb.rrep:not(.inc){background:linear-gradient(180deg,#f4e7b4,#e6d38a)!important;color:#1d2b4f!important}
+.rc .ti .tap{white-space:nowrap}.rc .s .apt{color:var(--mute);font-weight:600;font-size:.92em}

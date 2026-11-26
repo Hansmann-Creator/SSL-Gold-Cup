@@ -1,0 +1,6 @@
+{"note":"Official schedule changes (Race Committee notices). A day listed here replaces the generated schedule for that day. ap = approximate time (warning signal as soon as practicable after the prior race).",
+ "days":{
+  "2026-11-26":[{"rid":"r16","g":"A","n":1,"t":"12:00"},{"rid":"r16","g":"B","n":1,"t":"13:10"}],
+  "2026-11-27":[{"rid":"r16","g":"C","n":1,"t":"11:00"},{"rid":"r16","g":"C","n":2,"t":"12:20","ap":1},{"rid":"r16","g":"D","n":1,"t":"13:40","ap":1},
+                {"rid":"r16","g":"D","n":2,"t":"15:00","ap":1},{"rid":"r16","g":"A","n":2,"t":"16:20","ap":1},{"rid":"r16","g":"B","n":2,"t":"17:40","ap":1}]},
+ "briefing":{"2026-11-27":"09:30"}}

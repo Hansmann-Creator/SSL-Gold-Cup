@@ -13,10 +13,15 @@ T32 = [["12:00","13:20","14:40","16:00"],["11:00","12:20","13:40","15:00"],["12:
 DAYS = {"r32":["2026-11-19","2026-11-20","2026-11-21","2026-11-22"],"r16":["2026-11-26","2026-11-27","2026-11-28","2026-11-29"],
         "r8":["2026-12-02","2026-12-03","2026-12-04","2026-12-05"],"r4":["2026-12-07","2026-12-08","2026-12-09","2026-12-10"]}
 SCH = []
+try: SOV = json.load(open(os.path.join(ROOT, "sched.json"), encoding="utf-8")).get("days", {})
+except Exception: SOV = {}
 for rid, ds in DAYS.items():
     for i, d in enumerate(ds):
+        if d in SOV: continue
         for j, g in enumerate(ROT[i]):
             SCH.append(dict(rid=rid, d=d, t=(T32[i] if rid == "r32" else T4)[j], g=g, n=i + 1))
+for d, L in SOV.items():
+    SCH += [dict(rid=e["rid"], d=d, t=e["t"], g=e["g"], n=e["n"]) for e in L]
 SCH += [dict(rid="sf", d="2026-12-12", t="12:00", g="A", n=1), dict(rid="sf", d="2026-12-12", t="13:10", g="B", n=1),
         dict(rid="pf", d="2026-12-13", t="12:00", g="A", n=1), dict(rid="f", d="2026-12-13", t="13:10", g="A", n=1)]
 NAME = {r["id"]: r["name"] for r in R["rounds"]}

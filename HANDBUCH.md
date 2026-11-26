@@ -22,6 +22,9 @@ Datei `flags.json` bearbeiten: https://github.com/Hansmann-Creator/SSL-Gold-Cup/
 ### Renntag vorzeitig beendet
 In `flags.json` unter `days` eintragen: `{"races":{},"days":{"2026-11-26":{"over":true}}}` → oben „Renntag beendet · Nächstes Rennen …“, in der Liste verschwinden die nicht gesegelten Rennen, stattdessen „Renntag beendet · 2 Rennen gesegelt · Gruppe C & D verschoben“.
 
+### Neuer Zeitplan (Race Committee)
+Datei `sched.json`: unter `days` einen Tag eintragen – er ersetzt den Standardplan dieses Tages. Beispiel: `{"rid":"r16","g":"C","n":2,"t":"12:20","ap":1}` (`ap:1` = ungefähre Zeit, „nach Rennen davor“).
+
 ### Live-Schleife neu starten (wenn Ergebnisse hängen)
 Datei `.github/live_kick` bearbeiten, irgendetwas hineinschreiben, speichern. Oder: Actions → „Live results“ → „Run workflow“.
 
