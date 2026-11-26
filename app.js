@@ -2014,8 +2014,9 @@ function geoDecode(buf,day){const [Y,M,D]=day.split("_").map(Number),base=Date.U
     o+=ms}
   return out}
 let LEAF=null;
-function loadLeaflet(){return LEAF||(LEAF=new Promise((res,rej)=>{const c=document.createElement("link");c.rel="stylesheet";c.href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";document.head.appendChild(c);const s=document.createElement("script");s.src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";s.onload=()=>res(window.L);s.onerror=e=>{LEAF=null;rej(e)};document.head.appendChild(s)}))}
-const geoJ=async u=>{const r=await fetch(u,{cache:"no-store"});if(!r.ok)throw new Error(r.status);return r.json()};
+function loadLeaflet(){return LEAF||(LEAF=new Promise((res,rej)=>{const c=document.createElement("link");c.rel="stylesheet";c.href="vendor/leaflet/leaflet.css";document.head.appendChild(c);const s=document.createElement("script");s.src="vendor/leaflet/leaflet.js";s.onload=()=>res(window.L);s.onerror=e=>{LEAF=null;rej(e)};document.head.appendChild(s)}))}
+const tfetch=(u,o={},ms=10000)=>{let c=null;try{c=new AbortController();setTimeout(()=>c.abort(),ms)}catch(e){}return fetch(u,c?{...o,signal:c.signal}:o)};
+const geoJ=async u=>{const r=await tfetch(u,{cache:"no-store"});if(!r.ok)throw new Error(r.status);return r.json()};
 const dayStr=ms=>{const d=new Date(ms);return d.getUTCFullYear()+"_"+String(d.getUTCMonth()+1).padStart(2,"0")+"_"+String(d.getUTCDate()).padStart(2,"0")};
 let TK=null;
 window.gcmbTrack=u=>openTrack({url:u});
@@ -2030,6 +2031,7 @@ function openTrack(x){const u=x&&x.url?x.url:trkUrl(x);if(!u)return;let ev,rc;tr
   d.querySelector("[data-back]").onclick=()=>{trkStop();d.close()};
   show(d);gcEvent("tracking");
   if(!ev||!rc){$("#tkmsg").textContent=T("tkNone");return}
+  setTimeout(()=>{const m=$("#tkmsg");if(!m||m.hidden||!d.open||!m.querySelector(".spin"))return;const b=document.createElement("button");b.className="tkalt";b.textContent=T("trkExt");b.onclick=()=>window.open(u,"_blank","noopener");m.appendChild(b)},15000);
   trkRun(x,ev,rc).catch(e=>{const m=$("#tkmsg");if(m){m.hidden=false;m.textContent=T("tkNone")}})}
 function trkFrame(x){const u=x&&x.url?x.url:trkUrl(x),m=$("#tkmap")||$(".tkmap");if(!m||!u)return;const v=m.closest(".tk");v.querySelectorAll(".tktl,.tkrk,.tkcr").forEach(e=>e.remove());m.style.flex="1";m.innerHTML=`<iframe src="${esc(u)}" title="Tracking" allow="fullscreen" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff"></iframe>`}
 async function trkRun(x,ev,rc){const Lf=await loadLeaflet().catch(()=>null);const base=`${GEOD}${ev}/${rc}/`;
@@ -2042,10 +2044,11 @@ async function trkRun(x,ev,rc){const Lf=await loadLeaflet().catch(()=>null);cons
   for(const c of all.courses||[])for(const o of c.course_objects||[])for(const e of o.course_elements||[])if(!MK.has(+e.id))MK.set(+e.id,{name:e.name,color:e.color||"#ff8700",jury:/committee|jury/i.test(e.name)});
   const add=r=>{if(r.lt==null||r.lg==null)return;let a=tk.tr.get(r.id);if(!a)tk.tr.set(r.id,a=[]);
     if(a.length&&ACT.has(r.id)){const q=a[a.length-1],dt=Math.abs(r.t-q.t)/1e3,dm=Math.hypot((r.lt-q.lt)*111e3,(r.lg-q.lg)*102e3);if(dm>60+dt*15&&(a.rej=(a.rej||0)+1)<6)return;a.rej=0}if(a.length&&a[a.length-1].t>=r.t){if(a[a.length-1].t==r.t)return;a.push(r);a.sort((p,q)=>p.t-q.t);return}a.push(r)};
-  const lastBin={};async function bin(day,i){try{const r=await fetch(`${base}positions/${day}__r${i}__positions.bin`,{cache:"no-store"});if(!r.ok)return false;geoDecode(await r.arrayBuffer(),day).forEach(add);lastBin[day]=i;return true}catch(e){return false}}
-  async function loadDay(day){let i=0;while(i<40&&await bin(day,i))i++;return i}
+  const lastBin={};async function bin(day,i){try{const r=await tfetch(`${base}positions/${day}__r${i}__positions.bin`,{cache:"no-store"},15000);if(!r.ok)return false;geoDecode(await r.arrayBuffer(),day).forEach(add);lastBin[day]=Math.max(lastBin[day]??-1,i);return true}catch(e){return false}}
+  async function loadDay(day){for(let i=0;i<40;i+=6){const res=await Promise.all([0,1,2,3,4,5].map(k=>bin(day,i+k)));if(res.includes(false)||tk.dead)return}}
   const days=[...new Set([dayStr(AV),dayStr(S0),dayStr(Math.min(E0,Date.now()))])];
-  if(Date.now()>=AV-6e4)for(const dy of days)await loadDay(dy);
+  const liveNow=Date.now()>=AV&&Date.now()<=E0;let hist=Promise.resolve();
+  if(Date.now()>=AV-6e4){hist=(async()=>{for(const dy of days)await loadDay(dy)})();if(!liveNow)await hist}
   if(tk.dead)return;
   /* map */
   const msg=$("#tkmsg");
@@ -2114,7 +2117,7 @@ async function trkRun(x,ev,rc){const Lf=await loadLeaflet().catch(()=>null);cons
   msg.hidden=true;tl.hidden=false;lv.hidden=!tk.live;
   if(tk.live){tk.atLive=true;tk.t=Date.now()-delay;pollLive();tk.allPoll=setInterval(async()=>{try{const a2=await geoJ(`trk/${rc}.json?t=${Date.now()}`);all.splittimes=a2.splittimes;all.weathers=a2.weathers}catch(e){}if(!isLive()){tk.live=false;lv.hidden=true}},2e4)}
   else{tk.t=rg[0]+Math.min(9e4,(rg[1]-rg[0])*.02);setPlay(false)}
-  frame(true);
+  frame(true);hist.then(()=>{if(!tk.dead)frame(false)});
   let last=performance.now();tk.tick=setInterval(()=>{if(tk.dead||document.hidden)return;const now=performance.now(),dt=now-last;last=now;
     if(tk.atLive){tk.t=Date.now()-delay;frame(false);return}
     if(tk.play){const rg=range();tk.t+=dt*tk.spd;if(rg&&tk.t>=rg[1]){tk.t=rg[1];if(tk.live){tk.atLive=true}else setPlay(false)}frame(false)}},250)}
