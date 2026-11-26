@@ -1,0 +1,25 @@
+name: SSL Nations Ranking mirror
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [scripts/ranking.py, .github/workflows/ranking.yml]
+  schedule:
+    - cron: "41 3,15 * * *"   # twice a day; the ranking itself changes weekly
+permissions:
+  contents: write
+  actions: write
+concurrency: { group: ranking, cancel-in-progress: false }
+jobs:
+  r:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/ranking.py 150
+      - run: |
+          git config user.name "results-bot"; git config user.email "results-bot@users.noreply.github.com"
+          git add rank img/fl
+          if ! git diff --cached --quiet; then git commit -qm "nations ranking"; git pull -q --rebase origin main; git push -q origin main && gh workflow run deploy.yml --ref main; fi
