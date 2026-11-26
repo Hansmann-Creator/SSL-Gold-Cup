@@ -31,6 +31,18 @@ async def main():
                         bad.append(f"{lang} {v or 'home'}: errors={errs[:2]} nodes={n} width={w}")
                     print(f"ok? {lang:2} {v or 'home':14} nodes={n} width={w} errors={len(errs)}")
                 await ctx.close()
+            # every UI text must exist in every language (MO = month names, other languages use Intl)
+            ctx = await b.new_context(); pg = await ctx.new_page()
+            await pg.goto("http://localhost:8765/index.html?i18ncheck=1"); await pg.wait_for_timeout(1500)
+            miss = await pg.evaluate("""(()=>{const S=window.__S,D=window.__D;if(!S||!D)return ["i18n hook missing"];const L=Object.keys(D.LANGS),out=[];
+              const deep=(a,b,p)=>{if(b&&typeof b=='object'&&!Array.isArray(b)){for(const k in b){if(a==null||!(k in a))out.push(p+'.'+k);else deep(a[k],b[k],p+'.'+k)}}};
+              for(const l of L){if(!S[l]){out.push(l+': S');continue}for(const k in S.en)if(!(k in S[l]))out.push(l+': S.'+k)}
+              for(const n in D){if(n=='MO'||n=='LANGS')continue;const groups=n=='FIX'?Object.entries(D.FIX):[['',D[n]]];
+                for(const [g,o] of groups){if(!o||typeof o!='object'||!('en' in o))continue;for(const l of L){if(!(l in o))out.push(l+': '+n+g);else deep(o[l],o.en,l+': '+n+g)}}}
+              return out})()""")
+            if miss: bad.append(f"i18n: {len(miss)} missing texts – " + ", ".join(miss[:12]))
+            print(f"i18n check: {len(miss)} missing")
+            await ctx.close()
             await b.close()
     finally:
         srv.terminate()

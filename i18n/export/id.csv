@@ -594,83 +594,83 @@ RESS.[3],Final Series,Final Series
 RESS.[4],(to be determined),(belum ditentukan)
 RESS.[5],Last chance race,Lomba kesempatan terakhir
 RESS.[6],Pos.,Pos.
-CHT.t,What's new,
-CHT.sub,Everything new in the app – latest first,
-CHT.ver,Version,
-CHT.newB,New,
-CHT.seen,You're up to date,
-CHT.days[0],Race days at a glance,
-CHT.days[1],"On Home you can switch between the previous, today’s and the next race day; at midnight Rio time everything moves on by itself.",
-CHT.estd[0],Smart delay estimate,
-CHT.estd[1],The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races.,
-CHT.res[0],Results in the app,
-CHT.res[1],"Overall ranking, qualifiers and the Final Series – open places show “(to be determined)”.",
-CHT.rbox[0],Live race box,
-CHT.rbox[1],The header strip shows the race on the water and the countdown to the next start – and when a start is delayed.,
-CHT.inst2[0],Easier install,
-CHT.inst2[1],"One tap on Android, an arrow that points to the right button on iPhone, and “Open in Chrome/Safari” from WhatsApp & co.",
-CHT.trk2[0],Faster tracking,
-CHT.trk2[1],"Live positions appear right away, the race history loads in the background.",
-CHT.fbk[0],Send a wish or bug,
-CHT.fbk[1],Under More: tell the app maker what should be better.,
-CHT.rank[0],SSL Nations Ranking in the app,
-CHT.rank[1],"All 132 nations with continent filter, search, history back to 2025 and each nation's best skippers and crews.",
-CHT.pos[0],Positions checked,
-CHT.pos[1],Every sailor's position compared with the team pages and the Rio jersey numbers – several positions are shown where they differ.,
-CHT.linkin[0],No more jumps to other sites,
-CHT.linkin[1],Ranking and qualifier links now open inside the app.,
-CHT.compass[0],Clearer wind compass,
-CHT.compass[1],"The yellow wedge shows where the wind comes from, the wind speed sits right in the middle.",
-CHT.tap[0],Tap any team or sailor,
-CHT.tap[1],"Team and sailor names now open their page everywhere – tables, results, settings and more.",
-CHT.pl[0],Now in Polish,
-CHT.pl[1],Polski! The app now speaks 18 languages.,
-CHT.photos[0],Official portraits for the 1/16 teams,
-CHT.photos[1],"Japan, Czechia, Chile, Ecuador, Hungary, Peru, South Africa and Thailand – fresh from the event studio.",
-CHT.bright[0],Brightness button,
-CHT.bright[1],"Switch between Matchboard blue, day and night right in the header.",
-CHT.logo[0],Bigger SSL logo,
-CHT.logo[1],A little more presence at the top.,
-CHT.tabs[0],New tab bar,
-CHT.tabs[1],"Competition (rounds + matchboard), Teams and Sailors each have their own tab.",
-CHT.settings[0],Settings,
-CHT.settings[1],"Notifications, start reminders, quiet hours, units, local times and spoiler-free mode in one place.",
-CHT.pages[0],Real pages,
-CHT.pages[1],"Teams, sailors and races open as full pages with their own link – back always goes one step back.",
-CHT.anim[0],Smooth round switching,
-CHT.anim[1],"Swipe between rounds, with an animation like in the big apps.",
-CHT.install[0],Easier to install,
-CHT.install[1],An Install button next to the language – the app on your home screen in 20 seconds.,
-CHT.track[0],Live tracking inside the app,
-CHT.track[1],"Every boat on the map, live ranking, course and replay – no more external site.",
-CHT.profiles[0],New sailor profiles,
-CHT.profiles[1],"Bio, career, Olympic and world championship medals from the official SSL profiles.",
-CHT.favS[0],Follow sailors,
-CHT.favS[1],Tap ☆ on a sailor – your sailors get their own list.,
-CHT.langs6[0],Six more languages,
-CHT.langs6[1],"Japanese, Thai, Malay, Hungarian, Czech and Ukrainian.",
-CHT.stream[0],Live stream in the app,
-CHT.stream[1],With preview image and countdown until the broadcast starts.,
-CHT.spoil[0],Spoiler-free mode,
-CHT.spoil[1],Hide results until you've watched the race.,
-CHT.wx[0],Sailing weather per race,
-CHT.wx[1],"Wind, gusts, direction, waves and tide for every start time.",
-CHT.cmp[0],Team comparison,
-CHT.cmp[1],Two teams side by side – head to head and numbers from Rio.,
-CHT.vids[0],Highlights,
-CHT.vids[1],The latest SSL videos right in the app.,
-CHT.venue[0],Venue,
-CHT.venue[1],Marina da Glória with map and directions.,
-CHT.race[0],Race details,
-CHT.race[1],"Tap a race for result, group standings, wind and stream.",
-CHT.push[0],Push notifications,
-CHT.push[1],Results of your teams straight to your phone.,
-CHT.cal[0],Calendar,
-CHT.cal[1],All races of your team in your calendar – updates itself.,
-CHT.shareimg[0],Share as image,
-CHT.shareimg[1],Group tables as a picture for WhatsApp & co.,
-CHT.app[0],Install as an app,
-CHT.app[1],"Full screen, with icon, updates itself.",
+CHT.t,What's new,Yang baru
+CHT.sub,Everything new in the app – latest first,Semua yang baru di aplikasi – terbaru lebih dulu
+CHT.ver,Version,Versi
+CHT.newB,New,Baru
+CHT.seen,You're up to date,Anda sudah terbaru
+CHT.days[0],Race days at a glance,Hari lomba sekilas
+CHT.days[1],"On Home you can switch between the previous, today’s and the next race day; at midnight Rio time everything moves on by itself.","Di Beranda Anda bisa berpindah antara hari lomba sebelumnya, hari ini, dan berikutnya; pada tengah malam waktu Rio semuanya bergeser sendiri."
+CHT.estd[0],Smart delay estimate,Perkiraan keterlambatan cerdas
+CHT.estd[1],The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races.,Aplikasi belajar dari setiap lomba berapa lama lomba dan jeda berlangsung lalu menampilkan “Kemungkinan terlambat ~HH:MM” untuk lomba berikutnya.
+CHT.res[0],Results in the app,Hasil di aplikasi
+CHT.res[1],"Overall ranking, qualifiers and the Final Series – open places show “(to be determined)”.","Peringkat keseluruhan, kualifikasi, dan Final Series – posisi yang belum pasti menampilkan “(belum ditentukan)”."
+CHT.rbox[0],Live race box,Kotak lomba langsung
+CHT.rbox[1],The header strip shows the race on the water and the countdown to the next start – and when a start is delayed.,Strip di atas menampilkan lomba yang sedang berlangsung dan hitung mundur ke start berikutnya – juga saat start ditunda.
+CHT.inst2[0],Easier install,Pemasangan lebih mudah
+CHT.inst2[1],"One tap on Android, an arrow that points to the right button on iPhone, and “Open in Chrome/Safari” from WhatsApp & co.","Satu ketukan di Android, panah ke tombol yang tepat di iPhone, dan “Buka di Chrome/Safari” dari WhatsApp dkk."
+CHT.trk2[0],Faster tracking,Tracking lebih cepat
+CHT.trk2[1],"Live positions appear right away, the race history loads in the background.","Posisi langsung muncul seketika, riwayat lomba dimuat di latar belakang."
+CHT.fbk[0],Send a wish or bug,Kirim keinginan atau bug
+CHT.fbk[1],Under More: tell the app maker what should be better.,Di Lainnya: beri tahu pembuat aplikasi apa yang perlu diperbaiki.
+CHT.rank[0],SSL Nations Ranking in the app,SSL Nations Ranking di aplikasi
+CHT.rank[1],"All 132 nations with continent filter, search, history back to 2025 and each nation's best skippers and crews.","Semua 132 negara dengan filter benua, pencarian, riwayat hingga 2025, dan skipper serta kru terbaik tiap negara."
+CHT.pos[0],Positions checked,Posisi diperiksa
+CHT.pos[1],Every sailor's position compared with the team pages and the Rio jersey numbers – several positions are shown where they differ.,Posisi setiap pelaut dicocokkan dengan halaman tim dan nomor kaus Rio – beberapa posisi ditampilkan bila berbeda.
+CHT.linkin[0],No more jumps to other sites,Tidak ada lagi lompatan ke situs lain
+CHT.linkin[1],Ranking and qualifier links now open inside the app.,Tautan peringkat dan kualifikasi kini terbuka di dalam aplikasi.
+CHT.compass[0],Clearer wind compass,Kompas angin lebih jelas
+CHT.compass[1],"The yellow wedge shows where the wind comes from, the wind speed sits right in the middle.","Irisan kuning menunjukkan dari mana angin datang, kecepatan angin tepat di tengah."
+CHT.tap[0],Tap any team or sailor,Ketuk tim atau pelaut mana pun
+CHT.tap[1],"Team and sailor names now open their page everywhere – tables, results, settings and more.","Nama tim dan pelaut kini membuka halamannya di mana saja – tabel, hasil, pengaturan, dan lainnya."
+CHT.pl[0],Now in Polish,Kini dalam bahasa Polandia
+CHT.pl[1],Polski! The app now speaks 18 languages.,Polski! Aplikasi kini berbicara 18 bahasa.
+CHT.photos[0],Official portraits for the 1/16 teams,Potret resmi tim 1/16
+CHT.photos[1],"Japan, Czechia, Chile, Ecuador, Hungary, Peru, South Africa and Thailand – fresh from the event studio.","Jepang, Ceko, Chili, Ekuador, Hungaria, Peru, Afrika Selatan, dan Thailand – langsung dari studio acara."
+CHT.bright[0],Brightness button,Tombol kecerahan
+CHT.bright[1],"Switch between Matchboard blue, day and night right in the header.","Beralih antara biru Matchboard, siang, dan malam langsung di header."
+CHT.logo[0],Bigger SSL logo,Logo SSL lebih besar
+CHT.logo[1],A little more presence at the top.,Sedikit lebih menonjol di atas.
+CHT.tabs[0],New tab bar,Bilah tab baru
+CHT.tabs[1],"Competition (rounds + matchboard), Teams and Sailors each have their own tab.","Kompetisi (babak + Matchboard), Tim, dan Pelaut masing-masing punya tab sendiri."
+CHT.settings[0],Settings,Pengaturan
+CHT.settings[1],"Notifications, start reminders, quiet hours, units, local times and spoiler-free mode in one place.","Notifikasi, pengingat start, jam tenang, satuan, waktu lokal, dan mode bebas spoiler di satu tempat."
+CHT.pages[0],Real pages,Halaman sungguhan
+CHT.pages[1],"Teams, sailors and races open as full pages with their own link – back always goes one step back.","Tim, pelaut, dan lomba terbuka sebagai halaman penuh dengan tautan sendiri – kembali selalu satu langkah."
+CHT.anim[0],Smooth round switching,Pergantian babak yang mulus
+CHT.anim[1],"Swipe between rounds, with an animation like in the big apps.",Geser antar babak dengan animasi seperti di aplikasi besar.
+CHT.install[0],Easier to install,Lebih mudah dipasang
+CHT.install[1],An Install button next to the language – the app on your home screen in 20 seconds.,Tombol Pasang di samping bahasa – aplikasi di layar utama dalam 20 detik.
+CHT.track[0],Live tracking inside the app,Tracking langsung di aplikasi
+CHT.track[1],"Every boat on the map, live ranking, course and replay – no more external site.","Setiap perahu di peta, peringkat langsung, lintasan, dan replay – tanpa situs eksternal."
+CHT.profiles[0],New sailor profiles,Profil pelaut baru
+CHT.profiles[1],"Bio, career, Olympic and world championship medals from the official SSL profiles.","Bio, karier, medali Olimpiade dan kejuaraan dunia dari profil resmi SSL."
+CHT.favS[0],Follow sailors,Ikuti pelaut
+CHT.favS[1],Tap ☆ on a sailor – your sailors get their own list.,Ketuk ☆ pada pelaut – pelaut Anda punya daftar sendiri.
+CHT.langs6[0],Six more languages,Enam bahasa lagi
+CHT.langs6[1],"Japanese, Thai, Malay, Hungarian, Czech and Ukrainian.","Jepang, Thai, Melayu, Hungaria, Ceko, dan Ukraina."
+CHT.stream[0],Live stream in the app,Siaran langsung di aplikasi
+CHT.stream[1],With preview image and countdown until the broadcast starts.,Dengan gambar pratinjau dan hitung mundur hingga siaran dimulai.
+CHT.spoil[0],Spoiler-free mode,Mode bebas spoiler
+CHT.spoil[1],Hide results until you've watched the race.,Sembunyikan hasil sampai Anda menonton lombanya.
+CHT.wx[0],Sailing weather per race,Cuaca berlayar per lomba
+CHT.wx[1],"Wind, gusts, direction, waves and tide for every start time.","Angin, hembusan, arah, gelombang, dan pasang surut untuk setiap waktu start."
+CHT.cmp[0],Team comparison,Perbandingan tim
+CHT.cmp[1],Two teams side by side – head to head and numbers from Rio.,Dua tim berdampingan – head to head dan angka dari Rio.
+CHT.vids[0],Highlights,Sorotan
+CHT.vids[1],The latest SSL videos right in the app.,Video SSL terbaru langsung di aplikasi.
+CHT.venue[0],Venue,Lokasi
+CHT.venue[1],Marina da Glória with map and directions.,Marina da Glória dengan peta dan petunjuk arah.
+CHT.race[0],Race details,Detail lomba
+CHT.race[1],"Tap a race for result, group standings, wind and stream.","Ketuk lomba untuk hasil, klasemen grup, angin, dan siaran."
+CHT.push[0],Push notifications,Notifikasi push
+CHT.push[1],Results of your teams straight to your phone.,Hasil tim Anda langsung ke ponsel.
+CHT.cal[0],Calendar,Kalender
+CHT.cal[1],All races of your team in your calendar – updates itself.,Semua lomba tim Anda di kalender – diperbarui sendiri.
+CHT.shareimg[0],Share as image,Bagikan sebagai gambar
+CHT.shareimg[1],Group tables as a picture for WhatsApp & co.,Tabel grup sebagai gambar untuk WhatsApp dkk.
+CHT.app[0],Install as an app,Pasang sebagai aplikasi
+CHT.app[1],"Full screen, with icon, updates itself.","Layar penuh, dengan ikon, diperbarui sendiri."
 CONT.[0],Africa,Afrika
 CONT.[1],Asia,Asia
 CONT.[2],Europe,Eropa

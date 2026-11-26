@@ -594,83 +594,83 @@ RESS.[3],Final Series,ファイナルシリーズ
 RESS.[4],(to be determined),（未定）
 RESS.[5],Last chance race,ラストチャンスレース
 RESS.[6],Pos.,順位
-CHT.t,What's new,
-CHT.sub,Everything new in the app – latest first,
-CHT.ver,Version,
-CHT.newB,New,
-CHT.seen,You're up to date,
-CHT.days[0],Race days at a glance,
-CHT.days[1],"On Home you can switch between the previous, today’s and the next race day; at midnight Rio time everything moves on by itself.",
-CHT.estd[0],Smart delay estimate,
-CHT.estd[1],The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races.,
-CHT.res[0],Results in the app,
-CHT.res[1],"Overall ranking, qualifiers and the Final Series – open places show “(to be determined)”.",
-CHT.rbox[0],Live race box,
-CHT.rbox[1],The header strip shows the race on the water and the countdown to the next start – and when a start is delayed.,
-CHT.inst2[0],Easier install,
-CHT.inst2[1],"One tap on Android, an arrow that points to the right button on iPhone, and “Open in Chrome/Safari” from WhatsApp & co.",
-CHT.trk2[0],Faster tracking,
-CHT.trk2[1],"Live positions appear right away, the race history loads in the background.",
-CHT.fbk[0],Send a wish or bug,
-CHT.fbk[1],Under More: tell the app maker what should be better.,
-CHT.rank[0],SSL Nations Ranking in the app,
-CHT.rank[1],"All 132 nations with continent filter, search, history back to 2025 and each nation's best skippers and crews.",
-CHT.pos[0],Positions checked,
-CHT.pos[1],Every sailor's position compared with the team pages and the Rio jersey numbers – several positions are shown where they differ.,
-CHT.linkin[0],No more jumps to other sites,
-CHT.linkin[1],Ranking and qualifier links now open inside the app.,
-CHT.compass[0],Clearer wind compass,
-CHT.compass[1],"The yellow wedge shows where the wind comes from, the wind speed sits right in the middle.",
-CHT.tap[0],Tap any team or sailor,
-CHT.tap[1],"Team and sailor names now open their page everywhere – tables, results, settings and more.",
-CHT.pl[0],Now in Polish,
-CHT.pl[1],Polski! The app now speaks 18 languages.,
-CHT.photos[0],Official portraits for the 1/16 teams,
-CHT.photos[1],"Japan, Czechia, Chile, Ecuador, Hungary, Peru, South Africa and Thailand – fresh from the event studio.",
-CHT.bright[0],Brightness button,
-CHT.bright[1],"Switch between Matchboard blue, day and night right in the header.",
-CHT.logo[0],Bigger SSL logo,
-CHT.logo[1],A little more presence at the top.,
-CHT.tabs[0],New tab bar,
-CHT.tabs[1],"Competition (rounds + matchboard), Teams and Sailors each have their own tab.",
-CHT.settings[0],Settings,
-CHT.settings[1],"Notifications, start reminders, quiet hours, units, local times and spoiler-free mode in one place.",
-CHT.pages[0],Real pages,
-CHT.pages[1],"Teams, sailors and races open as full pages with their own link – back always goes one step back.",
-CHT.anim[0],Smooth round switching,
-CHT.anim[1],"Swipe between rounds, with an animation like in the big apps.",
-CHT.install[0],Easier to install,
-CHT.install[1],An Install button next to the language – the app on your home screen in 20 seconds.,
-CHT.track[0],Live tracking inside the app,
-CHT.track[1],"Every boat on the map, live ranking, course and replay – no more external site.",
-CHT.profiles[0],New sailor profiles,
-CHT.profiles[1],"Bio, career, Olympic and world championship medals from the official SSL profiles.",
-CHT.favS[0],Follow sailors,
-CHT.favS[1],Tap ☆ on a sailor – your sailors get their own list.,
-CHT.langs6[0],Six more languages,
-CHT.langs6[1],"Japanese, Thai, Malay, Hungarian, Czech and Ukrainian.",
-CHT.stream[0],Live stream in the app,
-CHT.stream[1],With preview image and countdown until the broadcast starts.,
-CHT.spoil[0],Spoiler-free mode,
-CHT.spoil[1],Hide results until you've watched the race.,
-CHT.wx[0],Sailing weather per race,
-CHT.wx[1],"Wind, gusts, direction, waves and tide for every start time.",
-CHT.cmp[0],Team comparison,
-CHT.cmp[1],Two teams side by side – head to head and numbers from Rio.,
-CHT.vids[0],Highlights,
-CHT.vids[1],The latest SSL videos right in the app.,
-CHT.venue[0],Venue,
-CHT.venue[1],Marina da Glória with map and directions.,
-CHT.race[0],Race details,
-CHT.race[1],"Tap a race for result, group standings, wind and stream.",
-CHT.push[0],Push notifications,
-CHT.push[1],Results of your teams straight to your phone.,
-CHT.cal[0],Calendar,
-CHT.cal[1],All races of your team in your calendar – updates itself.,
-CHT.shareimg[0],Share as image,
-CHT.shareimg[1],Group tables as a picture for WhatsApp & co.,
-CHT.app[0],Install as an app,
-CHT.app[1],"Full screen, with icon, updates itself.",
+CHT.t,What's new,新機能
+CHT.sub,Everything new in the app – latest first,アプリの新機能すべて – 新しい順
+CHT.ver,Version,バージョン
+CHT.newB,New,新着
+CHT.seen,You're up to date,最新の状態です
+CHT.days[0],Race days at a glance,レース日をひと目で
+CHT.days[1],"On Home you can switch between the previous, today’s and the next race day; at midnight Rio time everything moves on by itself.",ホームで前回・今日・次回のレース日を切り替えられます。リオ時間の深夜0時に自動で進みます。
+CHT.estd[0],Smart delay estimate,スマートな遅延予測
+CHT.estd[1],The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races.,アプリが各レースの所要時間と入れ替え時間を学習し、次のレースに「遅延の可能性 ~HH:MM」と表示します。
+CHT.res[0],Results in the app,アプリ内の結果
+CHT.res[1],"Overall ranking, qualifiers and the Final Series – open places show “(to be determined)”.",総合順位、予選、ファイナルシリーズ – 未確定の順位は「（未定）」と表示。
+CHT.rbox[0],Live race box,ライブレースボックス
+CHT.rbox[1],The header strip shows the race on the water and the countdown to the next start – and when a start is delayed.,上部のバーに水上のレースと次のスタートまでのカウントダウン、スタート延期も表示。
+CHT.inst2[0],Easier install,かんたんインストール
+CHT.inst2[1],"One tap on Android, an arrow that points to the right button on iPhone, and “Open in Chrome/Safari” from WhatsApp & co.",Androidはワンタップ、iPhoneでは正しいボタンを矢印で案内、WhatsAppなどからは「Chrome/Safariで開く」。
+CHT.trk2[0],Faster tracking,トラッキングが高速に
+CHT.trk2[1],"Live positions appear right away, the race history loads in the background.",ライブ位置はすぐに表示、レース履歴はバックグラウンドで読み込み。
+CHT.fbk[0],Send a wish or bug,要望や不具合を送信
+CHT.fbk[1],Under More: tell the app maker what should be better.,「その他」から：アプリ制作者に改善点を伝えられます。
+CHT.rank[0],SSL Nations Ranking in the app,アプリ内のSSL国別ランキング
+CHT.rank[1],"All 132 nations with continent filter, search, history back to 2025 and each nation's best skippers and crews.",全132か国、大陸フィルター、検索、2025年までの履歴、各国のトップスキッパーとクルー。
+CHT.pos[0],Positions checked,ポジションを確認済み
+CHT.pos[1],Every sailor's position compared with the team pages and the Rio jersey numbers – several positions are shown where they differ.,全セーラーのポジションをチームページとリオの背番号と照合 – 異なる場合は複数表示。
+CHT.linkin[0],No more jumps to other sites,他サイトへの移動なし
+CHT.linkin[1],Ranking and qualifier links now open inside the app.,ランキングと予選のリンクはアプリ内で開きます。
+CHT.compass[0],Clearer wind compass,見やすい風向コンパス
+CHT.compass[1],"The yellow wedge shows where the wind comes from, the wind speed sits right in the middle.",黄色の扇形が風の吹いてくる方向、中央に風速を表示。
+CHT.tap[0],Tap any team or sailor,チームやセーラーをタップ
+CHT.tap[1],"Team and sailor names now open their page everywhere – tables, results, settings and more.",表、結果、設定など、どこでもチーム名・セーラー名からページを開けます。
+CHT.pl[0],Now in Polish,ポーランド語に対応
+CHT.pl[1],Polski! The app now speaks 18 languages.,Polski！アプリは18言語に対応しました。
+CHT.photos[0],Official portraits for the 1/16 teams,1/16進出チームの公式ポートレート
+CHT.photos[1],"Japan, Czechia, Chile, Ecuador, Hungary, Peru, South Africa and Thailand – fresh from the event studio.",日本、チェコ、チリ、エクアドル、ハンガリー、ペルー、南アフリカ、タイ – 大会スタジオから。
+CHT.bright[0],Brightness button,明るさボタン
+CHT.bright[1],"Switch between Matchboard blue, day and night right in the header.",ヘッダーでMatchboardブルー、昼、夜を切り替え。
+CHT.logo[0],Bigger SSL logo,SSLロゴを大きく
+CHT.logo[1],A little more presence at the top.,上部での存在感を少しアップ。
+CHT.tabs[0],New tab bar,新しいタブバー
+CHT.tabs[1],"Competition (rounds + matchboard), Teams and Sailors each have their own tab.",大会（ラウンド＋Matchboard）、チーム、セーラーがそれぞれ独立したタブに。
+CHT.settings[0],Settings,設定
+CHT.settings[1],"Notifications, start reminders, quiet hours, units, local times and spoiler-free mode in one place.",通知、スタートリマインダー、おやすみ時間、単位、現地時間、ネタバレ防止を一か所に。
+CHT.pages[0],Real pages,本格的なページ
+CHT.pages[1],"Teams, sailors and races open as full pages with their own link – back always goes one step back.",チーム、セーラー、レースが専用リンク付きのページで開き、戻るは常に一つ前へ。
+CHT.anim[0],Smooth round switching,スムーズなラウンド切替
+CHT.anim[1],"Swipe between rounds, with an animation like in the big apps.",大手アプリのようなアニメーションでラウンド間をスワイプ。
+CHT.install[0],Easier to install,インストールが簡単に
+CHT.install[1],An Install button next to the language – the app on your home screen in 20 seconds.,言語の隣にインストールボタン – 20秒でホーム画面に。
+CHT.track[0],Live tracking inside the app,アプリ内ライブトラッキング
+CHT.track[1],"Every boat on the map, live ranking, course and replay – no more external site.",地図上の全艇、ライブ順位、コース、リプレイ – 外部サイト不要。
+CHT.profiles[0],New sailor profiles,新しいセーラープロフィール
+CHT.profiles[1],"Bio, career, Olympic and world championship medals from the official SSL profiles.",SSL公式プロフィールから経歴、キャリア、五輪・世界選手権メダル。
+CHT.favS[0],Follow sailors,セーラーをフォロー
+CHT.favS[1],Tap ☆ on a sailor – your sailors get their own list.,セーラーの☆をタップ – フォロー中のセーラーは専用リストに。
+CHT.langs6[0],Six more languages,6言語を追加
+CHT.langs6[1],"Japanese, Thai, Malay, Hungarian, Czech and Ukrainian.",日本語、タイ語、マレー語、ハンガリー語、チェコ語、ウクライナ語。
+CHT.stream[0],Live stream in the app,アプリ内ライブ配信
+CHT.stream[1],With preview image and countdown until the broadcast starts.,プレビュー画像と配信開始までのカウントダウン付き。
+CHT.spoil[0],Spoiler-free mode,ネタバレ防止モード
+CHT.spoil[1],Hide results until you've watched the race.,レースを見るまで結果を非表示。
+CHT.wx[0],Sailing weather per race,レースごとのセーリング天気
+CHT.wx[1],"Wind, gusts, direction, waves and tide for every start time.",各スタート時刻の風、ガスト、風向、波、潮汐。
+CHT.cmp[0],Team comparison,チーム比較
+CHT.cmp[1],Two teams side by side – head to head and numbers from Rio.,2チームを並べて比較 – 直接対決とリオでの数字。
+CHT.vids[0],Highlights,ハイライト
+CHT.vids[1],The latest SSL videos right in the app.,最新のSSL動画をアプリで。
+CHT.venue[0],Venue,会場
+CHT.venue[1],Marina da Glória with map and directions.,マリーナ・ダ・グロリア、地図と行き方付き。
+CHT.race[0],Race details,レース詳細
+CHT.race[1],"Tap a race for result, group standings, wind and stream.",レースをタップして結果、グループ順位、風、配信を表示。
+CHT.push[0],Push notifications,プッシュ通知
+CHT.push[1],Results of your teams straight to your phone.,フォロー中のチームの結果をスマホに直接。
+CHT.cal[0],Calendar,カレンダー
+CHT.cal[1],All races of your team in your calendar – updates itself.,チームの全レースをカレンダーに – 自動更新。
+CHT.shareimg[0],Share as image,画像で共有
+CHT.shareimg[1],Group tables as a picture for WhatsApp & co.,グループ表を画像にしてWhatsAppなどで共有。
+CHT.app[0],Install as an app,アプリとしてインストール
+CHT.app[1],"Full screen, with icon, updates itself.",全画面、アイコン付き、自動更新。
 CONT.[0],Africa,アフリカ
 CONT.[1],Asia,アジア
 CONT.[2],Europe,ヨーロッパ

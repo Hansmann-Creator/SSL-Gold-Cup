@@ -594,83 +594,83 @@ RESS.[3],Final Series,فائنل سیریز
 RESS.[4],(to be determined),(طے ہونا باقی)
 RESS.[5],Last chance race,آخری موقع کی ریس
 RESS.[6],Pos.,پوزیشن
-CHT.t,What's new,
-CHT.sub,Everything new in the app – latest first,
-CHT.ver,Version,
-CHT.newB,New,
-CHT.seen,You're up to date,
-CHT.days[0],Race days at a glance,
-CHT.days[1],"On Home you can switch between the previous, today’s and the next race day; at midnight Rio time everything moves on by itself.",
-CHT.estd[0],Smart delay estimate,
-CHT.estd[1],The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races.,
-CHT.res[0],Results in the app,
-CHT.res[1],"Overall ranking, qualifiers and the Final Series – open places show “(to be determined)”.",
-CHT.rbox[0],Live race box,
-CHT.rbox[1],The header strip shows the race on the water and the countdown to the next start – and when a start is delayed.,
-CHT.inst2[0],Easier install,
-CHT.inst2[1],"One tap on Android, an arrow that points to the right button on iPhone, and “Open in Chrome/Safari” from WhatsApp & co.",
-CHT.trk2[0],Faster tracking,
-CHT.trk2[1],"Live positions appear right away, the race history loads in the background.",
-CHT.fbk[0],Send a wish or bug,
-CHT.fbk[1],Under More: tell the app maker what should be better.,
-CHT.rank[0],SSL Nations Ranking in the app,
-CHT.rank[1],"All 132 nations with continent filter, search, history back to 2025 and each nation's best skippers and crews.",
-CHT.pos[0],Positions checked,
-CHT.pos[1],Every sailor's position compared with the team pages and the Rio jersey numbers – several positions are shown where they differ.,
-CHT.linkin[0],No more jumps to other sites,
-CHT.linkin[1],Ranking and qualifier links now open inside the app.,
-CHT.compass[0],Clearer wind compass,
-CHT.compass[1],"The yellow wedge shows where the wind comes from, the wind speed sits right in the middle.",
-CHT.tap[0],Tap any team or sailor,
-CHT.tap[1],"Team and sailor names now open their page everywhere – tables, results, settings and more.",
-CHT.pl[0],Now in Polish,
-CHT.pl[1],Polski! The app now speaks 18 languages.,
-CHT.photos[0],Official portraits for the 1/16 teams,
-CHT.photos[1],"Japan, Czechia, Chile, Ecuador, Hungary, Peru, South Africa and Thailand – fresh from the event studio.",
-CHT.bright[0],Brightness button,
-CHT.bright[1],"Switch between Matchboard blue, day and night right in the header.",
-CHT.logo[0],Bigger SSL logo,
-CHT.logo[1],A little more presence at the top.,
-CHT.tabs[0],New tab bar,
-CHT.tabs[1],"Competition (rounds + matchboard), Teams and Sailors each have their own tab.",
-CHT.settings[0],Settings,
-CHT.settings[1],"Notifications, start reminders, quiet hours, units, local times and spoiler-free mode in one place.",
-CHT.pages[0],Real pages,
-CHT.pages[1],"Teams, sailors and races open as full pages with their own link – back always goes one step back.",
-CHT.anim[0],Smooth round switching,
-CHT.anim[1],"Swipe between rounds, with an animation like in the big apps.",
-CHT.install[0],Easier to install,
-CHT.install[1],An Install button next to the language – the app on your home screen in 20 seconds.,
-CHT.track[0],Live tracking inside the app,
-CHT.track[1],"Every boat on the map, live ranking, course and replay – no more external site.",
-CHT.profiles[0],New sailor profiles,
-CHT.profiles[1],"Bio, career, Olympic and world championship medals from the official SSL profiles.",
-CHT.favS[0],Follow sailors,
-CHT.favS[1],Tap ☆ on a sailor – your sailors get their own list.,
-CHT.langs6[0],Six more languages,
-CHT.langs6[1],"Japanese, Thai, Malay, Hungarian, Czech and Ukrainian.",
-CHT.stream[0],Live stream in the app,
-CHT.stream[1],With preview image and countdown until the broadcast starts.,
-CHT.spoil[0],Spoiler-free mode,
-CHT.spoil[1],Hide results until you've watched the race.,
-CHT.wx[0],Sailing weather per race,
-CHT.wx[1],"Wind, gusts, direction, waves and tide for every start time.",
-CHT.cmp[0],Team comparison,
-CHT.cmp[1],Two teams side by side – head to head and numbers from Rio.,
-CHT.vids[0],Highlights,
-CHT.vids[1],The latest SSL videos right in the app.,
-CHT.venue[0],Venue,
-CHT.venue[1],Marina da Glória with map and directions.,
-CHT.race[0],Race details,
-CHT.race[1],"Tap a race for result, group standings, wind and stream.",
-CHT.push[0],Push notifications,
-CHT.push[1],Results of your teams straight to your phone.,
-CHT.cal[0],Calendar,
-CHT.cal[1],All races of your team in your calendar – updates itself.,
-CHT.shareimg[0],Share as image,
-CHT.shareimg[1],Group tables as a picture for WhatsApp & co.,
-CHT.app[0],Install as an app,
-CHT.app[1],"Full screen, with icon, updates itself.",
+CHT.t,What's new,نیا کیا ہے
+CHT.sub,Everything new in the app – latest first,ایپ میں سب کچھ نیا – تازہ ترین پہلے
+CHT.ver,Version,ورژن
+CHT.newB,New,نیا
+CHT.seen,You're up to date,آپ اپ ٹو ڈیٹ ہیں
+CHT.days[0],Race days at a glance,ریس کے دن ایک نظر میں
+CHT.days[1],"On Home you can switch between the previous, today’s and the next race day; at midnight Rio time everything moves on by itself.",ہوم پر پچھلے، آج اور اگلے ریس ڈے کے درمیان بدلیں؛ ریو وقت آدھی رات کو سب خود آگے بڑھ جاتا ہے۔
+CHT.estd[0],Smart delay estimate,ذہین تاخیر کا اندازہ
+CHT.estd[1],The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races.,ایپ ہر ریس سے ریس اور وقفوں کا دورانیہ سیکھتی ہے اور اگلی ریسوں کے لیے “ممکنہ تاخیر ~HH:MM” دکھاتی ہے۔
+CHT.res[0],Results in the app,ایپ میں نتائج
+CHT.res[1],"Overall ranking, qualifiers and the Final Series – open places show “(to be determined)”.",مجموعی رینکنگ، کوالیفائرز اور فائنل سیریز – کھلی پوزیشنیں “(طے ہونا باقی)” دکھاتی ہیں۔
+CHT.rbox[0],Live race box,لائیو ریس باکس
+CHT.rbox[1],The header strip shows the race on the water and the countdown to the next start – and when a start is delayed.,اوپر کی پٹی پانی پر جاری ریس اور اگلے اسٹارٹ کی الٹی گنتی دکھاتی ہے – اسٹارٹ میں تاخیر بھی۔
+CHT.inst2[0],Easier install,آسان انسٹال
+CHT.inst2[1],"One tap on Android, an arrow that points to the right button on iPhone, and “Open in Chrome/Safari” from WhatsApp & co.",Android پر ایک ٹیپ، iPhone پر درست بٹن کی طرف تیر، اور WhatsApp وغیرہ سے “Chrome/Safari میں کھولیں”۔
+CHT.trk2[0],Faster tracking,تیز ٹریکنگ
+CHT.trk2[1],"Live positions appear right away, the race history loads in the background.",لائیو پوزیشنز فوراً دکھائی دیتی ہیں، ریس کی تاریخ پس منظر میں لوڈ ہوتی ہے۔
+CHT.fbk[0],Send a wish or bug,خواہش یا خرابی بھیجیں
+CHT.fbk[1],Under More: tell the app maker what should be better.,“مزید” میں: ایپ بنانے والے کو بتائیں کیا بہتر ہونا چاہیے۔
+CHT.rank[0],SSL Nations Ranking in the app,ایپ میں SSL نیشنز رینکنگ
+CHT.rank[1],"All 132 nations with continent filter, search, history back to 2025 and each nation's best skippers and crews.",تمام 132 ممالک، براعظم فلٹر، تلاش، 2025 تک کی تاریخ اور ہر ملک کے بہترین اسکپر اور کریو۔
+CHT.pos[0],Positions checked,پوزیشنیں چیک کی گئیں
+CHT.pos[1],Every sailor's position compared with the team pages and the Rio jersey numbers – several positions are shown where they differ.,ہر ملاح کی پوزیشن ٹیم صفحات اور ریو جرسی نمبروں سے ملائی گئی – فرق ہو تو کئی پوزیشنیں دکھائی جاتی ہیں۔
+CHT.linkin[0],No more jumps to other sites,دوسری سائٹس پر جانا ختم
+CHT.linkin[1],Ranking and qualifier links now open inside the app.,رینکنگ اور کوالیفائر لنکس اب ایپ کے اندر کھلتے ہیں۔
+CHT.compass[0],Clearer wind compass,واضح ہوائی قطب نما
+CHT.compass[1],"The yellow wedge shows where the wind comes from, the wind speed sits right in the middle.",پیلا حصہ بتاتا ہے ہوا کہاں سے آ رہی ہے، ہوا کی رفتار بالکل درمیان میں۔
+CHT.tap[0],Tap any team or sailor,کسی بھی ٹیم یا ملاح پر ٹیپ کریں
+CHT.tap[1],"Team and sailor names now open their page everywhere – tables, results, settings and more.",ٹیموں اور ملاحوں کے نام ہر جگہ ان کا صفحہ کھولتے ہیں – جدولیں، نتائج، ترتیبات وغیرہ۔
+CHT.pl[0],Now in Polish,اب پولش میں
+CHT.pl[1],Polski! The app now speaks 18 languages.,Polski! ایپ اب 18 زبانوں میں ہے۔
+CHT.photos[0],Official portraits for the 1/16 teams,1/16 ٹیموں کی سرکاری تصاویر
+CHT.photos[1],"Japan, Czechia, Chile, Ecuador, Hungary, Peru, South Africa and Thailand – fresh from the event studio.",جاپان، چیکیا، چلی، ایکواڈور، ہنگری، پیرو، جنوبی افریقہ اور تھائی لینڈ – ایونٹ اسٹوڈیو سے۔
+CHT.bright[0],Brightness button,چمک کا بٹن
+CHT.bright[1],"Switch between Matchboard blue, day and night right in the header.",ہیڈر میں ہی Matchboard نیلا، دن اور رات بدلیں۔
+CHT.logo[0],Bigger SSL logo,بڑا SSL لوگو
+CHT.logo[1],A little more presence at the top.,اوپر تھوڑی زیادہ موجودگی۔
+CHT.tabs[0],New tab bar,نئی ٹیب بار
+CHT.tabs[1],"Competition (rounds + matchboard), Teams and Sailors each have their own tab.",مقابلہ (راؤنڈز + Matchboard)، ٹیمیں اور ملاح – ہر ایک کا اپنا ٹیب۔
+CHT.settings[0],Settings,ترتیبات
+CHT.settings[1],"Notifications, start reminders, quiet hours, units, local times and spoiler-free mode in one place.",اطلاعات، اسٹارٹ یاد دہانی، خاموش اوقات، اکائیاں، مقامی وقت اور اسپائلر فری موڈ ایک جگہ۔
+CHT.pages[0],Real pages,حقیقی صفحات
+CHT.pages[1],"Teams, sailors and races open as full pages with their own link – back always goes one step back.",ٹیمیں، ملاح اور ریسیں اپنے لنک کے ساتھ پورے صفحے کے طور پر کھلتی ہیں – واپس ہمیشہ ایک قدم۔
+CHT.anim[0],Smooth round switching,ہموار راؤنڈ تبدیلی
+CHT.anim[1],"Swipe between rounds, with an animation like in the big apps.",بڑی ایپس جیسی اینیمیشن کے ساتھ راؤنڈز کے درمیان سوائپ کریں۔
+CHT.install[0],Easier to install,انسٹال کرنا آسان
+CHT.install[1],An Install button next to the language – the app on your home screen in 20 seconds.,زبان کے ساتھ انسٹال بٹن – 20 سیکنڈ میں ایپ ہوم اسکرین پر۔
+CHT.track[0],Live tracking inside the app,ایپ کے اندر لائیو ٹریکنگ
+CHT.track[1],"Every boat on the map, live ranking, course and replay – no more external site.",نقشے پر ہر کشتی، لائیو رینکنگ، کورس اور ری پلے – بیرونی سائٹ کی ضرورت نہیں۔
+CHT.profiles[0],New sailor profiles,ملاحوں کے نئے پروفائل
+CHT.profiles[1],"Bio, career, Olympic and world championship medals from the official SSL profiles.",سرکاری SSL پروفائلز سے تعارف، کیریئر، اولمپک اور عالمی چیمپئن شپ تمغے۔
+CHT.favS[0],Follow sailors,ملاحوں کو فالو کریں
+CHT.favS[1],Tap ☆ on a sailor – your sailors get their own list.,کسی ملاح پر ☆ ٹیپ کریں – آپ کے ملاحوں کی اپنی فہرست۔
+CHT.langs6[0],Six more languages,چھ مزید زبانیں
+CHT.langs6[1],"Japanese, Thai, Malay, Hungarian, Czech and Ukrainian.",جاپانی، تھائی، مالے، ہنگرین، چیک اور یوکرینی۔
+CHT.stream[0],Live stream in the app,ایپ میں لائیو اسٹریم
+CHT.stream[1],With preview image and countdown until the broadcast starts.,پیش نظارہ تصویر اور نشریات شروع ہونے تک الٹی گنتی کے ساتھ۔
+CHT.spoil[0],Spoiler-free mode,اسپائلر فری موڈ
+CHT.spoil[1],Hide results until you've watched the race.,ریس دیکھنے تک نتائج چھپائیں۔
+CHT.wx[0],Sailing weather per race,ہر ریس کا بادبانی موسم
+CHT.wx[1],"Wind, gusts, direction, waves and tide for every start time.",ہر اسٹارٹ وقت کے لیے ہوا، جھونکے، سمت، لہریں اور جوار بھاٹا۔
+CHT.cmp[0],Team comparison,ٹیم موازنہ
+CHT.cmp[1],Two teams side by side – head to head and numbers from Rio.,دو ٹیمیں ساتھ ساتھ – آمنا سامنا اور ریو کے اعداد۔
+CHT.vids[0],Highlights,جھلکیاں
+CHT.vids[1],The latest SSL videos right in the app.,تازہ ترین SSL ویڈیوز براہ راست ایپ میں۔
+CHT.venue[0],Venue,مقام
+CHT.venue[1],Marina da Glória with map and directions.,مرینا دا گلوریا، نقشے اور راستے کے ساتھ۔
+CHT.race[0],Race details,ریس کی تفصیل
+CHT.race[1],"Tap a race for result, group standings, wind and stream.",نتیجہ، گروپ پوزیشن، ہوا اور اسٹریم کے لیے ریس پر ٹیپ کریں۔
+CHT.push[0],Push notifications,پش اطلاعات
+CHT.push[1],Results of your teams straight to your phone.,آپ کی ٹیموں کے نتائج سیدھے فون پر۔
+CHT.cal[0],Calendar,کیلنڈر
+CHT.cal[1],All races of your team in your calendar – updates itself.,آپ کی ٹیم کی تمام ریسیں کیلنڈر میں – خود اپ ڈیٹ ہوتا ہے۔
+CHT.shareimg[0],Share as image,تصویر کے طور پر شیئر کریں
+CHT.shareimg[1],Group tables as a picture for WhatsApp & co.,گروپ جدولیں تصویر کے طور پر WhatsApp وغیرہ کے لیے۔
+CHT.app[0],Install as an app,ایپ کے طور پر انسٹال کریں
+CHT.app[1],"Full screen, with icon, updates itself.",پوری اسکرین، آئیکن کے ساتھ، خود اپ ڈیٹ ہوتی ہے۔
 CONT.[0],Africa,افریقہ
 CONT.[1],Asia,ایشیا
 CONT.[2],Europe,یورپ

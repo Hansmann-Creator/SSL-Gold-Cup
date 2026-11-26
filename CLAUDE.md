@@ -6,7 +6,7 @@ Read this first in any new session. Everything needed to keep developing the app
 - Unofficial companion PWA for the SSL Gold Cup Final Series, Rio de Janeiro, 19 Nov – 13 Dec 2026 (Marina da Glória).
 - Owner: Hansi (filmmaker for Chimbovision at the event; German, works on the Chimbovision MacBook "Jasper" with the RAID at `/Volumes/data/26_GOLD_CUP_RIO`). Talk to him in German, no hype, verify facts.
 - Live: https://hansmann-creator.github.io/SSL-Gold-Cup/ · short link https://is.gd/sslgoldcup
-- Static site on GitHub Pages, no build step for the UI. 18 languages (en de fr es pt zh ar hi bn ur id ms ja th hu cs uk pl).
+- Static site on GitHub Pages, no build step for the UI. 19 languages (en de fr es pt it zh ar hi bn ur id ms ja th hu cs uk pl). `scripts/smoke.py` fails if any language misses a text; `python3 tools/i18n/export.py` (server on :8011) writes `i18n/export/<lang>.csv` for proofreading; fixed sailing terms in `i18n/glossary.json`.
 
 ## Files
 | File | Purpose |
@@ -37,7 +37,7 @@ Read this first in any new session. Everything needed to keep developing the app
 - `live.yml` – race days 14–22 UTC, minute loop: results + push (`notify.py`), live stream (`live_video.py`), start reminders and live push (`push_extra.py`), tracking watcher (`trk_watch.py`).
 - `ranking.yml` – mirrors the nations ranking twice a day.
 - `daily.yml` – every night 03:07 Rio: `scripts/daily.py` rebuilds roster.json from the team pages (plausibility checks, removals only after 2 days missing, `overrides.json` wins), then `scripts/sailors.py all` (profiles.json, `sp/<slug>.json` per sailor, `rank/ind.json` men/women rankings). Anomalies/squad changes → GitHub issue (mail to Hansi). Log in `updates.json`. Bots only write data JSON, never app code.
-- `update.yml` – results backup every 10 min. `extras.yml` – highlight-video push every 30 min. `profiles.yml` – Mondays and whenever roster.json changes.
+- `update.yml` – results backup every 10 min. `extras.yml` – highlight-video push every 30 min. `profiles.yml` – manual run only (daily.yml does it every night).
 
 ## Conventions
 - Commit as `Hansi (via Claude) <hansmann-creator@users.noreply.github.com>`; push with `git pull -q --rebase --depth=20 origin main && git -c push.negotiate=true push -q origin main`.
@@ -50,6 +50,7 @@ Read this first in any new session. Everything needed to keep developing the app
 ## Recurring jobs
 - **New portraits** (`/Volumes/data/26_GOLD_CUP_RIO/05_Footage_Graphic/SAILOR_PHOTOS/<TEAM>/`): official RAID photos always win and may overwrite older ones. Prefer the clean files in the team folder root (600×600 PNG, transparent) → 320 px webp in `img/` **and** 600 px webp with the same name in `img/hd/` (tap-to-zoom on the sailor page), add/update `teaminfo.json` crew `{no,name,img}`.
 - **Positions**: run audit in Actions → `python tools/positions/rebuild.py audit.json tools/positions/xls.json` → review `positions_report.json` (conflicts, added/removed sailors).
+- **New UI text**: add it to every language (the smoke test checks this) – follow `i18n/glossary.json`.
 - **New language**: add to `LANGS`, `LOC`, lang auto-detect list, `ORD`, `OSL`, `<select id="lang">`, a full `S.<lang>` block (copy the `cs` block), SSET, SOW, CP, WXF, ALSO, FIX; plus `scripts/notify.py` (LANGS, RN, W, spoiler text) and `scripts/push_extra.py`; add to `scripts/smoke.py`.
 
 ## Open items (waiting for Hansi)
@@ -57,4 +58,5 @@ Read this first in any new session. Everything needed to keep developing the app
 - Feedback: Google Form link (prefilled link with entry IDs) from Hansi → in-app "Wunsch melden".
 
 ## Done
-- GoatCounter live: `CFG.gc="ssl-gold-cup"` → https://ssl-gold-cup.goatcounter.com (events: start-app/start-browser, install = first launch from home screen per device, install-tap, install-guide-*, install-confirmed, lang-*).
+- GoatCounter live: `CFG.gc="ssl-gold-cup"` → https://ssl-gold-cup.goatcounter.com (events: start-app/start-browser, install = first launch from home screen per device – also counts iPhones, install-tap, install-guide-*, install-confirmed (Android only), lang-*, lang-auto-*/lang-manual-*). Open the app once with `?gcskip=1` on a device to exclude it from the stats (`?gcskip=0` undoes it).
+- Races show the actual start from Georacing (`timing.json` `s`/`plan`): “started 12:25”, planned time struck through.

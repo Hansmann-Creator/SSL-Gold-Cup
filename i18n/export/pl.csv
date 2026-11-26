@@ -599,20 +599,20 @@ CHT.sub,Everything new in the app – latest first,Wszystkie nowości – najnow
 CHT.ver,Version,Wersja
 CHT.newB,New,Nowe
 CHT.seen,You're up to date,Masz najnowszą wersję
-CHT.days[0],Race days at a glance,
-CHT.days[1],"On Home you can switch between the previous, today’s and the next race day; at midnight Rio time everything moves on by itself.",
-CHT.estd[0],Smart delay estimate,
-CHT.estd[1],The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races.,
-CHT.res[0],Results in the app,
-CHT.res[1],"Overall ranking, qualifiers and the Final Series – open places show “(to be determined)”.",
-CHT.rbox[0],Live race box,
-CHT.rbox[1],The header strip shows the race on the water and the countdown to the next start – and when a start is delayed.,
-CHT.inst2[0],Easier install,
-CHT.inst2[1],"One tap on Android, an arrow that points to the right button on iPhone, and “Open in Chrome/Safari” from WhatsApp & co.",
-CHT.trk2[0],Faster tracking,
-CHT.trk2[1],"Live positions appear right away, the race history loads in the background.",
-CHT.fbk[0],Send a wish or bug,
-CHT.fbk[1],Under More: tell the app maker what should be better.,
+CHT.days[0],Race days at a glance,Dni regat w skrócie
+CHT.days[1],"On Home you can switch between the previous, today’s and the next race day; at midnight Rio time everything moves on by itself.","Na ekranie głównym przełączasz się między poprzednim, dzisiejszym i następnym dniem regat; o północy czasu Rio wszystko przesuwa się samo."
+CHT.estd[0],Smart delay estimate,Inteligentne szacowanie opóźnień
+CHT.estd[1],The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races.,"Aplikacja uczy się z każdego wyścigu, ile trwają wyścigi i przerwy, i pokazuje „Prawdopodobnie opóźniony ~GG:MM” dla kolejnych wyścigów."
+CHT.res[0],Results in the app,Wyniki w aplikacji
+CHT.res[1],"Overall ranking, qualifiers and the Final Series – open places show “(to be determined)”.","Klasyfikacja generalna, kwalifikacje i Final Series – wolne miejsca pokazują „(do ustalenia)”."
+CHT.rbox[0],Live race box,Pasek wyścigu na żywo
+CHT.rbox[1],The header strip shows the race on the water and the countdown to the next start – and when a start is delayed.,"Pasek u góry pokazuje wyścig na wodzie i odliczanie do następnego startu – oraz to, gdy start jest opóźniony."
+CHT.inst2[0],Easier install,Łatwiejsza instalacja
+CHT.inst2[1],"One tap on Android, an arrow that points to the right button on iPhone, and “Open in Chrome/Safari” from WhatsApp & co.","Jedno stuknięcie na Androidzie, strzałka wskazująca właściwy przycisk na iPhonie i „Otwórz w Chrome/Safari” z WhatsAppa i innych."
+CHT.trk2[0],Faster tracking,Szybszy tracking
+CHT.trk2[1],"Live positions appear right away, the race history loads in the background.","Pozycje na żywo pojawiają się od razu, historia wyścigu ładuje się w tle."
+CHT.fbk[0],Send a wish or bug,Wyślij życzenie lub błąd
+CHT.fbk[1],Under More: tell the app maker what should be better.,"W zakładce Więcej: napisz twórcy aplikacji, co poprawić."
 CHT.rank[0],SSL Nations Ranking in the app,Ranking narodów SSL w aplikacji
 CHT.rank[1],"All 132 nations with continent filter, search, history back to 2025 and each nation's best skippers and crews.","Wszystkie 132 narody z filtrem kontynentu, wyszukiwaniem, historią od 2025 i najlepszymi sternikami oraz załogą."
 CHT.pos[0],Positions checked,Sprawdzone pozycje
@@ -695,6 +695,6 @@ NXP,Probably delayed,Możliwe opóźnienie
 ORD,"n=>n+(n%10==1&&n!=11?""st"":n%10==2&&n!=12?""nd"":n%10==3&&n!=13?""rd"":""th"")","n=>n+""."""
 OSL,en,pl
 FIX.GBR,Great Britain,Wielka Brytania
-FIX.TAH,Tahiti,
+FIX.TAH,Tahiti,Tahiti
 FIX.MYA,Myanmar,Mjanma
-FIX.USA,USA,
+FIX.USA,USA,USA

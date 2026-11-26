@@ -599,10 +599,10 @@ CHT.sub,Everything new in the app – latest first,Todo lo nuevo en la app – l
 CHT.ver,Version,Versión
 CHT.newB,New,Nuevo
 CHT.seen,You're up to date,Estás al día
-CHT.days[0],Race days at a glance,
-CHT.days[1],"On Home you can switch between the previous, today’s and the next race day; at midnight Rio time everything moves on by itself.",
-CHT.estd[0],Smart delay estimate,
-CHT.estd[1],The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races.,
+CHT.days[0],Race days at a glance,Las jornadas de un vistazo
+CHT.days[1],"On Home you can switch between the previous, today’s and the next race day; at midnight Rio time everything moves on by itself.","En Inicio cambias entre la jornada anterior, la de hoy y la siguiente; a medianoche, hora de Río, todo avanza solo."
+CHT.estd[0],Smart delay estimate,Estimación inteligente de retrasos
+CHT.estd[1],The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races.,La app aprende de cada regata cuánto duran las regatas y los cambios y muestra «Probablemente retrasada ~HH:MM» para las siguientes.
 CHT.res[0],Results in the app,Resultados en la app
 CHT.res[1],"Overall ranking, qualifiers and the Final Series – open places show “(to be determined)”.","Clasificación general, clasificatorias y Final Series – los puestos abiertos aparecen como “(to be determined)”."
 CHT.rbox[0],Live race box,Barra de regata en vivo
