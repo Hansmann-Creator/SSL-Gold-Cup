@@ -8,7 +8,8 @@ let theme=LS.get("theme","auto"),favs=new Set(LS.get("favs",[]));
 
 let INFO={};try{INFO=await (await fetch("teaminfo.json",{cache:"no-cache"})).json()}catch(e){}
 let PEOPLE=[];try{PEOPLE=await (await fetch("people.json",{cache:"no-cache"})).json()}catch(e){}
-async function pullFile(){try{const r=await fetch("results.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)return false;const d=await r.json();if(d&&Array.isArray(d.rounds)&&(!D.updatedAt||Date.parse(d.updatedAt)>=Date.parse(D.updatedAt))){const ch=JSON.stringify(d.rounds)!==JSON.stringify(D.rounds);D=d;if(d.checkedAt)checkedAt=d.checkedAt;return ch}}catch(e){}return false}
+const okData=d=>{try{return d&&Array.isArray(d.rounds)&&d.rounds.length>=5&&d.rounds.every(r=>r&&r.id&&r.start&&r.end&&Array.isArray(r.groups)&&r.groups.length&&r.groups.every(g=>g&&g.id&&Array.isArray(g.rows)&&g.rows.length&&g.rows.every(x=>x&&typeof x.team=="string"&&Array.isArray(x.r))))}catch(e){return false}};
+async function pullFile(){try{const r=await fetch("results.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)return false;const d=await r.json();if(okData(d)&&(!D.updatedAt||Date.parse(d.updatedAt)>=Date.parse(D.updatedAt))){const ch=JSON.stringify(d.rounds)!==JSON.stringify(D.rounds);D=d;if(d.checkedAt)checkedAt=d.checkedAt;return ch}}catch(e){}return false}
 let RO={};try{RO=await (await fetch("roster.json",{cache:"no-cache"})).json()}catch(e){}
 let D=JSON.parse($("#snap").textContent),checkedAt=null,view="board",round=null,sel=null,filt="all",sortBy="status",q="",live=false,stale=false,jump=false;
 
@@ -406,7 +407,9 @@ function stand(){const u=new Date(checkedAt&&Date.parse(checkedAt)>Date.parse(D.
 applyTheme();
 
 /* ---------- render & routing ---------- */
-function render(keepScroll){const y=scrollY;chrome();
+let GOOD=null;
+function render(keepScroll){try{render0(keepScroll);GOOD=D}catch(e){console.error(e);if(GOOD&&GOOD!==D){D=GOOD;try{render0(keepScroll)}catch(e2){}}}}
+function render0(keepScroll){const y=scrollY;chrome();
   document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.v==view||(b.dataset.v=="bracket"&&(view=="qualifying"||view=="gc2023"))));
   ladder();const M=$("#main");
   M.innerHTML=view=="board"?board():view=="bracket"?bracket():view=="qualifying"?qualifying():view=="gc2023"?gc23():teamView();
@@ -444,7 +447,7 @@ try{if("serviceWorker" in navigator&&window.top===window&&location.protocol=="ht
 /* ---------- live data ---------- */
 (async()=>{try{const db=await window.claude?.use?.("db");if(!db)return;
   const timer=setTimeout(()=>{if(!live){stale=true;stand()}},10000);
-  db.doc("gc/results").onSnapshot(s=>{if(s.exists){const d=s.data();if(d&&d.checkedAt)checkedAt=d.checkedAt;if(d&&Array.isArray(d.rounds)&&(!D.updatedAt||Date.parse(d.updatedAt)>=Date.parse(D.updatedAt))){D=JSON.parse(JSON.stringify(d));live=true;
+  db.doc("gc/results").onSnapshot(s=>{if(s.exists){const d=s.data();if(d&&d.checkedAt)checkedAt=d.checkedAt;if(okData(d)&&(!D.updatedAt||Date.parse(d.updatedAt)>=Date.parse(D.updatedAt))){D=JSON.parse(JSON.stringify(d));live=true;
       if(!D.rounds.some(r=>r.id==round))round=current();render(true);if($("#tmd").open&&openCode){const y=$("#tmd").scrollTop;openTeam(openCode);$("#tmd").scrollTop=y}}}
     if(!s.metadata.fromCache)clearTimeout(timer)},()=>clearTimeout(timer))}catch(e){}})();
 })();
