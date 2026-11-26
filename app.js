@@ -1199,6 +1199,7 @@ function role(p){const s=String(p||"").toLowerCase(),cap=/capt|kapit|capit/.test
   if(/main/.test(r))k="Main Trimmer";else if(/helm/.test(r))k="Helm";else if(/tact|strateg/.test(r))k="Tactician";else if(/grind/.test(r))k="Grinder";
   else if(/mid/.test(r))k="Mid-Bow";else if(/bow/.test(r))k="Bow";else if(/pit/.test(r))k="Pit";else if(/trim/.test(r))k="Trimmer";else if(/float|reserv|spare/.test(r))k="Floater";
   return{cap,k}}
+const posL=p=>(p.ks&&p.ks.length?p.ks:p.k?[p.k]:[]).join(" / ");
 const tc=n=>String(n).split(" ").map(w=>w.length>1&&w==w.toUpperCase()&&/[A-ZÀ-Þ]/.test(w)?w[0]+w.slice(1).toLowerCase():w).join(" ");
 const ini=n=>{const w=tc(n).replace(/["“”].*?["“”]/g,"").split(/[\s-]+/).filter(Boolean);return w.length?(w[0][0]+(w.length>1?w[w.length-1][0]:"")).toUpperCase():"?"};
 const STOP=new Set(["mohd","muhamad","muhammad","mohamed","mohamad","bin","binti","de","la","del","da","dos","al","nur","abdul","van","von","the"]);
@@ -1206,7 +1207,7 @@ const tok=s=>String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().rep
 const SQ={};
 function squad(code){if(SQ[code])return SQ[code];const t=RO[code],I=INFO[code]||{},crew=(I.crew||[]).map(c=>({...c,t:tok(c.name),used:false}));
   const out=[],seen={};const C=code;
-  if(t)t.s.forEach(([nm,pos,no])=>{const k=tc(nm).toLowerCase(),r=role(pos),o={name:tc(nm),no:String(no),cap:r.cap,k:r.k};
+  if(t)t.s.forEach(([nm,pos,no,ks])=>{const k=tc(nm).toLowerCase(),r=role(pos),K=Array.isArray(ks)&&ks.length?ks:(r.k?[r.k]:[]),o={name:tc(nm),no:String(no),cap:r.cap,k:K[0]||null,ks:K};
     if(seen[k]){if(!seen[k].k&&o.k)Object.assign(seen[k],o);return}seen[k]=o;out.push(o)});
   const capn=tc(t?t.c:(I.captain||"")).toLowerCase();out.forEach(p=>{if(p.name.toLowerCase()==capn)p.cap=true});
   out.forEach(p=>{const pt=tok(p.name);let best=null,bs=0;
@@ -1217,7 +1218,7 @@ function squad(code){if(SQ[code])return SQ[code];const t=RO[code],I=INFO[code]||
   return SQ[code]={n:(t&&t.n)||I.nick||"",c:t?tc(t.c):(I.captain||""),ppl:out}}
 const av=(p,small)=>`<span class="av${small?" s":""}${p.img?" ph":""}">${p.img?`<img src="${esc(p.img)}" alt="" loading="lazy">`:esc(ini(p.name))}${/^\d+$/.test(p.no)?`<i>${esc(p.no)}</i>`:""}</span>`;
 const pinfo=(code,p)=>{const tk=tok(p.name);return PEOPLE.find(e=>e.t==code&&tk.includes(e.m))};
-const person=p=>`<div class="pp" role="button" tabindex="0" data-pi="${p.i}">${av(p)}<span class="nm">${NMH(p.name)}${p.cap?`<span class="ctag">${T("capTag")}</span>`:""}<small>${/^\d+$/.test(p.no)?T("jersey")+" "+esc(p.no):T("numTbc")}${p.code&&pinfo(p.code,p)&&pinfo(p.code,p).rank?" · SSL #"+pinfo(p.code,p).rank:""}</small></span></div>`;
+const person=p=>`<div class="pp" role="button" tabindex="0" data-pi="${p.i}">${av(p)}<span class="nm">${NMH(p.name)}${p.cap?`<span class="ctag">${T("capTag")}</span>`:""}${p.ks&&p.ks.length>1?`<small class="alsop">${esc(T("alsoP"))} ${esc(p.ks.slice(1).join(" / "))}</small>`:""}<small>${/^\d+$/.test(p.no)?T("jersey")+" "+esc(p.no):T("numTbc")}${p.code&&pinfo(p.code,p)&&pinfo(p.code,p).rank?" · SSL #"+pinfo(p.code,p).rank:""}</small></span></div>`;
 function capPhoto(code){const sq=squad(code);const p=sq.ppl.find(x=>x.cap&&x.img)||sq.ppl.find(x=>x.no=="10"&&x.img)||sq.ppl.find(x=>x.img);return p&&p.img}
 function routeText(code,T0){const R=(INFO[code]||{}).route,r=T("route"),e=R&&R.ev?T("ev")[R.ev]:"";
   if(!R)return T0?r.seeded(RNm(T0.path[0].r)):"–";
@@ -1442,7 +1443,7 @@ function sailorsView(){const TT=teams(),byC={};TT.forEach(t=>byC[t.code]=t);
   if(qq){const L=all.filter(x=>(x.p.name+" "+x.c+" "+NM(x.c)+" "+(x.p.k||"")+" "+(squad(x.c).n||"")).toLowerCase().includes(qq));
     L.sort((a,b)=>(b.p.img?1:0)-(a.p.img?1:0)||NM(a.c).localeCompare(NM(b.c),lang)||(+a.p.no||99)-(+b.p.no||99));
     const shown=L.slice(0,200);
-    return h+(L.length?`<div class="slist">${shown.map(({c,p})=>`<button class="srow" data-sc="${esc(c)}" data-si="${p.i}">${av(p,1)}<span><span class="nmx">${NMH(p.name)}</span><small>${FL(c)}${esc(NM(c))}${p.k?" · "+esc(p.k):p.cap?" · "+esc(T("captain")):""}</small></span></button>`).join("")}</div>`:`<p>${T("noTeam")}</p>`)}
+    return h+(L.length?`<div class="slist">${shown.map(({c,p})=>`<button class="srow" data-sc="${esc(c)}" data-si="${p.i}">${av(p,1)}<span><span class="nmx">${NMH(p.name)}</span><small>${FL(c)}${esc(NM(c))}${p.k?" · "+esc(posL(p)):p.cap?" · "+esc(T("captain")):""}</small></span></button>`).join("")}</div>`:`<p>${T("noTeam")}</p>`)}
   const SF=favSailors();h+=SF.length?`<h3 class="sec">★ ${T("mySailors")}</h3>${sCarousel(SF)}`:`<p class="warn sfh">☆ ${esc(T("sFavHint"))}</p>`;
   /* captains */
   const caps=codes.map(c=>{const pp=squad(c).ppl;const p=pp.find(x=>x.cap)||pp.find(x=>x.k=="Captain");return p?{c,p}:null}).filter(Boolean).sort((a,b)=>(b.p.img?1:0)-(a.p.img?1:0));
@@ -1451,7 +1452,7 @@ function sailorsView(){const TT=teams(),byC={};TT.forEach(t=>byC[t.code]=t);
   h+=`<h3 class="sec">${T("sTeams")}</h3><p class="warn">${T("sHint")}</p><div class="sacc">${codes.map(c=>{const sq=squad(c),pp=sq.ppl.filter(p=>!p.extra),t=o(c),pics=pp.filter(p=>p.img).slice(0,4);
     const crew=[...pp].sort((a,b)=>(b.cap?1:0)-(a.cap?1:0)||(/^\d+$/.test(a.no)?+a.no:99)-(/^\d+$/.test(b.no)?+b.no:99));
     return `<details data-sq="${esc(c)}"${sOpen.has(c)?" open":""}${t.out?' class="out"':""}><summary><span class="sqf">${FL(c)}</span><span class="sqn"><b>${esc(NM(c))}${favs.has(c)?' <span class="star">★</span>':""}</b><small>${sq.n?`<span class="tnk">${esc(sq.n)}</span> · `:""}${pp.length} ${esc(T("sailors"))}${t.out?" · "+esc(T("stOut")):""}</small></span><span class="sqs" aria-hidden="true">${pics.map(p=>`<img src="${esc(p.img)}" alt="" loading="lazy">`).join("")}</span><span class="sqc" aria-hidden="true">›</span></summary>
-      <div class="sgrid">${crew.map(p=>`<button class="stile" data-sc="${esc(c)}" data-si="${p.i}"><span class="stp">${p.img?`<img src="${esc(p.img)}" alt="" loading="lazy">`:`<b>${esc(ini(p.name))}</b>`}${/^\d+$/.test(p.no)?`<i>${esc(p.no)}</i>`:""}</span><span class="sgn"><small>${esc(givenN(p.name))}</small><b>${esc(surname(p.name))}${sfavs.has(c+"|"+p.name)?' <span class="star">★</span>':""}</b></span><small>${esc(p.k?(T("roles")[p.k]?p.k:p.k):p.cap?T("captain"):"")}</small></button>`).join("")}</div><button class="sqteam" data-t="${esc(c)}">${T("sTeamPage")} ›</button></details>`}).join("")}</div>`;
+      <div class="sgrid">${crew.map(p=>`<button class="stile" data-sc="${esc(c)}" data-si="${p.i}"><span class="stp">${p.img?`<img src="${esc(p.img)}" alt="" loading="lazy">`:`<b>${esc(ini(p.name))}</b>`}${/^\d+$/.test(p.no)?`<i>${esc(p.no)}</i>`:""}</span><span class="sgn"><small>${esc(givenN(p.name))}</small><b>${esc(surname(p.name))}${sfavs.has(c+"|"+p.name)?' <span class="star">★</span>':""}</b></span><small>${esc(p.k?posL(p):p.cap?T("captain"):"")}</small></button>`).join("")}</div><button class="sqteam" data-t="${esc(c)}">${T("sTeamPage")} ›</button></details>`}).join("")}</div>`;
   return h}
 /* ---------- team numbers ---------- */
 function teamStats(TM){if(!TM)return"";let races=0,wins=0,pl=[],pts=0;const hist=[];
@@ -1819,7 +1820,7 @@ function pSailor(code,i){const d=$("#pg"),sq=squad(code),p=sq.ppl[i];if(!p)retur
   const q2=encodeURIComponent;let h=`<div class="th"><button class="bk">${T("back")}</button><div class="thb"><button class="fv ${sfavs.has(code+"|"+p.name)?"on":""}" data-sfv="1" aria-pressed="${sfavs.has(code+"|"+p.name)}" title="${esc(T("sFavHint"))}">${sfavs.has(code+"|"+p.name)?"★":"☆"}</button><button class="pv" aria-label="previous">‹</button><button class="nx2" aria-label="next">›</button><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">`;
   h+=`<div class="shero">${p.img?`<img src="${esc(p.img)}" alt="${esc(p.name)}">`:`<span class="big">${esc(ini(p.name))}</span>`}<div><div class="nick">${FL(code)} ${esc(NM(code))}${sq.n?" · "+esc(sq.n):""}</div><h2 class="snh">${NMH(p.name)}</h2>${p.cap?`<span class="ctag">${T("capTag")}</span>`:""}</div></div>`;
   const PF=PROF[code+"|"+p.name]||{};const tile=(k,v,e,cls)=>`<div class="sl${cls?" "+cls:""}"><small>${k}</small><b>${v}</b>${e?`<em>${e}</em>`:""}</div>`;
-  h+=`<div class="sstats pf">${tile(T("position"),esc(p.k||(p.cap?T("captain"):T("posTbc"))),p.k?esc(T("roles")[p.k]):"")}${tile(T("jersey"),/^\d+$/.test(p.no)?"#"+esc(p.no):"–")}${PF.rank||PE&&PE.rank?tile(T("indRank"),"#"+(PF.rank||PE.rank)):""}${PF.pts!=null?tile(T("sslPts"),PF.pts):""}${PF.cm?tile(T("heightT"),PF.cm+" cm"):""}${PF.kg?tile(T("weightT"),PF.kg+" kg"):""}${PF.club?tile(T("clubT"),esc(PF.club),"","wide"):""}<button class="sl wide" data-tm="1"><small>${T("team")}</small><b>${FL(code)} ${esc(NM(code))}</b><em>${esc(TM?TM.txt:"")}</em></button></div>`;
+  h+=`<div class="sstats pf">${tile(T("position"),esc(p.k?posL(p):(p.cap?T("captain"):T("posTbc"))),p.k?esc(p.ks&&p.ks.length>1?p.ks.map(k=>T("roles")[k]).join(" / "):T("roles")[p.k]):"")}${tile(T("jersey"),/^\d+$/.test(p.no)?"#"+esc(p.no):"–")}${PF.rank||PE&&PE.rank?tile(T("indRank"),"#"+(PF.rank||PE.rank)):""}${PF.pts!=null?tile(T("sslPts"),PF.pts):""}${PF.cm?tile(T("heightT"),PF.cm+" cm"):""}${PF.kg?tile(T("weightT"),PF.kg+" kg"):""}${PF.club?tile(T("clubT"),esc(PF.club),"","wide"):""}<button class="sl wide" data-tm="1"><small>${T("team")}</small><b>${FL(code)} ${esc(NM(code))}</b><em>${esc(TM?TM.txt:"")}</em></button></div>`;
   const hl=PE&&PE.b&&(PE.b[lang]||PE.b.en);
   const ph=profHtml(code,p.name,"car"),pt=profHtml(code,p.name,"top"),pb=profHtml(code,p.name,"bio");
   h+=pt+pb+(hl&&hl.length?`<h3>${T("highlights")}</h3><div class="grp"><ul class="hl">${hl.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`:"")+ph+(!(hl&&hl.length)&&!ph&&!pb?`<p class="warn">${T("noInfo")}</p>`:"");
@@ -2120,6 +2121,7 @@ async function openWx(x){const d=sheetWrap(`${T("wxH")} · Marina da Glória`,`$
   h+=`<p class="warn">${esc(T("wxSrc2"))}</p>${wxLinks()}`;const y=d.scrollTop;tb.innerHTML=h;d.scrollTop=y;tb.querySelectorAll("[data-hi]").forEach(el=>{el.onclick=()=>paint(+el.dataset.hi);el.onkeydown=e=>{if(e.key=="Enter")paint(+el.dataset.hi)}})};paint(st0)}
 const WI={t:'<path d="M10 14V5a2 2 0 014 0v9a4 4 0 11-4 0z"/>',r:'<path d="M7 15a4 4 0 01-.5-8A5.5 5.5 0 0117 6a3.5 3.5 0 01.5 7"/><path d="M9 17l-1 3M13 17l-1 3M17 16l-1 3"/>',c:'<path d="M7 18a4 4 0 01-.5-8A5.5 5.5 0 0117 9a3.5 3.5 0 01.5 7H7z"/>',p:'<circle cx="12" cy="13" r="8"/><path d="M12 13l4-3"/>'};
 const wi=k=>svg(WI[k],"wic");
+const ALSO={en:"also",de:"auch",fr:"aussi",es:"también",pt:"também",zh:"也任",ar:"أيضًا",hi:"यह भी",bn:"এছাড়াও",ur:"یہ بھی",id:"juga",ms:"juga",ja:"兼",th:"หรือ",hu:"is:",cs:"také",uk:"також",pl:"także"};for(const l in ALSO)if(S[l])S[l].alsoP=ALSO[l];
 const WXF={en:"Wind from",de:"Wind aus",fr:"Vent du",es:"Viento del",pt:"Vento de",zh:"风向（来自）",ar:"الرياح من",hi:"हवा की दिशा (से)",bn:"বাতাস আসছে",ur:"ہوا کا رخ (سے)",id:"Angin dari",ms:"Angin dari",ja:"風向（から）",th:"ลมมาจาก",hu:"Szél iránya",cs:"Vítr od",uk:"Вітер з",pl:"Wiatr z"};
 function rose(dir,w){const P=(r,a)=>[50+r*Math.sin(a*Math.PI/180),50-r*Math.cos(a*Math.PI/180)].map(v=>v.toFixed(1));
   const near=a=>Math.abs(((dir-a+540)%360)-180)<25;

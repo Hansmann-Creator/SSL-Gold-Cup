@@ -1018,3 +1018,5 @@ tr.tlink{cursor:pointer}tr.tlink:active td{background:color-mix(in srgb,var(--go
 .cdd,.mono,#nxc b{direction:ltr;unicode-bidi:isolate}
 @media(max-width:375px){.bar{gap:5px}#setb,#thm{width:36px!important;height:36px!important}.lgw{height:36px!important;padding:0 9px!important}#ins{height:36px!important;padding:0 10px!important}#nxc{transform-origin:right center}}
 @media(max-width:340px){#ins span{display:none!important}}
+
+.pp .alsop{display:block;color:var(--gold);font-size:12.5px;opacity:.9}
