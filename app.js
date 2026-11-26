@@ -1882,7 +1882,7 @@ function pTeam(code){if(!isTeam(code))return;openCode=code;const d=$("#pg"),sq=s
   h+=`<div class="tact">${pushShown()?`<button data-push="1" class="${pSet.has(code)?"on":""}" aria-pressed="${pSet.has(code)}">${T(pSet.has(code)?"pTeamOn":"pTeamOff")}</button>`:""}<button data-cal="${esc(code)}">${T("calBtn")}</button><button data-cmp="1">${T("cmpBtn")}</button><button data-br="1">${T("showPath")}</button></div></div>`;
   d.innerHTML=h;
   d.querySelector(".fv").onclick=()=>{favs.has(code)?favs.delete(code):favs.add(code);LS.set("favs",[...favs]);const y=d.scrollTop;pTeam(code);d.scrollTop=y;render(true)};
-  d.querySelector(".ln").onclick=async()=>{const u=location.href.split("#")[0]+"#team-"+code;try{if(navigator.share){await navigator.share({title:`${NM(code)} · SSL Gold Cup Rio 2026`,url:u});return}}catch(e){if(e&&e.name=="AbortError")return}try{await navigator.clipboard.writeText(u);toast(T("copied"))}catch(e){toast(u)}};d.querySelectorAll(".hrc[data-race]").forEach(b=>b.onclick=()=>{const x=raceBy(b.dataset.race);if(x)openRace(x)});
+  d.querySelector(".ln").onclick=async()=>{const u=location.origin+location.pathname+"#team-"+code;try{if(navigator.share){await navigator.share({title:`${NM(code)} · SSL Gold Cup Rio 2026`,url:u});return}}catch(e){if(e&&e.name=="AbortError")return}try{await navigator.clipboard.writeText(u);toast(T("copied"))}catch(e){toast(u)}};d.querySelectorAll(".hrc[data-race]").forEach(b=>b.onclick=()=>{const x=raceBy(b.dataset.race);if(x)openRace(x)});
   d.querySelector("[data-cal]").onclick=()=>calSheet(code);
   d.querySelector("[data-cmp]").onclick=()=>comparePick(code);
   {const pb=d.querySelector("[data-push]");if(pb)pb.onclick=async()=>{pb.disabled=true;await pushToggle(code);if(PGS&&PGS.t=="team"&&PGS.a==code){const y=d.scrollTop;pTeam(code);d.scrollTop=y}};}
@@ -1950,7 +1950,7 @@ function installHelp(first){const I=T("inst"),d=$("#tmd"),U=T("ui"),x=s=>esc(s);
   d.querySelector(".x").onclick=done;
   d.querySelector(".oblang").onchange=e=>{lang=e.target.value;LS.set("lang",lang);for(const k in SQ)delete SQ[k];chrome();render(true);installHelp(first)};
   const go=d.querySelector("[data-obgo]");if(go)go.onclick=async()=>{LS.set("onb",1);d.close();await doInstall()};
-  d.querySelectorAll("[data-obcopy]").forEach(b=>b.onclick=async()=>{const u=location.href.split("#")[0];try{await navigator.clipboard.writeText(u);toast(T("copied"))}catch(e){toast(u)}});
+  d.querySelectorAll("[data-obcopy]").forEach(b=>b.onclick=async()=>{const u=location.origin+location.pathname;try{await navigator.clipboard.writeText(u);toast(T("copied"))}catch(e){toast(u)}});
   openCode=null;show(d);try{d.querySelector(".obhero").focus({preventScroll:true})}catch(e){}}
 /* first visit in a phone browser: show the install guide once, full screen */
 function firstRun(){try{if(LS.get("onb",0)||LS.get("installed",0)||!canInstall()||!(isIOS||isAndroid)||navigator.webdriver)return;
@@ -2430,9 +2430,9 @@ if(!location.hash){const v=LS.get("view","");if(v&&!/^team-/.test(v))try{locatio
 if(SPOIL)setD(RAWD);route();firstRun();
 
 /* ---------- app updates: reload automatically when a new version is published ---------- */
-var VER=null,NEWVER=false;
-async function checkVer(){try{const r=await fetch("version.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const v=(await r.json()).v;if(!v)return;if(VER==null)VER=v;else if(v!==VER)NEWVER=true}catch(e){}tryReload()}
-function tryReload(){if(!NEWVER||document.hidden||$("#tmd").open||(document.activeElement&&document.activeElement.matches("input,select")))return;NEWVER=false;location.reload()}
+var VER=(document.querySelector('meta[name="app-ver"]')||{}).content||null,NEWVER=false,NEWV="";
+async function checkVer(){try{const r=await fetch("version.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const v=(await r.json()).v;if(!v)return;if(VER==null)VER=v;else if(v!==VER){NEWVER=true;NEWV=v}}catch(e){}tryReload()}
+function tryReload(){if(!NEWVER||document.hidden||$("#tmd").open||(document.activeElement&&document.activeElement.matches("input,select")))return;NEWVER=false;try{location.replace(location.pathname+"?v="+encodeURIComponent(NEWV)+location.hash)}catch(e){location.reload()}}
 checkVer();setInterval(checkVer,120000);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)checkVer()});
 $("#tmd").addEventListener("close",()=>setTimeout(tryReload,300));

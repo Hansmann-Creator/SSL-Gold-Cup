@@ -45,7 +45,12 @@ jobs:
       - name: Calendars and tracking links
         run: python3 scripts/build_extras.py
       - name: App version (changes only when app files change, not with results)
-        run: echo "{\"v\":\"$(cat index.html config.js app.js app.css sw.js manifest.webmanifest teaminfo.json people.json roster.json | sha256sum | cut -c1-12)\"}" > version.json && cat version.json
+        run: |
+          V=$(cat index.html config.js app.js app.css sw.js manifest.webmanifest teaminfo.json people.json roster.json | sha256sum | cut -c1-12)
+          echo "{\"v\":\"$V\"}" > version.json && cat version.json
+          # versioned asset URLs, so an update is never served from a stale CDN/browser cache
+          sed -i "s#src=\"app.js\"#src=\"app.js?v=$V\"#; s#href=\"app.css\"#href=\"app.css?v=$V\"#; s#<meta name=\"app-ver\" content=\"\">#<meta name=\"app-ver\" content=\"$V\">#" index.html
+          grep -c "app.js?v=$V" index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with: { path: "." }
