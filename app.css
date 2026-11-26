@@ -899,3 +899,5 @@ html.pgon .tabs{z-index:41}
 .setrow.full .sgc{flex:1 1 auto;width:100%}
 .setrow.full .sgc button{flex:1 1 0}
 .setrow select{min-width:0}
+
+#off[hidden]{display:none}
