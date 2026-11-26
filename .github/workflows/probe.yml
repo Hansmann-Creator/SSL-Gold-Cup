@@ -1,0 +1,20 @@
+name: Temporary probe
+on: workflow_dispatch
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -sL -A "Mozilla/5.0" https://worldofsailors.com/sailor/robert-scheidt > a.html; wc -c a.html
+          python3 - <<'PY'
+          import re
+          s=open('a.html',encoding='utf-8',errors='ignore').read()
+          s=re.sub(r'<script.*?</script>|<style.*?</style>','',s,flags=re.S)
+          i=s.find('Achievement'); print('ACH', re.sub(r'\s+',' ',re.sub(r'<[^>]+>',' | ',s[i-200:i+1500]))[:1500])
+          for k in ['Club','Country','Olympic Games','World Championship']:
+              j=s.find(k); print(k, j, re.sub(r'\s+',' ',re.sub(r'<[^>]+>',' | ',s[j:j+700]))[:700])
+          print('CLASSES', sorted(set(re.findall(r'class="([^"]+)"',s)))[:80])
+          PY
+          curl -sL -A "Mozilla/5.0" https://por.sslgoldcup.com/ | grep -oE 'https?://[a-z.]*worldofsailors\.com/sailor/[a-z0-9-]+' | sort -u | head
+          curl -sL -A "Mozilla/5.0" "https://worldofsailors.com/search?q=Plichart" | grep -oE '/sailor/[a-z0-9-]+' | sort -u | head
+          for s in teva-plichart yann-rigal heiniti-maiarii manutea-antoine-mahai joao-rodrigues; do printf "%s " $s; curl -s -o /dev/null -w "%{http_code}\n" -A "Mozilla/5.0" https://worldofsailors.com/sailor/$s; done
