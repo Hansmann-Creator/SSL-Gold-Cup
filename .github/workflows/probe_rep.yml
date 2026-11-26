@@ -1,8 +1,0 @@
-name: probe reports
-on: { push: { paths: [".github/workflows/probe_rep.yml"] } }
-jobs:
-  t:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - run: pip install -q beautifulsoup4 python-docx && python scripts/reports.py; curl -s -o /dev/null -w "embedded %{http_code}\n" "https://drive.google.com/embeddedfolderview?id=14XyNTwjimpGGTBownb5OfLyRfnowU3IF"
