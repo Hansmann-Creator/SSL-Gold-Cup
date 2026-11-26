@@ -6,13 +6,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          UA="Mozilla/5.0"; B=https://app.georacing.com
-          for f in /protect_js/app/env.js /protect_js/app/main.js; do
-            echo "=== $f"; curl -sL -A "$UA" -m 20 "$B$f?v=2" -o a.js; wc -c a.js
-            grep -oE "['\"][^'\" ]*(https?:)?//[^'\" ]{4,120}['\"]" a.js | sort -u | head -40
-            grep -oE "(ajax|getJSON|url)[^;]{0,160}" a.js | head -30
+          UA="Mozilla/5.0"; D=https://player.georacing.com/datas
+          curl -sL -A "$UA" "$D/applications/app_46.json" -o app.json
+          python3 -c "
+          import json;d=json.load(open('app.json'))
+          for e in d['events']: print('EVENT',e['id'],e['name'],e.get('start_date'),e.get('end_date'))
+          "
+          E32=$(python3 -c "
+          import json;d=json.load(open('app.json'))
+          print([e['id'] for e in d['events'] if '1/32' in e['name']][0])")
+          echo "--- races $E32"; curl -sL -A "$UA" "$D/$E32/races.json" -o races.json; head -c 1500 races.json; echo
+          echo "--- event"; curl -sL -A "$UA" "$D/$E32/event.json" | head -c 600; echo
+          R=$(python3 -c "
+          import json;d=json.load(open('races.json'));r=d if isinstance(d,list) else d.get('races',d)
+          r=r if isinstance(r,list) else list(r.values()) if isinstance(r,dict) else []
+          print(r[0]['id'] if r else '')" 2>/dev/null)
+          echo "first race $R"
+          curl -sL -A "$UA" "https://player.georacing.com/index.html" -o p.html; grep -oE 'src="[^"]+\.js[^"]*"' p.html | head
+          for js in $(grep -oE 'src="[^"]+\.js[^"]*"' p.html | sed 's/src="//;s/"//' | grep -v libs | head -6); do
+            case "$js" in http*) U=$js;; /*) U="https://player.georacing.com$js";; *) U="https://player.georacing.com/$js";; esac
+            curl -sL -A "$UA" -m 20 "$U" -o a.js; echo "=== $U $(wc -c < a.js)"
+            grep -oE "URL_DATAS[^;]{0,140}" a.js | sort -u | head -25
+            grep -oiE "[a-z_/]*(rank|result|classement|finish)[a-z_]*\.(json|bin|txt)" a.js | sort -u | head -20
           done
-          echo "=== events list guesses"
-          for u in "$B/app/ajax.php?application_id=46" "$B/events?application_id=46" "https://api.georacing.com/applications/46" "https://player.georacing.com/datas/applications/app_46.json" "https://player.georacing.com/datas/applications/46.json"; do
-            echo "--- $u"; curl -sL -A "$UA" -m 15 "$u" -w "\n[%{http_code} %{content_type}]\n" | head -c 800; echo
-          done
+          for f in ranking.json results.json race.json; do echo "--- try $D/$E32/$R/$f"; curl -sL -A "$UA" -m 15 "$D/$E32/$R/$f" -w "\n[%{http_code}]\n" | head -c 700; echo; done
