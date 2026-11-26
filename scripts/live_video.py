@@ -21,11 +21,21 @@ def lang_of(t):
 
 def walk(o, out):
     if isinstance(o, dict):
-        if "videoRenderer" in o:
-            out.append(o["videoRenderer"])
+        if "videoRenderer" in o: out.append(("v", o["videoRenderer"]))
+        if "lockupViewModel" in o: out.append(("l", o["lockupViewModel"]))
         for v in o.values(): walk(v, out)
     elif isinstance(o, list):
         for v in o: walk(v, out)
+
+def from_lockup(l):
+    j = json.dumps(l, ensure_ascii=False)
+    vid = l.get("contentId")
+    t = re.search(r'"title": \{"content": "((?:[^"\\]|\\.)*)"', j)
+    title = json.loads('"' + t.group(1) + '"') if t else ""
+    live = bool(re.search(r'"text": "LIVE"|BADGE_STYLE_TYPE_LIVE|THUMBNAIL_OVERLAY_BADGE_STYLE_LIVE|"LIVE"', j))
+    up = bool(re.search(r'UPCOMING|Upcoming|Scheduled|Notify me|Premieres', j))
+    st = re.search(r'"startTime": "?(\d{9,11})', j)
+    return vid, title, live, (int(st.group(1)) if st else (0 if up else None))
 
 def main():
     try:
@@ -37,14 +47,18 @@ def main():
     vids = []; walk(data, vids)
     streams = []
     now = datetime.datetime.utcnow().timestamp()
-    for v in vids:
-        vid = v.get("videoId"); title = "".join(r.get("text", "") for r in (v.get("title", {}).get("runs") or []))
-        styles = json.dumps(v.get("thumbnailOverlays", [])) + json.dumps(v.get("badges", []))
-        live = '"LIVE"' in styles or "BADGE_STYLE_TYPE_LIVE_NOW" in styles
-        up = v.get("upcomingEventData", {}).get("startTime")
-        if not vid or not (live or up): continue
+    for kind, v in vids:
+        if kind == "l":
+            vid, title, live, up = from_lockup(v)
+        else:
+            vid = v.get("videoId"); title = "".join(r.get("text", "") for r in (v.get("title", {}).get("runs") or []))
+            styles = json.dumps(v.get("thumbnailOverlays", [])) + json.dumps(v.get("badges", []))
+            live = '"LIVE"' in styles or "BADGE_STYLE_TYPE_LIVE_NOW" in styles
+            up = v.get("upcomingEventData", {}).get("startTime")
+        if not vid or not (live or up is not None): continue
         start = int(up) if up else None
         if start and start - now > 36 * 3600: continue
+        if any(x["id"] == vid for x in streams): continue
         streams.append({"id": vid, "t": html.unescape(title), "live": live, "start": start, "lang": lang_of(title)})
     streams.sort(key=lambda x: (not x["live"], x["start"] or 0))
     best = next((x for x in streams if x["lang"] == "en"), streams[0] if streams else None)

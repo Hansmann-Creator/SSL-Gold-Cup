@@ -4,18 +4,13 @@ jobs:
   p:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - run: |
-          curl -sL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131 Safari/537.36" -H "Accept-Language: en-US" -b "CONSENT=YES+1; SOCS=CAI" https://www.youtube.com/channel/UCslTs2hZG7d08VYH_mLGSUg/streams > s.html; wc -c s.html
-          for k in ytInitialData videoRenderer lockupViewModel upcomingEventData '"UPCOMING"' '"LIVE"' isLiveNow; do printf "%s %s\n" "$k" "$(grep -o "$k" s.html | wc -l)"; done
+          python3 scripts/live_video.py; cat live.json
           python3 - <<'PY'
-          import re,json
-          s=open('s.html',encoding='utf-8').read()
-          m=re.search(r"var ytInitialData = (\{.*?\});</script>",s,re.S); print("m",bool(m))
-          ids=re.findall(r'"contentId":"([\w-]{11})"',s); print("contentIds",ids[:12])
-          for vid in ids[:8]:
-            i=s.find('"contentId":"'+vid); seg=s[i:i+6000]
-            t=re.search(r'"title":\{"content":"([^"]+)"',seg); 
-            st=re.findall(r'"(LIVE|UPCOMING|Scheduled for[^"]*|Waiting[^"]*|watching[^"]*)"',seg)[:3]
-            print(vid, t.group(1) if t else None, st)
+          import re,json,urllib.request
+          import sys; sys.path.insert(0,'scripts'); import live_video as L
+          s=urllib.request.urlopen(urllib.request.Request(f"https://www.youtube.com/channel/{L.CH}/streams",headers=L.H)).read().decode()
+          d=json.loads(re.search(r"var ytInitialData = (\{.*?\});</script>",s,re.S).group(1)); out=[]; L.walk(d,out)
+          k,l=[x for x in out if x[0]=="l"][0]; j=json.dumps(l,ensure_ascii=False); print(j[:3000])
           PY
-          curl -sIL https://worldofsailors.com/sailor/robert-scheidt | grep -iE "^(x-frame|content-security|HTTP)"
