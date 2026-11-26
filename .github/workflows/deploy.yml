@@ -3,6 +3,7 @@ name: Deploy app
 on:
   push:
     branches: [main]
+    paths-ignore: ["push_state.json"]
   workflow_dispatch:
   schedule:
     - cron: "41 * * 11,12 *"   # hourly refresh of videos and tracking links during the event

@@ -130,17 +130,45 @@ def main():
         if dry:
             print(json.dumps({"headings": head["de"], "contents": body["de"], "en": body["en"], "ur": body["ur"]}, ensure_ascii=False, indent=1)); continue
         # one send per app language (tag "l"), text always in the "en" slot: works for every language,
-        # also those OneSignal has no language code for. Users in spoiler-free mode get nothing.
+        # also those OneSignal has no language code for. Spoiler-free users get a neutral text without the result.
         for L in LANGS:
             lv = APPL.get(L, L)
-            filters = []
-            for key in ["all"] + ["team_" + t for t in teams]:
-                if filters: filters.append({"operator": "OR"})
-                filters += [{"field": "tag", "key": key, "relation": "exists"}, {"field": "tag", "key": "l", "relation": "=", "value": lv},
-                            {"field": "tag", "key": "spoiler", "relation": "not_exists"}]
-            send(app, key_, {"app_id": app, "target_channel": "push", "filters": filters, "headings": {"en": head[L]}, "contents": {"en": body[L]},
-                   "url": f"{SITE}#round-{rid}", "web_push_topic": f"{rid}-{gid}", "ttl": 3 * 3600,
-                   "chrome_web_icon": SITE + "icons/icon-192.png"}, f"{rid} {gid} race {k} [{lv}]")
+            keys = ["all"] + ["team_" + t for t in teams]
+            common = {"app_id": app, "target_channel": "push", "url": f"{SITE}#round-{rid}", "web_push_topic": f"{rid}-{gid}", "ttl": 3 * 3600,
+                      "chrome_web_icon": SITE + "icons/icon-192.png"}
+            send(app, key_, {**common, "filters": audience(keys, lv, spoiler=False), "headings": {"en": head[L]}, "contents": {"en": body[L]}},
+                 f"{rid} {gid} race {k} [{lv}]")
+            send(app, key_, {**common, "filters": audience(keys, lv, spoiler=True), "headings": {"en": head[L]}, "contents": {"en": SPOILER_TXT.get(L, SPOILER_TXT["en"])}},
+                 f"{rid} {gid} race {k} [{lv}, spoiler-free]")
+
+SPOILER_TXT = {"en": "Race finished – result hidden (spoiler-free mode). Open the app when you're ready.", "de": "Rennen beendet – Ergebnis versteckt (spoilerfrei). Öffne die App, wenn du so weit bist.",
+ "fr": "Course terminée – résultat masqué (sans spoiler).", "es": "Regata terminada – resultado oculto (sin spoilers).", "pt": "Regata encerrada – resultado oculto (sem spoilers).",
+ "zh-Hans": "比赛结束 – 结果已隐藏（防剧透）。", "ar": "انتهى السباق – النتيجة مخفية (وضع بلا حرق).", "hi": "रेस खत्म – नतीजा छिपा है (स्पॉइलर-फ़्री)।", "bn": "রেস শেষ – ফল লুকানো (স্পয়লার-মুক্ত)।",
+ "ur": "ریس ختم – نتیجہ چھپا ہوا ہے (اسپائلر فری)۔", "id": "Lomba selesai – hasil disembunyikan (bebas spoiler).", "ms": "Perlumbaan tamat – keputusan disembunyikan (bebas spoiler).",
+ "ja": "レース終了 – 結果は非表示(ネタバレ防止)。", "th": "เรซจบแล้ว – ซ่อนผล (กันสปอยล์)", "hu": "A futam véget ért – eredmény elrejtve (spoilermentes).", "cs": "Rozjížďka skončila – výsledek skryt (bez spoilerů).", "uk": "Гонка завершилася – результат приховано (без спойлерів)."}
+
+def quiet_ranges(now_utc_hour=None):
+    """Users pick a 9-hour night quiet time; tag q = its start as UTC hour. Returns the allowed q ranges right now."""
+    import datetime
+    H = datetime.datetime.utcnow().hour if now_utc_hour is None else now_utc_hour
+    a, b = (H + 1) % 24, (H + 15) % 24
+    return [(a, b)] if a <= b else [(a, 23), (0, b)]
+
+def audience(keys, lv, spoiler=None, extra=()):
+    """OneSignal filters: (any of keys) AND language AND spoiler state AND not inside the user's quiet hours."""
+    out = []
+    sp = [] if spoiler is None else [{"field": "tag", "key": "spoiler", "relation": "exists" if spoiler else "not_exists"}]
+    for key in keys:
+        base = [{"field": "tag", "key": key, "relation": "exists"}, {"field": "tag", "key": "l", "relation": "=", "value": lv}] + sp + list(extra)
+        for q in [None] + quiet_ranges():
+            if out: out.append({"operator": "OR"})
+            if q is None:
+                out += base + [{"field": "tag", "key": "q", "relation": "not_exists"}]
+            else:
+                lo, hi = q
+                out += base + ([{"field": "tag", "key": "q", "relation": ">", "value": str(lo - 1)}] if lo > 0 else [{"field": "tag", "key": "q", "relation": "exists"}]) \
+                            + ([{"field": "tag", "key": "q", "relation": "<", "value": str(hi + 1)}] if hi < 23 else [])
+    return out
 
 def send(app, key_, payload, label):
     req = urllib.request.Request("https://api.onesignal.com/notifications?c=push", data=json.dumps(payload).encode(),
