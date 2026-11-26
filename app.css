@@ -1232,3 +1232,8 @@ header.top>#nxc .nxrow b{margin-inline-start:auto}
 
 .races li.rc.done .rtab.ready::after{content:"";position:absolute;top:8px;inset-inline-end:8px;width:9px;height:9px;border-radius:50%;background:#36c28c;box-shadow:0 0 0 2px #fff}
 .rcb.rrep .rrdy{font-style:normal;font-size:10px;font-weight:800;background:#10203f;color:#ffd21f;border-radius:99px;padding:2px 7px;margin-inline-start:8px}
+
+.rrday{margin-top:16px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.07);border:var(--bd);font-size:14px;line-height:1.5;color:var(--mute)}
+.rrday b{display:block;color:var(--ink,#fff);font-size:15px;margin-bottom:6px}.rrday p{margin:0 0 6px}
+.rrb .rrh{font-size:21px;margin:16px 0 8px;line-height:1.25;color:#ffd84d}
+.rrb .rrh{text-transform:none;letter-spacing:0;font-weight:800}

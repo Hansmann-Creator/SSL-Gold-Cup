@@ -2234,8 +2234,7 @@ function reportSheet(x){if(!x)return;const L=RRS[lang]||RRS.en,r=rnd(x.rid),g=r&
   const tile=(k,v)=>`<div class="sl"><small>${esc(k)}</small><b>${v}</b></div>`;
   const R=REPS[raceKey(x)]||{};
   const body=`<div class="sstats rrf">${s0?tile(L[0],esc(rioHM(s0).replace(/^0(\d)/,"$1"))):""}${s0&&f0?tile(L[1],esc(Math.round((f0-s0)/6e4)+" min")):""}${w?tile(L[2],`${FL(w.team)} ${esc(NM(w.team))}`):""}</div>
-    <div class="grp rcl">${ord.map((z,k)=>`<div class="rcrow"><span class="rcp p${k+1}">${k+1}</span>${FL(z.team)}<b>${esc(NM(z.team))}</b><small>${esc(String(z.r[i]).trim())} ${T("rcPts")}</small></div>`).join("")}</div>
-    ${R.html?`<div class="nwbody rrb">${R.html}</div>`:`<p class="rrsoon">${esc(L[3])}</p>`}`;
+    ${R.html?`${R.day&&R.day.t?`<div class="rrday"><b>${esc(R.day.t)}</b>${R.day.intro||""}</div>`:""}<div class="nwbody rrb">${R.head?`<h3 class="rrh">${esc(R.head)}</h3>`:""}${R.html}</div>`:`<p class="rrsoon">${esc(L[3])}</p>`}`;
   sheetWrap(`${r?RNm(r):""} · ${x.rid=="f"||x.rid=="pf"?"":T("group")+" "+x.g+" · "}${T("race")} ${x.n}`,"Race Report",body);gcEvent("race-report")}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-rrep]");if(b){e.preventDefault();const x=raceBy(b.dataset.rrep);if(x)reportSheet(x)}});
 function sheetWrap(nick,title,body){const d=$("#tmd");openCode=null;d.innerHTML=`<div class="th"><div><div class="nick">${esc(nick)}</div><h2>${esc(title)}</h2></div><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">${body}</div>`;d.querySelector(".x").onclick=()=>d.close();show(d);return d}

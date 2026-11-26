@@ -50,26 +50,74 @@ def clean_html(soup_node):
 def text_to_html(t):
     paras = [p.strip() for p in re.split(r"\n\s*\n", t.replace("\r", "")) if p.strip()]
     return "".join(f"<p>{H.escape(p).replace(chr(10), '<br>')}</p>" for p in paras)
+def paras_from_html(h):
+    S = BeautifulSoup(h, "html.parser"); out = []
+    for p in (S.body or S).find_all(["p", "h1", "h2", "h3", "h4", "li"]):
+        t = p.get_text(" ", strip=True)
+        if not t: continue
+        bold = p.name.startswith("h") or bool(p.find(["b", "strong"])) and len(p.find(["b", "strong"]).get_text(strip=True)) >= len(t) - 2 \
+            or "font-weight:700" in "".join((x.get("style") or "").replace(" ", "") for x in p.find_all("span"))
+        out.append((t, bool(bold)))
+    return out
 def fetch(fid, kind):
+    """-> list of (text, is_heading) paragraphs"""
     if kind == "doc":
-        h = get(f"https://docs.google.com/document/d/{fid}/export?format=html")
-        return clean_html(BeautifulSoup(h, "html.parser").body or BeautifulSoup(h, "html.parser"))
+        return paras_from_html(get(f"https://docs.google.com/document/d/{fid}/export?format=html"))
     b, ct = get(f"https://drive.google.com/uc?export=download&id={fid}", True)
+    return paras_from_bytes(b)
+def paras_from_bytes(b):
     if b[:4] == b"%PDF":
         import subprocess, tempfile
         with tempfile.NamedTemporaryFile(suffix=".pdf") as f:
-            f.write(b); f.flush(); t = subprocess.run(["pdftotext", "-layout", f.name, "-"], capture_output=True, text=True).stdout
-        t = re.sub(r"[ \t]{2,}", " ", t); return text_to_html(t)
+            f.write(b); f.flush(); t = subprocess.run(["pdftotext", f.name, "-"], capture_output=True, text=True).stdout
+        return [(re.sub(r"\s+", " ", p).strip(), False) for p in re.split(r"\n\s*\n", t) if p.strip()]
     if b[:2] == b"PK":
         import docx
         d = docx.Document(io.BytesIO(b)); out = []
         for p in d.paragraphs:
-            if not p.text.strip(): continue
-            st = (p.style.name or "").lower()
-            tag = "h3" if "heading" in st or "title" in st else "p"
-            out.append(f"<{tag}>{H.escape(p.text.strip())}</{tag}>")
-        return "".join(out)
-    return text_to_html(b.decode("utf-8", "replace"))
+            t = p.text.strip()
+            if not t: continue
+            st = (p.style.name or "").lower(); runs = [r for r in p.runs if r.text.strip()]
+            out.append((t, "heading" in st or "title" in st or (runs and all(r.bold for r in runs))))
+        return out
+    t = b.decode("utf-8", "replace")
+    return [(re.sub(r"\s+", " ", p).strip(), False) for p in re.split(r"\n\s*\n", t) if p.strip()]
+SEC = [(re.compile(r"^(?:group|gruppe|grupo|groupe)\s*([A-D])\s*[,·:-]?\s*(?:race|rennen|regata|course)\s*(\d)\s*(?:[-–—:]\s*(.*))?$", re.I), "g"),
+       (re.compile(r"^(petit\s*final)\s*(?:[-–—:]\s*(.*))?$", re.I), "pf"), (re.compile(r"^(?:grand\s*)?(final)\s*(?:[-–—:]\s*(.*))?$", re.I), "f"),
+       (re.compile(r"^semi[- ]?final\s*([AB])\s*(?:[-–—:]\s*(.*))?$", re.I), "sf")]
+P = lambda t: f"<p>{H.escape(t)}</p>"
+def split_report(paras, rid):
+    """Day report: title + intro, then one section per race ('Group A, Race 1 - headline'). -> {key: entry}"""
+    secs, cur, intro, title = {}, None, [], ""
+    for t, hd in paras:
+        hit = None
+        for rx, kind in SEC:
+            m = rx.match(t)
+            if m:
+                if kind == "g": hit = (f"{rid}|{m.group(1).upper()}|{m.group(2)}", m.group(3) or "")
+                elif kind == "sf": hit = (f"sf|{m.group(1).upper()}|1", m.group(2) or "")
+                else: hit = (f"{kind}|A|1", m.group(2) or "")
+                break
+        if hit: cur = hit[0]; secs[cur] = {"head": hit[1].strip(), "p": []}; continue
+        if cur: secs[cur]["p"].append(t)
+        elif hd and not title: title = t
+        else: intro.append(t)
+    return secs, title, intro
+def round_of(name, today):
+    n = name.lower().replace("_", " ")
+    return next((r for p, r in ROUNDS if re.search(p, n)), None) or current_round(today)
+def apply(store, paras, fname, fid, today):
+    base = re.sub(r"\.(pdf|docx?|txt|md)$", "", fname, flags=re.I)
+    secs, title, intro = split_report(paras, round_of(base, today))
+    if secs:
+        day = {"t": title, "intro": "".join(P(t) for t in intro[:4])}
+        for k, v in secs.items():
+            store[k] = {"head": v["head"], "html": "".join(P(t) for t in v["p"])[:60000], "day": day, "file": fname, "src": fid}
+            print("report", k, "<-", fname, "|", v["head"])
+        return
+    k = key_of(base, today)
+    if not k: print("skip (no race sections, name not understood):", fname); return
+    store[k] = {"head": title, "html": "".join(P(t) for t in intro)[:60000], "file": fname, "src": fid}; print("report", k, "<-", fname)
 def main():
     today = (datetime.datetime.utcnow() - datetime.timedelta(hours=3)).strftime("%Y-%m-%d")
     path = os.path.join(ROOT, "reports.json")
@@ -85,12 +133,9 @@ def main():
         if m and title: found.append((m.group(1), kind, title))
     new = dict(old)
     for fid, kind, title in found:
-        k = key_of(re.sub(r"\.(pdf|docx?|txt|md)$", "", title, flags=re.I), today)
-        if not k: print("skip (name not understood):", title); continue
-        try: h = fetch(fid, kind)
+        try: paras = fetch(fid, kind)
         except Exception as ex: print("fetch failed", title, ex); continue
-        if h: new[k] = {"html": h[:80000], "title": title, "src": fid}
-        print("report", k, "<-", title, len(h))
+        apply(new, paras, title, fid, today)
     if json.dumps(new, sort_keys=True) != json.dumps(old, sort_keys=True):
         json.dump(new, open(path, "w"), ensure_ascii=False, separators=(",", ":")); print("changed", len(new))
     else: print("same", len(new))
@@ -98,4 +143,8 @@ if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "--test":
         for n in ["R16 Group A Race 1", "1-16 A1", "Gruppe B Rennen 2", "Race 1 - Group C", "Report_1_16_GroupD_Race1.pdf", "QF A2", "Grand Final", "Petit Final", "SF Group B", "Group A R3"]:
             print(n, "->", key_of(re.sub(r"\.(pdf|docx?|txt|md)$", "", n, flags=re.I), "2026-11-26"))
+    elif len(sys.argv) > 2 and sys.argv[1] == "--local":
+        path = os.path.join(ROOT, "reports.json"); store = json.load(open(path)) if os.path.exists(path) else {}
+        apply(store, paras_from_bytes(open(sys.argv[2], "rb").read()), sys.argv[3], sys.argv[4], "2026-11-26")
+        json.dump(store, open(path, "w"), ensure_ascii=False, separators=(",", ":"))
     else: main()
