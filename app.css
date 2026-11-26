@@ -1179,3 +1179,15 @@ header.top>#nxc .nxrow{display:flex;align-items:center;gap:10px;padding:8px 14px
 header.top>#nxc .nxrow .nxi{flex:1;min-width:0;align-items:flex-start!important;margin:0!important}
 header.top>#nxc .nxrow small{text-align:start!important;white-space:normal!important;overflow:visible!important;line-height:1.25}
 header.top>#nxc .nxrow b{margin-inline-start:auto}
+
+/* sailor page header (variant A): country, team tag, bigger given name, chips */
+.shero .sh2{min-width:0}
+.shero .cty{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;line-height:1.2}
+.shero .cty img{width:24px;height:auto;border-radius:3px}
+.shero .nk2{display:inline-block;margin-top:5px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);border:1.5px solid color-mix(in srgb,var(--gold) 60%,transparent);border-radius:99px;padding:2px 9px;line-height:1.4}
+.shero h2.snh{margin:9px 0 0;font-size:clamp(26px,7.6vw,32px);font-weight:800;line-height:1.05}
+.shero .snh .gn{display:block;font-size:max(17px,.6em);font-weight:500;opacity:.85;margin-bottom:2px}
+.shero .chips2{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.shero .ch2{font-size:12px;font-weight:700;line-height:1.4;border-radius:99px;padding:3px 10px;background:rgba(255,255,255,.14)}
+.shero .ch2.c{background:var(--gold);color:#10203f}
+[data-theme=light] .shero .ch2{background:rgba(16,32,63,.08)}
