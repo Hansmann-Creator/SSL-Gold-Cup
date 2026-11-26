@@ -1237,3 +1237,11 @@ header.top>#nxc .nxrow b{margin-inline-start:auto}
 .rrday b{display:block;color:var(--ink,#fff);font-size:15px;margin-bottom:6px}.rrday p{margin:0 0 6px}
 .rrb .rrh{font-size:21px;margin:16px 0 8px;line-height:1.25;color:#ffd84d}
 .rrb .rrh{text-transform:none;letter-spacing:0;font-weight:800}
+
+/* racing day over */
+.races li.rdover{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:rgba(10,30,70,.55);border:1px solid rgba(255,255,255,.16);list-style:none;margin-top:8px}
+.races li.rdover b{display:block;font-size:16px}.races li.rdover small{display:block;font-size:13px;opacity:.85;margin-top:2px}
+.races li.rdover .apa{flex:none}
+header.top>#nxc.dayover{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35)!important}
+header.top>#nxc.dayover .nxi{margin-inline-end:auto;align-items:flex-start!important}
+header.top>#nxc .dov{font-size:13px!important;color:#fff!important;letter-spacing:.04em}

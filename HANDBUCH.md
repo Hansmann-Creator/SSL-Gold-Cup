@@ -19,6 +19,9 @@ Datei `flags.json` bearbeiten: https://github.com/Hansmann-Creator/SSL-Gold-Cup/
 - `nb` = „nicht vor“ in **UTC** (Rio-Zeit + 3 Stunden, also 15:45 Rio = `18:45:00Z`).
 - `until` = bis wann der Hinweis gilt. Leeren: `{"races":{}}`.
 
+### Renntag vorzeitig beendet
+In `flags.json` unter `days` eintragen: `{"races":{},"days":{"2026-11-26":{"over":true}}}` → oben „Renntag beendet · Nächstes Rennen …“, in der Liste verschwinden die nicht gesegelten Rennen, stattdessen „Renntag beendet · 2 Rennen gesegelt · Gruppe C & D verschoben“.
+
 ### Live-Schleife neu starten (wenn Ergebnisse hängen)
 Datei `.github/live_kick` bearbeiten, irgendetwas hineinschreiben, speichern. Oder: Actions → „Live results“ → „Run workflow“.
 

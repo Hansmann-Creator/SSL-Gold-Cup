@@ -1269,7 +1269,14 @@ async function loadWx(){try{const c=LS.get("wx",null);if(c&&Date.now()-c.at<30*6
   if(!r.ok)return;const j=await r.json();if(!j.hourly||!Array.isArray(j.hourly.time))return;WX=j.hourly;LS.set("wx",{at:Date.now(),d:WX});if(view=="home")render(true)}catch(e){}}
 function wxAt(x){if(!WX)return"";const k=`${x.d}T${x.t.slice(0,2)}:00`,i=WX.time.indexOf(k);if(i<0)return"";const w=Math.round(wvc(WX.wind_speed_10m[i])),gu=Math.round(wvc(WX.wind_gusts_10m[i])),dir=WX.wind_direction_10m[i];
   if(!isFinite(w))return"";return `<span class="wx" title="${esc(T("wxT"))}"><i class="wa" style="transform:rotate(${dir}deg)">↓</i>${w}<small> ${uW()} · G${gu}</small></span>`}
-function raceList(list){const nx=list.filter(x=>rState2(x)=="up").sort((a,b)=>at(a)-at(b))[0];return `<ul class="races">${list.sort((a,b)=>at(a)-at(b)).map(x=>raceLi(x,nx)).join("")}</ul>`}
+const DOV={en:["Racing day over",n=>`${n} race${n==1?"":"s"} sailed`,g=>`${g} postponed`],de:["Renntag beendet",n=>`${n} Rennen gesegelt`,g=>`${g} verschoben`],fr:["Journée de course terminée",n=>`${n} course${n>1?"s":""} disputée${n>1?"s":""}`,g=>`${g} reporté(s)`],es:["Jornada terminada",n=>`${n} regata${n==1?"":"s"} disputada${n==1?"":"s"}`,g=>`${g} aplazado(s)`],pt:["Dia de regatas encerrado",n=>`${n} regata${n==1?"":"s"} disputada${n==1?"":"s"}`,g=>`${g} adiado(s)`],zh:["今日比赛结束",n=>`已完成 ${n} 场`,g=>`${g} 延期`],ar:["انتهى يوم السباقات",n=>`أُقيم ${n} سباق`,g=>`تأجيل ${g}`],hi:["आज की रेस समाप्त",n=>`${n} रेस हुईं`,g=>`${g} स्थगित`],bn:["আজকের রেস শেষ",n=>`${n}টি রেস হয়েছে`,g=>`${g} স্থগিত`],ur:["آج کی ریسیں ختم",n=>`${n} ریس ہوئیں`,g=>`${g} ملتوی`],id:["Hari lomba selesai",n=>`${n} balapan selesai`,g=>`${g} ditunda`],ms:["Hari perlumbaan tamat",n=>`${n} perlumbaan selesai`,g=>`${g} ditangguhkan`],ja:["本日のレース終了",n=>`${n}レース実施`,g=>`${g} 延期`],th:["จบการแข่งขันวันนี้",n=>`แข่งแล้ว ${n} รายการ`,g=>`${g} เลื่อนออกไป`],hu:["Versenynap vége",n=>`${n} futam lement`,g=>`${g} elhalasztva`],cs:["Závodní den skončil",n=>`Odjeto závodů: ${n}`,g=>`${g} odloženo`],uk:["Гоночний день завершено",n=>`Проведено гонок: ${n}`,g=>`${g} перенесено`],pl:["Dzień regat zakończony",n=>`Rozegrane wyścigi: ${n}`,g=>`${g} przełożone`]};
+const dayOver=d=>!!(FLG&&FLG.days&&FLG.days[d]&&FLG.days[d].over);
+const APA='<svg class="apa" viewBox="0 0 40 28" width="34" height="24" aria-hidden="true"><rect x="1" y="1" width="38" height="12" rx="2" fill="#fff"/><path d="M1 3h38M1 6h38M1 9h38" stroke="#e53935" stroke-width="2.2"/><rect x="5" y="15" width="30" height="12" rx="2" fill="#fff"/><path d="M5 15h15l-4 6 4 6H5z" fill="#1a4486"/></svg>';
+function dayOverBox(list,d){const D0=DOV[lang]||DOV.en,done=list.filter(x=>x.d==d&&raceDone(x)).length,mv=list.filter(x=>x.d==d&&!raceDone(x));
+  const gs=mv.map(x=>x.rid=="f"||x.rid=="pf"?RNm(rnd(x.rid)):x.g);const gl=gs.length?(mv.every(x=>x.rid!="f"&&x.rid!="pf")?`${T("group")} ${gs.join(" & ")}`:gs.join(" & ")):"";
+  return `<li class="rdover">${APA}<span><b>${esc(D0[0])}</b><small>${esc(D0[1](done))}${gl?" · "+esc(D0[2](gl)):""}</small></span></li>`}
+function raceList(list){const all=[...list],L0=list.filter(x=>!(dayOver(x.d)&&!raceDone(x))),nx=L0.filter(x=>rState2(x)=="up").sort((a,b)=>at(a)-at(b))[0],ds=[...new Set(all.map(x=>x.d))].filter(dayOver);
+  return `<ul class="races">${L0.sort((a,b)=>at(a)-at(b)).map(x=>raceLi(x,nx)).join("")}${ds.map(d=>dayOverBox(all,d)).join("")}</ul>`}
 function tzNote(){return `<small style="display:block;color:var(--mute);font-size:12px;margin-top:8px">${T("rioT")}${showLocal?` · ${T("loc")} (${esc(myTZ)})`:""}${WX?` · <span title="${esc(T("wxSrc"))}">↓ kn = ${esc(T("wxT"))} · G = ${esc(T("wxGust"))}</span>`:""}</small>`}
 function schedFor(r){const L=SCH.filter(x=>x.rid==r.id||(r.id=="f"&&x.rid=="pf"));if(!L.length)return"";const days=[...new Set(L.map(x=>x.d))];
   return `<details class="sched g"><summary>${T("schedT")}</summary>${days.map(d=>`<div class="sday"><h5>${esc(wday(d))}</h5>${raceList(L.filter(x=>x.d==d))}</div>`).join("")}<p class="warn" style="padding:0 16px">${T("schedNote")} <a href="https://sslgoldcup.worldofsailors.com/schedule/" target="_blank" rel="noopener">↗</a></p></details>`}
@@ -2174,7 +2181,7 @@ const todayStart=()=>Date.parse(today()+"T00:00:00-03:00");
 function spoilBanner(){if(!SPOIL)return"";const when=new Date(SPCUT).toLocaleString(LOC(),{timeZone:"America/Sao_Paulo",weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
   return `<div class="spb"><span>🙈 <b>${esc(T("spT"))}</b><small>${esc(anyHidden()?T("spUntil")(when):T("spNone"))}</small></span>${anyHidden()?`<button data-spall="1">${esc(T("spShow"))}</button>`:""}<button class="spoff" data-spoff="1" aria-label="${esc(T("spOff"))}">${esc(T("spOff"))}</button></div>`}
 /* ---------- live-now banner ---------- */
-function liveBar(){const L=SCH.filter(x=>rState2(x)=="now").sort((a,b)=>at(a)-at(b));if(!L.length)return"";const x=L[0],u=trkUrl(x);
+function liveBar(){const L=SCH.filter(x=>rState2(x)=="now"&&!dayOver(x.d)).sort((a,b)=>at(a)-at(b));if(!L.length)return"";const x=L[0],u=trkUrl(x);
   const lbl=x.rid=="f"||x.rid=="pf"?RNm(rnd(x.rid)):`${RNm(rnd(x.rid))} · ${T("group")} ${x.g} · ${T("race")} ${x.n}`;
   return `<div class="livebar"><button class="lvmain" data-race="${raceKey(x)}"><span class="ldot" aria-hidden="true"></span><span><b>LIVE</b> · ${esc(T("onWater"))}<small>${esc(lbl)}</small></span><span aria-hidden="true">›</span></button><div class="lvl"><button data-live="1">▶ ${esc(T("watchLive"))}</button>${u?`<a data-trk="${raceKey(x)}" href="${esc(u)}" target="_blank" rel="noopener">📍 ${T("trk")}</a>`:""}</div></div>`}
 
@@ -2383,7 +2390,7 @@ function nxState(x){const t=at(x),n=nowMs(),f=FLG&&FLG.races&&FLG.races[raceKey(
   if(n<t)return fl?{k:"prob",to:t,nb:0}:{k:"soon",to:t};
   return st=="racing"?{k:"racing"}:{k:"live"}}
 function nxcPaint(){let b=$("#nxc");const n=nowMs();
-  const cand=SCH.filter(x=>!raceDone(x)&&at(x)>n-150*60e3).sort((a,b)=>at(a)-at(b));let x=null,S0=null;
+  const cand=SCH.filter(x=>!raceDone(x)&&at(x)>n-150*60e3&&!dayOver(x.d)).sort((a,b)=>at(a)-at(b));let x=null,S0=null;
   let cur=null,CS=null;
   for(const c of cand){const s=nxState(c);if(s.k=="done")continue;if(s.k=="live"||s.k=="racing"){if(!cur){cur=c;CS=s}continue}x=c;S0=s;break}
   if(!x&&cur){x=cur;S0=CS;cur=null}
@@ -2402,7 +2409,9 @@ function nxcPaint(){let b=$("#nxc");const n=nowMs();
   if(cur&&!red)top=`${esc(T("nextRace"))} · ${esc(rnm(x))} · ${esc(S0.k=="est"?"~"+hm(S0.est):S0.k=="prob"&&S0.nb?"≥"+hm(S0.nb):x.t)}`;
   let lbl;
   if(!red)big=big.replace(/^(<i class="dg">)0(<\/i>)(<i class="dg">\d<\/i>:)/,"$3");
-  if(cur){const rc=CS.k=="racing",g=timOf(cur),t0=g.s?Date.parse(g.s):((RST[raceKey(cur)]||{}).since||0),el=rc&&t0&&n>t0?Math.floor((n-t0)/6e4):-1;
+  const DO=dayOver(today())&&x.d!==today()&&!cur;b.classList.toggle("dayover",DO);
+  if(DO){const D0=DOV[lang]||DOV.en;lbl=`<span class="nxi"><small class="dov">✓ ${esc(D0[0])}</small><small>${esc(T("nextRace"))} · ${esc(wday(x.d))} · ${esc(x.t)}</small></span><b class="cdd">${big}</b>`}
+  else if(cur){const rc=CS.k=="racing",g=timOf(cur),t0=g.s?Date.parse(g.s):((RST[raceKey(cur)]||{}).since||0),el=rc&&t0&&n>t0?Math.floor((n-t0)/6e4):-1;
     const bg=big;
     lbl=`<span class="nxlv${rc?"":" w"}"><i class="nxdot0"></i><span class="nxlt">${rc?"LIVE · ":""}${esc(rnm(cur))} · ${esc(rc?(({id:"Balapan",ms:"Berlumba"})[lang]||L[4]):(NXW[lang]||NXW.en))}</span>${el>=0?`<span class="nxel"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><circle cx="12" cy="13" r="8" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M12 9v4l2.5 2M9 2h6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>${Math.floor(el/60)}:${String(el%60).padStart(2,"0")}</span>`:""}</span><span class="nxrow"><span class="nxi">${top?`<small>${top}</small>`:""}${pill}</span><b class="cdd">${bg}</b></span>`}
   else lbl=`<span class="nxi">${top?`<small>${top}</small>`:""}${pill}</span><b class="cdd">${big}</b>`;
