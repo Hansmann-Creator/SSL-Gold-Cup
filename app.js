@@ -2360,11 +2360,17 @@ function nxcPaint(){let b=$("#nxc");const n=nowMs();
   let top,big,pill="";
   if(red){top="";big=`<i class="ldot2 nxdot"></i>${esc(T("watchLive"))}`;if(S0.k=="racing")pill=`<em class="nxp r">${esc(L[4])}</em>`}
   else if(S0.k=="prob"){top=esc(S0.nb?L[5](rioHM(S0.nb)):(S[lang].nxS||T("nextRace")));big=mono(cdLong(S0.to));pill=`<em class="nxp o">${esc(L[3])}</em>`}
-  else if(S0.k=="est"){top=esc("~ "+rioHM(S0.est));big=mono(cdLong(S0.to));pill=`<em class="nxp o">${esc(NXP[lang]||NXP.en)}</em>`}
+  else if(S0.k=="est"){top=esc(`${x.rid=="f"||x.rid=="pf"?RNm(rnd(x.rid)):T("group")+" "+x.g} · ~${rioHM(S0.est).replace(/^0(\d)/,"$1")}`);big=mono(cdLong(S0.to));pill=`<em class="nxp o">${esc(NXP[lang]||NXP.en)}</em>`}
   else if(S0.k=="late"){top=esc(S[lang].nxS||T("nextRace"));big=mono(since(n-S0.since));pill=`<em class="nxp o">${esc(L[2])}</em>`}
   else{top=esc(S[lang].nxS||T("nextRace"));big=mono(cdLong(S0.to));pill=`<em class="nxp ${S0.k=="soon"?"y":"g"}">${esc(S0.k=="soon"?L[1]:L[0])}</em>`}
-  if(cur&&!red)top=`${esc(rnm(x))} · ${esc(S0.k=="est"?"~ "+rioHM(S0.est):x.t)}`;
-  const lbl=`${cur?`<em class="nxnow${CS.k=="racing"?"":" w"}"><i class="nxdot0"></i><span>${esc(rsh(cur))} · ${esc(CS.k=="racing"?(({id:"Balapan",ms:"Berlumba"})[lang]||L[4]):(NXW[lang]||NXW.en))}</span></em><i class="nxhr" aria-hidden="true"></i>`:""}<span class="nxi">${top?`<small>${top}</small>`:""}${pill}</span><b class="cdd">${big}</b>`;
+  const hm=ms=>rioHM(ms).replace(/^0(\d)/,"$1");
+  if(cur&&!red)top=`${esc(T("nextRace"))} · ${esc(rnm(x))} · ${esc(S0.k=="est"?"~"+hm(S0.est):S0.k=="prob"&&S0.nb?"≥"+hm(S0.nb):x.t)}`;
+  let lbl;
+  if(!red)big=big.replace(/^(<i class="dg">)0(<\/i>)(<i class="dg">\d<\/i>:)/,"$3");
+  if(cur){const rc=CS.k=="racing",g=timOf(cur),t0=g.s?Date.parse(g.s):((RST[raceKey(cur)]||{}).since||0),el=rc&&t0&&n>t0?Math.floor((n-t0)/6e4):-1;
+    const bg=big;
+    lbl=`<span class="nxlv${rc?"":" w"}"><i class="nxdot0"></i><span class="nxlt">${rc?"LIVE · ":""}${esc(rnm(cur))} · ${esc(rc?(({id:"Balapan",ms:"Berlumba"})[lang]||L[4]):(NXW[lang]||NXW.en))}</span>${el>=0?`<span class="nxel"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><circle cx="12" cy="13" r="8" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M12 9v4l2.5 2M9 2h6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>${Math.floor(el/60)}:${String(el%60).padStart(2,"0")}</span>`:""}</span><span class="nxrow"><span class="nxi">${top?`<small>${top}</small>`:""}${pill}</span><b class="cdd">${bg}</b></span>`}
+  else lbl=`<span class="nxi">${top?`<small>${top}</small>`:""}${pill}</span><b class="cdd">${big}</b>`;
   if(b._h!==lbl){b.innerHTML=lbl;b._h=lbl}b.setAttribute("aria-label",`${cur?rnm(cur)+" · "+L[4]+" · ":""}${rnm(x)} · ${x.t}`)}
 setInterval(()=>{if(!document.hidden)nxcPaint()},1000);
 /* ---------- push notifications (OneSignal) + private visitor counter (GoatCounter); both off until config.js has a value ---------- */
