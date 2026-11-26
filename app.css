@@ -1148,3 +1148,18 @@ header.top>#nxc .nxi{flex:none}
 .strip figcaption{overflow:visible}
 .strip figcaption .fpos{display:block;width:fit-content;max-width:100%;box-sizing:border-box;margin:5px auto 0;padding:2px 7px;border-radius:10px;background:rgba(78,195,255,.18);color:#9fdcff;font-size:10px;font-weight:600;line-height:1.25;white-space:normal;overflow:visible}
 [data-theme=light] .strip figcaption .fpos{background:rgba(26,68,134,.1);color:#1a4486}
+
+/* venue: race-day info, official event map with legend, zoom view */
+.vday{list-style:none;margin:0;padding:0;display:grid;gap:6px}.vday li{background:var(--card);border:var(--bd);border-radius:12px;padding:9px 12px;font-size:15px}
+.vmap{display:block;width:100%;padding:0;border:0;border-radius:14px;overflow:hidden;position:relative;background:#0a1730;cursor:zoom-in}
+.vmap img{display:block;width:100%;height:auto}
+.vmap span{position:absolute;left:50%;transform:translateX(-50%);top:8px;white-space:nowrap;background:rgba(10,23,48,.8);color:#fff;font-size:12px;font-weight:600;border-radius:99px;padding:4px 10px}
+.vleg{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:1fr;gap:6px}
+.vleg li{display:flex;align-items:flex-start;gap:10px;font-size:14.5px;line-height:1.3}
+.vleg li b{flex:none;width:24px;height:24px;border-radius:50%;background:#f5b800;color:#10203f;display:grid;place-items:center;font-size:12px;font-weight:800}
+.vsrc{font-size:12px;color:var(--mute);margin:10px 0 0}
+.vmz{position:fixed;inset:0;z-index:9998;background:#06101f}
+.vmz .vmzs{position:absolute;inset:0;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y pinch-zoom}
+.vmz .vmzs img{display:block;height:100%;width:auto;min-width:100%;max-width:none}
+.vmz .x{position:absolute;top:calc(12px + env(safe-area-inset-top));right:12px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:20px;backdrop-filter:blur(6px)}
+.vtap{margin:6px 0 0;font-size:13px;color:var(--mute);text-align:center}
