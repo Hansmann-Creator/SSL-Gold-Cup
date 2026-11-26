@@ -398,3 +398,9 @@ dialog.tmd::backdrop{background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(4px
 [dir=rtl] .pill,[dir=rtl] .rhead h2,[dir=rtl] .inst{letter-spacing:0}
 [dir=rtl] .gh b,[dir=rtl] .mh,[dir=rtl] h3.sec,[dir=rtl] .nick,[dir=rtl] .need h4{letter-spacing:0}
 :lang(zh) .gh b,:lang(zh) h3.sec,:lang(zh) .nick{letter-spacing:.02em}
+
+/* install button in header (only shown in the browser, never in the installed app) */
+#ins{margin-inline-start:auto;display:inline-flex;align-items:center;gap:6px;background:var(--hdr)!important;color:var(--hdrInk)!important;font-weight:600!important;padding:0 14px!important}
+#ins svg{width:16px;height:16px}
+@media(max-width:430px){#thm .tht{display:none}#thm{min-width:40px}}
+.bar{flex-wrap:nowrap}

@@ -458,7 +458,7 @@ const svg=(p,cls="")=>`<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true
 function latestRound(){const L=D.rounds.filter(r=>r.groups.some(g=>gState(g,r)!="up"&&g.rows.some(x=>x.r.some(v=>String(v).trim()!==""))));return L[L.length-1]}
 function home(){let h=`<section class="hero"><img src="icons/icon-192.png" alt="" width="64" height="64"><div><b>${T("welcome")}</b><span>${T("dates")}</span></div></section>`;
   h+=`<div class="prog" aria-label="${esc(T("progress"))}">${D.rounds.filter(r=>r.id!="pf").map(r=>{const s=rState(r);return `<button data-go="round-${r.id}" class="${s}${r.id==current()?" cur":""}"><i></i><span>${esc(RS[r.id]||r.short)}</span></button>`}).join("")}</div>`;
-  h+=installCard(true)+mine()+todayCard();
+  h+=mine()+todayCard();
   const lr=latestRound();
   if(lr)h+=`<h3 class="sec">${T("latest")} · ${esc(RNm(lr))}</h3><div class="lat">${lr.groups.map(g=>mbox(lr,g,{go:"round-"+lr.id,nob:1})).join("")}</div><p class="more1"><a href="#round-${lr.id}">${T("showRound")}</a></p>`;
   h+=`<h3 class="sec">${T("explore")}</h3><div class="tiles">${["board","bracket","teams","sailors","qualifying","gc2023"].map(k=>`<button data-go="${k=="board"?"round-"+current():k}">${svg(TI[k])}<b>${esc(T("tiles")[k][0])}</b><small>${esc(T("tiles")[k][1])}</small></button>`).join("")}</div>`;
@@ -471,6 +471,7 @@ const isStandalone=()=>{try{return matchMedia("(display-mode: standalone)").matc
 const canInstall=()=>!isStandalone()&&(location.protocol=="https:"||location.hostname=="localhost")&&window.top===window;
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();BIP=e;if(view=="home"||view=="more")render(true)});
 window.addEventListener("appinstalled",()=>{BIP=null;LS.set("installed",1);toast(T("inst").done);render(true)});
+if(isStandalone())LS.set("installed",1);
 function installCard(dismissable){if(!canInstall()||(dismissable&&LS.get("instHide",0)>Date.now()))return"";const I=T("inst");
   return `<section class="inst"><img src="icons/icon-192.png" alt="" width="52" height="52"><div><b>${I.t}</b><span>${I.d}</span></div><div class="ib"><button class="ibtn" data-inst="1">${BIP?I.b:I.how}</button>${dismissable?`<button class="ilater" data-insthide="1">${I.hide}</button>`:""}</div></section>`}
 function installHelp(){const I=T("inst"),d=$("#tmd");let steps;
@@ -563,7 +564,11 @@ const ICO0=['<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="cur
 $("#lang").onchange=e=>{lang=e.target.value;LS.set("lang",lang);for(const k in SQ)delete SQ[k];render();if($("#tmd").open&&openCode)openTeam(openCode)};
 $("#thm").onclick=()=>{theme={auto:"light",light:"dark",dark:"auto"}[theme];LS.set("theme",theme);applyTheme();chrome()};
 const ICO=['<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1z"/></svg>',ICO0[0],ICO0[1],ICO0[2],'<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="19" cy="12" r="1.9"/></svg>'];
-function chrome(){document.documentElement.lang=lang;document.documentElement.dir=lang=="ar"?"rtl":"ltr";$("#lang").value=lang;$("#thm").textContent=T("theme")[theme];
+function insBtn(){let b=$("#ins");const show=canInstall()&&!LS.get("installed",0);
+  if(!show){if(b)b.remove();return}
+  if(!b){b=document.createElement("button");b.id="ins";b.type="button";b.onclick=()=>doInstall();$(".bar").appendChild(b)}
+  b.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><span>${esc(T("inst").b)}</span>`;b.title=T("inst").t}
+function chrome(){insBtn();document.documentElement.lang=lang;document.documentElement.dir=lang=="ar"?"rtl":"ltr";$("#lang").value=lang;{const tl=T("theme")[theme],i=tl.indexOf(" ");$("#thm").innerHTML=`<span>${esc(tl.slice(0,i))}</span><span class="tht"> ${esc(tl.slice(i+1))}</span>`;$("#thm").title=tl.slice(i+1)}
   const tb=document.querySelectorAll(".tabs button");[T("home"),T("rounds"),T("bracket"),T("teams"),T("more")].forEach((l,i)=>{if(tb[i])tb[i].innerHTML=ICO[i]+`<span>${esc(l)}</span>`});
   $("#off").textContent=T("official");const F=$("#foot");const op=F.querySelector("details")?.open;F.innerHTML=`<details class="how"${op?" open":""}><summary>${esc(T("howT"))}</summary><ul>${T("how").map(x=>`<li>${esc(x)}</li>`).join("")}</ul></details><p>${esc(T("foot"))}</p>`;$("#tmd").setAttribute("aria-label",T("teams"));stand()}
 function stand(){const u=new Date(checkedAt&&Date.parse(checkedAt)>Date.parse(D.updatedAt)?checkedAt:D.updatedAt);if(isNaN(u)){$("#stand").textContent="–";return}
