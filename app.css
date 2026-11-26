@@ -1081,3 +1081,11 @@ tr.tlink{cursor:pointer}tr.tlink:active td{background:color-mix(in srgb,var(--go
 
 #stand .ldot2{animation:none}
 .rc .s .dlyt{color:#ffb37a;font-weight:700}
+
+/* live dialog actions: pills like the language chips */
+.lvact{display:grid;grid-template-columns:1fr;gap:8px;margin-top:14px}
+.lva{display:flex;align-items:center;justify-content:center;gap:8px;min-width:0;height:46px;padding:0 14px;border-radius:99px;border:var(--bd);background:transparent;color:var(--ink);font:inherit;font-size:15px;font-weight:600;text-decoration:none;--lvaBg:var(--bg,#1a4486)}
+.lva span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.lva svg{width:20px;height:20px;flex:none}
+.lva.pri{background:var(--acc);color:var(--accInk);border-color:transparent;--lvaBg:var(--acc)}
+.lva:active{transform:scale(.97)}
