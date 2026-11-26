@@ -1338,11 +1338,11 @@ function sailorsView(){const TT=teams(),byC={};TT.forEach(t=>byC[t.code]=t);
 /* ---------- team numbers ---------- */
 function teamStats(TM){if(!TM)return"";let races=0,wins=0,pl=[],pts=0;const hist=[];
   TM.path.forEach(s=>{const row=s.g.rows[s.pos-1];if(!row)return;const n=row.r.length;const H=[];
-    row.r.forEach((v,i)=>{if(String(v).trim()==="")return;races++;const val=num(v);pts+=val;const m=(i==n-1&&n>1)?2:1,q=val/m;const place=Number.isInteger(q)&&q>=1&&q<=4?5-q:null;if(place){pl.push(place);if(place==1)wins++}H.push(place)});
-    if(H.length)hist.push({r:s.r,H})});
+    row.r.forEach((v,i)=>{if(String(v).trim()==="")return;races++;const val=num(v);pts+=val;const m=(i==n-1&&n>1)?2:1,q=val/m;const place=Number.isInteger(q)&&q>=1&&q<=4?5-q:null;if(place){pl.push(place);if(place==1)wins++}H.push({p:place,v:String(v).trim(),n:i+1})});
+    if(H.length)hist.push({r:s.r,g:s.g.id,H})});
   if(!races)return"";const avg=pl.length?(pl.reduce((a,b)=>a+b,0)/pl.length).toFixed(1):"–";
   return `<h3>${T("statsT")}</h3><div class="nums"><div><b>${races}</b><small>${T("stRaces")}</small></div><div><b>${wins}</b><small>${T("stWins")}</small></div><div><b>${avg}</b><small>${T("stAvg")}</small></div><div><b>${pts}</b><small>${T("stPts")}</small></div></div>
-  <div class="hist" dir="ltr" aria-label="${esc(T("stHist"))}">${hist.map(x=>`<div><small>${esc(RS[x.r.id]||x.r.short)}</small><span>${x.H.map(p=>`<i class="p${p||0}">${p||"?"}</i>`).join("")}</span></div>`).join("")}</div>`}
+  <h3>${esc(T("stHist"))}</h3><div class="grp hist2">${hist.map(x=>`<div class="hrd"><div class="hrh">${esc(RNm(x.r))} · ${esc(T("group"))} ${esc(x.g)}</div><div class="hrr">${x.H.map(h=>`<button class="hrc p${h.p||0}" data-race="${esc(x.r.id)}|${esc(x.g)}|${h.n}"><small>${esc(T("race"))} ${h.n}${x.H.length>1&&h.n==x.H.length?" ×2":""}</small><b>${h.p?esc(ord(h.p)):/\*\*/.test(h.v)?"PEN":/\*/.test(h.v)?"OCS":esc(h.v)}</b><em>${esc(String(num(h.v)??h.v))} ${esc(T("rcPts"))}</em></button>`).join("")}</div></div>`).join("")}</div>`}
 /* ---------- calendar ---------- */
 function calSheet(code){const d=$("#tmd"),base=location.href.split("#")[0].replace(/[^/]*$/,""),file=code?`cal/${code}.ics`:"races.ics",web=base.replace(/^https?:/,"webcal:")+file;
   d.innerHTML=`<div class="th">${code?`<button class="bk">${T("back")}</button>`:""}<div><div class="nick">SSL Gold Cup</div><h2>${T("calT")}</h2></div><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">
@@ -1378,7 +1378,7 @@ function openTeam(code){if(!isTeam(code))return;openCode=code;const d=$("#tmd"),
   const path=TM?TM.path.map(s=>{const o=s.o;return `<span role="button" tabindex="0" data-go="round-${s.r.id}" class="${o?(o[0]=="w"?"w":(o[2]===0?"o":"")):""}">${esc(RS[s.r.id])} · ${T("group")} ${esc(s.g.id)}${s.done?` · ${ord(s.pos)}`:""} ›</span>`}).join(""):"";
   const lastP=TM?TM.path[TM.path.length-1]:null;
   let h=`<div class="th"><span class="fg">${FL(code)}</span><div><div class="nick">${esc(sq.n||code)}</div><h2>${esc(NM(code))}</h2></div>
-  <div class="thb"><button class="fv ${favs.has(code)?"on":""}" aria-pressed="${favs.has(code)}" title="${favs.has(code)?T("favOn"):T("favOff")}">${favs.has(code)?"★":"☆"}</button><button class="ln" title="${T("copyLink")}" aria-label="${T("copyLink")}">🔗</button><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">`;
+  <div class="thb"><button class="fv ${favs.has(code)?"on":""}" aria-pressed="${favs.has(code)}" title="${favs.has(code)?T("favOn"):T("favOff")}">${favs.has(code)?"★":"☆"}</button><button class="ln" title="${T("ui").share}" aria-label="${T("ui").share}"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 002 2h10a2 2 0 002-2v-6"/></svg></button><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">`;
   const lp=TM&&TM.path[TM.path.length-1],tnx=lp&&!TM.out?nextFor(lp.r.id,lp.g.id):null;
   h+=`${TM?`<div class="tst">${esc(TM.txt)}</div>`:""}${tnx?`<div class="tnx">${T("nextRace")}: <b>${["sf","pf","f"].includes(tnx.rid)?esc(RNm(lp.r)):T("race")+" "+tnx.n} · ${esc(wday(tnx.d))} · ${tnx.t}</b> ${T("rioT")}${showLocal?` (${esc(locT(tnx))} ${T("loc")})`:""}</div>`:""}${road(code,TM)}`;
   const pics=sq.ppl.filter(p=>p.img);
@@ -1405,7 +1405,7 @@ function openTeam(code){if(!isTeam(code))return;openCode=code;const d=$("#tmd"),
   d.innerHTML=h;
   d.querySelector(".x").onclick=()=>d.close();
   d.querySelector(".fv").onclick=()=>{favs.has(code)?favs.delete(code):favs.add(code);LS.set("favs",[...favs]);const y=d.scrollTop;openTeam(code);d.scrollTop=y;render(true)};
-  d.querySelector(".ln").onclick=async()=>{const u=location.href.split("#")[0]+"#team-"+code;try{await navigator.clipboard.writeText(u);toast(T("copied"))}catch(e){toast(u)}};
+  d.querySelector(".ln").onclick=async()=>{const u=location.href.split("#")[0]+"#team-"+code;try{if(navigator.share){await navigator.share({title:`${NM(code)} · SSL Gold Cup Rio 2026`,url:u});return}}catch(e){if(e&&e.name=="AbortError")return}try{await navigator.clipboard.writeText(u);toast(T("copied"))}catch(e){toast(u)}};d.querySelectorAll(".hrc[data-race]").forEach(b=>b.onclick=()=>{const x=raceBy(b.dataset.race);if(x)openRace(x)});
   d.querySelector("[data-cal]").onclick=()=>calSheet(code);
   d.querySelector("[data-cmp]").onclick=()=>comparePick(code);
   {const pb=d.querySelector("[data-push]");if(pb)pb.onclick=async()=>{pb.disabled=true;await pushToggle(code);if(d.open&&openCode==code){const y=d.scrollTop;openTeam(code);d.scrollTop=y}};}
@@ -1486,7 +1486,7 @@ function openRace(x){if(!x)return;const d=$("#tmd"),r=rnd(x.rid),g=r&&r.groups.f
   const s=st=="done"?`✓ ${T("done")}`:st=="now"?`● ${T("onWater")}`:st=="up"&&at(x)-nowMs()<24*36e5?T("inX")(Math.max(1,Math.round((at(x)-nowMs())/6e4))):"";
   let h=`<div class="th"><div><div class="nick">${esc(r?RNm(r):"")}</div><h2>${esc(title)}</h2></div><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">`;
   h+=`<div class="rchead"><span>${when}</span>${s?`<b class="rcs ${st}">${esc(s)}</b>`:""}${wxAt(x)}</div>`;
-  {const fc=at(x)>nowMs()-36e5*12&&at(x)-nowMs()<15*864e5;h+=`<div class="rcbtns">${u?`<button class="rcb trk2" data-trkin="1">${svg('<path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>')}<b>${esc(T(st=="done"||st=="past"?"trkReplayS":"trkLive"))}</b></button>`:""}${fc?`<button class="rcb fc2" data-wxo="1">${svg('<path d="M3 8h10.5a3 3 0 1 0-3-3"/><path d="M3 12h15.5a3 3 0 1 1-3 3"/><path d="M3 16h7"/>')}<b>${esc(T("fcBtn"))}</b></button>`:""}</div>${u?"":`<p class="warn">${esc(T("trkNone"))} <a href="https://app.georacing.com/?application_id=46" target="_blank" rel="noopener">${esc(T("trkExt"))}</a></p>`}`;}
+  {const fc=at(x)>nowMs()-36e5*12&&at(x)-nowMs()<15*864e5;h+=`<div class="rcbtns">${u?`<button class="rcb trk2" data-trkin="1">${svg('<path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>')}<b>${esc(T(st=="done"||st=="past"?"trkReplayS":"trkLive"))}</b></button>`:""}${fc?`<button class="rcb fc2" data-wxo="1">${svg('<path d="M3 8h10.5a3 3 0 1 0-3-3"/><path d="M3 12h15.5a3 3 0 1 1-3 3"/><path d="M3 16h7"/>')}<b>${esc(T("fcBtn"))}</b></button>`:""}</div>${u?"":`<p class="warn">${esc(T("trkNone"))}</p>`}`;}
   if(hiddenRace(x))h+=`<div class="sprc"><b>🙈 ${esc(T("spRace"))}</b><button data-sprv="1">${esc(T("spReveal"))}</button></div>`;
   if(g){const rows=g.rows,i=x.n-1,known=rows.filter(z=>isTeam(z.team));
     if(st=="done"){const ord2=[...rows].sort((a,b)=>num(b.r[i])-num(a.r[i]));
