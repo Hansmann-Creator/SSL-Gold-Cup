@@ -2263,7 +2263,7 @@ function nxcPaint(){let b=$("#nxc");const n=nowMs();
   const L=NXS[lang]||NXS.en,red=S0.k=="racing"||S0.k=="live";b._x=x;b.classList.toggle("live",red);b.dataset.st=S0.k;
   const p2=v=>String(v).padStart(2,"0"),since=d=>{const s=Math.max(0,Math.round(d/1000));return`+${Math.floor(s/3600)?Math.floor(s/3600)+":":""}${p2(Math.floor(s%3600/60))}:${p2(s%60)}`};
   let top,big,pill="";
-  if(red){top="";big=`▶ ${esc(T("watchLive"))}`;if(S0.k=="racing")pill=`<em class="nxp r">${esc(L[4])}</em>`}
+  if(red){top="";big=`<i class="ldot2 nxdot"></i>${esc(T("watchLive"))}`;if(S0.k=="racing")pill=`<em class="nxp r">${esc(L[4])}</em>`}
   else if(S0.k=="prob"){top=esc(S0.nb?L[5](rioHM(S0.nb)):(S[lang].nxS||T("nextRace")));big=mono(cdLong(S0.to));pill=`<em class="nxp o">${esc(L[3])}</em>`}
   else if(S0.k=="late"){top=esc(S[lang].nxS||T("nextRace"));big=mono(since(n-S0.since));pill=`<em class="nxp o">${esc(L[2])}</em>`}
   else{top=esc(S[lang].nxS||T("nextRace"));big=mono(cdLong(S0.to));pill=`<em class="nxp ${S0.k=="soon"?"y":"g"}">${esc(S0.k=="soon"?L[1]:L[0])}</em>`}

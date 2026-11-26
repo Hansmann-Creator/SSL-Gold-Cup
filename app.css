@@ -1059,3 +1059,9 @@ tr.tlink{cursor:pointer}tr.tlink:active td{background:color-mix(in srgb,var(--go
 @media(max-width:375px){#nxc{width:120px!important}#nxc b{font-size:19px!important}#ins{width:36px}}
 #nxc .nxp{letter-spacing:.03em}
 @media(max-width:420px){#nxc{padding-inline:5px!important}#nxc .nxp{font-size:8.8px;letter-spacing:0;padding:2px 6px;gap:4px}#nxc .nxp::before{width:5px;height:5px}}
+
+#nxc.live b{display:flex!important;align-items:center;justify-content:center;gap:7px}
+#nxc .nxdot{position:relative;width:9px;height:9px;flex:none;background:#fff;animation:none}
+#nxc .nxdot::after{content:"";position:absolute;inset:0;border-radius:50%;background:#fff;animation:nxping 1.4s cubic-bezier(0,0,.2,1) infinite}
+@keyframes nxping{0%{transform:scale(1);opacity:.85}80%,100%{transform:scale(2.6);opacity:0}}
+@media(prefers-reduced-motion:reduce){#nxc .nxdot::after{animation:none}}
