@@ -384,7 +384,7 @@ function gtable(r,g,clickable){const gs=gState(g,r);const lc=gs=="live"&&g.rows.
 function mine(){if(!favs.size)return"";const TT=teams().filter(t=>favs.has(t.code));if(!TT.length)return"";
   return `<div class="mine"><h3>★ ${T("myTeams")}</h3>${TT.map(t=>`<button data-t="${esc(t.code)}" class="tmx"><span>${t.flag}</span><span><b>${esc(t.name)}</b><br><small>${esc(t.txt)}</small></span></button>`).join("")}</div>`}
 function board(){const r=D.rounds.find(x=>x.id==round)||D.rounds[0],s=rState(r),n=r.groups[0].rows[0].r.length;
-  let h=mine()+todayCard();const td=today();
+  let h=mine();const td=today();
   h+=`<div class="rhead"><h2>${esc(RNm(r))}</h2><p>${esc(range(r))} · ${T("races")(n)} · ${s=="live"&&td>=r.start&&td<=r.end?T("raceDay")(...raceDay(r)):T("st")[s]}</p></div>`;
   return h+boardGroups(r)}
 function todayCard(){let h="";const td=today(),tl=SCH.filter(x=>x.d==td);
