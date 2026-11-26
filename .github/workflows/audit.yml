@@ -1,0 +1,19 @@
+name: Temporary audit (positions)
+on:
+  push:
+    paths: [".github/workflows/audit.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - run: python .github/audit.py
+      - run: |
+          mkdir /tmp/o && cp audit.json /tmp/o/
+          cd /tmp/o && git init -q -b audit && git add audit.json
+          git -c user.name=bot -c user.email=bot@users.noreply.github.com commit -qm audit
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" audit
