@@ -2310,6 +2310,7 @@ function openLive(x){const d=$("#tmd");openCode=null;const id=LIVEV&&LIVEV.id?LI
 function nextRaceX(){const n=nowMs();return SCH.filter(x=>at(x)>n).sort((a,b)=>at(a)-at(b))[0]}
 function cdLong(t){const d=Math.max(0,Math.round((t-nowMs())/1000)),dd=Math.floor(d/86400),h=Math.floor(d%86400/3600),m=Math.floor(d%3600/60),sc=d%60,p=n=>String(n).padStart(2,"0");return (dd?`${dd}d `:"")+`${p(h)}:${p(m)}:${p(sc)}`}
 const NXS={en:["On schedule","Starting soon","Start delayed","Delayed","Racing",t=>`Not before ${t}`],de:["Planmäßig","Start gleich","Start verzögert","Verspätet","Rennen läuft",t=>`Nicht vor ${t}`],fr:["À l'heure","Départ imminent","Départ retardé","Retardé","En course",t=>`Pas avant ${t}`],es:["Puntual","Salida inminente","Salida retrasada","Retrasada","En regata",t=>`No antes de ${t}`],pt:["No horário","Largada em breve","Com atraso","Atrasada","Em regata",t=>`Não antes de ${t}`],zh:["准时","即将起航","起航推迟","推迟","比赛中",t=>`${t} 前不开始`],ar:["في الموعد","الانطلاق قريبًا","تأخر الانطلاق","متأخر","السباق جارٍ",t=>`ليس قبل ${t}`],hi:["समय पर","शुरू होने वाली","शुरुआत में देरी","देरी","रेस जारी",t=>`${t} से पहले नहीं`],bn:["সময়মতো","শিগগির শুরু","শুরু দেরিতে","দেরি","রেস চলছে",t=>`${t}-এর আগে নয়`],ur:["وقت پر","آغاز قریب","آغاز میں تاخیر","تاخیر","ریس جاری",t=>`${t} سے پہلے نہیں`],id:["Sesuai jadwal","Segera mulai","Start tertunda","Tertunda","Sedang balapan",t=>`Setelah ${t}`],ms:["Ikut jadual","Hampir bermula","Lewat mula","Tertangguh","Sedang berlumba",t=>`Selepas ${t}`],ja:["定刻","まもなくスタート","スタート遅延","遅延","レース中",t=>`${t}以降`],th:["ตรงเวลา","ใกล้ออกตัว","ออกตัวล่าช้า","ล่าช้า","กำลังแข่ง",t=>`ไม่ก่อน ${t}`],hu:["Időben","Hamarosan rajt","Rajt késik","Késik","Futam zajlik",t=>`Nem ${t} előtt`],cs:["Podle plánu","Brzy start","Start zpožděn","Zpožděno","Závodí se",t=>`Ne dříve než ${t}`],uk:["За розкладом","Старт скоро","Запізнення","Затримка","Гонка триває",t=>`Не раніше ${t}`],pl:["Zgodnie z planem","Zaraz start","Start opóźniony","Opóźniony","Wyścig trwa",t=>`Nie przed ${t}`]};
+const NXW={en:"Start pending",de:"Start ausstehend",fr:"Départ à venir",es:"Salida pendiente",pt:"Largada pendente",zh:"等待起航",ar:"بانتظار الانطلاق",hi:"स्टार्ट बाकी",bn:"স্টার্ট বাকি",ur:"اسٹارٹ باقی",id:"Menunggu start",ms:"Menunggu mula",ja:"スタート待ち",th:"รอออกสตาร์ท",hu:"Rajtra vár",cs:"Čeká na start",uk:"Очікує старт",pl:"Czeka na start"};
 var FLG={};async function pullFlags(){try{const r=await fetch("flags.json?t="+Date.now(),{cache:"no-store"});if(r.ok){const j=await r.json(),ch=JSON.stringify(j)!==JSON.stringify(FLG);FLG=j;if(ch)try{render(true)}catch(e){}}}catch(e){}}
 pullFlags();setInterval(()=>{if(!document.hidden)pullFlags()},60000);
 /* race status from Georacing's live feed (CORS-open): waiting = boats on the water, none past the start; racing = someone past the start */
@@ -2332,7 +2333,7 @@ function nxcPaint(){let b=$("#nxc");const n=nowMs();
   if(!x&&cur){x=cur;S0=CS;cur=null}
   if(!x){if(b)b.remove();return}
   if(!b){b=document.createElement("button");b.id="nxc";b.type="button";b.onclick=()=>{const c=b._cur;if(c)return openLive(c);const y=b._x;if(!y)return;b.classList.contains("live")?openLive(y):openRace(y)};$("header.top").appendChild(b)}
-  const L=NXS[lang]||NXS.en,red=S0.k=="racing"||S0.k=="live";b._x=x;b._cur=cur;b.classList.toggle("live",red);b.classList.toggle("dual",!!cur);b.dataset.st=S0.k;
+  const L=NXS[lang]||NXS.en,red=S0.k=="racing"||S0.k=="live";b._x=x;b._cur=cur;b.classList.toggle("live",red);b.classList.toggle("dual",!!cur);b.classList.toggle("dualw",!!cur&&CS.k!="racing");b.dataset.st=S0.k;
   const rnm=c=>c.rid=="f"||c.rid=="pf"?String(RS[c.rid]||RNm(rnd(c.rid))):`${T("group")} ${c.g}`,rsh=c=>c.rid=="f"||c.rid=="pf"?String(RS[c.rid]||RNm(rnd(c.rid))):c.g;
   const p2=v=>String(v).padStart(2,"0"),since=d=>{const s=Math.max(0,Math.round(d/1000));return`+${Math.floor(s/3600)?Math.floor(s/3600)+":":""}${p2(Math.floor(s%3600/60))}:${p2(s%60)}`};
   let top,big,pill="";
@@ -2341,7 +2342,7 @@ function nxcPaint(){let b=$("#nxc");const n=nowMs();
   else if(S0.k=="late"){top=esc(S[lang].nxS||T("nextRace"));big=mono(since(n-S0.since));pill=`<em class="nxp o">${esc(L[2])}</em>`}
   else{top=esc(S[lang].nxS||T("nextRace"));big=mono(cdLong(S0.to));pill=`<em class="nxp ${S0.k=="soon"?"y":"g"}">${esc(S0.k=="soon"?L[1]:L[0])}</em>`}
   if(cur&&!red)top=`${esc(rnm(x))} · ${esc(x.t)}`;
-  const lbl=`${cur?`<em class="nxnow"><i class="nxdot0"></i><span>${esc(rsh(cur))} · ${esc(({id:"Balapan",ms:"Berlumba"})[lang]||L[4])}</span></em><i class="nxhr" aria-hidden="true"></i>`:""}<span class="nxi">${top?`<small>${top}</small>`:""}${pill}</span><b class="cdd">${big}</b>`;
+  const lbl=`${cur?`<em class="nxnow${CS.k=="racing"?"":" w"}"><i class="nxdot0"></i><span>${esc(rsh(cur))} · ${esc(CS.k=="racing"?(({id:"Balapan",ms:"Berlumba"})[lang]||L[4]):(NXW[lang]||NXW.en))}</span></em><i class="nxhr" aria-hidden="true"></i>`:""}<span class="nxi">${top?`<small>${top}</small>`:""}${pill}</span><b class="cdd">${big}</b>`;
   if(b._h!==lbl){b.innerHTML=lbl;b._h=lbl}b.setAttribute("aria-label",`${cur?rnm(cur)+" · "+L[4]+" · ":""}${rnm(x)} · ${x.t}`)}
 setInterval(()=>{if(!document.hidden)nxcPaint()},1000);
 /* ---------- push notifications (OneSignal) + private visitor counter (GoatCounter); both off until config.js has a value ---------- */
@@ -2401,7 +2402,7 @@ function stand(){const u=new Date(checkedAt&&Date.parse(checkedAt)>Date.parse(D.
   const m=Math.max(0,Math.round((Date.now()-u)/6e4)),abs=u.toLocaleString(LOC(),{timeZone:"America/Sao_Paulo",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
   const n=nowMs(),td=SCH.filter(x=>x.d==today()).map(at),fast=td.length&&n>=Math.min(...td)-60*6e4&&n<=Math.max(...td)+150*6e4;
   const el=$("#stand");if(!fast||m>15||stale){el.hidden=true;el.innerHTML="";return}el.hidden=false;
-  el.innerHTML=`<i class="ldot2"></i>${T("updated")} ${esc(abs.replace(/^.*?(\d{1,2}:\d{2}.*)$/,"$1"))} · <span class="ago">${esc(T("ago")(m))}</span>`}
+  el.innerHTML=`<i class="ldot2"></i>${T("updated")} ${esc(abs.replace(/^.*?(\d{1,2}:\d{2}.*)$/,"$1"))}<span class="ago">${esc(T("ago")(m))}</span>`}
 applyTheme();
 
 /* ---------- render & routing ---------- */

@@ -1163,3 +1163,6 @@ header.top>#nxc .nxi{flex:none}
 .vmz .vmzs img{display:block;height:100%;width:auto;min-width:100%;max-width:none}
 .vmz .x{position:absolute;top:calc(12px + env(safe-area-inset-top));right:12px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:20px;backdrop-filter:blur(6px)}
 .vtap{margin:6px 0 0;font-size:13px;color:var(--mute);text-align:center}
+#stand .ago{display:block;padding-inline-start:13px;margin-top:1px}
+header.top>#nxc .nxnow.w{background:#e8862a}
+header.top>#nxc.dualw{box-shadow:inset 0 0 0 1.5px rgba(255,140,60,.85),0 0 18px rgba(255,140,60,.3)!important}
