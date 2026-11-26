@@ -1222,3 +1222,10 @@ header.top>#nxc .nxrow b{margin-inline-start:auto}
 .races li.rc.done .rtab svg{width:20px;height:20px}.races li.rc.done .rtab b{font-size:20px;line-height:.8}
 .races li.rc.done:active,.races li.rc.done.tap{transform:scale(.975);box-shadow:0 0 0 2px #f5b800,0 0 24px rgba(245,184,0,.45);background:rgba(245,184,0,.14)}
 .rc .ti .tnb{white-space:nowrap;font-size:.92em}
+
+.rcb.rrep{background:linear-gradient(180deg,#ffd21f,#f5b800)!important;color:#10203f!important;border:0!important;font-weight:800}
+.rcb.rrep .rra{margin-inline-start:auto;font-size:22px;line-height:1;font-weight:800}
+.rcb.rrep:active{transform:scale(.97);box-shadow:0 0 0 2px #fff,0 0 20px rgba(245,184,0,.5)}
+.rrf{margin-bottom:12px}.rrf .sl b img{width:22px;height:auto;vertical-align:-3px;border-radius:3px}
+.rrsoon{margin:14px 0 0;color:var(--mute);font-size:14px;text-align:center}
+.rrb{margin-top:14px}
