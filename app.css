@@ -962,3 +962,13 @@ dialog.tmd:has(.vframe iframe) .vframe{touch-action:auto}
 .obdt li svg{color:#ffd21f;flex:none}
 
 .stools{margin-top:14px}.scount{margin:6px 4px 4px;font-size:13px;color:var(--mute)}
+
+.tstat{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 8px}
+.tstat button{border:var(--bd);background:var(--card);color:var(--ink);border-radius:14px;padding:9px 6px;display:flex;flex-direction:column;align-items:center;gap:1px;font:inherit}
+.tstat button:active{transform:scale(.97)}
+.tstat b{font-size:22px;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums}
+.tstat b.tsg{color:#4fd1a1}.tstat b.tsr{color:#f28b8b}
+.tstat small{font-size:12px;color:var(--mute)}
+.tbar{height:6px;border-radius:3px;background:rgba(242,139,139,.35);overflow:hidden;margin:0 2px 14px}
+.tbar i{display:block;height:100%;background:#4fd1a1;border-radius:3px}
+[data-theme=light] .tstat b.tsg{color:#0f8a5f}[data-theme=light] .tstat b.tsr{color:#c0392b}

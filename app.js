@@ -1280,8 +1280,10 @@ function teamView(){const TT=teams(),inn=TT.filter(t=>!t.out).length;
   const list=TT.filter(t=>{if(filt=="in"&&t.out||filt=="out"&&!t.out||filt=="fav"&&!favs.has(t.code))return false;if(!q)return true;
     const sq=squad(t.code);return(t.name+" "+t.code+" "+(INFO[t.code]||{}).name+" "+sq.n+" "+sq.ppl.map(p=>p.name).join(" ")).toLowerCase().includes(q.toLowerCase())});
   list.sort(sortBy=="rank"?(a,b)=>(a.I.rank||999)-(b.I.rank||999):sortBy=="name"?(a,b)=>a.name.localeCompare(b.name,lang):(a,b)=>a.out-b.out||b.lvl-a.lvl||(a.I.rank||999)-(b.I.rank||999));
-  return `<div class="rhead"><h2>${T("nations")(TT.length)}</h2><p>${inn} ${T("stillIn")} · ${TT.length-inn} ${T("outN")}</p></div>
-  <div class="tools"><input id="q" type="search" placeholder="${esc(T("search"))}" value="${esc(q)}" aria-label="${esc(T("search"))}"></div>
+  const nl=String(T("nations")(TT.length)).replace(/\d+/g,"").replace(/[:：]/g,"").trim();
+  return `<div class="tools stools"><input id="q" type="search" placeholder="${esc(T("search"))}" value="${esc(q)}" aria-label="${esc(T("search"))}"></div>
+  <div class="tstat"><button data-f="all"><b>${TT.length}</b><small>${esc(nl)}</small></button><button data-f="in"><b class="tsg">${inn}</b><small>${esc(T("stillIn"))}</small></button><button data-f="out"><b class="tsr">${TT.length-inn}</b><small>${esc(T("outN"))}</small></button></div>
+  <div class="tbar" aria-hidden="true"><i style="width:${Math.round(inn/Math.max(1,TT.length)*100)}%"></i></div>
   <div class="fbar"><span class="flab">${T("fShow")}</span><div class="sgc" role="group" aria-label="${esc(T("fShow"))}">${[["all",T("all")],["in",T("chipIn")],["out",T("chipOut")],["fav",T("mine")]].map(([k,l])=>`<button class="${filt==k?"on":""}" aria-pressed="${filt==k}" data-f="${k}">${l}</button>`).join("")}</div></div>
   <div class="fbar"><span class="flab">${T("fSort")}</span><div class="sgc sm" role="group" aria-label="${esc(T("fSort"))}">${[["status",T("sStatus")],["rank",T("sRank")],["name",T("sAz")]].map(([k,l])=>`<button class="${sortBy==k?"on":""}" aria-pressed="${sortBy==k}" data-s="${k}">${l}</button>`).join("")}</div></div>
   ${filt=="fav"&&!favs.size?`<p class="warn">${T("myHint")}</p>`:""}
