@@ -237,6 +237,15 @@ pt:{champT:"Campeão mundial · Gold Cup 2026",standT:"Classificação final",st
 zh:{champT:"世界冠军 · 2026 金杯",standT:"最终排名",statsT:"数据",stRaces:"比赛",stWins:"分站胜场",stAvg:"平均名次",stPts:"里约积分",stHist:"逐场成绩",calBtn:"📅 把比赛加入日历",calT:"把比赛加入你的日历",calSub:"订阅（iPhone、Mac、Outlook）",calG:"添加到 Google 日历",calDl:"下载文件（.ics）",calAll:"把全部比赛加入日历",calNote:"订阅会自动更新：队伍晋级后，下一轮比赛会自动出现。",wxT:"风力预报 · Marina da Glória",wxSrc:"Open-Meteo 预报，并非赛场实测。",trk:"实时追踪",delayed:m=>`成绩可能延迟——上次成功检查是 ${m} 分钟前。`,shareImg:"分享为图片",imgDone:"图片已生成"},
 ar:{champT:"بطل العالم · Gold Cup 2026",standT:"الترتيب النهائي",statsT:"بالأرقام",stRaces:"السباقات",stWins:"الانتصارات",stAvg:"متوسط المركز",stPts:"النقاط في ريو",stHist:"سباقًا بسباق",calBtn:"📅 السباقات في تقويمي",calT:"السباقات في تقويمك",calSub:"اشترك (iPhone وMac وOutlook)",calG:"أضف إلى تقويم Google",calDl:"تنزيل الملف (.ics)",calAll:"كل السباقات في تقويمي",calNote:"الاشتراك يتحدّث تلقائيًا: عندما يتأهل فريق تظهر سباقاته التالية.",wxT:"توقعات الرياح · مارينا دا غلوريا",wxSrc:"توقعات Open-Meteo، وليست قياسًا في موقع السباق.",trk:"التتبع",delayed:m=>`قد تتأخر النتائج – آخر تحقق ناجح قبل ${m} دقيقة.`,shareImg:"مشاركة كصورة",imgDone:"الصورة جاهزة"}};
 for(const l in SN)Object.assign(S[l],SN[l]);
+const SP={
+en:{pT:"Notifications",pAll:"All results",pAllSub:"A notification after every race",pTeamOff:"🔔 Notify me about this team",pTeamOn:"🔔 Notifications on ✓",pTeams:"Your teams",pNone:"No team yet: open a team and tap 🔔.",pNote:"You only get race results and who goes through. Switch off here any time.",pIOS:"On iPhone, notifications only work in the installed app: install it, open it from the home screen, then switch them on here.",pDenied:"Notifications are blocked. Allow them for this app in your device settings.",pErr:"That didn't work – please try again in a moment.",pOnT:"Notifications on",pOffT:"Notifications off",pUnsup:"This browser can't receive notifications."},
+de:{pT:"Mitteilungen",pAll:"Alle Ergebnisse",pAllSub:"Nach jedem Rennen eine Mitteilung",pTeamOff:"🔔 Mitteilungen für dieses Team",pTeamOn:"🔔 Mitteilungen an ✓",pTeams:"Deine Teams",pNone:"Noch kein Team: Öffne ein Team und tippe auf 🔔.",pNote:"Du bekommst nur Rennergebnisse und wer weiterkommt. Abschalten jederzeit hier.",pIOS:"Auf dem iPhone kommen Mitteilungen nur in der installierten App: App installieren, vom Home-Bildschirm öffnen und dann hier einschalten.",pDenied:"Mitteilungen sind blockiert. Erlaube sie in den Einstellungen deines Geräts für diese App.",pErr:"Hat gerade nicht geklappt – bitte gleich nochmal versuchen.",pOnT:"Mitteilungen an",pOffT:"Mitteilungen aus",pUnsup:"Dieser Browser kann keine Mitteilungen empfangen."},
+fr:{pT:"Notifications",pAll:"Tous les résultats",pAllSub:"Une notification après chaque course",pTeamOff:"🔔 M'avertir pour cette équipe",pTeamOn:"🔔 Notifications activées ✓",pTeams:"Vos équipes",pNone:"Aucune équipe : ouvrez une équipe et touchez 🔔.",pNote:"Vous recevez seulement les résultats des courses et les qualifiés. Désactivable ici à tout moment.",pIOS:"Sur iPhone, les notifications ne fonctionnent que dans l'app installée : installez-la, ouvrez-la depuis l'écran d'accueil, puis activez-les ici.",pDenied:"Les notifications sont bloquées. Autorisez-les pour cette app dans les réglages de l'appareil.",pErr:"Ça n'a pas marché – réessayez dans un instant.",pOnT:"Notifications activées",pOffT:"Notifications désactivées",pUnsup:"Ce navigateur ne peut pas recevoir de notifications."},
+es:{pT:"Notificaciones",pAll:"Todos los resultados",pAllSub:"Una notificación tras cada regata",pTeamOff:"🔔 Avisarme de este equipo",pTeamOn:"🔔 Notificaciones activadas ✓",pTeams:"Tus equipos",pNone:"Ningún equipo aún: abre un equipo y toca 🔔.",pNote:"Solo recibes resultados de regatas y quién se clasifica. Se desactiva aquí cuando quieras.",pIOS:"En iPhone, las notificaciones solo funcionan en la app instalada: instálala, ábrela desde la pantalla de inicio y actívalas aquí.",pDenied:"Las notificaciones están bloqueadas. Permítelas para esta app en los ajustes del dispositivo.",pErr:"No ha funcionado; inténtalo de nuevo en un momento.",pOnT:"Notificaciones activadas",pOffT:"Notificaciones desactivadas",pUnsup:"Este navegador no puede recibir notificaciones."},
+pt:{pT:"Notificações",pAll:"Todos os resultados",pAllSub:"Uma notificação após cada regata",pTeamOff:"🔔 Avisar sobre esta equipe",pTeamOn:"🔔 Notificações ativadas ✓",pTeams:"Suas equipes",pNone:"Nenhuma equipe ainda: abra uma equipe e toque em 🔔.",pNote:"Você recebe apenas resultados das regatas e quem avança. Desative aqui quando quiser.",pIOS:"No iPhone, as notificações só funcionam no app instalado: instale, abra pela tela inicial e ative aqui.",pDenied:"As notificações estão bloqueadas. Permita-as para este app nas configurações do aparelho.",pErr:"Não funcionou – tente novamente daqui a pouco.",pOnT:"Notificações ativadas",pOffT:"Notificações desativadas",pUnsup:"Este navegador não recebe notificações."},
+zh:{pT:"通知",pAll:"全部成绩",pAllSub:"每场比赛后推送通知",pTeamOff:"🔔 接收此队通知",pTeamOn:"🔔 已开启通知 ✓",pTeams:"你的队伍",pNone:"还没有关注队伍：打开一支队伍并点按 🔔。",pNote:"只推送比赛成绩和晋级信息。可随时在此关闭。",pIOS:"在 iPhone 上，通知仅在已安装的应用中可用：先安装应用，从主屏幕打开，再在此开启。",pDenied:"通知已被屏蔽。请在设备设置中允许此应用发送通知。",pErr:"操作未成功，请稍后再试。",pOnT:"已开启通知",pOffT:"已关闭通知",pUnsup:"此浏览器无法接收通知。"},
+ar:{pT:"الإشعارات",pAll:"كل النتائج",pAllSub:"إشعار بعد كل سباق",pTeamOff:"🔔 أشعرني بنتائج هذا الفريق",pTeamOn:"🔔 الإشعارات مفعّلة ✓",pTeams:"فرقك",pNone:"لا يوجد فريق بعد: افتح فريقًا واضغط 🔔.",pNote:"تصلك فقط نتائج السباقات ومن يتأهل. يمكنك الإيقاف هنا في أي وقت.",pIOS:"على iPhone تعمل الإشعارات فقط في التطبيق المثبّت: ثبّت التطبيق، وافتحه من الشاشة الرئيسية، ثم فعّلها هنا.",pDenied:"الإشعارات محظورة. اسمح بها لهذا التطبيق من إعدادات جهازك.",pErr:"لم تنجح العملية – حاول مرة أخرى بعد قليل.",pOnT:"تم تفعيل الإشعارات",pOffT:"تم إيقاف الإشعارات",pUnsup:"هذا المتصفح لا يستقبل الإشعارات."}};
+for(const l in SP)Object.assign(S[l],SP[l]);
 
 
 
@@ -494,7 +503,7 @@ let BIP=null;const UA=navigator.userAgent||"";
 const isIOS=/iPhone|iPad|iPod/.test(UA)||(/Macintosh/.test(UA)&&navigator.maxTouchPoints>1),isAndroid=/Android/.test(UA);
 const isStandalone=()=>{try{return matchMedia("(display-mode: standalone)").matches||navigator.standalone===true}catch(e){return false}};
 const canInstall=()=>!isStandalone()&&(location.protocol=="https:"||location.hostname=="localhost")&&window.top===window;
-window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();BIP=e;if(view=="home"||view=="more")render(true)});
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();BIP=e;LS.set("installed",0);insBtn();if(view=="home"||view=="more")render(true)});
 window.addEventListener("appinstalled",()=>{BIP=null;LS.set("installed",1);toast(T("inst").done);render(true)});
 if(isStandalone())LS.set("installed",1);
 function installCard(dismissable){if(!canInstall()||(dismissable&&LS.get("instHide",0)>Date.now()))return"";const I=T("inst");
@@ -515,6 +524,7 @@ function more(){const I=T("inst");
   let h=`<h2 class="pill">${T("moreT")}</h2>`;
   h+=isStandalone()?`<p class="warn">✓ ${I.installedNote}</p>`:installCard(false);
   h+=`<div class="mlist">${row("#sailors",TI.sailors,T("tiles").sailors[0],T("tiles").sailors[1])}${row("#qualifying",TI.qualifying,T("tiles").qualifying[0],T("tiles").qualifying[1])}${row("#gc2023",TI.gc2023,T("tiles").gc2023[0],T("tiles").gc2023[1])}<button class="mrow" data-calall="1">${svg('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>')}<span><b>${T("calAll")}</b></span></button><button class="mrow" data-share="1">${svg('<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/>')}<span><b>${T("share")}</b><small>${esc(location.href.split("#")[0])}</small></span></button></div>`;
+  h+=pushMore();
   h+=`<h3 class="sec">${T("links")}</h3><div class="mlist">${row("https://www.youtube.com/@Starsailors/streams",'<path d="M5 4l14 8-14 8z"/>',T("stream").replace("▶ ",""),"YouTube")}${row("https://app.georacing.com/?application_id=46",'<path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',T("tracking"),"Georacing")}${row("https://sslgoldcup.worldofsailors.com/results/",TI.board,T("official"),"sslgoldcup.worldofsailors.com")}${row("https://sslgoldcup.worldofsailors.com/schedule/",'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',T("schedule"),"")}</div>`;
   h+=`<h3 class="sec">${T("how")?T("howT"):""}</h3><div class="card pad"><ul class="howl">${T("how").map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
   h+=`<h3 class="sec">${T("about")}</h3><div class="card pad"><p>${esc(T("aboutT"))}</p><p class="warn">${esc(T("foot"))}</p></div>`;
@@ -595,12 +605,13 @@ function openTeam(code){if(!isTeam(code))return;openCode=code;const d=$("#tmd"),
     h+=`</div>`;const rest=rl.filter(p=>!p.k&&!p.cap);
     if(rest.length)h+=`<h3>${T("wider")}</h3><div class="grp rest">${rest.map(p=>`<div class="pp" role="button" tabindex="0" data-pi="${p.i}">${av(p,1)}<span class="nm">${esc(p.name)}</span></div>`).join("")}</div>`;
     h+=`<div class="tf">${T("squadNote")(rl.length,pics.length)}</div>`}
-  h+=`<div class="tact"><button data-cal="${esc(code)}">${T("calBtn")}</button><button data-br="1">${T("showPath")}</button></div></div>`;
+  h+=`<div class="tact">${pushShown()?`<button data-push="1" class="${pSet.has(code)?"on":""}" aria-pressed="${pSet.has(code)}">${T(pSet.has(code)?"pTeamOn":"pTeamOff")}</button>`:""}<button data-cal="${esc(code)}">${T("calBtn")}</button><button data-br="1">${T("showPath")}</button></div></div>`;
   d.innerHTML=h;
   d.querySelector(".x").onclick=()=>d.close();
   d.querySelector(".fv").onclick=()=>{favs.has(code)?favs.delete(code):favs.add(code);LS.set("favs",[...favs]);const y=d.scrollTop;openTeam(code);d.scrollTop=y;render(true)};
   d.querySelector(".ln").onclick=async()=>{const u=location.href.split("#")[0]+"#team-"+code;try{await navigator.clipboard.writeText(u);toast(T("copied"))}catch(e){toast(u)}};
   d.querySelector("[data-cal]").onclick=()=>calSheet(code);
+  {const pb=d.querySelector("[data-push]");if(pb)pb.onclick=async()=>{pb.disabled=true;await pushToggle(code);if(d.open&&openCode==code){const y=d.scrollTop;openTeam(code);d.scrollTop=y}};}
   d.querySelector("[data-br]").onclick=()=>{d.close();sel=code;jump=true;go("bracket")};
   d.querySelectorAll("[data-go]").forEach(b=>{const f=()=>{d.close();sel=code;jump=true;go(b.dataset.go)};b.onclick=f;b.onkeydown=e=>{if(e.key=="Enter")f()}});
   d.querySelectorAll("[data-pi]").forEach(el=>{const f=()=>openSailor(code,+el.dataset.pi);el.onclick=f;el.onkeydown=e=>{if(e.key=="Enter")f()}});
@@ -622,10 +633,47 @@ function openSailor(code,i){const d=$("#tmd"),sq=squad(code),p=sq.ppl[i];if(!p)r
   show(d)}
 function toast(m){let el=$(".toast");if(!el){el=document.createElement("div");el.className="toast";el.setAttribute("role","status");document.body.appendChild(el)}el.textContent=m;el.classList.add("on");clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove("on"),1800)}
 
+/* ---------- push notifications (OneSignal) + private visitor counter (GoatCounter); both off until config.js has a value ---------- */
+const CFG=window.CFG||{};
+const pushCan=()=>!!CFG.push&&"serviceWorker" in navigator&&"PushManager" in window&&"Notification" in window&&(location.protocol=="https:"||location.hostname=="localhost");
+const pushShown=()=>!!CFG.push&&(pushCan()||isIOS);
+const pushReady=()=>pushCan()&&!(isIOS&&!isStandalone());
+let pSet=new Set(LS.get("push",[])),osP=null;
+const OSL={en:"en",de:"de",fr:"fr",es:"es",pt:"pt",zh:"zh-Hans",ar:"ar"};
+function loadOS(){if(osP)return osP;
+  osP=new Promise((res,rej)=>{const to=setTimeout(()=>rej(new Error("timeout")),20000);
+    window.OneSignalDeferred=window.OneSignalDeferred||[];
+    window.OneSignalDeferred.push(async O=>{try{const base=location.pathname.replace(/[^/]*$/,"");
+      await O.init({appId:CFG.push,path:base,serviceWorkerPath:"push/onesignal/OneSignalSDKWorker.js",serviceWorkerParam:{scope:base+"push/onesignal/"}});
+      try{O.User.setLanguage(OSL[lang]||"en")}catch(e){}clearTimeout(to);res(O)}catch(e){clearTimeout(to);rej(e)}});
+    if(!document.querySelector("script[data-os]")){const s=document.createElement("script");s.src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js";s.defer=true;s.dataset.os=1;s.onerror=()=>{s.remove();clearTimeout(to);rej(new Error("load"))};document.head.appendChild(s)}});
+  osP.catch(()=>{osP=null});return osP}
+async function pushToggle(key){
+  if(!pushReady()){pushHelp();return}
+  const on=pSet.has(key),tag=key=="all"?"all":"team_"+key;let perm=Notification.permission;
+  if(!on&&perm!=="granted"){if(perm==="denied"){toast(T("pDenied"));return}
+    try{perm=await Notification.requestPermission()}catch(e){}   /* first await: the tap still counts as a user gesture */
+    if(perm!=="granted"){toast(T(perm==="denied"?"pDenied":"pErr"));return}}
+  try{const O=await loadOS();
+    if(!on){await O.User.PushSubscription.optIn();O.User.addTag(tag,"1");pSet.add(key)}else{O.User.removeTag(tag);pSet.delete(key)}
+    LS.set("push",[...pSet]);toast(T(on?"pOffT":"pOnT"));gcEvent(on?"push-off":"push-on")}
+  catch(e){console.warn("push",e);toast(T("pErr"))}}
+function pushHelp(){if(!(isIOS&&!isStandalone())){toast(T("pUnsup"));return}const d=$("#tmd");
+  d.innerHTML=`<div class="th"><div><div class="nick">SSL Gold Cup</div><h2>${esc(T("pT"))}</h2></div><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb"><p>${esc(T("pIOS"))}</p><div class="tact"><button data-ih="1">${esc(T("inst").how)}</button></div></div>`;
+  d.querySelector(".x").onclick=()=>d.close();d.querySelector("[data-ih]").onclick=()=>installHelp();openCode=null;show(d)}
+function pushMore(){if(!pushShown())return"";const tl=[...pSet].filter(x=>x!="all"&&isTeam(x));
+  return `<h3 class="sec">${T("pT")}</h3><div class="mlist"><button class="mrow" data-pall="1" role="switch" aria-checked="${pSet.has("all")}">${svg('<path d="M6 16V11a6 6 0 0112 0v5l2 2H4z"/><path d="M10 20a2 2 0 004 0"/>')}<span><b>${T("pAll")}</b><small>${T("pAllSub")}</small></span><i class="tgl${pSet.has("all")?" on":""}" aria-hidden="true"></i></button></div><div class="card pad"><p>${tl.length?`${esc(T("pTeams"))}: ${tl.map(c=>`<a href="#team-${esc(c)}">${FL(c)}${esc(NM(c))}</a>`).join(", ")}`:esc(T("pNone"))}</p><p class="warn">${esc(pushReady()?T("pNote"):T("pIOS"))}</p></div>`}
+if(CFG.push&&pSet.size&&pushCan()){if(Notification.permission!=="granted"){pSet.clear();LS.set("push",[])}else setTimeout(()=>loadOS().catch(()=>{}),4000)}
+
+/* visitor counter: anonymous, no cookies; dashboard only visible to the account owner */
+function gcEvent(name){try{if(CFG.gc&&window.goatcounter&&goatcounter.count)goatcounter.count({path:name,title:name,event:true})}catch(e){}}
+if(CFG.gc&&!/claude/.test(location.hostname)&&!navigator.webdriver){try{window.goatcounter={no_onload:true};const s=document.createElement("script");s.async=true;s.src="https://gc.zgo.at/count.js";s.dataset.goatcounter=`https://${CFG.gc}.goatcounter.com/count`;
+  s.onload=()=>{try{goatcounter.count({path:location.pathname});gcEvent(isStandalone()?"start-app":"start-browser");gcEvent("lang-"+lang)}catch(e){}};document.head.appendChild(s)}catch(e){}}
+
 /* ---------- chrome: header bar, theme, language ---------- */
 function applyTheme(){const r=document.documentElement,t=theme=="auto"?"mb":theme;r.setAttribute("data-theme",t);let m=$("meta[name=theme-color]");if(!m){m=document.createElement("meta");m.name="theme-color";document.head.appendChild(m)}m.content={mb:"#1a4486",light:"#192550",dark:"#0b1630"}[t]}
 const ICO0=['<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="4" rx="1.5"/><rect x="3" y="10" width="18" height="4" rx="1.5"/><rect x="3" y="16" width="18" height="4" rx="1.5"/></svg>','<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="3.5" width="6" height="5" rx="1"/><rect x="2.5" y="15.5" width="6" height="5" rx="1"/><rect x="15.5" y="9.5" width="6" height="5" rx="1"/><path d="M8.5 6H12v12H8.5M12 12h3.5"/></svg>','<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 21V3.5M5 4h12l-2.5 4.5L17 13H5"/></svg>'];
-$("#lang").onchange=e=>{lang=e.target.value;LS.set("lang",lang);for(const k in SQ)delete SQ[k];render();if($("#tmd").open&&openCode)openTeam(openCode)};
+$("#lang").onchange=e=>{lang=e.target.value;LS.set("lang",lang);if(osP)osP.then(O=>{try{O.User.setLanguage(OSL[lang]||"en")}catch(x){}}).catch(()=>{});for(const k in SQ)delete SQ[k];render();if($("#tmd").open&&openCode)openTeam(openCode)};
 $("#thm").onclick=()=>{theme={auto:"light",light:"dark",dark:"auto"}[theme];LS.set("theme",theme);applyTheme();chrome()};
 const ICO=['<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1z"/></svg>',ICO0[0],ICO0[1],ICO0[2],'<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="19" cy="12" r="1.9"/></svg>'];
 function insBtn(){let b=$("#ins");const show=canInstall()&&!LS.get("installed",0);
@@ -667,6 +715,7 @@ $("#main").addEventListener("click",e=>{
   const sh=e.target.closest("[data-share]");if(sh){const u=location.href.split("#")[0];(async()=>{try{if(navigator.share){await navigator.share({title:"SSL Gold Cup",url:u});return}}catch(x){return}try{await navigator.clipboard.writeText(u);toast(T("shared"))}catch(x){toast(u)}})();return}
   const si=e.target.closest("[data-shimg]");if(si){const[a,b]=si.dataset.shimg.split("|");shareGroup(a,b);return}
   const ca=e.target.closest("[data-calall]");if(ca){calSheet(null);return}
+  const pa=e.target.closest("[data-pall]");if(pa){pa.disabled=true;pushToggle("all").finally(()=>render(true));return}
   const sp=e.target.closest("[data-sp]");if(sp){sPh=sp.dataset.sp=="1";render(true);return}
   const sr=e.target.closest("[data-sc]");if(sr){openSailor(sr.dataset.sc,+sr.dataset.si);return}
   const g=e.target.closest("[data-go]");if(g&&!e.target.closest(".mr.team")){go(g.dataset.go);return}
