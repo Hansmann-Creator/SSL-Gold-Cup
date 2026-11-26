@@ -1926,6 +1926,7 @@ function pTeam(code){if(!isTeam(code))return;openCode=code;const d=$("#pg"),sq=s
   pgShow(d)}
 let lockY=0;
 function lockScroll(){const b=document.body;if(b.classList.contains("lock"))return;lockY=scrollY;b.style.top=-lockY+"px";b.classList.add("lock")}
+try{history.scrollRestoration="manual"}catch(e){}
 function unlockScroll(){const b=document.body;if(PGS&&!$("#pg").hidden)return;if(!b.classList.contains("lock"))return;b.classList.remove("lock");b.style.top="";scrollTo(0,lockY)}
 const NMH=n=>{const g=givenN(n);return `${g?`<span class="gn">${esc(g)}</span> `:""}<b class="sn">${esc(surname(n))}</b>`};
 function givenN(n){const sn=surname(n),w=String(n).trim();return w.endsWith(sn)?w.slice(0,w.length-sn.length).trim():""}

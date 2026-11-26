@@ -1256,3 +1256,6 @@ header.top>#nxc .dov{font-size:13px!important;color:#fff!important;letter-spacin
 .races li.rc.done .rtab:not(.inc){background:linear-gradient(180deg,#f4e7b4,#e6d38a);color:#1d2b4f}
 .rcb.rrep:not(.inc){background:linear-gradient(180deg,#f4e7b4,#e6d38a)!important;color:#1d2b4f!important}
 .rc .ti .tap{white-space:nowrap}.rc .s .apt{color:var(--mute);font-weight:600;font-size:.92em}
+/* status line empty → buttons left under the logo */
+header.top:has(#stand[hidden]):not(:has(#off:not([hidden])))>.meta{display:none}
+header.top:has(#stand[hidden]):not(:has(#off:not([hidden])))>.bar{grid-column:1/-1;justify-self:start;justify-content:flex-start}
