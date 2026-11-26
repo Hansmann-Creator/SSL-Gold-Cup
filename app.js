@@ -1436,11 +1436,11 @@ const isStandalone=()=>{try{return matchMedia("(display-mode: standalone)").matc
 const canInstall=()=>!isStandalone()&&(location.protocol=="https:"||location.hostname=="localhost")&&window.top===window;
 if(BIP){LS.set("installed",0);setTimeout(()=>{try{insBtn()}catch(e){}},0)}
   window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();BIP=e;window.__bip=e;LS.set("installed",0);insBtn();{const d=$("#tmd");if(d.open&&d.classList.contains("full"))installHelp()}if(view=="home"||view=="more")render(true)});
-window.addEventListener("appinstalled",()=>{BIP=null;LS.set("installed",1);toast(T("inst").done);render(true)});
+window.addEventListener("appinstalled",()=>{gcEvent("install-confirmed");BIP=null;LS.set("installed",1);toast(T("inst").done);render(true)});
 if(isStandalone())LS.set("installed",1);
 function installCard(dismissable){if(!canInstall()||(dismissable&&LS.get("instHide",0)>Date.now()))return"";const I=T("inst");
   return `<section class="inst"><img src="icons/icon-192.png" alt="" width="52" height="52"><div><b>${I.t}</b><span>${I.d}</span></div><div class="ib"><button class="ibtn" data-inst="1">${BIP?I.b:I.how}</button>${dismissable?`<button class="ilater" data-insthide="1">${I.hide}</button>`:""}</div></section>`}
-async function doInstall(){if(!BIP&&window.__bip)BIP=window.__bip;if(BIP){const e=BIP;BIP=null;window.__bip=null;try{await e.prompt();const c=await e.userChoice;if(c&&c.outcome=="accepted"){LS.set("installed",1);LS.set("onb",1)}}catch(x){}render(true)}else installHelp()}
+async function doInstall(){gcEvent("install-tap");if(!BIP&&window.__bip)BIP=window.__bip;if(BIP){const e=BIP;BIP=null;window.__bip=null;try{await e.prompt();const c=await e.userChoice;if(c&&c.outcome=="accepted"){LS.set("installed",1);LS.set("onb",1)}}catch(x){}render(true)}else installHelp()}
 
 /* ---------- more ---------- */
 function more(){const I=T("inst");
@@ -1969,7 +1969,7 @@ function installHelp(first){const I=T("inst"),d=$("#tmd"),U=T("ui"),x=s=>esc(s);
   d.querySelectorAll("[data-obcopy]").forEach(b=>b.onclick=async()=>{const u=location.origin+location.pathname;try{await navigator.clipboard.writeText(u);toast(T("copied"))}catch(e){toast(u)}});
   openCode=null;show(d);try{d.querySelector(".obhero").focus({preventScroll:true})}catch(e){}}
 /* coach marks: point at the browser's own button (outside the page) */
-function coach(mode,steps,note){const o=document.createElement("div");o.id="coach";o.className="c-"+mode;o.setAttribute("role","dialog");
+function coach(mode,steps,note){gcEvent("install-guide-"+mode);const o=document.createElement("div");o.id="coach";o.className="c-"+mode;o.setAttribute("role","dialog");
   const arr=`<svg class="carr" viewBox="0 0 48 64" aria-hidden="true"><path d="M24 4v50M8 40l16 18 16-18" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
   o.innerHTML=`<div class="ccard"><b class="ctap">${esc(T("coachT"))}</b><ol>${steps.map(t=>`<li>${esc(t)}</li>`).join("")}</ol>${note?`<p class="cnote">${esc(note)}</p>`:""}<button class="cok">${esc(T("gotIt"))}</button></div>${arr}`;
   o.onclick=()=>o.remove();document.body.appendChild(o)}
