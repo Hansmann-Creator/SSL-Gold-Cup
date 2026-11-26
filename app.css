@@ -1304,3 +1304,6 @@ header.top>.bar>#setb{order:5;margin-inline-start:auto}
 .races li.rc.done .rtab em{font-size:8px}
 .races li.rc.done{padding-inline-end:68px}
 .dwrap{overflow:clip;margin-inline:calc(-1 * var(--pad));padding-inline:var(--pad)}
+/* actual start time from the tracking feed */
+.races li.rc .ti .tst{display:block}
+.races li.rc .ti .tsl{display:block;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);margin-top:1px}
