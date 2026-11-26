@@ -1089,3 +1089,11 @@ tr.tlink{cursor:pointer}tr.tlink:active td{background:color-mix(in srgb,var(--go
 .lva svg{width:20px;height:20px;flex:none}
 .lva.pri{background:var(--acc);color:var(--accInk);border-color:transparent;--lvaBg:var(--acc)}
 .lva:active{transform:scale(.97)}
+
+/* small box while a race is running: current race on top, next start below (variant B) */
+#nxc.dual{min-height:0;padding-top:7px!important;box-shadow:inset 0 0 0 1.5px rgba(229,57,53,.9),0 0 18px rgba(229,57,53,.3)}
+#nxc .nxnow{font-style:normal;display:flex;align-items:center;justify-content:center;gap:5px;max-width:100%;align-self:stretch;background:#e53935;color:#fff;border-radius:999px;padding:3px 8px;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+#nxc .nxnow span{overflow:hidden;text-overflow:ellipsis;min-width:0}
+#nxc .nxdot0{width:6px;height:6px;border-radius:50%;background:#fff;flex:none}
+#nxc .nxhr{border:0;height:1px;align-self:stretch;margin:4px 6px 3px;background:rgba(255,255,255,.2)}
+@media(max-width:420px){#nxc .nxnow{font-size:9px;letter-spacing:.02em;padding:3px 6px;gap:4px}}
