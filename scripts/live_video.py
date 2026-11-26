@@ -1,36 +1,62 @@
-"""Find the SSL YouTube channel's current live video and write live.json.
+"""Find the SSL YouTube channel's live / upcoming streams and write live.json.
 
-{"id": "<videoId>", "live": true/false, "t": "<title>", "at": "<UTC time checked>"}
-live=false with an id means a scheduled (upcoming) stream. Never fails the caller.
+The channel often runs several streams at once (one per commentary language), so all of them are listed:
+{"streams":[{"id":..,"t":title,"live":bool,"start":epoch|null,"lang":"en|pt|hu|es|..."}], "id":..,"live":..}
+"id"/"live" mirror the best English (else first) stream for older app versions. Never fails the caller.
 """
 import json, re, os, datetime, urllib.request, html
 
 CH = "UCslTs2hZG7d08VYH_mLGSUg"
 OUT = os.path.join(os.path.dirname(__file__), "..", "live.json")
+H = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131 Safari/537.36", "Accept-Language": "en-US,en", "Cookie": "CONSENT=YES+1; SOCS=CAI"}
+
+def lang_of(t):
+    s = " " + t.lower() + " "
+    if re.search(r"\bhun\b|döntő|\bnap\b", s): return "hu"
+    if re.search(r"\bdia\b|fase de|ao vivo|português|\bpt\b|regata", s): return "pt"
+    if re.search(r"\bdía\b|en directo|español|\bes\b", s): return "es"
+    if re.search(r"\bjour\b|français|\bfr\b", s): return "fr"
+    if re.search(r"\btag\b|deutsch|\bde\b", s): return "de"
+    return "en"
+
+def walk(o, out):
+    if isinstance(o, dict):
+        if "videoRenderer" in o:
+            out.append(o["videoRenderer"])
+        for v in o.values(): walk(v, out)
+    elif isinstance(o, list):
+        for v in o: walk(v, out)
 
 def main():
-    old = {}
-    try: old = json.load(open(OUT))
-    except Exception: pass
-    out = {"id": "", "live": False, "t": ""}
     try:
-        req = urllib.request.Request(f"https://www.youtube.com/channel/{CH}/live",
-                                     headers={"User-Agent": "Mozilla/5.0", "Accept-Language": "en", "Cookie": "CONSENT=YES+1"})
-        s = urllib.request.urlopen(req, timeout=20).read().decode("utf-8", "replace")
-        m = re.search(r'<link rel="canonical" href="https://www\.youtube\.com/watch\?v=([\w-]{6,20})"', s)
-        if m:
-            out["id"] = m.group(1)
-            out["live"] = bool(re.search(r'"isLiveNow"\s*:\s*true', s) or re.search(r'"isLive"\s*:\s*true', s))
-            t = re.search(r'<meta name="title" content="([^"]*)"', s)
-            out["t"] = html.unescape(t.group(1)) if t else ""
+        s = urllib.request.urlopen(urllib.request.Request(f"https://www.youtube.com/channel/{CH}/streams", headers=H), timeout=25).read().decode("utf-8", "replace")
+        m = re.search(r"var ytInitialData = (\{.*?\});</script>", s, re.S)
+        data = json.loads(m.group(1)) if m else {}
     except Exception as e:
-        print("live: could not check:", e); return
-    if {k: old.get(k) for k in ("id", "live")} != {k: out[k] for k in ("id", "live")}:
+        print("live: could not read channel:", e); return
+    vids = []; walk(data, vids)
+    streams = []
+    now = datetime.datetime.utcnow().timestamp()
+    for v in vids:
+        vid = v.get("videoId"); title = "".join(r.get("text", "") for r in (v.get("title", {}).get("runs") or []))
+        styles = json.dumps(v.get("thumbnailOverlays", [])) + json.dumps(v.get("badges", []))
+        live = '"LIVE"' in styles or "BADGE_STYLE_TYPE_LIVE_NOW" in styles
+        up = v.get("upcomingEventData", {}).get("startTime")
+        if not vid or not (live or up): continue
+        start = int(up) if up else None
+        if start and start - now > 36 * 3600: continue
+        streams.append({"id": vid, "t": html.unescape(title), "live": live, "start": start, "lang": lang_of(title)})
+    streams.sort(key=lambda x: (not x["live"], x["start"] or 0))
+    best = next((x for x in streams if x["lang"] == "en"), streams[0] if streams else None)
+    out = {"streams": streams, "id": best["id"] if best else "", "live": bool(best and best["live"]), "t": best["t"] if best else ""}
+    try: old = json.load(open(OUT))
+    except Exception: old = {}
+    if [(x["id"], x["live"]) for x in old.get("streams", [])] != [(x["id"], x["live"]) for x in streams]:
         out["at"] = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
         json.dump(out, open(OUT, "w"), ensure_ascii=False)
-        print("live: changed ->", out)
+        print("live: changed ->", json.dumps(out, ensure_ascii=False)[:600])
     else:
-        print("live: unchanged", out["id"], out["live"])
+        print("live: unchanged", len(streams), "streams")
 
 if __name__ == "__main__":
     main()

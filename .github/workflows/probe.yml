@@ -1,5 +1,7 @@
 name: Temporary probe
 on: workflow_dispatch
+permissions:
+  contents: write
 jobs:
   p:
     runs-on: ubuntu-latest
@@ -10,6 +12,7 @@ jobs:
       - run: |
           pip install -q playwright && python -m playwright install --with-deps chromium >/dev/null
           python scripts/build_extras.py
+          python scripts/live_video.py; cat live.json; echo
           cat live.json; python -c "import json;t=json.load(open('tracking.json'));print({k:{g:list(v.items())[:2] for g,v in d.items()} for k,d in t.items()})"
           (python -m http.server 8000 >/dev/null 2>&1 &) ; sleep 2
           cat > s.py <<'PY'
@@ -22,7 +25,7 @@ jobs:
               pg=await ctx.new_page();await pg.goto("http://localhost:8000/index.html#home");await pg.wait_for_timeout(3000)
               n=await pg.evaluate("[...document.querySelectorAll('[data-trk]')].length");print("trk",n)
               if n:
-                await pg.evaluate("document.querySelector('[data-trk]').click()");await pg.wait_for_timeout(15000)
+                await pg.evaluate("document.querySelector('[data-trk]').click()");await pg.wait_for_timeout(20000)
                 print("url after",pg.url);await pg.screenshot(path="trk.png")
                 await pg.keyboard.press("Escape")
               await pg.goto("http://localhost:8000/index.html#home");await pg.wait_for_timeout(2000)
@@ -34,5 +37,5 @@ jobs:
           asyncio.run(main())
           PY
           python s.py
-      - uses: actions/upload-artifact@v4
-        with: { name: shots, path: "*.png" }
+      - run: |
+          mkdir /tmp/sh && cp *.png /tmp/sh/ && cd /tmp/sh && git init -q && git checkout -q -b shots && git add . && git -c user.name=bot -c user.email=bot@x commit -qm shots && git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" shots

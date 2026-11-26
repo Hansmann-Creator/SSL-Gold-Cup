@@ -736,3 +736,17 @@ td.t .bdg,td.t>.tag{margin-inline-start:30px}
 #nxc{min-width:8.2em;align-items:center}#nxc small{justify-content:center}
 .vframe.nolive{display:grid;place-items:center;text-align:center;background:linear-gradient(135deg,#1a4486,#0a5590);color:#fff}
 .vframe.nolive b{display:block;font-size:20px;margin-bottom:6px}.vframe.nolive span{font-size:14px;opacity:.85}
+.wxhero{display:block;padding:14px}
+.wxtop{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px}
+.wxbig{display:flex;flex-direction:column;align-items:center}.wxbig b{font-size:52px;line-height:1}.wxbig em{font-style:normal;font-size:13px;color:var(--mute);margin-top:4px;white-space:nowrap}
+.wxgust{display:flex;flex-direction:column;align-items:center;background:color-mix(in srgb,var(--gold) 14%,transparent);border-radius:14px;padding:8px 12px}
+.wxgust small{font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.05em}.wxgust b{font-size:26px;line-height:1.1;color:var(--gold)}.wxgust span{font-size:11px;color:var(--mute)}
+.wxtiles{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px}
+.wxtiles>div{background:color-mix(in srgb,var(--ink) 6%,transparent);border-radius:12px;padding:8px 6px;text-align:center}
+.wxtiles small{display:block;font-size:11px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.wxtiles b{font-size:16px}.wxtiles i{font-style:normal;font-size:10px;font-weight:400;color:var(--mute)}
+@media(max-width:360px){.wxtiles{grid-template-columns:repeat(2,1fr)}.wxtop{grid-template-columns:auto 1fr}.wxgust{grid-column:1/-1;flex-direction:row;gap:8px;justify-content:center}}
+.racenow{display:inline-flex;align-items:center;gap:2px;color:#fff;background:var(--live);border-radius:99px;padding:2px 9px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}.racenow .dot.live{background:#fff}
+.wic{width:18px;height:18px;display:block;margin:0 auto 3px;color:var(--mute)}
+.wxhd .wic{width:15px;height:15px;margin:0}
+.wxtiles>div>b{display:block;white-space:nowrap}
+.lvlang{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 0}.lvlang button{border:var(--bd);background:var(--card);color:var(--ink);border-radius:99px;padding:5px 12px;font-weight:700;font-size:13px}.lvlang button.on{background:var(--acc);color:var(--accInk);border-color:transparent}
