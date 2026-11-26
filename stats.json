@@ -1,0 +1,349 @@
+{
+  "success": true,
+  "count": 4,
+  "event_id": "102233",
+  "race_id": "103496",
+  "generated_at": "2026-11-15T16:19:05.266Z",
+  "race_summary": {
+    "name": "Race 5 - Group H",
+    "sport": "Sailing",
+    "start_time": "2026-11-15T15:25:00Z",
+    "end_time": "2026-11-15T16:17:56Z",
+    "analyse_uk": "<p><strong>URUGUAY</strong> won <em>Race 5 - Group H</em> in <strong>38m14s</strong>, finishing <strong>27 seconds</strong> ahead of the fleet. URUGUAY maintained consistent control, spending <strong>50%</strong> of the race at the head of the fleet.</p><h3>Key Race Moments</h3><ul><li>Lead change at <strong>MARK 1</strong>: <strong>ANTIGUA &amp; BARBUDA</strong> overtook <strong>PUERTO RICO</strong> to claim first place.</li><li>Lead change at <strong>MARK 3</strong>: <strong>URUGUAY</strong> overtook <strong>ANTIGUA &amp; BARBUDA</strong> to claim first place.</li></ul><h3>Determining Factors</h3><ul><li><strong>Tactical balance:</strong> URUGUAY executed <strong>9</strong> maneuvers, on par with the fleet average (11), prioritizing boat speed.</li><li><strong>Peak speed:</strong> <strong>13.6 knots</strong> reached during the race.</li><li><strong>Course efficiency:</strong> URUGUAY covered <strong>5.8 nm</strong>, one of the tightest routes in the fleet (fleet max: 6.0 nm).</li><li><strong>Wind conditions:</strong> Stable wind from the <strong>S (168°)</strong> with minimal variation (max <strong>2°</strong>).</li></ul><h3>Final Standings</h3><ol><li><strong>URUGUAY</strong> — 50% time in lead, 9 maneuvers</li><li><strong>PUERTO RICO</strong> — 8% time in lead, 12 maneuvers</li><li><strong>ANTIGUA &amp; BARBUDA</strong> — 41% time in lead, 13 maneuvers</li><li><strong>VENEZUELA</strong> — 0% time in lead, 11 maneuvers</li></ol>",
+    "analyse_fr": "<p><strong>URUGUAY</strong> remporte <em>Race 5 - Group H</em> en <strong>38m14s</strong>, terminant <strong>27 secondes</strong> devant la flotte. URUGUAY a maintenu un contrôle constant, passant <strong>50%</strong> de la course en tête de flotte.</p><h3>Moments Clefs</h3><ul><li>Changement de tête à <strong>MARK 1</strong>&nbsp;: <strong>ANTIGUA &amp; BARBUDA</strong> a dépassé <strong>PUERTO RICO</strong> pour prendre la première place.</li><li>Changement de tête à <strong>MARK 3</strong>&nbsp;: <strong>URUGUAY</strong> a dépassé <strong>ANTIGUA &amp; BARBUDA</strong> pour prendre la première place.</li></ul><h3>Facteurs Déterminants</h3><ul><li><strong>Équilibre tactique&nbsp;:</strong> URUGUAY a effectué <strong>9</strong> manœuvres, dans la moyenne de la flotte (11), en misant sur la vitesse.</li><li><strong>Vitesse de pointe&nbsp;:</strong> <strong>13.6&nbsp;nœuds</strong> atteints pendant la course.</li><li><strong>Efficacité de parcours&nbsp;:</strong> URUGUAY a parcouru <strong>5.8&nbsp;nm</strong>, l'un des tracés les plus directs de la flotte (max flotte&nbsp;: 6.0&nbsp;nm).</li><li><strong>Conditions de vent&nbsp;:</strong> Vent stable de <strong>S (168°)</strong> avec une variation minimale (max <strong>2°</strong>).</li></ul><h3>Classement Final</h3><ol><li><strong>URUGUAY</strong> — 50% de temps en tête, 9&nbsp;manœuvres</li><li><strong>PUERTO RICO</strong> — 8% de temps en tête, 12&nbsp;manœuvres</li><li><strong>ANTIGUA &amp; BARBUDA</strong> — 41% de temps en tête, 13&nbsp;manœuvres</li><li><strong>VENEZUELA</strong> — 0% de temps en tête, 11&nbsp;manœuvres</li></ol>"
+  },
+  "data": [
+    {
+      "actor_id": "10365361",
+      "start_number": "46",
+      "name": "URUGUAY",
+      "nationality": "URU",
+      "race_id": "103496",
+      "time_first_seconds": 1152,
+      "time_first_percentage": 50.20078133681369,
+      "tack_count": 9,
+      "distance_km": 10.748466946000212,
+      "avg_speed": 4.64911053179653,
+      "max_speed": 6.977059841156006,
+      "final_rank": 1,
+      "extra_infos": {
+        "Legs": {
+          "340342": {
+            "AvgSpeed": 3.982,
+            "DistanceKm": 0.026,
+            "MaxSpeed": 4.221,
+            "Maneuvers": 0,
+            "AvgHeading": 130,
+            "AvgHeadingLeft": 130,
+            "AvgSpeedLeft": 4.017,
+            "DurationLeftSeconds": 6,
+            "AvgHeadingRight": null,
+            "AvgSpeedRight": null,
+            "DurationRightSeconds": 0
+          },
+          "340343": {
+            "AvgSpeed": 4.09,
+            "DistanceKm": 2.626,
+            "MaxSpeed": 4.754,
+            "Maneuvers": 2,
+            "AvgHeading": 174.7,
+            "AvgHeadingLeft": 141.2,
+            "AvgSpeedLeft": 3.777,
+            "DurationLeftSeconds": 300,
+            "AvgHeadingRight": 203.8,
+            "AvgSpeedRight": 4.367,
+            "DurationRightSeconds": 340
+          },
+          "340344": {
+            "AvgSpeed": 5.429,
+            "DistanceKm": 2.461,
+            "MaxSpeed": 6.865,
+            "Maneuvers": 2,
+            "AvgHeading": 1.1,
+            "AvgHeadingLeft": 15.1,
+            "AvgSpeedLeft": 5.338,
+            "DurationLeftSeconds": 338,
+            "AvgHeadingRight": 313,
+            "AvgSpeedRight": 5.731,
+            "DurationRightSeconds": 110
+          },
+          "340345": {
+            "AvgSpeed": 3.859,
+            "DistanceKm": 2.741,
+            "MaxSpeed": 4.435,
+            "Maneuvers": 3,
+            "AvgHeading": 164.7,
+            "AvgHeadingLeft": 135.1,
+            "AvgSpeedLeft": 3.741,
+            "DurationLeftSeconds": 373,
+            "AvgHeadingRight": 197.8,
+            "AvgSpeedRight": 3.992,
+            "DurationRightSeconds": 332
+          },
+          "340346": {
+            "AvgSpeed": 5.808,
+            "DistanceKm": 2.88,
+            "MaxSpeed": 6.977,
+            "Maneuvers": 2,
+            "AvgHeading": 348.7,
+            "AvgHeadingLeft": 21.4,
+            "AvgSpeedLeft": 5.439,
+            "DurationLeftSeconds": 243,
+            "AvgHeadingRight": 317.1,
+            "AvgSpeedRight": 6.179,
+            "DurationRightSeconds": 248
+          }
+        }
+      }
+    },
+    {
+      "actor_id": "10365364",
+      "start_number": "45",
+      "name": "PUERTO RICO",
+      "nationality": "PUR",
+      "race_id": "103496",
+      "time_first_seconds": 179,
+      "time_first_percentage": 7.710804344585938,
+      "tack_count": 12,
+      "distance_km": 10.717865795230002,
+      "avg_speed": 4.583661210941311,
+      "max_speed": 7.285892963409424,
+      "final_rank": 2,
+      "extra_infos": {
+        "Legs": {
+          "340342": {
+            "AvgSpeed": 3.985,
+            "DistanceKm": 0.016,
+            "MaxSpeed": 4.109,
+            "Maneuvers": 0,
+            "AvgHeading": 132.1,
+            "AvgHeadingLeft": 132.1,
+            "AvgSpeedLeft": 4.028,
+            "DurationLeftSeconds": 4,
+            "AvgHeadingRight": null,
+            "AvgSpeedRight": null,
+            "DurationRightSeconds": 0
+          },
+          "340343": {
+            "AvgSpeed": 3.908,
+            "DistanceKm": 2.639,
+            "MaxSpeed": 4.627,
+            "Maneuvers": 3,
+            "AvgHeading": 177.4,
+            "AvgHeadingLeft": 131.9,
+            "AvgSpeedLeft": 3.639,
+            "DurationLeftSeconds": 221,
+            "AvgHeadingRight": 198.3,
+            "AvgSpeedRight": 4.041,
+            "DurationRightSeconds": 445
+          },
+          "340344": {
+            "AvgSpeed": 5.27,
+            "DistanceKm": 2.418,
+            "MaxSpeed": 6.529,
+            "Maneuvers": 2,
+            "AvgHeading": 358.2,
+            "AvgHeadingLeft": 14.4,
+            "AvgSpeedLeft": 5.229,
+            "DurationLeftSeconds": 317,
+            "AvgHeadingRight": 319.6,
+            "AvgSpeedRight": 5.373,
+            "DurationRightSeconds": 140
+          },
+          "340345": {
+            "AvgSpeed": 3.898,
+            "DistanceKm": 2.774,
+            "MaxSpeed": 4.46,
+            "Maneuvers": 5,
+            "AvgHeading": 162,
+            "AvgHeadingLeft": 136.9,
+            "AvgSpeedLeft": 3.825,
+            "DurationLeftSeconds": 414,
+            "AvgHeadingRight": 201.3,
+            "AvgSpeedRight": 4.003,
+            "DurationRightSeconds": 288
+          },
+          "340346": {
+            "AvgSpeed": 5.853,
+            "DistanceKm": 2.855,
+            "MaxSpeed": 7.286,
+            "Maneuvers": 2,
+            "AvgHeading": 348.5,
+            "AvgHeadingLeft": 19.8,
+            "AvgSpeedLeft": 5.563,
+            "DurationLeftSeconds": 244,
+            "AvgHeadingRight": 316.9,
+            "AvgSpeedRight": 6.158,
+            "DurationRightSeconds": 239
+          }
+        }
+      }
+    },
+    {
+      "actor_id": "10365363",
+      "start_number": "68",
+      "name": "ANTIGUA & BARBUDA",
+      "nationality": "ANT",
+      "race_id": "103496",
+      "time_first_seconds": 958,
+      "time_first_percentage": 41.18285056686604,
+      "tack_count": 13,
+      "distance_km": 11.079393593418974,
+      "avg_speed": 4.728100095542601,
+      "max_speed": 7.979738712310791,
+      "final_rank": 3,
+      "extra_infos": {
+        "Legs": {
+          "340342": {
+            "AvgSpeed": 4.631,
+            "DistanceKm": 0.023,
+            "MaxSpeed": 4.692,
+            "Maneuvers": 0,
+            "AvgHeading": 124.6,
+            "AvgHeadingLeft": 124.6,
+            "AvgSpeedLeft": 4.653,
+            "DurationLeftSeconds": 5,
+            "AvgHeadingRight": null,
+            "AvgSpeedRight": null,
+            "DurationRightSeconds": 0
+          },
+          "340343": {
+            "AvgSpeed": 4.217,
+            "DistanceKm": 2.664,
+            "MaxSpeed": 5.018,
+            "Maneuvers": 2,
+            "AvgHeading": 178,
+            "AvgHeadingLeft": 142.1,
+            "AvgSpeedLeft": 3.887,
+            "DurationLeftSeconds": 281,
+            "AvgHeadingRight": 206.2,
+            "AvgSpeedRight": 4.481,
+            "DurationRightSeconds": 348
+          },
+          "340344": {
+            "AvgSpeed": 5.505,
+            "DistanceKm": 2.439,
+            "MaxSpeed": 7.1,
+            "Maneuvers": 2,
+            "AvgHeading": 358.9,
+            "AvgHeadingLeft": 15,
+            "AvgSpeedLeft": 5.424,
+            "DurationLeftSeconds": 313,
+            "AvgHeadingRight": 315.6,
+            "AvgSpeedRight": 5.718,
+            "DurationRightSeconds": 125
+          },
+          "340345": {
+            "AvgSpeed": 3.776,
+            "DistanceKm": 3.036,
+            "MaxSpeed": 4.827,
+            "Maneuvers": 6,
+            "AvgHeading": 165.6,
+            "AvgHeadingLeft": 132,
+            "AvgSpeedLeft": 3.919,
+            "DurationLeftSeconds": 444,
+            "AvgHeadingRight": 212.3,
+            "AvgSpeedRight": 3.591,
+            "DurationRightSeconds": 347
+          },
+          "340346": {
+            "AvgSpeed": 6.32,
+            "DistanceKm": 2.9,
+            "MaxSpeed": 7.98,
+            "Maneuvers": 3,
+            "AvgHeading": 347.8,
+            "AvgHeadingLeft": 21.2,
+            "AvgSpeedLeft": 6.086,
+            "DurationLeftSeconds": 225,
+            "AvgHeadingRight": 315.4,
+            "AvgSpeedRight": 6.554,
+            "DurationRightSeconds": 232
+          }
+        }
+      }
+    },
+    {
+      "actor_id": "10365362",
+      "start_number": "57",
+      "name": "VENEZUELA",
+      "nationality": "VEN",
+      "race_id": "103496",
+      "time_first_seconds": 0,
+      "time_first_percentage": 0,
+      "tack_count": 11,
+      "distance_km": 11.184061169411796,
+      "avg_speed": 4.638888248592902,
+      "max_speed": 7.872016906738281,
+      "final_rank": 4,
+      "extra_infos": {
+        "Legs": {
+          "340342": {
+            "AvgSpeed": 4.462,
+            "DistanceKm": 0.05,
+            "MaxSpeed": 4.629,
+            "Maneuvers": 0,
+            "AvgHeading": 124.2,
+            "AvgHeadingLeft": 124.2,
+            "AvgSpeedLeft": 4.465,
+            "DurationLeftSeconds": 11,
+            "AvgHeadingRight": null,
+            "AvgSpeedRight": null,
+            "DurationRightSeconds": 0
+          },
+          "340343": {
+            "AvgSpeed": 3.96,
+            "DistanceKm": 2.926,
+            "MaxSpeed": 4.483,
+            "Maneuvers": 4,
+            "AvgHeading": 176,
+            "AvgHeadingLeft": 126.4,
+            "AvgSpeedLeft": 3.829,
+            "DurationLeftSeconds": 292,
+            "AvgHeadingRight": 206.7,
+            "AvgSpeedRight": 4.048,
+            "DurationRightSeconds": 437
+          },
+          "340344": {
+            "AvgSpeed": 5.22,
+            "DistanceKm": 2.445,
+            "MaxSpeed": 6.486,
+            "Maneuvers": 2,
+            "AvgHeading": 0.6,
+            "AvgHeadingLeft": 16.4,
+            "AvgSpeedLeft": 5.086,
+            "DurationLeftSeconds": 333,
+            "AvgHeadingRight": 318.8,
+            "AvgSpeedRight": 5.567,
+            "DurationRightSeconds": 133
+          },
+          "340345": {
+            "AvgSpeed": 4,
+            "DistanceKm": 2.808,
+            "MaxSpeed": 4.543,
+            "Maneuvers": 3,
+            "AvgHeading": 164.3,
+            "AvgHeadingLeft": 133.5,
+            "AvgSpeedLeft": 3.89,
+            "DurationLeftSeconds": 374,
+            "AvgHeadingRight": 200.4,
+            "AvgSpeedRight": 4.13,
+            "DurationRightSeconds": 319
+          },
+          "340346": {
+            "AvgSpeed": 6.015,
+            "DistanceKm": 2.939,
+            "MaxSpeed": 7.872,
+            "Maneuvers": 3,
+            "AvgHeading": 350.6,
+            "AvgHeadingLeft": 21.9,
+            "AvgSpeedLeft": 5.483,
+            "DurationLeftSeconds": 259,
+            "AvgHeadingRight": 314.8,
+            "AvgSpeedRight": 6.639,
+            "DurationRightSeconds": 226
+          }
+        }
+      }
+    }
+  ]
+}

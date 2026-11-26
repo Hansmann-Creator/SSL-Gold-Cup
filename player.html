@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GeoRacing Player - Live race tracking on interactive map">
+    <title>GeoRacing Player</title>
+    
+    <!-- Leaflet CSS (local, patched: _round() removed from latLngToLayerPoint for sub-pixel marker positioning) -->
+    <link rel="stylesheet" href="libs_player/leaflet.css"/>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css?v=20261029123804">
+
+    <!-- Google Analytics (GA4, property "Player Georacing - GA4"). Loaded ONLY on the
+         production host, so local and test deployments never pollute the statistics.
+         No personal data is sent: the page URL only carries event/race identifiers. -->
+    <script>
+        if (window.location.hostname === 'player.georacing.com') {
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            // Which race is being watched: the page path is always "/", so the event and race
+            // ids travel as EVENT PARAMETERS on every hit (register them once in GA4 as custom
+            // dimensions "event_id" / "race_id" to break the reports down), and the page title
+            // reads "event/race name" so the standard "Pages and screens" report tells them
+            // apart without any setup. Ids are whitelisted to digits, the name is a URL label.
+            const gaParams = new URLSearchParams(window.location.search);
+            const gaEvent = /^\d+$/.test(gaParams.get('event') || '') ? gaParams.get('event') : '';
+            const gaRace = /^\d+$/.test(gaParams.get('race') || '') ? gaParams.get('race') : '';
+            const gaName = (gaParams.get('name') || '').slice(0, 80);
+            const gaConfig = {};
+            if (gaEvent) gaConfig.event_id = gaEvent;
+            if (gaRace) gaConfig.race_id = gaRace;
+            if (gaEvent || gaRace) gaConfig.page_title = `${gaEvent}/${gaRace}${gaName ? ' ' + gaName : ''}`;
+            gtag('config', 'G-Q21MC9X8L3', gaConfig);
+            const gaScript = document.createElement('script');
+            gaScript.async = true;
+            gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-Q21MC9X8L3';
+            document.head.appendChild(gaScript);
+        }
+    </script>
+</head>
+<body>
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <button class="mobile-nav__btn mobile-nav__btn--active" data-view="map">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span data-i18n="mobile.map">MAP</span>
+        </button>
+        <button class="mobile-nav__btn" data-view="ranking">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="8.5" cy="7" r="4"></circle>
+                <polyline points="17 11 19 13 23 9"></polyline>
+            </svg>
+            <span data-i18n="mobile.ranking">RANKING</span>
+        </button>
+        <!-- Groups: revealed by setupGroupsTab() only on a race that carries groups -->
+        <button class="mobile-nav__btn" data-view="groups" id="mobileNavGroups" hidden>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <span data-i18n="tab.groups">GROUPS</span>
+        </button>
+        <button class="mobile-nav__btn" data-view="timings">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span data-i18n="mobile.timings">TIMINGS</span>
+        </button>
+        <button class="mobile-nav__btn" data-view="favorites">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span data-i18n="tab.favorites">FAVORIS</span>
+        </button>
+        <button class="mobile-nav__btn" data-view="options">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 00.12-.61l-1.92-3.32a.49.49 0 00-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 00-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.49.49 0 00-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 00-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"></path>
+            </svg>
+            <span data-i18n="mobile.options">OPTIONS</span>
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Sidebar Column (sidebar + sponsors stacked vertically) -->
+        <!-- Sidebar reopen tab (visible when sidebar is hidden) -->
+        <div class="sidebar-tab" id="sidebarTab" style="display:none;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 6 15 12 9 18"></polyline></svg>
+        </div>
+        <div class="sidebar-column" id="sidebarColumn">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <!-- Event Header -->
+            <div class="sidebar__header" id="sidebarHeader">
+                <img class="sidebar__header-logo" id="sidebarLogo" src="" alt="Event Logo">
+                <div class="sidebar__header-info">
+                    <h2 class="sidebar__header-event" id="sidebarEventName"></h2>
+                    <select class="sidebar__header-race-select" id="raceSelect" style="display:none;"></select>
+                    <h3 class="sidebar__header-title" id="sidebarRaceName"></h3>
+                    <p class="sidebar__header-date" id="sidebarRaceDate"></p>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="sidebar__tabs">
+                <button class="sidebar__tab sidebar__tab--active" data-tab="ranking">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+                    </svg>
+                    <span data-i18n="tab.ranking">RANKING</span>
+                </button>
+                <!-- Groups tab: shown only when the race carries groups (cycling / with_groups) -->
+                <button class="sidebar__tab" data-tab="groups" id="tabGroups" hidden>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    <span data-i18n="tab.groups">GROUPS</span>
+                </button>
+                <button class="sidebar__tab" data-tab="timings">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <span data-i18n="tab.timings">TIMINGS</span>
+                </button>
+                <button class="sidebar__tab" data-tab="favorites">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    <span data-i18n="tab.favorites">FAVORIS</span>
+                </button>
+                <button class="sidebar__tab" data-tab="options">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                        <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 00.12-.61l-1.92-3.32a.49.49 0 00-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 00-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.49.49 0 00-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 00-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"></path>
+                    </svg>
+                    <span data-i18n="tab.options">OPTIONS</span>
+                </button>
+            </div>
+
+            <!-- Category Filter Bar (populated dynamically from categories.json) -->
+            <div class="category-bar" id="categoryBar" style="display:none;"></div>
+            <!-- Rankings mode: Stage | Virtual general (shown only with a general_ranking.json + a route) -->
+            <div class="category-bar" id="rankingModeBar" style="display:none;"></div>
+
+            <!-- Tab Content -->
+            <div class="sidebar__content">
+                <!-- Ranking Tab -->
+                <div class="tab-panel tab-panel--active" id="rankingPanel">
+                    <div class="ranking-list__header">
+                        <span class="ranking-list__col ranking-list__col--chrono" style="display:none;" title="Référent chrono">⏱</span>
+                        <span class="ranking-list__col ranking-list__col--rank" data-i18n="ranking.colRank">Rang</span>
+                        <span class="ranking-list__col ranking-list__col--flag"></span>
+                        <span class="ranking-list__col ranking-list__col--startNum">#</span>
+                        <span class="ranking-list__col ranking-list__col--name" data-i18n="ranking.colName">Nom</span>
+                        <span class="ranking-list__col ranking-list__col--dist" data-i18n="ranking.colDist">Dist</span>
+                        <span class="ranking-list__col ranking-list__col--speed" data-i18n="ranking.colSpeed">Vitesse</span>
+                    </div>
+                    <div class="ranking-list" id="rankingList">
+                        <!-- Ranking items will be inserted here -->
+                    </div>
+                    <div class="sidebar__search">
+                        <input type="text" id="searchInput" placeholder="Quick search" class="search-input" data-i18n-placeholder="search.placeholder">
+                        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Groups Tab -->
+                <div class="tab-panel" id="groupsPanel">
+                    <div class="ranking-list__header groups-list__header">
+                        <span class="groups-list__col groups-list__col--rank" data-i18n="ranking.colRank">Rang</span>
+                        <span class="groups-list__col groups-list__col--name" data-i18n="groups.colName">Groupe</span>
+                        <span class="groups-list__col groups-list__col--count" data-i18n="groups.colRiders">Coureurs</span>
+                        <span class="groups-list__col groups-list__col--gapt" data-i18n="groups.colGapTime">Écart</span>
+                        <span class="groups-list__col groups-list__col--gapd" data-i18n="groups.colGapDist">Dist</span>
+                    </div>
+                    <div class="ranking-list" id="groupsList">
+                        <!-- Group rows are inserted here -->
+                    </div>
+                </div>
+
+                <!-- Timings Tab -->
+                <div class="tab-panel" id="timingsPanel">
+                    <div class="timings__selector">
+                        <div class="mark-navigator">
+                            <button class="mark-navigator__arrow mark-navigator__arrow--left" id="markPrev" title="Previous mark">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                            </button>
+                            <span class="mark-navigator__name" id="markName">---</span>
+                            <button class="mark-navigator__stats" id="btnSplitStats" title="Statistiques" style="display:none;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="12" width="4" height="9"></rect>
+                                    <rect x="10" y="6" width="4" height="15"></rect>
+                                    <rect x="17" y="2" width="4" height="19"></rect>
+                                </svg>
+                            </button>
+                            <button class="mark-navigator__arrow mark-navigator__arrow--right" id="markNext" title="Next mark">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 6 15 12 9 18"></polyline></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="timings-list__header" id="timingsHeader">
+                        <span class="timings-list__col timings-list__col--rank" data-i18n="ranking.colRank">Rang</span>
+                        <span class="timings-list__col timings-list__col--evo">&Delta;</span>
+                        <span class="timings-list__col timings-list__col--flag"></span>
+                        <span class="timings-list__col timings-list__col--number">#</span>
+                        <span class="timings-list__col timings-list__col--name" data-i18n="ranking.colName">Nom</span>
+                        <span class="timings-list__col timings-list__col--time" data-i18n="timings.colTime">Temps</span>
+                    </div>
+                    <div class="timings-list" id="timingsList">
+                        <!-- Timing items will be inserted here -->
+                    </div>
+                    <div class="sidebar__search">
+                        <input type="text" id="timingsSearchInput" placeholder="Quick search" class="search-input" data-i18n-placeholder="search.placeholder">
+                        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Favorites Tab -->
+                <div class="tab-panel" id="favoritesPanel">
+                    <div class="ranking-list__header" id="favoritesHeader">
+                    </div>
+                    <div class="ranking-list" id="favoritesList">
+                    </div>
+                </div>
+
+                <!-- Options Tab -->
+                <div class="tab-panel" id="optionsPanel">
+                    <div class="options">
+
+                        <!-- ===== INTERFACE GROUP ===== -->
+                        <div class="options__group-title" data-i18n="options.group.interface">Interface</div>
+
+                        <div class="options__section">
+                            <label class="options__label" data-i18n="options.language">Language</label>
+                            <select id="languageSelect" class="options__select">
+                                <option value="fr">Français</option>
+                                <option value="en">English</option>
+                                <option value="es">Español</option>
+                                <option value="it">Italiano</option>
+                                <option value="pt">Português</option>
+                            </select>
+                        </div>
+
+                        <div class="options__section">
+                            <label class="options__label" data-i18n="options.theme">Theme</label>
+                            <div class="options__toggle">
+                                <button class="toggle__btn" data-theme="dark" data-i18n="options.themeDark">DARK</button>
+                                <button class="toggle__btn" data-theme="light" data-i18n="options.themeLight">LIGHT</button>
+                            </div>
+                        </div>
+
+                        <!-- ===== UNITS GROUP ===== -->
+                        <div class="options__group-title" data-i18n="options.group.units">Units</div>
+
+                        <div class="options__section">
+                            <label class="options__label" data-i18n="options.speedUnit">Speed Unit</label>
+                            <div class="options__toggle">
+                                <button class="toggle__btn toggle__btn--active" data-unit="kmh">km/h</button>
+                                <button class="toggle__btn" data-unit="knots">knots</button>
+                                <button class="toggle__btn" data-unit="mph">mph</button>
+                            </div>
+                        </div>
+
+                        <div class="options__section">
+                            <label class="options__label" data-i18n="options.distanceUnit">Distance Unit</label>
+                            <div class="options__toggle">
+                                <button class="toggle__btn toggle__btn--active" data-distance-unit="meters">m/km</button>
+                                <button class="toggle__btn" data-distance-unit="miles_t">nm</button>
+                                <button class="toggle__btn" data-distance-unit="miles">mi</button>
+                            </div>
+                        </div>
+                        <div class="options__section">
+                            <label class="options__label" data-i18n="options.coordFormat">Lat / long format</label>
+                            <div class="options__toggle">
+                                <button class="toggle__btn toggle__btn--active" data-coord-format="decimal">DD.ddddd°</button>
+                                <button class="toggle__btn" data-coord-format="ddm">DD°MM.mmm'</button>
+                            </div>
+                        </div>
+
+                        <!-- ===== VIRTUALITIES GROUP ===== -->
+                        <div class="options__group-title" data-i18n="options.group.virtualities">Virtualités</div>
+
+                        <div class="options__section options__section--checkboxes">
+                            <div class="options__checkboxes">
+                                <div class="options__checkbox-row">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="checkbox-input" data-virtuality="marks_name" checked>
+                                        <span data-i18n="options.virtuality.marksName">Noms marques</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="checkbox-input" data-virtuality="circles" checked>
+                                        <span data-i18n="options.virtuality.circles">Cercles</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="checkbox-input" data-virtuality="legline" checked>
+                                        <span data-i18n="options.virtuality.legline">Ligne bord</span>
+                                    </label>
+                                </div>
+                                <div class="options__checkbox-row">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="checkbox-input" data-virtuality="gates" checked>
+                                        <span data-i18n="options.virtuality.gates">Portes</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="checkbox-input" data-virtuality="laylines" checked>
+                                        <span data-i18n="options.virtuality.laylines">Laylines</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="checkbox-input" data-virtuality="headline" checked>
+                                        <span data-i18n="options.virtuality.headline">Headline</span>
+                                    </label>
+                                </div>
+                                <div class="options__checkbox-row">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="checkbox-input" data-virtuality="grid">
+                                        <span data-i18n="options.virtuality.grid">Grille</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== MAP GROUP ===== -->
+                        <div class="options__group-title" data-i18n="options.group.map">Map</div>
+
+                        <div class="options__section">
+                            <label class="options__label" data-i18n="options.autoCenter">Auto Center</label>
+                            <select id="autoCenterSelect" class="options__select">
+                                <option value="selected" data-i18n="options.autoCenter.selected">Sélectionné</option>
+                                <option value="top1">Top 1</option>
+                                <option value="top3">Top 3</option>
+                                <option value="top5">Top 5</option>
+                                <option value="top10">Top 10</option>
+                                <option value="all">All</option>
+                            </select>
+                        </div>
+
+                        <div class="options__section" id="optionTileLayerSection">
+                            <label class="options__label" data-i18n="options.tileLayer">Map Layer</label>
+                            <div class="options__toggle" id="optionTileToggle">
+                                <!-- Tile layer buttons built dynamically by UIController.buildOptionsTileButtons() -->
+                            </div>
+                        </div>
+
+                        <!-- Wind Rotation Section (Sailing only) — inside Map group -->
+                        <div class="options__section options__section--sailing" id="optionWindRotation" style="display:none;">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="chkWindRotation" class="checkbox-input">
+                                <span data-i18n="options.windRotation">Orienter la carte dans le vent</span>
+                            </label>
+                        </div>
+
+                        <!-- Mapmatch Section (only when track_prod.xml + use_calculator=1) -->
+                        <div class="options__section" id="optionMapmatch" style="display:none;">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="chkMapmatch" class="checkbox-input">
+                                <span data-i18n="options.mapmatch">Mapmatch participants</span>
+                            </label>
+                        </div>
+
+
+                        <!-- ===== WEATHER GROUP (only when the race has wind grids, rule 126) ===== -->
+                        <div class="options__section" id="optionWeather" style="display:none;">
+                            <div class="options__group-title" data-i18n="options.group.weather">Weather</div>
+                            <div class="options__checkboxes">
+                                <div class="options__checkbox-row">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="chkWindShow" class="checkbox-input">
+                                        <span data-i18n="options.windShow">Show wind</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="chkWindParticles" class="checkbox-input" checked>
+                                        <span data-i18n="options.windParticles">Animated particles</span>
+                                    </label>
+                                </div>
+                                <div class="options__checkbox-row">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="chkWeatherTemperature" class="checkbox-input">
+                                        <span data-i18n="options.weatherTemperature">Temperature</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="chkWeatherPressure" class="checkbox-input">
+                                        <span data-i18n="options.weatherPressure">Pressure (isobars)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== PARTICIPANTS GROUP ===== -->
+                        <div class="options__group-title" data-i18n="options.group.participants">Participants</div>
+
+                        <!-- Participant Info Section -->
+                        <div class="options__section options__section--checkboxes">
+                            <label class="options__label" data-i18n="options.participantInfo">Infos participants</label>
+                            <div class="options__checkboxes">
+                                <!-- Ligne 1: Ranking, Flag, Number, Name -->
+                                <div class="options__checkbox-row">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="infoRanking" class="checkbox-input" data-info="ranking">
+                                        <span data-i18n="options.info.ranking">Ranking</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="infoFlag" class="checkbox-input" data-info="flags">
+                                        <span data-i18n="options.info.flag">Flag</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="infoNumber" class="checkbox-input" data-info="startNumber">
+                                        <span data-i18n="options.info.number">Number</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="infoName" class="checkbox-input" data-info="name">
+                                        <span data-i18n="options.info.name">Name</span>
+                                    </label>
+                                </div>
+
+                                <!-- Ligne 2: Speed, Heading, Distance -->
+                                <div class="options__checkbox-row">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="infoSpeed" class="checkbox-input" data-info="speed">
+                                        <span data-i18n="options.info.speed">Speed</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="infoHeading" class="checkbox-input" data-info="heading">
+                                        <span data-i18n="options.info.heading">Heading</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="infoDistance" class="checkbox-input" data-info="distance">
+                                        <span data-i18n="options.info.distance">Distance</span>
+                                    </label>
+                                </div>
+
+                                <!-- Ligne 3: Lat/Long, Position Time, Position Delay -->
+                                <div class="options__checkbox-row">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="infoLatLong" class="checkbox-input" data-info="latLong">
+                                        <span data-i18n="options.info.latLong">Lat/Long</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="infoTimeData" class="checkbox-input" data-info="timedata">
+                                        <span data-i18n="options.info.timeData">Position Time</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="infoTimeGap" class="checkbox-input" data-info="timegap">
+                                        <span data-i18n="options.info.timeGap">Position Delay</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Traces Section -->
+                        <div class="options__section">
+                            <label class="options__label">
+                                <span data-i18n="options.traces">Traces</span>
+                                <span class="options__value" id="traceDurationValue">0s</span>
+                            </label>
+                            <input type="range" id="traceDurationSlider" class="options__slider" min="0" max="300" value="0" step="5">
+                            <div class="options__slider-labels">
+                                <span>0</span>
+                                <span id="traceDurationMid"></span>
+                                <span id="traceDurationMax"></span>
+                            </div>
+                        </div>
+
+                        <!-- Label Size Section -->
+                        <div class="options__section">
+                            <label class="options__label" data-i18n="options.labelSize">Taille labels</label>
+                            <div class="options__toggle">
+                                <button class="toggle__btn toggle__btn--active" data-label-size="normal" data-i18n="options.labelSize.normal">Normal</button>
+                                <button class="toggle__btn" data-label-size="large" data-i18n="options.labelSize.large">Grand</button>
+                            </div>
+                        </div>
+
+                        <!-- Label Opacity Section -->
+                        <div class="options__section">
+                            <label class="options__label">
+                                <span data-i18n="options.labelOpacity">Opacité labels</span>
+                                <span class="options__value" id="labelOpacityValue">100%</span>
+                            </label>
+                            <input type="range" id="labelOpacitySlider" class="options__slider" min="0" max="100" value="100" step="5">
+                            <div class="options__slider-labels">
+                                <span>0%</span>
+                                <span>50%</span>
+                                <span>100%</span>
+                            </div>
+                        </div>
+
+                        <!-- Marker Size Section -->
+                        <div class="options__section">
+                            <label class="options__label">
+                                <span data-i18n="options.markerSize">Taille marker</span>
+                                <span class="options__value" id="markerSizeValue">100%</span>
+                            </label>
+                            <input type="range" id="markerSizeSlider" class="options__slider" min="0" max="200" value="100" step="5">
+                            <div class="options__slider-labels">
+                                <span>0%</span>
+                                <span>100%</span>
+                                <span>200%</span>
+                            </div>
+                        </div>
+
+                        <!-- Reading tools, all three also on a key (rules 129, 130, 132).
+                             The controllers own the state and tick these boxes back, so a
+                             key and its box can never drift apart. -->
+                        <div class="options__section" id="optionGapChart" style="display:none;">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="chkGapChart" class="checkbox-input">
+                                <span data-i18n="options.gapChart">Gap chart (G)</span>
+                            </label>
+                        </div>
+
+                        <div class="options__section" id="optionOverview">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="chkOverview" class="checkbox-input">
+                                <span data-i18n="options.overview">Overview inset (O)</span>
+                            </label>
+                        </div>
+
+                        <div class="options__section" id="optionCompare">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="chkCompare" class="checkbox-input">
+                                <span data-i18n="options.compare">Comparator (C)</span>
+                            </label>
+                        </div>
+
+                        <!-- ===== WEATHER GROUP (LIVE only) ===== -->
+                        <!-- Weather Overlays Section (LIVE only) -->
+                        <div class="options__section options__section--checkboxes options__section--weather" id="weatherOverlaysSection">
+                            <label class="options__label" data-i18n="options.weatherOverlays">Météo</label>
+                            <div class="options__checkboxes">
+                                <div class="options__checkbox-row">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="checkbox-input" data-weather="temp">
+                                        <span data-i18n="options.weather.temp">Température</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="checkbox-input" data-weather="precipitation">
+                                        <span data-i18n="options.weather.precipitation">Précipitations</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="checkbox-input" data-weather="clouds">
+                                        <span data-i18n="options.weather.clouds">Nuages</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Keyboard shortcuts legend, last block of the Options tab -->
+                        <div class="options__section shortcuts" id="shortcutsLegend">
+                            <label class="options__label" data-i18n="shortcuts.title">Keyboard shortcuts</label>
+                            <div class="shortcuts__row"><span class="shortcuts__keys"><kbd data-i18n="shortcuts.key.space">Space</kbd></span><span class="shortcuts__desc" data-i18n="shortcuts.playPause">Play / pause</span></div>
+                            <div class="shortcuts__row"><span class="shortcuts__keys"><kbd>← →</kbd></span><span class="shortcuts__desc" data-i18n="shortcuts.step1s">± 1 second</span></div>
+                            <div class="shortcuts__row"><span class="shortcuts__keys"><kbd data-i18n="shortcuts.key.shift">Shift</kbd> + ← →</span><span class="shortcuts__desc" data-i18n="shortcuts.step1min">± 1 minute</span></div>
+                            <div class="shortcuts__row"><span class="shortcuts__keys"><kbd>+ −</kbd></span><span class="shortcuts__desc" data-i18n="shortcuts.speed">Playback speed</span></div>
+                            <div class="shortcuts__row"><span class="shortcuts__keys"><kbd>L</kbd></span><span class="shortcuts__desc" data-i18n="shortcuts.labels">Labels</span></div>
+                            <div class="shortcuts__row"><span class="shortcuts__keys"><kbd>T</kbd></span><span class="shortcuts__desc" data-i18n="shortcuts.traces">Traces</span></div>
+                            <div class="shortcuts__row" data-shortcut-row="wind"><span class="shortcuts__keys"><kbd>W</kbd></span><span class="shortcuts__desc" data-i18n="shortcuts.wind">Wind</span></div>
+                            <div class="shortcuts__row" data-shortcut-row="profile"><span class="shortcuts__keys"><kbd>P</kbd></span><span class="shortcuts__desc" data-i18n="shortcuts.profile">Elevation profile</span></div>
+                            <div class="shortcuts__row" data-shortcut-row="gap"><span class="shortcuts__keys"><kbd>G</kbd></span><span class="shortcuts__desc" data-i18n="shortcuts.gapChart">Gap chart</span></div>
+                            <div class="shortcuts__row"><span class="shortcuts__keys"><kbd>C</kbd></span><span class="shortcuts__desc" data-i18n="shortcuts.compare">Compare</span></div>
+                            <div class="shortcuts__row"><span class="shortcuts__keys"><kbd>M</kbd></span><span class="shortcuts__desc" data-i18n="shortcuts.measure">Measure</span></div>
+                            <div class="shortcuts__row"><span class="shortcuts__keys"><kbd>S</kbd></span><span class="shortcuts__desc" data-i18n="shortcuts.sidebar">Sidebar</span></div>
+                            <div class="shortcuts__row"><span class="shortcuts__keys"><kbd>A</kbd></span><span class="shortcuts__desc" data-i18n="shortcuts.autoCenter">Auto-center</span></div>
+                            <div class="shortcuts__row"><span class="shortcuts__keys"><kbd>O</kbd></span><span class="shortcuts__desc" data-i18n="shortcuts.overview">Overview inset</span></div>
+                            <div class="shortcuts__row"><span class="shortcuts__keys"><kbd>F</kbd></span><span class="shortcuts__desc" data-i18n="shortcuts.fullscreen">Fullscreen</span></div>
+                            <div class="shortcuts__row"><span class="shortcuts__keys"><kbd data-i18n="shortcuts.key.esc">Esc</kbd></span><span class="shortcuts__desc" data-i18n="shortcuts.deselect">Deselect</span></div>
+                        </div>
+
+                        <div class="options__copyright">&copy; GeoRacing V1.0</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Sponsors Banner (below sidebar, same width) -->
+        <div class="sponsors-banner" id="sponsorsBanner" style="display:none;">
+            <a class="sponsors-banner__link" id="sponsorLink" href="#" target="_blank" rel="noopener">
+                <img class="sponsors-banner__img" id="sponsorImg" src="" alt="Sponsor">
+            </a>
+        </div>
+        </div><!-- /sidebar-column -->
+
+        <!-- Map Container -->
+        <div class="map-container">
+            <div id="map" class="map"></div>
+            
+            <!-- Mobile Event Header -->
+            <div class="mobile-event-header" id="mobileEventHeader">
+                <img class="mobile-event-header__logo" id="mobileEventLogo" src="" alt="Event Logo">
+                <span class="mobile-event-header__name" id="mobileEventRace"></span>
+            </div>
+            
+            <!-- Map Top Controls -->
+            <div class="map-top-controls">
+                <button class="map-top-control__btn map-top-control__btn--active" id="btnToggleSidebar" title="Afficher/Masquer la sidebar" data-i18n-attr="title:map.toggleSidebar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="9" y1="3" x2="9" y2="21"></line>
+                    </svg>
+                </button>
+                <button class="map-top-control__btn map-top-control__btn--active" id="btnToggleLabels" title="Afficher/Masquer les étiquettes" data-i18n-attr="title:map.toggleLabels">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"></path>
+                    </svg>
+                </button>
+                <button class="map-top-control__btn map-top-control__btn--active" id="btnToggleTraces" title="Afficher/Masquer les traces" data-i18n-attr="title:map.toggleTraces">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 20 C6 14, 8 6, 12 10 S18 2, 20 4"></path>
+                        <circle cx="20" cy="4" r="2.5" fill="currentColor" stroke="none"></circle>
+                    </svg>
+                </button>
+                <!-- Wind layer: revealed only when the race has wind grids (rule 126); mirrors Options → Weather -->
+                <button class="map-top-control__btn" id="btnToggleWind" title="Afficher/Masquer le vent" data-i18n-attr="title:map.toggleWind" hidden>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 8h11a3 3 0 1 0-3-3"></path>
+                        <path d="M3 13h15a3 3 0 1 1-3 3"></path>
+                        <path d="M3 18h8a2 2 0 1 1-2 2"></path>
+                    </svg>
+                </button>
+                <!-- Elevation profile: revealed only when track_prod.xml carries altitudes -->
+                <button class="map-top-control__btn" id="btnToggleProfile" title="Afficher/Masquer le profil" data-i18n-attr="title:map.toggleProfile" hidden>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 18l6-8 4 5 3-4 7 7"></path>
+                        <path d="M2 21h20"></path>
+                    </svg>
+                </button>
+                <!-- Compare 2 to 4 participants (rule 130) -->
+                <button class="map-top-control__btn" id="btnCompare" title="Compare participants" data-i18n-attr="title:map.compare">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 3v18M15 3v18M3 9h18M3 15h18"></path>
+                    </svg>
+                </button>
+                <button class="map-top-control__btn" id="btnMeasure" title="Mesurer une distance" data-i18n-attr="title:map.measure">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 2l20 20"></path>
+                        <path d="M2 2l4 0 0 4"></path>
+                        <path d="M22 22l-4 0 0-4"></path>
+                        <path d="M8.5 5.5l1.5 1.5"></path>
+                        <path d="M14 11l1.5 1.5"></path>
+                    </svg>
+                </button>
+                <button class="map-top-control__btn" id="btnWindRotation" title="Orienter la carte dans le vent" data-i18n-attr="title:map.windRotation" style="display:none;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20" stroke-linecap="round"></path>
+                        <path d="M5 9l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M8 17c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke-linecap="round"></path>
+                    </svg>
+                </button>
+                <button class="map-top-control__btn" id="btnStatistics" title="Statistiques" style="display:none;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="12" width="4" height="9"></rect>
+                        <rect x="10" y="6" width="4" height="15"></rect>
+                        <rect x="17" y="2" width="4" height="19"></rect>
+                    </svg>
+                </button>
+                <div class="map-top-control__share" id="shareContainer">
+                    <button class="map-top-control__btn" id="btnShare" title="Partager">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="18" cy="5" r="3"></circle>
+                            <circle cx="6" cy="12" r="3"></circle>
+                            <circle cx="18" cy="19" r="3"></circle>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                        </svg>
+                    </button>
+                    <div class="share-buttons" id="shareButtons" style="display:none;">
+                        <button class="map-top-control__btn share-btn" id="btnShareFacebook" title="Facebook">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        </button>
+                        <button class="map-top-control__btn share-btn" id="btnShareX" title="X (Twitter)">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map indicators (top-right: leg + wind) -->
+            <div class="map-indicators" id="mapIndicators">
+                <!-- Leg Indicator -->
+                <div class="map-leg-indicator" id="legIndicator" style="display: none;">
+                    <span id="legText"></span>
+                </div>
+                
+                <!-- Wind Direction Indicator -->
+                <div class="map-wind-indicator" id="windIndicator" style="display: none;">
+                    <svg class="wind-arrow" id="windArrow" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                        <path d="M12 2L6 14h12L12 2z"/>
+                    </svg>
+                    <span id="windText"></span>
+                </div>
+
+                <!-- Wind layer panel: colour legend + forecast slider (rule 126) -->
+                <div class="wind-panel" id="windPanel" hidden style="display:none;">
+                    <div class="wind-legend"></div>
+                    <div class="wind-legend__row">
+                        <div class="wind-legend__ticks"></div>
+                        <span class="wind-legend__unit"></span>
+                    </div>
+                    <div class="wind-forecast" hidden style="display:none;">
+                        <input type="range" class="wind-forecast__slider" min="0" max="48" step="1" value="0" aria-label="Forecast">
+                        <span class="wind-forecast__label"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- GeoRacing Logo (bottom center of map) -->
+            <div class="map-logo">
+                <img src="resources_player/images/logo_georacing.png" alt="GeoRacing">
+            </div>
+
+            <!-- Message Banner (bottom of map) -->
+            <div class="map-message" id="mapMessage" style="display:none;"></div>
+
+            <!-- Elevation profile strip, above the timeline -->
+            <div class="elevation-profile" id="elevationProfile" hidden>
+                <canvas id="elevationCanvas"></canvas>
+            </div>
+
+            <!-- Gap chart strip. Reuses .elevation-profile on purpose: the geometry,
+                 the theme and the open/close animation already ship in the deployed
+                 stylesheet (rule 109), so no new CSS can go missing. -->
+            <div class="elevation-profile gap-chart" id="gapChart" hidden>
+                <canvas id="gapChartCanvas"></canvas>
+            </div>
+
+            <!-- Overview inset (rule 132): the whole race, drawn from data already in
+                 memory — no second tile layer. Geometry is set inline by the JS. -->
+            <div class="overview-map" id="overviewMap" hidden>
+                <canvas id="overviewCanvas"></canvas>
+            </div>
+            <!-- Comparison panel (rule 130). Critical geometry is also set inline by
+                 the JS, so a stale stylesheet cannot leave it unusable. -->
+            <div class="compare-panel" id="comparePanel" hidden></div>
+            <!-- Map Controls -->
+            <div class="map-controls">
+                <button class="map-control__btn" id="btnFullscreen" title="Fullscreen">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                    </svg>
+                </button>
+                <button class="map-control__btn" id="btnFavFilter" title="Favoris">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                </button>
+                <button class="map-control__btn" id="btnCenter" title="Auto-Center">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="8"></circle>
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <line x1="12" y1="2" x2="12" y2="6"></line>
+                        <line x1="12" y1="18" x2="12" y2="22"></line>
+                        <line x1="2" y1="12" x2="6" y2="12"></line>
+                        <line x1="18" y1="12" x2="22" y2="12"></line>
+                    </svg>
+                </button>
+                <button class="map-control__btn" id="btnZoomIn" title="Zoom +">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                </button>
+                <button class="map-control__btn" id="btnZoomOut" title="Zoom -">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                </button>
+                <div id="tileToggleContainer" class="tile-toggle-container">
+                    <!-- Tile toggle buttons built dynamically by MapController._buildTileToggleButtons() -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Timeline Player -->
+    <div class="timeline-player">
+        <div class="timeline__controls">
+            <button class="control__btn" id="btnSlowDown" title="Slow Down">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+            </button>
+            <button class="control__btn control__btn--play" id="btnPlayPause" title="Play/Pause">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+            </button>
+            <button class="control__btn" id="btnSpeedUp" title="Speed Up">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+            </button>
+            <span class="control__speed" id="speedIndicator">x1</span>
+        </div>
+
+        <div class="timeline__progress">
+            <div class="data-loading-bar hidden" id="dataLoadingBar">
+                <div class="data-loading-bar__fill" id="dataLoadingFill"></div>
+                <span class="data-loading-bar__text" data-i18n="replay.loading.title">Chargement des données</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-bar__fill" id="progressFill"></div>
+                <div class="progress-bar__cursor" id="timelineCursor"></div>
+                <input type="range" class="progress-bar__slider" id="timelineSlider" min="0" max="100" value="0">
+                <div class="progress-bar__marks" id="timelineLabels">
+                    <!-- Mark lines and labels inserted dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline__info">
+            <div class="timeline__badge" id="modeBadge">LIVE</div>
+            <div class="timeline__timer">
+                <div class="timer__digits">
+                    <span id="timerDays" class="timer__day-col">00</span>
+                    <span class="separator timer__day-col">:</span>
+                    <span id="timerHours">00</span>
+                    <span class="separator">:</span>
+                    <span id="timerMinutes">00</span>
+                    <span class="separator">:</span>
+                    <span id="timerSeconds">00</span>
+                </div>
+                <div class="timer__labels">
+                    <span id="timerDaysLabel" class="timer__day-col" data-i18n="timer.days">Jours</span>
+                    <span class="separator timer__day-col"></span>
+                    <span data-i18n="timer.hours">Heures</span>
+                    <span class="separator"></span>
+                    <span data-i18n="timer.minutes">Min</span>
+                    <span class="separator"></span>
+                    <span data-i18n="timer.seconds">Sec</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <img src="resources_player/images/logo_georacing.png" alt="GeoRacing" class="loading-overlay__logo">
+        <div class="spinner"></div>
+        <p data-i18n="app.loading" id="loadingMessage">Loading race data...</p>
+        <div class="loading-overlay__progress">
+            <div class="loading-overlay__bar"><div class="loading-overlay__fill" id="loadingFill"></div></div>
+            <div class="loading-overlay__status">
+                <span id="loadingStep"></span>
+                <span id="loadingPercent">0%</span>
+            </div>
+            <!-- Positions preload: its own bar (bytes), revealed by App.setPositionsProgress() -->
+            <div id="loadingPositions" style="display:none; margin-top:12px">
+                <div class="loading-overlay__bar"><div class="loading-overlay__fill" id="loadingPositionsFill"></div></div>
+                <div class="loading-overlay__status">
+                    <span data-i18n="loading.positions">Positions</span>
+                    <span id="loadingPositionsDetail"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Replay Loading Overlay -->
+    <div class="replay-loading-overlay hidden" id="replayLoadingOverlay">
+        <div class="replay-loading__content">
+           <img src="resources_player/images/logo_georacing.png" /> 
+            <div class="replay-loading__icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+            </div>
+            <h3 class="replay-loading__title" data-i18n="replay.loading.title">Loading Historical Data</h3>
+            <p class="replay-loading__subtitle" data-i18n="replay.loading.subtitle">Preparing replay timeline...</p>
+            <div class="replay-loading__progress">
+                <div class="progress-bar-replay">
+                    <div class="progress-bar-replay__fill" id="replayProgressFill"></div>
+                </div>
+                <div class="replay-loading__stats">
+                    <span id="replayLoadedCount">0</span> / <span id="replayTotalCount">0</span>
+                    <span data-i18n="replay.loading.files">files</span>
+                    (<span id="replayProgressPercent">0</span>%)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Debug Panel (activated by ?debug=1 in URL) -->
+    <div class="debug-panel hidden" id="debugPanel">
+        <div class="debug-panel__header">
+            <span class="debug-panel__title">DEBUG</span>
+            <button class="debug-panel__toggle" id="debugPanelToggle" title="Minimize">_</button>
+        </div>
+        <!-- Tabs: GROUPS only appears on a race that carries groups (?debug=1) -->
+        <div class="debug-panel__tabs">
+            <button class="debug-panel__tab debug-panel__tab--active" data-debug-tab="perf">PERF</button>
+            <button class="debug-panel__tab" data-debug-tab="groups" id="debugTabGroups" hidden>GROUPS</button>
+        </div>
+        <div class="debug-panel__body" id="debugPanelBody">
+            <div class="debug-panel__perf" id="debugPerfView">
+            <div class="debug-panel__section">
+                <div class="debug-panel__row">
+                    <span class="debug-panel__label">FPS</span>
+                    <span class="debug-panel__value" id="debugFps">0</span>
+                </div>
+                <canvas class="debug-panel__chart" id="debugFpsChart" width="200" height="40"></canvas>
+            </div>
+            <div class="debug-panel__section">
+                <div class="debug-panel__row">
+                    <span class="debug-panel__label">Frame Total</span>
+                    <span class="debug-panel__value" id="debugFrameTotal">0 ms</span>
+                </div>
+                <div class="debug-panel__row">
+                    <span class="debug-panel__label">  Traces</span>
+                    <span class="debug-panel__value" id="debugTraceTime">0 ms</span>
+                </div>
+                <div class="debug-panel__row">
+                    <span class="debug-panel__label">  Markers</span>
+                    <span class="debug-panel__value" id="debugMarkerTime">0 ms</span>
+                </div>
+                <div class="debug-panel__row">
+                    <span class="debug-panel__label">  Labels</span>
+                    <span class="debug-panel__value" id="debugLabelTime">0 ms</span>
+                </div>
+                <div class="debug-panel__row">
+                    <span class="debug-panel__label">  Course Elts</span>
+                    <span class="debug-panel__value" id="debugCourseTime">0 ms</span>
+                </div>
+            </div>
+            <div class="debug-panel__section">
+                <div class="debug-panel__row">
+                    <span class="debug-panel__label">Actors</span>
+                    <span class="debug-panel__value" id="debugActorCount">0</span>
+                </div>
+                <div class="debug-panel__row">
+                    <span class="debug-panel__label">History Pts</span>
+                    <span class="debug-panel__value" id="debugHistoryPoints">0</span>
+                </div>
+                <div class="debug-panel__row">
+                    <span class="debug-panel__label">Mode</span>
+                    <span class="debug-panel__value" id="debugMode">-</span>
+                </div>
+                <div class="debug-panel__row">
+                    <span class="debug-panel__label">Playback</span>
+                    <span class="debug-panel__value" id="debugPlayback">-</span>
+                </div>
+            </div>
+            <div class="debug-panel__section">
+                <div class="debug-panel__row">
+                    <span class="debug-panel__label">Redraws/s</span>
+                    <span class="debug-panel__value" id="debugRedraws">0</span>
+                </div>
+                <div class="debug-panel__row">
+                    <span class="debug-panel__label">Memory</span>
+                    <span class="debug-panel__value" id="debugMemory">-</span>
+                </div>
+                <div class="debug-panel__row">
+                    <span class="debug-panel__label">DPR</span>
+                    <span class="debug-panel__value" id="debugDpr">-</span>
+                </div>
+            </div>
+            </div>
+            <!-- Groups debug view (?debug=1 on a race with groups) -->
+            <div class="debug-panel__groups" id="debugGroupsView" hidden>
+                <div class="debug-panel__section" id="debugGroupsHead"></div>
+                <div class="debug-panel__section" id="debugGroupsChecks"></div>
+                <div class="debug-panel__section debug-panel__grouplist" id="debugGroupsList"></div>
+                <div class="debug-panel__section">
+                    <button class="debug-panel__copy" id="debugGroupsCopy">Copier le diagnostic (JSON)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS (local, patched: _round() removed from latLngToLayerPoint for sub-pixel marker positioning) -->
+    <script src="libs_player/leaflet.js"></script>
+    
+    <!-- Leaflet Omnivore (for GPX loading) -->
+    <script src="https://unpkg.com/leaflet-omnivore@0.3.4/leaflet-omnivore.min.js"></script>
+
+    <!-- Application JS -->
+    <script src="js/script.js?v=20261029123804"></script>
+
+    <!-- Statistics iframe overlay -->
+    <div class="stats-overlay" id="statsOverlay" style="display:none;">
+        <div class="stats-overlay__panel">
+            <button class="stats-overlay__close" id="statsOverlayClose">&times;</button>
+            <iframe class="stats-overlay__iframe" id="statsIframe" src="" frameborder="0"></iframe>
+        </div>
+    </div>
+</body>
+</html>
