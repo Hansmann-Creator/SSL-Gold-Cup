@@ -1093,7 +1093,7 @@ function liveCalc(g){const n=g.rows[0].r.length;const tot=g.rows.map(x=>parseFlo
   const mx=g.rows.map((x,k)=>tot[k]+x.r.reduce((s,v,i)=>s+(String(v).trim()===""?(i==n-1?8:4):0),0));
   return g.rows.map((x,k)=>{const above=tot.filter((t,j)=>j!=k&&t>mx[k]).length;const reach=mx.filter((m,j)=>j!=k&&m>=tot[k]).length;return above>=2?"elim":reach<2?"clinch":""})}
 function raceDay(r){const t=days(r.start,r.end)+1,n=Math.min(t,Math.max(1,days(r.start,today())+1));return[n,t]}
-const LINKS=()=>`<div class="hlk"><button class="rcb" data-live="1">${svg('<path d="M6 4l14 8-14 8z"/>')}<b>${esc(T("liveStream"))}</b></button><button class="rcb" data-trkurl="1">${svg('<path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>')}<b>${esc(T("trkLive"))}</b></button></div>`;
+const LINKS=()=>`<div class="hcap"><button data-live="1"><span class="hci hcl"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M10 8.2v7.6l6-3.8z" fill="#fff"/></svg></span><span>${esc(T("liveStream"))}</span></button><i aria-hidden="true"></i><button data-trkurl="1"><span class="hci hct"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span>${esc(T("trk"))}</span></button></div>`;
 function current(){const r=D.rounds.find(r=>rState(r)!="done");return(r||D.rounds[D.rounds.length-1]).id}
 function teams(){const M={};
   D.rounds.forEach(r=>r.groups.forEach(g=>{const done=gState(g,r)=="done";g.rows.forEach((x,i)=>{if(!isTeam(x.team))return;

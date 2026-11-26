@@ -973,3 +973,11 @@ dialog.tmd:has(.vframe iframe) .vframe{touch-action:auto}
 .tbar i{display:block;height:100%;background:#4fd1a1;border-radius:3px}
 [data-theme=light] .tstat b.tsg{color:#0f8a5f}[data-theme=light] .tstat b.tsr{color:#c0392b}
 html{touch-action:pan-x pan-y}.leaflet-container{touch-action:none}
+
+.hcap{display:flex;margin-top:12px;border-radius:18px;overflow:hidden;background:var(--card);border:var(--bd)}
+.hcap>i{width:1px;background:var(--line);margin:10px 0}
+.hcap button{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:11px 4px;border:0;background:none;color:var(--ink);font:inherit;font-size:14px;font-weight:600;min-width:0}
+.hcap button span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.hcap button:active{background:var(--line)}
+.hci{display:grid;place-items:center;height:24px}
+.hcl{color:#e53935}.hct{color:var(--gold,#ffd21f)}
