@@ -246,6 +246,43 @@ pt:{pT:"Notificações",pAll:"Todos os resultados",pAllSub:"Uma notificação ap
 zh:{pT:"通知",pAll:"全部成绩",pAllSub:"每场比赛后推送通知",pTeamOff:"🔔 接收此队通知",pTeamOn:"🔔 已开启通知 ✓",pTeams:"你的队伍",pNone:"还没有关注队伍：打开一支队伍并点按 🔔。",pNote:"只推送比赛成绩和晋级信息。可随时在此关闭。",pIOS:"在 iPhone 上，通知仅在已安装的应用中可用：先安装应用，从主屏幕打开，再在此开启。",pDenied:"通知已被屏蔽。请在设备设置中允许此应用发送通知。",pErr:"操作未成功，请稍后再试。",pOnT:"已开启通知",pOffT:"已关闭通知",pUnsup:"此浏览器无法接收通知。"},
 ar:{pT:"الإشعارات",pAll:"كل النتائج",pAllSub:"إشعار بعد كل سباق",pTeamOff:"🔔 أشعرني بنتائج هذا الفريق",pTeamOn:"🔔 الإشعارات مفعّلة ✓",pTeams:"فرقك",pNone:"لا يوجد فريق بعد: افتح فريقًا واضغط 🔔.",pNote:"تصلك فقط نتائج السباقات ومن يتأهل. يمكنك الإيقاف هنا في أي وقت.",pIOS:"على iPhone تعمل الإشعارات فقط في التطبيق المثبّت: ثبّت التطبيق، وافتحه من الشاشة الرئيسية، ثم فعّلها هنا.",pDenied:"الإشعارات محظورة. اسمح بها لهذا التطبيق من إعدادات جهازك.",pErr:"لم تنجح العملية – حاول مرة أخرى بعد قليل.",pOnT:"تم تفعيل الإشعارات",pOffT:"تم إيقاف الإشعارات",pUnsup:"هذا المتصفح لا يستقبل الإشعارات."}};
 for(const l in SP)Object.assign(S[l],SP[l]);
+const SO={
+en:{obT:"Get the app",obSub:"Free, no App Store needed – on your home screen in 20 seconds.",obPerks:["Live results in one tap","Full screen, like a real app","Notifications for your team"],obBtn:"Install now",obLater:"Later – look around in the browser first",obSteps:"How it works",obStep:"Step",
+ ios26:["Tap ⋯ next to the address bar","Tap “Share”","Scroll down and tap “Add to Home Screen”","Leave “Open as Web App” on and tap “Add”"],
+ iosOld:["Tap the Share button at the bottom","Scroll down and tap “Add to Home Screen”","Tap “Add” in the top right"],
+ iosAlt:"Easiest in Safari: copy the link, open Safari and paste it.",inApp:"This page is open inside another app (e.g. WhatsApp or Instagram). Installing only works in the browser: tap ⋯ and choose “Open in browser” – or copy the link and open it in Safari or Chrome.",copy:"Copy link",done2:"Then open SSL Gold Cup from your home screen.",
+ ui:{share:"Share",home:"Add to Home Screen",add:"Add",web:"Open as Web App",cancel:"Cancel",ainst:"Install app",aok:"Install"}},
+de:{obT:"Hol dir die App",obSub:"Kostenlos, ohne App Store – in 20 Sekunden auf deinem Homescreen.",obPerks:["Live-Ergebnisse mit einem Tipp","Vollbild wie eine echte App","Mitteilungen zu deinem Team"],obBtn:"Jetzt installieren",obLater:"Später – erst mal im Browser umschauen",obSteps:"So geht's",obStep:"Schritt",
+ ios26:["Tippe neben der Adressleiste auf ⋯","Tippe auf „Teilen“","Nach unten wischen und „Zum Home-Bildschirm“ antippen","„Als Web-App öffnen“ an lassen und auf „Hinzufügen“ tippen"],
+ iosOld:["Tippe unten auf das Teilen-Symbol","Nach unten wischen und „Zum Home-Bildschirm“ antippen","Oben rechts auf „Hinzufügen“ tippen"],
+ iosAlt:"Am einfachsten in Safari: Link kopieren, Safari öffnen und einfügen.",inApp:"Diese Seite ist in einer anderen App geöffnet (z. B. WhatsApp oder Instagram). Installieren geht nur im Browser: Tippe auf ⋯ und wähle „Im Browser öffnen“ – oder kopiere den Link und öffne ihn in Safari oder Chrome.",copy:"Link kopieren",done2:"Danach SSL Gold Cup vom Homescreen aus öffnen.",
+ ui:{share:"Teilen",home:"Zum Home-Bildschirm",add:"Hinzufügen",web:"Als Web-App öffnen",cancel:"Abbrechen",ainst:"App installieren",aok:"Installieren"}},
+fr:{obT:"Installez l'app",obSub:"Gratuit, sans App Store – sur votre écran d'accueil en 20 secondes.",obPerks:["Résultats en direct en un geste","Plein écran, comme une vraie app","Notifications pour votre équipe"],obBtn:"Installer maintenant",obLater:"Plus tard – d'abord explorer dans le navigateur",obSteps:"Comment faire",obStep:"Étape",
+ ios26:["Touchez ⋯ à côté de la barre d'adresse","Touchez « Partager »","Faites défiler et touchez « Sur l'écran d'accueil »","Laissez « Ouvrir en tant qu'app web » activé et touchez « Ajouter »"],
+ iosOld:["Touchez le bouton Partager en bas","Faites défiler et touchez « Sur l'écran d'accueil »","Touchez « Ajouter » en haut à droite"],
+ iosAlt:"Le plus simple dans Safari : copiez le lien, ouvrez Safari et collez-le.",inApp:"Cette page est ouverte dans une autre app (WhatsApp, Instagram…). L'installation ne fonctionne que dans le navigateur : touchez ⋯ puis « Ouvrir dans le navigateur » – ou copiez le lien et ouvrez-le dans Safari ou Chrome.",copy:"Copier le lien",done2:"Ouvrez ensuite SSL Gold Cup depuis l'écran d'accueil.",
+ ui:{share:"Partager",home:"Sur l'écran d'accueil",add:"Ajouter",web:"Ouvrir en tant qu'app web",cancel:"Annuler",ainst:"Installer l'application",aok:"Installer"}},
+es:{obT:"Consigue la app",obSub:"Gratis, sin App Store: en tu pantalla de inicio en 20 segundos.",obPerks:["Resultados en directo con un toque","Pantalla completa, como una app de verdad","Notificaciones de tu equipo"],obBtn:"Instalar ahora",obLater:"Más tarde: primero echar un vistazo en el navegador",obSteps:"Cómo se hace",obStep:"Paso",
+ ios26:["Toca ⋯ junto a la barra de direcciones","Toca «Compartir»","Desliza hacia abajo y toca «Añadir a pantalla de inicio»","Deja activado «Abrir como app web» y toca «Añadir»"],
+ iosOld:["Toca el botón Compartir abajo","Desliza hacia abajo y toca «Añadir a pantalla de inicio»","Toca «Añadir» arriba a la derecha"],
+ iosAlt:"Lo más fácil es en Safari: copia el enlace, abre Safari y pégalo.",inApp:"Esta página está abierta dentro de otra app (p. ej. WhatsApp o Instagram). Solo se puede instalar desde el navegador: toca ⋯ y elige «Abrir en el navegador», o copia el enlace y ábrelo en Safari o Chrome.",copy:"Copiar enlace",done2:"Después abre SSL Gold Cup desde tu pantalla de inicio.",
+ ui:{share:"Compartir",home:"Añadir a pantalla de inicio",add:"Añadir",web:"Abrir como app web",cancel:"Cancelar",ainst:"Instalar aplicación",aok:"Instalar"}},
+pt:{obT:"Instale o app",obSub:"Grátis, sem loja de apps – na sua tela inicial em 20 segundos.",obPerks:["Resultados ao vivo com um toque","Tela cheia, como um app de verdade","Notificações da sua equipe"],obBtn:"Instalar agora",obLater:"Depois – primeiro explorar no navegador",obSteps:"Como fazer",obStep:"Passo",
+ ios26:["Toque em ⋯ ao lado da barra de endereço","Toque em “Compartilhar”","Role para baixo e toque em “Adicionar à Tela de Início”","Deixe “Abrir como App Web” ativado e toque em “Adicionar”"],
+ iosOld:["Toque no botão Compartilhar embaixo","Role para baixo e toque em “Adicionar à Tela de Início”","Toque em “Adicionar” no canto superior direito"],
+ iosAlt:"Mais fácil no Safari: copie o link, abra o Safari e cole.",inApp:"Esta página está aberta dentro de outro app (ex.: WhatsApp ou Instagram). A instalação só funciona no navegador: toque em ⋯ e escolha “Abrir no navegador” – ou copie o link e abra no Safari ou no Chrome.",copy:"Copiar link",done2:"Depois abra a SSL Gold Cup pela tela inicial.",
+ ui:{share:"Compartilhar",home:"Adicionar à Tela de Início",add:"Adicionar",web:"Abrir como App Web",cancel:"Cancelar",ainst:"Instalar app",aok:"Instalar"}},
+zh:{obT:"安装应用",obSub:"免费，无需应用商店——20 秒添加到主屏幕。",obPerks:["一点即看实时成绩","全屏，如同原生应用","关注队伍的通知"],obBtn:"立即安装",obLater:"稍后——先在浏览器中看看",obSteps:"操作步骤",obStep:"第",
+ ios26:["点按地址栏旁边的 ⋯","点按“分享”","向下滚动，点按“添加到主屏幕”","保持“作为网页 App 打开”开启，点按“添加”"],
+ iosOld:["点按底部的分享按钮","向下滚动，点按“添加到主屏幕”","点按右上角的“添加”"],
+ iosAlt:"在 Safari 中最简单：复制链接，打开 Safari 并粘贴。",inApp:"此页面是在其他应用（如微信、WhatsApp 或 Instagram）中打开的。只能在浏览器中安装：点按 ⋯ 并选择“在浏览器中打开”，或复制链接后在 Safari 或 Chrome 中打开。",copy:"复制链接",done2:"然后从主屏幕打开 SSL Gold Cup。",
+ ui:{share:"分享",home:"添加到主屏幕",add:"添加",web:"作为网页 App 打开",cancel:"取消",ainst:"安装应用",aok:"安装"}},
+ar:{obT:"ثبّت التطبيق",obSub:"مجاني، دون متجر تطبيقات – على شاشتك الرئيسية خلال 20 ثانية.",obPerks:["النتائج المباشرة بلمسة واحدة","ملء الشاشة مثل تطبيق حقيقي","إشعارات لفريقك"],obBtn:"ثبّت الآن",obLater:"لاحقًا – تصفّح في المتصفح أولًا",obSteps:"الطريقة",obStep:"الخطوة",
+ ios26:["اضغط ⋯ بجانب شريط العنوان","اضغط «مشاركة»","مرّر لأسفل واضغط «إضافة إلى الشاشة الرئيسية»","اترك «فتح كتطبيق ويب» مفعّلًا واضغط «إضافة»"],
+ iosOld:["اضغط زر المشاركة في الأسفل","مرّر لأسفل واضغط «إضافة إلى الشاشة الرئيسية»","اضغط «إضافة» في الأعلى"],
+ iosAlt:"الأسهل في Safari: انسخ الرابط وافتح Safari والصقه.",inApp:"هذه الصفحة مفتوحة داخل تطبيق آخر (مثل واتساب أو إنستغرام). التثبيت يعمل من المتصفح فقط: اضغط ⋯ واختر «فتح في المتصفح» – أو انسخ الرابط وافتحه في Safari أو Chrome.",copy:"نسخ الرابط",done2:"بعد ذلك افتح SSL Gold Cup من الشاشة الرئيسية.",
+ ui:{share:"مشاركة",home:"إضافة إلى الشاشة الرئيسية",add:"إضافة",web:"فتح كتطبيق ويب",cancel:"إلغاء",ainst:"تثبيت التطبيق",aok:"تثبيت"}}};
+for(const l in SO)Object.assign(S[l],SO[l]);
 
 
 
@@ -503,20 +540,12 @@ let BIP=null;const UA=navigator.userAgent||"";
 const isIOS=/iPhone|iPad|iPod/.test(UA)||(/Macintosh/.test(UA)&&navigator.maxTouchPoints>1),isAndroid=/Android/.test(UA);
 const isStandalone=()=>{try{return matchMedia("(display-mode: standalone)").matches||navigator.standalone===true}catch(e){return false}};
 const canInstall=()=>!isStandalone()&&(location.protocol=="https:"||location.hostname=="localhost")&&window.top===window;
-window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();BIP=e;LS.set("installed",0);insBtn();if(view=="home"||view=="more")render(true)});
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();BIP=e;LS.set("installed",0);insBtn();{const d=$("#tmd");if(d.open&&d.classList.contains("full"))installHelp()}if(view=="home"||view=="more")render(true)});
 window.addEventListener("appinstalled",()=>{BIP=null;LS.set("installed",1);toast(T("inst").done);render(true)});
 if(isStandalone())LS.set("installed",1);
 function installCard(dismissable){if(!canInstall()||(dismissable&&LS.get("instHide",0)>Date.now()))return"";const I=T("inst");
   return `<section class="inst"><img src="icons/icon-192.png" alt="" width="52" height="52"><div><b>${I.t}</b><span>${I.d}</span></div><div class="ib"><button class="ibtn" data-inst="1">${BIP?I.b:I.how}</button>${dismissable?`<button class="ilater" data-insthide="1">${I.hide}</button>`:""}</div></section>`}
-function installHelp(){const I=T("inst"),d=$("#tmd");let steps;
-  const shareIc='<svg class="shr" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M8 7l4-4 4 4M6 11H5a1 1 0 00-1 1v8a1 1 0 001 1h14a1 1 0 001-1v-8a1 1 0 00-1-1h-1"/></svg>';
-  if(isIOS){const safari=!/CriOS|FxiOS|EdgiOS|GSA|Instagram|FBAN|FBAV|WhatsApp/.test(UA);
-    steps=(safari?"":`<p class="warn">${I.iosOther}</p>`)+`<ol class="isteps"><li>${I.ios[0]} ${shareIc} ${I.ios[1]}</li><li>${I.ios[2]}</li><li>${I.ios[3]}</li></ol>`}
-  else if(isAndroid)steps=`<ol class="isteps">${I.android.map(x=>`<li>${x}</li>`).join("")}</ol>`;
-  else steps=`<ol class="isteps">${I.desk.map(x=>`<li>${x}</li>`).join("")}</ol>`;
-  d.innerHTML=`<div class="th"><div><div class="nick">SSL Gold Cup</div><h2>${I.how}</h2></div><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb"><div class="ihero"><img src="icons/icon-192.png" alt="" width="72" height="72"><span>${I.d}</span></div>${steps}</div>`;
-  d.querySelector(".x").onclick=()=>d.close();openCode=null;show(d)}
-async function doInstall(){if(BIP){const e=BIP;BIP=null;try{await e.prompt();const c=await e.userChoice;if(c&&c.outcome=="accepted")LS.set("installed",1)}catch(x){}render(true)}else installHelp()}
+async function doInstall(){if(BIP){const e=BIP;BIP=null;try{await e.prompt();const c=await e.userChoice;if(c&&c.outcome=="accepted"){LS.set("installed",1);LS.set("onb",1)}}catch(x){}render(true)}else installHelp()}
 
 /* ---------- more ---------- */
 function more(){const I=T("inst");
@@ -616,7 +645,7 @@ function openTeam(code){if(!isTeam(code))return;openCode=code;const d=$("#tmd"),
   d.querySelectorAll("[data-go]").forEach(b=>{const f=()=>{d.close();sel=code;jump=true;go(b.dataset.go)};b.onclick=f;b.onkeydown=e=>{if(e.key=="Enter")f()}});
   d.querySelectorAll("[data-pi]").forEach(el=>{const f=()=>openSailor(code,+el.dataset.pi);el.onclick=f;el.onkeydown=e=>{if(e.key=="Enter")f()}});
   show(d)}
-function show(d){if(!d.open){d.showModal();try{history.pushState({sheet:1},"")}catch(e){}}d.scrollTop=0;const th=d.querySelector(".th");if(th){th.tabIndex=-1;th.focus({preventScroll:true})}}
+function show(d){if(!d.querySelector(".ob"))d.classList.remove("full");if(!d.open){d.showModal();try{history.pushState({sheet:1},"")}catch(e){}}d.scrollTop=0;const th=d.querySelector(".th");if(th){th.tabIndex=-1;th.focus({preventScroll:true})}}
 function openSailor(code,i){const d=$("#tmd"),sq=squad(code),p=sq.ppl[i];if(!p)return;openCode=code;const PE=pinfo(code,p),TM=teams().find(x=>x.code==code),n=sq.ppl.length;
   const q2=encodeURIComponent;let h=`<div class="th"><button class="bk">${T("back")}</button><div class="thb"><button class="pv" aria-label="previous">‹</button><button class="nx2" aria-label="next">›</button><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">`;
   h+=`<div class="shero">${p.img?`<img src="${esc(p.img)}" alt="${esc(p.name)}">`:`<span class="big">${esc(ini(p.name))}</span>`}<div><div class="nick">${FL(code)} ${esc(NM(code))}${sq.n?" · "+esc(sq.n):""}</div><h2>${esc(p.name)}</h2>${p.cap?`<span class="ctag">${T("capTag")}</span>`:""}</div></div>`;
@@ -633,6 +662,43 @@ function openSailor(code,i){const d=$("#tmd"),sq=squad(code),p=sq.ppl[i];if(!p)r
   show(d)}
 function toast(m){let el=$(".toast");if(!el){el=document.createElement("div");el.className="toast";el.setAttribute("role","status");document.body.appendChild(el)}el.textContent=m;el.classList.add("on");clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove("on"),1800)}
 
+function installHelp(first){const I=T("inst"),d=$("#tmd"),U=T("ui"),x=s=>esc(s);
+  const iosV=+((UA.match(/Version\/(\d+)/)||UA.match(/OS (\d+)_/)||[])[1]||0),inApp=/Instagram|FBAN|FBAV|WhatsApp|Line\/|MicroMessenger|GSA\//.test(UA),iosOther=isIOS&&/CriOS|FxiOS|EdgiOS/.test(UA);
+  /* simple drawings of the phone screens; G = highlight colour */
+  const G="#f5b800",F='font-family="system-ui,-apple-system,sans-serif"',W=(inner,h=150)=>`<svg class="ill" viewBox="0 0 300 ${h}" role="img" aria-hidden="true" ${F}><rect x="0" y="0" width="300" height="${h}" rx="18" fill="#eef1f6"/>${inner}</svg>`;
+  const tap=(cx,cy)=>`<circle cx="${cx}" cy="${cy}" r="21" fill="none" stroke="${G}" stroke-width="4"/><circle cx="${cx}" cy="${cy}" r="30" fill="none" stroke="${G}" stroke-width="2" opacity=".45"/>`;
+  const lines=(x0,y0,n,w=150)=>Array.from({length:n},(_,i)=>`<rect x="${x0}" y="${y0+i*30}" width="${w-i*22}" height="10" rx="5" fill="#cfd6e2"/>`).join("");
+  const shareI=(cx,cy,c="#1a73e8")=>`<g fill="none" stroke="${c}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M${cx} ${cy+5}V${cy-11}M${cx-5} ${cy-6}l5-5 5 5M${cx-6} ${cy-2}h-2a1 1 0 00-1 1v10a1 1 0 001 1h16a1 1 0 001-1v-10a1 1 0 00-1-1h-2"/></g>`;
+  const plusI=(cx,cy)=>`<rect x="${cx-10}" y="${cy-10}" width="20" height="20" rx="5" fill="none" stroke="#333" stroke-width="2"/><path d="M${cx} ${cy-5}v10M${cx-5} ${cy}h10" stroke="#333" stroke-width="2"/>`;
+  const url=`<text x="44" y="122" font-size="13" fill="#555">hansmann-creator.github.io</text>`;
+  const pic={
+    i26a:W(`<rect x="12" y="20" width="276" height="62" rx="10" fill="#fff"/>${lines(28,36,2,200)}<rect x="14" y="100" width="222" height="36" rx="18" fill="#fff"/>${url}<circle cx="262" cy="118" r="18" fill="#fff"/><text x="262" y="124" text-anchor="middle" font-size="22" font-weight="700" fill="#222">⋯</text>${tap(262,118)}`),
+    i26b:W(`<rect x="110" y="12" width="178" height="126" rx="14" fill="#fff"/><rect x="118" y="20" width="162" height="34" rx="9" fill="#fff6d6" stroke="${G}" stroke-width="2"/>${shareI(136,38)}<text x="152" y="43" font-size="15" font-weight="600" fill="#111">${x(U.share)}</text><rect x="126" y="70" width="110" height="9" rx="4.5" fill="#cfd6e2"/><rect x="126" y="96" width="90" height="9" rx="4.5" fill="#cfd6e2"/><rect x="126" y="120" width="120" height="9" rx="4.5" fill="#cfd6e2"/>${lines(14,30,4,80)}`),
+    sheet:W(`<rect x="10" y="10" width="280" height="130" rx="14" fill="#fff"/><g fill="#d8dee8">${[40,90,140,190,240].map(c=>`<circle cx="${c}" cy="38" r="15"/>`).join("")}</g><rect x="22" y="68" width="150" height="9" rx="4.5" fill="#cfd6e2"/><rect x="18" y="92" width="264" height="38" rx="9" fill="#fff6d6" stroke="${G}" stroke-width="2"/><text x="30" y="116" font-size="14" font-weight="600" fill="#111">${x(U.home)}</text>${plusI(262,111)}`),
+    add:W(`<rect x="10" y="10" width="280" height="130" rx="14" fill="#fff"/><rect x="22" y="22" width="56" height="9" rx="4.5" fill="#cfd6e2"/><rect x="${290-22-Math.max(64,U.add.length*8.5)}" y="14" width="${Math.max(64,U.add.length*8.5)}" height="26" rx="13" fill="#fff6d6" stroke="${G}" stroke-width="2"/><text x="${290-22-Math.max(64,U.add.length*8.5)/2}" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#1a73e8">${x(U.add)}</text><image href="icons/icon-192.png" x="22" y="52" width="40" height="40"/><text x="72" y="77" font-size="15" font-weight="600" fill="#111">SSL Gold Cup</text><text x="22" y="123" font-size="13" fill="#333">${x(U.web)}</text><rect x="236" y="108" width="40" height="24" rx="12" fill="#34c759"/><circle cx="264" cy="120" r="10" fill="#fff"/>`),
+    iOld:W(`<rect x="12" y="14" width="276" height="62" rx="10" fill="#fff"/>${lines(28,30,2,200)}<rect x="0" y="96" width="300" height="54" fill="#f8f9fb"/><g fill="none" stroke="#1a73e8" stroke-width="2.4" stroke-linecap="round"><path d="M38 116l-7 7 7 7M74 116l7 7-7 7"/><rect x="190" y="113" width="18" height="18" rx="3"/><path d="M236 116h18v14h-18z"/></g>${shareI(150,124)}${tap(150,122)}`),
+    a1:W(`<rect x="10" y="12" width="236" height="36" rx="18" fill="#fff"/><text x="28" y="35" font-size="13" fill="#555">hansmann-creator.github.io</text><circle cx="270" cy="30" r="16" fill="#fff"/><g fill="#222"><circle cx="270" cy="22" r="2.6"/><circle cx="270" cy="30" r="2.6"/><circle cx="270" cy="38" r="2.6"/></g>${tap(270,30)}<rect x="12" y="66" width="276" height="74" rx="10" fill="#fff"/>${lines(28,82,2,200)}`),
+    a2:W(`<rect x="96" y="10" width="194" height="130" rx="10" fill="#fff"/><rect x="112" y="24" width="110" height="9" rx="4.5" fill="#cfd6e2"/><rect x="112" y="50" width="90" height="9" rx="4.5" fill="#cfd6e2"/><rect x="104" y="72" width="178" height="36" rx="8" fill="#fff6d6" stroke="${G}" stroke-width="2"/><text x="116" y="95" font-size="14" font-weight="600" fill="#111">${x(U.ainst)}</text><rect x="112" y="122" width="100" height="9" rx="4.5" fill="#cfd6e2"/>`),
+    a3:W(`<rect x="30" y="14" width="240" height="122" rx="16" fill="#fff"/><image href="icons/icon-192.png" x="48" y="30" width="40" height="40"/><text x="98" y="55" font-size="15" font-weight="600" fill="#111">SSL Gold Cup</text><text x="98" y="72" font-size="11" fill="#666">hansmann-creator.github.io</text><rect x="${250-Math.max(80,U.aok.length*9)}" y="92" width="${Math.max(80,U.aok.length*9)}" height="32" rx="16" fill="#1a73e8" stroke="${G}" stroke-width="3"/><text x="${250-Math.max(80,U.aok.length*9)/2}" y="113" text-anchor="middle" font-size="14" font-weight="600" fill="#fff">${x(U.aok)}</text><rect x="64" y="104" width="50" height="9" rx="4.5" fill="#cfd6e2"/>`)};
+  const steps=(txt,pics)=>`<h3 class="obh">${x(T("obSteps"))}</h3><ol class="obs">${txt.map((t,i)=>`<li><div class="obn">${i+1}</div><div><p>${x(t)}</p>${pics[i]?pic[pics[i]]:""}</div></li>`).join("")}</ol><p class="warn">${x(T("done2"))}</p>`;
+  let body="";
+  if(BIP)body=`<button class="obgo" data-obgo="1">${svg('<path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>')}<span>${x(T("obBtn"))}</span></button>`;
+  else if(inApp)body=`<p class="obwarn">${x(T("inApp"))}</p><button class="obgo" data-obcopy="1"><span>🔗 ${x(T("copy"))}</span></button>`;
+  else if(isIOS)body=(iosOther?`<p class="obwarn">${x(T("iosAlt"))} <button class="oblink" data-obcopy="1">${x(T("copy"))}</button></p>`:"")+(iosV>=26||iosOther?steps(T("ios26"),["i26a","i26b","sheet","add"]):steps(T("iosOld"),["iOld","sheet","add"]));
+  else if(isAndroid)body=steps(I.android,["a1","a2","a3"]);
+  else body=`<ol class="isteps">${I.desk.map(s=>`<li>${x(s)}</li>`).join("")}</ol>`;
+  const perks=T("obPerks").filter((p,i)=>i<2||CFG.push);
+  d.classList.add("full");
+  d.innerHTML=`<div class="obtop"><select class="oblang" aria-label="Language">${Object.entries(LANGS).map(([k,v])=>`<option value="${k}"${k==lang?" selected":""}>${v}</option>`).join("")}</select><button class="x" aria-label="${T("close")}">✕</button></div><div class="tb ob"><div class="obhero" tabindex="-1"><img src="icons/icon-192.png" alt="" width="88" height="88"><h2>${x(T("obT"))}</h2><p>${x(T("obSub"))}</p><ul class="obp">${perks.map(p=>`<li>✓ ${x(p)}</li>`).join("")}</ul></div>${body}<button class="oblater">${x(T("obLater"))}</button></div>`;
+  const done=()=>{LS.set("onb",1);d.close()};
+  d.querySelector(".x").onclick=done;d.querySelector(".oblater").onclick=done;
+  d.querySelector(".oblang").onchange=e=>{lang=e.target.value;LS.set("lang",lang);for(const k in SQ)delete SQ[k];chrome();render(true);installHelp(first)};
+  const go=d.querySelector("[data-obgo]");if(go)go.onclick=async()=>{LS.set("onb",1);d.close();await doInstall()};
+  d.querySelectorAll("[data-obcopy]").forEach(b=>b.onclick=async()=>{const u=location.href.split("#")[0];try{await navigator.clipboard.writeText(u);toast(T("copied"))}catch(e){toast(u)}});
+  openCode=null;show(d);try{d.querySelector(".obhero").focus({preventScroll:true})}catch(e){}}
+/* first visit in a phone browser: show the install guide once, full screen */
+function firstRun(){try{if(LS.get("onb",0)||LS.get("installed",0)||!canInstall()||!(isIOS||isAndroid)||navigator.webdriver)return;
+  setTimeout(()=>{if(!$("#tmd").open&&!LS.get("onb",0))installHelp(true)},900)}catch(e){}}
 /* ---------- push notifications (OneSignal) + private visitor counter (GoatCounter); both off until config.js has a value ---------- */
 const CFG=window.CFG||{};
 const pushCan=()=>!!CFG.push&&"serviceWorker" in navigator&&"PushManager" in window&&"Notification" in window&&(location.protocol=="https:"||location.hostname=="localhost");
@@ -723,7 +789,7 @@ $("#main").addEventListener("click",e=>{
   const s=e.target.closest("[data-s]");if(s){sortBy=s.dataset.s;render(true);return}
   const t=e.target.closest(".team,.tm,.tmx");if(t)openTeam(t.dataset.t)});
 $("#tmd").addEventListener("click",e=>{if(e.target.id=="tmd")e.target.close()});
-$("#tmd").addEventListener("close",()=>{openCode=null;try{if(history.state&&history.state.sheet)history.back()}catch(e){}});
+$("#tmd").addEventListener("close",()=>{openCode=null;if($("#tmd").querySelector(".ob"))LS.set("onb",1);$("#tmd").classList.remove("full");try{if(history.state&&history.state.sheet)history.back()}catch(e){}});
 window.addEventListener("popstate",()=>{const d=$("#tmd");if(d.open)d.close()});
 window.addEventListener("hashchange",route);
 document.addEventListener("keydown",e=>{if(e.target.matches("input,select,textarea")||$("#tmd").open)return;
@@ -735,7 +801,7 @@ document.addEventListener("visibilitychange",async()=>{if(!document.hidden&&awai
 await pullFile();live=true;loadWx();setInterval(loadWx,30*6e4);
 round=current();
 if(!location.hash){const v=LS.get("view","");if(v&&!/^team-/.test(v))try{location.hash=v}catch(e){}}
-route();
+route();firstRun();
 
 /* ---------- app updates: reload automatically when a new version is published ---------- */
 let VER=null,NEWVER=false;
