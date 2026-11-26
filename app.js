@@ -2257,7 +2257,7 @@ function nxState(x){const t=at(x),n=nowMs(),f=FLG&&FLG.races&&FLG.races[raceKey(
   return st=="racing"?{k:"racing"}:{k:"live"}}
 function nxcPaint(){let b=$("#nxc");const n=nowMs();
   const cand=SCH.filter(x=>!raceDone(x)&&at(x)>n-150*60e3).sort((a,b)=>at(a)-at(b));let x=null,S0=null;
-  for(const c of cand){const s=nxState(c);if(s.k=="done")continue;if(s.k=="live"&&n>at(c)+75*60e3)continue;x=c;S0=s;break}
+  for(const c of cand){const s=nxState(c);if(s.k=="done"||s.k=="live"||s.k=="racing")continue;x=c;S0=s;break}
   if(!x){if(b)b.remove();return}
   if(!b){b=document.createElement("button");b.id="nxc";b.type="button";b.onclick=()=>{const y=b._x;if(!y)return;b.classList.contains("live")?openLive(y):openRace(y)};$(".bar").appendChild(b)}
   const L=NXS[lang]||NXS.en,red=S0.k=="racing"||S0.k=="live";b._x=x;b.classList.toggle("live",red);b.dataset.st=S0.k;
