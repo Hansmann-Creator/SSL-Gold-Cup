@@ -914,4 +914,5 @@ dialog.tmd:has(.vframe iframe) .vframe{touch-action:auto}
 @keyframes swl{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:none}}
 @keyframes swr{from{opacity:0;transform:translateX(-36px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){#main.swl,#main.swr{animation:none}}
-#setb{order:9}
+
+.lgw{height:40px;min-height:0;box-sizing:border-box}#setb{width:40px;height:40px;min-height:0}.bar{align-items:center}
