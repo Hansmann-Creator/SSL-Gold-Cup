@@ -732,3 +732,7 @@ td.t .bdg,td.t>.tag{margin-inline-start:30px}
 .gn{font-weight:400;opacity:.8}.sn{font-weight:800}
 .snh .gn{display:block;font-size:.6em;opacity:.75}
 .nmx{display:block;font-size:15px}
+.tnk{color:var(--gold);font-weight:600;letter-spacing:.01em}.cmh small.tnk{color:var(--gold)}
+#nxc{min-width:8.2em;align-items:center}#nxc small{justify-content:center}
+.vframe.nolive{display:grid;place-items:center;text-align:center;background:linear-gradient(135deg,#1a4486,#0a5590);color:#fff}
+.vframe.nolive b{display:block;font-size:20px;margin-bottom:6px}.vframe.nolive span{font-size:14px;opacity:.85}

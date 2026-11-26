@@ -107,3 +107,7 @@ if __name__ == "__main__":
     build_ics()
     build_tracking()
     build_videos()
+    try:
+        import live_video; live_video.main()
+    except Exception as e:
+        print("live video:", e)
