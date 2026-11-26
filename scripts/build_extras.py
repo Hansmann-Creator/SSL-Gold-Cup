@@ -84,6 +84,26 @@ def build_tracking():
     print("tracking rounds:", {k: sum(len(v) for v in g.values()) for k, g in out.items()})
 
 
+def build_videos():
+    """Latest videos of the SSL YouTube channel (public RSS feed, no key needed)."""
+    import xml.etree.ElementTree as ET
+    out = []
+    try:
+        url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCslTs2hZG7d08VYH_mLGSUg"
+        x = urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"}), timeout=20).read()
+        ns = {"a": "http://www.w3.org/2005/Atom", "yt": "http://www.youtube.com/xml/schemas/2015", "m": "http://search.yahoo.com/mrss/"}
+        for e in ET.fromstring(x).findall("a:entry", ns):
+            vid = e.findtext("yt:videoId", "", ns)
+            if not re.fullmatch(r"[\w-]{6,20}", vid or ""):
+                continue
+            out.append({"id": vid, "t": (e.findtext("a:title", "", ns) or "").strip(), "d": e.findtext("a:published", "", ns)})
+    except Exception as ex:
+        print("videos: could not read feed:", ex)
+    json.dump(out, open(os.path.join(ROOT, "videos.json"), "w"), separators=(",", ":"), ensure_ascii=False)
+    print("videos:", len(out))
+
+
 if __name__ == "__main__":
     build_ics()
     build_tracking()
+    build_videos()

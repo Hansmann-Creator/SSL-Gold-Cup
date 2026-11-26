@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: "41 * * 11,12 *"   # hourly refresh of videos and tracking links during the event
 
 permissions:
   contents: read

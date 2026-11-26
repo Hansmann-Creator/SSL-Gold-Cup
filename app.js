@@ -11,7 +11,7 @@ let TRK={};try{const r=await fetch("tracking.json",{cache:"no-cache"});if(r.ok)T
 let INFO={};try{INFO=await (await fetch("teaminfo.json",{cache:"no-cache"})).json()}catch(e){}
 let PEOPLE=[];try{PEOPLE=await (await fetch("people.json",{cache:"no-cache"})).json()}catch(e){}
 const okData=d=>{try{return d&&Array.isArray(d.rounds)&&d.rounds.length>=5&&d.rounds.every(r=>r&&r.id&&r.start&&r.end&&Array.isArray(r.groups)&&r.groups.length&&r.groups.every(g=>g&&g.id&&Array.isArray(g.rows)&&g.rows.length&&g.rows.every(x=>x&&typeof x.team=="string"&&Array.isArray(x.r))))}catch(e){return false}};
-async function pullFile(){try{const r=await fetch("results.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)return false;const d=await r.json();if(okData(d)&&(!D.updatedAt||Date.parse(d.updatedAt)>=Date.parse(D.updatedAt))){const ch=JSON.stringify(d.rounds)!==JSON.stringify(D.rounds);D=d;if(d.checkedAt)checkedAt=d.checkedAt;return ch}}catch(e){}return false}
+async function pullFile(){try{const r=await fetch("results.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)return false;const d=await r.json();if(okData(d)&&(!RAWD.updatedAt||Date.parse(d.updatedAt)>=Date.parse(RAWD.updatedAt))){const ch=JSON.stringify(d.rounds)!==JSON.stringify(RAWD.rounds);setD(d);if(d.checkedAt)checkedAt=d.checkedAt;return ch}}catch(e){}return false}
 let RO={};try{RO=await (await fetch("roster.json",{cache:"no-cache"})).json()}catch(e){}
 let D=JSON.parse($("#snap").textContent),checkedAt=null,view="board",round=null,sel=null,filt="all",sortBy="status",q="",live=false,stale=false,jump=false;
 
@@ -292,15 +292,57 @@ pt:{trkOpen:"📍 Ver rastreamento ao vivo",trkReplay:"📍 Rever a regata (rast
 zh:{trkOpen:"📍 查看实时追踪",trkReplay:"📍 回放比赛（追踪）",trkNone:"Georacing 创建本场比赛后，追踪将显示在这里。",trkExt:"在 Georacing 中打开 ↗",trkHint:"每条船都是地图上的一个点——比赛中实时显示，赛后可回放。",back:"‹ 返回",rcRes:"本场成绩",rcTeams:"参赛队伍",rcStand:"小组目前排名",rcPts:"分",rcGroup:"在 Matchboard 中查看小组",rcTBD:"参赛队伍尚未确定"},
 ar:{trkOpen:"📍 شاهد التتبع المباشر",trkReplay:"📍 أعد مشاهدة السباق (التتبع)",trkNone:"سيظهر التتبع هنا بمجرد أن تُنشئ Georacing هذا السباق.",trkExt:"افتح في Georacing ↗",trkHint:"كل قارب نقطة على الخريطة – مباشرة أثناء السباق، ثم كإعادة بعده.",back:"رجوع ›",rcRes:"نتيجة هذا السباق",rcTeams:"على خط الانطلاق",rcStand:"المجموعة حتى الآن",rcPts:"نقطة",rcGroup:"اعرض المجموعة في Matchboard",rcTBD:"لم تُحدَّد الفرق بعد"}};
 for(const l in SR)Object.assign(S[l],SR[l]);
+const SHARE="https://is.gd/sslgoldcup";
 const SS={
-en:{qsep:n=>`▲ Top 2 go through to the ${n}`,shareSub:"Send via WhatsApp, Messages & co.",shareMsg:"SSL Gold Cup Rio 2026 – live results, race times and all teams:",sCaps:"Captains",sTeams:"Crews",sHint:"Tap a team to see its crew – teams still in the race come first.",sTeamPage:"Team page",fShow:"Show",fSort:"Sort"},
-de:{qsep:n=>`▲ Platz 1 und 2 kommen weiter: ${n}`,shareSub:"Per WhatsApp, Nachrichten & Co. verschicken",shareMsg:"SSL Gold Cup Rio 2026 – Live-Ergebnisse, Startzeiten und alle Teams:",sCaps:"Kapitäne",sTeams:"Crews",sHint:"Tippe auf ein Team, um die Crew zu sehen – Teams, die noch dabei sind, stehen oben.",sTeamPage:"Zur Teamseite",fShow:"Zeigen",fSort:"Sortieren"},
-fr:{qsep:n=>`▲ Les 2 premiers se qualifient : ${n}`,shareSub:"Envoyer par WhatsApp, Messages, etc.",shareMsg:"SSL Gold Cup Rio 2026 – résultats en direct, horaires et toutes les équipes :",sCaps:"Capitaines",sTeams:"Équipages",sHint:"Touchez une équipe pour voir l'équipage – les équipes encore en course d'abord.",sTeamPage:"Page de l'équipe",fShow:"Afficher",fSort:"Trier"},
-es:{qsep:n=>`▲ Los 2 primeros pasan: ${n}`,shareSub:"Enviar por WhatsApp, Mensajes, etc.",shareMsg:"SSL Gold Cup Rio 2026: resultados en directo, horarios y todos los equipos:",sCaps:"Capitanes",sTeams:"Tripulaciones",sHint:"Toca un equipo para ver su tripulación; primero los que siguen en competición.",sTeamPage:"Página del equipo",fShow:"Mostrar",fSort:"Ordenar"},
-pt:{qsep:n=>`▲ Os 2 primeiros avançam: ${n}`,shareSub:"Enviar por WhatsApp, Mensagens etc.",shareMsg:"SSL Gold Cup Rio 2026 – resultados ao vivo, horários e todas as equipes:",sCaps:"Capitães",sTeams:"Tripulações",sHint:"Toque numa equipe para ver a tripulação – as que seguem na disputa vêm primeiro.",sTeamPage:"Página da equipe",fShow:"Mostrar",fSort:"Ordenar"},
-zh:{qsep:n=>`▲ 前 2 名晋级：${n}`,shareSub:"通过微信、WhatsApp 等发送",shareMsg:"SSL Gold Cup 里约 2026——实时成绩、比赛时间和全部队伍：",sCaps:"队长",sTeams:"各队阵容",sHint:"点按队伍查看阵容——仍在比赛中的队伍排在前面。",sTeamPage:"队伍页面",fShow:"显示",fSort:"排序"},
-ar:{qsep:n=>`▲ أول فريقين يتأهلان: ${n}`,shareSub:"أرسله عبر واتساب والرسائل وغيرها",shareMsg:"SSL Gold Cup ريو 2026 – النتائج المباشرة ومواعيد السباقات وكل الفرق:",sCaps:"القادة",sTeams:"الأطقم",sHint:"اضغط على فريق لرؤية طاقمه – الفرق التي ما زالت في المنافسة أولًا.",sTeamPage:"صفحة الفريق",fShow:"عرض",fSort:"ترتيب"}};
+en:{qrT:"Scan with the phone camera – the app opens right away.",shareNow:"Share…",qsep:n=>"▲ advance",shareSub:"Send via WhatsApp, Messages & co.",shareMsg:"SSL Gold Cup Rio 2026 – live results, race times and all teams:",sCaps:"Captains",sTeams:"Crews",sHint:"Tap a team to see its crew – teams still in the race come first.",sTeamPage:"Team page",fShow:"Show",fSort:"Sort"},
+de:{qrT:"Mit der Handy-Kamera scannen – die App öffnet sich sofort.",shareNow:"Teilen …",qsep:n=>"▲ weiter",shareSub:"Per WhatsApp, Nachrichten & Co. verschicken",shareMsg:"SSL Gold Cup Rio 2026 – Live-Ergebnisse, Startzeiten und alle Teams:",sCaps:"Kapitäne",sTeams:"Crews",sHint:"Tippe auf ein Team, um die Crew zu sehen – Teams, die noch dabei sind, stehen oben.",sTeamPage:"Zur Teamseite",fShow:"Zeigen",fSort:"Sortieren"},
+fr:{qrT:"Scannez avec l'appareil photo – l'app s'ouvre aussitôt.",shareNow:"Partager…",qsep:n=>"▲ qualifiés",shareSub:"Envoyer par WhatsApp, Messages, etc.",shareMsg:"SSL Gold Cup Rio 2026 – résultats en direct, horaires et toutes les équipes :",sCaps:"Capitaines",sTeams:"Équipages",sHint:"Touchez une équipe pour voir l'équipage – les équipes encore en course d'abord.",sTeamPage:"Page de l'équipe",fShow:"Afficher",fSort:"Trier"},
+es:{qrT:"Escanéalo con la cámara del móvil: la app se abre al instante.",shareNow:"Compartir…",qsep:n=>"▲ pasan",shareSub:"Enviar por WhatsApp, Mensajes, etc.",shareMsg:"SSL Gold Cup Rio 2026: resultados en directo, horarios y todos los equipos:",sCaps:"Capitanes",sTeams:"Tripulaciones",sHint:"Toca un equipo para ver su tripulación; primero los que siguen en competición.",sTeamPage:"Página del equipo",fShow:"Mostrar",fSort:"Ordenar"},
+pt:{qrT:"Escaneie com a câmera do celular – o app abre na hora.",shareNow:"Compartilhar…",qsep:n=>"▲ avançam",shareSub:"Enviar por WhatsApp, Mensagens etc.",shareMsg:"SSL Gold Cup Rio 2026 – resultados ao vivo, horários e todas as equipes:",sCaps:"Capitães",sTeams:"Tripulações",sHint:"Toque numa equipe para ver a tripulação – as que seguem na disputa vêm primeiro.",sTeamPage:"Página da equipe",fShow:"Mostrar",fSort:"Ordenar"},
+zh:{qrT:"用手机相机扫描，立即打开应用。",shareNow:"分享…",qsep:n=>"▲ 晋级",shareSub:"通过微信、WhatsApp 等发送",shareMsg:"SSL Gold Cup 里约 2026——实时成绩、比赛时间和全部队伍：",sCaps:"队长",sTeams:"各队阵容",sHint:"点按队伍查看阵容——仍在比赛中的队伍排在前面。",sTeamPage:"队伍页面",fShow:"显示",fSort:"排序"},
+ar:{qrT:"امسحه بكاميرا الهاتف – يفتح التطبيق فورًا.",shareNow:"مشاركة…",qsep:n=>"▲ يتأهلان",shareSub:"أرسله عبر واتساب والرسائل وغيرها",shareMsg:"SSL Gold Cup ريو 2026 – النتائج المباشرة ومواعيد السباقات وكل الفرق:",sCaps:"القادة",sTeams:"الأطقم",sHint:"اضغط على فريق لرؤية طاقمه – الفرق التي ما زالت في المنافسة أولًا.",sTeamPage:"صفحة الفريق",fShow:"عرض",fSort:"ترتيب"}};
 for(const l in SS)Object.assign(S[l],SS[l]);
+const SPS={
+en:{spT:"Spoiler-free",spUntil:w=>`Results hidden after ${w}`,spNone:"No hidden results right now",spShow:"Show all",spOff:"Off",spRow:"Spoiler-free mode",spSub:"Hide results until you have watched the race",spRace:"Result hidden",spReveal:"I've watched it – show result",spOnT:"Results from today on are hidden"},
+de:{spT:"Spoiler-Schutz",spUntil:w=>`Ergebnisse ab ${w} verborgen`,spNone:"Gerade nichts verborgen",spShow:"Alles zeigen",spOff:"Aus",spRow:"Spoiler-Schutz",spSub:"Ergebnisse verbergen, bis du das Rennen gesehen hast",spRace:"Ergebnis verborgen",spReveal:"Hab's gesehen – Ergebnis zeigen",spOnT:"Ergebnisse ab heute sind verborgen"},
+fr:{spT:"Sans spoiler",spUntil:w=>`Résultats masqués après ${w}`,spNone:"Aucun résultat masqué pour l'instant",spShow:"Tout afficher",spOff:"Désactiver",spRow:"Mode sans spoiler",spSub:"Masquer les résultats tant que vous n'avez pas vu la course",spRace:"Résultat masqué",spReveal:"Je l'ai vue – afficher le résultat",spOnT:"Les résultats à partir d'aujourd'hui sont masqués"},
+es:{spT:"Sin spoilers",spUntil:w=>`Resultados ocultos desde ${w}`,spNone:"Ahora no hay resultados ocultos",spShow:"Mostrar todo",spOff:"Desactivar",spRow:"Modo sin spoilers",spSub:"Oculta los resultados hasta que hayas visto la regata",spRace:"Resultado oculto",spReveal:"Ya la vi: mostrar resultado",spOnT:"Los resultados desde hoy están ocultos"},
+pt:{spT:"Sem spoilers",spUntil:w=>`Resultados ocultos a partir de ${w}`,spNone:"Nenhum resultado oculto agora",spShow:"Mostrar tudo",spOff:"Desligar",spRow:"Modo sem spoilers",spSub:"Esconde os resultados até você assistir à regata",spRace:"Resultado oculto",spReveal:"Já assisti – mostrar resultado",spOnT:"Os resultados a partir de hoje estão ocultos"},
+zh:{spT:"防剧透",spUntil:w=>`${w} 之后的成绩已隐藏`,spNone:"目前没有隐藏的成绩",spShow:"全部显示",spOff:"关闭",spRow:"防剧透模式",spSub:"在你看完比赛前隐藏成绩",spRace:"成绩已隐藏",spReveal:"我看完了——显示成绩",spOnT:"今天起的成绩已隐藏"},
+ar:{spT:"بلا حرق للنتائج",spUntil:w=>`النتائج مخفية بعد ${w}`,spNone:"لا توجد نتائج مخفية الآن",spShow:"أظهر الكل",spOff:"إيقاف",spRow:"وضع بلا حرق للنتائج",spSub:"أخفِ النتائج حتى تشاهد السباق",spRace:"النتيجة مخفية",spReveal:"شاهدته – أظهر النتيجة",spOnT:"النتائج من اليوم مخفية"}};
+for(const l in SPS)Object.assign(S[l],SPS[l]);
+const SLV={
+en:{cmpBtn:"⚖️ Compare",cmpVs:"vs",cmpPick:"Pick a team to compare with.",h2hT:"Head to head",h2hSub:"races finished ahead",h2hNone:"No races against each other yet.",cmpNote:"Numbers from the races in Rio; ranking = SSL Nations Ranking.",vidT:"🎬 Highlights & videos",vidAll:"All videos on YouTube ↗",vidOpen:"Open on YouTube ↗",vidHid:n=>`${n} newer video${n>1?"s":""} hidden (spoiler-free)`},
+de:{cmpBtn:"⚖️ Vergleichen",cmpVs:"vs.",cmpPick:"Wähle ein Team zum Vergleichen.",h2hT:"Direkter Vergleich",h2hSub:"Rennen vor dem anderen",h2hNone:"Noch keine Rennen gegeneinander.",cmpNote:"Zahlen aus den Rennen in Rio; Rang = SSL Nations Ranking.",vidT:"🎬 Highlights & Videos",vidAll:"Alle Videos auf YouTube ↗",vidOpen:"Auf YouTube öffnen ↗",vidHid:n=>`${n} neuere${n>1?"":"s"} Video${n>1?"s":""} verborgen (Spoiler-Schutz)`},
+fr:{cmpBtn:"⚖️ Comparer",cmpVs:"vs",cmpPick:"Choisissez une équipe à comparer.",h2hT:"Face-à-face",h2hSub:"courses terminées devant",h2hNone:"Pas encore de course l'une contre l'autre.",cmpNote:"Chiffres des courses à Rio ; rang = SSL Nations Ranking.",vidT:"🎬 Temps forts & vidéos",vidAll:"Toutes les vidéos sur YouTube ↗",vidOpen:"Ouvrir sur YouTube ↗",vidHid:n=>`${n} vidéo(s) récente(s) masquée(s) (sans spoiler)`},
+es:{cmpBtn:"⚖️ Comparar",cmpVs:"vs",cmpPick:"Elige un equipo para comparar.",h2hT:"Cara a cara",h2hSub:"regatas terminadas por delante",h2hNone:"Aún no han competido entre sí.",cmpNote:"Cifras de las regatas en Río; puesto = SSL Nations Ranking.",vidT:"🎬 Resúmenes y vídeos",vidAll:"Todos los vídeos en YouTube ↗",vidOpen:"Abrir en YouTube ↗",vidHid:n=>`${n} vídeo(s) reciente(s) oculto(s) (sin spoilers)`},
+pt:{cmpBtn:"⚖️ Comparar",cmpVs:"x",cmpPick:"Escolha uma equipe para comparar.",h2hT:"Confronto direto",h2hSub:"regatas terminadas à frente",h2hNone:"Ainda não competiram entre si.",cmpNote:"Números das regatas no Rio; posição = SSL Nations Ranking.",vidT:"🎬 Melhores momentos e vídeos",vidAll:"Todos os vídeos no YouTube ↗",vidOpen:"Abrir no YouTube ↗",vidHid:n=>`${n} vídeo(s) recente(s) oculto(s) (sem spoilers)`},
+zh:{cmpBtn:"⚖️ 对比",cmpVs:"对",cmpPick:"选择要对比的队伍。",h2hT:"交锋记录",h2hSub:"场比赛名次领先",h2hNone:"两队尚未交手。",cmpNote:"数据来自里约的比赛；排名 = SSL 国家排名。",vidT:"🎬 集锦与视频",vidAll:"在 YouTube 查看全部视频 ↗",vidOpen:"在 YouTube 打开 ↗",vidHid:n=>`已隐藏 ${n} 个较新的视频（防剧透）`},
+ar:{cmpBtn:"⚖️ قارن",cmpVs:"ضد",cmpPick:"اختر فريقًا للمقارنة.",h2hT:"المواجهات المباشرة",h2hSub:"سباقات أنهاها متقدمًا",h2hNone:"لم يتواجها في أي سباق بعد.",cmpNote:"الأرقام من سباقات ريو؛ المركز = تصنيف SSL للدول.",vidT:"🎬 الملخصات والفيديوهات",vidAll:"كل الفيديوهات على YouTube ↗",vidOpen:"افتح على YouTube ↗",vidHid:n=>`تم إخفاء ${n} من الفيديوهات الأحدث (بلا حرق)`}};
+for(const l in SLV)Object.assign(S[l],SLV[l]);
+const SMX={
+en:{pastL:"Look back",vnT:"Venue · Marina da Glória",vnSub:"Where it all happens – map & directions",vnRoute:"Directions",vnApple:"Apple Maps",vnInfo:["The 2016 Olympic sailing venue, on Guanabara Bay with a view of Sugarloaf Mountain.","The marina is open to the public during the event – see the boats up close and visit the athletes' village.","Racing takes place on Guanabara Bay right in front of the marina."],
+ suT:"Sustainability",suSub:"What the SSL does for the ocean and fair sport",suIntro:"The SSL says that for them sustainability means protecting the ocean and making the sport fairer.",suList:["Every SSL Gold Cup boat must have two women on board.","No plastic bottles in the athletes' village.","A dedicated Sustainability Manager since September 2025.","Aligned with Clean Regattas, World Sailing's Sustainability Agenda 2030 and the IOC strategy; the goal is Platinum Clean Regattas certification.","Beach clean-ups with the teams at the qualifiers.","Few support boats: at the 2023 Finals, four coach boats served 440 sailors."],suMore:"Read more at the SSL ↗",
+ mcT:"Merch",mcSub:"Jerseys, caps & more – coming soon",mcSoon:"Coming soon",mcTxt:"The official SSL Gold Cup Store is not open yet. As soon as it is, you can shop here.",mcList:["Captain's jerseys of the national teams","SSL caps","SSL47 boat and team figures as building sets"],mcGo:"To the SSL store ↗"},
+de:{pastL:"Rückblick",vnT:"Austragungsort · Marina da Glória",vnSub:"Wo alles passiert – Karte & Anfahrt",vnRoute:"Route",vnApple:"Apple Karten",vnInfo:["Das olympische Segelrevier von 2016, an der Guanabara-Bucht mit Blick auf den Zuckerhut.","Die Marina ist während des Events für alle geöffnet – die Boote aus der Nähe sehen und das Athletendorf besuchen.","Gesegelt wird auf der Guanabara-Bucht direkt vor der Marina."],
+ suT:"Nachhaltigkeit",suSub:"Was die SSL für Meer und faire Sportbedingungen tut",suIntro:"Für die SSL heißt Nachhaltigkeit: das Meer schützen und den Sport fairer machen.",suList:["Auf jedem SSL-Gold-Cup-Boot müssen zwei Frauen segeln.","Keine Plastikflaschen im Athletendorf.","Eine eigene Nachhaltigkeitsmanagerin seit September 2025.","Ausgerichtet an Clean Regattas, der Sustainability Agenda 2030 von World Sailing und der IOC-Strategie; Ziel ist die Platinum-Zertifizierung von Clean Regattas.","Strandreinigungen mit den Teams bei den Qualifikationen.","Wenige Begleitboote: Beim Finale 2023 betreuten vier Coach-Boote 440 Segler."],suMore:"Mehr bei der SSL ↗",
+ mcT:"Merch",mcSub:"Trikots, Caps & mehr – bald verfügbar",mcSoon:"Bald verfügbar",mcTxt:"Der offizielle SSL Gold Cup Store ist noch nicht geöffnet. Sobald er öffnet, kannst du hier einkaufen.",mcList:["Kapitänstrikots der Nationalteams","SSL-Caps","SSL47-Boot und Team-Figuren als Bausets"],mcGo:"Zum SSL-Store ↗"},
+fr:{pastL:"Rétro",vnT:"Site · Marina da Glória",vnSub:"Où tout se passe – carte et itinéraire",vnRoute:"Itinéraire",vnApple:"Plans (Apple)",vnInfo:["Le site de voile des Jeux olympiques de 2016, sur la baie de Guanabara face au Pain de Sucre.","La marina est ouverte au public pendant l'événement – voir les bateaux de près et visiter le village des athlètes.","Les courses ont lieu dans la baie de Guanabara, juste devant la marina."],
+ suT:"Développement durable",suSub:"Ce que fait la SSL pour l'océan et l'équité",suIntro:"Pour la SSL, la durabilité c'est protéger l'océan et rendre le sport plus équitable.",suList:["Chaque bateau de la SSL Gold Cup doit compter deux femmes à bord.","Aucune bouteille en plastique dans le village des athlètes.","Une responsable du développement durable depuis septembre 2025.","Alignée sur Clean Regattas, l'Agenda 2030 de World Sailing et la stratégie du CIO ; objectif : la certification Platinum de Clean Regattas.","Nettoyages de plage avec les équipes lors des qualifications.","Peu de bateaux d'assistance : en 2023, quatre bateaux de coach pour 440 marins."],suMore:"En savoir plus sur le site de la SSL ↗",
+ mcT:"Boutique",mcSub:"Maillots, casquettes et plus – bientôt",mcSoon:"Bientôt disponible",mcTxt:"La boutique officielle SSL Gold Cup n'est pas encore ouverte. Dès son ouverture, vous pourrez commander ici.",mcList:["Maillots de capitaine des équipes nationales","Casquettes SSL","Bateau SSL47 et figurines à construire"],mcGo:"Vers la boutique SSL ↗"},
+es:{pastL:"Historial",vnT:"Sede · Marina da Glória",vnSub:"Donde pasa todo: mapa y cómo llegar",vnRoute:"Cómo llegar",vnApple:"Apple Mapas",vnInfo:["La sede de vela de los Juegos Olímpicos de 2016, en la bahía de Guanabara frente al Pan de Azúcar.","La marina está abierta al público durante el evento: ve los barcos de cerca y visita la villa de los atletas.","Las regatas se disputan en la bahía de Guanabara, justo delante de la marina."],
+ suT:"Sostenibilidad",suSub:"Lo que hace la SSL por el océano y un deporte justo",suIntro:"Para la SSL, sostenibilidad significa proteger el océano y hacer el deporte más justo.",suList:["Cada barco de la SSL Gold Cup debe llevar dos mujeres a bordo.","Nada de botellas de plástico en la villa de los atletas.","Una responsable de sostenibilidad desde septiembre de 2025.","Alineada con Clean Regattas, la Agenda 2030 de World Sailing y la estrategia del COI; el objetivo es la certificación Platinum de Clean Regattas.","Limpiezas de playa con los equipos en las clasificatorias.","Pocas lanchas de apoyo: en la final de 2023, cuatro lanchas atendieron a 440 regatistas."],suMore:"Más en la web de la SSL ↗",
+ mcT:"Tienda",mcSub:"Camisetas, gorras y más: muy pronto",mcSoon:"Muy pronto",mcTxt:"La tienda oficial SSL Gold Cup aún no está abierta. En cuanto abra, podrás comprar aquí.",mcList:["Camisetas de capitán de las selecciones","Gorras SSL","Barco SSL47 y figuras para construir"],mcGo:"Ir a la tienda SSL ↗"},
+pt:{pastL:"Histórico",vnT:"Local · Marina da Glória",vnSub:"Onde tudo acontece – mapa e como chegar",vnRoute:"Como chegar",vnApple:"Apple Mapas",vnInfo:["A sede da vela olímpica de 2016, na Baía de Guanabara, com vista para o Pão de Açúcar.","A marina fica aberta ao público durante o evento – veja os barcos de perto e visite a vila dos atletas.","As regatas acontecem na Baía de Guanabara, bem em frente à marina."],
+ suT:"Sustentabilidade",suSub:"O que a SSL faz pelo oceano e por um esporte justo",suIntro:"Para a SSL, sustentabilidade significa proteger o oceano e tornar o esporte mais justo.",suList:["Cada barco da SSL Gold Cup precisa ter duas mulheres a bordo.","Nenhuma garrafa plástica na vila dos atletas.","Uma gerente de sustentabilidade desde setembro de 2025.","Alinhada ao Clean Regattas, à Agenda 2030 da World Sailing e à estratégia do COI; a meta é a certificação Platinum do Clean Regattas.","Mutirões de limpeza de praia com as equipes nas seletivas.","Poucos barcos de apoio: na final de 2023, quatro botes atenderam 440 velejadores."],suMore:"Saiba mais no site da SSL ↗",
+ mcT:"Loja",mcSub:"Camisas, bonés e mais – em breve",mcSoon:"Em breve",mcTxt:"A loja oficial da SSL Gold Cup ainda não abriu. Assim que abrir, você poderá comprar aqui.",mcList:["Camisas de capitão das seleções","Bonés SSL","Barco SSL47 e bonecos para montar"],mcGo:"Ir para a loja SSL ↗"},
+zh:{pastL:"回顾",vnT:"比赛场地 · Marina da Glória",vnSub:"赛事现场——地图与路线",vnRoute:"路线",vnApple:"Apple 地图",vnInfo:["2016 年奥运会帆船比赛场地，位于瓜纳巴拉湾，可远眺面包山。","赛事期间码头向公众开放——可近距离看船并参观运动员村。","比赛就在码头正前方的瓜纳巴拉湾进行。"],
+ suT:"可持续发展",suSub:"SSL 为海洋与公平竞赛所做的努力",suIntro:"对 SSL 来说，可持续发展意味着保护海洋，并让这项运动更加公平。",suList:["每条 SSL 金杯赛船上必须有两名女性队员。","运动员村内不使用塑料瓶。","自 2025 年 9 月起设立专职可持续发展经理。","遵循 Clean Regattas、世界帆联《2030 可持续发展议程》及国际奥委会战略；目标是获得 Clean Regattas 白金认证。","在资格赛期间与各队一起清理海滩。","尽量少用保障船：2023 年总决赛中，4 艘教练船服务 440 名运动员。"],suMore:"在 SSL 网站了解更多 ↗",
+ mcT:"周边商品",mcSub:"球衣、帽子等——即将上线",mcSoon:"即将上线",mcTxt:"SSL 金杯官方商店尚未开放。开放后即可在这里购买。",mcList:["各国家队队长球衣","SSL 帽子","SSL47 帆船与队员拼装模型"],mcGo:"前往 SSL 商店 ↗"},
+ar:{pastL:"سابقًا",vnT:"مكان البطولة · مارينا دا غلوريا",vnSub:"حيث يحدث كل شيء – الخريطة والاتجاهات",vnRoute:"الاتجاهات",vnApple:"خرائط Apple",vnInfo:["موقع منافسات الإبحار في أولمبياد 2016، على خليج غوانابارا مع إطلالة على جبل السكر.","المارينا مفتوحة للجمهور أثناء البطولة – شاهد القوارب عن قرب وزر قرية الرياضيين.","تُقام السباقات في خليج غوانابارا أمام المارينا مباشرة."],
+ suT:"الاستدامة",suSub:"ما تفعله SSL من أجل المحيط ورياضة عادلة",suIntro:"تعني الاستدامة لدى SSL حماية المحيط وجعل الرياضة أكثر عدلًا.",suList:["يجب أن تضم كل سفينة في SSL Gold Cup امرأتين على متنها.","لا زجاجات بلاستيكية في قرية الرياضيين.","مديرة استدامة متفرغة منذ سبتمبر 2025.","متوافقة مع Clean Regattas وأجندة الاستدامة 2030 للاتحاد الدولي للإبحار واستراتيجية اللجنة الأولمبية؛ والهدف شهادة Clean Regattas البلاتينية.","حملات تنظيف للشواطئ مع الفرق خلال التصفيات.","قوارب دعم قليلة: في نهائيات 2023 خدمت أربعة قوارب تدريب 440 بحّارًا."],suMore:"المزيد على موقع SSL ↗",
+ mcT:"المتجر",mcSub:"قمصان وقبعات والمزيد – قريبًا",mcSoon:"قريبًا",mcTxt:"متجر SSL Gold Cup الرسمي لم يُفتح بعد. بمجرد افتتاحه يمكنك التسوق من هنا.",mcList:["قمصان قادة المنتخبات","قبعات SSL","قارب SSL47 ومجسمات الفريق للتركيب"],mcGo:"إلى متجر SSL ↗"}};
+for(const l in SMX)Object.assign(S[l],SMX[l]);
 
 
 
@@ -452,19 +494,21 @@ function needs(r,g){if(!["r32","r16","r8","r4"].includes(r.id))return null;const
 function needBox(r,g){const L=needs(r,g);if(!L)return"";return `<div class="need"><h4>${T("needT")}</h4><ul>${L.map(x=>`<li><b>${FL(x.c)}${esc(x.c)}</b><span>${esc(x.txt)}${x.tie?" ≈":""}</span></li>`).join("")}</ul><small>${T("needNote")}</small></div>`}
 
 /* ---------- views ---------- */
+const raceNow=(rid,gid)=>SCH.some(x=>x.rid==rid&&(gid==null||x.g==gid)&&rState2(x)=="now");
+const liveTag=()=>`<span class="dot live"></span><b class="lvtag">LIVE</b>`;
 function ladder(){const L=$("#ladder");L.hidden=view!="board";if(L.hidden)return;
-  L.innerHTML=D.rounds.map(r=>{const s=rState(r),cls=s=="done"?"done":s=="live"?"live":(r.id==current()?"nx":"");
+  L.innerHTML=D.rounds.map(r=>{const s=rState(r),cls=s=="done"?"done":s=="live"?(raceNow(r.id)?"live":"amb"):(r.id==current()?"nx":"");
     return `<button data-r="${r.id}" class="${r.id==round?"on":""}"><b>${esc(RS[r.id]||r.short)}</b><small><span class="dot ${cls}"></span>${esc(range(r))}</small></button>`}).join("");
   const on=L.querySelector(".on");if(on)on.scrollIntoView({block:"nearest",inline:"center"})}
 function note(g){return g.note?(/OCS|Frühstart|early/i.test(g.note)?T("notes").ocs:g.note):""}
 const QNX={r32:"r16",r16:"r8",r8:"r4",r4:"sf",sf:"f"};
-function qsep(r,g){const nx=rnd(QNX[r.id]),txt=T("qsep")(nx?RNm(nx):"");return `<tr class="qsep" aria-hidden="true"><td colspan="${g.rows[0].r.length+3}"><span>${esc(txt)}${r.id=="sf"?` · ▼ ${esc(RNm(rnd("pf")||{id:"pf"}))}`:""}</span></td></tr>`}
-function gtable(r,g,clickable){const gs=gState(g,r);const lc=gs=="live"&&g.rows.some(x=>x.r.some(v=>String(v).trim()!==""))&&["r32","r16","r8","r4"].includes(r.id)?liveCalc(g):null;
+function qsep(r,g){const nx=rnd(QNX[r.id]),txt=T("qsep")(nx?RNm(nx):"");return `<tr class="qsep" aria-hidden="true"><td colspan="${g.rows[0].r.length+3}"><span>${esc(txt)}</span></td></tr>`}
+function gtable(r,g,clickable){const gs=gState(g,r),started=g.rows.some(x=>x.r.some(v=>String(v).trim()!=="")||String(x.total??"").trim()!=="");const lc=gs=="live"&&g.rows.some(x=>x.r.some(v=>String(v).trim()!==""))&&["r32","r16","r8","r4"].includes(r.id)?liveCalc(g):null;
   return `<table><thead><tr><th>#</th><th>${T("team")}</th>${g.rows[0].r.map((_,i)=>`<th class="r">R${i+1}</th>`).join("")}<th>${T("pts")}</th></tr></thead><tbody>${
-  g.rows.map((x,i)=>{const o=outcome(r.id,i+1,gs=="done"),tm=isTeam(x.team);const c=[o?(o[0]=="w"?"q":(o[2]===0&&r.id!="pf"?"x":"")):"",sel==x.team?"sel":"",clickable&&tm?"team":""].join(" ");
+  (started?g.rows:[...g.rows].sort((a,b)=>(isTeam(a.team)?0:1)-(isTeam(b.team)?0:1)||(isTeam(a.team)?NM(a.team):a.team).localeCompare(isTeam(b.team)?NM(b.team):b.team,lang))).map((x,i)=>{const o=started?outcome(r.id,i+1,gs=="done"):null,tm=isTeam(x.team);const c=[o?(o[0]=="w"?"q":(o[2]===0&&r.id!="pf"?"x":"")):"",sel==x.team?"sel":"",clickable&&tm?"team":""].join(" ");
     const nm=tm?`<span class="fl">${FL(x.team)}</span><span class="n">${esc(NM(x.team))}</span>${star(x.team)}`:`<span class="ph">${esc(ph(x.team))}</span>`;
     const lt=lc&&lc[i]?`<span class="tag ${lc[i]=="clinch"?"w":"o"}">${T(lc[i]=="clinch"?"clinched":"elim")}</span>`:"";
-    return `<tr class="${c}${gs!="done"&&i==1&&g.rows.length>2&&r.id!="f"&&r.id!="pf"?" qline":""}${lc&&lc[i]=="elim"?" x":""}" data-t="${esc(x.team)}"><td class="p">${i+1}</td><td class="t">${nm}${o?(o[0]=="w"&&["r32","r16","r8","r4","sf"].includes(r.id)?`<span class="bdg" title="${esc(o[1])}">${esc(ord(i+1))}</span>`:`<span class="tag ${o[0]}">${esc(o[1])}</span>`):lt}${clickable&&tm?`<span class="chev">›</span>`:""}</td>${x.r.map(v=>`<td class="r">${esc(v)||"–"}</td>`).join("")}<td class="tot">${String(x.total??"").trim()?esc(x.total):x.r.some(v=>String(v).trim()!=="")?`<span class="run" title="provisional">${x.r.reduce((s,v)=>s+num(v),0)}</span>`:"–"}</td></tr>${gs!="done"&&i==1&&g.rows.length>2&&QNX[r.id]?qsep(r,g):""}`}).join("")
+    return `<tr class="${c}${lc&&lc[i]=="elim"?" x":""}" data-t="${esc(x.team)}"><td class="p">${started?i+1:""}</td><td class="t">${nm}${o?(o[0]=="w"&&["r32","r16","r8","r4","sf"].includes(r.id)?`<span class="bdg" title="${esc(o[1])}">${esc(ord(i+1))}</span>`:`<span class="tag ${o[0]}">${esc(o[1])}</span>`):lt}${clickable&&tm?`<span class="chev">›</span>`:""}</td>${x.r.map(v=>`<td class="r">${esc(v)||"–"}</td>`).join("")}<td class="tot">${String(x.total??"").trim()?esc(x.total):x.r.some(v=>String(v).trim()!=="")?`<span class="run" title="provisional">${x.r.reduce((s,v)=>s+num(v),0)}</span>`:"–"}</td></tr>${started&&gs!="done"&&i==1&&g.rows.length>2&&QNX[r.id]?qsep(r,g):""}`}).join("")
   }</tbody></table>${note(g)?`<div class="note">${esc(note(g))}</div>`:""}${clickable&&advText(r,g)?`<div class="adv">${esc(advText(r,g))}</div>`:""}`}
 function mine(){if(!favs.size)return"";const TT=teams().filter(t=>favs.has(t.code));if(!TT.length)return"";
   return `<div class="mine"><h3>★ ${T("myTeams")}</h3>${TT.map(t=>`<button data-t="${esc(t.code)}" class="tmx"><span>${t.flag}</span><span><b>${esc(t.name)}</b><br><small>${esc(t.txt)}</small></span></button>`).join("")}</div>`}
@@ -481,7 +525,7 @@ function todayCard(){let h="";const td=today(),tl=SCH.filter(x=>x.d==td);
 function boardGroups(r){let h="";
   if(r.id=="f"||r.id=="pf")h+=`<p class="warn">${T("oneRace")}</p>`;
   h+=`<div class="grid">`+r.groups.map(g=>{const gs=gState(g,r),nx=gs!="done"?nextFor(r.id,g.id):null;
-    return `<section class="g"><div class="gh"><b>${r.groups.length>1?T("group")+" "+esc(g.id):esc(RNm(r))}</b><span class="st"><span class="dot ${gs=="done"?"done":gs=="live"?"live":""}"></span>${T(gs=="done"?"decided":gs=="live"?"racing":"open")}${gs!="up"?`<button class="shbtn" data-shimg="${r.id}|${esc(g.id)}" aria-label="${esc(T("shareImg"))}" title="${esc(T("shareImg"))}"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M8 7l4-4 4 4M6 11H5a1 1 0 00-1 1v8a1 1 0 001 1h14a1 1 0 001-1v-8a1 1 0 00-1-1h-1"/></svg></button>`:""}</span></div>${nx?`<div class="gnx">${T("nextRace")}: <b>${["sf","pf","f"].includes(nx.rid)?"":T("race")+" "+nx.n+" · "}${esc(wday(nx.d))} · ${nx.t}</b>${showLocal?` (${esc(locT(nx))} ${T("loc")})`:""}</div>`:""}${gtable(r,g,true)}${needBox(r,g)}</section>`}).join("")+`</div>`;
+    return `<section class="g"><div class="gh"><b>${r.groups.length>1?T("group")+" "+esc(g.id):esc(RNm(r))}</b><span class="st">${gs=="live"&&raceNow(r.id,g.id)?liveTag():`<span class="dot ${gs=="done"?"done":gs=="live"?"amb":""}"></span>${T(gs=="done"?"decided":gs=="live"?"racing":"open")}`}${gs!="up"?`<button class="shbtn" data-shimg="${r.id}|${esc(g.id)}" aria-label="${esc(T("shareImg"))}" title="${esc(T("shareImg"))}"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M8 7l4-4 4 4M6 11H5a1 1 0 00-1 1v8a1 1 0 001 1h14a1 1 0 001-1v-8a1 1 0 00-1-1h-1"/></svg></button>`:""}</span></div>${nx?`<div class="gnx">${T("nextRace")}: <b>${["sf","pf","f"].includes(nx.rid)?"":T("race")+" "+nx.n+" · "}${esc(wday(nx.d))} · ${nx.t}</b>${showLocal?` (${esc(locT(nx))} ${T("loc")})`:""}</div>`:""}${gtable(r,g,true)}${needBox(r,g)}</section>`}).join("")+`</div>`;
   return h+schedFor(r)}
 const MBC={r32:"R1",r16:"R2",r8:"EF",r4:"QF",sf:"SF"};
 const KO=["r32","r16","r8","r4","sf"];
@@ -491,10 +535,10 @@ function mrow(c,o){const tm=isTeam(c),w=o.w;return `<div class="mr${w?" w":""}${
 function mbox(r,g,opt={}){const gs=gState(g,r),done=gs=="done",has=g.rows.some(x=>String(x.total??"").trim()!==""||x.r.some(v=>String(v).trim()!==""));
   const rows=g.rows.map((x,i)=>{const o=outcome(r.id,i+1,done);return mrow(x.team,{w:o&&o[0]=="w",x:o&&o[2]===0&&r.id!="pf",v:has?(String(x.total??"").trim()||String(x.r.reduce((s,v)=>s+num(v),0))):null,me:opt.me==x.team,click:!opt.me})}).join("");
   const bd=KO.includes(r.id)&&!opt.me&&!opt.nob?`<div class="bdgs" aria-hidden="true"><span>${esc(ord(1))}</span><span>${esc(ord(2))}</span></div>`:"";
-  return `<div class="mb ${gs}"${opt.go?` data-go="${opt.go}" role="button" tabindex="0"`:""}>${bd}<div class="mh"><span>${esc(bcode(r,g))}</span>${gs=="live"?`<span class="dot live"></span>`:done?`<span class="ok">✓</span>`:""}</div>${rows}</div>`}
-function mbNav(k){return `<nav class="seg">${[["bracket",T("fsT")],["qualifying",T("qsT")],["gc2023",T("gc23")]].map(([h,l])=>`<a href="#${h}"${k==h?` class="on" aria-current="page"`:""}>${esc(l)}</a>`).join("")}</nav>`}
+  return `<div class="mb ${gs}"${opt.go?` data-go="${opt.go}" role="button" tabindex="0"`:""}>${bd}<div class="mh"><span>${esc(bcode(r,g))}</span>${gs=="live"?(raceNow(r.id,g.id)?liveTag():`<span class="dot amb"></span>`):done?`<span class="ok">✓</span>`:""}</div>${rows}</div>`}
+function mbNav(k){const a=(h,l,c="")=>`<a href="#${h}" class="${c}${k==h?" on":""}"${k==h?` aria-current="page"`:""}>${esc(l)}</a>`;return `<nav class="mbn">${a("bracket",T("fsT"),"main")}<span class="past"><small>${esc(T("pastL"))}</small>${a("qualifying",T("qsT"))}${a("gc2023",T("gc23"))}</span></nav>`}
 function bracket(){const cols=KO.map(id=>D.rounds.find(r=>r.id==id)).filter(Boolean),fin=["f","pf"].map(id=>D.rounds.find(r=>r.id==id)).filter(Boolean);
-  const head=r=>{const s=rState(r);return `<div class="mch"><b>${esc(RNm(r))}</b><small><span class="dot ${s=="done"?"done":s=="live"?"live":r.id==current()?"nx":""}"></span>${esc(range(r))}</small></div>`};
+  const head=r=>{const s=rState(r);return `<div class="mch"><b>${esc(RNm(r))}</b><small>${s=="live"&&raceNow(r.id)?liveTag():`<span class="dot ${s=="done"?"done":s=="live"?"amb":r.id==current()?"nx":""}"></span>`}${esc(range(r))}</small></div>`};
   let h=mbNav("bracket")+`<h2 class="pill">${T("fsT")}</h2><p class="warn mbh">${T("mbHint")} <span class="sw">${T("swipe")}</span></p><div class="mbw" dir="ltr"><div class="mbg">`;
   h+=cols.map(r=>`<div class="mc">${head(r)}<div class="mcb">${r.groups.map(g=>mbox(r,g)).join("")}</div></div>`).join("");
   if(fin.length)h+=`<div class="mc fin">${head(fin[0])}<div class="mcb">${fin.map(r=>r.groups.map(g=>mbox(r,g)).join("")).join("")}</div></div>`;
@@ -525,8 +569,8 @@ function teamView(){const TT=teams(),inn=TT.filter(t=>!t.out).length;
   list.sort(sortBy=="rank"?(a,b)=>(a.I.rank||999)-(b.I.rank||999):sortBy=="name"?(a,b)=>a.name.localeCompare(b.name,lang):(a,b)=>a.out-b.out||b.lvl-a.lvl||(a.I.rank||999)-(b.I.rank||999));
   return `<div class="rhead"><h2>${T("nations")(TT.length)}</h2><p>${inn} ${T("stillIn")} · ${TT.length-inn} ${T("outN")}</p></div>
   <div class="tools"><input id="q" type="search" placeholder="${esc(T("search"))}" value="${esc(q)}" aria-label="${esc(T("search"))}"></div>
-  <div class="fbar"><span class="flab">${T("fShow")}</span><div class="seg" role="group" aria-label="${esc(T("fShow"))}">${[["all",T("all")],["in",T("chipIn")],["out",T("chipOut")],["fav",T("mine")]].map(([k,l])=>`<button class="${filt==k?"on":""}" aria-pressed="${filt==k}" data-f="${k}">${l}</button>`).join("")}</div></div>
-  <div class="fbar"><span class="flab">${T("fSort")}</span><div class="seg sm" role="group" aria-label="${esc(T("fSort"))}">${[["status",T("sStatus")],["rank",T("sRank")],["name",T("sAz")]].map(([k,l])=>`<button class="${sortBy==k?"on":""}" aria-pressed="${sortBy==k}" data-s="${k}">${l}</button>`).join("")}</div></div>
+  <div class="fbar"><span class="flab">${T("fShow")}</span><div class="sgc" role="group" aria-label="${esc(T("fShow"))}">${[["all",T("all")],["in",T("chipIn")],["out",T("chipOut")],["fav",T("mine")]].map(([k,l])=>`<button class="${filt==k?"on":""}" aria-pressed="${filt==k}" data-f="${k}">${l}</button>`).join("")}</div></div>
+  <div class="fbar"><span class="flab">${T("fSort")}</span><div class="sgc sm" role="group" aria-label="${esc(T("fSort"))}">${[["status",T("sStatus")],["rank",T("sRank")],["name",T("sAz")]].map(([k,l])=>`<button class="${sortBy==k?"on":""}" aria-pressed="${sortBy==k}" data-s="${k}">${l}</button>`).join("")}</div></div>
   ${filt=="fav"&&!favs.size?`<p class="warn">${T("myHint")}</p>`:""}
   ${sortBy=="status"?sections(list):`<div class="tl">${list.map(card).join("")}</div>`}`}
 function sections(list){const cur=current(),G=[];const add=(title,arr)=>{if(arr.length)G.push(`<h3 class="sec">${esc(title)} <span>${arr.length}</span></h3><div class="tl">${arr.map(card).join("")}</div>`)};
@@ -548,11 +592,12 @@ function delayBanner(){const td=today(),tl=SCH.filter(x=>x.d==td);if(!tl.length)
   return `<div class="delay" role="status">⚠ ${esc(T("delayed")(m))} <a href="https://sslgoldcup.worldofsailors.com/results/" target="_blank" rel="noopener">${T("official")} ↗</a></div>`}
 function champ(){const f=rnd("f");if(!f)return"";const g=f.groups[0];if(gState(g,f)!="done"||!isTeam(g.rows[0].team))return"";const pf=rnd("pf"),pg=pf&&pf.groups[0],pd=pg&&gState(pg,pf)=="done";const c=g.rows[0].team,M=["🥇","🥈","🥉"];
   return `<section class="champ"><div class="cup" aria-hidden="true">🏆</div><small>${T("champT")}</small><button class="cw team" data-t="${esc(c)}">${FL(c)}<b>${esc(NM(c))}</b></button><h4>${T("standT")}</h4><ol>${g.rows.map((x,i)=>`<li class="team" data-t="${esc(x.team)}"><span>${i<3?M[i]:i+1}</span>${FL(x.team)}${esc(NM(x.team))}</li>`).join("")}${pd?pg.rows.map((x,i)=>`<li class="team" data-t="${esc(x.team)}"><span>${i+5}</span>${FL(x.team)}${esc(NM(x.team))}</li>`).join(""):""}</ol></section>`}
-function home(){let h=delayBanner()+champ()+`<section class="hero"><img src="icons/icon-192.png" alt="" width="64" height="64"><div><b>${T("welcome")}</b><span>${T("dates")}</span></div></section>`;
+function home(){let h=liveBar()+delayBanner()+champ()+`<section class="hero"><img src="icons/icon-192.png" alt="" width="64" height="64"><div><b>${T("welcome")}</b><span>${T("dates")}</span></div></section>`;
   h+=`<div class="prog" aria-label="${esc(T("progress"))}">${D.rounds.filter(r=>r.id!="pf").map(r=>{const s=rState(r);return `<button data-go="round-${r.id}" class="${s}${r.id==current()?" cur":""}"><i></i><span>${esc(RS[r.id]||r.short)}</span></button>`}).join("")}</div>`;
   h+=mine()+todayCard();
   const lr=latestRound();
   if(lr)h+=`<h3 class="sec">${T("latest")} · ${esc(RNm(lr))}</h3><div class="lat">${lr.groups.map(g=>mbox(lr,g,{go:"round-"+lr.id,nob:1})).join("")}</div><p class="more1"><a href="#round-${lr.id}">${T("showRound")}</a></p>`;
+  h+=videosHome();
   h+=`<h3 class="sec">${T("explore")}</h3><div class="tiles">${["board","bracket","teams","sailors","qualifying","gc2023"].map(k=>`<button data-go="${k=="board"?"round-"+current():k}">${svg(TI[k])}<b>${esc(T("tiles")[k][0])}</b><small>${esc(T("tiles")[k][1])}</small></button>`).join("")}</div>`;
   return h}
 
@@ -573,8 +618,10 @@ function more(){const I=T("inst");
   const row=(href,ic,t,sub)=>`<a class="mrow" href="${href}"${/^https?:/.test(href)?' target="_blank" rel="noopener"':""}>${svg(ic)}<span><b>${esc(t)}</b>${sub?`<small>${esc(sub)}</small>`:""}</span></a>`;
   let h=`<h2 class="pill">${T("moreT")}</h2>`;
   h+=isStandalone()?`<p class="warn">✓ ${I.installedNote}</p>`:installCard(false);
-  h+=`<div class="mlist">${row("#sailors",TI.sailors,T("tiles").sailors[0],T("tiles").sailors[1])}${row("#qualifying",TI.qualifying,T("tiles").qualifying[0],T("tiles").qualifying[1])}${row("#gc2023",TI.gc2023,T("tiles").gc2023[0],T("tiles").gc2023[1])}<button class="mrow" data-calall="1">${svg('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>')}<span><b>${T("calAll")}</b></span></button><button class="mrow" data-share="1">${svg('<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/>')}<span><b>${T("share")}</b><small>${esc(T("shareSub"))}</small></span></button></div>`;
+  h+=`<div class="mlist">${row("#sailors",TI.sailors,T("tiles").sailors[0],T("tiles").sailors[1])}${row("#qualifying",TI.qualifying,T("tiles").qualifying[0],T("tiles").qualifying[1])}${row("#gc2023",TI.gc2023,T("tiles").gc2023[0],T("tiles").gc2023[1])}<button class="mrow" data-calall="1">${svg('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>')}<span><b>${T("calAll")}</b></span></button><button class="mrow" data-share="1">${svg('<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/>')}<span><b>${T("share")}</b><small>${esc(T("shareSub"))} · QR</small></span></button></div>`;
   h+=pushMore();
+  h+=`<div class="mlist"><button class="mrow" data-sptg="1" role="switch" aria-checked="${SPOIL}"><span class="mic">🙈</span><span><b>${T("spRow")}</b><small>${T("spSub")}</small></span><i class="tgl${SPOIL?" on":""}" aria-hidden="true"></i></button></div>`;
+  h+=`<h3 class="sec">Rio 2026</h3><div class="mlist"><button class="mrow" data-more="venue">${svg('<path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>')}<span><b>${T("vnT")}</b><small>${T("vnSub")}</small></span></button><button class="mrow" data-more="merch">${svg('<path d="M6 7h12l1 13H5z"/><path d="M9 7a3 3 0 016 0"/>')}<span><b>${T("mcT")}</b><small>${T("mcSub")}</small></span></button><button class="mrow" data-more="sust">${svg('<path d="M5 19c8 0 14-6 14-14-8 0-14 6-14 14z"/><path d="M5 19l7-7"/>')}<span><b>${T("suT")}</b><small>${T("suSub")}</small></span></button></div>`;
   h+=`<h3 class="sec">${T("links")}</h3><div class="mlist">${row("https://www.youtube.com/@Starsailors/streams",'<path d="M5 4l14 8-14 8z"/>',T("stream").replace("▶ ",""),"YouTube")}${row("https://app.georacing.com/?application_id=46",'<path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',T("tracking"),"Georacing")}${row("https://sslgoldcup.worldofsailors.com/results/",TI.board,T("official"),"sslgoldcup.worldofsailors.com")}${row("https://sslgoldcup.worldofsailors.com/schedule/",'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',T("schedule"),"")}</div>`;
   h+=`<h3 class="sec">${T("how")?T("howT"):""}</h3><div class="card pad"><ul class="howl">${T("how").map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
   h+=`<h3 class="sec">${T("about")}</h3><div class="card pad"><p>${esc(T("aboutT"))}</p><p class="warn">${esc(T("foot"))}</p></div>`;
@@ -667,18 +714,22 @@ function openTeam(code){if(!isTeam(code))return;openCode=code;const d=$("#tmd"),
     h+=`</div>`;const rest=rl.filter(p=>!p.k&&!p.cap);
     if(rest.length)h+=`<h3>${T("wider")}</h3><div class="grp rest">${rest.map(p=>`<div class="pp" role="button" tabindex="0" data-pi="${p.i}">${av(p,1)}<span class="nm">${esc(p.name)}</span></div>`).join("")}</div>`;
     h+=`<div class="tf">${T("squadNote")(rl.length,pics.length)}</div>`}
-  h+=`<div class="tact">${pushShown()?`<button data-push="1" class="${pSet.has(code)?"on":""}" aria-pressed="${pSet.has(code)}">${T(pSet.has(code)?"pTeamOn":"pTeamOff")}</button>`:""}<button data-cal="${esc(code)}">${T("calBtn")}</button><button data-br="1">${T("showPath")}</button></div></div>`;
+  h+=`<div class="tact">${pushShown()?`<button data-push="1" class="${pSet.has(code)?"on":""}" aria-pressed="${pSet.has(code)}">${T(pSet.has(code)?"pTeamOn":"pTeamOff")}</button>`:""}<button data-cal="${esc(code)}">${T("calBtn")}</button><button data-cmp="1">${T("cmpBtn")}</button><button data-br="1">${T("showPath")}</button></div></div>`;
   d.innerHTML=h;
   d.querySelector(".x").onclick=()=>d.close();
   d.querySelector(".fv").onclick=()=>{favs.has(code)?favs.delete(code):favs.add(code);LS.set("favs",[...favs]);const y=d.scrollTop;openTeam(code);d.scrollTop=y;render(true)};
   d.querySelector(".ln").onclick=async()=>{const u=location.href.split("#")[0]+"#team-"+code;try{await navigator.clipboard.writeText(u);toast(T("copied"))}catch(e){toast(u)}};
   d.querySelector("[data-cal]").onclick=()=>calSheet(code);
+  d.querySelector("[data-cmp]").onclick=()=>comparePick(code);
   {const pb=d.querySelector("[data-push]");if(pb)pb.onclick=async()=>{pb.disabled=true;await pushToggle(code);if(d.open&&openCode==code){const y=d.scrollTop;openTeam(code);d.scrollTop=y}};}
   d.querySelector("[data-br]").onclick=()=>{d.close();sel=code;jump=true;go("bracket")};
   d.querySelectorAll("[data-go]").forEach(b=>{const f=()=>{d.close();sel=code;jump=true;go(b.dataset.go)};b.onclick=f;b.onkeydown=e=>{if(e.key=="Enter")f()}});
   d.querySelectorAll("[data-pi]").forEach(el=>{const f=()=>openSailor(code,+el.dataset.pi);el.onclick=f;el.onkeydown=e=>{if(e.key=="Enter")f()}});
   show(d)}
-function show(d){if(!d.querySelector(".ob,.trkv"))d.classList.remove("full");if(!d.open){d.showModal();try{history.pushState({sheet:1},"")}catch(e){}}d.scrollTop=0;const th=d.querySelector(".th");if(th){th.tabIndex=-1;th.focus({preventScroll:true})}}
+let lockY=0;
+function lockScroll(){const b=document.body;if(b.classList.contains("lock"))return;lockY=scrollY;b.style.top=-lockY+"px";b.classList.add("lock")}
+function unlockScroll(){const b=document.body;if(!b.classList.contains("lock"))return;b.classList.remove("lock");b.style.top="";scrollTo(0,lockY)}
+function show(d){if(!d.querySelector(".ob,.trkv"))d.classList.remove("full");if(!d.open){lockScroll();d.showModal();try{history.pushState({sheet:1},"")}catch(e){}}d.scrollTop=0;const th=d.querySelector(".th");if(th){th.tabIndex=-1;th.focus({preventScroll:true})}}
 function openSailor(code,i){const d=$("#tmd"),sq=squad(code),p=sq.ppl[i];if(!p)return;openCode=code;const PE=pinfo(code,p),TM=teams().find(x=>x.code==code),n=sq.ppl.length;
   const q2=encodeURIComponent;let h=`<div class="th"><button class="bk">${T("back")}</button><div class="thb"><button class="pv" aria-label="previous">‹</button><button class="nx2" aria-label="next">›</button><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">`;
   h+=`<div class="shero">${p.img?`<img src="${esc(p.img)}" alt="${esc(p.name)}">`:`<span class="big">${esc(ini(p.name))}</span>`}<div><div class="nick">${FL(code)} ${esc(NM(code))}${sq.n?" · "+esc(sq.n):""}</div><h2>${esc(p.name)}</h2>${p.cap?`<span class="ctag">${T("capTag")}</span>`:""}</div></div>`;
@@ -742,6 +793,7 @@ function openRace(x){if(!x)return;const d=$("#tmd"),r=rnd(x.rid),g=r&&r.groups.f
   let h=`<div class="th"><div><div class="nick">${esc(r?RNm(r):"")}</div><h2>${esc(title)}</h2></div><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">`;
   h+=`<div class="rchead"><span>${when}</span>${s?`<b class="rcs ${st}">${esc(s)}</b>`:""}${wxAt(x)}</div>`;
   h+=u?`<button class="trkgo" data-trkin="1">${esc(T(st=="done"||st=="past"?"trkReplay":"trkOpen"))}</button><p class="warn">${esc(T("trkHint"))}</p>`:`<p class="warn">${esc(T("trkNone"))} <a href="https://app.georacing.com/?application_id=46" target="_blank" rel="noopener">${esc(T("trkExt"))}</a></p>`;
+  if(hiddenRace(x))h+=`<div class="sprc"><b>🙈 ${esc(T("spRace"))}</b><button data-sprv="1">${esc(T("spReveal"))}</button></div>`;
   if(g){const rows=g.rows,i=x.n-1,known=rows.filter(z=>isTeam(z.team));
     if(st=="done"){const ord2=[...rows].sort((a,b)=>num(b.r[i])-num(a.r[i]));
       h+=`<h3>${T("rcRes")}</h3><div class="grp rcl">${ord2.map((z,k)=>`<button class="rcrow" data-tm="${esc(z.team)}"><span class="rcp p${k+1}">${k+1}</span>${FL(z.team)}<b>${esc(isTeam(z.team)?NM(z.team):phm(z.team))}</b><small>${esc(String(z.r[i]).trim())} ${T("rcPts")}</small></button>`).join("")}</div>`}
@@ -750,6 +802,7 @@ function openRace(x){if(!x)return;const d=$("#tmd"),r=rnd(x.rid),g=r&&r.groups.f
   h+=`<div class="tact"><button data-go="round-${esc(x.rid)}">${T("rcGroup")}</button><a class="tbtn" href="https://www.youtube.com/@Starsailors/streams" target="_blank" rel="noopener">${T("stream")}</a></div></div>`;
   d.innerHTML=h;d.querySelector(".x").onclick=()=>d.close();
   const tb=d.querySelector("[data-trkin]");if(tb)tb.onclick=()=>openTrack(x);
+  const rv=d.querySelector("[data-sprv]");if(rv)rv.onclick=()=>{spoilSet(true,Math.max(SPCUT,at(x)+60e3));openRace(x)};
   d.querySelectorAll("[data-tm]").forEach(b=>b.onclick=()=>{if(isTeam(b.dataset.tm))openTeam(b.dataset.tm)});
   d.querySelector("[data-go]").onclick=e=>{d.close();sel=null;jump=true;go(e.currentTarget.dataset.go)};
   show(d)}
@@ -757,6 +810,84 @@ function openTrack(x){const u=trkUrl(x);if(!u)return;const d=$("#tmd");d.classLi
   d.innerHTML=`<div class="trkv"><div class="trkbar"><button class="trkb" data-back="1">${esc(T("back"))}</button><b>${esc(x.rid=="f"||x.rid=="pf"?RNm(rnd(x.rid)):`${T("group")} ${x.g} · ${T("race")} ${x.n}`)}</b><a class="trkb" href="${esc(u)}" target="_blank" rel="noopener">${esc(T("trkExt"))}</a></div><iframe src="${esc(u)}" title="Georacing" allow="fullscreen; geolocation" referrerpolicy="no-referrer-when-downgrade"></iframe></div>`;
   d.querySelector("[data-back]").onclick=()=>{d.classList.remove("full");openRace(x)};
   openCode=null;show(d);gcEvent("tracking")}
+/* ---------- spoiler-free mode: hide results after a cutoff the user chooses ---------- */
+let SPOIL=!!LS.get("spoil",0),SPCUT=LS.get("spcut",0)||0;
+const PREVR={r16:"r32",r8:"r16",r4:"r8",sf:"r4",pf:"sf",f:"sf"},PHC={r32:"R1",r16:"R2",r8:"EF",r4:"QF",sf:"SF"};
+function maskD(d0,cut){const d=JSON.parse(JSON.stringify(d0)),hidR={},where={};
+  const sum=z=>z.r.reduce((a,v)=>a+num(v),0);
+  d.rounds.forEach(r=>{let any=false;r.groups.forEach(g=>{g.rows.forEach((x,i)=>{where[r.id+":"+x.team]={g:g.id,p:i+1}});
+    const n=Math.max(0,...g.rows.map(x=>x.r.length));let hid=false;
+    for(let k=1;k<=n;k++){const x=SCH.find(s=>s.rid==r.id&&s.g==g.id&&s.n==k);const t=x?at(x):Date.parse(r.start+"T12:00:00-03:00");
+      if(t>cut&&g.rows.some(z=>String(z.r[k-1]??"").trim()!=="")){hid=true;g.rows.forEach(z=>{z.r[k-1]=""})}}
+    if(hid){any=true;g.rows.forEach(z=>z.total="");g.rows.sort((a,b)=>sum(b)-sum(a)||a.team.localeCompare(b.team))}});
+    hidR[r.id]=any});
+  d.rounds.forEach(r=>{const pv=PREVR[r.id];if(!pv||!hidR[pv])return;r.groups.forEach(g=>g.rows.forEach(z=>{const w=where[pv+":"+z.team];if(w&&isTeam(z.team))z.team=PHC[pv]+w.g+w.p}))});
+  return d}
+let RAWD=D;
+function setD(d){RAWD=d;D=SPOIL?maskD(d,SPCUT):d}
+function hiddenRace(x){if(!SPOIL||at(x)<=SPCUT)return false;const r=RAWD.rounds.find(y=>y.id==x.rid),g=r&&r.groups.find(y=>y.id==x.g);return !!(g&&g.rows.some(z=>String(z.r[x.n-1]??"").trim()!==""))}
+function anyHidden(){return SPOIL&&JSON.stringify(D.rounds)!==JSON.stringify(RAWD.rounds)}
+function spoilSet(on,cut){SPOIL=on;if(cut!=null)SPCUT=cut;LS.set("spoil",on?1:0);LS.set("spcut",SPCUT);setD(RAWD);
+  try{if(osP&&pSet.size)osP.then(O=>{on?O.User.addTag("spoiler","1"):O.User.removeTag("spoiler")}).catch(()=>{})}catch(e){}
+  render(true);if($("#tmd").open&&openCode){const y=$("#tmd").scrollTop;openTeam(openCode);$("#tmd").scrollTop=y}}
+const todayStart=()=>Date.parse(today()+"T00:00:00-03:00");
+function spoilBanner(){if(!SPOIL)return"";const when=new Date(SPCUT).toLocaleString(LOC(),{timeZone:"America/Sao_Paulo",weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
+  return `<div class="spb"><span>🙈 <b>${esc(T("spT"))}</b><small>${esc(anyHidden()?T("spUntil")(when):T("spNone"))}</small></span>${anyHidden()?`<button data-spall="1">${esc(T("spShow"))}</button>`:""}<button class="spoff" data-spoff="1" aria-label="${esc(T("spOff"))}">${esc(T("spOff"))}</button></div>`}
+/* ---------- live-now banner ---------- */
+function liveBar(){const L=SCH.filter(x=>rState2(x)=="now").sort((a,b)=>at(a)-at(b));if(!L.length)return"";const x=L[0],u=trkUrl(x);
+  const lbl=x.rid=="f"||x.rid=="pf"?RNm(rnd(x.rid)):`${RNm(rnd(x.rid))} · ${T("group")} ${x.g} · ${T("race")} ${x.n}`;
+  return `<div class="livebar"><button class="lvmain" data-race="${raceKey(x)}"><span class="ldot" aria-hidden="true"></span><span><b>LIVE</b> · ${esc(T("onWater"))}<small>${esc(lbl)}</small></span><span aria-hidden="true">›</span></button><div class="lvl"><a href="https://www.youtube.com/@Starsailors/streams" target="_blank" rel="noopener">${T("stream")}</a>${u?`<a data-trk="${raceKey(x)}" href="${esc(u)}" target="_blank" rel="noopener">📍 ${T("trk")}</a>`:""}</div></div>`}
+
+/* ---------- compare two teams ---------- */
+function tStats(TM){let races=0,wins=0,pl=[],pts=0;if(TM)TM.path.forEach(s=>{const row=s.g.rows[s.pos-1];if(!row)return;const n=row.r.length;
+  row.r.forEach((v,i)=>{if(String(v).trim()==="")return;races++;const val=num(v);pts+=val;const m=(i==n-1&&n>1)?2:1,q=val/m;const place=Number.isInteger(q)&&q>=1&&q<=4?5-q:null;if(place){pl.push(place);if(place==1)wins++}})});
+  return {races,wins,avg:pl.length?(pl.reduce((a,b)=>a+b,0)/pl.length):null,pts}}
+function h2h(a,b){let A=0,B=0;D.rounds.forEach(r=>r.groups.forEach(g=>{const ra=g.rows.find(z=>z.team==a),rb=g.rows.find(z=>z.team==b);if(!ra||!rb)return;
+  ra.r.forEach((v,i)=>{const w=rb.r[i];if(String(v).trim()===""||String(w??"").trim()==="")return;num(v)>num(w)?A++:num(w)>num(v)?B++:0})}));return {A,B}}
+function comparePick(a){const d=$("#tmd"),TT=teams().filter(t=>t.code!=a).sort((x,y)=>(favs.has(y.code)?1:0)-(favs.has(x.code)?1:0)||x.name.localeCompare(y.name,lang));
+  d.innerHTML=`<div class="th"><button class="bk">${T("back")}</button><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb"><h2 style="margin:0 0 12px">${FL(a)} ${esc(NM(a))} ${esc(T("cmpVs"))} …</h2><p class="warn">${esc(T("cmpPick"))}</p><div class="grp rcl">${TT.map(t=>`<button class="rcrow" data-cb="${esc(t.code)}">${FL(t.code)}<b>${esc(t.name)}${favs.has(t.code)?' <span class="star">★</span>':""}</b><small>${t.out?esc(T("stOut")):""}</small></button>`).join("")}</div></div>`;
+  d.querySelector(".x").onclick=()=>d.close();d.querySelector(".bk").onclick=()=>openTeam(a);
+  d.querySelectorAll("[data-cb]").forEach(b=>b.onclick=()=>compareSheet(a,b.dataset.cb));openCode=null;show(d);d.scrollTop=0}
+function compareSheet(a,b){const d=$("#tmd"),TA=teams().find(t=>t.code==a),TB=teams().find(t=>t.code==b),IA=INFO[a]||{},IB=INFO[b]||{},SA=tStats(TA),SB=tStats(TB),H=h2h(a,b);
+  const fmt=v=>v==null?"–":(Math.round(v*10)/10).toLocaleString(LOC());
+  const row=(l,va,vb,better)=>{const w=better==null?0:better;return `<div class="cmr"><span class="${w>0?"cw":""}">${va}</span><small>${esc(l)}</small><span class="${w<0?"cw":""}">${vb}</span></div>`};
+  const cmp=(x,y,lowGood)=>x==null||y==null||x===y?0:(lowGood?(x<y?1:-1):(x>y?1:-1));
+  const st=(TM)=>TM?(TM.out?T("stOut"):T("stIn")):"–",ent=TM=>TM?esc(RNm(TM.path[0].r)):"–";
+  let h=`<div class="th"><button class="bk">${T("back")}</button><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">
+  <div class="cmh"><button data-ct="${esc(a)}"><span class="fg">${FL(a)}</span><b>${esc(NM(a))}</b><small>${esc(squad(a).n||"")}</small></button><em>${esc(T("cmpVs"))}</em><button data-ct="${esc(b)}"><span class="fg">${FL(b)}</span><b>${esc(NM(b))}</b><small>${esc(squad(b).n||"")}</small></button></div>
+  <div class="grp cmp">${row(T("status"),esc(st(TA)),esc(st(TB)),cmp(TA&&!TA.out?1:0,TB&&!TB.out?1:0))}${row(T("ranking"),IA.rank?"#"+IA.rank:"–",IB.rank?"#"+IB.rank:"–",cmp(IA.rank,IB.rank,true))}${row(T("entered"),ent(TA),ent(TB),null)}${row(T("stRaces"),SA.races,SB.races,null)}${row(T("stWins"),SA.wins,SB.wins,cmp(SA.wins,SB.wins))}${row(T("stAvg"),fmt(SA.avg),fmt(SB.avg),cmp(SA.avg,SB.avg,true))}${row(T("stPts"),SA.pts,SB.pts,null)}${row(T("gc23"),esc(T("g23")[IA.gc23||"none"]),esc(T("g23")[IB.gc23||"none"]),null)}</div>
+  <h3>${T("h2hT")}</h3>${H.A+H.B?`<div class="h2h"><b class="${H.A>H.B?"cw":""}">${H.A}</b><span>${esc(T("h2hSub"))}</span><b class="${H.B>H.A?"cw":""}">${H.B}</b></div>`:`<p class="warn">${esc(T("h2hNone"))}</p>`}
+  <p class="warn">${esc(T("cmpNote"))}</p></div>`;
+  d.innerHTML=h;d.querySelector(".x").onclick=()=>d.close();d.querySelector(".bk").onclick=()=>comparePick(a);
+  d.querySelectorAll("[data-ct]").forEach(x=>x.onclick=()=>openTeam(x.dataset.ct));openCode=null;show(d);d.scrollTop=0;gcEvent("compare")}
+
+/* ---------- videos (SSL YouTube channel, refreshed hourly at build time) ---------- */
+let VIDS=[];(async()=>{try{const r=await fetch("videos.json",{cache:"no-cache"});if(r.ok){const v=await r.json();if(Array.isArray(v)){VIDS=v.filter(x=>x&&/^[\w-]{6,20}$/.test(x.id));if(view=="home")render(true)}}}catch(e){}})();
+const isHL=v=>/highlight|recap|resumo|resumen|day\s*\d|dia\s*\d|best of/i.test(v.t);
+function videosHome(){if(!VIDS.length)return"";let L=VIDS.filter(v=>!SPOIL||Date.parse(v.d)<=SPCUT);const hid=VIDS.length-L.length;
+  const hl=L.filter(isHL),list=(hl.length?hl:L).slice(0,6);if(!list.length&&!hid)return"";
+  const card=(v,big)=>`<button class="vid${big?" big":""}" data-vid="${esc(v.id)}"><span class="vth"><img src="https://i.ytimg.com/vi/${esc(v.id)}/${big?"hqdefault":"mqdefault"}.jpg" alt="" loading="lazy"><i aria-hidden="true">▶</i></span><b>${esc(v.t)}</b><small>${esc(wday(String(v.d).slice(0,10)))}</small></button>`;
+  return `<h3 class="sec">${T("vidT")}</h3>${list.length?card(list[0],1)+`<div class="vrow">${list.slice(1).map(v=>card(v)).join("")}</div>`:""}${hid?`<p class="warn">🙈 ${esc(T("vidHid")(hid))}</p>`:""}<p class="more1"><a href="https://www.youtube.com/@Starsailors/videos" target="_blank" rel="noopener">${T("vidAll")}</a></p>`}
+function openVideo(id){const v=VIDS.find(x=>x.id==id);if(!v)return;const d=$("#tmd");openCode=null;
+  d.innerHTML=`<div class="th"><div><div class="nick">YouTube · Star Sailors League</div><h2 style="font-size:19px">${esc(v.t)}</h2></div><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb"><div class="vframe"><iframe src="https://www.youtube-nocookie.com/embed/${esc(v.id)}?autoplay=1&playsinline=1&rel=0" title="${esc(v.t)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div><div class="tact"><a class="tbtn" href="https://www.youtube.com/watch?v=${esc(v.id)}" target="_blank" rel="noopener">${T("vidOpen")}</a></div></div>`;
+  d.querySelector(".x").onclick=()=>d.close();show(d);gcEvent("video")}
+/* ---------- venue, sustainability, merch ---------- */
+const VENUE={lat:-22.9196,lng:-43.1700,q:"AXIA Marina da Glória, Av. Infante Dom Henrique, Rio de Janeiro"};
+function sheetWrap(nick,title,body){const d=$("#tmd");openCode=null;d.innerHTML=`<div class="th"><div><div class="nick">${esc(nick)}</div><h2>${esc(title)}</h2></div><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">${body}</div>`;d.querySelector(".x").onclick=()=>d.close();show(d);return d}
+function venueSheet(){const q=encodeURIComponent(VENUE.q),bb=[VENUE.lng-.012,VENUE.lat-.008,VENUE.lng+.012,VENUE.lat+.008].join(",");
+  sheetWrap("SSL Gold Cup · Rio 2026",T("vnT"),`<div class="map"><iframe src="https://www.openstreetmap.org/export/embed.html?bbox=${bb}&layer=mapnik&marker=${VENUE.lat},${VENUE.lng}" title="Map" loading="lazy"></iframe></div>
+  <p class="vaddr"><b>AXIA Marina da Glória</b><br>Av. Infante Dom Henrique, s/n – Glória<br>Rio de Janeiro – RJ, 20021-140</p>
+  <div class="tact"><a class="tbtn" href="https://www.google.com/maps/dir/?api=1&destination=${q}" target="_blank" rel="noopener">🧭 ${T("vnRoute")}</a><a class="tbtn" href="https://maps.apple.com/?q=${encodeURIComponent("Marina da Glória")}&ll=${VENUE.lat},${VENUE.lng}" target="_blank" rel="noopener">${T("vnApple")}</a></div>
+  <ul class="bul">${T("vnInfo").map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`);gcEvent("venue")}
+function sustSheet(){sheetWrap("Star Sailors League",T("suT"),`<p>${esc(T("suIntro"))}</p><ul class="bul">${T("suList").map(x=>`<li>${esc(x)}</li>`).join("")}</ul><div class="tact"><a class="tbtn" href="https://sslgoldcup.worldofsailors.com/?p=353" target="_blank" rel="noopener">${T("suMore")}</a></div>`);gcEvent("sustainability")}
+function merchSheet(){sheetWrap("SSL Gold Cup Store",T("mcT"),`<div class="soon"><span>🛍️</span><b>${esc(T("mcSoon"))}</b><p>${esc(T("mcTxt"))}</p></div><ul class="bul">${T("mcList").map(x=>`<li>${esc(x)}</li>`).join("")}</ul><div class="tact"><a class="tbtn" href="https://shop.sslgoldcup.com/" target="_blank" rel="noopener">${T("mcGo")}</a></div>`);gcEvent("merch")}
+/* ---------- share: QR code + short link ---------- */
+function shareSheet(){const d=$("#tmd");openCode=null;
+  d.innerHTML=`<div class="th"><div><div class="nick">SSL Gold Cup</div><h2>${esc(T("share"))}</h2></div><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb shs"><p class="warn" style="text-align:center">${esc(T("qrT"))}</p><div class="qrw"><img src="icons/qr.svg" alt="QR ${esc(SHARE)}" width="260" height="260"><img class="qri" src="icons/icon-192.png" alt=""></div><p class="qru">${esc(SHARE.replace(/^https:\/\//,""))}</p><div class="tact"><button data-shn="1">${esc(T("shareNow"))}</button><button data-shc="1">🔗 ${esc(T("copy"))}</button></div></div>`;
+  d.querySelector(".x").onclick=()=>d.close();
+  d.querySelector("[data-shn]").onclick=async()=>{try{if(navigator.share){await navigator.share({title:"SSL Gold Cup Rio 2026",text:T("shareMsg"),url:SHARE});gcEvent("share");return}}catch(x){return}try{await navigator.clipboard.writeText(SHARE);toast(T("shared"))}catch(x){toast(SHARE)}};
+  d.querySelector("[data-shc]").onclick=async()=>{try{await navigator.clipboard.writeText(SHARE);toast(T("copied"))}catch(x){toast(SHARE)}};
+  show(d)}
 /* ---------- push notifications (OneSignal) + private visitor counter (GoatCounter); both off until config.js has a value ---------- */
 const CFG=window.CFG||{};
 const pushCan=()=>!!CFG.push&&"serviceWorker" in navigator&&"PushManager" in window&&"Notification" in window&&(location.protocol=="https:"||location.hostname=="localhost");
@@ -818,7 +949,7 @@ function render(keepScroll){try{render0(keepScroll);GOOD=D}catch(e){console.erro
 function render0(keepScroll){const y=scrollY;chrome();
   document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.v==view||(b.dataset.v=="bracket"&&(view=="qualifying"||view=="gc2023"))||(b.dataset.v=="more"&&view=="sailors")));
   ladder();const M=$("#main");
-  M.innerHTML=view=="home"?home():view=="more"?more():view=="sailors"?sailorsView():view=="board"?board():view=="bracket"?bracket():view=="qualifying"?qualifying():view=="gc2023"?gc23():teamView();
+  M.innerHTML=(["home","board","bracket","teams"].includes(view)?spoilBanner():"")+(view=="home"?home():view=="more"?more():view=="sailors"?sailorsView():view=="board"?board():view=="bracket"?bracket():view=="qualifying"?qualifying():view=="gc2023"?gc23():teamView());
   document.body.dataset.view=view;
   if(jump){jump=false;const sr=M.querySelector("tr.sel,.bx .sel,.mr.sel");if(sr)setTimeout(()=>sr.scrollIntoView({block:"center",inline:"center"}),60);else scrollTo(0,0)}else if(keepScroll)scrollTo(0,y);
   const i=$("#q");if(i)i.oninput=e=>{q=e.target.value;const p=i.selectionStart;render(true);const n=$("#q");n.focus();n.setSelectionRange(p,p)};
@@ -834,13 +965,18 @@ const go=h=>{if(location.hash.slice(1)!==h){try{if(history.state&&history.state.
 document.querySelector(".tabs").addEventListener("click",e=>{const b=e.target.closest("button");if(b){if(b.dataset.v==view&&scrollY>0)scrollTo({top:0,behavior:"smooth"});go(b.dataset.v=="board"?"round-"+(round||current()):b.dataset.v)}});
 $("#ladder").addEventListener("click",e=>{const b=e.target.closest("button");if(b){round=b.dataset.r;go("round-"+round)}});
 $("#main").addEventListener("click",e=>{
+  const vd=e.target.closest("[data-vid]");if(vd){openVideo(vd.dataset.vid);return}
   const tk=e.target.closest("[data-trk]");if(tk){e.preventDefault();const x=raceBy(tk.dataset.trk);if(x)openTrack(x);return}
   const rc=e.target.closest("[data-race]");if(rc){openRace(raceBy(rc.dataset.race));return}
   const ins=e.target.closest("[data-inst]");if(ins){doInstall();return}
   const ih=e.target.closest("[data-insthide]");if(ih){LS.set("instHide",Date.now()+3*864e5);render(true);return}
-  const sh=e.target.closest("[data-share]");if(sh){const u=location.href.split("#")[0];(async()=>{try{if(navigator.share){await navigator.share({title:"SSL Gold Cup Rio 2026",text:T("shareMsg"),url:u});return}}catch(x){return}try{await navigator.clipboard.writeText(u);toast(T("shared"))}catch(x){toast(u)}})();return}
+  const sh=e.target.closest("[data-share]");if(sh){shareSheet();return}
   const si=e.target.closest("[data-shimg]");if(si){const[a,b]=si.dataset.shimg.split("|");shareGroup(a,b);return}
   const ca=e.target.closest("[data-calall]");if(ca){calSheet(null);return}
+  const mo=e.target.closest("[data-more]");if(mo){({venue:venueSheet,merch:merchSheet,sust:sustSheet})[mo.dataset.more]();return}
+  const sg=e.target.closest("[data-sptg]");if(sg){if(SPOIL)spoilSet(false);else{spoilSet(true,todayStart());toast(T("spOnT"))}gcEvent(SPOIL?"spoiler-on":"spoiler-off");return}
+  const sa=e.target.closest("[data-spall]");if(sa){spoilSet(true,nowMs());return}
+  const so=e.target.closest("[data-spoff]");if(so){spoilSet(false);return}
   const pa=e.target.closest("[data-pall]");if(pa){pa.disabled=true;pushToggle("all").finally(()=>render(true));return}
   const sr=e.target.closest("[data-sc]");if(sr){openSailor(sr.dataset.sc,+sr.dataset.si);return}
   const g=e.target.closest("[data-go]");if(g&&!e.target.closest(".mr.team")){go(g.dataset.go);return}
@@ -850,7 +986,7 @@ $("#main").addEventListener("click",e=>{
 $("#tmd").addEventListener("click",e=>{if(e.target.id=="tmd")e.target.close()});
 $("#main").addEventListener("toggle",e=>{const dd=e.target;if(!dd.matches||!dd.matches("details[data-sq]"))return;dd.open?sOpen.add(dd.dataset.sq):sOpen.delete(dd.dataset.sq);LS.set("sOpen",[...sOpen])},true);
 $("#main").addEventListener("keydown",e=>{if(e.key!="Enter"&&e.key!=" ")return;const rc=e.target.closest&&e.target.closest("[data-race]");if(rc&&e.target===rc){e.preventDefault();openRace(raceBy(rc.dataset.race))}});
-$("#tmd").addEventListener("close",()=>{openCode=null;if($("#tmd").querySelector(".ob"))LS.set("onb",1);$("#tmd").classList.remove("full");try{if(history.state&&history.state.sheet)history.back()}catch(e){}});
+$("#tmd").addEventListener("close",()=>{unlockScroll();openCode=null;if($("#tmd").querySelector(".ob"))LS.set("onb",1);$("#tmd").classList.remove("full");try{if(history.state&&history.state.sheet)history.back()}catch(e){}});
 window.addEventListener("popstate",()=>{const d=$("#tmd");if(d.open)d.close()});
 window.addEventListener("hashchange",route);
 document.addEventListener("keydown",e=>{if(e.target.matches("input,select,textarea")||$("#tmd").open)return;
@@ -862,7 +998,7 @@ document.addEventListener("visibilitychange",async()=>{if(!document.hidden&&awai
 await pullFile();live=true;loadWx();setInterval(loadWx,30*6e4);
 round=current();
 if(!location.hash){const v=LS.get("view","");if(v&&!/^team-/.test(v))try{location.hash=v}catch(e){}}
-route();firstRun();
+if(SPOIL)setD(RAWD);route();firstRun();
 
 /* ---------- app updates: reload automatically when a new version is published ---------- */
 let VER=null,NEWVER=false;
@@ -878,7 +1014,7 @@ try{if("serviceWorker" in navigator&&window.top===window&&location.protocol=="ht
 /* ---------- live data ---------- */
 (async()=>{try{const db=await window.claude?.use?.("db");if(!db)return;
   const timer=setTimeout(()=>{if(!live){stale=true;stand()}},10000);
-  db.doc("gc/results").onSnapshot(s=>{if(s.exists){const d=s.data();if(d&&d.checkedAt)checkedAt=d.checkedAt;if(okData(d)&&(!D.updatedAt||Date.parse(d.updatedAt)>=Date.parse(D.updatedAt))){D=JSON.parse(JSON.stringify(d));live=true;
+  db.doc("gc/results").onSnapshot(s=>{if(s.exists){const d=s.data();if(d&&d.checkedAt)checkedAt=d.checkedAt;if(okData(d)&&(!RAWD.updatedAt||Date.parse(d.updatedAt)>=Date.parse(RAWD.updatedAt))){setD(JSON.parse(JSON.stringify(d)));live=true;
       if(!D.rounds.some(r=>r.id==round))round=current();render(true);if($("#tmd").open&&openCode){const y=$("#tmd").scrollTop;openTeam(openCode);$("#tmd").scrollTop=y}}}
     if(!s.metadata.fromCache)clearTimeout(timer)},()=>clearTimeout(timer))}catch(e){}})();
 })();
