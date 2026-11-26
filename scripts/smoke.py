@@ -4,7 +4,7 @@ import asyncio, sys, subprocess, time, os
 from playwright.async_api import async_playwright
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
-VIEWS = ["", "#round-r32", "#round-r16", "#bracket", "#qualifying", "#gc2023", "#teams", "#sailors", "#more", "#team-POR", "#team-HUN"]
+VIEWS = ["", "#round-r32", "#round-r16", "#bracket", "#qualifying", "#gc2023", "#teams", "#sailors", "#more", "#team-POR", "#team-HUN", "#ranking", "#changes"]
 LANGS = [("en", "auto"), ("ja", "dark"), ("hu", "light"), ("de", "light"), ("ar", "dark"), ("zh", "auto"), ("ur", "auto"), ("hi", "light"), ("pl", "auto")]
 
 

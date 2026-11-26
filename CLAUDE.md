@@ -21,12 +21,14 @@ Read this first in any new session. Everything needed to keep developing the app
 | `people.json` | Hand-written highlight bullets for famous sailors. |
 | `img/` | Sailor portraits 320×320 webp, `CODE-NO-name-slug.webp`; `img/fl/` flags. |
 | `live.json` | Live-stream state (written by `live.yml`). |
+| `rank/` | SSL Nations Ranking mirror (`scripts/ranking.py`, workflow `ranking.yml`): `index.json` (weeks, continents) + one file per week. Shown in-app at `#ranking`; never link out to worldofsailors.com. |
 | `config.js` | `CFG.push` = OneSignal App ID, `CFG.gc` = GoatCounter code. Empty = feature off. |
 | `tools/positions/` | Position audit: `audit.py` (runs in Actions, fetches team pages), `rebuild.py` (merges sources → roster.json + positions_report.json), `xls.json` (production sheet extract). |
 
 ## Workflows (.github/workflows)
 - `deploy.yml` – on push: build_extras.py (tracking mirror `trk/`), Playwright smoke test (`scripts/smoke.py`, must pass), publish Pages.
 - `live.yml` – race days 14–22 UTC, minute loop: results + push (`notify.py`), live stream (`live_video.py`), start reminders and live push (`push_extra.py`), tracking watcher (`trk_watch.py`).
+- `ranking.yml` – mirrors the nations ranking twice a day.
 - `update.yml` – results backup every 10 min. `extras.yml` – highlight-video push every 30 min. `profiles.yml` – Mondays and whenever roster.json changes.
 
 ## Conventions

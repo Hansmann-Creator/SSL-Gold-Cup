@@ -1020,3 +1020,26 @@ tr.tlink{cursor:pointer}tr.tlink:active td{background:color-mix(in srgb,var(--go
 @media(max-width:340px){#ins span{display:none!important}}
 
 .pp .alsop{display:block;color:var(--gold);font-size:12.5px;opacity:.9}
+
+.rk .rkhead{display:flex;gap:10px;margin:0 0 12px}.rkhead>div{flex:1;background:var(--card);border:var(--bd);border-radius:14px;padding:10px 14px}.rkhead small{display:block;color:var(--mute);font-size:12px;text-transform:uppercase;letter-spacing:.05em}.rkhead b{font-size:18px}
+.rkchips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 10px;margin:0 -2px;scrollbar-width:none}.rkchips::-webkit-scrollbar{display:none}
+.rkchips button{flex:none;border:var(--bd);background:var(--card);color:inherit;border-radius:999px;padding:8px 14px;font:inherit;font-size:14px;font-weight:600;white-space:nowrap}
+.rkchips button.on{background:var(--gold);color:#13224a;border-color:var(--gold)}.rkchips button.gc:not(.on){color:var(--gold)}
+.rkf{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:12px}
+.rks{display:flex;align-items:center;gap:8px;background:var(--card);border:var(--bd);border-radius:14px;padding:0 12px}.rks svg{width:18px;height:18px;opacity:.6;flex:none}.rks input{flex:1;background:none;border:0;color:inherit;font:inherit;font-size:16px;padding:12px 0;outline:none;min-width:0}
+.rkw{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card);border:var(--bd);border-radius:14px;padding:6px 6px 6px 14px}.rkw small{color:var(--mute);font-size:13px}.rkw select{background:var(--ctl);color:inherit;border:0;border-radius:10px;font:inherit;font-size:14px;font-weight:600;padding:8px 10px;max-width:60%}
+.rktb{background:var(--card);border:var(--bd);border-radius:16px;overflow:hidden}
+.rkr{display:grid;grid-template-columns:34px 42px 40px 1fr 16px;align-items:center;gap:6px;width:100%;background:none;border:0;color:inherit;font:inherit;text-align:start;padding:12px 14px;min-height:54px}
+.rkh{min-height:0;padding:10px 14px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);font-weight:700;border-bottom:var(--bd)}
+.rkrow+.rkrow,.rkh+.rkrow{border-top:1px solid color-mix(in srgb,currentColor 8%,transparent)}
+.rkn{color:var(--mute);font-size:14px;font-variant-numeric:tabular-nums}.rkg{font-weight:800;font-size:17px;font-variant-numeric:tabular-nums}.rkg.rk3{color:var(--gold);font-size:22px}
+.rktr{font-size:12px;font-weight:700;white-space:nowrap}.rktr.up{color:#36c28c}.rktr.dn{color:#ff6b6b}.rktr.eq{color:var(--mute);font-size:16px;padding-inline-start:4px}
+.rknm{display:flex;align-items:center;gap:9px;min-width:0}.rknm b{font-size:16px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rknm .flg{flex:none;border-radius:3px}
+.rknm em{font-style:normal;font-size:10px;font-weight:800;background:var(--gold);color:#13224a;border-radius:6px;padding:2px 5px;flex:none}
+.rkch{font-style:normal;opacity:.45;transition:transform .2s}.rkrow.op .rkch{transform:rotate(90deg)}.rkrow.isgc .rkg{color:var(--gold)}
+.rkd{padding:2px 14px 14px}.rkd h4{margin:10px 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute)}
+.rkpl{display:grid;gap:6px}.rkp{display:flex;align-items:center;gap:10px;background:color-mix(in srgb,currentColor 5%,transparent);border:0;color:inherit;font:inherit;text-align:start;border-radius:12px;padding:7px 10px;width:100%}
+.rkav{position:relative;width:38px;height:38px;border-radius:50%;overflow:hidden;background:var(--ctl);display:grid;place-items:center;flex:none}.rkav img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.rkav b{font-size:13px}
+.rkpn{flex:1;min-width:0;line-height:1.2}.rkpn small{display:block;font-size:12px;color:var(--mute)}.rkpn b{font-size:15px}.rkpr{text-align:end;line-height:1.2}.rkpr small{display:block;font-size:11px;color:var(--mute)}.rkpr b{color:var(--gold)}.rkp i{font-style:normal;opacity:.5}
+.rkfoot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;font-size:13px;color:var(--mute)}.rkfoot b{color:var(--ink)}.rkfoot button{background:var(--gold);color:#13224a;border:0;border-radius:999px;font:inherit;font-weight:700;font-size:14px;padding:8px 14px}
+#rktile .rktr{font-size:13px;margin-inline-start:4px}
