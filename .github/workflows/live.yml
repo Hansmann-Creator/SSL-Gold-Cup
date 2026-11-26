@@ -6,6 +6,9 @@ on:
   schedule:
     - cron: "0 14 * 11,12 *"
     - cron: "40 19 * 11,12 *"
+  push:
+    branches: [main]
+    paths: [".github/live_kick"]   # commit this file to (re)start the loop when GitHub's schedule is late
   workflow_dispatch:
     inputs:
       minutes:
