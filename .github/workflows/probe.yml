@@ -1,0 +1,21 @@
+name: Probe tracking (temporary)
+on: workflow_dispatch
+permissions: { contents: read }
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          UA="Mozilla/5.0"
+          for u in "https://app.georacing.com/?application_id=46" "https://app.georacing.com/" ; do
+            echo "=== $u"; curl -sL -A "$UA" -m 20 "$u" -o page.html -w "%{http_code} %{content_type} %{size_download}\n"
+            head -c 3000 page.html; echo
+            grep -oE '(src|href)="[^"]+\.js[^"]*"' page.html | head -20
+            grep -oE 'https?://[a-zA-Z0-9.-]*georacing[a-zA-Z0-9./_-]*' page.html | sort -u | head -30
+          done
+          for js in $(grep -oE 'src="[^"]+\.js[^"]*"' page.html | sed 's/src="//;s/"//' | head -5); do
+            case "$js" in http*) U=$js;; /*) U="https://app.georacing.com$js";; *) U="https://app.georacing.com/$js";; esac
+            echo "=== JS $U"; curl -sL -A "$UA" -m 20 "$U" -o a.js; wc -c a.js
+            grep -oE '"https?://[^"]{5,120}"' a.js | sort -u | head -40
+            grep -oE '"/(api|v[0-9])[^"]{2,80}"' a.js | sort -u | head -40
+          done
