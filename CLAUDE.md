@@ -1,0 +1,47 @@
+# SSL Gold Cup Rio 2026 – companion app · handover
+
+Read this first in any new session. Everything needed to keep developing the app lives in this repository.
+
+## What it is
+- Unofficial companion PWA for the SSL Gold Cup Final Series, Rio de Janeiro, 19 Nov – 13 Dec 2026 (Marina da Glória).
+- Owner: Hansi (filmmaker for Chimbovision at the event; German, works on the Chimbovision MacBook "Jasper" with the RAID at `/Volumes/data/26_GOLD_CUP_RIO`). Talk to him in German, no hype, verify facts.
+- Live: https://hansmann-creator.github.io/SSL-Gold-Cup/ · short link https://is.gd/sslgoldcup
+- Static site on GitHub Pages, no build step for the UI. 18 languages (en de fr es pt zh ar hi bn ur id ms ja th hu cs uk pl).
+
+## Files
+| File | Purpose |
+|---|---|
+| `index.html` | Shell: header bar (settings · brightness · language · install pill · countdown), `#main` views, `#pg` pages layer, `#tmd` dialog, tab bar. Link-preview meta tags (image `icons/share-app2.jpg`). |
+| `app.js` | Whole app (vanilla JS). All UI strings in `S.<lang>` plus extra dicts merged into `S` (SSET settings, SPF profile, WXF, ALSO, CP, SOW, CHT changelog …). `T(key)` falls back to English. |
+| `app.css` | Styles; later rules override earlier ones (append at the end). |
+| `results.json` | Results, written ONLY by the update workflows – never push it by hand. |
+| `teaminfo.json` | 40 teams: name, nick, captain, helm, rank, route, notes, `crew` = official Rio portraits `{no,name,img}`. |
+| `roster.json` | Squads from the official team pages `xxx.sslgoldcup.com`: `{"n":nick,"c":captain,"s":[[name, raw position, number, [positions…]]]}`. Position list: first = Rio jersey (1–9), then other positions from the team page ("also …" in the app). |
+| `profiles.json` | Facts + bios from worldofsailors.com profiles, keyed `CODE|Name` (workflow `profiles.yml`). |
+| `people.json` | Hand-written highlight bullets for famous sailors. |
+| `img/` | Sailor portraits 320×320 webp, `CODE-NO-name-slug.webp`; `img/fl/` flags. |
+| `live.json` | Live-stream state (written by `live.yml`). |
+| `config.js` | `CFG.push` = OneSignal App ID, `CFG.gc` = GoatCounter code. Empty = feature off. |
+| `tools/positions/` | Position audit: `audit.py` (runs in Actions, fetches team pages), `rebuild.py` (merges sources → roster.json + positions_report.json), `xls.json` (production sheet extract). |
+
+## Workflows (.github/workflows)
+- `deploy.yml` – on push: build_extras.py (tracking mirror `trk/`), Playwright smoke test (`scripts/smoke.py`, must pass), publish Pages.
+- `live.yml` – race days 14–22 UTC, minute loop: results + push (`notify.py`), live stream (`live_video.py`), start reminders and live push (`push_extra.py`), tracking watcher (`trk_watch.py`).
+- `update.yml` – results backup every 10 min. `extras.yml` – highlight-video push every 30 min. `profiles.yml` – Mondays and whenever roster.json changes.
+
+## Conventions
+- Commit as `Hansi (via Claude) <hansmann-creator@users.noreply.github.com>`; push with `git pull -q --rebase --depth=20 origin main && git -c push.negotiate=true push -q origin main`.
+- Test locally: `python3 -m http.server 8011` + Playwright (Chrome at `/usr/bin/google-chrome`); run `python3 scripts/smoke.py` before pushing.
+- The Claude container cannot reach sslgoldcup.com / worldofsailors.com / Georacing / YouTube → fetch those inside a temporary GitHub Actions workflow and push the result to an orphan branch, then remove the workflow.
+- Never commit secrets. OneSignal REST key only as repo secret `ONESIGNAL_REST_KEY` (set by Hansi).
+- RAID production folders are read-only: never modify or delete there.
+- New features → add an entry to the changelog (`CHL`/`CHT` in app.js, bump version `v`).
+
+## Recurring jobs
+- **New portraits** (`/Volumes/data/26_GOLD_CUP_RIO/05_Footage_Graphic/SAILOR_PHOTOS/<TEAM>/`): official RAID photos always win and may overwrite older ones. Prefer the clean files in the team folder root (600×600 PNG, transparent) → 320 px webp in `img/`, add/update `teaminfo.json` crew `{no,name,img}`.
+- **Positions**: run audit in Actions → `python tools/positions/rebuild.py audit.json tools/positions/xls.json` → review `positions_report.json` (conflicts, added/removed sailors).
+- **New language**: add to `LANGS`, `LOC`, lang auto-detect list, `ORD`, `OSL`, `<select id="lang">`, a full `S.<lang>` block (copy the `cs` block), SSET, SOW, CP, WXF, ALSO, FIX; plus `scripts/notify.py` (LANGS, RN, W, spoiler text) and `scripts/push_extra.py`; add to `scripts/smoke.py`.
+
+## Open items (waiting for Hansi)
+- OneSignal App ID (+ secret `ONESIGNAL_REST_KEY`) → push notifications go live.
+- GoatCounter code → visitor counter. Feedback address (`CFG.fb`).
