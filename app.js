@@ -1347,25 +1347,31 @@ function todayCard(){let h="";const td=today(),tl=SCH.filter(x=>x.d==td),W=DSW[l
   const role=d=>d==cur?"t":d==pv?"p":"n";
   const dl=[[pv,"p"],[cur,"t"],[nx,"n"]].filter(x=>x[0]);
   if(dl.length>1)h+=`<div class="dchips" role="tablist">${dl.map(([d,k])=>`<button type="button" role="tab" aria-selected="${d==sd}" class="${d==sd?"on":""}" data-dsel="${d}"><small>${esc(W[k=="p"?0:k=="t"?1:2])}</small><b>${esc(sh(d))}</b></button>`).join("")}</div>`;
-  const m=meta(sd),k=role(sd),di=dl.findIndex(x=>x[0]==sd);h+=`<div class="dwrap${di>0?" hp":""}${di>=0&&di<dl.length-1?" hn":""}" data-dd="${dl.map(x=>x[0]).join(",")}" data-sd="${sd}"><i class="dgl" aria-hidden="true"></i><i class="dgr" aria-hidden="true"></i>`;
-  if(k=="t"){const [dn,dt]=raceDay(m.r);h+=`<div class="next dsel"><h3><span>${T("todayRaces")} · ${esc(RNm(m.r))}</span><small>${esc(wday(sd))} · ${T("raceDay")(dn,dt)}${dn==dt&&dt>1?` · <b class="cd">${T("finalDay")}</b>`:""}</small></h3>${raceList(m.L)}${tzNote()}${LINKS()}</div>`}
-  else if(k=="n"&&!cur)h+=`<div class="next dsel"><h3><span>${T("upNext")}: ${esc(RNm(m.r))}</span><small>${esc(wday(sd))} · <span class="cd">${T("startsIn")(days(td,sd))}</span></small></h3>${raceList(m.L)}${tzNote()}${LINKS()}</div>`;
-  else h+=`<div class="next dsel"><h3><span>${esc(W[k=="p"?3:4])} · ${esc(RNm(m.r))}</span><small>${esc(wday(sd))} · ${T("raceDay")(m.dn,m.dt)}</small></h3>${raceList(m.L)}${tzNote()}</div>`;
-  h+=`</div>`;
+  const card=d=>{const m=meta(d),k=role(d);
+    if(k=="t"){const [dn,dt]=raceDay(m.r);return `<h3><span>${T("todayRaces")} · ${esc(RNm(m.r))}</span><small>${esc(wday(d))} · ${T("raceDay")(dn,dt)}${dn==dt&&dt>1?` · <b class="cd">${T("finalDay")}</b>`:""}</small></h3>${raceList(m.L)}${tzNote()}${LINKS()}`}
+    if(k=="n"&&!cur)return `<h3><span>${T("upNext")}: ${esc(RNm(m.r))}</span><small>${esc(wday(d))} · <span class="cd">${T("startsIn")(days(td,d))}</span></small></h3>${raceList(m.L)}${tzNote()}${LINKS()}`;
+    return `<h3><span>${esc(W[k=="p"?3:4])} · ${esc(RNm(m.r))}</span><small>${esc(wday(d))} · ${T("raceDay")(m.dn,m.dt)}</small></h3>${raceList(m.L)}${tzNote()}`};
+  const di=Math.max(0,dl.findIndex(x=>x[0]==sd));
+  h+=`<div class="dwrap" data-dd="${dl.map(x=>x[0]).join(",")}" data-sd="${sd}"><div class="dtrack">${dl.map(([d],i)=>`<div class="next dcard${i==di?" dsel":""}" style="--o:${i-di}" data-dday="${d}"${i==di?"":` aria-hidden="true"`}>${card(d)}</div>`).join("")}</div></div>`;
   for(const [d,kk] of dl){if(d==sd)continue;const q=meta(d),dn=q.L.filter(raceDone).length,lab=kk=="t"?T("todayRaces"):W[kk=="p"?3:4];
     const nr=q.L.length==1?W[7]:W[6].replace("{n}",q.L.length),info=kk=="p"||dn==q.L.length?`✓ ${nr}`:`${nr} · ${W[5].replace("{t}",q.first.t)}`;
     h+=`<button type="button" class="next drow ${kk}" data-dsel="${d}" data-dscroll="1"><span class="dbl"><small>${esc(lab)}</small><b>${esc(sh(d))} · ${esc(RNm(q.r))}</b></span><span class="dbr">${esc(info)}</span><i aria-hidden="true">›</i></button>`}
   return h}
-function dPick(d,dir){const w=$(".dwrap");if(w&&!dir){const L=w.dataset.dd.split(","),a=L.indexOf(w.dataset.sd),z=L.indexOf(d);dir=z>a?1:z<a?-1:0}if(!dir&&DSEL&&DSEL.d==d)return;DSEL={d,td:today()};render(true);const n=$(".next.dsel");if(n&&dir){n.classList.remove("din1","din-1");void n.offsetWidth;n.classList.add(dir>0?"din1":"din-1")}}
-document.addEventListener("click",e=>{if(Date.now()-(window.__dsw||0)<400){const r=e.target.closest&&e.target.closest(".dwrap");if(r){e.preventDefault();e.stopPropagation();return}}const b=e.target.closest&&e.target.closest("[data-dsel]");if(!b)return;e.preventDefault();const sc=b.dataset.dscroll;dPick(b.dataset.dsel);if(sc){const c=$(".dchips")||$(".next.dsel");if(c){const y=c.getBoundingClientRect().top+scrollY-12;scrollTo({top:Math.max(0,y),behavior:"smooth"})}}},true);
-(()=>{let sx=0,sy=0,mode=0,card=null,w=null,dx=0;
-  let tg=null;const off=()=>{if(tg){tg.removeEventListener("touchmove",mv);tg.removeEventListener("touchend",end);tg.removeEventListener("touchcancel",end);tg=null}};
-  document.addEventListener("touchstart",e=>{off();const c=e.target.closest&&e.target.closest(".dwrap>.next.dsel");if(!c||e.touches.length>1){card=null;return}card=c;w=c.parentNode;sx=e.touches[0].clientX;sy=e.touches[0].clientY;mode=0;dx=0;tg=e.target;tg.addEventListener("touchmove",mv,{passive:true});tg.addEventListener("touchend",end,{passive:true});tg.addEventListener("touchcancel",end,{passive:true})},{passive:true});
-  function mv(e){if(!card)return;const x=e.touches[0].clientX-sx,y=e.touches[0].clientY-sy;if(!mode){if(Math.abs(x)<10&&Math.abs(y)<10)return;mode=Math.abs(x)>Math.abs(y)*1.2?1:2;if(mode==1){card.style.transition="none";card.classList.remove("din1","din-1")}}if(mode!=1)return;
-    const L=w.dataset.dd.split(","),a=L.indexOf(w.dataset.sd),fw=(x<0)!=(document.documentElement.dir=="rtl"),can=fw?a<L.length-1:a>0;dx=can?x:x*.25;card.style.transform=`translateX(${dx}px) rotate(${dx/80}deg)`;card.style.opacity=String(1-Math.min(.35,Math.abs(dx)/900))}
-  function end(){off();if(!card)return;const c=card;card=null;if(mode!=1)return;window.__dsw=Date.now();const L=w.dataset.dd.split(","),a=L.indexOf(w.dataset.sd),rt=document.documentElement.dir=="rtl",dir=(dx<0?1:-1)*(rt?-1:1),t=L[a+dir];
-    if(Math.abs(dx)>60&&t){c.style.transition="transform .16s ease-in,opacity .16s ease-in";c.style.transform=`translateX(${dx<0?-110:110}%)`;c.style.opacity="0";setTimeout(()=>dPick(t,dir),150)}
-    else{c.style.transition="transform .25s cubic-bezier(.2,.9,.3,1.2),opacity .25s";c.style.transform="";c.style.opacity=""}}})();
+function dGo(d){const w=$(".dwrap"),tr=w&&w.querySelector(".dtrack");if(!tr){DSEL={d,td:today()};render(true);return}
+  const L=w.dataset.dd.split(","),a=L.indexOf(w.dataset.sd),z=L.indexOf(d);if(z<0)return;if(z==a){tr.style.transition="transform .28s cubic-bezier(.2,.8,.25,1)";tr.style.transform="";return}
+  const rt=document.documentElement.dir=="rtl",tg=w.querySelector(`[data-dday="${d}"]`),h0=w.offsetHeight;
+  w.style.height=h0+"px";void w.offsetHeight;w.style.transition="height .32s cubic-bezier(.2,.8,.25,1)";if(tg)w.style.height=tg.offsetHeight+"px";
+  document.querySelectorAll(".dchips button").forEach(b=>{const on=b.dataset.dsel==d;b.classList.toggle("on",on);b.setAttribute("aria-selected",on)});
+  tr.style.transition="transform .32s cubic-bezier(.2,.8,.25,1)";tr.style.transform=`translateX(calc(${(z-a)*(rt?1:-1)} * (100% + 10px)))`;
+  let done=false;const fin=()=>{if(done)return;done=true;DSEL={d,td:today()};render(true)};tr.addEventListener("transitionend",e=>{if(e.target===tr)fin()},{once:true});setTimeout(fin,420)}
+document.addEventListener("click",e=>{if(Date.now()-(window.__dsw||0)<400){const r=e.target.closest&&e.target.closest(".dwrap");if(r){e.preventDefault();e.stopPropagation();return}}const b=e.target.closest&&e.target.closest("[data-dsel]");if(!b)return;e.preventDefault();const sc=b.dataset.dscroll;if(sc){const c=$(".dchips")||$(".dwrap");if(c){const y=c.getBoundingClientRect().top+scrollY-12;scrollTo({top:Math.max(0,y),behavior:"smooth"})}setTimeout(()=>dGo(b.dataset.dsel),sc?250:0)}else dGo(b.dataset.dsel)},true);
+(()=>{let sx=0,sy=0,mode=0,tr=null,w=null,dx=0,t0=0,tg=null;
+  const off=()=>{if(tg){tg.removeEventListener("touchmove",mv);tg.removeEventListener("touchend",end);tg.removeEventListener("touchcancel",end);tg=null}};
+  document.addEventListener("touchstart",e=>{off();const c=e.target.closest&&e.target.closest(".dwrap .dcard.dsel");if(!c||e.touches.length>1){tr=null;return}w=c.closest(".dwrap");tr=w.querySelector(".dtrack");sx=e.touches[0].clientX;sy=e.touches[0].clientY;mode=0;dx=0;t0=Date.now();tg=e.target;tg.addEventListener("touchmove",mv,{passive:true});tg.addEventListener("touchend",end,{passive:true});tg.addEventListener("touchcancel",end,{passive:true})},{passive:true});
+  function mv(e){if(!tr)return;const x=e.touches[0].clientX-sx,y=e.touches[0].clientY-sy;if(!mode){if(Math.abs(x)<10&&Math.abs(y)<10)return;mode=Math.abs(x)>Math.abs(y)*1.2?1:2;if(mode==1)tr.style.transition="none"}if(mode!=1)return;
+    const L=w.dataset.dd.split(","),a=L.indexOf(w.dataset.sd),fw=(x<0)!=(document.documentElement.dir=="rtl"),can=fw?a<L.length-1:a>0;dx=can?x:x*.3;tr.style.transform=`translateX(${dx}px)`}
+  function end(){off();if(!tr)return;const t=tr;tr=null;if(mode!=1)return;window.__dsw=Date.now();const L=w.dataset.dd.split(","),a=L.indexOf(w.dataset.sd),rt=document.documentElement.dir=="rtl",dir=(dx<0?1:-1)*(rt?-1:1),nx=L[a+dir],fast=Math.abs(dx)/Math.max(1,Date.now()-t0)>.5;
+    if(nx&&(Math.abs(dx)>w.offsetWidth*.25||(fast&&Math.abs(dx)>30)))dGo(nx);else{t.style.transition="transform .28s cubic-bezier(.2,.8,.25,1)";t.style.transform=""}}})();
 function boardGroups(r){let h="";
   if(r.id=="f"||r.id=="pf")h+=`<p class="warn">${T("oneRace")}</p>`;
   h+=`<div class="grid">`+r.groups.map(g=>{const gs=gState(g,r),nx=gs!="done"?nextFor(r.id,g.id):null;

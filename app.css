@@ -1282,21 +1282,13 @@ header.top>.bar>#setb{order:5;margin-inline-start:auto}
 .next.dsel+.drow{margin-top:-6px}
 .dchips button.on{background:color-mix(in srgb,var(--acc) 20%,var(--card));color:var(--ink);border-color:transparent;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--acc) 75%,transparent)}
 .dchips button.on small{color:var(--ink);opacity:.85}
-/* race days: swipe + slide-in + side frames */
-.dwrap{position:relative}
-.dwrap>.next.dsel{touch-action:pan-y;will-change:transform;position:relative;z-index:1}
-.dwrap>i{position:absolute;top:28px;bottom:28px;width:calc(var(--pad) - 7px);border:var(--bd);background:var(--card);opacity:0;pointer-events:none;display:block}
-.dwrap>.dgl{left:calc(-1 * var(--pad) - 2px);border-left:0;border-radius:0 18px 18px 0}
-.dwrap>.dgr{right:calc(-1 * var(--pad) - 2px);border-right:0;border-radius:18px 0 0 18px}
-.dwrap.hp>.dgl,.dwrap.hn>.dgr{opacity:.85}
-.next.dsel.din1{animation:dIn1 .32s cubic-bezier(.2,.8,.25,1)}
-.next.dsel.din-1{animation:dIn-1 .32s cubic-bezier(.2,.8,.25,1)}
-@keyframes dIn1{from{transform:translateX(60%);opacity:0}to{transform:none;opacity:1}}
-@keyframes dIn-1{from{transform:translateX(-60%);opacity:0}to{transform:none;opacity:1}}
-[dir=rtl] .next.dsel.din1{animation-name:dIn-1}[dir=rtl] .next.dsel.din-1{animation-name:dIn1}
-@media (prefers-reduced-motion:reduce){.next.dsel.din1,.next.dsel.din-1{animation:none}}
-[dir=rtl] .dwrap>.dgl{left:auto;right:calc(-1 * var(--pad) - 2px);border-left:var(--bd);border-right:0;border-radius:18px 0 0 18px}
-[dir=rtl] .dwrap>.dgr{right:auto;left:calc(-1 * var(--pad) - 2px);border-right:var(--bd);border-left:0;border-radius:0 18px 18px 0}
+/* race days: side-by-side cards (real neighbours peek at the screen edge) */
+.dwrap{position:relative;overflow-x:visible;overflow-y:clip;margin-bottom:18px}
+.dtrack{position:relative;will-change:transform;touch-action:pan-y}
+.dcard{margin:0!important}
+.dcard:not(.dsel){position:absolute;top:0;left:0;width:100%;box-sizing:border-box;transform:translateX(calc(var(--o) * (100% + 10px)))}
+[dir=rtl] .dcard:not(.dsel){left:auto;right:0;transform:translateX(calc(var(--o) * -1 * (100% + 10px)))}
+.dwrap+.drow{margin-top:-6px}
 /* finished races: placing list 1.–4. on its own row */
 .races li.rc.done:has(.fvB){grid-template-areas:"ti gt" "ti s" "meta meta"!important}
 .races li .fls.fvB{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin-top:4px}
@@ -1311,3 +1303,4 @@ header.top>.bar>#setb{order:5;margin-inline-start:auto}
 .races li.rc.done .rtab svg{width:16px;height:16px}.races li.rc.done .rtab b{font-size:16px}
 .races li.rc.done .rtab em{font-size:8px}
 .races li.rc.done{padding-inline-end:68px}
+.dwrap{overflow:clip;margin-inline:calc(-1 * var(--pad));padding-inline:var(--pad)}
