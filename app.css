@@ -972,3 +972,4 @@ dialog.tmd:has(.vframe iframe) .vframe{touch-action:auto}
 .tbar{height:6px;border-radius:3px;background:rgba(242,139,139,.35);overflow:hidden;margin:0 2px 14px}
 .tbar i{display:block;height:100%;background:#4fd1a1;border-radius:3px}
 [data-theme=light] .tstat b.tsg{color:#0f8a5f}[data-theme=light] .tstat b.tsr{color:#c0392b}
+html{touch-action:pan-x pan-y}.leaflet-container{touch-action:none}

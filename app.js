@@ -1,6 +1,9 @@
 /* Gold Cup Rio Matchboard – app logic (EN/DE/FR/ES, themes, favourites) */
 (async()=>{
 const $=s=>document.querySelector(s);
+/* no pinch / double-tap zoom of the app UI (iOS ignores user-scalable=no); the tracking map keeps its own pinch zoom */
+["gesturestart","gesturechange"].forEach(t=>document.addEventListener(t,e=>{if(!(e.target.closest&&e.target.closest(".leaflet-container")))e.preventDefault()},{passive:false}));
+document.addEventListener("touchmove",e=>{if(e.touches.length>1&&!(e.target.closest&&e.target.closest(".leaflet-container")))e.preventDefault()},{passive:false});
 const LS={get(k,d){try{const v=localStorage.getItem("gcmb_"+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem("gcmb_"+k,JSON.stringify(v))}catch(e){}}};
 const LANGS={en:"English",de:"Deutsch",fr:"Français",es:"Español",pt:"Português",zh:"中文",ar:"العربية",hi:"हिन्दी",bn:"বাংলা",ur:"اردو",id:"Bahasa Indonesia",ms:"Bahasa Melayu",ja:"日本語",th:"ไทย",hu:"Magyar",cs:"Čeština",uk:"Українська"};
 const RTL=l=>l=="ar"||l=="ur";
