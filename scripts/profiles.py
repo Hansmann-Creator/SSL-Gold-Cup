@@ -1,8 +1,7 @@
 """Collect public facts from the SSL sailor profiles (worldofsailors.com) for every sailor in roster.json.
 
 Writes profiles.json: { "TAH|Teva Plichart": {"slug":..., "rank":..., "club":..., "ach":[[n,label]], "oly":[[year,city,class,rank]],
-"wc":[[year,class,rank]], "ec":[[year,class,rank]]} }. Only facts (titles, results, club) – the free-text biographies are
-not copied; the app links to the profile instead.
+"wc":[[year,class,rank]], "ec":[[year,class,rank]]} }. Includes the short official bio, shown in the app with the SSL as source.
 """
 import json, re, os, time, html, unicodedata, urllib.request, urllib.error
 
@@ -26,12 +25,17 @@ def text(s):
     return re.sub(r"(\s*\|\s*)+", "|", t)
 
 ROW = re.compile(r"\|(\d{4})\|([^|]+)\|([^|]*)\|,\|([^|]+)\|([^|]+)\|([^|]+)\|(\d+)(?=\|)")
+HDR = re.compile(r"\|([^|]{3,60})\|DATE\|EVENT\|CLASS\|ROLE\|RANK\|")
 
-def section(t, a, b):
-    i = t.find("|" + a + "|DATE|")
-    if i < 0: return []
-    j = min([k for k in (t.find("|" + x + "|", i + 5) for x in b) if k > 0] or [len(t)])
-    return [m.groups() for m in ROW.finditer(t[i:j] + "|")]
+def sections(t):
+    """All result tables of the profile: {title: [[year, event, city, country, class, role, rank], ...]}"""
+    hs = list(HDR.finditer(t)); out = {}
+    for k, m in enumerate(hs):
+        j = hs[k + 1].start() if k + 1 < len(hs) else (t.find("|Statistics|", m.end()) if t.find("|Statistics|", m.end()) > 0 else len(t))
+        rows = [[int(y), ev.strip(), c.strip(), co.strip().title(), cl.strip(), ro.strip(), int(r)]
+                for y, ev, c, co, cl, ro, r in (g.groups() for g in ROW.finditer(t[m.start():j] + "|"))]
+        if rows: out[m.group(1).strip()] = rows
+    return out
 
 def parse(t, first, last):
     # the profile header shows first and last name as separate fields
@@ -40,18 +44,30 @@ def parse(t, first, last):
     out = {}
     m = re.search(r"\|Rank\|(\d+)\|", t)
     if m: out["rank"] = int(m.group(1))
-    h = t[t.find("|Rank|"):t.find("|Country|")] if "|Country|" in t else ""
+    m = re.search(r"\|SSL Points\|((?:\d\|)+?)(?=\d+\|X\||Country\|)", t)
+    if m: out["pts"] = int("".join(m.group(1).split("|")) or 0)
+    h = t[t.find("|Rank|"):t.find("|Country|") + 1] if "|Country|" in t else ""
     ach = [[int(n), lab.strip()] for n, lab in re.findall(r"\|(\d+)\|X\|([^|]{3,60})(?=\|)", h)]
     if ach: out["ach"] = ach
+    m = re.search(r"\|Country\|([^|]{2,60})\|", t)
+    if m and m.group(1).strip() not in ("Club", "Height"): out["country"] = m.group(1).strip().title()
     m = re.search(r"\|Club\|([^|]{2,80})\|", t)
-    if m and not m.group(1).strip().startswith(("Height", "Weight")): out["club"] = m.group(1).strip()
-    oly = section(t, "Olympic Games", ["World Championship", "Continental Championship", "Statistics"])
-    if oly: out["oly"] = [[int(y), c.strip(), cl.strip(), int(r)] for y, ev, c, co, cl, ro, r in oly][:8]
-    wc = section(t, "World Championship", ["Continental Championship", "Statistics"])
-    if wc: out["wc"] = sorted([[int(y), cl.strip(), int(r)] for y, ev, c, co, cl, ro, r in wc if int(r) <= 3], key=lambda x: (-x[0]))[:6]
-    ec = section(t, "Continental Championship", ["Statistics"])
-    if ec: out["ec"] = sorted([[int(y), cl.strip(), int(r)] for y, ev, c, co, cl, ro, r in ec if int(r) <= 3], key=lambda x: (-x[0]))[:4]
-    out["bio"] = "|Bio|" in t
+    if m and not m.group(1).strip().startswith(("Height", "Weight", "Bio")): out["club"] = m.group(1).strip()
+    m = re.search(r"\|Height\|(\d{2,3})\|cm\|", t)
+    if m: out["cm"] = int(m.group(1))
+    m = re.search(r"\|Weight\|(\d{2,3})\|kg\|", t)
+    if m: out["kg"] = int(m.group(1))
+    m = re.search(r"\|Bio\|(.{20,2500}?)\|(?:Records and Statistics|Statistics)\|", t)
+    if m: out["bio"] = m.group(1).replace("|", " ").strip()
+    sec = sections(t)
+    if sec: out["rec"] = sec
+    # compact lists kept for older app versions
+    oly = sec.get("Olympic Games", [])
+    if oly: out["oly"] = [[r[0], r[2], r[4], r[6]] for r in oly][:8]
+    wc = sec.get("World Championship", [])
+    if wc: out["wc"] = sorted([[r[0], r[4], r[6]] for r in wc if r[6] <= 3], key=lambda x: -x[0])[:6]
+    ec = sec.get("Continental Championship", [])
+    if ec: out["ec"] = sorted([[r[0], r[4], r[6]] for r in ec if r[6] <= 3], key=lambda x: -x[0])[:4]
     return out
 
 def main():
