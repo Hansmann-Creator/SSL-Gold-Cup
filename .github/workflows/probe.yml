@@ -5,12 +5,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: |
-          python3 scripts/live_video.py; cat live.json
-          python3 - <<'PY'
-          import re,json,urllib.request
-          import sys; sys.path.insert(0,'scripts'); import live_video as L
-          s=urllib.request.urlopen(urllib.request.Request(f"https://www.youtube.com/channel/{L.CH}/streams",headers=L.H)).read().decode()
-          d=json.loads(re.search(r"var ytInitialData = (\{.*?\});</script>",s,re.S).group(1)); out=[]; L.walk(d,out)
-          k,l=[x for x in out if x[0]=="l"][0]; j=json.dumps(l,ensure_ascii=False); print(j[:3000])
-          PY
+      - run: echo '{}' > live.json; python3 scripts/live_video.py; cat live.json

@@ -12,6 +12,11 @@ H = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
 
 def lang_of(t):
     s = " " + t.lower() + " "
+    if re.search(r"[\u0e00-\u0e7f]|\btha\b", s): return "th"
+    if re.search(r"[\u3040-\u30ff]|\bjpn?\b", s): return "ja"
+    if re.search(r"[\u4e00-\u9fff]|\bchn\b", s): return "zh"
+    if re.search(r"\bukr?\b|[іїєґ]", s): return "uk"
+    if re.search(r"\bcze?\b|\bden\b|čeština", s): return "cs"
     if re.search(r"\bhun\b|döntő|\bnap\b", s): return "hu"
     if re.search(r"\bdia\b|fase de|ao vivo|português|\bpt\b|regata", s): return "pt"
     if re.search(r"\bdía\b|en directo|español|\bes\b", s): return "es"
@@ -37,6 +42,17 @@ def from_lockup(l):
     st = re.search(r'"startTime": "?(\d{9,11})', j)
     return vid, title, live, (int(st.group(1)) if st else (0 if up else None))
 
+def watch_info(vid):
+    """Exact state from the watch page: live now / scheduled start (epoch)."""
+    try:
+        w = urllib.request.urlopen(urllib.request.Request(f"https://www.youtube.com/watch?v={vid}", headers=H), timeout=20).read().decode("utf-8", "replace")
+    except Exception:
+        return None, None, None
+    live = '"isLiveNow":true' in w
+    st = re.search(r'"scheduledStartTime":"(\d+)"', w)
+    ended = '"endTimestamp"' in w and not live
+    return live, (int(st.group(1)) if st else None), ended
+
 def main():
     try:
         s = urllib.request.urlopen(urllib.request.Request(f"https://www.youtube.com/channel/{CH}/streams", headers=H), timeout=25).read().decode("utf-8", "replace")
@@ -59,13 +75,19 @@ def main():
         start = int(up) if up else None
         if start and start - now > 36 * 3600: continue
         if any(x["id"] == vid for x in streams): continue
+        if len(streams) < 12:
+            wl, ws, we = watch_info(vid)
+            if we: continue
+            if wl is not None: live = wl
+            if ws: start = ws
+            if start and start - now > 36 * 3600: continue
         streams.append({"id": vid, "t": html.unescape(title), "live": live, "start": start, "lang": lang_of(title)})
     streams.sort(key=lambda x: (not x["live"], x["start"] or 0))
     best = next((x for x in streams if x["lang"] == "en"), streams[0] if streams else None)
     out = {"streams": streams, "id": best["id"] if best else "", "live": bool(best and best["live"]), "t": best["t"] if best else ""}
     try: old = json.load(open(OUT))
     except Exception: old = {}
-    if [(x["id"], x["live"]) for x in old.get("streams", [])] != [(x["id"], x["live"]) for x in streams]:
+    if [(x["id"], x["live"], x["start"]) for x in old.get("streams", [])] != [(x["id"], x["live"], x["start"]) for x in streams]:
         out["at"] = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
         json.dump(out, open(OUT, "w"), ensure_ascii=False)
         print("live: changed ->", json.dumps(out, ensure_ascii=False)[:600])
