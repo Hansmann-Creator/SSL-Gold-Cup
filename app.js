@@ -1256,7 +1256,7 @@ setInterval(()=>{if(document.hidden)return;document.querySelectorAll("[data-lat]
 function raceLi(x,nx){const st=rState2(x),r=rnd(x.rid),g=r&&r.groups.find(y=>y.id==x.g);
   const fl=g?g.rows.filter(z=>isTeam(z.team)).map(z=>FL(z.team)).join(""):"";
   const lbl=x.rid=="f"?RNm(rnd("f")):x.rid=="pf"?RNm(rnd("pf")):`${T("group")} ${x.g}`;
-  const s=st=="done"?`✓ ${T("done")}`:st=="now"?T("onWater"):"";const FG=(FLG&&FLG.races&&FLG.races[raceKey(x)])||null,NB0=FG&&FG.pd&&FG.nb&&st!="done"&&(!FG.until||nowMs()<Date.parse(FG.until))?Date.parse(FG.nb):0,EST=!NB0&&st!="done"&&st!="past"&&!(RST[raceKey(x)]&&RST[raceKey(x)].s=="racing")?estOf(x):0,NB=NB0||EST;
+  const s=st=="done"?`✓ ${T("done")}`:st=="now"?T("onWater"):"";const FG=(FLG&&FLG.races&&FLG.races[raceKey(x)])||null,NB0=FG&&FG.pd&&FG.nb&&st!="done"&&(!FG.until||nowMs()<Date.parse(FG.until))?Date.parse(FG.nb):0,EST=!NB0&&st!="done"&&st!="past"&&!(RST[raceKey(x)]&&RST[raceKey(x)].s=="racing")&&!timOf(x).s?estOf(x):0,NB=NB0||EST;
   const dly=NB&&NB>nowMs();const s2=dly?`<span class="dlyt">${esc(EST?(NXP[lang]||NXP.en):(NXS[lang]||NXS.en)[3])}</span>`:s;const st2=dly?"up":st;
   const cdn=NB&&NB>nowMs()?`<small class="cdn" data-at="${NB}">${mono(cdTxt(NB))}</small>`:st=="up"&&at(x)-nowMs()<24*36e5?`<small class="cdn" data-at="${at(x)}">${mono(cdTxt(at(x)))}</small>`:"";
   const tk=trkUrl(x)&&st!="done"&&st!="past"?`<a class="trk" data-trk="${raceKey(x)}" href="${esc(trkUrl(x))}" target="_blank" rel="noopener">📍 ${T("trk")}</a>`:"";
@@ -1551,7 +1551,7 @@ function quietUtc(start){const off=new Date().getTimezoneOffset();return String(
 let RSTQ=0;
 /* ---------- changelog ("What's new") ---------- */
 const CHL=[
- {d:"2026-11-26",v:"2.6",it:[["res","#f5b800"],["rbox","#e8475f"],["inst2","#36c28c"],["trk2","#4ec3ff"],["fbk","#9b8cff"]]},
+ {d:"2026-11-26",v:"2.6",it:[["res","#f5b800"],["rbox","#e8475f"],["inst2","#36c28c"],["trk2","#4ec3ff"],["fbk","#9b8cff"],["estd","#f5b800"]]},
  {d:"2026-11-26",v:"2.5",it:[["rank","#f5b800"],["pos","#4ec3ff"],["linkin","#36c28c"]]},
  {d:"2026-11-26",v:"2.4",it:[["compass","#f5b800"],["tap","#4ec3ff"],["pl","#e8475f"],["photos","#36c28c"],["bright","#f5b800"],["logo","#9b8cff"]]},
  {d:"2026-11-26",v:"2.3",it:[["tabs","#4ec3ff"],["settings","#9b8cff"],["pages","#36c28c"],["anim","#f5b800"],["install","#e8475f"]]},
@@ -1566,6 +1566,7 @@ const CHI={compass:'<circle cx="12" cy="12" r="9"/><path d="M12 3l2.5 6h-5z" fil
  race:'<path d="M4 21V4M4 4h12l-2 4 2 4H4"/>',push:'<path d="M6 16V11a6 6 0 0112 0v5l2 2H4z"/><path d="M10 20a2 2 0 004 0"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',shareimg:'<path d="M12 3v12M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>',app:'<rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 18h4"/>',rank:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',pos:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/><path d="M17 3l2 2-2 2"/>',linkin:'<path d="M10 14a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1"/><path d="M14 10a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/>'};
 const CHT={
 en:{t:"What's new",sub:"Everything new in the app – latest first",ver:"Version",newB:"New",seen:"You're up to date",
+ estd:["Smart delay estimate","The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races."],
  res:["Results in the app","Overall ranking, qualifiers and the Final Series – open places show “(to be determined)”."],rbox:["Live race box","The header strip shows the race on the water and the countdown to the next start – and when a start is delayed."],inst2:["Easier install","One tap on Android, an arrow that points to the right button on iPhone, and “Open in Chrome/Safari” from WhatsApp & co."],trk2:["Faster tracking","Live positions appear right away, the race history loads in the background."],fbk:["Send a wish or bug","Under More: tell the app maker what should be better."],
  rank:["SSL Nations Ranking in the app","All 132 nations with continent filter, search, history back to 2025 and each nation's best skippers and crews."],pos:["Positions checked","Every sailor's position compared with the team pages and the Rio jersey numbers – several positions are shown where they differ."],linkin:["No more jumps to other sites","Ranking and qualifier links now open inside the app."],
  compass:["Clearer wind compass","The yellow wedge shows where the wind comes from, the wind speed sits right in the middle."],
@@ -1595,6 +1596,7 @@ en:{t:"What's new",sub:"Everything new in the app – latest first",ver:"Version
  shareimg:["Share as image","Group tables as a picture for WhatsApp & co."],
  app:["Install as an app","Full screen, with icon, updates itself."]},
 de:{t:"Neu in der App",sub:"Alle Neuerungen – die neuesten zuerst",ver:"Version",newB:"Neu",seen:"Du bist auf dem neuesten Stand",
+ estd:["Verspätungen vorhergesagt","Die App lernt aus jedem Rennen, wie lange Rennen und Wechsel dauern, und zeigt für die folgenden Rennen „Wohl verspätet ~HH:MM“."],
  res:["Ergebnisse in der App","Gesamtwertung, Qualifikation und Final Series – offene Plätze stehen als „(to be determined)“."],rbox:["Live-Rennleiste","Oben siehst du das laufende Rennen und den Countdown zum nächsten Start – auch wenn sich ein Start verschiebt."],inst2:["Einfacher installieren","Ein Tipp unter Android, ein Pfeil zum richtigen Knopf auf dem iPhone und „In Chrome/Safari öffnen“ aus WhatsApp & Co."],trk2:["Schnelleres Tracking","Live-Positionen erscheinen sofort, der Rennverlauf lädt im Hintergrund."],fbk:["Wunsch oder Fehler melden","Unter Mehr: Sag dem Macher der App, was besser werden soll."],
  rank:["SSL Nations Ranking in der App","Alle 132 Nationen mit Kontinent-Filter, Suche, Verlauf bis 2025 und den besten Skippern und Crews jeder Nation."],pos:["Positionen geprüft","Die Position jedes Seglers mit Teamseiten und Rio-Trikotnummern abgeglichen – bei Abweichungen stehen mehrere Positionen."],linkin:["Keine Sprünge mehr auf andere Seiten","Ranking- und Quali-Links öffnen jetzt in der App."],
  compass:["Klarerer Windkompass","Der gelbe Keil zeigt, woher der Wind kommt, die Windstärke steht direkt in der Mitte."],
@@ -2315,17 +2317,21 @@ const NXS={en:["On schedule","Starting soon","Start delayed","Delayed","Racing",
 const NXW={en:"Start pending",de:"Start ausstehend",fr:"Départ à venir",es:"Salida pendiente",pt:"Largada pendente",zh:"等待起航",ar:"بانتظار الانطلاق",hi:"स्टार्ट बाकी",bn:"স্টার্ট বাকি",ur:"اسٹارٹ باقی",id:"Menunggu start",ms:"Menunggu mula",ja:"スタート待ち",th:"รอออกสตาร์ท",hu:"Rajtra vár",cs:"Čeká na start",uk:"Очікує старт",pl:"Czeka na start"};
 const NXP={en:"Probably delayed",de:"Wohl verspätet",fr:"Retard probable",es:"Retraso probable",pt:"Atraso provável",zh:"可能推迟",ar:"تأخير محتمل",hi:"देरी संभव",bn:"দেরি হতে পারে",ur:"تاخیر متوقع",id:"Mungkin tertunda",ms:"Mungkin lewat",ja:"遅延見込み",th:"อาจล่าช้า",hu:"Valószínű késés",cs:"Asi zpoždění",uk:"Ймовірна затримка",pl:"Możliwe opóźnienie"};
 /* estimated start of today's races: one race at a time on the course; ~50 min racing + ~30 min changeover */
-const RDUR=50*60e3,RGAP=30*60e3;let ESTC=null;
-function estDay(){const n=nowMs();if(ESTC&&ESTC.D===D&&ESTC.F===FLG&&n-ESTC.at<5e3)return ESTC.E;const day=today(),E={};let end=0;
-  for(const x of SCH.filter(y=>y.d==day).sort((a,b)=>at(a)-at(b))){const k=raceKey(x),t=at(x),o=RST[k]||{};
-    if(raceDone(x)||o.s=="done"){end=o.doneAt&&n-o.doneAt<3*36e5?o.doneAt:0;continue}
+/* learned from Georacing (timing.json): typical race length and changeover, actual starts/finishes, operator's start times */
+let ESTC=null;
+function estDay(){const n=nowMs();if(ESTC&&ESTC.D===D&&ESTC.F===FLG&&ESTC.T===TIM&&n-ESTC.at<5e3)return ESTC.E;
+  const RDUR=((TIM&&TIM.dur)||45)*60e3,RGAP=((TIM&&TIM.gap)||35)*60e3,TR=(TIM&&TIM.races)||{},day=today(),E={};let end=0;
+  for(const x of SCH.filter(y=>y.d==day).sort((a,b)=>at(a)-at(b))){const k=raceKey(x),t=at(x),o=RST[k]||{},g=TR[k]||{},gs=g.s?Date.parse(g.s):0,gf=g.f?Date.parse(g.f):0,gp=g.plan?Date.parse(g.plan):0;
+    if(gf||raceDone(x)||o.s=="done"){end=gf||(o.doneAt&&n-o.doneAt<3*36e5?o.doneAt:0)||(gs?gs+RDUR:0);continue}
     const f=FLG&&FLG.races&&FLG.races[k],nb=f&&f.pd&&f.nb&&(!f.until||n<Date.parse(f.until))?Date.parse(f.nb):0;let st;
-    if(o.s=="racing"){st=o.since||Math.max(t,nb);end=Math.max(st+RDUR,n+5*60e3)}
-    else{st=Math.max(t,nb,end?end+RGAP:0,n>=t?n+5*60e3:0);end=st+RDUR}
+    const plan=gp&&Math.abs(gp-t)<6*36e5?gp:t;
+    if(gs||o.s=="racing"){st=gs||o.since||Math.max(plan,nb);end=Math.max(st+RDUR,n+3*60e3)}
+    else{st=Math.max(plan,nb,end?end+RGAP:0,n>=plan?n+3*60e3:0);end=st+RDUR}
     E[k]=st}
-  ESTC={at:n,E,D,F:FLG};return E}
-const estOf=x=>{if(nowMs()>=at(x))return 0;const e=estDay()[raceKey(x)];return e&&e-at(x)>=10*60e3?e:0};
-var FLG={};async function pullFlags(){try{const r=await fetch("flags.json?t="+Date.now(),{cache:"no-store"});if(r.ok){const j=await r.json(),ch=JSON.stringify(j)!==JSON.stringify(FLG);FLG=j;if(ch)try{render(true)}catch(e){}}}catch(e){}}
+  ESTC={at:n,E,D,F:FLG,T:TIM};return E}
+const timOf=x=>(TIM&&TIM.races&&TIM.races[raceKey(x)])||{};
+const estOf=x=>{const e=estDay()[raceKey(x)],n=nowMs();return e&&e-at(x)>=10*60e3&&e>n+4*60e3?e:0};
+var FLG={},TIM=null;async function pullFlags(){try{const r=await fetch("timing.json?t="+Date.now(),{cache:"no-store"});if(r.ok){const j=await r.json(),ch=JSON.stringify(j)!==JSON.stringify(TIM);TIM=j;ESTC=null;if(ch)try{render(true)}catch(e){}}}catch(e){}try{const r=await fetch("flags.json?t="+Date.now(),{cache:"no-store"});if(r.ok){const j=await r.json(),ch=JSON.stringify(j)!==JSON.stringify(FLG);FLG=j;if(ch)try{render(true)}catch(e){}}}catch(e){}}
 pullFlags();setInterval(()=>{if(!document.hidden)pullFlags()},60000);
 /* race status from Georacing's live feed (CORS-open): waiting = boats on the water, none past the start; racing = someone past the start */
 const RST={};
@@ -2334,10 +2340,10 @@ function rsPoll(x){const k=raceKey(x),o=RST[k]||(RST[k]={s:"",at:0,busy:false}),
     o.s=!P.length?"":P.every(c=>c==255)?"done":P.some(c=>c>=2&&c!=255)||P.some(c=>c==255)?"racing":"waiting";if(o.s=="racing"&&!o.since)o.since=nowMs();if(o.s=="done"&&!o.doneAt&&o.seenOpen)o.doneAt=nowMs();if(o.s&&o.s!="done")o.seenOpen=1}).catch(()=>{o.s=""}).finally(()=>{o.at=nowMs();o.busy=false});return o}
 function rioHM(ms){try{return new Date(ms).toLocaleTimeString(LOC(),{hour:"2-digit",minute:"2-digit",timeZone:"America/Sao_Paulo"})}catch(e){return""}}
 function nxState(x){const t=at(x),n=nowMs(),f=FLG&&FLG.races&&FLG.races[raceKey(x)],nb=f&&f.nb?Date.parse(f.nb):0,fl=f&&f.pd&&(!f.until||n<Date.parse(f.until));
-  const o=n>t-10*60e3&&n<t+150*60e3?rsPoll(x):RST[raceKey(x)]||{},st=o.s;
+  const o=n>t-10*60e3&&n<t+150*60e3?rsPoll(x):RST[raceKey(x)]||{},g=timOf(x),st=g.f?"done":g.s&&n>=Date.parse(g.s)?"racing":o.s;
   if(st=="done")return{k:"done"};
   if(fl&&nb&&n<nb)return{k:"prob",to:nb,nb};
-  if(!fl&&n<t+5*60e3&&st!="racing"){const e=estOf(x);if(e&&n<e)return{k:"est",to:e,est:e}}
+  if(!fl&&st!="racing"){const e=estOf(x);if(e)return{k:"est",to:e,est:e}}
   if(n<t-5*60e3)return fl?{k:"prob",to:t,nb:0}:{k:"ok",to:t};
   if(n<t)return fl?{k:"prob",to:t,nb:0}:{k:"soon",to:t};
   return st=="racing"?{k:"racing"}:{k:"live"}}

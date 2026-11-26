@@ -65,6 +65,10 @@ jobs:
             if [ $(( $(date +%s) / 60 % 3 )) -eq 1 ]; then
               if timeout 60 python scripts/trk_watch.py | grep -q '^changed'; then gh workflow run deploy.yml --ref main || true; fi
             fi
+            # race timing learned from Georacing (actual starts/finishes, operator start times), every 2 min
+            if [ $(( $(date +%s) / 60 % 2 )) -eq 1 ]; then
+              if timeout 90 python scripts/timing.py | grep -q '^changed'; then git add timing.json; git commit -qm "timing $(date -u +%H:%M)" && { git push -q origin main && gh workflow run deploy.yml --ref main || git reset -q --hard origin/main; }; fi
+            fi
             # start reminders (15 min before a race, opt-in)
             PUSH_STATE=/tmp/push_state.json timeout 60 python scripts/push_extra.py remind || true
             cp results.json /tmp/old.json
