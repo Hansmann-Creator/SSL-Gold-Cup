@@ -56,6 +56,32 @@ def build_ics():
         open(os.path.join(ROOT, "cal", f"{code}.ics"), "w", encoding="utf-8", newline="").write(ics(f"SSL Gold Cup – {info[code].get('name', code)}", ev))
 
 
+def trim_all(a):
+    """The parts of Georacing's all.json the in-app tracker needs (the browser may not read it cross-origin)."""
+    r = a.get("race") or {}
+    keep = lambda d, ks: {k: d.get(k) for k in ks}
+    return {
+        "race": keep(r, ["id", "name", "start_time", "end_time", "available_time", "time_delay_2d", "format_data"]),
+        "actors": [keep(x, ["id", "short_name", "name", "color"]) for x in a.get("actors") or []],
+        "courses": [{"name": c.get("name"), "active": c.get("active"), "course_objects": [
+            {**keep(o, ["name", "type", "role", "order"]), "course_elements": [keep(el, ["id", "name", "color"]) for el in o.get("course_elements") or []]}
+            for o in c.get("course_objects") or []]} for c in a.get("courses") or []],
+        "splittimes": [{**keep(sp, ["name", "role"]), "splittimes": [keep(t, ["actor_id", "time", "rank"]) for t in sp.get("splittimes") or []]}
+                       for sp in a.get("splittimes") or []],
+        "weathers": [keep(w, ["wind_direction", "time"]) for w in a.get("weathers") or []],
+    }
+
+
+def mirror_race(ev, rc):
+    try:
+        a = json.load(urllib.request.urlopen(urllib.request.Request(f"https://player.georacing.com/datas/{ev}/{rc}/all.json",
+                      headers={"User-Agent": "Mozilla/5.0 Chrome/131", "Referer": "https://player.georacing.com/"}), timeout=20))
+        os.makedirs(os.path.join(ROOT, "trk"), exist_ok=True)
+        json.dump(trim_all(a), open(os.path.join(ROOT, "trk", f"{rc}.json"), "w"), separators=(",", ":"))
+    except Exception as ex:
+        print("tracking mirror", rc, "skipped –", ex)
+
+
 def build_tracking():
     out = {}
     try:
@@ -69,6 +95,7 @@ def build_tracking():
             for x in get(f"https://player.georacing.com/datas/{e['id']}/races.json"):
                 nm = x.get("name") or ""
                 url = f"https://player.georacing.com/{x.get('player_name') or ''}?event={e['id']}&race={x['id']}&application_id=46"
+                mirror_race(e["id"], x["id"])
                 m = re.match(r"Race\s*(\d)\s*-\s*Group\s*([A-D])", nm, re.I)
                 if m and rid:
                     out.setdefault(rid, {}).setdefault(m.group(2).upper(), {})[m.group(1)] = url

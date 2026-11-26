@@ -1003,15 +1003,18 @@ function openTrack(x){const u=x&&x.url?x.url:trkUrl(x);if(!u)return;let ev,rc;tr
   show(d);gcEvent("tracking");
   if(!ev||!rc){$("#tkmsg").textContent=T("tkNone");return}
   trkRun(x,ev,rc).catch(e=>{const m=$("#tkmsg");if(m){m.hidden=false;m.textContent=T("tkNone")}})}
+function trkFrame(x){const u=x&&x.url?x.url:trkUrl(x),m=$("#tkmap")||$(".tkmap");if(!m||!u)return;const v=m.closest(".tk");v.querySelectorAll(".tktl,.tkrk,.tkcr").forEach(e=>e.remove());m.style.flex="1";m.innerHTML=`<iframe src="${esc(u)}" title="Tracking" allow="fullscreen" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff"></iframe>`}
 async function trkRun(x,ev,rc){const Lf=await loadLeaflet().catch(()=>null);const base=`${GEOD}${ev}/${rc}/`;
-  const all=await geoJ(base+"all.json");if(!TK&&!$("#tkm"))return;
+  let all=null;try{all=await geoJ(`trk/${rc}.json?t=${Math.floor(Date.now()/6e4)}`)}catch(e){}
+  if(!all||!all.race||!(all.actors||[]).length){trkFrame(x);return}if(!$("#tkm"))return;
   const S0=Date.parse(all.race.start_time),E0=Date.parse(all.race.end_time),AV=Date.parse(all.race.available_time||all.race.start_time),delay=1e3*(+all.race.time_delay_2d||8);
   const tk=TK={ev,rc,all,map:null,tr:new Map(),start:S0,t:0,play:false,spd:1,live:false,follow:true,dead:false};
   const ACT=new Map((all.actors||[]).map(a=>[+a.id,{code:(a.short_name||"").toUpperCase(),name:a.name,color:a.color||"#fff"}]));
   const course=(all.courses||[]).find(c=>+c.active)||(all.courses||[])[0];const MK=new Map();
   for(const c of all.courses||[])for(const o of c.course_objects||[])for(const e of o.course_elements||[])if(!MK.has(+e.id))MK.set(+e.id,{name:e.name,color:e.color||"#ff8700",jury:/committee|jury/i.test(e.name)});
   const add=r=>{if(r.lt==null||r.lg==null)return;let a=tk.tr.get(r.id);if(!a)tk.tr.set(r.id,a=[]);if(a.length&&a[a.length-1].t>=r.t){if(a[a.length-1].t==r.t)return;a.push(r);a.sort((p,q)=>p.t-q.t);return}a.push(r)};
-  async function loadDay(day){try{const ix=await geoJ(`${base}positions/${day}__r.json`);const n=ix.lastIndex??0;for(let i=0;i<=n;i++){const r=await fetch(`${base}positions/${day}__r${i}__positions.bin`,{cache:"no-store"});if(r.ok)geoDecode(await r.arrayBuffer(),day).forEach(add)}return n}catch(e){return -1}}
+  const lastBin={};async function bin(day,i){try{const r=await fetch(`${base}positions/${day}__r${i}__positions.bin`,{cache:"no-store"});if(!r.ok)return false;geoDecode(await r.arrayBuffer(),day).forEach(add);lastBin[day]=i;return true}catch(e){return false}}
+  async function loadDay(day){let i=0;while(i<40&&await bin(day,i))i++;return i}
   const days=[...new Set([dayStr(AV),dayStr(S0),dayStr(Math.min(E0,Date.now()))])];
   if(Date.now()>=AV-6e4)for(const dy of days)await loadDay(dy);
   if(tk.dead)return;
@@ -1072,14 +1075,14 @@ async function trkRun(x,ev,rc){const Lf=await loadLeaflet().catch(()=>null);cons
   /* live feed: live.json every 2 s, falls back to re-reading the newest .bin file */
   async function pollLive(){if(tk.dead)return;let ok=false;
     try{const j=await geoJ(`${GEOL}${ev}/${rc}/live.json`);(Array.isArray(j)?j:[]).forEach(s=>{const tt=Date.parse(s.time);(s.positions||[]).forEach(p=>add({...p,id:+p.id,t:tt}))});ok=true}catch(e){}
-    if(!ok){try{const dy=dayStr(Date.now()),ix=await geoJ(`${base}positions/${dy}__r.json`),r=await fetch(`${base}positions/${dy}__r${ix.lastIndex??0}__positions.bin`,{cache:"no-store"});if(r.ok)geoDecode(await r.arrayBuffer(),dy).forEach(add)}catch(e){}}
+    if(!ok){const dy=dayStr(Date.now()),i=lastBin[dy]??0;await bin(dy,i);await bin(dy,i+1)}
     tk.poll=setTimeout(pollLive,ok?2000:5000)}
   tk.live=isLive();
   const rg=range();
   if(!rg&&!tk.live){msg.innerHTML=Date.now()<AV?`${esc(T("tkOpens"))} <b>${esc(rioClock(AV))}</b> ${esc(T("rioT"))}<br><small>${esc(T("tkStart"))} ${esc(rioClock(S0))}</small>`:esc(T("tkNoData"));
     if(Date.now()<AV){tk.allPoll=setInterval(()=>{if(Date.now()>=AV-3e4){clearInterval(tk.allPoll);if(!tk.dead){trkStop();openTrack(x)}}},15e3)}return}
   msg.hidden=true;tl.hidden=false;lv.hidden=!tk.live;
-  if(tk.live){tk.atLive=true;tk.t=Date.now()-delay;pollLive();tk.allPoll=setInterval(async()=>{try{const a2=await geoJ(base+"all.json");all.splittimes=a2.splittimes;all.weathers=a2.weathers}catch(e){}if(!isLive()){tk.live=false;lv.hidden=true}},2e4)}
+  if(tk.live){tk.atLive=true;tk.t=Date.now()-delay;pollLive();tk.allPoll=setInterval(async()=>{try{const a2=await geoJ(`trk/${rc}.json?t=${Date.now()}`);all.splittimes=a2.splittimes;all.weathers=a2.weathers}catch(e){}if(!isLive()){tk.live=false;lv.hidden=true}},2e4)}
   else{tk.t=rg[0]+Math.min(9e4,(rg[1]-rg[0])*.02);setPlay(false)}
   frame(true);
   let last=performance.now();tk.tick=setInterval(()=>{if(tk.dead||document.hidden)return;const now=performance.now(),dt=now-last;last=now;
