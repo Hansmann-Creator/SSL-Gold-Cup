@@ -537,7 +537,7 @@ function liveCalc(g){const n=g.rows[0].r.length;const tot=g.rows.map(x=>parseFlo
   const mx=g.rows.map((x,k)=>tot[k]+x.r.reduce((s,v,i)=>s+(String(v).trim()===""?(i==n-1?8:4):0),0));
   return g.rows.map((x,k)=>{const above=tot.filter((t,j)=>j!=k&&t>mx[k]).length;const reach=mx.filter((m,j)=>j!=k&&m>=tot[k]).length;return above>=2?"elim":reach<2?"clinch":""})}
 function raceDay(r){const t=days(r.start,r.end)+1,n=Math.min(t,Math.max(1,days(r.start,today())+1));return[n,t]}
-const LINKS=()=>`<span class="lk"><a href="https://www.youtube.com/@Starsailors/streams" target="_blank" rel="noopener">${T("stream")}</a><a href="https://app.georacing.com/?application_id=46" target="_blank" rel="noopener">${T("tracking")}</a><a href="https://sslgoldcup.worldofsailors.com/schedule/" target="_blank" rel="noopener">${T("schedule")}</a></span>`;
+const LINKS=()=>`<span class="lk"><a href="https://www.youtube.com/@Starsailors/streams" target="_blank" rel="noopener">${T("stream")}</a><a href="https://app.georacing.com/?application_id=46" target="_blank" rel="noopener" data-trkurl="1">${T("tracking")}</a><a href="https://sslgoldcup.worldofsailors.com/schedule/" target="_blank" rel="noopener">${T("schedule")}</a></span>`;
 function current(){const r=D.rounds.find(r=>rState(r)!="done");return(r||D.rounds[D.rounds.length-1]).id}
 function teams(){const M={};
   D.rounds.forEach(r=>r.groups.forEach(g=>{const done=gState(g,r)=="done";g.rows.forEach((x,i)=>{if(!isTeam(x.team))return;
@@ -598,12 +598,13 @@ const rnd=id=>D.rounds.find(r=>r.id==id);
 function raceDone(x){const r=rnd(x.rid),g=r&&r.groups.find(y=>y.id==x.g);if(!g)return false;const i=x.n-1;return g.rows.every(z=>String(z.r[i]??"").trim()!=="")}
 function rState2(x){if(raceDone(x))return"done";const t=at(x),n=nowMs();if(n>=t-5*60e3&&n<t+75*60e3)return"now";if(n>=t+75*60e3)return"past";return"up"}
 function nextFor(rid,gid){return SCH.filter(x=>x.rid==rid&&x.g==gid&&!raceDone(x)&&rState2(x)!="past").sort((a,b)=>at(a)-at(b))[0]}
+const mono=t=>String(t).replace(/\d/g,d=>`<i class="dg">${d}</i>`);
 function cdTxt(t){const d=Math.max(0,Math.round((t-nowMs())/1000)),h=Math.floor(d/3600),m=Math.floor(d%3600/60),sec=d%60,p=n=>String(n).padStart(2,"0");return (h?`${h}:${p(m)}`:`${m}`)+`:${p(sec)}`}
-setInterval(()=>{if(document.hidden)return;document.querySelectorAll(".cdn[data-at]").forEach(el=>{const t=+el.dataset.at;if(t-nowMs()<=0){el.remove();return}el.textContent=cdTxt(t)})},1000);
+setInterval(()=>{if(document.hidden)return;document.querySelectorAll(".cdn[data-at]").forEach(el=>{const t=+el.dataset.at;if(t-nowMs()<=0){el.remove();return}el.innerHTML=mono(cdTxt(t))})},1000);
 function raceLi(x,nx){const st=rState2(x),r=rnd(x.rid),g=r&&r.groups.find(y=>y.id==x.g);
   const fl=g?g.rows.filter(z=>isTeam(z.team)).map(z=>FL(z.team)).join(""):"";
   const lbl=x.rid=="f"?RNm(rnd("f")):x.rid=="pf"?RNm(rnd("pf")):`${T("group")} ${x.g}`;
-  const s=st=="done"?`✓ ${T("done")}`:st=="now"?T("onWater"):"";const cdn=st=="up"&&at(x)-nowMs()<24*36e5?`<small class="cdn" data-at="${at(x)}">${esc(cdTxt(at(x)))}</small>`:"";
+  const s=st=="done"?`✓ ${T("done")}`:st=="now"?T("onWater"):"";const cdn=st=="up"&&at(x)-nowMs()<24*36e5?`<small class="cdn" data-at="${at(x)}">${mono(cdTxt(at(x)))}</small>`:"";
   const tk=trkUrl(x)&&st!="done"&&st!="past"?`<a class="trk" data-trk="${raceKey(x)}" href="${esc(trkUrl(x))}" target="_blank" rel="noopener">📍 ${T("trk")}</a>`:"";
   return `<li class="rc ${st=="done"||st=="past"?"past":st=="now"?"now":x===nx?"nxt":""}" data-race="${raceKey(x)}" role="button" tabindex="0"><span class="ti">${x.t}${showLocal?`<small>${esc(locT(x))}</small>`:""}${cdn}</span><span class="gt"><b>${esc(lbl)}</b>${["sf","pf","f"].includes(x.rid)?`<i>${esc(RS[x.rid])}</i>`:`<i>${T("race")} ${x.n}</i>`}</span><span class="s">${esc(s)}</span><span class="meta"><span class="fls">${fl}</span>${wxAt(x)}${tk}</span><span class="chev" aria-hidden="true">›</span></li>`}
 const trkUrl=x=>{try{const u=TRK[x.rid][x.g][String(x.n)];return /^https:\/\/player\.georacing\.com\//.test(u)?u:""}catch(e){return""}};
@@ -960,9 +961,9 @@ function openRace(x){if(!x)return;const d=$("#tmd"),r=rnd(x.rid),g=r&&r.groups.f
   d.querySelectorAll("[data-tm]").forEach(b=>b.onclick=()=>{if(isTeam(b.dataset.tm))openTeam(b.dataset.tm)});
   d.querySelector("[data-go]").onclick=e=>{d.close();sel=null;jump=true;go(e.currentTarget.dataset.go)};
   show(d)}
-function openTrack(x){const u=trkUrl(x);if(!u)return;const d=$("#tmd");d.classList.add("full");
-  d.innerHTML=`<div class="trkv"><div class="trkbar"><button class="trkb" data-back="1">${esc(T("back"))}</button><b>${esc(x.rid=="f"||x.rid=="pf"?RNm(rnd(x.rid)):`${T("group")} ${x.g} · ${T("race")} ${x.n}`)}</b><a class="trkb" href="${esc(u)}" target="_blank" rel="noopener">${esc(T("trkExt"))}</a></div><iframe src="${esc(u)}" title="Georacing" allow="fullscreen; geolocation" referrerpolicy="no-referrer-when-downgrade"></iframe></div>`;
-  d.querySelector("[data-back]").onclick=()=>{d.classList.remove("full");openRace(x)};
+function openTrack(x){const u=x&&x.url?x.url:trkUrl(x);if(!u)return;const d=$("#tmd");d.classList.add("full");
+  d.innerHTML=`<div class="trkv"><div class="trkbar"><button class="trkb" data-back="1">${esc(T("back"))}</button><b>${esc(x.url?"Georacing":x.rid=="f"||x.rid=="pf"?RNm(rnd(x.rid)):`${T("group")} ${x.g} · ${T("race")} ${x.n}`)}</b><a class="trkb" href="${esc(u)}" target="_blank" rel="noopener">${esc(T("trkExt"))}</a></div><iframe src="${esc(u)}" title="Georacing" allow="fullscreen" sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-downloads" referrerpolicy="no-referrer-when-downgrade"></iframe></div>`;
+  d.querySelector("[data-back]").onclick=()=>{d.classList.remove("full");if(x.url)d.close();else openRace(x)};
   openCode=null;show(d);gcEvent("tracking")}
 /* ---------- spoiler-free mode: hide results after a cutoff the user chooses ---------- */
 let SPOIL=!!LS.get("spoil",0),SPCUT=LS.get("spcut",0)||0;
@@ -1112,7 +1113,7 @@ function nxcPaint(){let b=$("#nxc");const L=SCH.filter(x=>rState2(x)=="now").sor
   if(!L&&!N){if(b)b.remove();return}
   if(!b){b=document.createElement("button");b.id="nxc";b.type="button";b.onclick=()=>{const x=b._x;if(!x)return;b.classList.contains("live")?openLive(x):openRace(x)};const bar=$(".bar"),ins=$("#ins");ins?bar.insertBefore(b,ins):bar.appendChild(b)}
   b._x=L||N;b.classList.toggle("live",!!L);
-  const lbl=L?`<small><i class="ldot2"></i>LIVE</small><b>▶ ${esc(T("watchLive"))}</b>`:`<small>${esc(T("nextRace"))}</small><b class="cdd">${cdLong(at(N))}</b>`;
+  const lbl=L?`<small><i class="ldot2"></i>LIVE</small><b>▶ ${esc(T("watchLive"))}</b>`:`<small>${esc(T("nextRace"))}</small><b class="cdd">${mono(cdLong(at(N)))}</b>`;
   if(b._h!==lbl){b.innerHTML=lbl;b._h=lbl}b.setAttribute("aria-label",(L?"LIVE ":T("nextRace")+" ")+(b._x?`${T("group")} ${b._x.g} · ${b._x.t}`:""))}
 setInterval(()=>{if(!document.hidden)nxcPaint()},1000);
 /* ---------- push notifications (OneSignal) + private visitor counter (GoatCounter); both off until config.js has a value ---------- */
@@ -1193,6 +1194,7 @@ document.querySelector(".tabs").addEventListener("click",e=>{const b=e.target.cl
 $("#ladder").addEventListener("click",e=>{const b=e.target.closest("button");if(b){round=b.dataset.r;go("round-"+round)}});
 $("#main").addEventListener("click",e=>{
   const lvb=e.target.closest("[data-live]");if(lvb){openLive(SCH.filter(x=>rState2(x)=="now")[0]||null);return}
+  const tu=e.target.closest("[data-trkurl],a[href^=\"https://app.georacing.com\"]");if(tu){e.preventDefault();openTrack({url:"https://app.georacing.com/?application_id=46"});return}
   const vd=e.target.closest("[data-vid]");if(vd){openVideo(vd.dataset.vid);return}
   const tk=e.target.closest("[data-trk]");if(tk){e.preventDefault();const x=raceBy(tk.dataset.trk);if(x)openTrack(x);return}
   const rc=e.target.closest("[data-race]");if(rc){openRace(raceBy(rc.dataset.race));return}
