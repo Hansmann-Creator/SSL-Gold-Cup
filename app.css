@@ -960,3 +960,5 @@ dialog.tmd:has(.vframe iframe) .vframe{touch-action:auto}
 .obdt ul{list-style:none;margin:0;padding:0;display:grid;gap:5px}
 .obdt li{display:flex;gap:7px;align-items:center;font-size:14px;opacity:.92}
 .obdt li svg{color:#ffd21f;flex:none}
+
+.stools{margin-top:14px}.scount{margin:6px 4px 4px;font-size:13px;color:var(--mute)}

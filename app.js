@@ -1347,7 +1347,7 @@ function sailorsView(){const TT=teams(),byC={};TT.forEach(t=>byC[t.code]=t);
   codes.sort((a,b)=>(favs.has(b)?1:0)-(favs.has(a)?1:0)||(o(a).out?1:0)-(o(b).out?1:0)||NM(a).localeCompare(NM(b),lang));
   const all=[];codes.forEach(c=>squad(c).ppl.forEach(p=>all.push({c,p})));
   const qq=sq2.trim().toLowerCase();
-  let h=`<div class="rhead"><h2>${T("sailors")}</h2><p>${T("sailorsT")(all.length)} · ${T("nations")(codes.length)}</p></div><div class="tools"><input id="q2" type="search" placeholder="${esc(T("sSearch"))}" value="${esc(sq2)}" aria-label="${esc(T("sSearch"))}"></div>`;
+  let h=`<div class="tools stools"><input id="q2" type="search" placeholder="${esc(T("sSearch"))}" value="${esc(sq2)}" aria-label="${esc(T("sSearch"))}"></div><p class="scount">${T("sailorsT")(all.length)} · ${T("nations")(codes.length)}</p>`;
   if(qq){const L=all.filter(x=>(x.p.name+" "+x.c+" "+NM(x.c)+" "+(x.p.k||"")+" "+(squad(x.c).n||"")).toLowerCase().includes(qq));
     L.sort((a,b)=>(b.p.img?1:0)-(a.p.img?1:0)||NM(a.c).localeCompare(NM(b.c),lang)||(+a.p.no||99)-(+b.p.no||99));
     const shown=L.slice(0,200);
