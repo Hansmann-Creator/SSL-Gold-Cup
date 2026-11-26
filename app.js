@@ -2305,7 +2305,7 @@ function nxcPaint(){let b=$("#nxc");const n=nowMs();
   for(const c of cand){const s=nxState(c);if(s.k=="done")continue;if(s.k=="live"||s.k=="racing"){if(!cur){cur=c;CS=s}continue}x=c;S0=s;break}
   if(!x&&cur){x=cur;S0=CS;cur=null}
   if(!x){if(b)b.remove();return}
-  if(!b){b=document.createElement("button");b.id="nxc";b.type="button";b.onclick=()=>{const c=b._cur;if(c)return openLive(c);const y=b._x;if(!y)return;b.classList.contains("live")?openLive(y):openRace(y)};$(".bar").appendChild(b)}
+  if(!b){b=document.createElement("button");b.id="nxc";b.type="button";b.onclick=()=>{const c=b._cur;if(c)return openLive(c);const y=b._x;if(!y)return;b.classList.contains("live")?openLive(y):openRace(y)};$("header.top").appendChild(b)}
   const L=NXS[lang]||NXS.en,red=S0.k=="racing"||S0.k=="live";b._x=x;b._cur=cur;b.classList.toggle("live",red);b.classList.toggle("dual",!!cur);b.dataset.st=S0.k;
   const rnm=c=>c.rid=="f"||c.rid=="pf"?String(RS[c.rid]||RNm(rnd(c.rid))):`${T("group")} ${c.g}`,rsh=c=>c.rid=="f"||c.rid=="pf"?String(RS[c.rid]||RNm(rnd(c.rid))):c.g;
   const p2=v=>String(v).padStart(2,"0"),since=d=>{const s=Math.max(0,Math.round(d/1000));return`+${Math.floor(s/3600)?Math.floor(s/3600)+":":""}${p2(Math.floor(s%3600/60))}:${p2(s%60)}`};
@@ -2315,7 +2315,7 @@ function nxcPaint(){let b=$("#nxc");const n=nowMs();
   else if(S0.k=="late"){top=esc(S[lang].nxS||T("nextRace"));big=mono(since(n-S0.since));pill=`<em class="nxp o">${esc(L[2])}</em>`}
   else{top=esc(S[lang].nxS||T("nextRace"));big=mono(cdLong(S0.to));pill=`<em class="nxp ${S0.k=="soon"?"y":"g"}">${esc(S0.k=="soon"?L[1]:L[0])}</em>`}
   if(cur&&!red)top=`${esc(rnm(x))} · ${esc(x.t)}`;
-  const lbl=`${cur?`<em class="nxnow"><i class="nxdot0"></i><span>${esc(rsh(cur))} · ${esc(({id:"Balapan",ms:"Berlumba"})[lang]||L[4])}</span></em><hr class="nxhr">`:""}${top?`<small>${top}</small>`:""}<b class="cdd">${big}</b>${pill}`;
+  const lbl=`${cur?`<em class="nxnow"><i class="nxdot0"></i><span>${esc(rsh(cur))} · ${esc(({id:"Balapan",ms:"Berlumba"})[lang]||L[4])}</span></em><i class="nxhr" aria-hidden="true"></i>`:""}<span class="nxi">${top?`<small>${top}</small>`:""}${pill}</span><b class="cdd">${big}</b>`;
   if(b._h!==lbl){b.innerHTML=lbl;b._h=lbl}b.setAttribute("aria-label",`${cur?rnm(cur)+" · "+L[4]+" · ":""}${rnm(x)} · ${x.t}`)}
 setInterval(()=>{if(!document.hidden)nxcPaint()},1000);
 /* ---------- push notifications (OneSignal) + private visitor counter (GoatCounter); both off until config.js has a value ---------- */
