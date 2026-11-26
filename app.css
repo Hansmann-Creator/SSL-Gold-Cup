@@ -375,7 +375,7 @@ dialog.tmd::backdrop{background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(4px
 .mlist>.mrow:first-child{border-top:0}
 .mrow svg{width:22px;height:22px;flex:none;color:var(--gold)}
 .mrow b{display:block;font-weight:600}
-.mrow small{display:block;color:var(--mute);font-size:13px;word-break:break-all}
+.mrow small{display:block;color:var(--mute);font-size:13px;overflow-wrap:break-word;word-break:normal;hyphens:auto}
 .mrow::after{content:"›";margin-inline-start:auto;color:var(--out);font-size:22px;padding-inline-start:8px}
 .card.pad{padding:14px 16px}.card.pad p{margin:0 0 8px}
 .howl{margin:0;padding-inline-start:20px;color:var(--mute)}.howl li{margin:4px 0}
@@ -672,3 +672,17 @@ tr.qsep+tr td{border-top-color:transparent}
 #nxc b{color:#fff;text-shadow:0 0 10px rgba(245,184,0,.55)}
 [data-theme=light] #nxc{color:#fff}
 @media(max-width:360px){#nxc{padding:4px 9px}#nxc b{font-size:15px}#nxc small{font-size:8.5px}}
+.mrow>span{flex:1;min-width:0}
+.sw{white-space:normal!important}
+.facts dd,.facts dd a,.tb p,.warn{overflow-wrap:break-word}
+.facts dd a{word-break:break-word}
+/* group table: name on line 1, badge on line 2 – same for every row */
+td.t{white-space:normal}
+td.t .tnm{display:flex;align-items:center;gap:0 6px;flex-wrap:wrap}
+td.t .bdg,td.t>.tag{display:table;margin:4px 0 0;margin-inline-start:28px}
+td.t .tnm{flex-wrap:nowrap;gap:0 4px}
+td.t .tnm .fl{flex:none}
+td.t .tnm .n{min-width:0}
+td.t .tnm .chev{flex:none}
+td.t .bdg,td.t>.tag{margin-inline-start:30px}
+@media(max-width:330px){td{padding:8px 3px}td.r{font-size:13px}td.tot{width:30px}}
