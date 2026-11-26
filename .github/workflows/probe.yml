@@ -1,0 +1,9 @@
+name: Temporary probe
+on: workflow_dispatch
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -s "https://api.open-meteo.com/v1/forecast?latitude=-22.9196&longitude=-43.17&hourly=wind_speed_10m,wind_gusts_10m,wind_direction_10m,temperature_2m,precipitation_probability,cloud_cover,pressure_msl&daily=sunrise,sunset&wind_speed_unit=kn&timezone=America%2FSao_Paulo&start_date=2026-11-27&end_date=2026-11-27" | python3 -c "import json,sys;d=json.load(sys.stdin);h=d.get('hourly',d);print({k:(v[12] if isinstance(v,list) else v) for k,v in h.items()});print(d.get('daily'))"
+          for p in "-22.93,-43.16" "-22.94,-43.14" "-22.96,-43.13"; do la=${p%,*}; lo=${p#*,}; echo "== marine $p"; curl -s "https://marine-api.open-meteo.com/v1/marine?latitude=$la&longitude=$lo&hourly=wave_height,wave_period,wave_direction,sea_surface_temperature,sea_level_height_msl,ocean_current_velocity,ocean_current_direction&timezone=America%2FSao_Paulo&start_date=2026-11-27&end_date=2026-11-27" | python3 -c "import json,sys;d=json.load(sys.stdin);h=d.get('hourly',d);print(d.get('latitude'),d.get('longitude'),{k:(v[11:16] if isinstance(v,list) else v) for k,v in h.items() if k!='time'})"; done
