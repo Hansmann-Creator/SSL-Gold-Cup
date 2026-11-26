@@ -1,0 +1,700 @@
+key,English,Bahasa Indonesia
+S.rounds,Rounds,Babak
+S.bracket,Matchboard,Matchboard
+S.teams,Teams,Tim
+S.official,Official results,Hasil resmi
+S.updated,Updated,Diperbarui
+S.ago,"m=>m<1?""just now"":m<60?`${m} min ago`:`${Math.round(m/60)} h ago`","m=>m<1?""baru saja"":m<60?`${m} menit lalu`:`${Math.round(m/60)} jam lalu`"
+S.rio,Rio time,Waktu Rio
+S.offline,offline – last saved data,offline – data terakhir yang tersimpan
+S.rn.r32,1/32 Finals,Final 1/32
+S.rn.r16,1/16 Finals,Final 1/16
+S.rn.r8,1/8 Finals,Final 1/8
+S.rn.r4,Quarter-finals,Perempat final
+S.rn.sf,Semi-finals,Semifinal
+S.rn.pf,Petit Final,Final Kecil
+S.rn.f,Grand Final,Grand Final
+S.group,Group,Grup
+S.decided,decided,selesai
+S.racing,racing,berlangsung
+S.open,open,belum mulai
+S.st.done,completed,selesai
+S.st.live,in progress,berlangsung
+S.st.up,upcoming,akan datang
+S.races,"n=>`${n} race${n>1?""s"":""""} per group`",n=>`${n} lomba per grup`
+S.upNext,Up next,Berikutnya
+S.startsIn,"d=>d<=0?""starts today"":d==1?""starts tomorrow"":`starts in ${d} days`","d=>d<=0?""mulai hari ini"":d==1?""mulai besok"":`mulai dalam ${d} hari`"
+S.groupsOf4,"n=>`${n} group${n>1?""s"":""""} of four`",n=>`${n} grup berisi empat tim`
+S.oneRace,One race – the finishing order decides.,Satu lomba – urutan finis yang menentukan.
+S.through,through,lolos
+S.out,out,tersingkir
+S.toFinal,to Final,ke Final
+S.toPetit,to Petit Final,ke Final Kecil
+S.medals[0],Gold,Emas
+S.medals[1],Silver,Perak
+S.medals[2],Bronze,Perunggu
+S.medals[3],4th,Ke-4
+S.pts,Pts,Poin
+S.outIn,"(r,g,p)=>`Out in the ${r} (Group ${g}, ${p})`","(r,g,p)=>`Tersingkir di ${r} (Grup ${g}, ${p})`"
+S.gf,m=>`Grand Final: ${m}`,m=>`Grand Final: ${m}`
+S.finished,p=>`Finished ${p}`,p=>`Finis ${p}`
+S.thrTbc,Through – next group to be confirmed,Lolos – grup berikutnya belum pasti
+S.seeded,"(r,g,d)=>`Seeded – enters the ${r}, Group ${g}, ${d}`","(r,g,d)=>`Unggulan – masuk di ${r}, Grup ${g}, ${d}`"
+S.racingNow,Racing now,Sedang berlomba
+S.nations,n=>`${n} nations`,n=>`${n} negara`
+S.stillIn,still in,masih bertahan
+S.outN,out,tersingkir
+S.search,"Search nation, nickname or sailor","Cari negara, julukan, atau pelaut"
+S.all,All,Semua
+S.chipIn,Still in,Masih bertahan
+S.chipOut,Out,Tersingkir
+S.mine,★ My teams,★ Tim saya
+S.sStatus,Status,Status
+S.sRank,Ranking,Peringkat
+S.sAz,A–Z,A–Z
+S.noTeam,No team found.,Tim tidak ditemukan.
+S.rank,Rank,Peringkat
+S.captain,Captain,Kapten
+S.helm,Helm,Juru mudi
+S.ranking,SSL Nations Ranking,SSL Nations Ranking
+S.rankBoard,Ranking board ↗,Papan peringkat ↗
+S.entered,Entered Rio at,Masuk di Rio pada
+S.showRound,Open round ›,Buka babak ›
+S.gc23,Gold Cup 2023,Gold Cup 2023
+S.br23,2023 bracket ›,Bagan 2023 ›
+S.status,Status,Status
+S.stIn,Still in,Masih bertahan
+S.stOut,Out,Tersingkir
+S.whereEnded,Where it ended ›,Di mana berakhir ›
+S.curGroup,Current group ›,Grup saat ini ›
+S.background,Background,Latar belakang
+S.road,Road to Rio,Jalan ke Rio
+S.story,Story,Kisah
+S.site,Team site,Situs tim
+S.qualRes,Qualifier results ↗,Hasil kualifikasi ↗
+S.sslRank,SSL Nations Ranking ↗,SSL Nations Ranking ↗
+S.resRio,Results in Rio,Hasil di Rio
+S.photos,Crew photos,Foto kru
+S.byPos,Crew by position,Kru per posisi
+S.leader,Team leader,Pemimpin tim
+S.wider,Wider squad · position TBC,Skuad lebih luas · posisi belum pasti
+S.squadNote,"(n,p)=>`${n} names in the squad. 8–10 sail each race and the line-up can change from day to day. Positions and numbers from the official team site; portraits from the Gold Cup Rio graphics${p?"""":"" (none yet for this team)""}.`","(n,p)=>`${n} nama dalam skuad. 8–10 orang berlayar di setiap lomba dan susunan bisa berubah setiap hari. Posisi dan nomor dari situs resmi tim; foto dari grafis Gold Cup Rio${p?"""":"" (belum ada untuk tim ini)""}.`"
+S.noSquad,No squad list published for this team yet.,Daftar skuad tim ini belum diterbitkan.
+S.showPath,Show path in bracket,Tampilkan jalur di bagan
+S.copyLink,Copy link,Salin tautan
+S.copied,Link copied,Tautan disalin
+S.close,Close,Tutup
+S.jersey,Jersey,Jersey
+S.numTbc,Number TBC,Nomor belum pasti
+S.capTag,Captain,Kapten
+S.favOn,Following,Diikuti
+S.favOff,Follow,Ikuti
+S.brHint,Tap a team for crew and history. Swipe for later rounds.,Ketuk tim untuk kru dan riwayat. Geser untuk babak berikutnya.
+S.h23,Gold Cup 2023,Gold Cup 2023
+S.champ23,Gran Canaria · champion,Gran Canaria · juara
+S.hl,highlighted,disorot
+S.tap26,Tap a team for its Rio 2026 page.,Ketuk tim untuk halaman Rio 2026-nya.
+S.off23,Official 2023 results ↗,Hasil resmi 2023 ↗
+S.myTeams,My teams,Tim saya
+S.myHint,Tap ☆ on a team page to follow it.,Ketuk ☆ di halaman tim untuk mengikutinya.
+S.foot,"Scoring: 4-3-2-1 points per race, double points in the last race of each group (8-6-4-2). Top two of each group advance. Results refresh automatically from the official SSL results page. Ranking = SSL Nations Ranking at the start of the Final Series.","Poin: 4-3-2-1 per lomba, poin ganda di lomba terakhir tiap grup (8-6-4-2). Dua teratas tiap grup lolos. Hasil diperbarui otomatis dari halaman hasil resmi SSL. Peringkat = SSL Nations Ranking saat Final Series dimulai."
+S.notes.ocs,* OCS (early start)  ** Standard penalty,* OCS (start terlalu awal)  ** Penalti standar
+S.theme.auto,🌊 Matchboard,🌊 Matchboard
+S.theme.light,☀️ Day,☀️ Siang
+S.theme.dark,🌙 Night,🌙 Malam
+S.g23.champ,Champion (Gold),Juara (Emas)
+S.g23.second,Runner-up (Silver),Runner-up (Perak)
+S.g23.third,3rd (Bronze),Ke-3 (Perunggu)
+S.g23.fourth,4th – Grand Final,Ke-4 – Grand Final
+S.g23.sf,Semi-finals,Semifinal
+S.g23.qf,Quarter-finals,Perempat final
+S.g23.r8,1/8 Finals,Final 1/8
+S.g23.r16,1/16 Finals,Final 1/16
+S.g23.r32,1/32 Finals,Final 1/32
+S.g23.none,Didn't race the 2023 Final Series,Tidak ikut Final Series 2023
+S.ev.asia,Asian Qualifiers,Kualifikasi Asia
+S.ev.afoc,African & Oceanian Qualifiers,Kualifikasi Afrika & Oseania
+S.ev.eu1,European Qualifiers 1,Kualifikasi Eropa 1
+S.ev.eu2,European Qualifiers 2,Kualifikasi Eropa 2
+S.ev.pan,Pan-American Qualifiers,Kualifikasi Pan-Amerika
+S.route.won,"(e,g)=>`Won the ${e}, Group ${g}`","(e,g)=>`Juara ${e}, Grup ${g}`"
+S.route.pos,"(p,e,g)=>`${p} in the ${e}, Group ${g}`","(p,e,g)=>`${p} di ${e}, Grup ${g}`"
+S.route.lc,"(e,g)=>`3rd in the ${e} Group ${g}, then won the Last Chance race`","(e,g)=>`Ke-3 di ${e} Grup ${g}, lalu memenangi lomba Last Chance`"
+S.route.ranking,Qualified through the SSL Nations Ranking,Lolos lewat SSL Nations Ranking
+S.route.host,"Host nation, seeded into the 1/8 Finals","Tuan rumah, unggulan di Final 1/8"
+S.route.seeded,r=>`Seeded into the ${r} via the SSL Nations Ranking`,r=>`Unggulan di ${r} lewat SSL Nations Ranking`
+S.roles.Helm,Steers the boat,Mengemudikan kapal
+S.roles.Tactician,Strategy & calls,Strategi & keputusan
+S.roles.Main Trimmer,Mainsail,Layar utama
+S.roles.Trimmer,Jib & gennaker,Jib & gennaker
+S.roles.Grinder,Powers the winches,Menggerakkan winch
+S.roles.Pit,Halyards & controls,Halyard & kontrol
+S.roles.Mid-Bow,Mast & foredeck,Tiang & dek depan
+S.roles.Bow,Bow & starts,Haluan & start
+S.roles.Floater,Utility / reserve,Serba bisa / cadangan
+S.back,‹ Back,‹ Kembali
+S.position,Position,Posisi
+S.team,Team,Tim
+S.indRank,SSL ranking,Peringkat SSL
+S.highlights,Highlights,Sorotan
+S.profile,SSL profile ↗,Profil SSL ↗
+S.findProfile,Find SSL profile ↗,Cari profil SSL ↗
+S.ws,World Sailing ↗,World Sailing ↗
+S.mates,Teammates,Rekan tim
+S.posTbc,Position TBC,Posisi belum pasti
+S.noInfo,No further details published yet – the links below search the official profiles.,Belum ada detail lain – tautan di bawah mencari profil resmi.
+S.today,Today,Hari ini
+S.raceDay,"(n,t)=>`race day ${n} of ${t}`","(n,t)=>`hari lomba ${n} dari ${t}`"
+S.finalDay,Final day – last race counts double,Hari terakhir – lomba terakhir poin ganda
+S.stream,▶ Live stream,▶ Siaran langsung
+S.tracking,Tracking,Pelacakan
+S.schedule,Schedule,Jadwal
+S.adv,"(a,b)=>`1st → ${a} · 2nd → ${b}`","(a,b)=>`Ke-1 → ${a} · Ke-2 → ${b}`"
+S.advSf,1st–2nd → Final · 3rd–4th → Petit Final,Ke-1–2 → Final · Ke-3–4 → Final Kecil
+S.clinched,✓ through,✓ lolos
+S.elim,out,tersingkir
+S.secNow,In the current round,Di babak saat ini
+S.secSeeded,r=>`Seeded – enter in the ${r}`,r=>`Unggulan – masuk di ${r}`
+S.secOut,Out,Tersingkir
+S.lineup,Line-up,Susunan
+S.howT,How the Gold Cup works,Cara kerja Gold Cup
+S.how[0],"National teams, one SSL47 boat each – all boats identical and provided by the organisers.","Tim nasional, masing-masing satu kapal SSL47 – semua kapal identik dan disediakan panitia."
+S.how[1],Groups of four. 4-3-2-1 points per race; the last race of each group counts double (8-6-4-2).,Grup berisi empat tim. 4-3-2-1 poin per lomba; lomba terakhir tiap grup poin ganda (8-6-4-2).
+S.how[2],The top two of every group advance; better-ranked nations enter later rounds.,Dua teratas tiap grup lolos; negara dengan peringkat lebih baik masuk di babak berikutnya.
+S.how[3],Semi-finals and finals are a single race each; the Grand Final decides the world champion.,Semifinal dan final masing-masing satu lomba; Grand Final menentukan juara dunia.
+S.race,Race,Lomba
+S.nextRace,Next race,Lomba berikutnya
+S.todayRaces,Today's races,Lomba hari ini
+S.rioT,Rio time,waktu Rio
+S.loc,your time,waktu Anda
+S.onWater,on the water,di air
+S.done,done,selesai
+S.inX,"m=>m<60?`in ${m} min`:`in ${Math.floor(m/60)} h ${String(m%60).padStart(2,""0"")}`","m=>m<60?`dalam ${m} mnt`:`dalam ${Math.floor(m/60)} j ${String(m%60).padStart(2,""0"")}`"
+S.firstStart,First start,Start pertama
+S.schedT,Race schedule,Jadwal lomba
+S.schedNote,"Times are Rio de Janeiro time (UTC−3), from the official schedule. Its groups G1–G4 are shown here as groups A–D.","Waktu Rio de Janeiro (UTC−3), dari jadwal resmi. Grup G1–G4 di sana ditampilkan di sini sebagai grup A–D."
+S.needT,Before the final race (double points),Sebelum lomba terakhir (poin ganda)
+S.need.sure,"through, whatever happens","lolos, apa pun yang terjadi"
+S.need.gone,"out, whatever happens","tersingkir, apa pun yang terjadi"
+S.need.win,a win is enough,menang sudah cukup
+S.need.top,k=>`${k} or better is enough`,k=>`${k} atau lebih baik sudah cukup`
+S.need.mustWin,must win,harus menang
+S.need.help,and needs help from the others,dan butuh bantuan tim lain
+S.need.maybe,k=>`${k} may be enough – depends on the others`,k=>`${k} mungkin cukup – tergantung tim lain`
+S.need.iff,"(k,c)=>`${k} is enough if ${c}`","(k,c)=>`${k} cukup jika ${c}`"
+S.need.mustIf,"c=>`must win, and only if ${c}`","c=>`harus menang, dan hanya jika ${c}`"
+S.need.ahead,R=>`ahead of ${R}`,R=>`di depan ${R}`
+S.need.behind,R=>`behind ${R}`,R=>`di belakang ${R}`
+S.need.notWin,R=>`${R} doesn't win`,R=>`${R} tidak menang`
+S.need.last,R=>`${R} finishes last`,R=>`${R} finis terakhir`
+S.need.wins,R=>`${R} wins`,R=>`${R} menang`
+S.need.tie,level on points possible – tie-break decides,poin bisa sama – tie-break menentukan
+S.needNote,"Worked out from the current points; ≈ means teams could finish level, then the official tie-break decides.","Dihitung dari poin saat ini; ≈ berarti tim bisa berpoin sama, lalu tie-break resmi yang menentukan."
+S.install,Add to Home Screen for the app icon.,Tambahkan ke Layar Utama untuk ikon aplikasi.
+S.home,Home,Beranda
+S.more,More,Lainnya
+S.sailors,Sailors,Pelaut
+S.welcome,Final Series · Rio de Janeiro,Final Series · Rio de Janeiro
+S.dates,19 Nov – 13 Dec 2026 · Marina da Glória,19 Nov – 13 Des 2026 · Marina da Glória
+S.progress,Tournament,Turnamen
+S.latest,Latest results,Hasil terbaru
+S.explore,Explore,Jelajahi
+S.tiles.board[0],Rounds,Babak
+S.tiles.board[1],"Groups, points, times","Grup, poin, waktu"
+S.tiles.bracket[0],Matchboard,Matchboard
+S.tiles.bracket[1],The whole draw at a glance,Seluruh undian sekilas
+S.tiles.teams[0],Teams,Tim
+S.tiles.teams[1],"40 nations, crews, rankings","40 negara, kru, peringkat"
+S.tiles.sailors[0],Sailors,Pelaut
+S.tiles.sailors[1],Search every sailor,Cari semua pelaut
+S.tiles.qualifying[0],Qualifying,Kualifikasi
+S.tiles.qualifying[1],How the teams got to Rio,Bagaimana tim sampai ke Rio
+S.tiles.gc2023[0],Gold Cup 2023,Gold Cup 2023
+S.tiles.gc2023[1],Last edition's bracket,Bagan edisi sebelumnya
+S.sailorsT,n=>`${n} sailors`,n=>`${n} pelaut`
+S.sSearch,"Search sailor, team or position","Cari pelaut, tim, atau posisi"
+S.withPhoto,With photo,Dengan foto
+S.allS,All,Semua
+S.moreT,More,Lainnya
+S.lang,Language,Bahasa
+S.design,Design,Tampilan
+S.share,Share app,Bagikan aplikasi
+S.shared,Link copied,Tautan disalin
+S.links,Links,Tautan
+S.about,About this app,Tentang aplikasi ini
+S.aboutT,Unofficial companion app for the SSL Gold Cup Rio 2026. Results update automatically from the official SSL results page.,Aplikasi pendamping tidak resmi untuk SSL Gold Cup Rio 2026. Hasil diperbarui otomatis dari halaman hasil resmi SSL.
+S.inst.t,Install the app,Pasang aplikasi
+S.inst.d,"Put SSL Gold Cup on your home screen – opens like an app, full screen, with live results.","Taruh SSL Gold Cup di layar utama – terbuka seperti aplikasi, layar penuh, dengan hasil langsung."
+S.inst.b,Install,Pasang
+S.inst.done,Installed ✓,Terpasang ✓
+S.inst.ios[0],Tap the Share button,Ketuk tombol Bagikan
+S.inst.ios[1],at the bottom of Safari (top right on iPad).,di bawah Safari (kanan atas di iPad).
+S.inst.ios[2],Scroll down and tap “Add to Home Screen”.,Gulir ke bawah dan ketuk “Tambah ke Layar Utama”.
+S.inst.ios[3],Tap “Add” – done.,Ketuk “Tambah” – selesai.
+S.inst.iosOther,On iPhone this works in Safari: open this page in Safari first.,Di iPhone ini berfungsi di Safari: buka halaman ini di Safari dulu.
+S.inst.android[0],Tap the ⋮ menu in the top right of your browser.,Ketuk menu ⋮ di kanan atas browser.
+S.inst.android[1],Tap “Install app” or “Add to Home screen”.,Ketuk “Instal aplikasi” atau “Tambahkan ke layar utama”.
+S.inst.android[2],Confirm with “Install”.,Konfirmasi dengan “Instal”.
+S.inst.desk[0],"Click the install icon in the address bar,","Klik ikon pasang di bilah alamat,"
+S.inst.desk[1],or open the browser menu and choose “Install SSL Gold Cup”.,atau buka menu browser dan pilih “Instal SSL Gold Cup”.
+S.inst.how,How to install,Cara memasang
+S.inst.hide,Not now,Nanti saja
+S.inst.installedNote,You're using the installed app.,Anda memakai aplikasi yang terpasang.
+S.champT,World Champion · Gold Cup 2026,Juara Dunia · Gold Cup 2026
+S.standT,Final standings,Klasemen akhir
+S.statsT,In numbers,Dalam angka
+S.stRaces,Races,Lomba
+S.stWins,Race wins,Menang lomba
+S.stAvg,Avg. place,Rata-rata posisi
+S.stPts,Points in Rio,Poin di Rio
+S.stHist,Race by race,Lomba demi lomba
+S.calBtn,📅 Races in my calendar,📅 Lomba ke kalender saya
+S.calT,Races in your calendar,Lomba ke kalender Anda
+S.calSub,"Subscribe (iPhone, Mac, Outlook)","Berlangganan (iPhone, Mac, Outlook)"
+S.calG,Add to Google Calendar,Tambah ke Google Kalender
+S.calDl,Download file (.ics),Unduh file (.ics)
+S.calAll,All races in my calendar,Semua lomba ke kalender saya
+S.calNote,"A subscription updates itself: when a team qualifies, its next races appear automatically.","Langganan memperbarui diri: saat tim lolos, lomba berikutnya otomatis muncul."
+S.wxT,Wind forecast · Marina da Glória,Prakiraan angin · Marina da Glória
+S.wxSrc,"Forecast by Open-Meteo, not measured on the course.","Prakiraan Open-Meteo, bukan pengukuran di lintasan."
+S.trk,Tracking,Pelacakan
+S.delayed,m=>`Results may be delayed – last successful check ${m} min ago.`,m=>`Hasil mungkin tertunda – pengecekan berhasil terakhir ${m} menit lalu.`
+S.shareImg,Share as image,Bagikan sebagai gambar
+S.imgDone,Image ready,Gambar siap
+S.pT,Notifications,Notifikasi
+S.pAll,All results,Semua hasil
+S.pAllSub,A notification after every race,Notifikasi setelah setiap lomba
+S.pTeamOff,🔔 Notify me about this team,🔔 Beri tahu saya tentang tim ini
+S.pTeamOn,🔔 Notifications on ✓,🔔 Notifikasi aktif ✓
+S.pTeams,Your teams,Tim Anda
+S.pNone,No team yet: open a team and tap 🔔.,Belum ada tim: buka sebuah tim dan ketuk 🔔.
+S.pNote,You only get race results and who goes through. Switch off here any time.,Anda hanya menerima hasil lomba dan siapa yang lolos. Matikan di sini kapan saja.
+S.pIOS,"On iPhone, notifications only work in the installed app: install it, open it from the home screen, then switch them on here.","Di iPhone, notifikasi hanya berfungsi di aplikasi yang terpasang: pasang, buka dari layar utama, lalu aktifkan di sini."
+S.pDenied,Notifications are blocked. Allow them for this app in your device settings.,Notifikasi diblokir. Izinkan untuk aplikasi ini di pengaturan perangkat.
+S.pErr,That didn't work – please try again in a moment.,Gagal – coba lagi sebentar lagi.
+S.pOnT,Notifications on,Notifikasi aktif
+S.pOffT,Notifications off,Notifikasi mati
+S.pUnsup,This browser can't receive notifications.,Browser ini tidak bisa menerima notifikasi.
+S.obT,Get the app,Dapatkan aplikasinya
+S.obSub,"Free, no App Store needed – on your home screen in 20 seconds.","Gratis, tanpa App Store – di layar utama Anda dalam 20 detik."
+S.obPerks[0],Live results in one tap,Hasil langsung dengan satu ketukan
+S.obPerks[1],"Full screen, like a real app","Layar penuh, seperti aplikasi sungguhan"
+S.obPerks[2],Notifications for your team,Notifikasi untuk tim Anda
+S.obBtn,Install now,Pasang sekarang
+S.obLater,Later – look around in the browser first,Nanti – lihat-lihat di browser dulu
+S.obSteps,How it works,Caranya
+S.obStep,Step,Langkah
+S.ios26[0],Tap ⋯ next to the address bar,Ketuk ⋯ di samping bilah alamat
+S.ios26[1],Tap “Share”,Ketuk “Bagikan”
+S.ios26[2],Scroll down and tap “Add to Home Screen”,Gulir ke bawah dan ketuk “Tambah ke Layar Utama”
+S.ios26[3],Leave “Open as Web App” on and tap “Add”,Biarkan “Buka sebagai App Web” aktif dan ketuk “Tambah”
+S.iosOld[0],Tap the Share button at the bottom,Ketuk tombol Bagikan di bawah
+S.iosOld[1],Scroll down and tap “Add to Home Screen”,Gulir ke bawah dan ketuk “Tambah ke Layar Utama”
+S.iosOld[2],Tap “Add” in the top right,Ketuk “Tambah” di kanan atas
+S.iosAlt,"Easiest in Safari: copy the link, open Safari and paste it.","Paling mudah di Safari: salin tautan, buka Safari, lalu tempel."
+S.inApp,This page is open inside another app (e.g. WhatsApp or Instagram). Installing only works in the browser: tap ⋯ and choose “Open in browser” – or copy the link and open it in Safari or Chrome.,Halaman ini terbuka di dalam aplikasi lain (mis. WhatsApp atau Instagram). Pemasangan hanya bisa di browser: ketuk ⋯ dan pilih “Buka di browser” – atau salin tautan dan buka di Safari atau Chrome.
+S.copy,Copy link,Salin tautan
+S.done2,Then open SSL Gold Cup from your home screen.,Lalu buka SSL Gold Cup dari layar utama.
+S.ui.share,Share,Bagikan
+S.ui.home,Add to Home Screen,Tambah ke Layar Utama
+S.ui.add,Add,Tambah
+S.ui.web,Open as Web App,Buka sebagai App Web
+S.ui.cancel,Cancel,Batal
+S.ui.ainst,Install app,Instal aplikasi
+S.ui.aok,Install,Instal
+S.trkOpen,📍 Watch live tracking,📍 Tonton pelacakan langsung
+S.trkReplay,📍 Replay the race (tracking),📍 Putar ulang lomba (pelacakan)
+S.trkNone,Tracking appears here as soon as Georacing has set up this race.,Pelacakan muncul di sini begitu Georacing menyiapkan lomba ini.
+S.trkExt,Open in Georacing ↗,Buka di Georacing ↗
+S.trkHint,"Every boat as a dot on the map – live during the race, as a replay afterwards.","Setiap kapal sebagai titik di peta – langsung saat lomba, tayangan ulang setelahnya."
+S.rcRes,Result of this race,Hasil lomba ini
+S.rcTeams,Teams in this race,Tim di balapan ini
+S.rcStand,Group so far,Grup sejauh ini
+S.rcPts,pts,poin
+S.rcGroup,Show group on the Matchboard,Tampilkan grup di Matchboard
+S.rcTBD,Teams not decided yet,Tim belum ditentukan
+S.qrT,Scan with the phone camera – the app opens right away.,Pindai dengan kamera ponsel – aplikasi langsung terbuka.
+S.shareNow,Share…,Bagikan…
+S.qsep,"n=>""▲ advance""","n=>""▲ lolos"""
+S.shareSub,"Send via WhatsApp, Messages & co.","Kirim lewat WhatsApp, Pesan, dll."
+S.shareMsg,"SSL Gold Cup Rio 2026 – live results, race times and all teams:","SSL Gold Cup Rio 2026 – hasil langsung, jadwal lomba, dan semua tim:"
+S.sCaps,Captains,Kapten
+S.sTeams,Crews,Kru
+S.sHint,Tap a team to see its crew – teams still in the race come first.,Ketuk tim untuk melihat krunya – tim yang masih bertahan tampil lebih dulu.
+S.sTeamPage,Team page,Halaman tim
+S.fShow,Show,Tampilkan
+S.fSort,Sort,Urutkan
+S.spT,Spoiler-free,Bebas spoiler
+S.spUntil,w=>`Results hidden after ${w}`,w=>`Hasil setelah ${w} disembunyikan`
+S.spNone,No hidden results right now,Tidak ada hasil yang disembunyikan saat ini
+S.spShow,Show all,Tampilkan semua
+S.spOff,Off,Mati
+S.spRow,Spoiler-free mode,Mode bebas spoiler
+S.spSub,Hide results until you have watched the race,Sembunyikan hasil sampai Anda menonton lombanya
+S.spRace,Result hidden,Hasil disembunyikan
+S.spReveal,I've watched it – show result,Sudah nonton – tampilkan hasil
+S.spOnT,Results from today on are hidden,Hasil mulai hari ini disembunyikan
+S.cmpBtn,⚖️ Compare,⚖️ Bandingkan
+S.cmpVs,vs,vs
+S.cmpPick,Pick a team to compare with.,Pilih tim untuk dibandingkan.
+S.h2hT,Head to head,Head to head
+S.h2hSub,races finished ahead,lomba finis lebih depan
+S.h2hNone,No races against each other yet.,Belum pernah bertemu dalam lomba.
+S.cmpNote,Numbers from the races in Rio; ranking = SSL Nations Ranking.,Angka dari lomba di Rio; peringkat = SSL Nations Ranking.
+S.vidT,🎬 Highlights & videos,🎬 Sorotan & video
+S.vidAll,All videos on YouTube ↗,Semua video di YouTube ↗
+S.vidOpen,Open on YouTube ↗,Buka di YouTube ↗
+S.vidHid,"n=>`${n} newer video${n>1?""s"":""""} hidden (spoiler-free)`",n=>`${n} video baru disembunyikan (bebas spoiler)`
+S.pastL,Look back,Kilas balik
+S.vnT,Venue · Marina da Glória,Lokasi · Marina da Glória
+S.vnSub,Where it all happens – map & directions,Tempat semuanya terjadi – peta & rute
+S.vnRoute,Directions,Rute
+S.vnApple,Apple Maps,Apple Maps
+S.vnInfo[0],"The 2016 Olympic sailing venue, on Guanabara Bay with a view of Sugarloaf Mountain.","Lokasi lomba layar Olimpiade 2016, di Teluk Guanabara dengan pemandangan Gunung Sugarloaf."
+S.vnInfo[1],The marina is open to the public during the event – see the boats up close and visit the athletes' village.,Marina terbuka untuk umum selama acara – lihat kapal dari dekat dan kunjungi desa atlet.
+S.vnInfo[2],Racing takes place on Guanabara Bay right in front of the marina.,Lomba berlangsung di Teluk Guanabara tepat di depan marina.
+S.suT,Sustainability,Keberlanjutan
+S.suSub,What the SSL does for the ocean and fair sport,Upaya SSL untuk laut dan olahraga yang adil
+S.suIntro,The SSL says that for them sustainability means protecting the ocean and making the sport fairer.,"Menurut SSL, keberlanjutan berarti melindungi laut dan membuat olahraga lebih adil."
+S.suList[0],Every SSL Gold Cup boat must have two women on board.,Setiap kapal SSL Gold Cup wajib membawa dua perempuan.
+S.suList[1],No plastic bottles in the athletes' village.,Tanpa botol plastik di desa atlet.
+S.suList[2],A dedicated Sustainability Manager since September 2025.,Manajer keberlanjutan khusus sejak September 2025.
+S.suList[3],"Aligned with Clean Regattas, World Sailing's Sustainability Agenda 2030 and the IOC strategy; the goal is Platinum Clean Regattas certification.","Selaras dengan Clean Regattas, Agenda Keberlanjutan 2030 World Sailing, dan strategi IOC; targetnya sertifikasi Platinum Clean Regattas."
+S.suList[4],Beach clean-ups with the teams at the qualifiers.,Bersih-bersih pantai bersama tim saat kualifikasi.
+S.suList[5],"Few support boats: at the 2023 Finals, four coach boats served 440 sailors.","Sedikit kapal pendukung: di Final 2023, empat kapal pelatih melayani 440 pelaut."
+S.suMore,Read more at the SSL ↗,Baca selengkapnya di SSL ↗
+S.mcT,Merch,Merchandise
+S.mcSub,"Jerseys, caps & more – coming soon","Jersey, topi & lainnya – segera hadir"
+S.mcSoon,Coming soon,Segera hadir
+S.mcTxt,"The official SSL Gold Cup Store is not open yet. As soon as it is, you can shop here.","Toko resmi SSL Gold Cup belum buka. Begitu buka, Anda bisa belanja di sini."
+S.mcList[0],Captain's jerseys of the national teams,Jersey kapten tim nasional
+S.mcList[1],SSL caps,Topi SSL
+S.mcList[2],SSL47 boat and team figures as building sets,Set rakit kapal SSL47 dan figur tim
+S.mcGo,To the SSL store ↗,Ke toko SSL ↗
+S.wxBtn,🌬️ Weather for sailors,🌬️ Cuaca untuk pelaut
+S.wxH,Sailing weather,Cuaca berlayar
+S.wxLoad,Loading forecast…,Memuat prakiraan…
+S.wxFail,The forecast could not be loaded right now.,Prakiraan tidak dapat dimuat saat ini.
+S.wxGust,Gusts,Hembusan
+S.wxDir,Direction,Arah
+S.wxPres,Pressure,Tekanan
+S.wxAtStart,Forecast for the start time.,Prakiraan untuk waktu start.
+S.wxHours,Hour by hour,Per jam
+S.wxTime,Time,Jam
+S.wxWind,Wind kn,Angin kn
+S.wxKn,Wind in knots: mean – gusts. Arrows show where the wind blows to.,Angin dalam knot: rata-rata – hembusan. Panah menunjukkan ke mana angin bertiup.
+S.wxSea,Water,Air
+S.wxWater,Water temperature,Suhu air
+S.wxTide,Tide,Pasang surut
+S.wxRise,rising,naik
+S.wxFall,falling,turun
+S.wxHigh,High,Pasang
+S.wxLow,Low,Surut
+S.wxCur,Current,Arus
+S.wxCurN,Model value at the bay entrance; arrow = where it flows.,Nilai model di mulut teluk; panah = arah aliran.
+S.wxWave,Swell,Gelombang
+S.wxWaveN,"At the bay entrance, much smaller on the course.","Di mulut teluk, jauh lebih kecil di lintasan."
+S.wxSun,Sunrise – sunset,Matahari terbit – terbenam
+S.wxSrc2,"Forecast by Open-Meteo (weather models), not measured on the course.","Prakiraan Open-Meteo (model cuaca), bukan pengukuran di lintasan."
+S.trkLive,Live tracking,Pelacakan langsung
+S.trkReplayS,Replay,Tayangan ulang
+S.fcBtn,Forecast,Prakiraan
+S.fcCond[0],Light wind,Angin lemah
+S.fcCond[1],Medium wind,Angin sedang
+S.fcCond[2],Fresh breeze,Angin segar
+S.fcCond[3],Strong wind,Angin kencang
+S.fcTr.up,building,menguat
+S.fcTr.down,easing,melemah
+S.fcTr.steady,steady,stabil
+S.fcTr.veer,veering (clockwise),berputar searah jarum jam
+S.fcTr.back,backing (anti-clockwise),berputar berlawanan jarum jam
+S.fcNext,Next hour,Jam berikutnya
+S.fcChart,"Wind 10:00–18:00 · line = mean, band = gusts, marker = start","Angin 10:00–18:00 · garis = rata-rata, pita = hembusan, penanda = start"
+S.fcBft,Beaufort,Beaufort
+S.watchLive,Watch live,Tonton langsung
+S.liveStream,Live stream,Siaran langsung
+S.liveNow,The race is on – watch it here,Lomba sedang berlangsung – tonton di sini
+S.liveNote,"If the player stays black, the stream hasn't started yet or YouTube blocks embedding – then open it on YouTube.","Jika pemutar tetap hitam, siaran belum mulai atau YouTube memblokir penyematan – buka di YouTube."
+S.achT,Achievements,Prestasi
+S.olyT,Olympic Games,Olimpiade
+S.wcT,World Championship podiums,Podium Kejuaraan Dunia
+S.ecT,Continental podiums,Podium kontinental
+S.clubT,Club,Klub
+S.profSrc,Facts from the official SSL profile.,Fakta dari profil resmi SSL.
+S.achL[0],World Champion,Juara Dunia
+S.achL[1],Olympic gold,Emas Olimpiade
+S.achL[2],Olympic silver,Perak Olimpiade
+S.achL[3],Olympic bronze,Perunggu Olimpiade
+S.wxAtT,h=>`Forecast for ${h}`,h=>`Prakiraan untuk ${h}`
+S.wxTap,Tap an hour for details.,Ketuk jam untuk detail.
+S.fsT,Final Series,Final Series
+S.qsT,Qualifying Series,Qualifying Series
+S.qsLeg,Highlighted: qualified through this series. ● = in Rio via the SSL Nations Ranking. Tap a team in Rio for its page.,Disorot: lolos lewat seri ini. ● = di Rio lewat SSL Nations Ranking. Ketuk tim di Rio untuk halamannya.
+S.qsNote,"The winner of each qualifying group (group C: top two) was drawn into the 1/32 Finals. 29 teams qualified for the Final Series via the SSL Ranking, with spots per continent: 12 Europe, 8 Pan-America, 6 Asia, 1 Africa, 2 Oceania.","Juara setiap grup kualifikasi (grup C: dua teratas) masuk ke Final 1/32. 29 tim lolos ke Final Series lewat SSL Ranking, dengan jatah per benua: Eropa 12, Pan-Amerika 8, Asia 6, Afrika 1, Oseania 2."
+S.reg.asia,Asia,Asia
+S.reg.afoc,Africa & Oceania,Afrika & Oseania
+S.reg.eur,Europe,Eropa
+S.reg.pam,Pan-America,Pan-Amerika
+S.fin,Final,Final
+S.petit,Petit F.,Final K.
+S.swipe,Swipe sideways for later rounds →,Geser ke samping untuk babak berikutnya →
+S.road2,Road to Rio,Jalan ke Rio
+S.inRio,In Rio via SSL Ranking,Di Rio lewat SSL Ranking
+S.mbHint,Top two of each group advance. Tap a team for crew and history.,Dua teratas tiap grup lolos. Ketuk tim untuk kru dan riwayat.
+S.vmT,Event area,Area acara
+S.vmTap,Tap the map to zoom,Ketuk peta untuk memperbesar
+S.vmL[0],SSL47 boats,Kapal SSL47
+S.vmL[1],Flag pole ashore (signals),Tiang bendera di darat (sinyal)
+S.vmL[2],"Village: partner stands, shop, waste sorting","Village: stan mitra, toko, pemilahan sampah"
+S.vmL[3],Video wall,Layar video
+S.vmL[4],Race office & jury room,Kantor lomba & ruang juri
+S.vmL[5],Sailors Lounge,Sailors Lounge
+S.vmL[6],Uniforms,Seragam
+S.vmL[7],TV broadcast,Siaran TV
+S.vmL[8],Exhibition boat,Kapal pameran
+S.vmL[9],Shore team tent,Tenda tim darat
+S.vmL[10],"Main stage: concert, final podium, closing ceremony","Panggung utama: konser, podium final, upacara penutupan"
+S.vmL[11],Spectator boat,Kapal penonton
+S.vmL[12],Press & production office,Kantor pers & produksi
+S.vmL[13],Lunch buffet,Prasmanan makan siang
+S.vmW,Water refill station,Stasiun isi ulang air
+S.vdT,On race days,Pada hari lomba
+S.vd[0],10:00 – Skippers’ briefing,10:00 – briefing skipper
+S.vd[1],12:00 – first warning signal,12:00 – sinyal peringatan pertama
+S.vd[2],Signals ashore: flag pole in front of the Sailors Lounge (2),Sinyal di darat: tiang bendera di depan Sailors Lounge (2)
+S.vmSrc,"Map: SSL Gold Cup, official notice board","Peta: SSL Gold Cup, papan pengumuman resmi"
+S.fbT,Wish or bug report,Saran atau laporan bug
+S.fbSub,Goes straight to the app maker,Langsung ke pembuat aplikasi
+S.fbPh,What should be better? What isn't working?,Apa yang bisa lebih baik? Apa yang tidak berfungsi?
+S.fbName,Your name (optional),Namamu (opsional)
+S.fbSend,Send,Kirim
+S.fbOk,Thanks – sent!,Terima kasih – terkirim!
+S.fbErr,Couldn't send. Check your connection and try again.,Gagal mengirim. Periksa koneksi dan coba lagi.
+S.showMe,Show me where,Tunjukkan di mana
+S.openChrome,Open in Chrome,Buka di Chrome
+S.openSafari,Open in Safari,Buka di Safari
+S.prep,Getting ready … one moment,Menyiapkan … sebentar
+S.coachT,Tap here,Ketuk di sini
+S.gotIt,Got it,Mengerti
+S.samsung[0],Tap ≡ (menu) at the bottom right.,Ketuk ≡ (menu) di kanan bawah.
+S.samsung[1],Tap “Add page to” → “Home screen”.,Ketuk “Tambahkan halaman ke” → “Layar Utama”.
+S.samsung[2],Confirm with “Add”.,Konfirmasi dengan “Tambahkan”.
+S.noDots,No ⋯ button? Tap the Share icon instead.,Tidak ada tombol ⋯? Ketuk ikon Bagikan.
+S.tkLoad,Loading tracking…,Memuat pelacakan…
+S.tkNone,No tracking for this race yet.,Belum ada pelacakan untuk lomba ini.
+S.tkNoData,No tracking data for this race.,Tidak ada data pelacakan untuk lomba ini.
+S.tkOpens,Tracking opens at,Pelacakan dibuka pukul
+S.tkStart,Start,Start
+S.tkLeg,Leg,Leg
+S.tkPre,pre-start,sebelum start
+S.tkNoPos,no signal,tanpa sinyal
+S.tkRep,Replay,Tayangan ulang
+S.secOly,Olympic Games,Olimpiade
+S.secWc,World Championships,Kejuaraan Dunia
+S.secEc,Continental Championships,Kejuaraan kontinental
+S.bioT,About,Tentang
+S.srcSSL,Official bio · Star Sailors League,Bio resmi · Star Sailors League
+S.careerT,Career,Karier
+S.evN,results listed,hasil tercatat
+S.podN,podiums,podium
+S.medRate,medal rate,rasio medali
+S.bestR,best result,hasil terbaik
+S.showAll,Show all,Tampilkan semua
+S.sslPts,SSL points,Poin SSL
+S.heightT,Height,Tinggi
+S.weightT,Weight,Berat
+S.sslProf,Official SSL profile,Profil resmi SSL
+S.teamSite,Team website,Situs tim
+S.mySailors,My sailors,Pelaut saya
+S.sFavHint,Tap ☆ on a sailor's page to follow them – they'll show up here.,Ketuk ☆ di halaman pelaut untuk mengikutinya – mereka akan muncul di sini.
+S.ownW,In their own words · from the SSL profile,Dengan kata-katanya sendiri · dari profil SSL
+S.pathHl,n=>`Path of ${n} highlighted`,n=>`Jalur ${n} disorot`
+S.setT,Settings,Pengaturan
+S.setSub,"Notifications, favourites, display, spoiler-free","Notifikasi, favorit, tampilan, bebas spoiler"
+S.sNotAvail,Push notifications are being set up and will be available here soon.,Notifikasi push sedang disiapkan.
+S.sMaster,Push notifications,Notifikasi push
+S.sMasterSub,Main switch for this device,Saklar utama perangkat ini
+S.sRemT,Start reminder,Pengingat start
+S.sRemSub,15 minutes before your teams race,15 menit sebelum tim Anda berlomba
+S.sLiveT,Livestream starts,Siaran langsung dimulai
+S.sLiveSub,When the SSL livestream goes live,Saat siaran SSL dimulai
+S.sVidT,New highlight video,Video sorotan baru
+S.sVidSub,When a new highlight film is out,Saat sorotan baru terbit
+S.sResT,Results of my teams,Hasil tim saya
+S.sResSub,After every race of these teams – your favourite teams and the teams of your favourite sailors.,Setelah setiap lomba tim ini – tim favorit dan tim pelaut favorit Anda.
+S.sFavNone,No favourites yet – tap ☆ on a team or sailor.,Belum ada favorit – ketuk ☆ pada tim atau pelaut.
+S.sQuietT,Quiet hours,Jam tenang
+S.sQuietSub,No notifications during this time (your local time),Tanpa notifikasi pada waktu ini (waktu lokal)
+S.sQoff,Off,Mati
+S.sSpoilN,"In spoiler-free mode, notifications only say that a race has finished.","Dalam mode bebas spoiler, notifikasi hanya memberi tahu lomba selesai."
+S.sDispT,Display,Tampilan
+S.sTimeT,Times,Waktu
+S.sTimeRio,Rio only,Rio saja
+S.sTimeBoth,Rio + mine,Rio + lokal
+S.sWindT,Wind,Angin
+S.sTempT,Temperature,Suhu
+S.sLvT,Commentary language,Bahasa komentar
+S.sLvAuto,Same as the app,Sama dengan aplikasi
+S.sCalT,Calendar,Kalender
+S.sCalTeam,Races of this team,Lomba tim ini
+S.sDataT,Data & privacy,Data & privasi
+S.sPriv,"Everything you set here is stored only on this device. No account, no cookies; visits are counted anonymously.","Semua pengaturan hanya tersimpan di perangkat ini. Tanpa akun, tanpa cookie; kunjungan dihitung secara anonim."
+S.sResetF,Remove favourites,Hapus favorit
+S.sResetA,Reset everything,Atur ulang semua
+S.sResetQ,Tap again to confirm,Ketuk lagi untuk konfirmasi
+S.sFeedback,Send feedback,Kirim masukan
+S.sVer,Version,Versi
+S.comp,Competition,Kompetisi
+S.rkT,SSL Nations Ranking,Peringkat Negara SSL
+S.rkAsOf,As of,Per
+S.rkNat,n=>`${n} nations`,n=>`${n} negara`
+S.rkHist,Historical ranking,Peringkat historis
+S.rkCur,Current,Terkini
+S.rkCont,Continent,Benua
+S.rkAll,All,Semua
+S.rkSearch,Search country,Cari negara
+S.rkGC,Gold Cup teams,Tim Gold Cup
+S.rkSk,Skippers,Skipper
+S.rkCr,Crews,Kru
+S.rkPts,Points (sum of the sailors' ranks),Poin (jumlah peringkat)
+S.rkNo,No.,No.
+S.rkGlob,Global,Global
+S.rkName,Nation,Negara
+S.rkNone,No nation found.,Negara tidak ditemukan.
+S.rkLoad,Loading ranking…,Memuat peringkat…
+S.rkFail,The ranking can't be loaded right now.,Peringkat tidak dapat dimuat sekarang.
+S.rkSrc,Source: Star Sailors League · updated every week. The nation's rank comes from its best-ranked skippers and crews.,Sumber: Star Sailors League · diperbarui setiap minggu. Peringkat negara berasal dari skipper dan kru terbaiknya.
+S.rkTeam,Team page,Halaman tim
+S.rkPrev,p=>`previous week: ${p}`,p=>`minggu lalu: ${p}`
+S.rkWas,p=>`was ${p}`,p=>`sebelumnya ${p}`
+S.rkInd,World rank,Peringkat dunia
+S.rkOpen,Open ranking ›,Buka peringkat ›
+S.rkTap,Tap a nation for its sailors.,Ketuk negara untuk melihat pelautnya.
+S.alsoP,also,juga
+SOW,In their own words · from the SSL profile,Dengan kata-katanya sendiri · dari profil SSL
+NXG.[0],started,dimulai
+NXG.[1],planned,dijadwalkan
+NXF,After prior race,Setelah balapan sebelumnya
+RINC,Incoming,Segera
+DOV.[0],Racing day over,Hari lomba selesai
+DOV.[1],"n=>`${n} race${n==1?"""":""s""} sailed`",n=>`${n} balapan selesai`
+DOV.[2],g=>`${g} postponed`,g=>`${g} ditunda`
+DSW.[0],Previous,Sebelumnya
+DSW.[1],Today,Hari ini
+DSW.[2],Next,Berikutnya
+DSW.[3],Previous race day,Hari lomba sebelumnya
+DSW.[4],Next race day,Hari lomba berikutnya
+DSW.[5],from {t},mulai {t}
+DSW.[6],{n} races,{n} lomba
+DSW.[7],1 race,1 lomba
+RESS.[0],Results,Hasil
+RESS.[1],Overall results,Klasemen akhir
+RESS.[2],Qualifiers,Kualifikasi
+RESS.[3],Final Series,Final Series
+RESS.[4],(to be determined),(belum ditentukan)
+RESS.[5],Last chance race,Lomba kesempatan terakhir
+RESS.[6],Pos.,Pos.
+CHT.t,What's new,
+CHT.sub,Everything new in the app – latest first,
+CHT.ver,Version,
+CHT.newB,New,
+CHT.seen,You're up to date,
+CHT.days[0],Race days at a glance,
+CHT.days[1],"On Home you can switch between the previous, today’s and the next race day; at midnight Rio time everything moves on by itself.",
+CHT.estd[0],Smart delay estimate,
+CHT.estd[1],The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races.,
+CHT.res[0],Results in the app,
+CHT.res[1],"Overall ranking, qualifiers and the Final Series – open places show “(to be determined)”.",
+CHT.rbox[0],Live race box,
+CHT.rbox[1],The header strip shows the race on the water and the countdown to the next start – and when a start is delayed.,
+CHT.inst2[0],Easier install,
+CHT.inst2[1],"One tap on Android, an arrow that points to the right button on iPhone, and “Open in Chrome/Safari” from WhatsApp & co.",
+CHT.trk2[0],Faster tracking,
+CHT.trk2[1],"Live positions appear right away, the race history loads in the background.",
+CHT.fbk[0],Send a wish or bug,
+CHT.fbk[1],Under More: tell the app maker what should be better.,
+CHT.rank[0],SSL Nations Ranking in the app,
+CHT.rank[1],"All 132 nations with continent filter, search, history back to 2025 and each nation's best skippers and crews.",
+CHT.pos[0],Positions checked,
+CHT.pos[1],Every sailor's position compared with the team pages and the Rio jersey numbers – several positions are shown where they differ.,
+CHT.linkin[0],No more jumps to other sites,
+CHT.linkin[1],Ranking and qualifier links now open inside the app.,
+CHT.compass[0],Clearer wind compass,
+CHT.compass[1],"The yellow wedge shows where the wind comes from, the wind speed sits right in the middle.",
+CHT.tap[0],Tap any team or sailor,
+CHT.tap[1],"Team and sailor names now open their page everywhere – tables, results, settings and more.",
+CHT.pl[0],Now in Polish,
+CHT.pl[1],Polski! The app now speaks 18 languages.,
+CHT.photos[0],Official portraits for the 1/16 teams,
+CHT.photos[1],"Japan, Czechia, Chile, Ecuador, Hungary, Peru, South Africa and Thailand – fresh from the event studio.",
+CHT.bright[0],Brightness button,
+CHT.bright[1],"Switch between Matchboard blue, day and night right in the header.",
+CHT.logo[0],Bigger SSL logo,
+CHT.logo[1],A little more presence at the top.,
+CHT.tabs[0],New tab bar,
+CHT.tabs[1],"Competition (rounds + matchboard), Teams and Sailors each have their own tab.",
+CHT.settings[0],Settings,
+CHT.settings[1],"Notifications, start reminders, quiet hours, units, local times and spoiler-free mode in one place.",
+CHT.pages[0],Real pages,
+CHT.pages[1],"Teams, sailors and races open as full pages with their own link – back always goes one step back.",
+CHT.anim[0],Smooth round switching,
+CHT.anim[1],"Swipe between rounds, with an animation like in the big apps.",
+CHT.install[0],Easier to install,
+CHT.install[1],An Install button next to the language – the app on your home screen in 20 seconds.,
+CHT.track[0],Live tracking inside the app,
+CHT.track[1],"Every boat on the map, live ranking, course and replay – no more external site.",
+CHT.profiles[0],New sailor profiles,
+CHT.profiles[1],"Bio, career, Olympic and world championship medals from the official SSL profiles.",
+CHT.favS[0],Follow sailors,
+CHT.favS[1],Tap ☆ on a sailor – your sailors get their own list.,
+CHT.langs6[0],Six more languages,
+CHT.langs6[1],"Japanese, Thai, Malay, Hungarian, Czech and Ukrainian.",
+CHT.stream[0],Live stream in the app,
+CHT.stream[1],With preview image and countdown until the broadcast starts.,
+CHT.spoil[0],Spoiler-free mode,
+CHT.spoil[1],Hide results until you've watched the race.,
+CHT.wx[0],Sailing weather per race,
+CHT.wx[1],"Wind, gusts, direction, waves and tide for every start time.",
+CHT.cmp[0],Team comparison,
+CHT.cmp[1],Two teams side by side – head to head and numbers from Rio.,
+CHT.vids[0],Highlights,
+CHT.vids[1],The latest SSL videos right in the app.,
+CHT.venue[0],Venue,
+CHT.venue[1],Marina da Glória with map and directions.,
+CHT.race[0],Race details,
+CHT.race[1],"Tap a race for result, group standings, wind and stream.",
+CHT.push[0],Push notifications,
+CHT.push[1],Results of your teams straight to your phone.,
+CHT.cal[0],Calendar,
+CHT.cal[1],All races of your team in your calendar – updates itself.,
+CHT.shareimg[0],Share as image,
+CHT.shareimg[1],Group tables as a picture for WhatsApp & co.,
+CHT.app[0],Install as an app,
+CHT.app[1],"Full screen, with icon, updates itself.",
+CONT.[0],Africa,Afrika
+CONT.[1],Asia,Asia
+CONT.[2],Europe,Eropa
+CONT.[3],Oceania,Oseania
+CONT.[4],Pan-America,Pan-Amerika
+NWS,News,Berita
+NSRC,Source: worldofsailors.com (Star Sailors League),Sumber: worldofsailors.com (Star Sailors League)
+RRS.[0],Start,Start
+RRS.[1],Race time,Durasi
+RRS.[2],Winner,Pemenang
+RRS.[3],The full report for this race follows here.,Laporan lengkap balapan ini segera hadir di sini.
+ALSO,also,juga
+WXF,Wind from,Angin dari
+NXS.[0],On schedule,Sesuai jadwal
+NXS.[1],Starting soon,Segera mulai
+NXS.[2],Start delayed,Start tertunda
+NXS.[3],Delayed,Tertunda
+NXS.[4],Racing,Sedang balapan
+NXS.[5],t=>`Not before ${t}`,t=>`Setelah ${t}`
+NXW,Start pending,Menunggu start
+NXP,Probably delayed,Mungkin tertunda
+ORD,"n=>n+(n%10==1&&n!=11?""st"":n%10==2&&n!=12?""nd"":n%10==3&&n!=13?""rd"":""th"")","n=>""ke-""+n"
+OSL,en,id
+FIX.GBR,Great Britain,Britania Raya
+FIX.TAH,Tahiti,Tahiti
+FIX.MYA,Myanmar,Myanmar
+FIX.USA,USA,Amerika Serikat

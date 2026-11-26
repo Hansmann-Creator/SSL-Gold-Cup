@@ -1,0 +1,700 @@
+key,English,Українська
+S.rounds,Rounds,Раунди
+S.bracket,Matchboard,Matchboard
+S.teams,Teams,Команди
+S.official,Official results,Офіційні результати
+S.updated,Updated,Оновлено
+S.ago,"m=>m<1?""just now"":m<60?`${m} min ago`:`${Math.round(m/60)} h ago`","m=>m<1?""щойно"":m<60?`${m} хв тому`:`${Math.round(m/60)} год тому`"
+S.rio,Rio time,час Ріо
+S.offline,offline – last saved data,офлайн – останні збережені дані
+S.rn.r32,1/32 Finals,1/32 фіналу
+S.rn.r16,1/16 Finals,1/16 фіналу
+S.rn.r8,1/8 Finals,1/8 фіналу
+S.rn.r4,Quarter-finals,Чвертьфінали
+S.rn.sf,Semi-finals,Півфінали
+S.rn.pf,Petit Final,Малий фінал
+S.rn.f,Grand Final,Гранд-фінал
+S.group,Group,Група
+S.decided,decided,визначено
+S.racing,racing,гонка триває
+S.open,open,відкрито
+S.st.done,completed,завершено
+S.st.live,in progress,триває
+S.st.up,upcoming,незабаром
+S.races,"n=>`${n} race${n>1?""s"":""""} per group`",n=>`${n} гонки в групі`
+S.upNext,Up next,Далі
+S.startsIn,"d=>d<=0?""starts today"":d==1?""starts tomorrow"":`starts in ${d} days`","d=>d<=0?""починається сьогодні"":d==1?""починається завтра"":`починається через ${d} дн.`"
+S.groupsOf4,"n=>`${n} group${n>1?""s"":""""} of four`",n=>`Груп по чотири: ${n}`
+S.oneRace,One race – the finishing order decides.,Одна гонка – вирішує порядок фінішу.
+S.through,through,проходить
+S.out,out,вибув
+S.toFinal,to Final,у фінал
+S.toPetit,to Petit Final,у малий фінал
+S.medals[0],Gold,Золото
+S.medals[1],Silver,Срібло
+S.medals[2],Bronze,Бронза
+S.medals[3],4th,4-те
+S.pts,Pts,Очки
+S.outIn,"(r,g,p)=>`Out in the ${r} (Group ${g}, ${p})`","(r,g,p)=>`Вибув: ${r} (група ${g}, ${p})`"
+S.gf,m=>`Grand Final: ${m}`,m=>`Гранд-фінал: ${m}`
+S.finished,p=>`Finished ${p}`,p=>`Підсумкове місце: ${p}`
+S.thrTbc,Through – next group to be confirmed,Проходить – наступна група ще не відома
+S.seeded,"(r,g,d)=>`Seeded – enters the ${r}, Group ${g}, ${d}`","(r,g,d)=>`Посіяна – стартує: ${r}, група ${g}, ${d}`"
+S.racingNow,Racing now,Зараз у гонці
+S.nations,n=>`${n} nations`,n=>`Країн: ${n}`
+S.stillIn,still in,ще в боротьбі
+S.outN,out,вибули
+S.search,"Search nation, nickname or sailor","Пошук країни, прізвиська або яхтсмена"
+S.all,All,Усі
+S.chipIn,Still in,У боротьбі
+S.chipOut,Out,Вибули
+S.mine,★ My teams,★ Мої команди
+S.sStatus,Status,Статус
+S.sRank,Ranking,Рейтинг
+S.sAz,A–Z,А–Я
+S.noTeam,No team found.,Команду не знайдено.
+S.rank,Rank,Місце
+S.captain,Captain,Капітан
+S.helm,Helm,Стерновий
+S.ranking,SSL Nations Ranking,SSL Nations Ranking
+S.rankBoard,Ranking board ↗,Рейтинг ↗
+S.entered,Entered Rio at,Старт у Ріо
+S.showRound,Open round ›,Відкрити раунд ›
+S.gc23,Gold Cup 2023,Gold Cup 2023
+S.br23,2023 bracket ›,Сітка 2023 ›
+S.status,Status,Статус
+S.stIn,Still in,У боротьбі
+S.stOut,Out,Вибула
+S.whereEnded,Where it ended ›,Де завершила ›
+S.curGroup,Current group ›,Поточна група ›
+S.background,Background,Довідка
+S.road,Road to Rio,Шлях до Ріо
+S.story,Story,Історія
+S.site,Team site,Сайт команди
+S.qualRes,Qualifier results ↗,Результати кваліфікації ↗
+S.sslRank,SSL Nations Ranking ↗,SSL Nations Ranking ↗
+S.resRio,Results in Rio,Результати в Ріо
+S.photos,Crew photos,Фото екіпажу
+S.byPos,Crew by position,Екіпаж за позиціями
+S.leader,Team leader,Лідер команди
+S.wider,Wider squad · position TBC,Розширений склад · позиція не визначена
+S.squadNote,"(n,p)=>`${n} names in the squad. 8–10 sail each race and the line-up can change from day to day. Positions and numbers from the official team site; portraits from the Gold Cup Rio graphics${p?"""":"" (none yet for this team)""}.`","(n,p)=>`У складі ${n} імен. У кожній гонці на борту 8–10 яхтсменів, склад може змінюватися щодня. Позиції та номери з офіційного сайту команди; портрети з графіки Gold Cup Rio${p?"""":"" (для цієї команди ще немає)""}.`"
+S.noSquad,No squad list published for this team yet.,Склад цієї команди ще не опубліковано.
+S.showPath,Show path in bracket,Показати шлях у сітці
+S.copyLink,Copy link,Копіювати посилання
+S.copied,Link copied,Посилання скопійовано
+S.close,Close,Закрити
+S.jersey,Jersey,Номер
+S.numTbc,Number TBC,Номер не визначено
+S.capTag,Captain,Капітан
+S.favOn,Following,Стежу
+S.favOff,Follow,Стежити
+S.brHint,Tap a team for crew and history. Swipe for later rounds.,"Торкніться команди, щоб побачити екіпаж та історію. Гортайте вбік для наступних раундів."
+S.h23,Gold Cup 2023,Gold Cup 2023
+S.champ23,Gran Canaria · champion,Гран-Канарія · переможець
+S.hl,highlighted,виділено
+S.tap26,Tap a team for its Rio 2026 page.,"Торкніться команди, щоб відкрити її сторінку Rio 2026."
+S.off23,Official 2023 results ↗,Офіційні результати 2023 ↗
+S.myTeams,My teams,Мої команди
+S.myHint,Tap ☆ on a team page to follow it.,"Торкніться ☆ на сторінці команди, щоб стежити за нею."
+S.foot,"Scoring: 4-3-2-1 points per race, double points in the last race of each group (8-6-4-2). Top two of each group advance. Results refresh automatically from the official SSL results page. Ranking = SSL Nations Ranking at the start of the Final Series.","Очки: 4-3-2-1 за гонку, в останній гонці кожної групи подвійні (8-6-4-2). З кожної групи проходять двоє перших. Результати автоматично оновлюються з офіційної сторінки результатів SSL. Рейтинг = SSL Nations Ranking на початок Final Series."
+S.notes.ocs,* OCS (early start)  ** Standard penalty,* OCS (фальстарт)  ** Стандартний штраф
+S.theme.auto,🌊 Matchboard,🌊 Matchboard
+S.theme.light,☀️ Day,☀️ День
+S.theme.dark,🌙 Night,🌙 Ніч
+S.g23.champ,Champion (Gold),Чемпіон (золото)
+S.g23.second,Runner-up (Silver),Друге місце (срібло)
+S.g23.third,3rd (Bronze),3-тє (бронза)
+S.g23.fourth,4th – Grand Final,4-те – Гранд-фінал
+S.g23.sf,Semi-finals,Півфінали
+S.g23.qf,Quarter-finals,Чвертьфінали
+S.g23.r8,1/8 Finals,1/8 фіналу
+S.g23.r16,1/16 Finals,1/16 фіналу
+S.g23.r32,1/32 Finals,1/32 фіналу
+S.g23.none,Didn't race the 2023 Final Series,Не брала участі у Final Series 2023
+S.ev.asia,Asian Qualifiers,Азійська кваліфікація
+S.ev.afoc,African & Oceanian Qualifiers,Кваліфікація Африки та Океанії
+S.ev.eu1,European Qualifiers 1,Європейська кваліфікація 1
+S.ev.eu2,European Qualifiers 2,Європейська кваліфікація 2
+S.ev.pan,Pan-American Qualifiers,Панамериканська кваліфікація
+S.route.won,"(e,g)=>`Won the ${e}, Group ${g}`","(e,g)=>`Перемога: ${e}, група ${g}`"
+S.route.pos,"(p,e,g)=>`${p} in the ${e}, Group ${g}`","(p,e,g)=>`${p}: ${e}, група ${g}`"
+S.route.lc,"(e,g)=>`3rd in the ${e} Group ${g}, then won the Last Chance race`","(e,g)=>`3-тє місце: ${e}, група ${g}, потім перемога в гонці Last Chance`"
+S.route.ranking,Qualified through the SSL Nations Ranking,Кваліфікувалася через SSL Nations Ranking
+S.route.host,"Host nation, seeded into the 1/8 Finals","Країна-господиня, посіяна в 1/8 фіналу"
+S.route.seeded,r=>`Seeded into the ${r} via the SSL Nations Ranking`,r=>`Посіяна (${r}) за SSL Nations Ranking`
+S.roles.Helm,Steers the boat,Керує яхтою
+S.roles.Tactician,Strategy & calls,Стратегія та рішення
+S.roles.Main Trimmer,Mainsail,Грот
+S.roles.Trimmer,Jib & gennaker,Стаксель і генакер
+S.roles.Grinder,Powers the winches,Крутить лебідки
+S.roles.Pit,Halyards & controls,Фали та керування
+S.roles.Mid-Bow,Mast & foredeck,Щогла й бак
+S.roles.Bow,Bow & starts,Ніс і старти
+S.roles.Floater,Utility / reserve,Універсал / запас
+S.back,‹ Back,‹ Назад
+S.position,Position,Позиція
+S.team,Team,Команда
+S.indRank,SSL ranking,Рейтинг SSL
+S.highlights,Highlights,Головні досягнення
+S.profile,SSL profile ↗,Профіль SSL ↗
+S.findProfile,Find SSL profile ↗,Знайти профіль SSL ↗
+S.ws,World Sailing ↗,World Sailing ↗
+S.mates,Teammates,Товариші по команді
+S.posTbc,Position TBC,Позиція не визначена
+S.noInfo,No further details published yet – the links below search the official profiles.,Більше даних ще не опубліковано – посилання нижче шукають в офіційних профілях.
+S.today,Today,Сьогодні
+S.raceDay,"(n,t)=>`race day ${n} of ${t}`","(n,t)=>`гоночний день ${n} з ${t}`"
+S.finalDay,Final day – last race counts double,Останній день – остання гонка рахується подвійно
+S.stream,▶ Live stream,▶ Пряма трансляція
+S.tracking,Tracking,Трекінг
+S.schedule,Schedule,Розклад
+S.adv,"(a,b)=>`1st → ${a} · 2nd → ${b}`","(a,b)=>`1-ше → ${a} · 2-ге → ${b}`"
+S.advSf,1st–2nd → Final · 3rd–4th → Petit Final,1–2 → Фінал · 3–4 → Малий фінал
+S.clinched,✓ through,✓ точно проходить
+S.elim,out,вибула
+S.secNow,In the current round,У поточному раунді
+S.secSeeded,r=>`Seeded – enter in the ${r}`,r=>`Посіяні – стартують: ${r}`
+S.secOut,Out,Вибули
+S.lineup,Line-up,Учасники
+S.howT,How the Gold Cup works,Як працює Gold Cup
+S.how[0],"National teams, one SSL47 boat each – all boats identical and provided by the organisers.","Національні команди, у кожної по одній яхті SSL47 – усі яхти однакові й надаються організаторами."
+S.how[1],Groups of four. 4-3-2-1 points per race; the last race of each group counts double (8-6-4-2).,Групи по чотири. 4-3-2-1 очки за гонку; остання гонка кожної групи рахується подвійно (8-6-4-2).
+S.how[2],The top two of every group advance; better-ranked nations enter later rounds.,З кожної групи проходять двоє перших; країни з вищим рейтингом стартують у пізніших раундах.
+S.how[3],Semi-finals and finals are a single race each; the Grand Final decides the world champion.,Півфінали й фінали – по одній гонці; Гранд-фінал визначає чемпіона світу.
+S.race,Race,Гонка
+S.nextRace,Next race,Наступна гонка
+S.todayRaces,Today's races,Гонки сьогодні
+S.rioT,Rio time,час Ріо
+S.loc,your time,ваш час
+S.onWater,on the water,на воді
+S.done,done,завершено
+S.inX,"m=>m<60?`in ${m} min`:`in ${Math.floor(m/60)} h ${String(m%60).padStart(2,""0"")}`","m=>m<60?`через ${m} хв`:`через ${Math.floor(m/60)} год ${String(m%60).padStart(2,""0"")} хв`"
+S.firstStart,First start,Перший старт
+S.schedT,Race schedule,Розклад гонок
+S.schedNote,"Times are Rio de Janeiro time (UTC−3), from the official schedule. Its groups G1–G4 are shown here as groups A–D.",Час Ріо-де-Жанейро (UTC−3) за офіційним розкладом. Його групи G1–G4 тут показано як групи A–D.
+S.needT,Before the final race (double points),Перед останньою гонкою (подвійні очки)
+S.need.sure,"through, whatever happens",проходить за будь-якого результату
+S.need.gone,"out, whatever happens",вибуває за будь-якого результату
+S.need.win,a win is enough,досить перемоги
+S.need.top,k=>`${k} or better is enough`,k=>`досить ${k} або краще`
+S.need.mustWin,must win,мусить перемогти
+S.need.help,and needs help from the others,і потребує допомоги інших
+S.need.maybe,k=>`${k} may be enough – depends on the others`,k=>`${k} може вистачити – залежить від інших`
+S.need.iff,"(k,c)=>`${k} is enough if ${c}`","(k,c)=>`${k} досить, якщо ${c}`"
+S.need.mustIf,"c=>`must win, and only if ${c}`","c=>`мусить перемогти, і лише якщо ${c}`"
+S.need.ahead,R=>`ahead of ${R}`,R=>`попереду ${R}`
+S.need.behind,R=>`behind ${R}`,R=>`позаду ${R}`
+S.need.notWin,R=>`${R} doesn't win`,R=>`${R} не перемагає`
+S.need.last,R=>`${R} finishes last`,R=>`${R} фінішує останньою`
+S.need.wins,R=>`${R} wins`,R=>`${R} перемагає`
+S.need.tie,level on points possible – tie-break decides,можлива рівність очок – вирішує тай-брейк
+S.needNote,"Worked out from the current points; ≈ means teams could finish level, then the official tie-break decides.","Розраховано за поточними очками; ≈ означає можливу рівність, тоді вирішує офіційний тай-брейк."
+S.install,Add to Home Screen for the app icon.,"Додайте на головний екран, щоб мати іконку застосунку."
+S.home,Home,Головна
+S.more,More,Ще
+S.sailors,Sailors,Яхтсмени
+S.welcome,Final Series · Rio de Janeiro,Final Series · Ріо-де-Жанейро
+S.dates,19 Nov – 13 Dec 2026 · Marina da Glória,19 лист. – 13 груд. 2026 · Marina da Glória
+S.progress,Tournament,Турнір
+S.latest,Latest results,Останні результати
+S.explore,Explore,Огляд
+S.tiles.board[0],Rounds,Раунди
+S.tiles.board[1],"Groups, points, times","Групи, очки, час"
+S.tiles.bracket[0],Matchboard,Matchboard
+S.tiles.bracket[1],The whole draw at a glance,Уся сітка одним поглядом
+S.tiles.teams[0],Teams,Команди
+S.tiles.teams[1],"40 nations, crews, rankings","40 країн, екіпажі, рейтинги"
+S.tiles.sailors[0],Sailors,Яхтсмени
+S.tiles.sailors[1],Search every sailor,Пошук усіх яхтсменів
+S.tiles.qualifying[0],Qualifying,Кваліфікація
+S.tiles.qualifying[1],How the teams got to Rio,Як команди потрапили до Ріо
+S.tiles.gc2023[0],Gold Cup 2023,Gold Cup 2023
+S.tiles.gc2023[1],Last edition's bracket,Сітка минулого турніру
+S.sailorsT,n=>`${n} sailors`,n=>`Яхтсменів: ${n}`
+S.sSearch,"Search sailor, team or position","Пошук яхтсмена, команди або позиції"
+S.withPhoto,With photo,З фото
+S.allS,All,Усі
+S.moreT,More,Ще
+S.lang,Language,Мова
+S.design,Design,Вигляд
+S.share,Share app,Поділитися застосунком
+S.shared,Link copied,Посилання скопійовано
+S.links,Links,Посилання
+S.about,About this app,Про застосунок
+S.aboutT,Unofficial companion app for the SSL Gold Cup Rio 2026. Results update automatically from the official SSL results page.,Неофіційний застосунок-супутник для SSL Gold Cup Rio 2026. Результати автоматично оновлюються з офіційної сторінки результатів SSL.
+S.inst.t,Install the app,Установити застосунок
+S.inst.d,"Put SSL Gold Cup on your home screen – opens like an app, full screen, with live results.","Додайте SSL Gold Cup на головний екран – відкривається як застосунок, на весь екран, із живими результатами."
+S.inst.b,Install,Установити
+S.inst.done,Installed ✓,Установлено ✓
+S.inst.ios[0],Tap the Share button,Торкніться кнопки «Поділитися»
+S.inst.ios[1],at the bottom of Safari (top right on iPad).,внизу Safari (на iPad – вгорі праворуч).
+S.inst.ios[2],Scroll down and tap “Add to Home Screen”.,Прокрутіть вниз і торкніться «На початковий екран».
+S.inst.ios[3],Tap “Add” – done.,Торкніться «Додати» – готово.
+S.inst.iosOther,On iPhone this works in Safari: open this page in Safari first.,На iPhone це працює в Safari: спершу відкрийте цю сторінку в Safari.
+S.inst.android[0],Tap the ⋮ menu in the top right of your browser.,Торкніться меню ⋮ у правому верхньому куті браузера.
+S.inst.android[1],Tap “Install app” or “Add to Home screen”.,Торкніться «Установити застосунок» або «Додати на головний екран».
+S.inst.android[2],Confirm with “Install”.,Підтвердьте кнопкою «Установити».
+S.inst.desk[0],"Click the install icon in the address bar,","Натисніть значок установлення в адресному рядку,"
+S.inst.desk[1],or open the browser menu and choose “Install SSL Gold Cup”.,або відкрийте меню браузера й виберіть «Установити SSL Gold Cup».
+S.inst.how,How to install,Як установити
+S.inst.hide,Not now,Не зараз
+S.inst.installedNote,You're using the installed app.,Ви користуєтеся встановленим застосунком.
+S.champT,World Champion · Gold Cup 2026,Чемпіон світу · Gold Cup 2026
+S.standT,Final standings,Підсумкове положення
+S.statsT,In numbers,У цифрах
+S.stRaces,Races,Гонки
+S.stWins,Race wins,Перемоги
+S.stAvg,Avg. place,Сер. місце
+S.stPts,Points in Rio,Очки в Ріо
+S.stHist,Race by race,Гонка за гонкою
+S.calBtn,📅 Races in my calendar,📅 Гонки в моєму календарі
+S.calT,Races in your calendar,Гонки у вашому календарі
+S.calSub,"Subscribe (iPhone, Mac, Outlook)","Підписатися (iPhone, Mac, Outlook)"
+S.calG,Add to Google Calendar,Додати в Google Календар
+S.calDl,Download file (.ics),Завантажити файл (.ics)
+S.calAll,All races in my calendar,Усі гонки в моєму календарі
+S.calNote,"A subscription updates itself: when a team qualifies, its next races appear automatically.","Підписка оновлюється сама: коли команда проходить далі, її наступні гонки з'являються автоматично."
+S.wxT,Wind forecast · Marina da Glória,Прогноз вітру · Marina da Glória
+S.wxSrc,"Forecast by Open-Meteo, not measured on the course.","Прогноз Open-Meteo, не виміряно на дистанції."
+S.trk,Tracking,Трекінг
+S.delayed,m=>`Results may be delayed – last successful check ${m} min ago.`,m=>`Результати можуть запізнюватися – остання успішна перевірка ${m} хв тому.`
+S.shareImg,Share as image,Поділитися зображенням
+S.imgDone,Image ready,Зображення готове
+S.pT,Notifications,Сповіщення
+S.pAll,All results,Усі результати
+S.pAllSub,A notification after every race,Сповіщення після кожної гонки
+S.pTeamOff,🔔 Notify me about this team,🔔 Сповіщати про цю команду
+S.pTeamOn,🔔 Notifications on ✓,🔔 Сповіщення увімкнено ✓
+S.pTeams,Your teams,Ваші команди
+S.pNone,No team yet: open a team and tap 🔔.,Ще немає команд: відкрийте команду й торкніться 🔔.
+S.pNote,You only get race results and who goes through. Switch off here any time.,Ви отримуєте лише результати гонок і хто проходить далі. Вимкнути можна тут будь-коли.
+S.pIOS,"On iPhone, notifications only work in the installed app: install it, open it from the home screen, then switch them on here.","На iPhone сповіщення працюють лише у встановленому застосунку: установіть його, відкрийте з головного екрана й увімкніть тут."
+S.pDenied,Notifications are blocked. Allow them for this app in your device settings.,Сповіщення заблоковано. Дозвольте їх для цього застосунку в налаштуваннях пристрою.
+S.pErr,That didn't work – please try again in a moment.,Не вдалося – спробуйте ще раз за мить.
+S.pOnT,Notifications on,Сповіщення увімкнено
+S.pOffT,Notifications off,Сповіщення вимкнено
+S.pUnsup,This browser can't receive notifications.,Цей браузер не може отримувати сповіщення.
+S.obT,Get the app,Отримайте застосунок
+S.obSub,"Free, no App Store needed – on your home screen in 20 seconds.","Безкоштовно, без App Store – на головному екрані за 20 секунд."
+S.obPerks[0],Live results in one tap,Живі результати одним дотиком
+S.obPerks[1],"Full screen, like a real app","Повний екран, як справжній застосунок"
+S.obPerks[2],Notifications for your team,Сповіщення про вашу команду
+S.obBtn,Install now,Установити зараз
+S.obLater,Later – look around in the browser first,Пізніше – спершу погляну в браузері
+S.obSteps,How it works,Як це працює
+S.obStep,Step,Крок
+S.ios26[0],Tap ⋯ next to the address bar,Торкніться ⋯ біля адресного рядка
+S.ios26[1],Tap “Share”,Торкніться «Поділитися»
+S.ios26[2],Scroll down and tap “Add to Home Screen”,Прокрутіть вниз і торкніться «На початковий екран»
+S.ios26[3],Leave “Open as Web App” on and tap “Add”,Залиште увімкненим «Відкрити як вебпрограму» і торкніться «Додати»
+S.iosOld[0],Tap the Share button at the bottom,Торкніться кнопки «Поділитися» внизу
+S.iosOld[1],Scroll down and tap “Add to Home Screen”,Прокрутіть вниз і торкніться «На початковий екран»
+S.iosOld[2],Tap “Add” in the top right,Торкніться «Додати» вгорі праворуч
+S.iosAlt,"Easiest in Safari: copy the link, open Safari and paste it.","Найпростіше в Safari: скопіюйте посилання, відкрийте Safari і вставте його."
+S.inApp,This page is open inside another app (e.g. WhatsApp or Instagram). Installing only works in the browser: tap ⋯ and choose “Open in browser” – or copy the link and open it in Safari or Chrome.,Цю сторінку відкрито в іншому застосунку (напр. WhatsApp або Instagram). Установлення працює лише в браузері: торкніться ⋯ і виберіть «Відкрити в браузері» – або скопіюйте посилання й відкрийте в Safari чи Chrome.
+S.copy,Copy link,Копіювати посилання
+S.done2,Then open SSL Gold Cup from your home screen.,Потім відкрийте SSL Gold Cup з головного екрана.
+S.ui.share,Share,Поділитися
+S.ui.home,Add to Home Screen,На початковий екран
+S.ui.add,Add,Додати
+S.ui.web,Open as Web App,Відкрити як вебпрограму
+S.ui.cancel,Cancel,Скасувати
+S.ui.ainst,Install app,Установити застосунок
+S.ui.aok,Install,Установити
+S.trkOpen,📍 Watch live tracking,📍 Дивитися живий трекінг
+S.trkReplay,📍 Replay the race (tracking),📍 Повтор гонки (трекінг)
+S.trkNone,Tracking appears here as soon as Georacing has set up this race.,"Трекінг з'явиться тут, щойно Georacing налаштує цю гонку."
+S.trkExt,Open in Georacing ↗,Відкрити в Georacing ↗
+S.trkHint,"Every boat as a dot on the map – live during the race, as a replay afterwards.","Кожна яхта на карті – наживо під час гонки, у повторі після неї."
+S.rcRes,Result of this race,Результат гонки
+S.rcTeams,Teams in this race,На стартовій лінії
+S.rcStand,Group so far,Група на цей момент
+S.rcPts,pts,оч.
+S.rcGroup,Show group on the Matchboard,Показати групу на Matchboard
+S.rcTBD,Teams not decided yet,Команди ще не визначені
+S.qrT,Scan with the phone camera – the app opens right away.,Скануйте камерою телефона – застосунок відкриється одразу.
+S.shareNow,Share…,Поділитися…
+S.qsep,"n=>""▲ advance""","n=>""▲ проходять"""
+S.shareSub,"Send via WhatsApp, Messages & co.","Надіслати через WhatsApp, Повідомлення тощо"
+S.shareMsg,"SSL Gold Cup Rio 2026 – live results, race times and all teams:","SSL Gold Cup Rio 2026 – живі результати, час гонок і всі команди:"
+S.sCaps,Captains,Капітани
+S.sTeams,Crews,Екіпажі
+S.sHint,Tap a team to see its crew – teams still in the race come first.,"Торкніться команди, щоб побачити екіпаж – команди, що ще в боротьбі, першими."
+S.sTeamPage,Team page,Сторінка команди
+S.fShow,Show,Показати
+S.fSort,Sort,Сортувати
+S.spT,Spoiler-free,Без спойлерів
+S.spUntil,w=>`Results hidden after ${w}`,w=>`Результати приховано після ${w}`
+S.spNone,No hidden results right now,Зараз немає прихованих результатів
+S.spShow,Show all,Показати все
+S.spOff,Off,Вимк.
+S.spRow,Spoiler-free mode,Режим без спойлерів
+S.spSub,Hide results until you have watched the race,"Приховати результати, доки ви не подивитеся гонку"
+S.spRace,Result hidden,Результат приховано
+S.spReveal,I've watched it – show result,Я подивився – показати результат
+S.spOnT,Results from today on are hidden,Результати від сьогодні приховано
+S.cmpBtn,⚖️ Compare,⚖️ Порівняти
+S.cmpVs,vs,vs
+S.cmpPick,Pick a team to compare with.,Виберіть команду для порівняння.
+S.h2hT,Head to head,Особисті зустрічі
+S.h2hSub,races finished ahead,гонок фінішувала попереду
+S.h2hNone,No races against each other yet.,Ще не зустрічалися.
+S.cmpNote,Numbers from the races in Rio; ranking = SSL Nations Ranking.,Дані з гонок у Ріо; рейтинг = SSL Nations Ranking.
+S.vidT,🎬 Highlights & videos,🎬 Найкраще та відео
+S.vidAll,All videos on YouTube ↗,Усі відео на YouTube ↗
+S.vidOpen,Open on YouTube ↗,Відкрити на YouTube ↗
+S.vidHid,"n=>`${n} newer video${n>1?""s"":""""} hidden (spoiler-free)`",n=>`Приховано нових відео: ${n} (без спойлерів)`
+S.pastL,Look back,Озирнутися
+S.vnT,Venue · Marina da Glória,Місце проведення · Marina da Glória
+S.vnSub,Where it all happens – map & directions,Де все відбувається – карта й маршрут
+S.vnRoute,Directions,Маршрут
+S.vnApple,Apple Maps,Карти Apple
+S.vnInfo[0],"The 2016 Olympic sailing venue, on Guanabara Bay with a view of Sugarloaf Mountain.",Олімпійська вітрильна арена 2016 року в затоці Гуанабара з видом на гору Цукрова Голова.
+S.vnInfo[1],The marina is open to the public during the event – see the boats up close and visit the athletes' village.,Під час змагань марина відкрита для відвідувачів – можна побачити яхти зблизька й відвідати селище спортсменів.
+S.vnInfo[2],Racing takes place on Guanabara Bay right in front of the marina.,Гонки проходять у затоці Гуанабара просто перед мариною.
+S.suT,Sustainability,Сталий розвиток
+S.suSub,What the SSL does for the ocean and fair sport,Що робить SSL для океану та чесного спорту
+S.suIntro,The SSL says that for them sustainability means protecting the ocean and making the sport fairer.,"SSL зазначає, що для неї сталий розвиток – це захист океану й чесніший спорт."
+S.suList[0],Every SSL Gold Cup boat must have two women on board.,На кожній яхті SSL Gold Cup мають бути дві жінки.
+S.suList[1],No plastic bottles in the athletes' village.,У селищі спортсменів немає пластикових пляшок.
+S.suList[2],A dedicated Sustainability Manager since September 2025.,Окремий менеджер зі сталого розвитку з вересня 2025.
+S.suList[3],"Aligned with Clean Regattas, World Sailing's Sustainability Agenda 2030 and the IOC strategy; the goal is Platinum Clean Regattas certification.","Відповідно до Clean Regattas, Програми сталого розвитку 2030 World Sailing і стратегії МОК; мета – сертифікат Platinum Clean Regattas."
+S.suList[4],Beach clean-ups with the teams at the qualifiers.,Прибирання пляжів разом із командами на кваліфікаціях.
+S.suList[5],"Few support boats: at the 2023 Finals, four coach boats served 440 sailors.",Мало човнів супроводу: на фіналах 2023 чотири тренерські човни обслуговували 440 яхтсменів.
+S.suMore,Read more at the SSL ↗,Детальніше на сайті SSL ↗
+S.mcT,Merch,Мерч
+S.mcSub,"Jerseys, caps & more – coming soon","Джерсі, кепки та інше – незабаром"
+S.mcSoon,Coming soon,Незабаром
+S.mcTxt,"The official SSL Gold Cup Store is not open yet. As soon as it is, you can shop here.","Офіційний магазин SSL Gold Cup ще не відкрито. Щойно відкриється, купувати можна буде тут."
+S.mcList[0],Captain's jerseys of the national teams,Капітанські джерсі національних команд
+S.mcList[1],SSL caps,Кепки SSL
+S.mcList[2],SSL47 boat and team figures as building sets,Конструктори яхт SSL47 і фігурки команд
+S.mcGo,To the SSL store ↗,До магазину SSL ↗
+S.wxBtn,🌬️ Weather for sailors,🌬️ Погода для яхтсменів
+S.wxH,Sailing weather,Погода для вітрильників
+S.wxLoad,Loading forecast…,Завантаження прогнозу…
+S.wxFail,The forecast could not be loaded right now.,Зараз не вдалося завантажити прогноз.
+S.wxGust,Gusts,Пориви
+S.wxDir,Direction,Напрям
+S.wxPres,Pressure,Тиск
+S.wxAtStart,Forecast for the start time.,Прогноз на час старту.
+S.wxHours,Hour by hour,Щогодини
+S.wxTime,Time,Час
+S.wxWind,Wind kn,Вітер kn
+S.wxKn,Wind in knots: mean – gusts. Arrows show where the wind blows to.,"Вітер у вузлах: середній – пориви. Стрілки показують, куди дме вітер."
+S.wxSea,Water,Вода
+S.wxWater,Water temperature,Температура води
+S.wxTide,Tide,Приплив
+S.wxRise,rising,приплив
+S.wxFall,falling,відплив
+S.wxHigh,High,Повна вода
+S.wxLow,Low,Мала вода
+S.wxCur,Current,Течія
+S.wxCurN,Model value at the bay entrance; arrow = where it flows.,Модельне значення біля входу в затоку; стрілка = напрям течії.
+S.wxWave,Swell,Брижі
+S.wxWaveN,"At the bay entrance, much smaller on the course.",Біля входу в затоку; на дистанції значно менші.
+S.wxSun,Sunrise – sunset,Схід – захід сонця
+S.wxSrc2,"Forecast by Open-Meteo (weather models), not measured on the course.","Прогноз Open-Meteo (погодні моделі), не виміряно на дистанції."
+S.trkLive,Live tracking,Живий трекінг
+S.trkReplayS,Replay,Повтор
+S.fcBtn,Forecast,Прогноз
+S.fcCond[0],Light wind,Слабкий вітер
+S.fcCond[1],Medium wind,Помірний вітер
+S.fcCond[2],Fresh breeze,Свіжий вітер
+S.fcCond[3],Strong wind,Сильний вітер
+S.fcTr.up,building,посилюється
+S.fcTr.down,easing,слабшає
+S.fcTr.steady,steady,стабільний
+S.fcTr.veer,veering (clockwise),повертає за годинниковою
+S.fcTr.back,backing (anti-clockwise),повертає проти годинникової
+S.fcNext,Next hour,Наступна година
+S.fcChart,"Wind 10:00–18:00 · line = mean, band = gusts, marker = start","Вітер 10:00–18:00 · лінія = середній, смуга = пориви, позначка = старт"
+S.fcBft,Beaufort,Бофорт
+S.watchLive,Watch live,Дивитися наживо
+S.liveStream,Live stream,Пряма трансляція
+S.liveNow,The race is on – watch it here,Гонка триває – дивіться тут
+S.liveNote,"If the player stays black, the stream hasn't started yet or YouTube blocks embedding – then open it on YouTube.","Якщо плеєр залишається чорним, трансляція ще не почалася або YouTube забороняє вбудовування – тоді відкрийте на YouTube."
+S.achT,Achievements,Досягнення
+S.olyT,Olympic Games,Олімпійські ігри
+S.wcT,World Championship podiums,Подіуми чемпіонатів світу
+S.ecT,Continental podiums,Подіуми континентальних чемпіонатів
+S.clubT,Club,Клуб
+S.profSrc,Facts from the official SSL profile.,Дані з офіційного профілю SSL.
+S.achL[0],World Champion,Чемпіон світу
+S.achL[1],Olympic gold,Олімпійське золото
+S.achL[2],Olympic silver,Олімпійське срібло
+S.achL[3],Olympic bronze,Олімпійська бронза
+S.wxAtT,h=>`Forecast for ${h}`,h=>`Прогноз на ${h}`
+S.wxTap,Tap an hour for details.,Торкніться години для подробиць.
+S.fsT,Final Series,Final Series
+S.qsT,Qualifying Series,Qualifying Series
+S.qsLeg,Highlighted: qualified through this series. ● = in Rio via the SSL Nations Ranking. Tap a team in Rio for its page.,Виділено: кваліфікувалися через цю серію. ● = у Ріо через SSL Nations Ranking. Торкніться команди в Ріо для її сторінки.
+S.qsNote,"The winner of each qualifying group (group C: top two) was drawn into the 1/32 Finals. 29 teams qualified for the Final Series via the SSL Ranking, with spots per continent: 12 Europe, 8 Pan-America, 6 Asia, 1 Africa, 2 Oceania.","Переможець кожної кваліфікаційної групи (у групі C – двоє перших) потрапив до 1/32 фіналу. 29 команд кваліфікувалися до Final Series через SSL Ranking із квотами за континентами: Європа 12, Панамерика 8, Азія 6, Африка 1, Океанія 2."
+S.reg.asia,Asia,Азія
+S.reg.afoc,Africa & Oceania,Африка та Океанія
+S.reg.eur,Europe,Європа
+S.reg.pam,Pan-America,Панамерика
+S.fin,Final,Фінал
+S.petit,Petit F.,Малий ф.
+S.swipe,Swipe sideways for later rounds →,Гортайте вбік для наступних раундів →
+S.road2,Road to Rio,Шлях до Ріо
+S.inRio,In Rio via SSL Ranking,У Ріо через SSL Ranking
+S.mbHint,Top two of each group advance. Tap a team for crew and history.,З кожної групи проходять двоє перших. Торкніться команди для екіпажу та історії.
+S.vmT,Event area,Територія події
+S.vmTap,Tap the map to zoom,"Торкніться мапи, щоб збільшити"
+S.vmL[0],SSL47 boats,Човни SSL47
+S.vmL[1],Flag pole ashore (signals),Щогла сигналів на березі
+S.vmL[2],"Village: partner stands, shop, waste sorting","Village: стенди партнерів, магазин, сортування відходів"
+S.vmL[3],Video wall,Відеостіна
+S.vmL[4],Race office & jury room,Гоночний офіс і кімната журі
+S.vmL[5],Sailors Lounge,Sailors Lounge
+S.vmL[6],Uniforms,Форма
+S.vmL[7],TV broadcast,ТВ-трансляція
+S.vmL[8],Exhibition boat,Виставковий човен
+S.vmL[9],Shore team tent,Намет берегових команд
+S.vmL[10],"Main stage: concert, final podium, closing ceremony","Головна сцена: концерт, фінальний подіум, церемонія закриття"
+S.vmL[11],Spectator boat,Глядацький човен
+S.vmL[12],Press & production office,Офіс преси та продакшну
+S.vmL[13],Lunch buffet,Обідній буфет
+S.vmW,Water refill station,Станція питної води
+S.vdT,On race days,У дні гонок
+S.vd[0],10:00 – Skippers’ briefing,10:00 – брифінг шкіперів
+S.vd[1],12:00 – first warning signal,12:00 – перший попереджувальний сигнал
+S.vd[2],Signals ashore: flag pole in front of the Sailors Lounge (2),Сигнали на березі: щогла перед Sailors Lounge (2)
+S.vmSrc,"Map: SSL Gold Cup, official notice board","Мапа: SSL Gold Cup, офіційна дошка оголошень"
+S.fbT,Wish or bug report,Побажання або помилка
+S.fbSub,Goes straight to the app maker,Надходить прямо автору застосунку
+S.fbPh,What should be better? What isn't working?,Що можна покращити? Що не працює?
+S.fbName,Your name (optional),Ваше ім’я (необов’язково)
+S.fbSend,Send,Надіслати
+S.fbOk,Thanks – sent!,Дякуємо – надіслано!
+S.fbErr,Couldn't send. Check your connection and try again.,Не вдалося надіслати. Перевірте з’єднання і спробуйте ще раз.
+S.showMe,Show me where,Покажи де
+S.openChrome,Open in Chrome,Відкрити в Chrome
+S.openSafari,Open in Safari,Відкрити в Safari
+S.prep,Getting ready … one moment,Готуємо … хвилинку
+S.coachT,Tap here,Торкніться тут
+S.gotIt,Got it,Зрозуміло
+S.samsung[0],Tap ≡ (menu) at the bottom right.,Торкніться ≡ (меню) внизу праворуч.
+S.samsung[1],Tap “Add page to” → “Home screen”.,Торкніться «Додати сторінку до» → «Головний екран».
+S.samsung[2],Confirm with “Add”.,Підтвердьте «Додати».
+S.noDots,No ⋯ button? Tap the Share icon instead.,Немає кнопки ⋯? Торкніться значка «Поділитися».
+S.tkLoad,Loading tracking…,Завантаження трекінгу…
+S.tkNone,No tracking for this race yet.,Для цієї гонки трекінгу ще немає.
+S.tkNoData,No tracking data for this race.,Немає даних трекінгу для цієї гонки.
+S.tkOpens,Tracking opens at,Трекінг відкриється о
+S.tkStart,Start,Старт
+S.tkLeg,Leg,Відрізок
+S.tkPre,pre-start,перед стартом
+S.tkNoPos,no signal,немає сигналу
+S.tkRep,Replay,Повтор
+S.secOly,Olympic Games,Олімпійські ігри
+S.secWc,World Championships,Чемпіонати світу
+S.secEc,Continental Championships,Континентальні чемпіонати
+S.bioT,About,Про яхтсмена
+S.srcSSL,Official bio · Star Sailors League,Офіційна біографія · Star Sailors League
+S.careerT,Career,Кар'єра
+S.evN,results listed,результатів у списку
+S.podN,podiums,подіумів
+S.medRate,medal rate,частка медалей
+S.bestR,best result,найкращий результат
+S.showAll,Show all,Показати все
+S.sslPts,SSL points,Очки SSL
+S.heightT,Height,Зріст
+S.weightT,Weight,Вага
+S.sslProf,Official SSL profile,Офіційний профіль SSL
+S.teamSite,Team website,Сайт команди
+S.mySailors,My sailors,Мої яхтсмени
+S.sFavHint,Tap ☆ on a sailor's page to follow them – they'll show up here.,"Торкніться ☆ на сторінці яхтсмена, щоб стежити – він з'явиться тут."
+S.ownW,In their own words · from the SSL profile,Власними словами · з профілю SSL
+S.pathHl,n=>`Path of ${n} highlighted`,n=>`Шлях ${n} виділено`
+S.setT,Settings,Налаштування
+S.setSub,"Notifications, favourites, display, spoiler-free","Сповіщення, обране, вигляд, без спойлерів"
+S.sNotAvail,Push notifications are being set up and will be available here soon.,Push-сповіщення зараз налаштовуються.
+S.sMaster,Push notifications,Push-сповіщення
+S.sMasterSub,Main switch for this device,Головний перемикач цього пристрою
+S.sRemT,Start reminder,Нагадування про старт
+S.sRemSub,15 minutes before your teams race,За 15 хвилин до гонки ваших команд
+S.sLiveT,Livestream starts,Початок трансляції
+S.sLiveSub,When the SSL livestream goes live,Коли починається трансляція SSL
+S.sVidT,New highlight video,Нове відео найкращих моментів
+S.sVidSub,When a new highlight film is out,Коли виходить новий огляд
+S.sResT,Results of my teams,Результати моїх команд
+S.sResSub,After every race of these teams – your favourite teams and the teams of your favourite sailors.,Після кожної гонки цих команд – обрані команди й команди обраних яхтсменів.
+S.sFavNone,No favourites yet – tap ☆ on a team or sailor.,Ще немає обраного – торкніться ☆ у команди чи яхтсмена.
+S.sQuietT,Quiet hours,Тихі години
+S.sQuietSub,No notifications during this time (your local time),У цей час без сповіщень (ваш місцевий час)
+S.sQoff,Off,Вимк.
+S.sSpoilN,"In spoiler-free mode, notifications only say that a race has finished.","У режимі без спойлерів сповіщення лише кажуть, що гонка завершилась."
+S.sDispT,Display,Вигляд
+S.sTimeT,Times,Час
+S.sTimeRio,Rio only,Лише Ріо
+S.sTimeBoth,Rio + mine,Ріо + мій
+S.sWindT,Wind,Вітер
+S.sTempT,Temperature,Температура
+S.sLvT,Commentary language,Мова коментаря
+S.sLvAuto,Same as the app,Як у застосунку
+S.sCalT,Calendar,Календар
+S.sCalTeam,Races of this team,Гонки цієї команди
+S.sDataT,Data & privacy,Дані й приватність
+S.sPriv,"Everything you set here is stored only on this device. No account, no cookies; visits are counted anonymously.",Усі налаштування зберігаються лише на цьому пристрої. Без акаунта й cookies; відвідування рахуються анонімно.
+S.sResetF,Remove favourites,Видалити обране
+S.sResetA,Reset everything,Скинути все
+S.sResetQ,Tap again to confirm,Торкніться ще раз для підтвердження
+S.sFeedback,Send feedback,Надіслати відгук
+S.sVer,Version,Версія
+S.comp,Competition,Змагання
+S.rkT,SSL Nations Ranking,Рейтинг націй SSL
+S.rkAsOf,As of,Станом на
+S.rkNat,n=>`${n} nations`,n=>`${n} націй`
+S.rkHist,Historical ranking,Історичний рейтинг
+S.rkCur,Current,Поточний
+S.rkCont,Continent,Континент
+S.rkAll,All,Усі
+S.rkSearch,Search country,Пошук країни
+S.rkGC,Gold Cup teams,Команди Gold Cup
+S.rkSk,Skippers,Шкіпери
+S.rkCr,Crews,Екіпаж
+S.rkPts,Points (sum of the sailors' ranks),Бали (сума місць)
+S.rkNo,No.,№
+S.rkGlob,Global,Світ
+S.rkName,Nation,Нація
+S.rkNone,No nation found.,Націю не знайдено.
+S.rkLoad,Loading ranking…,Завантаження рейтингу…
+S.rkFail,The ranking can't be loaded right now.,Зараз не вдається завантажити рейтинг.
+S.rkSrc,Source: Star Sailors League · updated every week. The nation's rank comes from its best-ranked skippers and crews.,Джерело: Star Sailors League · оновлюється щотижня. Місце нації визначають її найкращі шкіпери й члени екіпажу.
+S.rkTeam,Team page,Сторінка команди
+S.rkPrev,p=>`previous week: ${p}`,p=>`минулий тиждень: ${p}`
+S.rkWas,p=>`was ${p}`,p=>`було ${p}`
+S.rkInd,World rank,Світовий рейтинг
+S.rkOpen,Open ranking ›,Відкрити рейтинг ›
+S.rkTap,Tap a nation for its sailors.,"Торкніться нації, щоб побачити яхтсменів."
+S.alsoP,also,також
+SOW,In their own words · from the SSL profile,Власними словами · з профілю SSL
+NXG.[0],started,старт
+NXG.[1],planned,план
+NXF,After prior race,Після попередньої гонки
+RINC,Incoming,Незабаром
+DOV.[0],Racing day over,Гоночний день завершено
+DOV.[1],"n=>`${n} race${n==1?"""":""s""} sailed`",n=>`Проведено гонок: ${n}`
+DOV.[2],g=>`${g} postponed`,g=>`${g} перенесено`
+DSW.[0],Previous,Попередній
+DSW.[1],Today,Сьогодні
+DSW.[2],Next,Наступний
+DSW.[3],Previous race day,Попередній день гонок
+DSW.[4],Next race day,Наступний день гонок
+DSW.[5],from {t},з {t}
+DSW.[6],{n} races,Гонок: {n}
+DSW.[7],1 race,1 гонка
+RESS.[0],Results,Результати
+RESS.[1],Overall results,Загальний залік
+RESS.[2],Qualifiers,Кваліфікація
+RESS.[3],Final Series,Фінальна серія
+RESS.[4],(to be determined),(буде визначено)
+RESS.[5],Last chance race,Гонка останнього шансу
+RESS.[6],Pos.,Місце
+CHT.t,What's new,
+CHT.sub,Everything new in the app – latest first,
+CHT.ver,Version,
+CHT.newB,New,
+CHT.seen,You're up to date,
+CHT.days[0],Race days at a glance,
+CHT.days[1],"On Home you can switch between the previous, today’s and the next race day; at midnight Rio time everything moves on by itself.",
+CHT.estd[0],Smart delay estimate,
+CHT.estd[1],The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races.,
+CHT.res[0],Results in the app,
+CHT.res[1],"Overall ranking, qualifiers and the Final Series – open places show “(to be determined)”.",
+CHT.rbox[0],Live race box,
+CHT.rbox[1],The header strip shows the race on the water and the countdown to the next start – and when a start is delayed.,
+CHT.inst2[0],Easier install,
+CHT.inst2[1],"One tap on Android, an arrow that points to the right button on iPhone, and “Open in Chrome/Safari” from WhatsApp & co.",
+CHT.trk2[0],Faster tracking,
+CHT.trk2[1],"Live positions appear right away, the race history loads in the background.",
+CHT.fbk[0],Send a wish or bug,
+CHT.fbk[1],Under More: tell the app maker what should be better.,
+CHT.rank[0],SSL Nations Ranking in the app,
+CHT.rank[1],"All 132 nations with continent filter, search, history back to 2025 and each nation's best skippers and crews.",
+CHT.pos[0],Positions checked,
+CHT.pos[1],Every sailor's position compared with the team pages and the Rio jersey numbers – several positions are shown where they differ.,
+CHT.linkin[0],No more jumps to other sites,
+CHT.linkin[1],Ranking and qualifier links now open inside the app.,
+CHT.compass[0],Clearer wind compass,
+CHT.compass[1],"The yellow wedge shows where the wind comes from, the wind speed sits right in the middle.",
+CHT.tap[0],Tap any team or sailor,
+CHT.tap[1],"Team and sailor names now open their page everywhere – tables, results, settings and more.",
+CHT.pl[0],Now in Polish,
+CHT.pl[1],Polski! The app now speaks 18 languages.,
+CHT.photos[0],Official portraits for the 1/16 teams,
+CHT.photos[1],"Japan, Czechia, Chile, Ecuador, Hungary, Peru, South Africa and Thailand – fresh from the event studio.",
+CHT.bright[0],Brightness button,
+CHT.bright[1],"Switch between Matchboard blue, day and night right in the header.",
+CHT.logo[0],Bigger SSL logo,
+CHT.logo[1],A little more presence at the top.,
+CHT.tabs[0],New tab bar,
+CHT.tabs[1],"Competition (rounds + matchboard), Teams and Sailors each have their own tab.",
+CHT.settings[0],Settings,
+CHT.settings[1],"Notifications, start reminders, quiet hours, units, local times and spoiler-free mode in one place.",
+CHT.pages[0],Real pages,
+CHT.pages[1],"Teams, sailors and races open as full pages with their own link – back always goes one step back.",
+CHT.anim[0],Smooth round switching,
+CHT.anim[1],"Swipe between rounds, with an animation like in the big apps.",
+CHT.install[0],Easier to install,
+CHT.install[1],An Install button next to the language – the app on your home screen in 20 seconds.,
+CHT.track[0],Live tracking inside the app,
+CHT.track[1],"Every boat on the map, live ranking, course and replay – no more external site.",
+CHT.profiles[0],New sailor profiles,
+CHT.profiles[1],"Bio, career, Olympic and world championship medals from the official SSL profiles.",
+CHT.favS[0],Follow sailors,
+CHT.favS[1],Tap ☆ on a sailor – your sailors get their own list.,
+CHT.langs6[0],Six more languages,
+CHT.langs6[1],"Japanese, Thai, Malay, Hungarian, Czech and Ukrainian.",
+CHT.stream[0],Live stream in the app,
+CHT.stream[1],With preview image and countdown until the broadcast starts.,
+CHT.spoil[0],Spoiler-free mode,
+CHT.spoil[1],Hide results until you've watched the race.,
+CHT.wx[0],Sailing weather per race,
+CHT.wx[1],"Wind, gusts, direction, waves and tide for every start time.",
+CHT.cmp[0],Team comparison,
+CHT.cmp[1],Two teams side by side – head to head and numbers from Rio.,
+CHT.vids[0],Highlights,
+CHT.vids[1],The latest SSL videos right in the app.,
+CHT.venue[0],Venue,
+CHT.venue[1],Marina da Glória with map and directions.,
+CHT.race[0],Race details,
+CHT.race[1],"Tap a race for result, group standings, wind and stream.",
+CHT.push[0],Push notifications,
+CHT.push[1],Results of your teams straight to your phone.,
+CHT.cal[0],Calendar,
+CHT.cal[1],All races of your team in your calendar – updates itself.,
+CHT.shareimg[0],Share as image,
+CHT.shareimg[1],Group tables as a picture for WhatsApp & co.,
+CHT.app[0],Install as an app,
+CHT.app[1],"Full screen, with icon, updates itself.",
+CONT.[0],Africa,Африка
+CONT.[1],Asia,Азія
+CONT.[2],Europe,Європа
+CONT.[3],Oceania,Океанія
+CONT.[4],Pan-America,Панамерика
+NWS,News,Новини
+NSRC,Source: worldofsailors.com (Star Sailors League),Джерело: worldofsailors.com (Star Sailors League)
+RRS.[0],Start,Старт
+RRS.[1],Race time,Тривалість
+RRS.[2],Winner,Переможець
+RRS.[3],The full report for this race follows here.,Повний звіт про цю гонку з’явиться тут.
+ALSO,also,також
+WXF,Wind from,Вітер з
+NXS.[0],On schedule,За розкладом
+NXS.[1],Starting soon,Старт скоро
+NXS.[2],Start delayed,Запізнення
+NXS.[3],Delayed,Затримка
+NXS.[4],Racing,Гонка триває
+NXS.[5],t=>`Not before ${t}`,t=>`Не раніше ${t}`
+NXW,Start pending,Очікує старт
+NXP,Probably delayed,Ймовірна затримка
+ORD,"n=>n+(n%10==1&&n!=11?""st"":n%10==2&&n!=12?""nd"":n%10==3&&n!=13?""rd"":""th"")","n=>n+""-е"""
+OSL,en,uk
+FIX.GBR,Great Britain,Велика Британія
+FIX.TAH,Tahiti,Таїті
+FIX.MYA,Myanmar,М’янма
+FIX.USA,USA,США

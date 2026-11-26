@@ -1,0 +1,700 @@
+key,English,日本語
+S.rounds,Rounds,ラウンド
+S.bracket,Matchboard,マッチボード
+S.teams,Teams,チーム
+S.official,Official results,公式結果
+S.updated,Updated,更新
+S.ago,"m=>m<1?""just now"":m<60?`${m} min ago`:`${Math.round(m/60)} h ago`","m=>m<1?""たった今"":m<60?`${m}分前`:`${Math.round(m/60)}時間前`"
+S.rio,Rio time,リオ時間
+S.offline,offline – last saved data,オフライン – 最後に保存したデータ
+S.rn.r32,1/32 Finals,1/32ファイナル
+S.rn.r16,1/16 Finals,1/16ファイナル
+S.rn.r8,1/8 Finals,1/8ファイナル
+S.rn.r4,Quarter-finals,準々決勝
+S.rn.sf,Semi-finals,準決勝
+S.rn.pf,Petit Final,3位決定戦
+S.rn.f,Grand Final,グランドファイナル
+S.group,Group,グループ
+S.decided,decided,決定
+S.racing,racing,レース中
+S.open,open,未定
+S.st.done,completed,終了
+S.st.live,in progress,進行中
+S.st.up,upcoming,開催前
+S.races,"n=>`${n} race${n>1?""s"":""""} per group`",n=>`各グループ${n}レース`
+S.upNext,Up next,次の予定
+S.startsIn,"d=>d<=0?""starts today"":d==1?""starts tomorrow"":`starts in ${d} days`","d=>d<=0?""今日開始"":d==1?""明日開始"":`${d}日後に開始`"
+S.groupsOf4,"n=>`${n} group${n>1?""s"":""""} of four`",n=>`4チーム×${n}グループ`
+S.oneRace,One race – the finishing order decides.,1レース勝負 – 着順で決まります。
+S.through,through,突破
+S.out,out,敗退
+S.toFinal,to Final,決勝へ
+S.toPetit,to Petit Final,3位決定戦へ
+S.medals[0],Gold,金
+S.medals[1],Silver,銀
+S.medals[2],Bronze,銅
+S.medals[3],4th,4位
+S.pts,Pts,点
+S.outIn,"(r,g,p)=>`Out in the ${r} (Group ${g}, ${p})`","(r,g,p)=>`${r}で敗退(グループ${g}、${p})`"
+S.gf,m=>`Grand Final: ${m}`,m=>`グランドファイナル:${m}`
+S.finished,p=>`Finished ${p}`,p=>`最終順位 ${p}`
+S.thrTbc,Through – next group to be confirmed,突破 – 次のグループは未定
+S.seeded,"(r,g,d)=>`Seeded – enters the ${r}, Group ${g}, ${d}`","(r,g,d)=>`シード – ${r}から出場、グループ${g}、${d}`"
+S.racingNow,Racing now,レース中
+S.nations,n=>`${n} nations`,n=>`${n}か国`
+S.stillIn,still in,勝ち残り
+S.outN,out,敗退
+S.search,"Search nation, nickname or sailor",国名・愛称・選手名で検索
+S.all,All,すべて
+S.chipIn,Still in,勝ち残り
+S.chipOut,Out,敗退
+S.mine,★ My teams,★ マイチーム
+S.sStatus,Status,状況
+S.sRank,Ranking,ランキング
+S.sAz,A–Z,A–Z
+S.noTeam,No team found.,チームが見つかりません。
+S.rank,Rank,順位
+S.captain,Captain,キャプテン
+S.helm,Helm,ヘルムスマン
+S.ranking,SSL Nations Ranking,SSLネーションズランキング
+S.rankBoard,Ranking board ↗,ランキング表 ↗
+S.entered,Entered Rio at,リオでの初戦
+S.showRound,Open round ›,ラウンドを開く ›
+S.gc23,Gold Cup 2023,ゴールドカップ2023
+S.br23,2023 bracket ›,2023年のトーナメント表 ›
+S.status,Status,状況
+S.stIn,Still in,勝ち残り
+S.stOut,Out,敗退
+S.whereEnded,Where it ended ›,敗退したラウンド ›
+S.curGroup,Current group ›,現在のグループ ›
+S.background,Background,背景
+S.road,Road to Rio,リオへの道
+S.story,Story,ストーリー
+S.site,Team site,チームサイト
+S.qualRes,Qualifier results ↗,予選結果 ↗
+S.sslRank,SSL Nations Ranking ↗,SSLネーションズランキング ↗
+S.resRio,Results in Rio,リオでの結果
+S.photos,Crew photos,クルー写真
+S.byPos,Crew by position,ポジション別クルー
+S.leader,Team leader,チームリーダー
+S.wider,Wider squad · position TBC,その他のメンバー · ポジション未定
+S.squadNote,"(n,p)=>`${n} names in the squad. 8–10 sail each race and the line-up can change from day to day. Positions and numbers from the official team site; portraits from the Gold Cup Rio graphics${p?"""":"" (none yet for this team)""}.`","(n,p)=>`登録メンバーは${n}名。各レース8〜10名が乗艇し、顔ぶれは日によって変わります。ポジションと背番号は公式チームサイトより、写真はゴールドカップ・リオのグラフィックより${p?"""":""(このチームはまだありません)""}。`"
+S.noSquad,No squad list published for this team yet.,このチームのメンバーリストはまだ公開されていません。
+S.showPath,Show path in bracket,トーナメント表で道のりを表示
+S.copyLink,Copy link,リンクをコピー
+S.copied,Link copied,リンクをコピーしました
+S.close,Close,閉じる
+S.jersey,Jersey,背番号
+S.numTbc,Number TBC,背番号未定
+S.capTag,Captain,キャプテン
+S.favOn,Following,フォロー中
+S.favOff,Follow,フォロー
+S.brHint,Tap a team for crew and history. Swipe for later rounds.,チームをタップするとクルーと戦績を表示。横にスワイプで次のラウンド。
+S.h23,Gold Cup 2023,ゴールドカップ2023
+S.champ23,Gran Canaria · champion,グラン・カナリア · 優勝
+S.hl,highlighted,ハイライト
+S.tap26,Tap a team for its Rio 2026 page.,チームをタップするとリオ2026のページを表示。
+S.off23,Official 2023 results ↗,2023年公式結果 ↗
+S.myTeams,My teams,マイチーム
+S.myHint,Tap ☆ on a team page to follow it.,チームページの☆をタップしてフォロー。
+S.foot,"Scoring: 4-3-2-1 points per race, double points in the last race of each group (8-6-4-2). Top two of each group advance. Results refresh automatically from the official SSL results page. Ranking = SSL Nations Ranking at the start of the Final Series.",得点:1レースごとに4-3-2-1点、各グループ最終レースは2倍(8-6-4-2)。各グループ上位2チームが勝ち上がり。結果はSSL公式結果ページから自動更新。ランキング=ファイナルシリーズ開始時のSSLネーションズランキング。
+S.notes.ocs,* OCS (early start)  ** Standard penalty,* OCS(フライング)  ** 標準ペナルティ
+S.theme.auto,🌊 Matchboard,🌊 マッチボード
+S.theme.light,☀️ Day,☀️ ライト
+S.theme.dark,🌙 Night,🌙 ダーク
+S.g23.champ,Champion (Gold),優勝(金)
+S.g23.second,Runner-up (Silver),準優勝(銀)
+S.g23.third,3rd (Bronze),3位(銅)
+S.g23.fourth,4th – Grand Final,4位 – グランドファイナル
+S.g23.sf,Semi-finals,準決勝
+S.g23.qf,Quarter-finals,準々決勝
+S.g23.r8,1/8 Finals,1/8ファイナル
+S.g23.r16,1/16 Finals,1/16ファイナル
+S.g23.r32,1/32 Finals,1/32ファイナル
+S.g23.none,Didn't race the 2023 Final Series,2023年ファイナルシリーズ不出場
+S.ev.asia,Asian Qualifiers,アジア予選
+S.ev.afoc,African & Oceanian Qualifiers,アフリカ・オセアニア予選
+S.ev.eu1,European Qualifiers 1,ヨーロッパ予選1
+S.ev.eu2,European Qualifiers 2,ヨーロッパ予選2
+S.ev.pan,Pan-American Qualifiers,パンアメリカ予選
+S.route.won,"(e,g)=>`Won the ${e}, Group ${g}`","(e,g)=>`${e} グループ${g}で優勝`"
+S.route.pos,"(p,e,g)=>`${p} in the ${e}, Group ${g}`","(p,e,g)=>`${e} グループ${g}で${p}`"
+S.route.lc,"(e,g)=>`3rd in the ${e} Group ${g}, then won the Last Chance race`","(e,g)=>`${e} グループ${g}で3位、ラストチャンスレースで勝利`"
+S.route.ranking,Qualified through the SSL Nations Ranking,SSLネーションズランキングで出場権獲得
+S.route.host,"Host nation, seeded into the 1/8 Finals",開催国、1/8ファイナルからシード
+S.route.seeded,r=>`Seeded into the ${r} via the SSL Nations Ranking`,r=>`SSLネーションズランキングにより${r}からシード`
+S.roles.Helm,Steers the boat,艇の舵を取る
+S.roles.Tactician,Strategy & calls,戦略と判断
+S.roles.Main Trimmer,Mainsail,メインセール
+S.roles.Trimmer,Jib & gennaker,ジブとジェネカー
+S.roles.Grinder,Powers the winches,ウインチを回す
+S.roles.Pit,Halyards & controls,ハリヤードと操作系
+S.roles.Mid-Bow,Mast & foredeck,マストとフォアデッキ
+S.roles.Bow,Bow & starts,バウとスタート
+S.roles.Floater,Utility / reserve,ユーティリティ/控え
+S.back,‹ Back,‹ 戻る
+S.position,Position,ポジション
+S.team,Team,チーム
+S.indRank,SSL ranking,SSLランキング
+S.highlights,Highlights,主な実績
+S.profile,SSL profile ↗,SSLプロフィール ↗
+S.findProfile,Find SSL profile ↗,SSLプロフィールを探す ↗
+S.ws,World Sailing ↗,World Sailing ↗
+S.mates,Teammates,チームメイト
+S.posTbc,Position TBC,ポジション未定
+S.noInfo,No further details published yet – the links below search the official profiles.,まだ詳しい情報は公開されていません – 下のリンクから公式プロフィールを検索できます。
+S.today,Today,今日
+S.raceDay,"(n,t)=>`race day ${n} of ${t}`","(n,t)=>`レース日 ${n}/${t}`"
+S.finalDay,Final day – last race counts double,最終日 – 最終レースは得点2倍
+S.stream,▶ Live stream,▶ ライブ配信
+S.tracking,Tracking,トラッキング
+S.schedule,Schedule,スケジュール
+S.adv,"(a,b)=>`1st → ${a} · 2nd → ${b}`","(a,b)=>`1位 → ${a} · 2位 → ${b}`"
+S.advSf,1st–2nd → Final · 3rd–4th → Petit Final,1–2位 → 決勝 · 3–4位 → 3位決定戦
+S.clinched,✓ through,✓ 突破確定
+S.elim,out,敗退
+S.secNow,In the current round,現在のラウンド
+S.secSeeded,r=>`Seeded – enter in the ${r}`,r=>`シード – ${r}から出場`
+S.secOut,Out,敗退
+S.lineup,Line-up,出場チーム
+S.howT,How the Gold Cup works,ゴールドカップの仕組み
+S.how[0],"National teams, one SSL47 boat each – all boats identical and provided by the organisers.",各国代表チームが同一仕様のSSL47艇で競います。艇は主催者が用意。
+S.how[1],Groups of four. 4-3-2-1 points per race; the last race of each group counts double (8-6-4-2).,4チームずつのグループ戦。1レースごとに4-3-2-1点、各グループ最終レースは2倍(8-6-4-2)。
+S.how[2],The top two of every group advance; better-ranked nations enter later rounds.,各グループ上位2チームが勝ち上がり、ランキング上位国は後のラウンドから出場。
+S.how[3],Semi-finals and finals are a single race each; the Grand Final decides the world champion.,準決勝と決勝は1レース勝負。グランドファイナルで世界チャンピオンが決まります。
+S.race,Race,レース
+S.nextRace,Next race,次のレース
+S.todayRaces,Today's races,今日のレース
+S.rioT,Rio time,リオ時間
+S.loc,your time,現地時間
+S.onWater,on the water,レース中
+S.done,done,終了
+S.inX,"m=>m<60?`in ${m} min`:`in ${Math.floor(m/60)} h ${String(m%60).padStart(2,""0"")}`","m=>m<60?`${m}分後`:`${Math.floor(m/60)}時間${String(m%60).padStart(2,""0"")}分後`"
+S.firstStart,First start,最初のスタート
+S.schedT,Race schedule,レーススケジュール
+S.schedNote,"Times are Rio de Janeiro time (UTC−3), from the official schedule. Its groups G1–G4 are shown here as groups A–D.",時刻はリオデジャネイロ時間(UTC−3)、公式スケジュールより。公式のグループG1–G4はここではA–Dと表示。
+S.needT,Before the final race (double points),最終レース前(得点2倍)
+S.need.sure,"through, whatever happens",結果に関係なく突破
+S.need.gone,"out, whatever happens",結果に関係なく敗退
+S.need.win,a win is enough,勝てば突破
+S.need.top,k=>`${k} or better is enough`,k=>`${k}以上で突破`
+S.need.mustWin,must win,勝利が必須
+S.need.help,and needs help from the others,さらに他チームの結果次第
+S.need.maybe,k=>`${k} may be enough – depends on the others`,k=>`${k}で突破の可能性 – 他チーム次第`
+S.need.iff,"(k,c)=>`${k} is enough if ${c}`","(k,c)=>`${c}なら${k}で突破`"
+S.need.mustIf,"c=>`must win, and only if ${c}`",c=>`勝利が必須、かつ${c}の場合のみ`
+S.need.ahead,R=>`ahead of ${R}`,R=>`${R}より上位`
+S.need.behind,R=>`behind ${R}`,R=>`${R}より下位`
+S.need.notWin,R=>`${R} doesn't win`,R=>`${R}が勝たない`
+S.need.last,R=>`${R} finishes last`,R=>`${R}が最下位`
+S.need.wins,R=>`${R} wins`,R=>`${R}が勝つ`
+S.need.tie,level on points possible – tie-break decides,同点の可能性あり – タイブレークで決定
+S.needNote,"Worked out from the current points; ≈ means teams could finish level, then the official tie-break decides.",現在の得点から計算。≈は同点の可能性を示し、その場合は公式タイブレークで決まります。
+S.install,Add to Home Screen for the app icon.,ホーム画面に追加するとアプリアイコンになります。
+S.home,Home,ホーム
+S.more,More,その他
+S.sailors,Sailors,選手
+S.welcome,Final Series · Rio de Janeiro,ファイナルシリーズ · リオデジャネイロ
+S.dates,19 Nov – 13 Dec 2026 · Marina da Glória,2026年11月19日〜12月13日 · マリーナ・ダ・グロリア
+S.progress,Tournament,大会
+S.latest,Latest results,最新結果
+S.explore,Explore,見る
+S.tiles.board[0],Rounds,ラウンド
+S.tiles.board[1],"Groups, points, times",グループ、得点、時刻
+S.tiles.bracket[0],Matchboard,マッチボード
+S.tiles.bracket[1],The whole draw at a glance,全組み合わせを一目で
+S.tiles.teams[0],Teams,チーム
+S.tiles.teams[1],"40 nations, crews, rankings",40か国、クルー、ランキング
+S.tiles.sailors[0],Sailors,選手
+S.tiles.sailors[1],Search every sailor,全選手を検索
+S.tiles.qualifying[0],Qualifying,予選
+S.tiles.qualifying[1],How the teams got to Rio,各チームのリオへの道
+S.tiles.gc2023[0],Gold Cup 2023,ゴールドカップ2023
+S.tiles.gc2023[1],Last edition's bracket,前回大会のトーナメント表
+S.sailorsT,n=>`${n} sailors`,n=>`${n}人の選手`
+S.sSearch,"Search sailor, team or position",選手・チーム・ポジションで検索
+S.withPhoto,With photo,写真あり
+S.allS,All,すべて
+S.moreT,More,その他
+S.lang,Language,言語
+S.design,Design,デザイン
+S.share,Share app,アプリを共有
+S.shared,Link copied,リンクをコピーしました
+S.links,Links,リンク
+S.about,About this app,このアプリについて
+S.aboutT,Unofficial companion app for the SSL Gold Cup Rio 2026. Results update automatically from the official SSL results page.,SSLゴールドカップ・リオ2026の非公式コンパニオンアプリ。結果はSSL公式結果ページから自動更新されます。
+S.inst.t,Install the app,アプリをインストール
+S.inst.d,"Put SSL Gold Cup on your home screen – opens like an app, full screen, with live results.",SSL Gold Cupをホーム画面に – アプリのように全画面で開き、ライブ結果を表示。
+S.inst.b,Install,インストール
+S.inst.done,Installed ✓,インストール済み ✓
+S.inst.ios[0],Tap the Share button,共有ボタンをタップ
+S.inst.ios[1],at the bottom of Safari (top right on iPad).,(Safari下部、iPadは右上)。
+S.inst.ios[2],Scroll down and tap “Add to Home Screen”.,下にスクロールして「ホーム画面に追加」をタップ。
+S.inst.ios[3],Tap “Add” – done.,「追加」をタップ – 完了。
+S.inst.iosOther,On iPhone this works in Safari: open this page in Safari first.,iPhoneではSafariで行えます:まずこのページをSafariで開いてください。
+S.inst.android[0],Tap the ⋮ menu in the top right of your browser.,ブラウザ右上の⋮メニューをタップ。
+S.inst.android[1],Tap “Install app” or “Add to Home screen”.,「アプリをインストール」または「ホーム画面に追加」をタップ。
+S.inst.android[2],Confirm with “Install”.,「インストール」で確定。
+S.inst.desk[0],"Click the install icon in the address bar,",アドレスバーのインストールアイコンをクリック、
+S.inst.desk[1],or open the browser menu and choose “Install SSL Gold Cup”.,またはブラウザメニューから「SSL Gold Cupをインストール」を選択。
+S.inst.how,How to install,インストール方法
+S.inst.hide,Not now,今はしない
+S.inst.installedNote,You're using the installed app.,インストール済みのアプリを使用中です。
+S.champT,World Champion · Gold Cup 2026,世界チャンピオン · ゴールドカップ2026
+S.standT,Final standings,最終順位
+S.statsT,In numbers,数字で見る
+S.stRaces,Races,レース数
+S.stWins,Race wins,レース勝利
+S.stAvg,Avg. place,平均順位
+S.stPts,Points in Rio,リオでの得点
+S.stHist,Race by race,レースごとの結果
+S.calBtn,📅 Races in my calendar,📅 レースをカレンダーに
+S.calT,Races in your calendar,レースをカレンダーに追加
+S.calSub,"Subscribe (iPhone, Mac, Outlook)",購読(iPhone、Mac、Outlook)
+S.calG,Add to Google Calendar,Googleカレンダーに追加
+S.calDl,Download file (.ics),ファイルをダウンロード(.ics)
+S.calAll,All races in my calendar,全レースをカレンダーに
+S.calNote,"A subscription updates itself: when a team qualifies, its next races appear automatically.",購読は自動更新:チームが勝ち上がると次のレースが自動で追加されます。
+S.wxT,Wind forecast · Marina da Glória,風の予報 · マリーナ・ダ・グロリア
+S.wxSrc,"Forecast by Open-Meteo, not measured on the course.",Open-Meteoによる予報。コース上の実測値ではありません。
+S.trk,Tracking,トラッキング
+S.delayed,m=>`Results may be delayed – last successful check ${m} min ago.`,m=>`結果が遅れている可能性があります – 最後の確認は${m}分前。`
+S.shareImg,Share as image,画像で共有
+S.imgDone,Image ready,画像の準備完了
+S.pT,Notifications,通知
+S.pAll,All results,すべての結果
+S.pAllSub,A notification after every race,各レース後に通知
+S.pTeamOff,🔔 Notify me about this team,🔔 このチームの通知を受け取る
+S.pTeamOn,🔔 Notifications on ✓,🔔 通知オン ✓
+S.pTeams,Your teams,あなたのチーム
+S.pNone,No team yet: open a team and tap 🔔.,チーム未登録:チームを開いて🔔をタップ。
+S.pNote,You only get race results and who goes through. Switch off here any time.,届くのはレース結果と勝ち上がりチームのみ。いつでもここでオフにできます。
+S.pIOS,"On iPhone, notifications only work in the installed app: install it, open it from the home screen, then switch them on here.",iPhoneではインストールしたアプリでのみ通知が使えます:インストールしてホーム画面から開き、ここでオンにしてください。
+S.pDenied,Notifications are blocked. Allow them for this app in your device settings.,通知がブロックされています。端末の設定でこのアプリの通知を許可してください。
+S.pErr,That didn't work – please try again in a moment.,うまくいきませんでした – 少し後でもう一度お試しください。
+S.pOnT,Notifications on,通知オン
+S.pOffT,Notifications off,通知オフ
+S.pUnsup,This browser can't receive notifications.,このブラウザは通知を受け取れません。
+S.obT,Get the app,アプリを入手
+S.obSub,"Free, no App Store needed – on your home screen in 20 seconds.",無料、App Store不要 – 20秒でホーム画面に。
+S.obPerks[0],Live results in one tap,ワンタップでライブ結果
+S.obPerks[1],"Full screen, like a real app",本物のアプリのように全画面
+S.obPerks[2],Notifications for your team,応援チームの通知
+S.obBtn,Install now,今すぐインストール
+S.obLater,Later – look around in the browser first,あとで – まずブラウザで見る
+S.obSteps,How it works,手順
+S.obStep,Step,ステップ
+S.ios26[0],Tap ⋯ next to the address bar,アドレスバー横の⋯をタップ
+S.ios26[1],Tap “Share”,「共有」をタップ
+S.ios26[2],Scroll down and tap “Add to Home Screen”,下にスクロールして「ホーム画面に追加」をタップ
+S.ios26[3],Leave “Open as Web App” on and tap “Add”,「Webアプリとして開く」をオンのまま「追加」をタップ
+S.iosOld[0],Tap the Share button at the bottom,下部の共有ボタンをタップ
+S.iosOld[1],Scroll down and tap “Add to Home Screen”,下にスクロールして「ホーム画面に追加」をタップ
+S.iosOld[2],Tap “Add” in the top right,右上の「追加」をタップ
+S.iosAlt,"Easiest in Safari: copy the link, open Safari and paste it.",Safariが一番簡単:リンクをコピーしてSafariを開き、貼り付けてください。
+S.inApp,This page is open inside another app (e.g. WhatsApp or Instagram). Installing only works in the browser: tap ⋯ and choose “Open in browser” – or copy the link and open it in Safari or Chrome.,このページは別のアプリ(WhatsAppやInstagramなど)の中で開かれています。インストールはブラウザでのみ可能:⋯をタップして「ブラウザで開く」を選ぶか、リンクをコピーしてSafariかChromeで開いてください。
+S.copy,Copy link,リンクをコピー
+S.done2,Then open SSL Gold Cup from your home screen.,その後、ホーム画面からSSL Gold Cupを開いてください。
+S.ui.share,Share,共有
+S.ui.home,Add to Home Screen,ホーム画面に追加
+S.ui.add,Add,追加
+S.ui.web,Open as Web App,Webアプリとして開く
+S.ui.cancel,Cancel,キャンセル
+S.ui.ainst,Install app,アプリをインストール
+S.ui.aok,Install,インストール
+S.trkOpen,📍 Watch live tracking,📍 ライブトラッキングを見る
+S.trkReplay,📍 Replay the race (tracking),📍 レースを再生(トラッキング)
+S.trkNone,Tracking appears here as soon as Georacing has set up this race.,Georacingがこのレースを設定するとすぐにトラッキングが表示されます。
+S.trkExt,Open in Georacing ↗,Georacingで開く ↗
+S.trkHint,"Every boat as a dot on the map – live during the race, as a replay afterwards.",全艇を地図上に表示 – レース中はライブ、終了後はリプレイ。
+S.rcRes,Result of this race,このレースの結果
+S.rcTeams,Teams in this race,スタートライン
+S.rcStand,Group so far,現在のグループ順位
+S.rcPts,pts,点
+S.rcGroup,Show group on the Matchboard,マッチボードでグループを表示
+S.rcTBD,Teams not decided yet,出場チーム未定
+S.qrT,Scan with the phone camera – the app opens right away.,スマホのカメラで読み取ると、すぐにアプリが開きます。
+S.shareNow,Share…,共有…
+S.qsep,"n=>""▲ advance""","n=>""▲ 勝ち上がり"""
+S.shareSub,"Send via WhatsApp, Messages & co.",WhatsApp、メッセージなどで送信
+S.shareMsg,"SSL Gold Cup Rio 2026 – live results, race times and all teams:",SSL Gold Cup Rio 2026 – ライブ結果、レース時刻、全チーム:
+S.sCaps,Captains,キャプテン
+S.sTeams,Crews,クルー
+S.sHint,Tap a team to see its crew – teams still in the race come first.,チームをタップしてクルーを表示 – 勝ち残りチームが先頭。
+S.sTeamPage,Team page,チームページ
+S.fShow,Show,表示
+S.fSort,Sort,並べ替え
+S.spT,Spoiler-free,ネタバレ防止
+S.spUntil,w=>`Results hidden after ${w}`,w=>`${w}以降の結果を非表示`
+S.spNone,No hidden results right now,現在非表示の結果はありません
+S.spShow,Show all,すべて表示
+S.spOff,Off,オフ
+S.spRow,Spoiler-free mode,ネタバレ防止モード
+S.spSub,Hide results until you have watched the race,レースを見るまで結果を隠す
+S.spRace,Result hidden,結果は非表示
+S.spReveal,I've watched it – show result,見ました – 結果を表示
+S.spOnT,Results from today on are hidden,今日以降の結果は非表示です
+S.cmpBtn,⚖️ Compare,⚖️ 比較
+S.cmpVs,vs,vs
+S.cmpPick,Pick a team to compare with.,比較するチームを選択。
+S.h2hT,Head to head,直接対決
+S.h2hSub,races finished ahead,レースで先着
+S.h2hNone,No races against each other yet.,まだ直接対戦はありません。
+S.cmpNote,Numbers from the races in Rio; ranking = SSL Nations Ranking.,数値はリオでのレースより。ランキング=SSLネーションズランキング。
+S.vidT,🎬 Highlights & videos,🎬 ハイライト&動画
+S.vidAll,All videos on YouTube ↗,YouTubeですべての動画 ↗
+S.vidOpen,Open on YouTube ↗,YouTubeで開く ↗
+S.vidHid,"n=>`${n} newer video${n>1?""s"":""""} hidden (spoiler-free)`",n=>`新しい動画${n}本を非表示(ネタバレ防止)`
+S.pastL,Look back,振り返り
+S.vnT,Venue · Marina da Glória,会場 · マリーナ・ダ・グロリア
+S.vnSub,Where it all happens – map & directions,すべての舞台 – 地図とアクセス
+S.vnRoute,Directions,ルート
+S.vnApple,Apple Maps,Appleマップ
+S.vnInfo[0],"The 2016 Olympic sailing venue, on Guanabara Bay with a view of Sugarloaf Mountain.",2016年オリンピックのセーリング会場。グアナバラ湾に面し、ポン・ジ・アスーカルを望みます。
+S.vnInfo[1],The marina is open to the public during the event – see the boats up close and visit the athletes' village.,大会期間中マリーナは一般公開 – 艇を間近で見て、選手村を訪れられます。
+S.vnInfo[2],Racing takes place on Guanabara Bay right in front of the marina.,レースはマリーナ正面のグアナバラ湾で行われます。
+S.suT,Sustainability,サステナビリティ
+S.suSub,What the SSL does for the ocean and fair sport,SSLの海とフェアなスポーツへの取り組み
+S.suIntro,The SSL says that for them sustainability means protecting the ocean and making the sport fairer.,SSLにとってサステナビリティとは、海を守り、スポーツをより公平にすることだとしています。
+S.suList[0],Every SSL Gold Cup boat must have two women on board.,SSLゴールドカップの全艇に女性2名の乗艇が義務。
+S.suList[1],No plastic bottles in the athletes' village.,選手村ではペットボトル不使用。
+S.suList[2],A dedicated Sustainability Manager since September 2025.,2025年9月から専任のサステナビリティ・マネージャー。
+S.suList[3],"Aligned with Clean Regattas, World Sailing's Sustainability Agenda 2030 and the IOC strategy; the goal is Platinum Clean Regattas certification.",Clean Regattas、World Sailingのサステナビリティ・アジェンダ2030、IOC戦略に準拠。目標はClean Regattasのプラチナ認証。
+S.suList[4],Beach clean-ups with the teams at the qualifiers.,予選では各チームとビーチクリーンアップ。
+S.suList[5],"Few support boats: at the 2023 Finals, four coach boats served 440 sailors.",サポート艇は最小限:2023年のファイナルでは4隻のコーチボートで440人の選手を支援。
+S.suMore,Read more at the SSL ↗,SSLで詳しく ↗
+S.mcT,Merch,グッズ
+S.mcSub,"Jerseys, caps & more – coming soon",ジャージ、キャップなど – 近日公開
+S.mcSoon,Coming soon,近日公開
+S.mcTxt,"The official SSL Gold Cup Store is not open yet. As soon as it is, you can shop here.",SSLゴールドカップ公式ストアはまだ開店していません。開店したらここから購入できます。
+S.mcList[0],Captain's jerseys of the national teams,各国代表のキャプテンジャージ
+S.mcList[1],SSL caps,SSLキャップ
+S.mcList[2],SSL47 boat and team figures as building sets,SSL47艇とチームフィギュアの組み立てセット
+S.mcGo,To the SSL store ↗,SSLストアへ ↗
+S.wxBtn,🌬️ Weather for sailors,🌬️ セーラー向け天気
+S.wxH,Sailing weather,セーリング天気
+S.wxLoad,Loading forecast…,予報を読み込み中…
+S.wxFail,The forecast could not be loaded right now.,現在、予報を読み込めませんでした。
+S.wxGust,Gusts,ガスト
+S.wxDir,Direction,風向
+S.wxPres,Pressure,気圧
+S.wxAtStart,Forecast for the start time.,スタート時刻の予報。
+S.wxHours,Hour by hour,1時間ごと
+S.wxTime,Time,時刻
+S.wxWind,Wind kn,風 kn
+S.wxKn,Wind in knots: mean – gusts. Arrows show where the wind blows to.,風速(ノット):平均 – ガスト。矢印は風が吹いていく方向。
+S.wxSea,Water,海
+S.wxWater,Water temperature,水温
+S.wxTide,Tide,潮汐
+S.wxRise,rising,上げ潮
+S.wxFall,falling,下げ潮
+S.wxHigh,High,満潮
+S.wxLow,Low,干潮
+S.wxCur,Current,潮流
+S.wxCurN,Model value at the bay entrance; arrow = where it flows.,湾口のモデル値。矢印=流れる方向。
+S.wxWave,Swell,うねり
+S.wxWaveN,"At the bay entrance, much smaller on the course.",湾口での値。コース上ははるかに小さい。
+S.wxSun,Sunrise – sunset,日の出 – 日の入り
+S.wxSrc2,"Forecast by Open-Meteo (weather models), not measured on the course.",Open-Meteo(気象モデル)による予報。コース上の実測値ではありません。
+S.trkLive,Live tracking,ライブトラッキング
+S.trkReplayS,Replay,リプレイ
+S.fcBtn,Forecast,予報
+S.fcCond[0],Light wind,微風
+S.fcCond[1],Medium wind,中風
+S.fcCond[2],Fresh breeze,やや強い風
+S.fcCond[3],Strong wind,強風
+S.fcTr.up,building,強まる
+S.fcTr.down,easing,弱まる
+S.fcTr.steady,steady,安定
+S.fcTr.veer,veering (clockwise),時計回りに振れる
+S.fcTr.back,backing (anti-clockwise),反時計回りに振れる
+S.fcNext,Next hour,次の1時間
+S.fcChart,"Wind 10:00–18:00 · line = mean, band = gusts, marker = start",風 10:00–18:00 · 線=平均、帯=ガスト、マーカー=スタート
+S.fcBft,Beaufort,ビューフォート
+S.watchLive,Watch live,ライブで見る
+S.liveStream,Live stream,ライブ配信
+S.liveNow,The race is on – watch it here,レース中 – ここで視聴
+S.liveNote,"If the player stays black, the stream hasn't started yet or YouTube blocks embedding – then open it on YouTube.",プレーヤーが黒いままの場合、配信がまだ始まっていないか、YouTubeが埋め込みを制限しています – YouTubeで開いてください。
+S.achT,Achievements,実績
+S.olyT,Olympic Games,オリンピック
+S.wcT,World Championship podiums,世界選手権の表彰台
+S.ecT,Continental podiums,大陸選手権の表彰台
+S.clubT,Club,クラブ
+S.profSrc,Facts from the official SSL profile.,SSL公式プロフィールより。
+S.achL[0],World Champion,世界チャンピオン
+S.achL[1],Olympic gold,オリンピック金
+S.achL[2],Olympic silver,オリンピック銀
+S.achL[3],Olympic bronze,オリンピック銅
+S.wxAtT,h=>`Forecast for ${h}`,h=>`${h}の予報`
+S.wxTap,Tap an hour for details.,時刻をタップすると詳細を表示。
+S.fsT,Final Series,ファイナルシリーズ
+S.qsT,Qualifying Series,予選シリーズ
+S.qsLeg,Highlighted: qualified through this series. ● = in Rio via the SSL Nations Ranking. Tap a team in Rio for its page.,ハイライト:このシリーズで出場権獲得。●=SSLネーションズランキングでリオ出場。リオ出場チームをタップするとページを表示。
+S.qsNote,"The winner of each qualifying group (group C: top two) was drawn into the 1/32 Finals. 29 teams qualified for the Final Series via the SSL Ranking, with spots per continent: 12 Europe, 8 Pan-America, 6 Asia, 1 Africa, 2 Oceania.",各予選グループの勝者(グループCは上位2チーム)が1/32ファイナルに進出。29チームがSSLランキングでファイナルシリーズに出場(大陸別枠:ヨーロッパ12、パンアメリカ8、アジア6、アフリカ1、オセアニア2)。
+S.reg.asia,Asia,アジア
+S.reg.afoc,Africa & Oceania,アフリカ・オセアニア
+S.reg.eur,Europe,ヨーロッパ
+S.reg.pam,Pan-America,パンアメリカ
+S.fin,Final,決勝
+S.petit,Petit F.,3位決定戦
+S.swipe,Swipe sideways for later rounds →,横にスワイプで次のラウンド →
+S.road2,Road to Rio,リオへの道
+S.inRio,In Rio via SSL Ranking,SSLランキングでリオへ
+S.mbHint,Top two of each group advance. Tap a team for crew and history.,各グループ上位2チームが勝ち上がり。チームをタップするとクルーと戦績を表示。
+S.vmT,Event area,イベント会場
+S.vmTap,Tap the map to zoom,地図をタップで拡大
+S.vmL[0],SSL47 boats,SSL47 艇
+S.vmL[1],Flag pole ashore (signals),陸上の信号旗竿
+S.vmL[2],"Village: partner stands, shop, waste sorting",ビレッジ：パートナーブース、ショップ、分別ステーション
+S.vmL[3],Video wall,大型ビジョン
+S.vmL[4],Race office & jury room,レースオフィス・ジュリールーム
+S.vmL[5],Sailors Lounge,セーラーズラウンジ
+S.vmL[6],Uniforms,ユニフォーム
+S.vmL[7],TV broadcast,テレビ中継
+S.vmL[8],Exhibition boat,展示艇
+S.vmL[9],Shore team tent,ショアチームのテント
+S.vmL[10],"Main stage: concert, final podium, closing ceremony",メインステージ：コンサート、表彰台、閉会式
+S.vmL[11],Spectator boat,観覧艇
+S.vmL[12],Press & production office,プレス・制作オフィス
+S.vmL[13],Lunch buffet,ランチビュッフェ
+S.vmW,Water refill station,給水ステーション
+S.vdT,On race days,レース日
+S.vd[0],10:00 – Skippers’ briefing,10:00 – スキッパーズブリーフィング
+S.vd[1],12:00 – first warning signal,12:00 – 最初の予告信号
+S.vd[2],Signals ashore: flag pole in front of the Sailors Lounge (2),陸上信号：セーラーズラウンジ前の旗竿 (2)
+S.vmSrc,"Map: SSL Gold Cup, official notice board",地図：SSL Gold Cup 公式掲示板
+S.fbT,Wish or bug report,要望・不具合の報告
+S.fbSub,Goes straight to the app maker,アプリの作者に直接届きます
+S.fbPh,What should be better? What isn't working?,改善してほしい点や動かない所は？
+S.fbName,Your name (optional),お名前（任意）
+S.fbSend,Send,送信
+S.fbOk,Thanks – sent!,ありがとうございます。送信しました！
+S.fbErr,Couldn't send. Check your connection and try again.,送信できませんでした。接続を確認してもう一度お試しください。
+S.showMe,Show me where,場所を表示
+S.openChrome,Open in Chrome,Chromeで開く
+S.openSafari,Open in Safari,Safariで開く
+S.prep,Getting ready … one moment,準備中…少々お待ちください
+S.coachT,Tap here,ここをタップ
+S.gotIt,Got it,OK
+S.samsung[0],Tap ≡ (menu) at the bottom right.,右下の ≡（メニュー）をタップ。
+S.samsung[1],Tap “Add page to” → “Home screen”.,「ページを追加」→「ホーム画面」をタップ。
+S.samsung[2],Confirm with “Add”.,「追加」で確定。
+S.noDots,No ⋯ button? Tap the Share icon instead.,⋯ が見つからない場合は共有アイコンをタップ。
+S.tkLoad,Loading tracking…,トラッキングを読み込み中…
+S.tkNone,No tracking for this race yet.,このレースのトラッキングはまだありません。
+S.tkNoData,No tracking data for this race.,このレースのトラッキングデータはありません。
+S.tkOpens,Tracking opens at,トラッキング開始
+S.tkStart,Start,スタート
+S.tkLeg,Leg,レグ
+S.tkPre,pre-start,スタート前
+S.tkNoPos,no signal,信号なし
+S.tkRep,Replay,リプレイ
+S.secOly,Olympic Games,オリンピック
+S.secWc,World Championships,世界選手権
+S.secEc,Continental Championships,大陸選手権
+S.bioT,About,プロフィール
+S.srcSSL,Official bio · Star Sailors League,公式プロフィール · Star Sailors League
+S.careerT,Career,キャリア
+S.evN,results listed,掲載結果
+S.podN,podiums,表彰台
+S.medRate,medal rate,メダル率
+S.bestR,best result,最高成績
+S.showAll,Show all,すべて表示
+S.sslPts,SSL points,SSLポイント
+S.heightT,Height,身長
+S.weightT,Weight,体重
+S.sslProf,Official SSL profile,SSL公式プロフィール
+S.teamSite,Team website,チームサイト
+S.mySailors,My sailors,マイ選手
+S.sFavHint,Tap ☆ on a sailor's page to follow them – they'll show up here.,選手ページの☆をタップしてフォロー – ここに表示されます。
+S.ownW,In their own words · from the SSL profile,本人による紹介 · SSLプロフィールより
+S.pathHl,n=>`Path of ${n} highlighted`,n=>`${n} の勝ち上がりを表示中`
+S.setT,Settings,設定
+S.setSub,"Notifications, favourites, display, spoiler-free",通知、お気に入り、表示、ネタバレ防止
+S.sNotAvail,Push notifications are being set up and will be available here soon.,プッシュ通知は準備中です。
+S.sMaster,Push notifications,プッシュ通知
+S.sMasterSub,Main switch for this device,この端末のメインスイッチ
+S.sRemT,Start reminder,スタートのお知らせ
+S.sRemSub,15 minutes before your teams race,チームのレース15分前
+S.sLiveT,Livestream starts,ライブ配信開始
+S.sLiveSub,When the SSL livestream goes live,SSLのライブ配信が始まったとき
+S.sVidT,New highlight video,新しいハイライト動画
+S.sVidSub,When a new highlight film is out,新しいハイライトが公開されたとき
+S.sResT,Results of my teams,マイチームの結果
+S.sResSub,After every race of these teams – your favourite teams and the teams of your favourite sailors.,これらのチームの各レース後 – お気に入りチームとお気に入り選手のチーム。
+S.sFavNone,No favourites yet – tap ☆ on a team or sailor.,お気に入りはまだありません – チームや選手の☆をタップ。
+S.sQuietT,Quiet hours,おやすみ時間
+S.sQuietSub,No notifications during this time (your local time),この時間は通知しません(現地時間)
+S.sQoff,Off,オフ
+S.sSpoilN,"In spoiler-free mode, notifications only say that a race has finished.",ネタバレ防止モードでは、レース終了だけを通知します。
+S.sDispT,Display,表示
+S.sTimeT,Times,時刻
+S.sTimeRio,Rio only,リオのみ
+S.sTimeBoth,Rio + mine,リオ+現地
+S.sWindT,Wind,風
+S.sTempT,Temperature,気温
+S.sLvT,Commentary language,実況の言語
+S.sLvAuto,Same as the app,アプリと同じ
+S.sCalT,Calendar,カレンダー
+S.sCalTeam,Races of this team,このチームのレース
+S.sDataT,Data & privacy,データとプライバシー
+S.sPriv,"Everything you set here is stored only on this device. No account, no cookies; visits are counted anonymously.",設定はこの端末にのみ保存されます。アカウントやCookieは不要、訪問は匿名で集計されます。
+S.sResetF,Remove favourites,お気に入りを削除
+S.sResetA,Reset everything,すべてリセット
+S.sResetQ,Tap again to confirm,もう一度タップして確定
+S.sFeedback,Send feedback,フィードバックを送る
+S.sVer,Version,バージョン
+S.comp,Competition,大会
+S.rkT,SSL Nations Ranking,SSL国別ランキング
+S.rkAsOf,As of,時点
+S.rkNat,n=>`${n} nations`,n=>`${n}か国`
+S.rkHist,Historical ranking,過去のランキング
+S.rkCur,Current,最新
+S.rkCont,Continent,大陸
+S.rkAll,All,すべて
+S.rkSearch,Search country,国を検索
+S.rkGC,Gold Cup teams,ゴールドカップ出場国
+S.rkSk,Skippers,スキッパー
+S.rkCr,Crews,クルー
+S.rkPts,Points (sum of the sailors' ranks),ポイント（順位の合計）
+S.rkNo,No.,No.
+S.rkGlob,Global,世界
+S.rkName,Nation,国
+S.rkNone,No nation found.,国が見つかりません。
+S.rkLoad,Loading ranking…,ランキングを読み込み中…
+S.rkFail,The ranking can't be loaded right now.,現在ランキングを読み込めません。
+S.rkSrc,Source: Star Sailors League · updated every week. The nation's rank comes from its best-ranked skippers and crews.,出典：Star Sailors League・毎週更新。国の順位は上位のスキッパーとクルーで決まります。
+S.rkTeam,Team page,チームページ
+S.rkPrev,p=>`previous week: ${p}`,p=>`前週：${p}`
+S.rkWas,p=>`was ${p}`,p=>`前回 ${p}`
+S.rkInd,World rank,世界ランク
+S.rkOpen,Open ranking ›,ランキングを開く ›
+S.rkTap,Tap a nation for its sailors.,国をタップするとセーラーを表示。
+S.alsoP,also,兼
+SOW,In their own words · from the SSL profile,本人による紹介 · SSLプロフィールより
+NXG.[0],started,スタート
+NXG.[1],planned,予定
+NXF,After prior race,前のレース後
+RINC,Incoming,準備中
+DOV.[0],Racing day over,本日のレース終了
+DOV.[1],"n=>`${n} race${n==1?"""":""s""} sailed`",n=>`${n}レース実施`
+DOV.[2],g=>`${g} postponed`,g=>`${g} 延期`
+DSW.[0],Previous,前回
+DSW.[1],Today,今日
+DSW.[2],Next,次回
+DSW.[3],Previous race day,前のレース日
+DSW.[4],Next race day,次のレース日
+DSW.[5],from {t},{t}から
+DSW.[6],{n} races,{n}レース
+DSW.[7],1 race,1レース
+RESS.[0],Results,結果
+RESS.[1],Overall results,総合順位
+RESS.[2],Qualifiers,予選
+RESS.[3],Final Series,ファイナルシリーズ
+RESS.[4],(to be determined),（未定）
+RESS.[5],Last chance race,ラストチャンスレース
+RESS.[6],Pos.,順位
+CHT.t,What's new,
+CHT.sub,Everything new in the app – latest first,
+CHT.ver,Version,
+CHT.newB,New,
+CHT.seen,You're up to date,
+CHT.days[0],Race days at a glance,
+CHT.days[1],"On Home you can switch between the previous, today’s and the next race day; at midnight Rio time everything moves on by itself.",
+CHT.estd[0],Smart delay estimate,
+CHT.estd[1],The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races.,
+CHT.res[0],Results in the app,
+CHT.res[1],"Overall ranking, qualifiers and the Final Series – open places show “(to be determined)”.",
+CHT.rbox[0],Live race box,
+CHT.rbox[1],The header strip shows the race on the water and the countdown to the next start – and when a start is delayed.,
+CHT.inst2[0],Easier install,
+CHT.inst2[1],"One tap on Android, an arrow that points to the right button on iPhone, and “Open in Chrome/Safari” from WhatsApp & co.",
+CHT.trk2[0],Faster tracking,
+CHT.trk2[1],"Live positions appear right away, the race history loads in the background.",
+CHT.fbk[0],Send a wish or bug,
+CHT.fbk[1],Under More: tell the app maker what should be better.,
+CHT.rank[0],SSL Nations Ranking in the app,
+CHT.rank[1],"All 132 nations with continent filter, search, history back to 2025 and each nation's best skippers and crews.",
+CHT.pos[0],Positions checked,
+CHT.pos[1],Every sailor's position compared with the team pages and the Rio jersey numbers – several positions are shown where they differ.,
+CHT.linkin[0],No more jumps to other sites,
+CHT.linkin[1],Ranking and qualifier links now open inside the app.,
+CHT.compass[0],Clearer wind compass,
+CHT.compass[1],"The yellow wedge shows where the wind comes from, the wind speed sits right in the middle.",
+CHT.tap[0],Tap any team or sailor,
+CHT.tap[1],"Team and sailor names now open their page everywhere – tables, results, settings and more.",
+CHT.pl[0],Now in Polish,
+CHT.pl[1],Polski! The app now speaks 18 languages.,
+CHT.photos[0],Official portraits for the 1/16 teams,
+CHT.photos[1],"Japan, Czechia, Chile, Ecuador, Hungary, Peru, South Africa and Thailand – fresh from the event studio.",
+CHT.bright[0],Brightness button,
+CHT.bright[1],"Switch between Matchboard blue, day and night right in the header.",
+CHT.logo[0],Bigger SSL logo,
+CHT.logo[1],A little more presence at the top.,
+CHT.tabs[0],New tab bar,
+CHT.tabs[1],"Competition (rounds + matchboard), Teams and Sailors each have their own tab.",
+CHT.settings[0],Settings,
+CHT.settings[1],"Notifications, start reminders, quiet hours, units, local times and spoiler-free mode in one place.",
+CHT.pages[0],Real pages,
+CHT.pages[1],"Teams, sailors and races open as full pages with their own link – back always goes one step back.",
+CHT.anim[0],Smooth round switching,
+CHT.anim[1],"Swipe between rounds, with an animation like in the big apps.",
+CHT.install[0],Easier to install,
+CHT.install[1],An Install button next to the language – the app on your home screen in 20 seconds.,
+CHT.track[0],Live tracking inside the app,
+CHT.track[1],"Every boat on the map, live ranking, course and replay – no more external site.",
+CHT.profiles[0],New sailor profiles,
+CHT.profiles[1],"Bio, career, Olympic and world championship medals from the official SSL profiles.",
+CHT.favS[0],Follow sailors,
+CHT.favS[1],Tap ☆ on a sailor – your sailors get their own list.,
+CHT.langs6[0],Six more languages,
+CHT.langs6[1],"Japanese, Thai, Malay, Hungarian, Czech and Ukrainian.",
+CHT.stream[0],Live stream in the app,
+CHT.stream[1],With preview image and countdown until the broadcast starts.,
+CHT.spoil[0],Spoiler-free mode,
+CHT.spoil[1],Hide results until you've watched the race.,
+CHT.wx[0],Sailing weather per race,
+CHT.wx[1],"Wind, gusts, direction, waves and tide for every start time.",
+CHT.cmp[0],Team comparison,
+CHT.cmp[1],Two teams side by side – head to head and numbers from Rio.,
+CHT.vids[0],Highlights,
+CHT.vids[1],The latest SSL videos right in the app.,
+CHT.venue[0],Venue,
+CHT.venue[1],Marina da Glória with map and directions.,
+CHT.race[0],Race details,
+CHT.race[1],"Tap a race for result, group standings, wind and stream.",
+CHT.push[0],Push notifications,
+CHT.push[1],Results of your teams straight to your phone.,
+CHT.cal[0],Calendar,
+CHT.cal[1],All races of your team in your calendar – updates itself.,
+CHT.shareimg[0],Share as image,
+CHT.shareimg[1],Group tables as a picture for WhatsApp & co.,
+CHT.app[0],Install as an app,
+CHT.app[1],"Full screen, with icon, updates itself.",
+CONT.[0],Africa,アフリカ
+CONT.[1],Asia,アジア
+CONT.[2],Europe,ヨーロッパ
+CONT.[3],Oceania,オセアニア
+CONT.[4],Pan-America,汎アメリカ
+NWS,News,ニュース
+NSRC,Source: worldofsailors.com (Star Sailors League),出典：worldofsailors.com（Star Sailors League）
+RRS.[0],Start,スタート
+RRS.[1],Race time,レース時間
+RRS.[2],Winner,勝者
+RRS.[3],The full report for this race follows here.,このレースの詳しいレポートはここに掲載予定です。
+ALSO,also,兼
+WXF,Wind from,風向（から）
+NXS.[0],On schedule,定刻
+NXS.[1],Starting soon,まもなくスタート
+NXS.[2],Start delayed,スタート遅延
+NXS.[3],Delayed,遅延
+NXS.[4],Racing,レース中
+NXS.[5],t=>`Not before ${t}`,t=>`${t}以降`
+NXW,Start pending,スタート待ち
+NXP,Probably delayed,遅延見込み
+ORD,"n=>n+(n%10==1&&n!=11?""st"":n%10==2&&n!=12?""nd"":n%10==3&&n!=13?""rd"":""th"")","n=>n+""位"""
+OSL,en,ja
+FIX.GBR,Great Britain,イギリス
+FIX.TAH,Tahiti,タヒチ
+FIX.MYA,Myanmar,ミャンマー
+FIX.USA,USA,アメリカ

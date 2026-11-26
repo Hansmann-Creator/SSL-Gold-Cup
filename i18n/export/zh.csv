@@ -1,0 +1,700 @@
+key,English,中文
+S.rounds,Rounds,轮次
+S.bracket,Matchboard,对阵图
+S.teams,Teams,队伍
+S.official,Official results,官方成绩
+S.updated,Updated,更新于
+S.ago,"m=>m<1?""just now"":m<60?`${m} min ago`:`${Math.round(m/60)} h ago`","m=>m<1?""刚刚"":m<60?`${m} 分钟前`:`${Math.round(m/60)} 小时前`"
+S.rio,Rio time,里约时间
+S.offline,offline – last saved data,离线——上次保存的数据
+S.rn.r32,1/32 Finals,1/32 决赛
+S.rn.r16,1/16 Finals,1/16 决赛
+S.rn.r8,1/8 Finals,1/8 决赛
+S.rn.r4,Quarter-finals,四分之一决赛
+S.rn.sf,Semi-finals,半决赛
+S.rn.pf,Petit Final,小决赛
+S.rn.f,Grand Final,总决赛
+S.group,Group,小组
+S.decided,decided,已决出
+S.racing,racing,比赛中
+S.open,open,未开始
+S.st.done,completed,已结束
+S.st.live,in progress,进行中
+S.st.up,upcoming,即将开始
+S.races,"n=>`${n} race${n>1?""s"":""""} per group`",n=>`每组 ${n} 场比赛`
+S.upNext,Up next,下一轮
+S.startsIn,"d=>d<=0?""starts today"":d==1?""starts tomorrow"":`starts in ${d} days`","d=>d<=0?""今天开始"":d==1?""明天开始"":`${d} 天后开始`"
+S.groupsOf4,"n=>`${n} group${n>1?""s"":""""} of four`",n=>`${n} 个四队小组`
+S.oneRace,One race – the finishing order decides.,只赛一场——冲线顺序决定名次。
+S.through,through,晋级
+S.out,out,出局
+S.toFinal,to Final,进入决赛
+S.toPetit,to Petit Final,进入小决赛
+S.medals[0],Gold,金牌
+S.medals[1],Silver,银牌
+S.medals[2],Bronze,铜牌
+S.medals[3],4th,第4名
+S.pts,Pts,积分
+S.outIn,"(r,g,p)=>`Out in the ${r} (Group ${g}, ${p})`","(r,g,p)=>`在${r}出局（${g} 组，${p}）`"
+S.gf,m=>`Grand Final: ${m}`,m=>`总决赛：${m}`
+S.finished,p=>`Finished ${p}`,p=>`最终${p}`
+S.thrTbc,Through – next group to be confirmed,已晋级——下一轮小组待定
+S.seeded,"(r,g,d)=>`Seeded – enters the ${r}, Group ${g}, ${d}`","(r,g,d)=>`种子队——从${r}开始参赛，${g} 组，${d}`"
+S.racingNow,Racing now,正在比赛
+S.nations,n=>`${n} nations`,n=>`${n} 个国家`
+S.stillIn,still in,仍在比赛
+S.outN,out,已出局
+S.search,"Search nation, nickname or sailor",搜索国家、昵称或帆手
+S.all,All,全部
+S.chipIn,Still in,仍在比赛
+S.chipOut,Out,已出局
+S.mine,★ My teams,★ 我的队伍
+S.sStatus,Status,状态
+S.sRank,Ranking,排名
+S.sAz,A–Z,A–Z
+S.noTeam,No team found.,未找到队伍。
+S.rank,Rank,排名
+S.captain,Captain,队长
+S.helm,Helm,舵手
+S.ranking,SSL Nations Ranking,SSL 国家排名
+S.rankBoard,Ranking board ↗,查看排名 ↗
+S.entered,Entered Rio at,里约参赛起点
+S.showRound,Open round ›,打开该轮 ›
+S.gc23,Gold Cup 2023,2023 金杯
+S.br23,2023 bracket ›,2023 对阵图 ›
+S.status,Status,状态
+S.stIn,Still in,仍在比赛
+S.stOut,Out,已出局
+S.whereEnded,Where it ended ›,止步之处 ›
+S.curGroup,Current group ›,当前小组 ›
+S.background,Background,背景
+S.road,Road to Rio,晋级之路
+S.story,Story,故事
+S.site,Team site,队伍网站
+S.qualRes,Qualifier results ↗,资格赛成绩 ↗
+S.sslRank,SSL Nations Ranking ↗,SSL 国家排名 ↗
+S.resRio,Results in Rio,里约成绩
+S.photos,Crew photos,船员照片
+S.byPos,Crew by position,按岗位的船员
+S.leader,Team leader,队伍领队
+S.wider,Wider squad · position TBC,扩展名单 · 岗位待定
+S.squadNote,"(n,p)=>`${n} names in the squad. 8–10 sail each race and the line-up can change from day to day. Positions and numbers from the official team site; portraits from the Gold Cup Rio graphics${p?"""":"" (none yet for this team)""}.`","(n,p)=>`名单共 ${n} 人。每场比赛 8–10 人出海，阵容每天可能不同。岗位和号码来自官方队伍网站；肖像来自里约金杯赛事图形${p?"""":""（该队暂无）""}。`"
+S.noSquad,No squad list published for this team yet.,该队尚未公布名单。
+S.showPath,Show path in bracket,在对阵图中显示路线
+S.copyLink,Copy link,复制链接
+S.copied,Link copied,链接已复制
+S.close,Close,关闭
+S.jersey,Jersey,号码
+S.numTbc,Number TBC,号码待定
+S.capTag,Captain,队长
+S.favOn,Following,已关注
+S.favOff,Follow,关注
+S.brHint,Tap a team for crew and history. Swipe for later rounds.,点击队伍查看船员和历史。左右滑动查看后续轮次。
+S.h23,Gold Cup 2023,2023 金杯
+S.champ23,Gran Canaria · champion,大加那利岛 · 冠军
+S.hl,highlighted,已高亮
+S.tap26,Tap a team for its Rio 2026 page.,点击队伍查看其 2026 里约页面。
+S.off23,Official 2023 results ↗,2023 官方成绩 ↗
+S.myTeams,My teams,我的队伍
+S.myHint,Tap ☆ on a team page to follow it.,在队伍页面点击 ☆ 即可关注。
+S.foot,"Scoring: 4-3-2-1 points per race, double points in the last race of each group (8-6-4-2). Top two of each group advance. Results refresh automatically from the official SSL results page. Ranking = SSL Nations Ranking at the start of the Final Series.",计分：每场 4-3-2-1 分，每组最后一场双倍积分（8-6-4-2）。每组前两名晋级。成绩自动从 SSL 官方成绩页更新。排名 = Final Series 开始时的 SSL 国家排名。
+S.notes.ocs,* OCS (early start)  ** Standard penalty,* OCS（抢航）  ** 标准判罚
+S.theme.auto,🌊 Matchboard,🌊 Matchboard
+S.theme.light,☀️ Day,☀️ 日间
+S.theme.dark,🌙 Night,🌙 夜间
+S.g23.champ,Champion (Gold),冠军（金牌）
+S.g23.second,Runner-up (Silver),亚军（银牌）
+S.g23.third,3rd (Bronze),季军（铜牌）
+S.g23.fourth,4th – Grand Final,第4名 – 总决赛
+S.g23.sf,Semi-finals,半决赛
+S.g23.qf,Quarter-finals,四分之一决赛
+S.g23.r8,1/8 Finals,1/8 决赛
+S.g23.r16,1/16 Finals,1/16 决赛
+S.g23.r32,1/32 Finals,1/32 决赛
+S.g23.none,Didn't race the 2023 Final Series,未参加 2023 年 Final Series
+S.ev.asia,Asian Qualifiers,亚洲资格赛
+S.ev.afoc,African & Oceanian Qualifiers,非洲及大洋洲资格赛
+S.ev.eu1,European Qualifiers 1,欧洲资格赛 1
+S.ev.eu2,European Qualifiers 2,欧洲资格赛 2
+S.ev.pan,Pan-American Qualifiers,泛美资格赛
+S.route.won,"(e,g)=>`Won the ${e}, Group ${g}`","(e,g)=>`赢得${e} ${g} 组`"
+S.route.pos,"(p,e,g)=>`${p} in the ${e}, Group ${g}`","(p,e,g)=>`${e} ${g} 组${p}`"
+S.route.lc,"(e,g)=>`3rd in the ${e} Group ${g}, then won the Last Chance race`","(e,g)=>`${e} ${g} 组第3名，随后赢得“最后机会”赛`"
+S.route.ranking,Qualified through the SSL Nations Ranking,凭 SSL 国家排名获得资格
+S.route.host,"Host nation, seeded into the 1/8 Finals",东道主，直接进入 1/8 决赛
+S.route.seeded,r=>`Seeded into the ${r} via the SSL Nations Ranking`,r=>`凭 SSL 国家排名直接进入${r}`
+S.roles.Helm,Steers the boat,掌舵
+S.roles.Tactician,Strategy & calls,战术与决策
+S.roles.Main Trimmer,Mainsail,主帆
+S.roles.Trimmer,Jib & gennaker,前帆与球帆
+S.roles.Grinder,Powers the winches,绞盘动力
+S.roles.Pit,Halyards & controls,升帆索与控制
+S.roles.Mid-Bow,Mast & foredeck,桅杆与前甲板
+S.roles.Bow,Bow & starts,船首与起航
+S.roles.Floater,Utility / reserve,替补 / 机动
+S.back,‹ Back,‹ 返回
+S.position,Position,岗位
+S.team,Team,队伍
+S.indRank,SSL ranking,SSL 排名
+S.highlights,Highlights,主要成就
+S.profile,SSL profile ↗,SSL 资料 ↗
+S.findProfile,Find SSL profile ↗,查找 SSL 资料 ↗
+S.ws,World Sailing ↗,World Sailing ↗
+S.mates,Teammates,队友
+S.posTbc,Position TBC,岗位待定
+S.noInfo,No further details published yet – the links below search the official profiles.,暂无更多公开信息——下方链接可搜索官方资料。
+S.today,Today,今天
+S.raceDay,"(n,t)=>`race day ${n} of ${t}`","(n,t)=>`第 ${n} / ${t} 比赛日`"
+S.finalDay,Final day – last race counts double,最后一天——最后一场双倍积分
+S.stream,▶ Live stream,▶ 直播
+S.tracking,Tracking,实时追踪
+S.schedule,Schedule,赛程
+S.adv,"(a,b)=>`1st → ${a} · 2nd → ${b}`","(a,b)=>`第1名 → ${a} · 第2名 → ${b}`"
+S.advSf,1st–2nd → Final · 3rd–4th → Petit Final,第1–2名 → 决赛 · 第3–4名 → 小决赛
+S.clinched,✓ through,✓ 已晋级
+S.elim,out,出局
+S.secNow,In the current round,本轮参赛
+S.secSeeded,r=>`Seeded – enter in the ${r}`,r=>`种子队——从${r}开始`
+S.secOut,Out,已出局
+S.lineup,Line-up,阵容
+S.howT,How the Gold Cup works,金杯赛制
+S.how[0],"National teams, one SSL47 boat each – all boats identical and provided by the organisers.",国家队，每队一艘 SSL47——所有船只完全相同，由主办方提供。
+S.how[1],Groups of four. 4-3-2-1 points per race; the last race of each group counts double (8-6-4-2).,四队一组。每场 4-3-2-1 分；每组最后一场双倍积分（8-6-4-2）。
+S.how[2],The top two of every group advance; better-ranked nations enter later rounds.,每组前两名晋级；排名靠前的国家从后面的轮次开始参赛。
+S.how[3],Semi-finals and finals are a single race each; the Grand Final decides the world champion.,半决赛和决赛各只赛一场；总决赛决出世界冠军。
+S.race,Race,比赛
+S.nextRace,Next race,下一场
+S.todayRaces,Today's races,今日比赛
+S.rioT,Rio time,里约时间
+S.loc,your time,你的时间
+S.onWater,on the water,正在比赛
+S.done,done,已结束
+S.inX,"m=>m<60?`in ${m} min`:`in ${Math.floor(m/60)} h ${String(m%60).padStart(2,""0"")}`","m=>m<60?`${m} 分钟后`:`${Math.floor(m/60)} 小时 ${String(m%60).padStart(2,""0"")} 分后`"
+S.firstStart,First start,首场起航
+S.schedT,Race schedule,本轮赛程
+S.schedNote,"Times are Rio de Janeiro time (UTC−3), from the official schedule. Its groups G1–G4 are shown here as groups A–D.",时间为里约热内卢时间（UTC−3），依据官方赛程。官方的 G1–G4 组在此显示为 A–D 组。
+S.needT,Before the final race (double points),最后一场之前（双倍积分）
+S.need.sure,"through, whatever happens",无论如何都已晋级
+S.need.gone,"out, whatever happens",无论如何都已出局
+S.need.win,a win is enough,获胜即可晋级
+S.need.top,k=>`${k} or better is enough`,k=>`${k}或更好即可`
+S.need.mustWin,must win,必须获胜
+S.need.help,and needs help from the others,并需要其他队帮忙
+S.need.maybe,k=>`${k} may be enough – depends on the others`,k=>`${k}可能足够——取决于其他队`
+S.need.iff,"(k,c)=>`${k} is enough if ${c}`","(k,c)=>`${k}即可，前提是${c}`"
+S.need.mustIf,"c=>`must win, and only if ${c}`",c=>`必须获胜，且只有在${c}时`
+S.need.ahead,R=>`ahead of ${R}`,R=>`领先 ${R}`
+S.need.behind,R=>`behind ${R}`,R=>`落后于 ${R}`
+S.need.notWin,R=>`${R} doesn't win`,R=>`${R} 没有获胜`
+S.need.last,R=>`${R} finishes last`,R=>`${R} 最后一名`
+S.need.wins,R=>`${R} wins`,R=>`${R} 获胜`
+S.need.tie,level on points possible – tie-break decides,可能同分——由打破平局规则决定
+S.needNote,"Worked out from the current points; ≈ means teams could finish level, then the official tie-break decides.",根据当前积分计算；≈ 表示可能同分，届时由官方打破平局规则决定。
+S.install,Add to Home Screen for the app icon.,添加到主屏幕即可获得应用图标。
+S.home,Home,首页
+S.more,More,更多
+S.sailors,Sailors,帆手
+S.welcome,Final Series · Rio de Janeiro,Final Series · 里约热内卢
+S.dates,19 Nov – 13 Dec 2026 · Marina da Glória,2026年11月19日 – 12月13日 · Marina da Glória
+S.progress,Tournament,赛事进度
+S.latest,Latest results,最新成绩
+S.explore,Explore,浏览
+S.tiles.board[0],Rounds,轮次
+S.tiles.board[1],"Groups, points, times",小组、积分、时间
+S.tiles.bracket[0],Matchboard,对阵图
+S.tiles.bracket[1],The whole draw at a glance,一览完整赛程
+S.tiles.teams[0],Teams,队伍
+S.tiles.teams[1],"40 nations, crews, rankings",40 个国家、船员、排名
+S.tiles.sailors[0],Sailors,帆手
+S.tiles.sailors[1],Search every sailor,搜索所有帆手
+S.tiles.qualifying[0],Qualifying,资格赛
+S.tiles.qualifying[1],How the teams got to Rio,各队如何晋级里约
+S.tiles.gc2023[0],Gold Cup 2023,2023 金杯
+S.tiles.gc2023[1],Last edition's bracket,上届对阵图
+S.sailorsT,n=>`${n} sailors`,n=>`${n} 名帆手`
+S.sSearch,"Search sailor, team or position",搜索帆手、队伍或岗位
+S.withPhoto,With photo,有照片
+S.allS,All,全部
+S.moreT,More,更多
+S.lang,Language,语言
+S.design,Design,主题
+S.share,Share app,分享应用
+S.shared,Link copied,链接已复制
+S.links,Links,链接
+S.about,About this app,关于本应用
+S.aboutT,Unofficial companion app for the SSL Gold Cup Rio 2026. Results update automatically from the official SSL results page.,SSL 金杯里约 2026 的非官方伴侣应用。成绩自动从 SSL 官方成绩页更新。
+S.inst.t,Install the app,安装应用
+S.inst.d,"Put SSL Gold Cup on your home screen – opens like an app, full screen, with live results.",把 SSL Gold Cup 添加到主屏幕——像应用一样全屏打开，实时查看成绩。
+S.inst.b,Install,安装
+S.inst.done,Installed ✓,已安装 ✓
+S.inst.ios[0],Tap the Share button,点按分享按钮
+S.inst.ios[1],at the bottom of Safari (top right on iPad).,（位于 Safari 底部，iPad 在右上角）。
+S.inst.ios[2],Scroll down and tap “Add to Home Screen”.,向下滚动，点按“添加到主屏幕”。
+S.inst.ios[3],Tap “Add” – done.,点按“添加”——完成。
+S.inst.iosOther,On iPhone this works in Safari: open this page in Safari first.,在 iPhone 上请使用 Safari：先在 Safari 中打开此页面。
+S.inst.android[0],Tap the ⋮ menu in the top right of your browser.,点按浏览器右上角的 ⋮ 菜单。
+S.inst.android[1],Tap “Install app” or “Add to Home screen”.,点按“安装应用”或“添加到主屏幕”。
+S.inst.android[2],Confirm with “Install”.,点按“安装”确认。
+S.inst.desk[0],"Click the install icon in the address bar,",点击地址栏中的安装图标，
+S.inst.desk[1],or open the browser menu and choose “Install SSL Gold Cup”.,或在浏览器菜单中选择“安装 SSL Gold Cup”。
+S.inst.how,How to install,如何安装应用
+S.inst.hide,Not now,以后再说
+S.inst.installedNote,You're using the installed app.,你正在使用已安装的应用。
+S.champT,World Champion · Gold Cup 2026,世界冠军 · 2026 金杯
+S.standT,Final standings,最终排名
+S.statsT,In numbers,数据
+S.stRaces,Races,比赛
+S.stWins,Race wins,分站胜场
+S.stAvg,Avg. place,平均名次
+S.stPts,Points in Rio,里约积分
+S.stHist,Race by race,逐场成绩
+S.calBtn,📅 Races in my calendar,📅 把比赛加入日历
+S.calT,Races in your calendar,把比赛加入你的日历
+S.calSub,"Subscribe (iPhone, Mac, Outlook)",订阅（iPhone、Mac、Outlook）
+S.calG,Add to Google Calendar,添加到 Google 日历
+S.calDl,Download file (.ics),下载文件（.ics）
+S.calAll,All races in my calendar,把全部比赛加入日历
+S.calNote,"A subscription updates itself: when a team qualifies, its next races appear automatically.",订阅会自动更新：队伍晋级后，下一轮比赛会自动出现。
+S.wxT,Wind forecast · Marina da Glória,风力预报 · Marina da Glória
+S.wxSrc,"Forecast by Open-Meteo, not measured on the course.",Open-Meteo 预报，并非赛场实测。
+S.trk,Tracking,实时追踪
+S.delayed,m=>`Results may be delayed – last successful check ${m} min ago.`,m=>`成绩可能延迟——上次成功检查是 ${m} 分钟前。`
+S.shareImg,Share as image,分享为图片
+S.imgDone,Image ready,图片已生成
+S.pT,Notifications,通知
+S.pAll,All results,全部成绩
+S.pAllSub,A notification after every race,每场比赛后推送通知
+S.pTeamOff,🔔 Notify me about this team,🔔 接收此队通知
+S.pTeamOn,🔔 Notifications on ✓,🔔 已开启通知 ✓
+S.pTeams,Your teams,你的队伍
+S.pNone,No team yet: open a team and tap 🔔.,还没有关注队伍：打开一支队伍并点按 🔔。
+S.pNote,You only get race results and who goes through. Switch off here any time.,只推送比赛成绩和晋级信息。可随时在此关闭。
+S.pIOS,"On iPhone, notifications only work in the installed app: install it, open it from the home screen, then switch them on here.",在 iPhone 上，通知仅在已安装的应用中可用：先安装应用，从主屏幕打开，再在此开启。
+S.pDenied,Notifications are blocked. Allow them for this app in your device settings.,通知已被屏蔽。请在设备设置中允许此应用发送通知。
+S.pErr,That didn't work – please try again in a moment.,操作未成功，请稍后再试。
+S.pOnT,Notifications on,已开启通知
+S.pOffT,Notifications off,已关闭通知
+S.pUnsup,This browser can't receive notifications.,此浏览器无法接收通知。
+S.obT,Get the app,安装应用
+S.obSub,"Free, no App Store needed – on your home screen in 20 seconds.",免费，无需应用商店——20 秒添加到主屏幕。
+S.obPerks[0],Live results in one tap,一点即看实时成绩
+S.obPerks[1],"Full screen, like a real app",全屏，如同原生应用
+S.obPerks[2],Notifications for your team,关注队伍的通知
+S.obBtn,Install now,立即安装
+S.obLater,Later – look around in the browser first,稍后——先在浏览器中看看
+S.obSteps,How it works,操作步骤
+S.obStep,Step,第
+S.ios26[0],Tap ⋯ next to the address bar,点按地址栏旁边的 ⋯
+S.ios26[1],Tap “Share”,点按“分享”
+S.ios26[2],Scroll down and tap “Add to Home Screen”,向下滚动，点按“添加到主屏幕”
+S.ios26[3],Leave “Open as Web App” on and tap “Add”,保持“作为网页 App 打开”开启，点按“添加”
+S.iosOld[0],Tap the Share button at the bottom,点按底部的分享按钮
+S.iosOld[1],Scroll down and tap “Add to Home Screen”,向下滚动，点按“添加到主屏幕”
+S.iosOld[2],Tap “Add” in the top right,点按右上角的“添加”
+S.iosAlt,"Easiest in Safari: copy the link, open Safari and paste it.",在 Safari 中最简单：复制链接，打开 Safari 并粘贴。
+S.inApp,This page is open inside another app (e.g. WhatsApp or Instagram). Installing only works in the browser: tap ⋯ and choose “Open in browser” – or copy the link and open it in Safari or Chrome.,此页面是在其他应用（如微信、WhatsApp 或 Instagram）中打开的。只能在浏览器中安装：点按 ⋯ 并选择“在浏览器中打开”，或复制链接后在 Safari 或 Chrome 中打开。
+S.copy,Copy link,复制链接
+S.done2,Then open SSL Gold Cup from your home screen.,然后从主屏幕打开 SSL Gold Cup。
+S.ui.share,Share,分享
+S.ui.home,Add to Home Screen,添加到主屏幕
+S.ui.add,Add,添加
+S.ui.web,Open as Web App,作为网页 App 打开
+S.ui.cancel,Cancel,取消
+S.ui.ainst,Install app,安装应用
+S.ui.aok,Install,安装
+S.trkOpen,📍 Watch live tracking,📍 查看实时追踪
+S.trkReplay,📍 Replay the race (tracking),📍 回放比赛（追踪）
+S.trkNone,Tracking appears here as soon as Georacing has set up this race.,Georacing 创建本场比赛后，追踪将显示在这里。
+S.trkExt,Open in Georacing ↗,在 Georacing 中打开 ↗
+S.trkHint,"Every boat as a dot on the map – live during the race, as a replay afterwards.",每条船都是地图上的一个点——比赛中实时显示，赛后可回放。
+S.rcRes,Result of this race,本场成绩
+S.rcTeams,Teams in this race,参赛队伍
+S.rcStand,Group so far,小组目前排名
+S.rcPts,pts,分
+S.rcGroup,Show group on the Matchboard,在 Matchboard 中查看小组
+S.rcTBD,Teams not decided yet,参赛队伍尚未确定
+S.qrT,Scan with the phone camera – the app opens right away.,用手机相机扫描，立即打开应用。
+S.shareNow,Share…,分享…
+S.qsep,"n=>""▲ advance""","n=>""▲ 晋级"""
+S.shareSub,"Send via WhatsApp, Messages & co.",通过微信、WhatsApp 等发送
+S.shareMsg,"SSL Gold Cup Rio 2026 – live results, race times and all teams:",SSL Gold Cup 里约 2026——实时成绩、比赛时间和全部队伍：
+S.sCaps,Captains,队长
+S.sTeams,Crews,各队阵容
+S.sHint,Tap a team to see its crew – teams still in the race come first.,点按队伍查看阵容——仍在比赛中的队伍排在前面。
+S.sTeamPage,Team page,队伍页面
+S.fShow,Show,显示
+S.fSort,Sort,排序
+S.spT,Spoiler-free,防剧透
+S.spUntil,w=>`Results hidden after ${w}`,w=>`${w} 之后的成绩已隐藏`
+S.spNone,No hidden results right now,目前没有隐藏的成绩
+S.spShow,Show all,全部显示
+S.spOff,Off,关闭
+S.spRow,Spoiler-free mode,防剧透模式
+S.spSub,Hide results until you have watched the race,在你看完比赛前隐藏成绩
+S.spRace,Result hidden,成绩已隐藏
+S.spReveal,I've watched it – show result,我看完了——显示成绩
+S.spOnT,Results from today on are hidden,今天起的成绩已隐藏
+S.cmpBtn,⚖️ Compare,⚖️ 对比
+S.cmpVs,vs,对
+S.cmpPick,Pick a team to compare with.,选择要对比的队伍。
+S.h2hT,Head to head,交锋记录
+S.h2hSub,races finished ahead,场比赛名次领先
+S.h2hNone,No races against each other yet.,两队尚未交手。
+S.cmpNote,Numbers from the races in Rio; ranking = SSL Nations Ranking.,数据来自里约的比赛；排名 = SSL 国家排名。
+S.vidT,🎬 Highlights & videos,🎬 集锦与视频
+S.vidAll,All videos on YouTube ↗,在 YouTube 查看全部视频 ↗
+S.vidOpen,Open on YouTube ↗,在 YouTube 打开 ↗
+S.vidHid,"n=>`${n} newer video${n>1?""s"":""""} hidden (spoiler-free)`",n=>`已隐藏 ${n} 个较新的视频（防剧透）`
+S.pastL,Look back,回顾
+S.vnT,Venue · Marina da Glória,比赛场地 · Marina da Glória
+S.vnSub,Where it all happens – map & directions,赛事现场——地图与路线
+S.vnRoute,Directions,路线
+S.vnApple,Apple Maps,Apple 地图
+S.vnInfo[0],"The 2016 Olympic sailing venue, on Guanabara Bay with a view of Sugarloaf Mountain.",2016 年奥运会帆船比赛场地，位于瓜纳巴拉湾，可远眺面包山。
+S.vnInfo[1],The marina is open to the public during the event – see the boats up close and visit the athletes' village.,赛事期间码头向公众开放——可近距离看船并参观运动员村。
+S.vnInfo[2],Racing takes place on Guanabara Bay right in front of the marina.,比赛就在码头正前方的瓜纳巴拉湾进行。
+S.suT,Sustainability,可持续发展
+S.suSub,What the SSL does for the ocean and fair sport,SSL 为海洋与公平竞赛所做的努力
+S.suIntro,The SSL says that for them sustainability means protecting the ocean and making the sport fairer.,对 SSL 来说，可持续发展意味着保护海洋，并让这项运动更加公平。
+S.suList[0],Every SSL Gold Cup boat must have two women on board.,每条 SSL 金杯赛船上必须有两名女性队员。
+S.suList[1],No plastic bottles in the athletes' village.,运动员村内不使用塑料瓶。
+S.suList[2],A dedicated Sustainability Manager since September 2025.,自 2025 年 9 月起设立专职可持续发展经理。
+S.suList[3],"Aligned with Clean Regattas, World Sailing's Sustainability Agenda 2030 and the IOC strategy; the goal is Platinum Clean Regattas certification.",遵循 Clean Regattas、世界帆联《2030 可持续发展议程》及国际奥委会战略；目标是获得 Clean Regattas 白金认证。
+S.suList[4],Beach clean-ups with the teams at the qualifiers.,在资格赛期间与各队一起清理海滩。
+S.suList[5],"Few support boats: at the 2023 Finals, four coach boats served 440 sailors.",尽量少用保障船：2023 年总决赛中，4 艘教练船服务 440 名运动员。
+S.suMore,Read more at the SSL ↗,在 SSL 网站了解更多 ↗
+S.mcT,Merch,周边商品
+S.mcSub,"Jerseys, caps & more – coming soon",球衣、帽子等——即将上线
+S.mcSoon,Coming soon,即将上线
+S.mcTxt,"The official SSL Gold Cup Store is not open yet. As soon as it is, you can shop here.",SSL 金杯官方商店尚未开放。开放后即可在这里购买。
+S.mcList[0],Captain's jerseys of the national teams,各国家队队长球衣
+S.mcList[1],SSL caps,SSL 帽子
+S.mcList[2],SSL47 boat and team figures as building sets,SSL47 帆船与队员拼装模型
+S.mcGo,To the SSL store ↗,前往 SSL 商店 ↗
+S.wxBtn,🌬️ Weather for sailors,🌬️ 帆船天气
+S.wxH,Sailing weather,帆船天气
+S.wxLoad,Loading forecast…,正在加载预报…
+S.wxFail,The forecast could not be loaded right now.,暂时无法加载预报。
+S.wxGust,Gusts,阵风
+S.wxDir,Direction,风向
+S.wxPres,Pressure,气压
+S.wxAtStart,Forecast for the start time.,起航时间的预报。
+S.wxHours,Hour by hour,逐小时
+S.wxTime,Time,时间
+S.wxWind,Wind kn,风速 节
+S.wxKn,Wind in knots: mean – gusts. Arrows show where the wind blows to.,风速单位为节：平均 – 阵风。箭头表示风吹向的方向。
+S.wxSea,Water,海况
+S.wxWater,Water temperature,水温
+S.wxTide,Tide,潮汐
+S.wxRise,rising,涨潮
+S.wxFall,falling,落潮
+S.wxHigh,High,高潮
+S.wxLow,Low,低潮
+S.wxCur,Current,海流
+S.wxCurN,Model value at the bay entrance; arrow = where it flows.,湾口处的模型数值；箭头 = 流向。
+S.wxWave,Swell,涌浪
+S.wxWaveN,"At the bay entrance, much smaller on the course.",湾口处的数值，赛场内要小得多。
+S.wxSun,Sunrise – sunset,日出 – 日落
+S.wxSrc2,"Forecast by Open-Meteo (weather models), not measured on the course.",Open-Meteo 预报（气象模型），并非赛场实测。
+S.trkLive,Live tracking,实时追踪
+S.trkReplayS,Replay,回放
+S.fcBtn,Forecast,天气预报
+S.fcCond[0],Light wind,微风
+S.fcCond[1],Medium wind,中等风
+S.fcCond[2],Fresh breeze,清劲风
+S.fcCond[3],Strong wind,强风
+S.fcTr.up,building,增强
+S.fcTr.down,easing,减弱
+S.fcTr.steady,steady,平稳
+S.fcTr.veer,veering (clockwise),顺时针转向
+S.fcTr.back,backing (anti-clockwise),逆时针转向
+S.fcNext,Next hour,下一小时
+S.fcChart,"Wind 10:00–18:00 · line = mean, band = gusts, marker = start",10:00–18:00 风速 · 线 = 平均，色带 = 阵风，标记 = 起航
+S.fcBft,Beaufort,蒲福风级
+S.watchLive,Watch live,观看直播
+S.liveStream,Live stream,直播
+S.liveNow,The race is on – watch it here,比赛正在进行——在这里观看
+S.liveNote,"If the player stays black, the stream hasn't started yet or YouTube blocks embedding – then open it on YouTube.",如果播放器一直黑屏，说明直播尚未开始或 YouTube 不允许嵌入——请在 YouTube 打开。
+S.achT,Achievements,成就
+S.olyT,Olympic Games,奥运会
+S.wcT,World Championship podiums,世锦赛领奖台
+S.ecT,Continental podiums,洲际锦标赛领奖台
+S.clubT,Club,俱乐部
+S.profSrc,Facts from the official SSL profile.,数据来自 SSL 官方资料。
+S.achL[0],World Champion,世界冠军
+S.achL[1],Olympic gold,奥运金牌
+S.achL[2],Olympic silver,奥运银牌
+S.achL[3],Olympic bronze,奥运铜牌
+S.wxAtT,h=>`Forecast for ${h}`,h=>`${h} 的预报`
+S.wxTap,Tap an hour for details.,点按某个小时查看详情。
+S.fsT,Final Series,Final Series
+S.qsT,Qualifying Series,Qualifying Series
+S.qsLeg,Highlighted: qualified through this series. ● = in Rio via the SSL Nations Ranking. Tap a team in Rio for its page.,高亮：通过该系列赛晋级。● = 凭 SSL 国家排名来到里约。点击已在里约的队伍查看其页面。
+S.qsNote,"The winner of each qualifying group (group C: top two) was drawn into the 1/32 Finals. 29 teams qualified for the Final Series via the SSL Ranking, with spots per continent: 12 Europe, 8 Pan-America, 6 Asia, 1 Africa, 2 Oceania.",每个资格赛小组的冠军（C 组：前两名）被抽签进入 1/32 决赛。另有 29 支队伍凭 SSL 排名进入 Final Series，按大洲分配名额：欧洲 12、泛美 8、亚洲 6、非洲 1、大洋洲 2。
+S.reg.asia,Asia,亚洲
+S.reg.afoc,Africa & Oceania,非洲及大洋洲
+S.reg.eur,Europe,欧洲
+S.reg.pam,Pan-America,泛美
+S.fin,Final,决赛
+S.petit,Petit F.,小决赛
+S.swipe,Swipe sideways for later rounds →,左右滑动查看后续轮次 →
+S.road2,Road to Rio,晋级之路
+S.inRio,In Rio via SSL Ranking,凭 SSL 排名来到里约
+S.mbHint,Top two of each group advance. Tap a team for crew and history.,每组前两名晋级。点击队伍查看船员和历史。
+S.vmT,Event area,赛事场地
+S.vmTap,Tap the map to zoom,点按地图放大
+S.vmL[0],SSL47 boats,SSL47 赛船
+S.vmL[1],Flag pole ashore (signals),岸上旗杆（信号）
+S.vmL[2],"Village: partner stands, shop, waste sorting",赛事村：合作伙伴展位、商店、垃圾分类
+S.vmL[3],Video wall,大屏幕
+S.vmL[4],Race office & jury room,赛事办公室和仲裁室
+S.vmL[5],Sailors Lounge,Sailors Lounge 选手休息区
+S.vmL[6],Uniforms,制服领取
+S.vmL[7],TV broadcast,电视转播
+S.vmL[8],Exhibition boat,展示船
+S.vmL[9],Shore team tent,岸上团队帐篷
+S.vmL[10],"Main stage: concert, final podium, closing ceremony",主舞台：音乐会、决赛领奖台、闭幕式
+S.vmL[11],Spectator boat,观赛船
+S.vmL[12],Press & production office,新闻和制作办公室
+S.vmL[13],Lunch buffet,午餐自助
+S.vmW,Water refill station,饮水补给站
+S.vdT,On race days,比赛日
+S.vd[0],10:00 – Skippers’ briefing,10:00 – 船长简报会
+S.vd[1],12:00 – first warning signal,12:00 – 第一个预备信号
+S.vd[2],Signals ashore: flag pole in front of the Sailors Lounge (2),岸上信号：Sailors Lounge 前的旗杆 (2)
+S.vmSrc,"Map: SSL Gold Cup, official notice board",地图：SSL Gold Cup 官方公告板
+S.fbT,Wish or bug report,建议或问题反馈
+S.fbSub,Goes straight to the app maker,直接发送给应用作者
+S.fbPh,What should be better? What isn't working?,哪里可以改进？哪里出了问题？
+S.fbName,Your name (optional),你的名字（可选）
+S.fbSend,Send,发送
+S.fbOk,Thanks – sent!,谢谢，已发送！
+S.fbErr,Couldn't send. Check your connection and try again.,发送失败，请检查网络后重试。
+S.showMe,Show me where,告诉我在哪
+S.openChrome,Open in Chrome,在 Chrome 中打开
+S.openSafari,Open in Safari,在 Safari 中打开
+S.prep,Getting ready … one moment,准备中……请稍候
+S.coachT,Tap here,点这里
+S.gotIt,Got it,知道了
+S.samsung[0],Tap ≡ (menu) at the bottom right.,点右下角的 ≡（菜单）。
+S.samsung[1],Tap “Add page to” → “Home screen”.,点“添加页面至”→“主屏幕”。
+S.samsung[2],Confirm with “Add”.,点“添加”确认。
+S.noDots,No ⋯ button? Tap the Share icon instead.,看不到 ⋯？请点分享图标。
+S.tkLoad,Loading tracking…,正在加载追踪…
+S.tkNone,No tracking for this race yet.,本场比赛暂无追踪。
+S.tkNoData,No tracking data for this race.,本场比赛没有追踪数据。
+S.tkOpens,Tracking opens at,追踪开放时间
+S.tkStart,Start,起航
+S.tkLeg,Leg,航段
+S.tkPre,pre-start,起航前
+S.tkNoPos,no signal,无信号
+S.tkRep,Replay,回放
+S.secOly,Olympic Games,奥运会
+S.secWc,World Championships,世界锦标赛
+S.secEc,Continental Championships,洲际锦标赛
+S.bioT,About,简介
+S.srcSSL,Official bio · Star Sailors League,官方简介 · Star Sailors League
+S.careerT,Career,职业生涯
+S.evN,results listed,项成绩
+S.podN,podiums,次登台
+S.medRate,medal rate,奖牌率
+S.bestR,best result,最佳成绩
+S.showAll,Show all,显示全部
+S.sslPts,SSL points,SSL积分
+S.heightT,Height,身高
+S.weightT,Weight,体重
+S.sslProf,Official SSL profile,SSL官方资料
+S.teamSite,Team website,球队网站
+S.mySailors,My sailors,我的帆船手
+S.sFavHint,Tap ☆ on a sailor's page to follow them – they'll show up here.,在帆船手页面点击☆即可关注——他们会显示在这里。
+S.ownW,In their own words · from the SSL profile,本人自述 · 来自SSL资料
+S.pathHl,n=>`Path of ${n} highlighted`,n=>`已标出 ${n} 的晋级路线`
+S.setT,Settings,设置
+S.setSub,"Notifications, favourites, display, spoiler-free",通知、收藏、显示、防剧透
+S.sNotAvail,Push notifications are being set up and will be available here soon.,推送通知正在设置中，即将在此提供。
+S.sMaster,Push notifications,推送通知
+S.sMasterSub,Main switch for this device,本设备总开关
+S.sRemT,Start reminder,起航提醒
+S.sRemSub,15 minutes before your teams race,你关注的队伍比赛前15分钟
+S.sLiveT,Livestream starts,直播开始
+S.sLiveSub,When the SSL livestream goes live,SSL直播开始时
+S.sVidT,New highlight video,新集锦视频
+S.sVidSub,When a new highlight film is out,新集锦发布时
+S.sResT,Results of my teams,我的队伍结果
+S.sResSub,After every race of these teams – your favourite teams and the teams of your favourite sailors.,这些队伍每场比赛后——你收藏的队伍及收藏帆船手所在队伍。
+S.sFavNone,No favourites yet – tap ☆ on a team or sailor.,暂无收藏——在队伍或帆船手页面点击☆。
+S.sQuietT,Quiet hours,免打扰时段
+S.sQuietSub,No notifications during this time (your local time),此时段不发通知（本地时间）
+S.sQoff,Off,关闭
+S.sSpoilN,"In spoiler-free mode, notifications only say that a race has finished.",防剧透模式下，通知只告知比赛已结束。
+S.sDispT,Display,显示
+S.sTimeT,Times,时间
+S.sTimeRio,Rio only,仅里约
+S.sTimeBoth,Rio + mine,里约+本地
+S.sWindT,Wind,风
+S.sTempT,Temperature,温度
+S.sLvT,Commentary language,解说语言
+S.sLvAuto,Same as the app,与应用相同
+S.sCalT,Calendar,日历
+S.sCalTeam,Races of this team,该队的比赛
+S.sDataT,Data & privacy,数据与隐私
+S.sPriv,"Everything you set here is stored only on this device. No account, no cookies; visits are counted anonymously.",你的设置只保存在本设备。无账号、无cookie；访问以匿名方式统计。
+S.sResetF,Remove favourites,清除收藏
+S.sResetA,Reset everything,全部重置
+S.sResetQ,Tap again to confirm,再点一次确认
+S.sFeedback,Send feedback,发送反馈
+S.sVer,Version,版本
+S.comp,Competition,赛事
+S.rkT,SSL Nations Ranking,SSL 国家排名
+S.rkAsOf,As of,截至
+S.rkNat,n=>`${n} nations`,n=>`${n} 个国家`
+S.rkHist,Historical ranking,历史排名
+S.rkCur,Current,当前
+S.rkCont,Continent,大洲
+S.rkAll,All,全部
+S.rkSearch,Search country,搜索国家
+S.rkGC,Gold Cup teams,金杯参赛队
+S.rkSk,Skippers,舵手
+S.rkCr,Crews,船员
+S.rkPts,Points (sum of the sailors' ranks),积分（排名之和）
+S.rkNo,No.,序号
+S.rkGlob,Global,全球
+S.rkName,Nation,国家
+S.rkNone,No nation found.,未找到国家。
+S.rkLoad,Loading ranking…,正在加载排名…
+S.rkFail,The ranking can't be loaded right now.,暂时无法加载排名。
+S.rkSrc,Source: Star Sailors League · updated every week. The nation's rank comes from its best-ranked skippers and crews.,来源：Star Sailors League · 每周更新。国家排名取决于其排名最高的舵手和船员。
+S.rkTeam,Team page,球队页面
+S.rkPrev,p=>`previous week: ${p}`,p=>`上周：${p}`
+S.rkWas,p=>`was ${p}`,p=>`之前 ${p}`
+S.rkInd,World rank,世界排名
+S.rkOpen,Open ranking ›,打开排名 ›
+S.rkTap,Tap a nation for its sailors.,点击国家查看帆船手。
+S.alsoP,also,也任
+SOW,In their own words · from the SSL profile,本人自述 · 来自SSL资料
+NXG.[0],started,已开赛
+NXG.[1],planned,计划
+NXF,After prior race,前一场结束后
+RINC,Incoming,即将发布
+DOV.[0],Racing day over,今日比赛结束
+DOV.[1],"n=>`${n} race${n==1?"""":""s""} sailed`",n=>`已完成 ${n} 场`
+DOV.[2],g=>`${g} postponed`,g=>`${g} 延期`
+DSW.[0],Previous,上一个
+DSW.[1],Today,今天
+DSW.[2],Next,下一个
+DSW.[3],Previous race day,上一比赛日
+DSW.[4],Next race day,下一比赛日
+DSW.[5],from {t},{t} 起
+DSW.[6],{n} races,{n} 场比赛
+DSW.[7],1 race,1 场比赛
+RESS.[0],Results,成绩
+RESS.[1],Overall results,总排名
+RESS.[2],Qualifiers,资格赛
+RESS.[3],Final Series,总决赛系列
+RESS.[4],(to be determined),（待定）
+RESS.[5],Last chance race,最后机会赛
+RESS.[6],Pos.,名次
+CHT.t,What's new,
+CHT.sub,Everything new in the app – latest first,
+CHT.ver,Version,
+CHT.newB,New,
+CHT.seen,You're up to date,
+CHT.days[0],Race days at a glance,
+CHT.days[1],"On Home you can switch between the previous, today’s and the next race day; at midnight Rio time everything moves on by itself.",
+CHT.estd[0],Smart delay estimate,
+CHT.estd[1],The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races.,
+CHT.res[0],Results in the app,
+CHT.res[1],"Overall ranking, qualifiers and the Final Series – open places show “(to be determined)”.",
+CHT.rbox[0],Live race box,
+CHT.rbox[1],The header strip shows the race on the water and the countdown to the next start – and when a start is delayed.,
+CHT.inst2[0],Easier install,
+CHT.inst2[1],"One tap on Android, an arrow that points to the right button on iPhone, and “Open in Chrome/Safari” from WhatsApp & co.",
+CHT.trk2[0],Faster tracking,
+CHT.trk2[1],"Live positions appear right away, the race history loads in the background.",
+CHT.fbk[0],Send a wish or bug,
+CHT.fbk[1],Under More: tell the app maker what should be better.,
+CHT.rank[0],SSL Nations Ranking in the app,
+CHT.rank[1],"All 132 nations with continent filter, search, history back to 2025 and each nation's best skippers and crews.",
+CHT.pos[0],Positions checked,
+CHT.pos[1],Every sailor's position compared with the team pages and the Rio jersey numbers – several positions are shown where they differ.,
+CHT.linkin[0],No more jumps to other sites,
+CHT.linkin[1],Ranking and qualifier links now open inside the app.,
+CHT.compass[0],Clearer wind compass,
+CHT.compass[1],"The yellow wedge shows where the wind comes from, the wind speed sits right in the middle.",
+CHT.tap[0],Tap any team or sailor,
+CHT.tap[1],"Team and sailor names now open their page everywhere – tables, results, settings and more.",
+CHT.pl[0],Now in Polish,
+CHT.pl[1],Polski! The app now speaks 18 languages.,
+CHT.photos[0],Official portraits for the 1/16 teams,
+CHT.photos[1],"Japan, Czechia, Chile, Ecuador, Hungary, Peru, South Africa and Thailand – fresh from the event studio.",
+CHT.bright[0],Brightness button,
+CHT.bright[1],"Switch between Matchboard blue, day and night right in the header.",
+CHT.logo[0],Bigger SSL logo,
+CHT.logo[1],A little more presence at the top.,
+CHT.tabs[0],New tab bar,
+CHT.tabs[1],"Competition (rounds + matchboard), Teams and Sailors each have their own tab.",
+CHT.settings[0],Settings,
+CHT.settings[1],"Notifications, start reminders, quiet hours, units, local times and spoiler-free mode in one place.",
+CHT.pages[0],Real pages,
+CHT.pages[1],"Teams, sailors and races open as full pages with their own link – back always goes one step back.",
+CHT.anim[0],Smooth round switching,
+CHT.anim[1],"Swipe between rounds, with an animation like in the big apps.",
+CHT.install[0],Easier to install,
+CHT.install[1],An Install button next to the language – the app on your home screen in 20 seconds.,
+CHT.track[0],Live tracking inside the app,
+CHT.track[1],"Every boat on the map, live ranking, course and replay – no more external site.",
+CHT.profiles[0],New sailor profiles,
+CHT.profiles[1],"Bio, career, Olympic and world championship medals from the official SSL profiles.",
+CHT.favS[0],Follow sailors,
+CHT.favS[1],Tap ☆ on a sailor – your sailors get their own list.,
+CHT.langs6[0],Six more languages,
+CHT.langs6[1],"Japanese, Thai, Malay, Hungarian, Czech and Ukrainian.",
+CHT.stream[0],Live stream in the app,
+CHT.stream[1],With preview image and countdown until the broadcast starts.,
+CHT.spoil[0],Spoiler-free mode,
+CHT.spoil[1],Hide results until you've watched the race.,
+CHT.wx[0],Sailing weather per race,
+CHT.wx[1],"Wind, gusts, direction, waves and tide for every start time.",
+CHT.cmp[0],Team comparison,
+CHT.cmp[1],Two teams side by side – head to head and numbers from Rio.,
+CHT.vids[0],Highlights,
+CHT.vids[1],The latest SSL videos right in the app.,
+CHT.venue[0],Venue,
+CHT.venue[1],Marina da Glória with map and directions.,
+CHT.race[0],Race details,
+CHT.race[1],"Tap a race for result, group standings, wind and stream.",
+CHT.push[0],Push notifications,
+CHT.push[1],Results of your teams straight to your phone.,
+CHT.cal[0],Calendar,
+CHT.cal[1],All races of your team in your calendar – updates itself.,
+CHT.shareimg[0],Share as image,
+CHT.shareimg[1],Group tables as a picture for WhatsApp & co.,
+CHT.app[0],Install as an app,
+CHT.app[1],"Full screen, with icon, updates itself.",
+CONT.[0],Africa,非洲
+CONT.[1],Asia,亚洲
+CONT.[2],Europe,欧洲
+CONT.[3],Oceania,大洋洲
+CONT.[4],Pan-America,泛美
+NWS,News,新闻
+NSRC,Source: worldofsailors.com (Star Sailors League),来源：worldofsailors.com（Star Sailors League）
+RRS.[0],Start,起航
+RRS.[1],Race time,比赛用时
+RRS.[2],Winner,获胜
+RRS.[3],The full report for this race follows here.,本场比赛的完整报告稍后在此发布。
+ALSO,also,也任
+WXF,Wind from,风向（来自）
+NXS.[0],On schedule,准时
+NXS.[1],Starting soon,即将起航
+NXS.[2],Start delayed,起航推迟
+NXS.[3],Delayed,推迟
+NXS.[4],Racing,比赛中
+NXS.[5],t=>`Not before ${t}`,t=>`${t} 前不开始`
+NXW,Start pending,等待起航
+NXP,Probably delayed,可能推迟
+ORD,"n=>n+(n%10==1&&n!=11?""st"":n%10==2&&n!=12?""nd"":n%10==3&&n!=13?""rd"":""th"")","n=>""第""+n+""名"""
+OSL,en,zh-Hans
+FIX.GBR,Great Britain,英国
+FIX.TAH,Tahiti,塔希提
+FIX.MYA,Myanmar,缅甸
+FIX.USA,USA,美国

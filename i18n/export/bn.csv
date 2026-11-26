@@ -1,0 +1,700 @@
+key,English,বাংলা
+S.rounds,Rounds,রাউন্ড
+S.bracket,Matchboard,ম্যাচবোর্ড
+S.teams,Teams,দল
+S.official,Official results,অফিসিয়াল ফলাফল
+S.updated,Updated,আপডেট
+S.ago,"m=>m<1?""just now"":m<60?`${m} min ago`:`${Math.round(m/60)} h ago`","m=>m<1?""এইমাত্র"":m<60?`${m} মিনিট আগে`:`${Math.round(m/60)} ঘণ্টা আগে`"
+S.rio,Rio time,রিও সময়
+S.offline,offline – last saved data,অফলাইন – শেষ সংরক্ষিত তথ্য
+S.rn.r32,1/32 Finals,1/32 ফাইনাল
+S.rn.r16,1/16 Finals,1/16 ফাইনাল
+S.rn.r8,1/8 Finals,1/8 ফাইনাল
+S.rn.r4,Quarter-finals,কোয়ার্টার ফাইনাল
+S.rn.sf,Semi-finals,সেমিফাইনাল
+S.rn.pf,Petit Final,পেটিট ফাইনাল
+S.rn.f,Grand Final,গ্র্যান্ড ফাইনাল
+S.group,Group,গ্রুপ
+S.decided,decided,নির্ধারিত
+S.racing,racing,চলছে
+S.open,open,বাকি
+S.st.done,completed,শেষ
+S.st.live,in progress,চলছে
+S.st.up,upcoming,আসন্ন
+S.races,"n=>`${n} race${n>1?""s"":""""} per group`",n=>`প্রতি গ্রুপে ${n}টি রেস`
+S.upNext,Up next,পরবর্তী
+S.startsIn,"d=>d<=0?""starts today"":d==1?""starts tomorrow"":`starts in ${d} days`","d=>d<=0?""আজ শুরু"":d==1?""আগামীকাল শুরু"":`${d} দিন পর শুরু`"
+S.groupsOf4,"n=>`${n} group${n>1?""s"":""""} of four`",n=>`চার দলের ${n}টি গ্রুপ`
+S.oneRace,One race – the finishing order decides.,একটিই রেস – শেষ করার ক্রমই সিদ্ধান্ত।
+S.through,through,পরের পর্বে
+S.out,out,বাদ
+S.toFinal,to Final,ফাইনালে
+S.toPetit,to Petit Final,পেটিট ফাইনালে
+S.medals[0],Gold,স্বর্ণ
+S.medals[1],Silver,রৌপ্য
+S.medals[2],Bronze,ব্রোঞ্জ
+S.medals[3],4th,চতুর্থ
+S.pts,Pts,পয়েন্ট
+S.outIn,"(r,g,p)=>`Out in the ${r} (Group ${g}, ${p})`","(r,g,p)=>`${r}-এ বাদ (গ্রুপ ${g}, ${p})`"
+S.gf,m=>`Grand Final: ${m}`,m=>`গ্র্যান্ড ফাইনাল: ${m}`
+S.finished,p=>`Finished ${p}`,p=>`${p} হয়ে শেষ`
+S.thrTbc,Through – next group to be confirmed,পরের পর্বে – পরের গ্রুপ এখনো ঠিক হয়নি
+S.seeded,"(r,g,d)=>`Seeded – enters the ${r}, Group ${g}, ${d}`","(r,g,d)=>`সিডেড – ${r}-এ প্রবেশ, গ্রুপ ${g}, ${d}`"
+S.racingNow,Racing now,এখন রেস চলছে
+S.nations,n=>`${n} nations`,n=>`${n}টি দেশ`
+S.stillIn,still in,এখনো টিকে আছে
+S.outN,out,বাদ
+S.search,"Search nation, nickname or sailor","দেশ, ডাকনাম বা নাবিক খুঁজুন"
+S.all,All,সব
+S.chipIn,Still in,টিকে আছে
+S.chipOut,Out,বাদ
+S.mine,★ My teams,★ আমার দল
+S.sStatus,Status,অবস্থা
+S.sRank,Ranking,র‍্যাঙ্কিং
+S.sAz,A–Z,A–Z
+S.noTeam,No team found.,কোনো দল পাওয়া যায়নি।
+S.rank,Rank,র‍্যাঙ্ক
+S.captain,Captain,অধিনায়ক
+S.helm,Helm,হেলম
+S.ranking,SSL Nations Ranking,SSL নেশনস র‍্যাঙ্কিং
+S.rankBoard,Ranking board ↗,র‍্যাঙ্কিং বোর্ড ↗
+S.entered,Entered Rio at,রিওতে প্রবেশ
+S.showRound,Open round ›,রাউন্ড খুলুন ›
+S.gc23,Gold Cup 2023,গোল্ড কাপ 2023
+S.br23,2023 bracket ›,2023 ব্র্যাকেট ›
+S.status,Status,অবস্থা
+S.stIn,Still in,টিকে আছে
+S.stOut,Out,বাদ
+S.whereEnded,Where it ended ›,কোথায় শেষ হলো ›
+S.curGroup,Current group ›,বর্তমান গ্রুপ ›
+S.background,Background,পটভূমি
+S.road,Road to Rio,রিওর পথে
+S.story,Story,গল্প
+S.site,Team site,দলের সাইট
+S.qualRes,Qualifier results ↗,বাছাইপর্বের ফলাফল ↗
+S.sslRank,SSL Nations Ranking ↗,SSL নেশনস র‍্যাঙ্কিং ↗
+S.resRio,Results in Rio,রিওতে ফলাফল
+S.photos,Crew photos,ক্রুর ছবি
+S.byPos,Crew by position,পজিশন অনুযায়ী ক্রু
+S.leader,Team leader,দলনেতা
+S.wider,Wider squad · position TBC,বড় স্কোয়াড · পজিশন ঠিক হয়নি
+S.squadNote,"(n,p)=>`${n} names in the squad. 8–10 sail each race and the line-up can change from day to day. Positions and numbers from the official team site; portraits from the Gold Cup Rio graphics${p?"""":"" (none yet for this team)""}.`","(n,p)=>`স্কোয়াডে ${n}টি নাম। প্রতি রেসে 8–10 জন সেইল করেন এবং লাইন-আপ প্রতিদিন বদলাতে পারে। পজিশন ও নম্বর অফিসিয়াল দলের সাইট থেকে; ছবি গোল্ড কাপ রিও গ্রাফিক্স থেকে${p?"""":"" (এই দলের এখনো নেই)""}।`"
+S.noSquad,No squad list published for this team yet.,এই দলের তালিকা এখনো প্রকাশিত হয়নি।
+S.showPath,Show path in bracket,ব্র্যাকেটে পথ দেখান
+S.copyLink,Copy link,লিংক কপি করুন
+S.copied,Link copied,লিংক কপি হয়েছে
+S.close,Close,বন্ধ করুন
+S.jersey,Jersey,জার্সি
+S.numTbc,Number TBC,নম্বর ঠিক হয়নি
+S.capTag,Captain,অধিনায়ক
+S.favOn,Following,অনুসরণ করছেন
+S.favOff,Follow,অনুসরণ করুন
+S.brHint,Tap a team for crew and history. Swipe for later rounds.,ক্রু ও ইতিহাসের জন্য দলে ট্যাপ করুন। পরের রাউন্ডের জন্য সোয়াইপ করুন।
+S.h23,Gold Cup 2023,গোল্ড কাপ 2023
+S.champ23,Gran Canaria · champion,গ্রান কানারিয়া · চ্যাম্পিয়ন
+S.hl,highlighted,হাইলাইট করা
+S.tap26,Tap a team for its Rio 2026 page.,রিও 2026 পাতার জন্য দলে ট্যাপ করুন।
+S.off23,Official 2023 results ↗,2023-এর অফিসিয়াল ফলাফল ↗
+S.myTeams,My teams,আমার দল
+S.myHint,Tap ☆ on a team page to follow it.,কোনো দল অনুসরণ করতে তার পাতায় ☆ ট্যাপ করুন।
+S.foot,"Scoring: 4-3-2-1 points per race, double points in the last race of each group (8-6-4-2). Top two of each group advance. Results refresh automatically from the official SSL results page. Ranking = SSL Nations Ranking at the start of the Final Series.","পয়েন্ট: প্রতি রেসে 4-3-2-1, প্রতিটি গ্রুপের শেষ রেসে দ্বিগুণ (8-6-4-2)। প্রতি গ্রুপের সেরা দুই দল এগোয়। ফলাফল অফিসিয়াল SSL পাতা থেকে নিজে থেকে আপডেট হয়। র‍্যাঙ্কিং = ফাইনাল সিরিজের শুরুতে SSL নেশনস র‍্যাঙ্কিং।"
+S.notes.ocs,* OCS (early start)  ** Standard penalty,* OCS (আগাম স্টার্ট)  ** সাধারণ পেনাল্টি
+S.theme.auto,🌊 Matchboard,🌊 ম্যাচবোর্ড
+S.theme.light,☀️ Day,☀️ দিন
+S.theme.dark,🌙 Night,🌙 রাত
+S.g23.champ,Champion (Gold),চ্যাম্পিয়ন (স্বর্ণ)
+S.g23.second,Runner-up (Silver),রানার্স-আপ (রৌপ্য)
+S.g23.third,3rd (Bronze),তৃতীয় (ব্রোঞ্জ)
+S.g23.fourth,4th – Grand Final,চতুর্থ – গ্র্যান্ড ফাইনাল
+S.g23.sf,Semi-finals,সেমিফাইনাল
+S.g23.qf,Quarter-finals,কোয়ার্টার ফাইনাল
+S.g23.r8,1/8 Finals,1/8 ফাইনাল
+S.g23.r16,1/16 Finals,1/16 ফাইনাল
+S.g23.r32,1/32 Finals,1/32 ফাইনাল
+S.g23.none,Didn't race the 2023 Final Series,2023 ফাইনাল সিরিজে ছিল না
+S.ev.asia,Asian Qualifiers,এশিয়ান বাছাইপর্ব
+S.ev.afoc,African & Oceanian Qualifiers,আফ্রিকা ও ওশেনিয়া বাছাইপর্ব
+S.ev.eu1,European Qualifiers 1,ইউরোপীয় বাছাইপর্ব 1
+S.ev.eu2,European Qualifiers 2,ইউরোপীয় বাছাইপর্ব 2
+S.ev.pan,Pan-American Qualifiers,প্যান-আমেরিকান বাছাইপর্ব
+S.route.won,"(e,g)=>`Won the ${e}, Group ${g}`","(e,g)=>`${e}, গ্রুপ ${g} জয়ী`"
+S.route.pos,"(p,e,g)=>`${p} in the ${e}, Group ${g}`","(p,e,g)=>`${e}, গ্রুপ ${g}-এ ${p}`"
+S.route.lc,"(e,g)=>`3rd in the ${e} Group ${g}, then won the Last Chance race`","(e,g)=>`${e} গ্রুপ ${g}-এ তৃতীয়, তারপর লাস্ট চান্স রেস জয়`"
+S.route.ranking,Qualified through the SSL Nations Ranking,SSL নেশনস র‍্যাঙ্কিং দিয়ে যোগ্যতা
+S.route.host,"Host nation, seeded into the 1/8 Finals","আয়োজক দেশ, 1/8 ফাইনালে সিডেড"
+S.route.seeded,r=>`Seeded into the ${r} via the SSL Nations Ranking`,r=>`SSL নেশনস র‍্যাঙ্কিং দিয়ে ${r}-এ সিডেড`
+S.roles.Helm,Steers the boat,নৌকা চালান
+S.roles.Tactician,Strategy & calls,কৌশল ও সিদ্ধান্ত
+S.roles.Main Trimmer,Mainsail,মেইনসেইল
+S.roles.Trimmer,Jib & gennaker,জিব ও জেনেকার
+S.roles.Grinder,Powers the winches,উইঞ্চ চালান
+S.roles.Pit,Halyards & controls,হ্যালিয়ার্ড ও কন্ট্রোল
+S.roles.Mid-Bow,Mast & foredeck,মাস্তুল ও ফোরডেক
+S.roles.Bow,Bow & starts,বো ও স্টার্ট
+S.roles.Floater,Utility / reserve,সহায়ক / রিজার্ভ
+S.back,‹ Back,‹ ফিরে যান
+S.position,Position,পজিশন
+S.team,Team,দল
+S.indRank,SSL ranking,SSL র‍্যাঙ্কিং
+S.highlights,Highlights,হাইলাইটস
+S.profile,SSL profile ↗,SSL প্রোফাইল ↗
+S.findProfile,Find SSL profile ↗,SSL প্রোফাইল খুঁজুন ↗
+S.ws,World Sailing ↗,ওয়ার্ল্ড সেইলিং ↗
+S.mates,Teammates,সতীর্থ
+S.posTbc,Position TBC,পজিশন ঠিক হয়নি
+S.noInfo,No further details published yet – the links below search the official profiles.,আর কোনো তথ্য এখনো প্রকাশিত হয়নি – নিচের লিংকে অফিসিয়াল প্রোফাইল খোঁজা যায়।
+S.today,Today,আজ
+S.raceDay,"(n,t)=>`race day ${n} of ${t}`","(n,t)=>`রেস দিবস ${n} / ${t}`"
+S.finalDay,Final day – last race counts double,শেষ দিন – শেষ রেসে দ্বিগুণ পয়েন্ট
+S.stream,▶ Live stream,▶ লাইভ স্ট্রিম
+S.tracking,Tracking,ট্র্যাকিং
+S.schedule,Schedule,সূচি
+S.adv,"(a,b)=>`1st → ${a} · 2nd → ${b}`","(a,b)=>`1ম → ${a} · 2য় → ${b}`"
+S.advSf,1st–2nd → Final · 3rd–4th → Petit Final,1–2 → ফাইনাল · 3–4 → পেটিট ফাইনাল
+S.clinched,✓ through,✓ পরের পর্বে
+S.elim,out,বাদ
+S.secNow,In the current round,বর্তমান রাউন্ডে
+S.secSeeded,r=>`Seeded – enter in the ${r}`,r=>`সিডেড – ${r}-এ প্রবেশ`
+S.secOut,Out,বাদ
+S.lineup,Line-up,লাইন-আপ
+S.howT,How the Gold Cup works,গোল্ড কাপ কীভাবে চলে
+S.how[0],"National teams, one SSL47 boat each – all boats identical and provided by the organisers.","জাতীয় দল, প্রত্যেকের একটি করে SSL47 নৌকা – সব নৌকা একই রকম, আয়োজকরা দেন।"
+S.how[1],Groups of four. 4-3-2-1 points per race; the last race of each group counts double (8-6-4-2).,চার দলের গ্রুপ। প্রতি রেসে 4-3-2-1 পয়েন্ট; প্রতি গ্রুপের শেষ রেস দ্বিগুণ (8-6-4-2)।
+S.how[2],The top two of every group advance; better-ranked nations enter later rounds.,প্রতি গ্রুপের সেরা দুই দল এগোয়; ভালো র‍্যাঙ্কের দেশ পরের রাউন্ডে যোগ দেয়।
+S.how[3],Semi-finals and finals are a single race each; the Grand Final decides the world champion.,সেমিফাইনাল ও ফাইনাল একটি করে রেস; গ্র্যান্ড ফাইনাল বিশ্বচ্যাম্পিয়ন ঠিক করে।
+S.race,Race,রেস
+S.nextRace,Next race,পরের রেস
+S.todayRaces,Today's races,আজকের রেস
+S.rioT,Rio time,রিও সময়
+S.loc,your time,আপনার সময়
+S.onWater,on the water,পানিতে
+S.done,done,শেষ
+S.inX,"m=>m<60?`in ${m} min`:`in ${Math.floor(m/60)} h ${String(m%60).padStart(2,""0"")}`","m=>m<60?`${m} মিনিট পর`:`${Math.floor(m/60)} ঘ ${String(m%60).padStart(2,""0"")} মি পর`"
+S.firstStart,First start,প্রথম স্টার্ট
+S.schedT,Race schedule,রেসের সূচি
+S.schedNote,"Times are Rio de Janeiro time (UTC−3), from the official schedule. Its groups G1–G4 are shown here as groups A–D.","সময় রিও ডি জেনেইরোর (UTC−3), অফিসিয়াল সূচি থেকে। সেখানকার গ্রুপ G1–G4 এখানে A–D হিসেবে দেখানো হয়েছে।"
+S.needT,Before the final race (double points),শেষ রেসের আগে (দ্বিগুণ পয়েন্ট)
+S.need.sure,"through, whatever happens","যা-ই হোক, পরের পর্বে"
+S.need.gone,"out, whatever happens","যা-ই হোক, বাদ"
+S.need.win,a win is enough,জয়ই যথেষ্ট
+S.need.top,k=>`${k} or better is enough`,k=>`${k} বা ভালো হলেই যথেষ্ট`
+S.need.mustWin,must win,জিততেই হবে
+S.need.help,and needs help from the others,এবং অন্যদের সাহায্য দরকার
+S.need.maybe,k=>`${k} may be enough – depends on the others`,k=>`${k} যথেষ্ট হতে পারে – অন্যদের ওপর নির্ভর`
+S.need.iff,"(k,c)=>`${k} is enough if ${c}`","(k,c)=>`${k} যথেষ্ট যদি ${c}`"
+S.need.mustIf,"c=>`must win, and only if ${c}`","c=>`জিততেই হবে, আর শুধু যদি ${c}`"
+S.need.ahead,R=>`ahead of ${R}`,R=>`${R}-এর আগে`
+S.need.behind,R=>`behind ${R}`,R=>`${R}-এর পেছনে`
+S.need.notWin,R=>`${R} doesn't win`,R=>`${R} না জেতে`
+S.need.last,R=>`${R} finishes last`,R=>`${R} শেষে থাকে`
+S.need.wins,R=>`${R} wins`,R=>`${R} জেতে`
+S.need.tie,level on points possible – tie-break decides,সমান পয়েন্ট সম্ভব – টাই-ব্রেক ঠিক করবে
+S.needNote,"Worked out from the current points; ≈ means teams could finish level, then the official tie-break decides.","বর্তমান পয়েন্ট থেকে হিসাব; ≈ মানে দলগুলো সমান হতে পারে, তখন অফিসিয়াল টাই-ব্রেক ঠিক করে।"
+S.install,Add to Home Screen for the app icon.,অ্যাপ আইকনের জন্য হোম স্ক্রিনে যোগ করুন।
+S.home,Home,হোম
+S.more,More,আরও
+S.sailors,Sailors,নাবিক
+S.welcome,Final Series · Rio de Janeiro,ফাইনাল সিরিজ · রিও ডি জেনেইরো
+S.dates,19 Nov – 13 Dec 2026 · Marina da Glória,19 নভে – 13 ডিসে 2026 · মারিনা দা গ্লোরিয়া
+S.progress,Tournament,টুর্নামেন্ট
+S.latest,Latest results,সর্বশেষ ফলাফল
+S.explore,Explore,ঘুরে দেখুন
+S.tiles.board[0],Rounds,রাউন্ড
+S.tiles.board[1],"Groups, points, times","গ্রুপ, পয়েন্ট, সময়"
+S.tiles.bracket[0],Matchboard,ম্যাচবোর্ড
+S.tiles.bracket[1],The whole draw at a glance,পুরো ড্র এক নজরে
+S.tiles.teams[0],Teams,দল
+S.tiles.teams[1],"40 nations, crews, rankings","40টি দেশ, ক্রু, র‍্যাঙ্কিং"
+S.tiles.sailors[0],Sailors,নাবিক
+S.tiles.sailors[1],Search every sailor,সব নাবিক খুঁজুন
+S.tiles.qualifying[0],Qualifying,বাছাইপর্ব
+S.tiles.qualifying[1],How the teams got to Rio,দলগুলো কীভাবে রিওতে এলো
+S.tiles.gc2023[0],Gold Cup 2023,গোল্ড কাপ 2023
+S.tiles.gc2023[1],Last edition's bracket,গত আসরের ব্র্যাকেট
+S.sailorsT,n=>`${n} sailors`,n=>`${n} জন নাবিক`
+S.sSearch,"Search sailor, team or position","নাবিক, দল বা পজিশন খুঁজুন"
+S.withPhoto,With photo,ছবিসহ
+S.allS,All,সব
+S.moreT,More,আরও
+S.lang,Language,ভাষা
+S.design,Design,ডিজাইন
+S.share,Share app,অ্যাপ শেয়ার করুন
+S.shared,Link copied,লিংক কপি হয়েছে
+S.links,Links,লিংক
+S.about,About this app,এই অ্যাপ সম্পর্কে
+S.aboutT,Unofficial companion app for the SSL Gold Cup Rio 2026. Results update automatically from the official SSL results page.,SSL গোল্ড কাপ রিও 2026-এর অনানুষ্ঠানিক সঙ্গী অ্যাপ। ফলাফল অফিসিয়াল SSL ফলাফল পাতা থেকে নিজে থেকে আপডেট হয়।
+S.inst.t,Install the app,অ্যাপ ইনস্টল করুন
+S.inst.d,"Put SSL Gold Cup on your home screen – opens like an app, full screen, with live results.","SSL গোল্ড কাপ হোম স্ক্রিনে রাখুন – অ্যাপের মতো, পূর্ণ স্ক্রিনে, লাইভ ফলাফলসহ খোলে।"
+S.inst.b,Install,ইনস্টল
+S.inst.done,Installed ✓,ইনস্টল হয়েছে ✓
+S.inst.ios[0],Tap the Share button,শেয়ার বোতামে ট্যাপ করুন
+S.inst.ios[1],at the bottom of Safari (top right on iPad).,Safari-র নিচে (iPad-এ ওপরে ডানে)।
+S.inst.ios[2],Scroll down and tap “Add to Home Screen”.,নিচে স্ক্রল করে “হোম স্ক্রিনে যোগ করুন” ট্যাপ করুন।
+S.inst.ios[3],Tap “Add” – done.,“যোগ করুন” ট্যাপ করুন – হয়ে গেল।
+S.inst.iosOther,On iPhone this works in Safari: open this page in Safari first.,iPhone-এ এটি Safari-তে কাজ করে: আগে পাতাটি Safari-তে খুলুন।
+S.inst.android[0],Tap the ⋮ menu in the top right of your browser.,ব্রাউজারের ওপরে ডানে ⋮ মেনুতে ট্যাপ করুন।
+S.inst.android[1],Tap “Install app” or “Add to Home screen”.,“অ্যাপ ইনস্টল করুন” বা “হোম স্ক্রিনে যোগ করুন” ট্যাপ করুন।
+S.inst.android[2],Confirm with “Install”.,“ইনস্টল” দিয়ে নিশ্চিত করুন।
+S.inst.desk[0],"Click the install icon in the address bar,","অ্যাড্রেস বারে ইনস্টল আইকনে ক্লিক করুন,"
+S.inst.desk[1],or open the browser menu and choose “Install SSL Gold Cup”.,অথবা ব্রাউজার মেনু খুলে “SSL Gold Cup ইনস্টল করুন” বেছে নিন।
+S.inst.how,How to install,কীভাবে ইনস্টল করবেন
+S.inst.hide,Not now,এখন না
+S.inst.installedNote,You're using the installed app.,আপনি ইনস্টল করা অ্যাপ ব্যবহার করছেন।
+S.champT,World Champion · Gold Cup 2026,বিশ্বচ্যাম্পিয়ন · গোল্ড কাপ 2026
+S.standT,Final standings,চূড়ান্ত অবস্থান
+S.statsT,In numbers,সংখ্যায়
+S.stRaces,Races,রেস
+S.stWins,Race wins,রেস জয়
+S.stAvg,Avg. place,গড় স্থান
+S.stPts,Points in Rio,রিওতে পয়েন্ট
+S.stHist,Race by race,রেস ধরে ধরে
+S.calBtn,📅 Races in my calendar,📅 রেস আমার ক্যালেন্ডারে
+S.calT,Races in your calendar,রেস আপনার ক্যালেন্ডারে
+S.calSub,"Subscribe (iPhone, Mac, Outlook)","সাবস্ক্রাইব (iPhone, Mac, Outlook)"
+S.calG,Add to Google Calendar,Google ক্যালেন্ডারে যোগ করুন
+S.calDl,Download file (.ics),ফাইল ডাউনলোড (.ics)
+S.calAll,All races in my calendar,সব রেস আমার ক্যালেন্ডারে
+S.calNote,"A subscription updates itself: when a team qualifies, its next races appear automatically.",সাবস্ক্রিপশন নিজে থেকে আপডেট হয়: দল এগোলে তার পরের রেস নিজেই যুক্ত হয়।
+S.wxT,Wind forecast · Marina da Glória,বাতাসের পূর্বাভাস · মারিনা দা গ্লোরিয়া
+S.wxSrc,"Forecast by Open-Meteo, not measured on the course.","Open-Meteo-র পূর্বাভাস, কোর্সে মাপা নয়।"
+S.trk,Tracking,ট্র্যাকিং
+S.delayed,m=>`Results may be delayed – last successful check ${m} min ago.`,m=>`ফলাফলে দেরি হতে পারে – শেষ সফল যাচাই ${m} মিনিট আগে।`
+S.shareImg,Share as image,ছবি হিসেবে শেয়ার করুন
+S.imgDone,Image ready,ছবি তৈরি
+S.pT,Notifications,নোটিফিকেশন
+S.pAll,All results,সব ফলাফল
+S.pAllSub,A notification after every race,প্রতি রেসের পর একটি নোটিফিকেশন
+S.pTeamOff,🔔 Notify me about this team,🔔 এই দলের খবর জানান
+S.pTeamOn,🔔 Notifications on ✓,🔔 নোটিফিকেশন চালু ✓
+S.pTeams,Your teams,আপনার দল
+S.pNone,No team yet: open a team and tap 🔔.,এখনো কোনো দল নেই: একটি দল খুলে 🔔 ট্যাপ করুন।
+S.pNote,You only get race results and who goes through. Switch off here any time.,শুধু রেসের ফলাফল আর কে এগোল তা জানানো হবে। যেকোনো সময় এখানে বন্ধ করুন।
+S.pIOS,"On iPhone, notifications only work in the installed app: install it, open it from the home screen, then switch them on here.","iPhone-এ নোটিফিকেশন শুধু ইনস্টল করা অ্যাপে আসে: অ্যাপ ইনস্টল করুন, হোম স্ক্রিন থেকে খুলুন, তারপর এখানে চালু করুন।"
+S.pDenied,Notifications are blocked. Allow them for this app in your device settings.,নোটিফিকেশন বন্ধ করা আছে। ডিভাইসের সেটিংসে এই অ্যাপের জন্য অনুমতি দিন।
+S.pErr,That didn't work – please try again in a moment.,হলো না – একটু পরে আবার চেষ্টা করুন।
+S.pOnT,Notifications on,নোটিফিকেশন চালু
+S.pOffT,Notifications off,নোটিফিকেশন বন্ধ
+S.pUnsup,This browser can't receive notifications.,এই ব্রাউজার নোটিফিকেশন পায় না।
+S.obT,Get the app,অ্যাপটি নিন
+S.obSub,"Free, no App Store needed – on your home screen in 20 seconds.","বিনামূল্যে, অ্যাপ স্টোর লাগবে না – 20 সেকেন্ডে আপনার হোম স্ক্রিনে।"
+S.obPerks[0],Live results in one tap,এক ট্যাপে লাইভ ফলাফল
+S.obPerks[1],"Full screen, like a real app",আসল অ্যাপের মতো পূর্ণ স্ক্রিন
+S.obPerks[2],Notifications for your team,আপনার দলের নোটিফিকেশন
+S.obBtn,Install now,এখনই ইনস্টল করুন
+S.obLater,Later – look around in the browser first,পরে – আগে ব্রাউজারে দেখি
+S.obSteps,How it works,কীভাবে করবেন
+S.obStep,Step,ধাপ
+S.ios26[0],Tap ⋯ next to the address bar,অ্যাড্রেস বারের পাশে ⋯ ট্যাপ করুন
+S.ios26[1],Tap “Share”,“শেয়ার” ট্যাপ করুন
+S.ios26[2],Scroll down and tap “Add to Home Screen”,নিচে স্ক্রল করে “হোম স্ক্রিনে যোগ করুন” ট্যাপ করুন
+S.ios26[3],Leave “Open as Web App” on and tap “Add”,“ওয়েব অ্যাপ হিসেবে খুলুন” চালু রেখে “যোগ করুন” ট্যাপ করুন
+S.iosOld[0],Tap the Share button at the bottom,নিচে শেয়ার বোতামে ট্যাপ করুন
+S.iosOld[1],Scroll down and tap “Add to Home Screen”,নিচে স্ক্রল করে “হোম স্ক্রিনে যোগ করুন” ট্যাপ করুন
+S.iosOld[2],Tap “Add” in the top right,ওপরে ডানে “যোগ করুন” ট্যাপ করুন
+S.iosAlt,"Easiest in Safari: copy the link, open Safari and paste it.",Safari-তে সবচেয়ে সহজ: লিংক কপি করে Safari খুলে পেস্ট করুন।
+S.inApp,This page is open inside another app (e.g. WhatsApp or Instagram). Installing only works in the browser: tap ⋯ and choose “Open in browser” – or copy the link and open it in Safari or Chrome.,পাতাটি অন্য একটি অ্যাপের (যেমন WhatsApp বা Instagram) ভেতরে খোলা। ইনস্টল শুধু ব্রাউজারে হয়: ⋯ ট্যাপ করে “ব্রাউজারে খুলুন” বেছে নিন – অথবা লিংক কপি করে Safari বা Chrome-এ খুলুন।
+S.copy,Copy link,লিংক কপি করুন
+S.done2,Then open SSL Gold Cup from your home screen.,তারপর হোম স্ক্রিন থেকে SSL Gold Cup খুলুন।
+S.ui.share,Share,শেয়ার
+S.ui.home,Add to Home Screen,হোম স্ক্রিনে যোগ করুন
+S.ui.add,Add,যোগ করুন
+S.ui.web,Open as Web App,ওয়েব অ্যাপ হিসেবে খুলুন
+S.ui.cancel,Cancel,বাতিল
+S.ui.ainst,Install app,অ্যাপ ইনস্টল করুন
+S.ui.aok,Install,ইনস্টল
+S.trkOpen,📍 Watch live tracking,📍 লাইভ ট্র্যাকিং দেখুন
+S.trkReplay,📍 Replay the race (tracking),📍 রেস আবার দেখুন (ট্র্যাকিং)
+S.trkNone,Tracking appears here as soon as Georacing has set up this race.,Georacing রেসটি যুক্ত করলেই ট্র্যাকিং এখানে দেখা যাবে।
+S.trkExt,Open in Georacing ↗,Georacing-এ খুলুন ↗
+S.trkHint,"Every boat as a dot on the map – live during the race, as a replay afterwards.","প্রতিটি নৌকা মানচিত্রে একটি বিন্দু – রেসের সময় লাইভ, পরে রিপ্লে।"
+S.rcRes,Result of this race,এই রেসের ফলাফল
+S.rcTeams,Teams in this race,এই রেসের দল
+S.rcStand,Group so far,গ্রুপ এ পর্যন্ত
+S.rcPts,pts,পয়েন্ট
+S.rcGroup,Show group on the Matchboard,ম্যাচবোর্ডে গ্রুপ দেখান
+S.rcTBD,Teams not decided yet,দল এখনো ঠিক হয়নি
+S.qrT,Scan with the phone camera – the app opens right away.,ফোনের ক্যামেরা দিয়ে স্ক্যান করুন – অ্যাপ সঙ্গে সঙ্গে খুলবে।
+S.shareNow,Share…,শেয়ার…
+S.qsep,"n=>""▲ advance""","n=>""▲ পরের পর্বে"""
+S.shareSub,"Send via WhatsApp, Messages & co.","WhatsApp, মেসেজ ইত্যাদিতে পাঠান"
+S.shareMsg,"SSL Gold Cup Rio 2026 – live results, race times and all teams:","SSL গোল্ড কাপ রিও 2026 – লাইভ ফলাফল, রেসের সময় ও সব দল:"
+S.sCaps,Captains,অধিনায়করা
+S.sTeams,Crews,ক্রু
+S.sHint,Tap a team to see its crew – teams still in the race come first.,ক্রু দেখতে দলে ট্যাপ করুন – যারা এখনো টিকে আছে তারা আগে।
+S.sTeamPage,Team page,দলের পাতা
+S.fShow,Show,দেখান
+S.fSort,Sort,সাজান
+S.spT,Spoiler-free,স্পয়লার-মুক্ত
+S.spUntil,w=>`Results hidden after ${w}`,w=>`${w}-এর পরের ফলাফল লুকানো`
+S.spNone,No hidden results right now,এখন কোনো ফলাফল লুকানো নেই
+S.spShow,Show all,সব দেখান
+S.spOff,Off,বন্ধ
+S.spRow,Spoiler-free mode,স্পয়লার-মুক্ত মোড
+S.spSub,Hide results until you have watched the race,রেস দেখা পর্যন্ত ফলাফল লুকিয়ে রাখুন
+S.spRace,Result hidden,ফলাফল লুকানো
+S.spReveal,I've watched it – show result,দেখেছি – ফলাফল দেখান
+S.spOnT,Results from today on are hidden,আজ থেকে ফলাফল লুকানো
+S.cmpBtn,⚖️ Compare,⚖️ তুলনা
+S.cmpVs,vs,বনাম
+S.cmpPick,Pick a team to compare with.,তুলনার জন্য একটি দল বেছে নিন।
+S.h2hT,Head to head,মুখোমুখি
+S.h2hSub,races finished ahead,রেসে আগে শেষ
+S.h2hNone,No races against each other yet.,এখনো একে অপরের বিপক্ষে রেস হয়নি।
+S.cmpNote,Numbers from the races in Rio; ranking = SSL Nations Ranking.,রিওর রেসের সংখ্যা; র‍্যাঙ্ক = SSL নেশনস র‍্যাঙ্কিং।
+S.vidT,🎬 Highlights & videos,🎬 হাইলাইটস ও ভিডিও
+S.vidAll,All videos on YouTube ↗,YouTube-এ সব ভিডিও ↗
+S.vidOpen,Open on YouTube ↗,YouTube-এ খুলুন ↗
+S.vidHid,"n=>`${n} newer video${n>1?""s"":""""} hidden (spoiler-free)`",n=>`${n}টি নতুন ভিডিও লুকানো (স্পয়লার-মুক্ত)`
+S.pastL,Look back,পেছনে ফিরে
+S.vnT,Venue · Marina da Glória,ভেন্যু · মারিনা দা গ্লোরিয়া
+S.vnSub,Where it all happens – map & directions,যেখানে সব ঘটে – মানচিত্র ও পথ
+S.vnRoute,Directions,পথনির্দেশ
+S.vnApple,Apple Maps,Apple Maps
+S.vnInfo[0],"The 2016 Olympic sailing venue, on Guanabara Bay with a view of Sugarloaf Mountain.","2016 অলিম্পিকের সেইলিং ভেন্যু, গুয়ানাবারা উপসাগরে, সুগারলোফ পাহাড়ের দৃশ্যসহ।"
+S.vnInfo[1],The marina is open to the public during the event – see the boats up close and visit the athletes' village.,"ইভেন্টের সময় মারিনা সবার জন্য খোলা – কাছ থেকে নৌকা দেখুন, অ্যাথলেট ভিলেজ ঘুরে আসুন।"
+S.vnInfo[2],Racing takes place on Guanabara Bay right in front of the marina.,রেস হয় মারিনার ঠিক সামনে গুয়ানাবারা উপসাগরে।
+S.suT,Sustainability,টেকসইতা
+S.suSub,What the SSL does for the ocean and fair sport,সমুদ্র ও ন্যায্য খেলার জন্য SSL যা করে
+S.suIntro,The SSL says that for them sustainability means protecting the ocean and making the sport fairer.,SSL-এর মতে তাদের কাছে টেকসইতা মানে সমুদ্র রক্ষা আর খেলাকে আরও ন্যায্য করা।
+S.suList[0],Every SSL Gold Cup boat must have two women on board.,SSL গোল্ড কাপের প্রতিটি নৌকায় দুজন নারী থাকা বাধ্যতামূলক।
+S.suList[1],No plastic bottles in the athletes' village.,অ্যাথলেট ভিলেজে প্লাস্টিকের বোতল নেই।
+S.suList[2],A dedicated Sustainability Manager since September 2025.,সেপ্টেম্বর 2025 থেকে একজন নিবেদিত সাসটেইনেবিলিটি ম্যানেজার।
+S.suList[3],"Aligned with Clean Regattas, World Sailing's Sustainability Agenda 2030 and the IOC strategy; the goal is Platinum Clean Regattas certification.","Clean Regattas, ওয়ার্ল্ড সেইলিং-এর সাসটেইনেবিলিটি এজেন্ডা 2030 ও IOC কৌশলের সঙ্গে সামঞ্জস্যপূর্ণ; লক্ষ্য Clean Regattas প্ল্যাটিনাম সনদ।"
+S.suList[4],Beach clean-ups with the teams at the qualifiers.,বাছাইপর্বে দলগুলোকে নিয়ে সৈকত পরিষ্কার।
+S.suList[5],"Few support boats: at the 2023 Finals, four coach boats served 440 sailors.",কম সহায়ক নৌকা: 2023 ফাইনালে চারটি কোচ বোট 440 জন নাবিককে সহায়তা দিয়েছে।
+S.suMore,Read more at the SSL ↗,SSL-এ আরও পড়ুন ↗
+S.mcT,Merch,মার্চ
+S.mcSub,"Jerseys, caps & more – coming soon","জার্সি, ক্যাপ ও আরও – শিগগিরই"
+S.mcSoon,Coming soon,শিগগিরই আসছে
+S.mcTxt,"The official SSL Gold Cup Store is not open yet. As soon as it is, you can shop here.",অফিসিয়াল SSL গোল্ড কাপ স্টোর এখনো খোলেনি। খুললেই এখান থেকে কিনতে পারবেন।
+S.mcList[0],Captain's jerseys of the national teams,জাতীয় দলগুলোর অধিনায়কের জার্সি
+S.mcList[1],SSL caps,SSL ক্যাপ
+S.mcList[2],SSL47 boat and team figures as building sets,SSL47 নৌকা ও দলের ফিগার বিল্ডিং সেট
+S.mcGo,To the SSL store ↗,SSL স্টোরে যান ↗
+S.wxBtn,🌬️ Weather for sailors,🌬️ নাবিকদের জন্য আবহাওয়া
+S.wxH,Sailing weather,সেইলিং আবহাওয়া
+S.wxLoad,Loading forecast…,পূর্বাভাস লোড হচ্ছে…
+S.wxFail,The forecast could not be loaded right now.,এখন পূর্বাভাস লোড করা গেল না।
+S.wxGust,Gusts,দমকা
+S.wxDir,Direction,দিক
+S.wxPres,Pressure,চাপ
+S.wxAtStart,Forecast for the start time.,স্টার্টের সময়ের পূর্বাভাস।
+S.wxHours,Hour by hour,ঘণ্টা ধরে ধরে
+S.wxTime,Time,সময়
+S.wxWind,Wind kn,বাতাস kn
+S.wxKn,Wind in knots: mean – gusts. Arrows show where the wind blows to.,বাতাস নটে: গড় – দমকা। তীর দেখায় বাতাস কোন দিকে বইছে।
+S.wxSea,Water,পানি
+S.wxWater,Water temperature,পানির তাপমাত্রা
+S.wxTide,Tide,জোয়ার-ভাটা
+S.wxRise,rising,বাড়ছে
+S.wxFall,falling,কমছে
+S.wxHigh,High,জোয়ার
+S.wxLow,Low,ভাটা
+S.wxCur,Current,স্রোত
+S.wxCurN,Model value at the bay entrance; arrow = where it flows.,উপসাগরের মুখে মডেলের মান; তীর = স্রোতের দিক।
+S.wxWave,Swell,ঢেউ
+S.wxWaveN,"At the bay entrance, much smaller on the course.","উপসাগরের মুখে, কোর্সে অনেক কম।"
+S.wxSun,Sunrise – sunset,সূর্যোদয় – সূর্যাস্ত
+S.wxSrc2,"Forecast by Open-Meteo (weather models), not measured on the course.","Open-Meteo-র পূর্বাভাস (আবহাওয়া মডেল), কোর্সে মাপা নয়।"
+S.trkLive,Live tracking,লাইভ ট্র্যাকিং
+S.trkReplayS,Replay,রিপ্লে
+S.fcBtn,Forecast,পূর্বাভাস
+S.fcCond[0],Light wind,হালকা বাতাস
+S.fcCond[1],Medium wind,মাঝারি বাতাস
+S.fcCond[2],Fresh breeze,তাজা হাওয়া
+S.fcCond[3],Strong wind,জোরালো বাতাস
+S.fcTr.up,building,বাড়ছে
+S.fcTr.down,easing,কমছে
+S.fcTr.steady,steady,স্থির
+S.fcTr.veer,veering (clockwise),ঘড়ির কাঁটার দিকে ঘুরছে
+S.fcTr.back,backing (anti-clockwise),ঘড়ির উল্টো দিকে ঘুরছে
+S.fcNext,Next hour,পরের ঘণ্টা
+S.fcChart,"Wind 10:00–18:00 · line = mean, band = gusts, marker = start","বাতাস 10:00–18:00 · রেখা = গড়, ব্যান্ড = দমকা, চিহ্ন = স্টার্ট"
+S.fcBft,Beaufort,বোফোর্ট
+S.watchLive,Watch live,লাইভ দেখুন
+S.liveStream,Live stream,লাইভ স্ট্রিম
+S.liveNow,The race is on – watch it here,রেস চলছে – এখানে দেখুন
+S.liveNote,"If the player stays black, the stream hasn't started yet or YouTube blocks embedding – then open it on YouTube.",প্লেয়ার কালো থাকলে স্ট্রিম এখনো শুরু হয়নি বা YouTube এমবেড করতে দিচ্ছে না – তখন YouTube-এ খুলুন।
+S.achT,Achievements,সাফল্য
+S.olyT,Olympic Games,অলিম্পিক গেমস
+S.wcT,World Championship podiums,বিশ্ব চ্যাম্পিয়নশিপ পোডিয়াম
+S.ecT,Continental podiums,মহাদেশীয় পোডিয়াম
+S.clubT,Club,ক্লাব
+S.profSrc,Facts from the official SSL profile.,অফিসিয়াল SSL প্রোফাইল থেকে তথ্য।
+S.achL[0],World Champion,বিশ্বচ্যাম্পিয়ন
+S.achL[1],Olympic gold,অলিম্পিক স্বর্ণ
+S.achL[2],Olympic silver,অলিম্পিক রৌপ্য
+S.achL[3],Olympic bronze,অলিম্পিক ব্রোঞ্জ
+S.wxAtT,h=>`Forecast for ${h}`,h=>`${h}-এর পূর্বাভাস`
+S.wxTap,Tap an hour for details.,বিস্তারিত দেখতে একটি ঘণ্টায় ট্যাপ করুন।
+S.fsT,Final Series,ফাইনাল সিরিজ
+S.qsT,Qualifying Series,বাছাই সিরিজ
+S.qsLeg,Highlighted: qualified through this series. ● = in Rio via the SSL Nations Ranking. Tap a team in Rio for its page.,হাইলাইট: এই সিরিজ থেকে যোগ্যতা। ● = SSL নেশনস র‍্যাঙ্কিং দিয়ে রিওতে। রিওর দলের পাতার জন্য ট্যাপ করুন।
+S.qsNote,"The winner of each qualifying group (group C: top two) was drawn into the 1/32 Finals. 29 teams qualified for the Final Series via the SSL Ranking, with spots per continent: 12 Europe, 8 Pan-America, 6 Asia, 1 Africa, 2 Oceania.","প্রতিটি বাছাই গ্রুপের বিজয়ী (গ্রুপ C: সেরা দুই) 1/32 ফাইনালে উঠেছে। 29টি দল SSL র‍্যাঙ্কিং দিয়ে ফাইনাল সিরিজে এসেছে, মহাদেশভিত্তিক: ইউরোপ 12, প্যান-আমেরিকা 8, এশিয়া 6, আফ্রিকা 1, ওশেনিয়া 2।"
+S.reg.asia,Asia,এশিয়া
+S.reg.afoc,Africa & Oceania,আফ্রিকা ও ওশেনিয়া
+S.reg.eur,Europe,ইউরোপ
+S.reg.pam,Pan-America,প্যান-আমেরিকা
+S.fin,Final,ফাইনাল
+S.petit,Petit F.,পেটিট ফা.
+S.swipe,Swipe sideways for later rounds →,পরের রাউন্ডের জন্য পাশে সোয়াইপ করুন →
+S.road2,Road to Rio,রিওর পথে
+S.inRio,In Rio via SSL Ranking,SSL র‍্যাঙ্কিং দিয়ে রিওতে
+S.mbHint,Top two of each group advance. Tap a team for crew and history.,প্রতি গ্রুপের সেরা দুই দল এগোয়। ক্রু ও ইতিহাসের জন্য দলে ট্যাপ করুন।
+S.vmT,Event area,ইভেন্ট এলাকা
+S.vmTap,Tap the map to zoom,বড় করতে মানচিত্রে ট্যাপ করুন
+S.vmL[0],SSL47 boats,SSL47 নৌকা
+S.vmL[1],Flag pole ashore (signals),তীরে পতাকা-দণ্ড (সংকেত)
+S.vmL[2],"Village: partner stands, shop, waste sorting","ভিলেজ: পার্টনার স্টল, শপ, বর্জ্য বাছাই"
+S.vmL[3],Video wall,ভিডিও ওয়াল
+S.vmL[4],Race office & jury room,রেস অফিস ও জুরি রুম
+S.vmL[5],Sailors Lounge,সেইলার্স লাউঞ্জ
+S.vmL[6],Uniforms,ইউনিফর্ম
+S.vmL[7],TV broadcast,টিভি সম্প্রচার
+S.vmL[8],Exhibition boat,প্রদর্শনী নৌকা
+S.vmL[9],Shore team tent,শোর টিম তাঁবু
+S.vmL[10],"Main stage: concert, final podium, closing ceremony","মূল মঞ্চ: কনসার্ট, ফাইনাল পোডিয়াম, সমাপনী অনুষ্ঠান"
+S.vmL[11],Spectator boat,দর্শক নৌকা
+S.vmL[12],Press & production office,প্রেস ও প্রোডাকশন অফিস
+S.vmL[13],Lunch buffet,লাঞ্চ বুফে
+S.vmW,Water refill station,পানি ভরার স্টেশন
+S.vdT,On race days,রেসের দিনে
+S.vd[0],10:00 – Skippers’ briefing,10:00 – স্কিপারদের ব্রিফিং
+S.vd[1],12:00 – first warning signal,12:00 – প্রথম সতর্ক সংকেত
+S.vd[2],Signals ashore: flag pole in front of the Sailors Lounge (2),তীরের সংকেত: সেইলার্স লাউঞ্জের সামনে পতাকা-দণ্ড (2)
+S.vmSrc,"Map: SSL Gold Cup, official notice board","মানচিত্র: SSL Gold Cup, অফিসিয়াল নোটিস বোর্ড"
+S.fbT,Wish or bug report,পরামর্শ বা ত্রুটি জানান
+S.fbSub,Goes straight to the app maker,সরাসরি অ্যাপ নির্মাতার কাছে যায়
+S.fbPh,What should be better? What isn't working?,কী আরও ভালো হতে পারে? কী কাজ করছে না?
+S.fbName,Your name (optional),আপনার নাম (ঐচ্ছিক)
+S.fbSend,Send,পাঠান
+S.fbOk,Thanks – sent!,ধন্যবাদ – পাঠানো হয়েছে!
+S.fbErr,Couldn't send. Check your connection and try again.,পাঠানো যায়নি। সংযোগ দেখে আবার চেষ্টা করুন।
+S.showMe,Show me where,কোথায় দেখান
+S.openChrome,Open in Chrome,Chrome-এ খুলুন
+S.openSafari,Open in Safari,Safari-তে খুলুন
+S.prep,Getting ready … one moment,প্রস্তুত হচ্ছে … একটু অপেক্ষা
+S.coachT,Tap here,এখানে ট্যাপ করুন
+S.gotIt,Got it,বুঝেছি
+S.samsung[0],Tap ≡ (menu) at the bottom right.,নিচে ডানদিকে ≡ (মেনু) ট্যাপ করুন।
+S.samsung[1],Tap “Add page to” → “Home screen”.,“পেজ যোগ করুন” → “হোম স্ক্রিন” ট্যাপ করুন।
+S.samsung[2],Confirm with “Add”.,“যোগ করুন” দিয়ে নিশ্চিত করুন।
+S.noDots,No ⋯ button? Tap the Share icon instead.,⋯ দেখছেন না? শেয়ার আইকনে ট্যাপ করুন।
+S.tkLoad,Loading tracking…,ট্র্যাকিং লোড হচ্ছে…
+S.tkNone,No tracking for this race yet.,এই রেসের ট্র্যাকিং এখনো নেই।
+S.tkNoData,No tracking data for this race.,এই রেসের কোনো ট্র্যাকিং ডেটা নেই।
+S.tkOpens,Tracking opens at,ট্র্যাকিং শুরু
+S.tkStart,Start,স্টার্ট
+S.tkLeg,Leg,লেগ
+S.tkPre,pre-start,স্টার্টের আগে
+S.tkNoPos,no signal,সিগন্যাল নেই
+S.tkRep,Replay,রিপ্লে
+S.secOly,Olympic Games,অলিম্পিক গেমস
+S.secWc,World Championships,বিশ্ব চ্যাম্পিয়নশিপ
+S.secEc,Continental Championships,মহাদেশীয় চ্যাম্পিয়নশিপ
+S.bioT,About,পরিচিতি
+S.srcSSL,Official bio · Star Sailors League,অফিশিয়াল পরিচিতি · Star Sailors League
+S.careerT,Career,ক্যারিয়ার
+S.evN,results listed,তালিকাভুক্ত ফল
+S.podN,podiums,পোডিয়াম
+S.medRate,medal rate,পদকের হার
+S.bestR,best result,সেরা ফল
+S.showAll,Show all,সব দেখুন
+S.sslPts,SSL points,SSL পয়েন্ট
+S.heightT,Height,উচ্চতা
+S.weightT,Weight,ওজন
+S.sslProf,Official SSL profile,অফিশিয়াল SSL প্রোফাইল
+S.teamSite,Team website,দলের ওয়েবসাইট
+S.mySailors,My sailors,আমার নাবিকেরা
+S.sFavHint,Tap ☆ on a sailor's page to follow them – they'll show up here.,নাবিকের পেজে ☆ চাপুন অনুসরণ করতে – তারা এখানে দেখাবে।
+S.ownW,In their own words · from the SSL profile,নিজের ভাষায় · SSL প্রোফাইল থেকে
+S.pathHl,n=>`Path of ${n} highlighted`,n=>`${n}-এর পথ চিহ্নিত`
+S.setT,Settings,সেটিংস
+S.setSub,"Notifications, favourites, display, spoiler-free","নোটিফিকেশন, প্রিয়, প্রদর্শন, স্পয়লার-মুক্ত"
+S.sNotAvail,Push notifications are being set up and will be available here soon.,পুশ নোটিফিকেশন চালু করা হচ্ছে।
+S.sMaster,Push notifications,পুশ নোটিফিকেশন
+S.sMasterSub,Main switch for this device,এই ডিভাইসের মূল সুইচ
+S.sRemT,Start reminder,স্টার্ট রিমাইন্ডার
+S.sRemSub,15 minutes before your teams race,আপনার দলের রেসের ১৫ মিনিট আগে
+S.sLiveT,Livestream starts,লাইভ স্ট্রিম শুরু
+S.sLiveSub,When the SSL livestream goes live,SSL লাইভ স্ট্রিম শুরু হলে
+S.sVidT,New highlight video,নতুন হাইলাইট ভিডিও
+S.sVidSub,When a new highlight film is out,নতুন হাইলাইট এলে
+S.sResT,Results of my teams,আমার দলের ফল
+S.sResSub,After every race of these teams – your favourite teams and the teams of your favourite sailors.,এই দলগুলোর প্রতিটি রেসের পর – প্রিয় দল ও প্রিয় নাবিকদের দল।
+S.sFavNone,No favourites yet – tap ☆ on a team or sailor.,এখনো কোনো প্রিয় নেই – দল বা নাবিকে ☆ চাপুন।
+S.sQuietT,Quiet hours,নীরব সময়
+S.sQuietSub,No notifications during this time (your local time),এই সময়ে নোটিফিকেশন নয় (আপনার স্থানীয় সময়)
+S.sQoff,Off,বন্ধ
+S.sSpoilN,"In spoiler-free mode, notifications only say that a race has finished.",স্পয়লার-মুক্ত মোডে নোটিফিকেশন শুধু জানায় রেস শেষ।
+S.sDispT,Display,প্রদর্শন
+S.sTimeT,Times,সময়
+S.sTimeRio,Rio only,শুধু রিও
+S.sTimeBoth,Rio + mine,রিও + আমার
+S.sWindT,Wind,বাতাস
+S.sTempT,Temperature,তাপমাত্রা
+S.sLvT,Commentary language,ধারাভাষ্যের ভাষা
+S.sLvAuto,Same as the app,অ্যাপের মতো
+S.sCalT,Calendar,ক্যালেন্ডার
+S.sCalTeam,Races of this team,এই দলের রেস
+S.sDataT,Data & privacy,ডেটা ও গোপনীয়তা
+S.sPriv,"Everything you set here is stored only on this device. No account, no cookies; visits are counted anonymously.","আপনার সেটিংস শুধু এই ডিভাইসে থাকে। কোনো অ্যাকাউন্ট নেই, কুকি নেই; ভিজিট বেনামে গোনা হয়।"
+S.sResetF,Remove favourites,প্রিয় মুছুন
+S.sResetA,Reset everything,সব রিসেট
+S.sResetQ,Tap again to confirm,নিশ্চিত করতে আবার চাপুন
+S.sFeedback,Send feedback,মতামত পাঠান
+S.sVer,Version,সংস্করণ
+S.comp,Competition,প্রতিযোগিতা
+S.rkT,SSL Nations Ranking,SSL জাতি র‍্যাঙ্কিং
+S.rkAsOf,As of,পর্যন্ত
+S.rkNat,n=>`${n} nations`,n=>`${n}টি জাতি`
+S.rkHist,Historical ranking,ঐতিহাসিক র‍্যাঙ্কিং
+S.rkCur,Current,বর্তমান
+S.rkCont,Continent,মহাদেশ
+S.rkAll,All,সব
+S.rkSearch,Search country,দেশ খুঁজুন
+S.rkGC,Gold Cup teams,গোল্ড কাপ দল
+S.rkSk,Skippers,স্কিপার
+S.rkCr,Crews,ক্রু
+S.rkPts,Points (sum of the sailors' ranks),পয়েন্ট (র‍্যাঙ্কের যোগফল)
+S.rkNo,No.,নং
+S.rkGlob,Global,বৈশ্বিক
+S.rkName,Nation,জাতি
+S.rkNone,No nation found.,কোনো জাতি পাওয়া যায়নি।
+S.rkLoad,Loading ranking…,র‍্যাঙ্কিং লোড হচ্ছে…
+S.rkFail,The ranking can't be loaded right now.,এখন র‍্যাঙ্কিং লোড করা যাচ্ছে না।
+S.rkSrc,Source: Star Sailors League · updated every week. The nation's rank comes from its best-ranked skippers and crews.,উৎস: Star Sailors League · প্রতি সপ্তাহে হালনাগাদ। জাতির অবস্থান তার সেরা স্কিপার ও ক্রু থেকে আসে।
+S.rkTeam,Team page,দলের পাতা
+S.rkPrev,p=>`previous week: ${p}`,p=>`আগের সপ্তাহ: ${p}`
+S.rkWas,p=>`was ${p}`,p=>`আগে ${p}`
+S.rkInd,World rank,বিশ্ব র‍্যাঙ্ক
+S.rkOpen,Open ranking ›,র‍্যাঙ্কিং খুলুন ›
+S.rkTap,Tap a nation for its sailors.,নাবিকদের দেখতে জাতিতে ট্যাপ করুন।
+S.alsoP,also,এছাড়াও
+SOW,In their own words · from the SSL profile,নিজের ভাষায় · SSL প্রোফাইল থেকে
+NXG.[0],started,শুরু
+NXG.[1],planned,নির্ধারিত
+NXF,After prior race,আগের রেসের পরে
+RINC,Incoming,শীঘ্রই
+DOV.[0],Racing day over,আজকের রেস শেষ
+DOV.[1],"n=>`${n} race${n==1?"""":""s""} sailed`",n=>`${n}টি রেস হয়েছে`
+DOV.[2],g=>`${g} postponed`,g=>`${g} স্থগিত`
+DSW.[0],Previous,আগের
+DSW.[1],Today,আজ
+DSW.[2],Next,পরের
+DSW.[3],Previous race day,আগের রেস দিন
+DSW.[4],Next race day,পরের রেস দিন
+DSW.[5],from {t},{t} থেকে
+DSW.[6],{n} races,{n}টি রেস
+DSW.[7],1 race,১টি রেস
+RESS.[0],Results,ফলাফল
+RESS.[1],Overall results,সামগ্রিক ফল
+RESS.[2],Qualifiers,বাছাইপর্ব
+RESS.[3],Final Series,ফাইনাল সিরিজ
+RESS.[4],(to be determined),(নির্ধারিত হয়নি)
+RESS.[5],Last chance race,শেষ সুযোগের রেস
+RESS.[6],Pos.,অবস্থান
+CHT.t,What's new,
+CHT.sub,Everything new in the app – latest first,
+CHT.ver,Version,
+CHT.newB,New,
+CHT.seen,You're up to date,
+CHT.days[0],Race days at a glance,
+CHT.days[1],"On Home you can switch between the previous, today’s and the next race day; at midnight Rio time everything moves on by itself.",
+CHT.estd[0],Smart delay estimate,
+CHT.estd[1],The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races.,
+CHT.res[0],Results in the app,
+CHT.res[1],"Overall ranking, qualifiers and the Final Series – open places show “(to be determined)”.",
+CHT.rbox[0],Live race box,
+CHT.rbox[1],The header strip shows the race on the water and the countdown to the next start – and when a start is delayed.,
+CHT.inst2[0],Easier install,
+CHT.inst2[1],"One tap on Android, an arrow that points to the right button on iPhone, and “Open in Chrome/Safari” from WhatsApp & co.",
+CHT.trk2[0],Faster tracking,
+CHT.trk2[1],"Live positions appear right away, the race history loads in the background.",
+CHT.fbk[0],Send a wish or bug,
+CHT.fbk[1],Under More: tell the app maker what should be better.,
+CHT.rank[0],SSL Nations Ranking in the app,
+CHT.rank[1],"All 132 nations with continent filter, search, history back to 2025 and each nation's best skippers and crews.",
+CHT.pos[0],Positions checked,
+CHT.pos[1],Every sailor's position compared with the team pages and the Rio jersey numbers – several positions are shown where they differ.,
+CHT.linkin[0],No more jumps to other sites,
+CHT.linkin[1],Ranking and qualifier links now open inside the app.,
+CHT.compass[0],Clearer wind compass,
+CHT.compass[1],"The yellow wedge shows where the wind comes from, the wind speed sits right in the middle.",
+CHT.tap[0],Tap any team or sailor,
+CHT.tap[1],"Team and sailor names now open their page everywhere – tables, results, settings and more.",
+CHT.pl[0],Now in Polish,
+CHT.pl[1],Polski! The app now speaks 18 languages.,
+CHT.photos[0],Official portraits for the 1/16 teams,
+CHT.photos[1],"Japan, Czechia, Chile, Ecuador, Hungary, Peru, South Africa and Thailand – fresh from the event studio.",
+CHT.bright[0],Brightness button,
+CHT.bright[1],"Switch between Matchboard blue, day and night right in the header.",
+CHT.logo[0],Bigger SSL logo,
+CHT.logo[1],A little more presence at the top.,
+CHT.tabs[0],New tab bar,
+CHT.tabs[1],"Competition (rounds + matchboard), Teams and Sailors each have their own tab.",
+CHT.settings[0],Settings,
+CHT.settings[1],"Notifications, start reminders, quiet hours, units, local times and spoiler-free mode in one place.",
+CHT.pages[0],Real pages,
+CHT.pages[1],"Teams, sailors and races open as full pages with their own link – back always goes one step back.",
+CHT.anim[0],Smooth round switching,
+CHT.anim[1],"Swipe between rounds, with an animation like in the big apps.",
+CHT.install[0],Easier to install,
+CHT.install[1],An Install button next to the language – the app on your home screen in 20 seconds.,
+CHT.track[0],Live tracking inside the app,
+CHT.track[1],"Every boat on the map, live ranking, course and replay – no more external site.",
+CHT.profiles[0],New sailor profiles,
+CHT.profiles[1],"Bio, career, Olympic and world championship medals from the official SSL profiles.",
+CHT.favS[0],Follow sailors,
+CHT.favS[1],Tap ☆ on a sailor – your sailors get their own list.,
+CHT.langs6[0],Six more languages,
+CHT.langs6[1],"Japanese, Thai, Malay, Hungarian, Czech and Ukrainian.",
+CHT.stream[0],Live stream in the app,
+CHT.stream[1],With preview image and countdown until the broadcast starts.,
+CHT.spoil[0],Spoiler-free mode,
+CHT.spoil[1],Hide results until you've watched the race.,
+CHT.wx[0],Sailing weather per race,
+CHT.wx[1],"Wind, gusts, direction, waves and tide for every start time.",
+CHT.cmp[0],Team comparison,
+CHT.cmp[1],Two teams side by side – head to head and numbers from Rio.,
+CHT.vids[0],Highlights,
+CHT.vids[1],The latest SSL videos right in the app.,
+CHT.venue[0],Venue,
+CHT.venue[1],Marina da Glória with map and directions.,
+CHT.race[0],Race details,
+CHT.race[1],"Tap a race for result, group standings, wind and stream.",
+CHT.push[0],Push notifications,
+CHT.push[1],Results of your teams straight to your phone.,
+CHT.cal[0],Calendar,
+CHT.cal[1],All races of your team in your calendar – updates itself.,
+CHT.shareimg[0],Share as image,
+CHT.shareimg[1],Group tables as a picture for WhatsApp & co.,
+CHT.app[0],Install as an app,
+CHT.app[1],"Full screen, with icon, updates itself.",
+CONT.[0],Africa,আফ্রিকা
+CONT.[1],Asia,এশিয়া
+CONT.[2],Europe,ইউরোপ
+CONT.[3],Oceania,ওশেনিয়া
+CONT.[4],Pan-America,প্যান-আমেরিকা
+NWS,News,খবর
+NSRC,Source: worldofsailors.com (Star Sailors League),সূত্র: worldofsailors.com (Star Sailors League)
+RRS.[0],Start,স্টার্ট
+RRS.[1],Race time,রেসের সময়
+RRS.[2],Winner,বিজয়ী
+RRS.[3],The full report for this race follows here.,এই রেসের পূর্ণ রিপোর্ট শিগগিরই এখানে আসবে।
+ALSO,also,এছাড়াও
+WXF,Wind from,বাতাস আসছে
+NXS.[0],On schedule,সময়মতো
+NXS.[1],Starting soon,শিগগির শুরু
+NXS.[2],Start delayed,শুরু দেরিতে
+NXS.[3],Delayed,দেরি
+NXS.[4],Racing,রেস চলছে
+NXS.[5],t=>`Not before ${t}`,t=>`${t}-এর আগে নয়`
+NXW,Start pending,স্টার্ট বাকি
+NXP,Probably delayed,দেরি হতে পারে
+ORD,"n=>n+(n%10==1&&n!=11?""st"":n%10==2&&n!=12?""nd"":n%10==3&&n!=13?""rd"":""th"")","n=>({1:""1ম"",2:""2য়"",3:""3য়"",4:""4র্থ"",5:""5ম"",6:""6ষ্ঠ"",7:""7ম"",8:""8ম""})[n]||n+""তম"""
+OSL,en,bn
+FIX.GBR,Great Britain,গ্রেট ব্রিটেন
+FIX.TAH,Tahiti,তাহিতি
+FIX.MYA,Myanmar,মিয়ানমার
+FIX.USA,USA,যুক্তরাষ্ট্র

@@ -1,0 +1,700 @@
+key,English,Deutsch
+S.rounds,Rounds,Runden
+S.bracket,Matchboard,Matchboard
+S.teams,Teams,Teams
+S.official,Official results,Offizielle Ergebnisse
+S.updated,Updated,Stand
+S.ago,"m=>m<1?""just now"":m<60?`${m} min ago`:`${Math.round(m/60)} h ago`","m=>m<1?""gerade eben"":m<60?`vor ${m} Min.`:`vor ${Math.round(m/60)} Std.`"
+S.rio,Rio time,Rio-Zeit
+S.offline,offline – last saved data,offline – zuletzt gespeicherte Daten
+S.rn.r32,1/32 Finals,1/32-Finale
+S.rn.r16,1/16 Finals,1/16-Finale
+S.rn.r8,1/8 Finals,Achtelfinale
+S.rn.r4,Quarter-finals,Viertelfinale
+S.rn.sf,Semi-finals,Halbfinale
+S.rn.pf,Petit Final,Kleines Finale
+S.rn.f,Grand Final,Grand Final
+S.group,Group,Gruppe
+S.decided,decided,entschieden
+S.racing,racing,läuft
+S.open,open,offen
+S.st.done,completed,abgeschlossen
+S.st.live,in progress,läuft
+S.st.up,upcoming,steht an
+S.races,"n=>`${n} race${n>1?""s"":""""} per group`",n=>`${n} Rennen pro Gruppe`
+S.upNext,Up next,Als Nächstes
+S.startsIn,"d=>d<=0?""starts today"":d==1?""starts tomorrow"":`starts in ${d} days`","d=>d<=0?""beginnt heute"":d==1?""beginnt morgen"":`beginnt in ${d} Tagen`"
+S.groupsOf4,"n=>`${n} group${n>1?""s"":""""} of four`","n=>`${n} Gruppe${n>1?""n"":""""} à 4 Teams`"
+S.oneRace,One race – the finishing order decides.,Ein Rennen – die Zielreihenfolge entscheidet.
+S.through,through,weiter
+S.out,out,raus
+S.toFinal,to Final,ins Finale
+S.toPetit,to Petit Final,ins kl. Finale
+S.medals[0],Gold,Gold
+S.medals[1],Silver,Silber
+S.medals[2],Bronze,Bronze
+S.medals[3],4th,4. Platz
+S.pts,Pts,Pkt
+S.outIn,"(r,g,p)=>`Out in the ${r} (Group ${g}, ${p})`","(r,g,p)=>`Ausgeschieden im ${r} (Gruppe ${g}, Platz ${p})`"
+S.gf,m=>`Grand Final: ${m}`,m=>`Grand Final: ${m}`
+S.finished,p=>`Finished ${p}`,p=>`Endplatz ${p}`
+S.thrTbc,Through – next group to be confirmed,Weiter – nächste Gruppe noch offen
+S.seeded,"(r,g,d)=>`Seeded – enters the ${r}, Group ${g}, ${d}`","(r,g,d)=>`Gesetzt – steigt im ${r} ein, Gruppe ${g}, ${d}`"
+S.racingNow,Racing now,Läuft gerade
+S.nations,n=>`${n} nations`,n=>`${n} Nationen`
+S.stillIn,still in,noch dabei
+S.outN,out,raus
+S.search,"Search nation, nickname or sailor","Land, Spitzname oder Segler suchen"
+S.all,All,Alle
+S.chipIn,Still in,Noch dabei
+S.chipOut,Out,Raus
+S.mine,★ My teams,★ Meine Teams
+S.sStatus,Status,Status
+S.sRank,Ranking,Ranking
+S.sAz,A–Z,A–Z
+S.noTeam,No team found.,Kein Team gefunden.
+S.rank,Rank,Rang
+S.captain,Captain,Kapitän
+S.helm,Helm,Steuer
+S.ranking,SSL Nations Ranking,SSL Nations Ranking
+S.rankBoard,Ranking board ↗,Zum Ranking ↗
+S.entered,Entered Rio at,Einstieg in Rio
+S.showRound,Open round ›,Runde öffnen ›
+S.gc23,Gold Cup 2023,Gold Cup 2023
+S.br23,2023 bracket ›,Bracket 2023 ›
+S.status,Status,Status
+S.stIn,Still in,Noch dabei
+S.stOut,Out,Ausgeschieden
+S.whereEnded,Where it ended ›,Wo es endete ›
+S.curGroup,Current group ›,Aktuelle Gruppe ›
+S.background,Background,Hintergrund
+S.road,Road to Rio,Weg nach Rio
+S.story,Story,Story
+S.site,Team site,Teamseite
+S.qualRes,Qualifier results ↗,Quali-Ergebnisse ↗
+S.sslRank,SSL Nations Ranking ↗,SSL Nations Ranking ↗
+S.resRio,Results in Rio,Ergebnisse in Rio
+S.photos,Crew photos,Crew-Fotos
+S.byPos,Crew by position,Crew nach Position
+S.leader,Team leader,Teamchef
+S.wider,Wider squad · position TBC,Weiterer Kader · Position offen
+S.squadNote,"(n,p)=>`${n} names in the squad. 8–10 sail each race and the line-up can change from day to day. Positions and numbers from the official team site; portraits from the Gold Cup Rio graphics${p?"""":"" (none yet for this team)""}.`","(n,p)=>`${n} Namen im Kader. Pro Rennen segeln 8–10 an Bord, die Aufstellung kann täglich wechseln. Positionen und Nummern laut offizieller Teamseite; Porträts aus den Gold-Cup-Rio-Grafiken${p?"""":"" (für dieses Team noch keine)""}.`"
+S.noSquad,No squad list published for this team yet.,Für dieses Team liegt noch kein Kader vor.
+S.showPath,Show path in bracket,Weg im Bracket zeigen
+S.copyLink,Copy link,Link kopieren
+S.copied,Link copied,Link kopiert
+S.close,Close,Schließen
+S.jersey,Jersey,Trikot
+S.numTbc,Number TBC,Nummer offen
+S.capTag,Captain,Kapitän
+S.favOn,Following,Folge ich
+S.favOff,Follow,Folgen
+S.brHint,Tap a team for crew and history. Swipe for later rounds.,Team antippen für Crew und Historie. Wischen für spätere Runden.
+S.h23,Gold Cup 2023,Gold Cup 2023
+S.champ23,Gran Canaria · champion,Gran Canaria · Sieger
+S.hl,highlighted,markiert
+S.tap26,Tap a team for its Rio 2026 page.,Team antippen für die Rio-2026-Seite.
+S.off23,Official 2023 results ↗,Offizielle Ergebnisse 2023 ↗
+S.myTeams,My teams,Meine Teams
+S.myHint,Tap ☆ on a team page to follow it.,"Auf einer Teamseite ☆ antippen, um dem Team zu folgen."
+S.foot,"Scoring: 4-3-2-1 points per race, double points in the last race of each group (8-6-4-2). Top two of each group advance. Results refresh automatically from the official SSL results page. Ranking = SSL Nations Ranking at the start of the Final Series.","Wertung: 4-3-2-1 Punkte pro Rennen, im letzten Gruppenrennen doppelt (8-6-4-2). Die ersten zwei jeder Gruppe kommen weiter. Ergebnisse werden automatisch von der offiziellen SSL-Ergebnisseite übernommen. Ranking = SSL Nations Ranking zu Beginn der Final Series."
+S.notes.ocs,* OCS (early start)  ** Standard penalty,* OCS (Frühstart)  ** Standardstrafe
+S.theme.auto,🌊 Matchboard,🌊 Matchboard
+S.theme.light,☀️ Day,☀️ Tag
+S.theme.dark,🌙 Night,🌙 Nacht
+S.g23.champ,Champion (Gold),Weltmeister (Gold)
+S.g23.second,Runner-up (Silver),Vizemeister (Silber)
+S.g23.third,3rd (Bronze),3. Platz (Bronze)
+S.g23.fourth,4th – Grand Final,4. – Grand Final
+S.g23.sf,Semi-finals,Halbfinale
+S.g23.qf,Quarter-finals,Viertelfinale
+S.g23.r8,1/8 Finals,Achtelfinale
+S.g23.r16,1/16 Finals,1/16-Finale
+S.g23.r32,1/32 Finals,1/32-Finale
+S.g23.none,Didn't race the 2023 Final Series,2023 nicht in der Final Series
+S.ev.asia,Asian Qualifiers,Asien-Quali
+S.ev.afoc,African & Oceanian Qualifiers,Afrika-&-Ozeanien-Quali
+S.ev.eu1,European Qualifiers 1,Europa-Quali 1
+S.ev.eu2,European Qualifiers 2,Europa-Quali 2
+S.ev.pan,Pan-American Qualifiers,Panamerika-Quali
+S.route.won,"(e,g)=>`Won the ${e}, Group ${g}`","(e,g)=>`Sieger ${e}, Gruppe ${g}`"
+S.route.pos,"(p,e,g)=>`${p} in the ${e}, Group ${g}`","(p,e,g)=>`${p} Platz ${e}, Gruppe ${g}`"
+S.route.lc,"(e,g)=>`3rd in the ${e} Group ${g}, then won the Last Chance race`","(e,g)=>`3. in ${e} Gruppe ${g}, dann Sieg im Last-Chance-Rennen`"
+S.route.ranking,Qualified through the SSL Nations Ranking,Über das SSL Nations Ranking qualifiziert
+S.route.host,"Host nation, seeded into the 1/8 Finals","Gastgeber, fürs Achtelfinale gesetzt"
+S.route.seeded,r=>`Seeded into the ${r} via the SSL Nations Ranking`,r=>`Über das SSL Nations Ranking fürs ${r} gesetzt`
+S.roles.Helm,Steers the boat,Steuert das Boot
+S.roles.Tactician,Strategy & calls,Strategie & Ansagen
+S.roles.Main Trimmer,Mainsail,Großsegel
+S.roles.Trimmer,Jib & gennaker,Fock & Gennaker
+S.roles.Grinder,Powers the winches,Kurbelt die Winschen
+S.roles.Pit,Halyards & controls,Fallen & Strecker
+S.roles.Mid-Bow,Mast & foredeck,Mast & Vorschiff
+S.roles.Bow,Bow & starts,Vorschiff & Start
+S.roles.Floater,Utility / reserve,Allrounder / Ersatz
+S.back,‹ Back,‹ Zurück
+S.position,Position,Position
+S.team,Team,Team
+S.indRank,SSL ranking,SSL-Ranking
+S.highlights,Highlights,Erfolge
+S.profile,SSL profile ↗,SSL-Profil ↗
+S.findProfile,Find SSL profile ↗,SSL-Profil suchen ↗
+S.ws,World Sailing ↗,World Sailing ↗
+S.mates,Teammates,Teamkollegen
+S.posTbc,Position TBC,Position offen
+S.noInfo,No further details published yet – the links below search the official profiles.,Noch keine weiteren Infos veröffentlicht – die Links unten suchen die offiziellen Profile.
+S.today,Today,Heute
+S.raceDay,"(n,t)=>`race day ${n} of ${t}`","(n,t)=>`Renntag ${n} von ${t}`"
+S.finalDay,Final day – last race counts double,Letzter Tag – das letzte Rennen zählt doppelt
+S.stream,▶ Live stream,▶ Livestream
+S.tracking,Tracking,Tracking
+S.schedule,Schedule,Zeitplan
+S.adv,"(a,b)=>`1st → ${a} · 2nd → ${b}`","(a,b)=>`1. → ${a} · 2. → ${b}`"
+S.advSf,1st–2nd → Final · 3rd–4th → Petit Final,1.–2. → Finale · 3.–4. → Kleines Finale
+S.clinched,✓ through,✓ sicher weiter
+S.elim,out,raus
+S.secNow,In the current round,In der aktuellen Runde
+S.secSeeded,r=>`Seeded – enter in the ${r}`,r=>`Gesetzt – Einstieg im ${r}`
+S.secOut,Out,Ausgeschieden
+S.lineup,Line-up,Aufstellung
+S.howT,How the Gold Cup works,So funktioniert der Gold Cup
+S.how[0],"National teams, one SSL47 boat each – all boats identical and provided by the organisers.","Nationalteams, je ein SSL47 – alle Boote baugleich und vom Veranstalter gestellt."
+S.how[1],Groups of four. 4-3-2-1 points per race; the last race of each group counts double (8-6-4-2).,Vierergruppen. 4-3-2-1 Punkte pro Rennen; das letzte Gruppenrennen zählt doppelt (8-6-4-2).
+S.how[2],The top two of every group advance; better-ranked nations enter later rounds.,Die ersten zwei jeder Gruppe kommen weiter; besser platzierte Nationen steigen später ein.
+S.how[3],Semi-finals and finals are a single race each; the Grand Final decides the world champion.,Halbfinale und Finale sind je ein Rennen; das Grand Final entscheidet über den Weltmeister.
+S.race,Race,Rennen
+S.nextRace,Next race,Nächstes Rennen
+S.todayRaces,Today's races,Rennen heute
+S.rioT,Rio time,Rio-Zeit
+S.loc,your time,deine Zeit
+S.onWater,on the water,auf dem Wasser
+S.done,done,fertig
+S.inX,"m=>m<60?`in ${m} min`:`in ${Math.floor(m/60)} h ${String(m%60).padStart(2,""0"")}`","m=>m<60?`in ${m} Min.`:`in ${Math.floor(m/60)} Std. ${String(m%60).padStart(2,""0"")}`"
+S.firstStart,First start,Erster Start
+S.schedT,Race schedule,Zeitplan der Runde
+S.schedNote,"Times are Rio de Janeiro time (UTC−3), from the official schedule. Its groups G1–G4 are shown here as groups A–D.","Zeiten in Rio-Zeit (UTC−3), laut offiziellem Zeitplan. Dessen Gruppen G1–G4 stehen hier als Gruppen A–D."
+S.needT,Before the final race (double points),Vor dem letzten Rennen (doppelte Punkte)
+S.need.sure,"through, whatever happens","sicher weiter, egal was passiert"
+S.need.gone,"out, whatever happens","raus, egal was passiert"
+S.need.win,a win is enough,ein Sieg reicht
+S.need.top,k=>`${k} or better is enough`,"k=>`Platz ${String(k).replace(/\.$/,"""")} oder besser reicht`"
+S.need.mustWin,must win,muss gewinnen
+S.need.help,and needs help from the others,und braucht Hilfe der anderen
+S.need.maybe,k=>`${k} may be enough – depends on the others`,"k=>`Platz ${String(k).replace(/\.$/,"""")} kann reichen – hängt von den anderen ab`"
+S.need.iff,"(k,c)=>`${k} is enough if ${c}`","(k,c)=>`Platz ${String(k).replace(/\.$/,"""")} reicht, wenn ${c}`"
+S.need.mustIf,"c=>`must win, and only if ${c}`","c=>`muss gewinnen, und nur wenn ${c}`"
+S.need.ahead,R=>`ahead of ${R}`,R=>`vor ${R}`
+S.need.behind,R=>`behind ${R}`,R=>`hinter ${R}`
+S.need.notWin,R=>`${R} doesn't win`,R=>`${R} nicht gewinnt`
+S.need.last,R=>`${R} finishes last`,R=>`${R} Letzter wird`
+S.need.wins,R=>`${R} wins`,R=>`${R} gewinnt`
+S.need.tie,level on points possible – tie-break decides,Punktgleichheit möglich – dann entscheidet der Tie-Break
+S.needNote,"Worked out from the current points; ≈ means teams could finish level, then the official tie-break decides.","Berechnet aus dem aktuellen Punktestand; ≈ heißt, Teams können punktgleich enden, dann entscheidet der offizielle Tie-Break."
+S.install,Add to Home Screen for the app icon.,Zum Home-Bildschirm hinzufügen für das App-Icon.
+S.home,Home,Home
+S.more,More,Mehr
+S.sailors,Sailors,Segler
+S.welcome,Final Series · Rio de Janeiro,Final Series · Rio de Janeiro
+S.dates,19 Nov – 13 Dec 2026 · Marina da Glória,19. Nov. – 13. Dez. 2026 · Marina da Glória
+S.progress,Tournament,Turnier
+S.latest,Latest results,Neueste Ergebnisse
+S.explore,Explore,Entdecken
+S.tiles.board[0],Rounds,Runden
+S.tiles.board[1],"Groups, points, times","Gruppen, Punkte, Zeiten"
+S.tiles.bracket[0],Matchboard,Matchboard
+S.tiles.bracket[1],The whole draw at a glance,Der ganze Turnierbaum
+S.tiles.teams[0],Teams,Teams
+S.tiles.teams[1],"40 nations, crews, rankings","40 Nationen, Crews, Ranking"
+S.tiles.sailors[0],Sailors,Segler
+S.tiles.sailors[1],Search every sailor,Alle Segler durchsuchen
+S.tiles.qualifying[0],Qualifying,Qualifikation
+S.tiles.qualifying[1],How the teams got to Rio,Der Weg der Teams nach Rio
+S.tiles.gc2023[0],Gold Cup 2023,Gold Cup 2023
+S.tiles.gc2023[1],Last edition's bracket,Der Turnierbaum von 2023
+S.sailorsT,n=>`${n} sailors`,n=>`${n} Segler`
+S.sSearch,"Search sailor, team or position","Segler, Team oder Position suchen"
+S.withPhoto,With photo,Mit Foto
+S.allS,All,Alle
+S.moreT,More,Mehr
+S.lang,Language,Sprache
+S.design,Design,Design
+S.share,Share app,App teilen
+S.shared,Link copied,Link kopiert
+S.links,Links,Links
+S.about,About this app,Über diese App
+S.aboutT,Unofficial companion app for the SSL Gold Cup Rio 2026. Results update automatically from the official SSL results page.,Inoffizielle Begleit-App zum SSL Gold Cup Rio 2026. Die Ergebnisse kommen automatisch von der offiziellen SSL-Ergebnisseite.
+S.inst.t,Install the app,App installieren
+S.inst.d,"Put SSL Gold Cup on your home screen – opens like an app, full screen, with live results.","SSL Gold Cup auf den Homescreen legen – öffnet sich wie eine App, im Vollbild, mit Live-Ergebnissen."
+S.inst.b,Install,Installieren
+S.inst.done,Installed ✓,Installiert ✓
+S.inst.ios[0],Tap the Share button,Tippe auf das Teilen-Symbol
+S.inst.ios[1],at the bottom of Safari (top right on iPad).,unten in Safari (beim iPad oben rechts).
+S.inst.ios[2],Scroll down and tap “Add to Home Screen”.,Runterscrollen und „Zum Home-Bildschirm“ antippen.
+S.inst.ios[3],Tap “Add” – done.,Auf „Hinzufügen“ tippen – fertig.
+S.inst.iosOther,On iPhone this works in Safari: open this page in Safari first.,Auf dem iPhone geht das in Safari: Öffne diese Seite zuerst in Safari.
+S.inst.android[0],Tap the ⋮ menu in the top right of your browser.,Tippe oben rechts im Browser auf das ⋮-Menü.
+S.inst.android[1],Tap “Install app” or “Add to Home screen”.,Tippe auf „App installieren“ oder „Zum Startbildschirm hinzufügen“.
+S.inst.android[2],Confirm with “Install”.,Mit „Installieren“ bestätigen.
+S.inst.desk[0],"Click the install icon in the address bar,",Klicke auf das Installieren-Symbol in der Adresszeile
+S.inst.desk[1],or open the browser menu and choose “Install SSL Gold Cup”.,oder wähle im Browsermenü „SSL Gold Cup installieren“.
+S.inst.how,How to install,So installierst du die App
+S.inst.hide,Not now,Später
+S.inst.installedNote,You're using the installed app.,Du nutzt die installierte App.
+S.champT,World Champion · Gold Cup 2026,Weltmeister · Gold Cup 2026
+S.standT,Final standings,Endstand
+S.statsT,In numbers,In Zahlen
+S.stRaces,Races,Rennen
+S.stWins,Race wins,Rennsiege
+S.stAvg,Avg. place,Ø Platz
+S.stPts,Points in Rio,Punkte in Rio
+S.stHist,Race by race,Rennen für Rennen
+S.calBtn,📅 Races in my calendar,📅 Rennen in meinen Kalender
+S.calT,Races in your calendar,Rennen in deinen Kalender
+S.calSub,"Subscribe (iPhone, Mac, Outlook)","Abonnieren (iPhone, Mac, Outlook)"
+S.calG,Add to Google Calendar,Zu Google Kalender hinzufügen
+S.calDl,Download file (.ics),Datei herunterladen (.ics)
+S.calAll,All races in my calendar,Alle Rennen in meinen Kalender
+S.calNote,"A subscription updates itself: when a team qualifies, its next races appear automatically.","Ein Abo aktualisiert sich selbst: Kommt ein Team weiter, erscheinen seine nächsten Rennen automatisch."
+S.wxT,Wind forecast · Marina da Glória,Windvorhersage · Marina da Glória
+S.wxSrc,"Forecast by Open-Meteo, not measured on the course.","Vorhersage von Open-Meteo, nicht auf der Bahn gemessen."
+S.trk,Tracking,Tracking
+S.delayed,m=>`Results may be delayed – last successful check ${m} min ago.`,m=>`Ergebnisse evtl. verzögert – letzte erfolgreiche Prüfung vor ${m} Min.`
+S.shareImg,Share as image,Als Bild teilen
+S.imgDone,Image ready,Bild erstellt
+S.pT,Notifications,Mitteilungen
+S.pAll,All results,Alle Ergebnisse
+S.pAllSub,A notification after every race,Nach jedem Rennen eine Mitteilung
+S.pTeamOff,🔔 Notify me about this team,🔔 Mitteilungen für dieses Team
+S.pTeamOn,🔔 Notifications on ✓,🔔 Mitteilungen an ✓
+S.pTeams,Your teams,Deine Teams
+S.pNone,No team yet: open a team and tap 🔔.,Noch kein Team: Öffne ein Team und tippe auf 🔔.
+S.pNote,You only get race results and who goes through. Switch off here any time.,Du bekommst nur Rennergebnisse und wer weiterkommt. Abschalten jederzeit hier.
+S.pIOS,"On iPhone, notifications only work in the installed app: install it, open it from the home screen, then switch them on here.","Auf dem iPhone kommen Mitteilungen nur in der installierten App: App installieren, vom Home-Bildschirm öffnen und dann hier einschalten."
+S.pDenied,Notifications are blocked. Allow them for this app in your device settings.,Mitteilungen sind blockiert. Erlaube sie in den Einstellungen deines Geräts für diese App.
+S.pErr,That didn't work – please try again in a moment.,Hat gerade nicht geklappt – bitte gleich nochmal versuchen.
+S.pOnT,Notifications on,Mitteilungen an
+S.pOffT,Notifications off,Mitteilungen aus
+S.pUnsup,This browser can't receive notifications.,Dieser Browser kann keine Mitteilungen empfangen.
+S.obT,Get the app,Hol dir die App
+S.obSub,"Free, no App Store needed – on your home screen in 20 seconds.","Kostenlos, ohne App Store – in 20 Sekunden auf deinem Homescreen."
+S.obPerks[0],Live results in one tap,Live-Ergebnisse mit einem Tipp
+S.obPerks[1],"Full screen, like a real app",Vollbild wie eine echte App
+S.obPerks[2],Notifications for your team,Mitteilungen zu deinem Team
+S.obBtn,Install now,Jetzt installieren
+S.obLater,Later – look around in the browser first,Später – erst mal im Browser umschauen
+S.obSteps,How it works,So geht's
+S.obStep,Step,Schritt
+S.ios26[0],Tap ⋯ next to the address bar,Tippe neben der Adressleiste auf ⋯
+S.ios26[1],Tap “Share”,Tippe auf „Teilen“
+S.ios26[2],Scroll down and tap “Add to Home Screen”,Nach unten wischen und „Zum Home-Bildschirm“ antippen
+S.ios26[3],Leave “Open as Web App” on and tap “Add”,„Als Web-App öffnen“ an lassen und auf „Hinzufügen“ tippen
+S.iosOld[0],Tap the Share button at the bottom,Tippe unten auf das Teilen-Symbol
+S.iosOld[1],Scroll down and tap “Add to Home Screen”,Nach unten wischen und „Zum Home-Bildschirm“ antippen
+S.iosOld[2],Tap “Add” in the top right,Oben rechts auf „Hinzufügen“ tippen
+S.iosAlt,"Easiest in Safari: copy the link, open Safari and paste it.","Am einfachsten in Safari: Link kopieren, Safari öffnen und einfügen."
+S.inApp,This page is open inside another app (e.g. WhatsApp or Instagram). Installing only works in the browser: tap ⋯ and choose “Open in browser” – or copy the link and open it in Safari or Chrome.,Diese Seite ist in einer anderen App geöffnet (z. B. WhatsApp oder Instagram). Installieren geht nur im Browser: Tippe auf ⋯ und wähle „Im Browser öffnen“ – oder kopiere den Link und öffne ihn in Safari oder Chrome.
+S.copy,Copy link,Link kopieren
+S.done2,Then open SSL Gold Cup from your home screen.,Danach SSL Gold Cup vom Homescreen aus öffnen.
+S.ui.share,Share,Teilen
+S.ui.home,Add to Home Screen,Zum Home-Bildschirm
+S.ui.add,Add,Hinzufügen
+S.ui.web,Open as Web App,Als Web-App öffnen
+S.ui.cancel,Cancel,Abbrechen
+S.ui.ainst,Install app,App installieren
+S.ui.aok,Install,Installieren
+S.trkOpen,📍 Watch live tracking,📍 Live-Tracking ansehen
+S.trkReplay,📍 Replay the race (tracking),📍 Rennen nochmal ansehen (Tracking)
+S.trkNone,Tracking appears here as soon as Georacing has set up this race.,"Das Tracking erscheint hier, sobald Georacing dieses Rennen angelegt hat."
+S.trkExt,Open in Georacing ↗,In Georacing öffnen ↗
+S.trkHint,"Every boat as a dot on the map – live during the race, as a replay afterwards.","Jedes Boot als Punkt auf der Karte – live während des Rennens, danach als Wiederholung."
+S.rcRes,Result of this race,Ergebnis dieses Rennens
+S.rcTeams,Teams in this race,Teams in diesem Rennen
+S.rcStand,Group so far,Gruppe bisher
+S.rcPts,pts,Pkt.
+S.rcGroup,Show group on the Matchboard,Gruppe im Matchboard zeigen
+S.rcTBD,Teams not decided yet,Teams stehen noch nicht fest
+S.qrT,Scan with the phone camera – the app opens right away.,Mit der Handy-Kamera scannen – die App öffnet sich sofort.
+S.shareNow,Share…,Teilen …
+S.qsep,"n=>""▲ advance""","n=>""▲ weiter"""
+S.shareSub,"Send via WhatsApp, Messages & co.","Per WhatsApp, Nachrichten & Co. verschicken"
+S.shareMsg,"SSL Gold Cup Rio 2026 – live results, race times and all teams:","SSL Gold Cup Rio 2026 – Live-Ergebnisse, Startzeiten und alle Teams:"
+S.sCaps,Captains,Kapitäne
+S.sTeams,Crews,Crews
+S.sHint,Tap a team to see its crew – teams still in the race come first.,"Tippe auf ein Team, um die Crew zu sehen – Teams, die noch dabei sind, stehen oben."
+S.sTeamPage,Team page,Zur Teamseite
+S.fShow,Show,Zeigen
+S.fSort,Sort,Sortieren
+S.spT,Spoiler-free,Spoiler-Schutz
+S.spUntil,w=>`Results hidden after ${w}`,w=>`Ergebnisse ab ${w} verborgen`
+S.spNone,No hidden results right now,Gerade nichts verborgen
+S.spShow,Show all,Alles zeigen
+S.spOff,Off,Aus
+S.spRow,Spoiler-free mode,Spoiler-Schutz
+S.spSub,Hide results until you have watched the race,"Ergebnisse verbergen, bis du das Rennen gesehen hast"
+S.spRace,Result hidden,Ergebnis verborgen
+S.spReveal,I've watched it – show result,Hab's gesehen – Ergebnis zeigen
+S.spOnT,Results from today on are hidden,Ergebnisse ab heute sind verborgen
+S.cmpBtn,⚖️ Compare,⚖️ Vergleichen
+S.cmpVs,vs,vs.
+S.cmpPick,Pick a team to compare with.,Wähle ein Team zum Vergleichen.
+S.h2hT,Head to head,Direkter Vergleich
+S.h2hSub,races finished ahead,Rennen vor dem anderen
+S.h2hNone,No races against each other yet.,Noch keine Rennen gegeneinander.
+S.cmpNote,Numbers from the races in Rio; ranking = SSL Nations Ranking.,Zahlen aus den Rennen in Rio; Rang = SSL Nations Ranking.
+S.vidT,🎬 Highlights & videos,🎬 Highlights & Videos
+S.vidAll,All videos on YouTube ↗,Alle Videos auf YouTube ↗
+S.vidOpen,Open on YouTube ↗,Auf YouTube öffnen ↗
+S.vidHid,"n=>`${n} newer video${n>1?""s"":""""} hidden (spoiler-free)`","n=>`${n} neuere${n>1?"""":""s""} Video${n>1?""s"":""""} verborgen (Spoiler-Schutz)`"
+S.pastL,Look back,Rückblick
+S.vnT,Venue · Marina da Glória,Austragungsort · Marina da Glória
+S.vnSub,Where it all happens – map & directions,Wo alles passiert – Karte & Anfahrt
+S.vnRoute,Directions,Route
+S.vnApple,Apple Maps,Apple Karten
+S.vnInfo[0],"The 2016 Olympic sailing venue, on Guanabara Bay with a view of Sugarloaf Mountain.","Das olympische Segelrevier von 2016, an der Guanabara-Bucht mit Blick auf den Zuckerhut."
+S.vnInfo[1],The marina is open to the public during the event – see the boats up close and visit the athletes' village.,Die Marina ist während des Events für alle geöffnet – die Boote aus der Nähe sehen und das Athletendorf besuchen.
+S.vnInfo[2],Racing takes place on Guanabara Bay right in front of the marina.,Gesegelt wird auf der Guanabara-Bucht direkt vor der Marina.
+S.suT,Sustainability,Nachhaltigkeit
+S.suSub,What the SSL does for the ocean and fair sport,Was die SSL für Meer und faire Sportbedingungen tut
+S.suIntro,The SSL says that for them sustainability means protecting the ocean and making the sport fairer.,Für die SSL heißt Nachhaltigkeit: das Meer schützen und den Sport fairer machen.
+S.suList[0],Every SSL Gold Cup boat must have two women on board.,Auf jedem SSL-Gold-Cup-Boot müssen zwei Frauen segeln.
+S.suList[1],No plastic bottles in the athletes' village.,Keine Plastikflaschen im Athletendorf.
+S.suList[2],A dedicated Sustainability Manager since September 2025.,Eine eigene Nachhaltigkeitsmanagerin seit September 2025.
+S.suList[3],"Aligned with Clean Regattas, World Sailing's Sustainability Agenda 2030 and the IOC strategy; the goal is Platinum Clean Regattas certification.","Ausgerichtet an Clean Regattas, der Sustainability Agenda 2030 von World Sailing und der IOC-Strategie; Ziel ist die Platinum-Zertifizierung von Clean Regattas."
+S.suList[4],Beach clean-ups with the teams at the qualifiers.,Strandreinigungen mit den Teams bei den Qualifikationen.
+S.suList[5],"Few support boats: at the 2023 Finals, four coach boats served 440 sailors.",Wenige Begleitboote: Beim Finale 2023 betreuten vier Coach-Boote 440 Segler.
+S.suMore,Read more at the SSL ↗,Mehr bei der SSL ↗
+S.mcT,Merch,Merch
+S.mcSub,"Jerseys, caps & more – coming soon","Trikots, Caps & mehr – bald verfügbar"
+S.mcSoon,Coming soon,Bald verfügbar
+S.mcTxt,"The official SSL Gold Cup Store is not open yet. As soon as it is, you can shop here.","Der offizielle SSL Gold Cup Store ist noch nicht geöffnet. Sobald er öffnet, kannst du hier einkaufen."
+S.mcList[0],Captain's jerseys of the national teams,Kapitänstrikots der Nationalteams
+S.mcList[1],SSL caps,SSL-Caps
+S.mcList[2],SSL47 boat and team figures as building sets,SSL47-Boot und Team-Figuren als Bausets
+S.mcGo,To the SSL store ↗,Zum SSL-Store ↗
+S.wxBtn,🌬️ Weather for sailors,🌬️ Wetter für Segler
+S.wxH,Sailing weather,Segelwetter
+S.wxLoad,Loading forecast…,Vorhersage wird geladen …
+S.wxFail,The forecast could not be loaded right now.,Die Vorhersage konnte gerade nicht geladen werden.
+S.wxGust,Gusts,Böen
+S.wxDir,Direction,Richtung
+S.wxPres,Pressure,Luftdruck
+S.wxAtStart,Forecast for the start time.,Vorhersage für die Startzeit.
+S.wxHours,Hour by hour,Stunde für Stunde
+S.wxTime,Time,Zeit
+S.wxWind,Wind kn,Wind kn
+S.wxKn,Wind in knots: mean – gusts. Arrows show where the wind blows to.,"Wind in Knoten: Mittel – Böen. Pfeile zeigen, wohin der Wind weht."
+S.wxSea,Water,Wasser
+S.wxWater,Water temperature,Wassertemperatur
+S.wxTide,Tide,Tide
+S.wxRise,rising,steigend
+S.wxFall,falling,fallend
+S.wxHigh,High,Hochwasser
+S.wxLow,Low,Niedrigwasser
+S.wxCur,Current,Strömung
+S.wxCurN,Model value at the bay entrance; arrow = where it flows.,Modellwert an der Buchteinfahrt; Pfeil = wohin sie fließt.
+S.wxWave,Swell,Dünung
+S.wxWaveN,"At the bay entrance, much smaller on the course.","An der Buchteinfahrt, auf der Bahn deutlich weniger."
+S.wxSun,Sunrise – sunset,Sonnenaufgang – -untergang
+S.wxSrc2,"Forecast by Open-Meteo (weather models), not measured on the course.","Vorhersage von Open-Meteo (Wettermodelle), nicht auf der Bahn gemessen."
+S.trkLive,Live tracking,Live-Tracking
+S.trkReplayS,Replay,Wiederholung
+S.fcBtn,Forecast,Vorhersage
+S.fcCond[0],Light wind,Leichtwind
+S.fcCond[1],Medium wind,Mittelwind
+S.fcCond[2],Fresh breeze,Frische Brise
+S.fcCond[3],Strong wind,Starkwind
+S.fcTr.up,building,zunehmend
+S.fcTr.down,easing,abnehmend
+S.fcTr.steady,steady,gleichbleibend
+S.fcTr.veer,veering (clockwise),rechtsdrehend
+S.fcTr.back,backing (anti-clockwise),linksdrehend
+S.fcNext,Next hour,Nächste Stunde
+S.fcChart,"Wind 10:00–18:00 · line = mean, band = gusts, marker = start","Wind 10:00–18:00 · Linie = Mittel, Band = Böen, Marke = Start"
+S.fcBft,Beaufort,Beaufort
+S.watchLive,Watch live,Live ansehen
+S.liveStream,Live stream,Livestream
+S.liveNow,The race is on – watch it here,Das Rennen läuft – hier live schauen
+S.liveNote,"If the player stays black, the stream hasn't started yet or YouTube blocks embedding – then open it on YouTube.","Bleibt der Player schwarz, hat der Stream noch nicht begonnen oder YouTube erlaubt die Einbettung nicht – dann auf YouTube öffnen."
+S.achT,Achievements,Erfolge
+S.olyT,Olympic Games,Olympische Spiele
+S.wcT,World Championship podiums,WM-Podien
+S.ecT,Continental podiums,Kontinental-Podien
+S.clubT,Club,Verein
+S.profSrc,Facts from the official SSL profile.,Fakten aus dem offiziellen SSL-Profil.
+S.achL[0],World Champion,Weltmeister
+S.achL[1],Olympic gold,Olympia-Gold
+S.achL[2],Olympic silver,Olympia-Silber
+S.achL[3],Olympic bronze,Olympia-Bronze
+S.wxAtT,h=>`Forecast for ${h}`,h=>`Vorhersage für ${h}`
+S.wxTap,Tap an hour for details.,Tippe auf eine Stunde für Details.
+S.fsT,Final Series,Final Series
+S.qsT,Qualifying Series,Qualifying Series
+S.qsLeg,Highlighted: qualified through this series. ● = in Rio via the SSL Nations Ranking. Tap a team in Rio for its page.,Hervorgehoben: über diese Serie qualifiziert. ● = über das SSL Nations Ranking in Rio. Team in Rio antippen für die Teamseite.
+S.qsNote,"The winner of each qualifying group (group C: top two) was drawn into the 1/32 Finals. 29 teams qualified for the Final Series via the SSL Ranking, with spots per continent: 12 Europe, 8 Pan-America, 6 Asia, 1 Africa, 2 Oceania.","Der Sieger jeder Qualifikationsgruppe (Gruppe C: die ersten zwei) wurde in die 1/32-Finale gelost. 29 Teams kamen über das SSL Ranking in die Final Series, mit Plätzen je Kontinent: 12 Europa, 8 Panamerika, 6 Asien, 1 Afrika, 2 Ozeanien."
+S.reg.asia,Asia,Asien
+S.reg.afoc,Africa & Oceania,Afrika & Ozeanien
+S.reg.eur,Europe,Europa
+S.reg.pam,Pan-America,Panamerika
+S.fin,Final,Finale
+S.petit,Petit F.,Kl. Finale
+S.swipe,Swipe sideways for later rounds →,Seitlich wischen für spätere Runden →
+S.road2,Road to Rio,Weg nach Rio
+S.inRio,In Rio via SSL Ranking,Über das SSL Ranking in Rio
+S.mbHint,Top two of each group advance. Tap a team for crew and history.,Die ersten zwei jeder Gruppe kommen weiter. Team antippen für Crew und Historie.
+S.vmT,Event area,Event-Gelände
+S.vmTap,Tap the map to zoom,Karte antippen zum Vergrößern
+S.vmL[0],SSL47 boats,SSL47-Boote
+S.vmL[1],Flag pole ashore (signals),Flaggenmast an Land (Signale)
+S.vmL[2],"Village: partner stands, shop, waste sorting","Village: Partnerstände, Shop, Mülltrennung"
+S.vmL[3],Video wall,Videowand
+S.vmL[4],Race office & jury room,Race Office & Jury-Raum
+S.vmL[5],Sailors Lounge,Sailors Lounge
+S.vmL[6],Uniforms,Uniformen
+S.vmL[7],TV broadcast,TV-Übertragung
+S.vmL[8],Exhibition boat,Ausstellungsboot
+S.vmL[9],Shore team tent,Zelt der Shore-Teams
+S.vmL[10],"Main stage: concert, final podium, closing ceremony","Hauptbühne: Konzert, Finalpodium, Abschlussfeier"
+S.vmL[11],Spectator boat,Zuschauerboot
+S.vmL[12],Press & production office,Presse- & Produktionsbüro
+S.vmL[13],Lunch buffet,Mittagsbuffet
+S.vmW,Water refill station,Trinkwasser-Station
+S.vdT,On race days,An Renntagen
+S.vd[0],10:00 – Skippers’ briefing,10:00 – Skippers’ Briefing
+S.vd[1],12:00 – first warning signal,12:00 – erstes Ankündigungssignal
+S.vd[2],Signals ashore: flag pole in front of the Sailors Lounge (2),Signale an Land: Flaggenmast vor der Sailors Lounge (2)
+S.vmSrc,"Map: SSL Gold Cup, official notice board","Karte: SSL Gold Cup, offizielles Notice Board"
+S.fbT,Wish or bug report,Wunsch oder Fehler melden
+S.fbSub,Goes straight to the app maker,Geht direkt an den Macher der App
+S.fbPh,What should be better? What isn't working?,Was soll besser werden? Was funktioniert nicht?
+S.fbName,Your name (optional),Dein Name (optional)
+S.fbSend,Send,Senden
+S.fbOk,Thanks – sent!,Danke – ist angekommen!
+S.fbErr,Couldn't send. Check your connection and try again.,Senden fehlgeschlagen. Verbindung prüfen und nochmal versuchen.
+S.showMe,Show me where,"Zeig mir, wo"
+S.openChrome,Open in Chrome,In Chrome öffnen
+S.openSafari,Open in Safari,In Safari öffnen
+S.prep,Getting ready … one moment,Wird vorbereitet … einen Moment
+S.coachT,Tap here,Hier tippen
+S.gotIt,Got it,Verstanden
+S.samsung[0],Tap ≡ (menu) at the bottom right.,Tippe unten rechts auf ≡ (Menü).
+S.samsung[1],Tap “Add page to” → “Home screen”.,Tippe „Seite hinzufügen zu“ → „Startbildschirm“.
+S.samsung[2],Confirm with “Add”.,Bestätige mit „Hinzufügen“.
+S.noDots,No ⋯ button? Tap the Share icon instead.,Kein ⋯ zu sehen? Dann tippe auf das Teilen-Symbol.
+S.tkLoad,Loading tracking…,Tracking wird geladen…
+S.tkNone,No tracking for this race yet.,Für dieses Rennen gibt es noch kein Tracking.
+S.tkNoData,No tracking data for this race.,Keine Tracking-Daten für dieses Rennen.
+S.tkOpens,Tracking opens at,Tracking startet um
+S.tkStart,Start,Start
+S.tkLeg,Leg,Schenkel
+S.tkPre,pre-start,vor dem Start
+S.tkNoPos,no signal,kein Signal
+S.tkRep,Replay,Replay
+S.secOly,Olympic Games,Olympische Spiele
+S.secWc,World Championships,Weltmeisterschaften
+S.secEc,Continental Championships,Kontinentalmeisterschaften
+S.bioT,About,Über
+S.srcSSL,Official bio · Star Sailors League,Offizielle Bio · Star Sailors League
+S.careerT,Career,Karriere
+S.evN,results listed,gelistete Ergebnisse
+S.podN,podiums,Podien
+S.medRate,medal rate,Medaillenquote
+S.bestR,best result,bestes Ergebnis
+S.showAll,Show all,Alle anzeigen
+S.sslPts,SSL points,SSL-Punkte
+S.heightT,Height,Größe
+S.weightT,Weight,Gewicht
+S.sslProf,Official SSL profile,Offizielles SSL-Profil
+S.teamSite,Team website,Team-Website
+S.mySailors,My sailors,Meine Segler
+S.sFavHint,Tap ☆ on a sailor's page to follow them – they'll show up here.,"Tippe auf ☆ auf der Seite eines Seglers, um ihm zu folgen – er erscheint dann hier."
+S.ownW,In their own words · from the SSL profile,In eigenen Worten · aus dem SSL-Profil
+S.pathHl,n=>`Path of ${n} highlighted`,n=>`Weg von ${n} markiert`
+S.setT,Settings,Einstellungen
+S.setSub,"Notifications, favourites, display, spoiler-free","Benachrichtigungen, Favoriten, Anzeige, spoilerfrei"
+S.sNotAvail,Push notifications are being set up and will be available here soon.,Push-Benachrichtigungen werden gerade eingerichtet und sind hier bald verfügbar.
+S.sMaster,Push notifications,Push-Benachrichtigungen
+S.sMasterSub,Main switch for this device,Hauptschalter für dieses Gerät
+S.sRemT,Start reminder,Start-Erinnerung
+S.sRemSub,15 minutes before your teams race,15 Minuten bevor deine Teams segeln
+S.sLiveT,Livestream starts,Livestream startet
+S.sLiveSub,When the SSL livestream goes live,Wenn der SSL-Livestream beginnt
+S.sVidT,New highlight video,Neues Highlight-Video
+S.sVidSub,When a new highlight film is out,Wenn ein neuer Highlight-Film erscheint
+S.sResT,Results of my teams,Ergebnisse meiner Teams
+S.sResSub,After every race of these teams – your favourite teams and the teams of your favourite sailors.,Nach jedem Rennen dieser Teams – deine Lieblingsteams und die Teams deiner Lieblingssegler.
+S.sFavNone,No favourites yet – tap ☆ on a team or sailor.,Noch keine Favoriten – tippe auf ☆ bei einem Team oder Segler.
+S.sQuietT,Quiet hours,Ruhezeiten
+S.sQuietSub,No notifications during this time (your local time),In dieser Zeit keine Benachrichtigungen (deine Ortszeit)
+S.sQoff,Off,Aus
+S.sSpoilN,"In spoiler-free mode, notifications only say that a race has finished.","Im spoilerfreien Modus sagen Benachrichtigungen nur, dass ein Rennen beendet ist."
+S.sDispT,Display,Anzeige
+S.sTimeT,Times,Uhrzeiten
+S.sTimeRio,Rio only,Nur Rio
+S.sTimeBoth,Rio + mine,Rio + meine
+S.sWindT,Wind,Wind
+S.sTempT,Temperature,Temperatur
+S.sLvT,Commentary language,Kommentarsprache
+S.sLvAuto,Same as the app,Wie die App
+S.sCalT,Calendar,Kalender
+S.sCalTeam,Races of this team,Rennen dieses Teams
+S.sDataT,Data & privacy,Daten & Datenschutz
+S.sPriv,"Everything you set here is stored only on this device. No account, no cookies; visits are counted anonymously.","Alles, was du hier einstellst, bleibt nur auf diesem Gerät. Kein Konto, keine Cookies; Besuche werden anonym gezählt."
+S.sResetF,Remove favourites,Favoriten entfernen
+S.sResetA,Reset everything,Alles zurücksetzen
+S.sResetQ,Tap again to confirm,Zum Bestätigen nochmal tippen
+S.sFeedback,Send feedback,Feedback senden
+S.sVer,Version,Version
+S.comp,Competition,Wettkampf
+S.rkT,SSL Nations Ranking,SSL Nations Ranking
+S.rkAsOf,As of,Stand
+S.rkNat,n=>`${n} nations`,n=>`${n} Nationen`
+S.rkHist,Historical ranking,Historisches Ranking
+S.rkCur,Current,Aktuell
+S.rkCont,Continent,Kontinent
+S.rkAll,All,Alle
+S.rkSearch,Search country,Land suchen
+S.rkGC,Gold Cup teams,Gold-Cup-Teams
+S.rkSk,Skippers,Skipper
+S.rkCr,Crews,Crew
+S.rkPts,Points (sum of the sailors' ranks),Punkte (Summe der Ranglistenplätze)
+S.rkNo,No.,Nr.
+S.rkGlob,Global,Global
+S.rkName,Nation,Nation
+S.rkNone,No nation found.,Keine Nation gefunden.
+S.rkLoad,Loading ranking…,Ranking wird geladen…
+S.rkFail,The ranking can't be loaded right now.,Das Ranking kann gerade nicht geladen werden.
+S.rkSrc,Source: Star Sailors League · updated every week. The nation's rank comes from its best-ranked skippers and crews.,Quelle: Star Sailors League · wöchentlich aktualisiert. Der Platz einer Nation ergibt sich aus ihren bestplatzierten Skippern und Crews.
+S.rkTeam,Team page,Teamseite
+S.rkPrev,p=>`previous week: ${p}`,p=>`Vorwoche: ${p}`
+S.rkWas,p=>`was ${p}`,p=>`vorher ${p}`
+S.rkInd,World rank,Weltrangliste
+S.rkOpen,Open ranking ›,Ranking öffnen ›
+S.rkTap,Tap a nation for its sailors.,Nation antippen für ihre Segler.
+S.alsoP,also,auch
+SOW,In their own words · from the SSL profile,In eigenen Worten · aus dem SSL-Profil
+NXG.[0],started,gestartet
+NXG.[1],planned,geplant
+NXF,After prior race,Nach Rennen davor
+RINC,Incoming,Folgt
+DOV.[0],Racing day over,Renntag beendet
+DOV.[1],"n=>`${n} race${n==1?"""":""s""} sailed`",n=>`${n} Rennen gesegelt`
+DOV.[2],g=>`${g} postponed`,g=>`${g} verschoben`
+DSW.[0],Previous,Vorheriger
+DSW.[1],Today,Heute
+DSW.[2],Next,Nächster
+DSW.[3],Previous race day,Vorheriger Renntag
+DSW.[4],Next race day,Nächster Renntag
+DSW.[5],from {t},ab {t}
+DSW.[6],{n} races,{n} Rennen
+DSW.[7],1 race,1 Rennen
+RESS.[0],Results,Ergebnisse
+RESS.[1],Overall results,Gesamtwertung
+RESS.[2],Qualifiers,Qualifikation
+RESS.[3],Final Series,Final Series
+RESS.[4],(to be determined),(noch offen)
+RESS.[5],Last chance race,Last-Chance-Rennen
+RESS.[6],Pos.,Pl.
+CHT.t,What's new,Neu in der App
+CHT.sub,Everything new in the app – latest first,Alle Neuerungen – die neuesten zuerst
+CHT.ver,Version,Version
+CHT.newB,New,Neu
+CHT.seen,You're up to date,Du bist auf dem neuesten Stand
+CHT.days[0],Race days at a glance,Renntage auf einen Blick
+CHT.days[1],"On Home you can switch between the previous, today’s and the next race day; at midnight Rio time everything moves on by itself.","Auf Home wechselst du zwischen vorherigem, heutigem und nächstem Renntag; um Mitternacht Rio-Zeit rückt alles von selbst weiter."
+CHT.estd[0],Smart delay estimate,Verspätungen vorhergesagt
+CHT.estd[1],The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races.,"Die App lernt aus jedem Rennen, wie lange Rennen und Wechsel dauern, und zeigt für die folgenden Rennen „Wohl verspätet ~HH:MM“."
+CHT.res[0],Results in the app,Ergebnisse in der App
+CHT.res[1],"Overall ranking, qualifiers and the Final Series – open places show “(to be determined)”.","Gesamtwertung, Qualifikation und Final Series – offene Plätze stehen als „(to be determined)“."
+CHT.rbox[0],Live race box,Live-Rennleiste
+CHT.rbox[1],The header strip shows the race on the water and the countdown to the next start – and when a start is delayed.,Oben siehst du das laufende Rennen und den Countdown zum nächsten Start – auch wenn sich ein Start verschiebt.
+CHT.inst2[0],Easier install,Einfacher installieren
+CHT.inst2[1],"One tap on Android, an arrow that points to the right button on iPhone, and “Open in Chrome/Safari” from WhatsApp & co.","Ein Tipp unter Android, ein Pfeil zum richtigen Knopf auf dem iPhone und „In Chrome/Safari öffnen“ aus WhatsApp & Co."
+CHT.trk2[0],Faster tracking,Schnelleres Tracking
+CHT.trk2[1],"Live positions appear right away, the race history loads in the background.","Live-Positionen erscheinen sofort, der Rennverlauf lädt im Hintergrund."
+CHT.fbk[0],Send a wish or bug,Wunsch oder Fehler melden
+CHT.fbk[1],Under More: tell the app maker what should be better.,"Unter Mehr: Sag dem Macher der App, was besser werden soll."
+CHT.rank[0],SSL Nations Ranking in the app,SSL Nations Ranking in der App
+CHT.rank[1],"All 132 nations with continent filter, search, history back to 2025 and each nation's best skippers and crews.","Alle 132 Nationen mit Kontinent-Filter, Suche, Verlauf bis 2025 und den besten Skippern und Crews jeder Nation."
+CHT.pos[0],Positions checked,Positionen geprüft
+CHT.pos[1],Every sailor's position compared with the team pages and the Rio jersey numbers – several positions are shown where they differ.,Die Position jedes Seglers mit Teamseiten und Rio-Trikotnummern abgeglichen – bei Abweichungen stehen mehrere Positionen.
+CHT.linkin[0],No more jumps to other sites,Keine Sprünge mehr auf andere Seiten
+CHT.linkin[1],Ranking and qualifier links now open inside the app.,Ranking- und Quali-Links öffnen jetzt in der App.
+CHT.compass[0],Clearer wind compass,Klarerer Windkompass
+CHT.compass[1],"The yellow wedge shows where the wind comes from, the wind speed sits right in the middle.","Der gelbe Keil zeigt, woher der Wind kommt, die Windstärke steht direkt in der Mitte."
+CHT.tap[0],Tap any team or sailor,Teams und Segler überall antippen
+CHT.tap[1],"Team and sailor names now open their page everywhere – tables, results, settings and more.","Team- und Seglernamen öffnen jetzt überall ihre Seite – in Tabellen, Ergebnissen, Einstellungen und mehr."
+CHT.pl[0],Now in Polish,Jetzt auf Polnisch
+CHT.pl[1],Polski! The app now speaks 18 languages.,Polski! Die App spricht jetzt 18 Sprachen.
+CHT.photos[0],Official portraits for the 1/16 teams,Offizielle Porträts der 1/16-Teams
+CHT.photos[1],"Japan, Czechia, Chile, Ecuador, Hungary, Peru, South Africa and Thailand – fresh from the event studio.","Japan, Tschechien, Chile, Ecuador, Ungarn, Peru, Südafrika und Thailand – frisch aus dem Event-Studio."
+CHT.bright[0],Brightness button,Helligkeits-Button
+CHT.bright[1],"Switch between Matchboard blue, day and night right in the header.","Oben direkt zwischen Matchboard-Blau, Tag und Nacht wechseln."
+CHT.logo[0],Bigger SSL logo,Größeres SSL-Logo
+CHT.logo[1],A little more presence at the top.,Etwas mehr Präsenz oben rechts.
+CHT.tabs[0],New tab bar,Neue Menüleiste
+CHT.tabs[1],"Competition (rounds + matchboard), Teams and Sailors each have their own tab.","Wettkampf (Runden + Matchboard), Teams und Segler haben je einen eigenen Tab."
+CHT.settings[0],Settings,Einstellungen
+CHT.settings[1],"Notifications, start reminders, quiet hours, units, local times and spoiler-free mode in one place.","Benachrichtigungen, Start-Erinnerungen, Ruhezeiten, Einheiten, Ortszeit und spoilerfrei an einem Ort."
+CHT.pages[0],Real pages,Echte Seiten
+CHT.pages[1],"Teams, sailors and races open as full pages with their own link – back always goes one step back.","Teams, Segler und Rennen öffnen als eigene Seite mit eigenem Link – Zurück geht immer einen Schritt zurück."
+CHT.anim[0],Smooth round switching,Flüssiger Rundenwechsel
+CHT.anim[1],"Swipe between rounds, with an animation like in the big apps.","Zwischen den Runden wischen, mit Animation wie in den großen Apps."
+CHT.install[0],Easier to install,Einfacher installieren
+CHT.install[1],An Install button next to the language – the app on your home screen in 20 seconds.,Install-Button neben der Sprache – die App in 20 Sekunden auf dem Homescreen.
+CHT.track[0],Live tracking inside the app,Live-Tracking in der App
+CHT.track[1],"Every boat on the map, live ranking, course and replay – no more external site.","Jedes Boot auf der Karte, Live-Rangliste, Kurs und Replay – ohne externe Seite."
+CHT.profiles[0],New sailor profiles,Neue Seglerprofile
+CHT.profiles[1],"Bio, career, Olympic and world championship medals from the official SSL profiles.","Bio, Karriere, Olympia- und WM-Medaillen aus den offiziellen SSL-Profilen."
+CHT.favS[0],Follow sailors,Seglern folgen
+CHT.favS[1],Tap ☆ on a sailor – your sailors get their own list.,☆ beim Segler antippen – deine Segler bekommen eine eigene Liste.
+CHT.langs6[0],Six more languages,Sechs weitere Sprachen
+CHT.langs6[1],"Japanese, Thai, Malay, Hungarian, Czech and Ukrainian.","Japanisch, Thai, Malaiisch, Ungarisch, Tschechisch und Ukrainisch."
+CHT.stream[0],Live stream in the app,Livestream in der App
+CHT.stream[1],With preview image and countdown until the broadcast starts.,Mit Vorschaubild und Countdown bis zum Sendestart.
+CHT.spoil[0],Spoiler-free mode,Spoilerfrei-Modus
+CHT.spoil[1],Hide results until you've watched the race.,"Ergebnisse verstecken, bis du das Rennen gesehen hast."
+CHT.wx[0],Sailing weather per race,Segelwetter pro Rennen
+CHT.wx[1],"Wind, gusts, direction, waves and tide for every start time.","Wind, Böen, Richtung, Wellen und Tide für jede Startzeit."
+CHT.cmp[0],Team comparison,Teamvergleich
+CHT.cmp[1],Two teams side by side – head to head and numbers from Rio.,Zwei Teams nebeneinander – direkter Vergleich und Zahlen aus Rio.
+CHT.vids[0],Highlights,Highlights
+CHT.vids[1],The latest SSL videos right in the app.,Die neuesten SSL-Videos direkt in der App.
+CHT.venue[0],Venue,Austragungsort
+CHT.venue[1],Marina da Glória with map and directions.,Marina da Glória mit Karte und Route.
+CHT.race[0],Race details,Renndetails
+CHT.race[1],"Tap a race for result, group standings, wind and stream.","Rennen antippen für Ergebnis, Gruppenstand, Wind und Stream."
+CHT.push[0],Push notifications,Push-Benachrichtigungen
+CHT.push[1],Results of your teams straight to your phone.,Ergebnisse deiner Teams direkt aufs Handy.
+CHT.cal[0],Calendar,Kalender
+CHT.cal[1],All races of your team in your calendar – updates itself.,Alle Rennen deines Teams im Kalender – aktualisiert sich selbst.
+CHT.shareimg[0],Share as image,Als Bild teilen
+CHT.shareimg[1],Group tables as a picture for WhatsApp & co.,Gruppentabellen als Bild für WhatsApp & Co.
+CHT.app[0],Install as an app,Als App installieren
+CHT.app[1],"Full screen, with icon, updates itself.","Vollbild, mit Icon, aktualisiert sich selbst."
+CONT.[0],Africa,Afrika
+CONT.[1],Asia,Asien
+CONT.[2],Europe,Europa
+CONT.[3],Oceania,Ozeanien
+CONT.[4],Pan-America,Panamerika
+NWS,News,News
+NSRC,Source: worldofsailors.com (Star Sailors League),Quelle: worldofsailors.com (Star Sailors League)
+RRS.[0],Start,Start
+RRS.[1],Race time,Renndauer
+RRS.[2],Winner,Sieger
+RRS.[3],The full report for this race follows here.,Der ausführliche Bericht zu diesem Rennen folgt hier.
+ALSO,also,auch
+WXF,Wind from,Wind aus
+NXS.[0],On schedule,Planmäßig
+NXS.[1],Starting soon,Start gleich
+NXS.[2],Start delayed,Start verzögert
+NXS.[3],Delayed,Verspätet
+NXS.[4],Racing,Rennen läuft
+NXS.[5],t=>`Not before ${t}`,t=>`Nicht vor ${t}`
+NXW,Start pending,Start ausstehend
+NXP,Probably delayed,Wohl verspätet
+ORD,"n=>n+(n%10==1&&n!=11?""st"":n%10==2&&n!=12?""nd"":n%10==3&&n!=13?""rd"":""th"")","n=>n+""."""
+OSL,en,de
+FIX.GBR,Great Britain,Großbritannien
+FIX.TAH,Tahiti,Tahiti
+FIX.MYA,Myanmar,Myanmar
+FIX.USA,USA,USA

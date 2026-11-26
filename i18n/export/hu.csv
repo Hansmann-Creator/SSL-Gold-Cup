@@ -1,0 +1,700 @@
+key,English,Magyar
+S.rounds,Rounds,Fordulók
+S.bracket,Matchboard,Matchboard
+S.teams,Teams,Csapatok
+S.official,Official results,Hivatalos eredmények
+S.updated,Updated,Frissítve
+S.ago,"m=>m<1?""just now"":m<60?`${m} min ago`:`${Math.round(m/60)} h ago`","m=>m<1?""épp most"":m<60?`${m} perce`:`${Math.round(m/60)} órája`"
+S.rio,Rio time,riói idő
+S.offline,offline – last saved data,offline – utoljára mentett adatok
+S.rn.r32,1/32 Finals,1/32-es döntő
+S.rn.r16,1/16 Finals,1/16-os döntő
+S.rn.r8,1/8 Finals,Nyolcaddöntő
+S.rn.r4,Quarter-finals,Negyeddöntő
+S.rn.sf,Semi-finals,Elődöntő
+S.rn.pf,Petit Final,Kisdöntő
+S.rn.f,Grand Final,Nagydöntő
+S.group,Group,Csoport
+S.decided,decided,eldőlt
+S.racing,racing,verseny zajlik
+S.open,open,nyitott
+S.st.done,completed,befejezve
+S.st.live,in progress,folyamatban
+S.st.up,upcoming,hamarosan
+S.races,"n=>`${n} race${n>1?""s"":""""} per group`",n=>`csoportonként ${n} futam`
+S.upNext,Up next,Következik
+S.startsIn,"d=>d<=0?""starts today"":d==1?""starts tomorrow"":`starts in ${d} days`","d=>d<=0?""ma kezdődik"":d==1?""holnap kezdődik"":`${d} nap múlva kezdődik`"
+S.groupsOf4,"n=>`${n} group${n>1?""s"":""""} of four`",n=>`${n} négyes csoport`
+S.oneRace,One race – the finishing order decides.,Egy futam – a befutási sorrend dönt.
+S.through,through,továbbjut
+S.out,out,kiesett
+S.toFinal,to Final,a döntőbe
+S.toPetit,to Petit Final,a kisdöntőbe
+S.medals[0],Gold,Arany
+S.medals[1],Silver,Ezüst
+S.medals[2],Bronze,Bronz
+S.medals[3],4th,4.
+S.pts,Pts,Pont
+S.outIn,"(r,g,p)=>`Out in the ${r} (Group ${g}, ${p})`","(r,g,p)=>`Kiesett – ${r} (${g} csoport, ${p})`"
+S.gf,m=>`Grand Final: ${m}`,m=>`Nagydöntő: ${m}`
+S.finished,p=>`Finished ${p}`,p=>`Végeredmény: ${p}`
+S.thrTbc,Through – next group to be confirmed,Továbbjutott – a következő csoport még nem ismert
+S.seeded,"(r,g,d)=>`Seeded – enters the ${r}, Group ${g}, ${d}`","(r,g,d)=>`Kiemelt – kezdés: ${r}, ${g} csoport, ${d}`"
+S.racingNow,Racing now,Most versenyez
+S.nations,n=>`${n} nations`,n=>`${n} nemzet`
+S.stillIn,still in,még versenyben
+S.outN,out,kiesett
+S.search,"Search nation, nickname or sailor","Ország, becenév vagy vitorlázó keresése"
+S.all,All,Mind
+S.chipIn,Still in,Versenyben
+S.chipOut,Out,Kiesett
+S.mine,★ My teams,★ Csapataim
+S.sStatus,Status,Állapot
+S.sRank,Ranking,Rangsor
+S.sAz,A–Z,A–Z
+S.noTeam,No team found.,Nincs találat.
+S.rank,Rank,Helyezés
+S.captain,Captain,Kapitány
+S.helm,Helm,Kormányos
+S.ranking,SSL Nations Ranking,SSL Nations Ranking
+S.rankBoard,Ranking board ↗,Rangsor ↗
+S.entered,Entered Rio at,Belépés Rióban
+S.showRound,Open round ›,Forduló megnyitása ›
+S.gc23,Gold Cup 2023,Gold Cup 2023
+S.br23,2023 bracket ›,2023-as ágrajz ›
+S.status,Status,Állapot
+S.stIn,Still in,Versenyben
+S.stOut,Out,Kiesett
+S.whereEnded,Where it ended ›,Hol ért véget ›
+S.curGroup,Current group ›,Aktuális csoport ›
+S.background,Background,Háttér
+S.road,Road to Rio,Út Rióba
+S.story,Story,Történet
+S.site,Team site,Csapatoldal
+S.qualRes,Qualifier results ↗,Selejtező eredményei ↗
+S.sslRank,SSL Nations Ranking ↗,SSL Nations Ranking ↗
+S.resRio,Results in Rio,Eredmények Rióban
+S.photos,Crew photos,Legénység fotói
+S.byPos,Crew by position,Legénység posztonként
+S.leader,Team leader,Csapatvezető
+S.wider,Wider squad · position TBC,Bővebb keret · poszt még nem ismert
+S.squadNote,"(n,p)=>`${n} names in the squad. 8–10 sail each race and the line-up can change from day to day. Positions and numbers from the official team site; portraits from the Gold Cup Rio graphics${p?"""":"" (none yet for this team)""}.`","(n,p)=>`${n} név a keretben. Futamonként 8–10 fő vitorlázik, a felállás naponta változhat. Posztok és számok a hivatalos csapatoldalról; portrék a Gold Cup Rio grafikáiból${p?"""":"" (ennél a csapatnál még nincs)""}.`"
+S.noSquad,No squad list published for this team yet.,Ennek a csapatnak még nincs közzétett kerete.
+S.showPath,Show path in bracket,Út mutatása az ágrajzon
+S.copyLink,Copy link,Link másolása
+S.copied,Link copied,Link másolva
+S.close,Close,Bezárás
+S.jersey,Jersey,Mezszám
+S.numTbc,Number TBC,Szám még nem ismert
+S.capTag,Captain,Kapitány
+S.favOn,Following,Követem
+S.favOff,Follow,Követés
+S.brHint,Tap a team for crew and history. Swipe for later rounds.,Koppints egy csapatra a legénységért és az előzményekért. Húzd oldalra a későbbi fordulókért.
+S.h23,Gold Cup 2023,Gold Cup 2023
+S.champ23,Gran Canaria · champion,Gran Canaria · bajnok
+S.hl,highlighted,kiemelve
+S.tap26,Tap a team for its Rio 2026 page.,Koppints egy csapatra a Rio 2026 oldaláért.
+S.off23,Official 2023 results ↗,Hivatalos 2023-as eredmények ↗
+S.myTeams,My teams,Csapataim
+S.myHint,Tap ☆ on a team page to follow it.,Koppints a ☆-ra a csapatoldalon a követéshez.
+S.foot,"Scoring: 4-3-2-1 points per race, double points in the last race of each group (8-6-4-2). Top two of each group advance. Results refresh automatically from the official SSL results page. Ranking = SSL Nations Ranking at the start of the Final Series.","Pontozás: futamonként 4-3-2-1 pont, minden csoport utolsó futamán dupla pont (8-6-4-2). Csoportonként az első kettő jut tovább. Az eredmények automatikusan frissülnek a hivatalos SSL-eredményoldalról. Rangsor = SSL Nations Ranking a Final Series kezdetén."
+S.notes.ocs,* OCS (early start)  ** Standard penalty,* OCS (korai rajt)  ** Standard büntetés
+S.theme.auto,🌊 Matchboard,🌊 Matchboard
+S.theme.light,☀️ Day,☀️ Nappal
+S.theme.dark,🌙 Night,🌙 Éjjel
+S.g23.champ,Champion (Gold),Bajnok (arany)
+S.g23.second,Runner-up (Silver),Második (ezüst)
+S.g23.third,3rd (Bronze),3. (bronz)
+S.g23.fourth,4th – Grand Final,4. – Nagydöntő
+S.g23.sf,Semi-finals,Elődöntő
+S.g23.qf,Quarter-finals,Negyeddöntő
+S.g23.r8,1/8 Finals,Nyolcaddöntő
+S.g23.r16,1/16 Finals,1/16-os döntő
+S.g23.r32,1/32 Finals,1/32-es döntő
+S.g23.none,Didn't race the 2023 Final Series,Nem versenyzett a 2023-as Final Series-ben
+S.ev.asia,Asian Qualifiers,Ázsiai selejtező
+S.ev.afoc,African & Oceanian Qualifiers,Afrikai és óceániai selejtező
+S.ev.eu1,European Qualifiers 1,Európai selejtező 1
+S.ev.eu2,European Qualifiers 2,Európai selejtező 2
+S.ev.pan,Pan-American Qualifiers,Pánamerikai selejtező
+S.route.won,"(e,g)=>`Won the ${e}, Group ${g}`","(e,g)=>`Győzelem: ${e}, ${g} csoport`"
+S.route.pos,"(p,e,g)=>`${p} in the ${e}, Group ${g}`","(p,e,g)=>`${p} – ${e}, ${g} csoport`"
+S.route.lc,"(e,g)=>`3rd in the ${e} Group ${g}, then won the Last Chance race`","(e,g)=>`3. – ${e}, ${g} csoport, majd győzelem a Last Chance futamon`"
+S.route.ranking,Qualified through the SSL Nations Ranking,Az SSL Nations Rankingen keresztül jutott be
+S.route.host,"Host nation, seeded into the 1/8 Finals","Rendező ország, kiemelve a nyolcaddöntőbe"
+S.route.seeded,r=>`Seeded into the ${r} via the SSL Nations Ranking`,r=>`Kiemelve (${r}) az SSL Nations Ranking alapján`
+S.roles.Helm,Steers the boat,Kormányozza a hajót
+S.roles.Tactician,Strategy & calls,Stratégia és döntések
+S.roles.Main Trimmer,Mainsail,Nagyvitorla
+S.roles.Trimmer,Jib & gennaker,Orrvitorla és gennaker
+S.roles.Grinder,Powers the winches,Hajtja a csörlőket
+S.roles.Pit,Halyards & controls,Felhúzókötelek és vezérlés
+S.roles.Mid-Bow,Mast & foredeck,Árboc és elődedék
+S.roles.Bow,Bow & starts,Orr és rajtok
+S.roles.Floater,Utility / reserve,Univerzális / tartalék
+S.back,‹ Back,‹ Vissza
+S.position,Position,Poszt
+S.team,Team,Csapat
+S.indRank,SSL ranking,SSL-rangsor
+S.highlights,Highlights,Kiemelkedő eredmények
+S.profile,SSL profile ↗,SSL-profil ↗
+S.findProfile,Find SSL profile ↗,SSL-profil keresése ↗
+S.ws,World Sailing ↗,World Sailing ↗
+S.mates,Teammates,Csapattársak
+S.posTbc,Position TBC,Poszt még nem ismert
+S.noInfo,No further details published yet – the links below search the official profiles.,Még nincs több közzétett adat – az alábbi linkek a hivatalos profilokban keresnek.
+S.today,Today,Ma
+S.raceDay,"(n,t)=>`race day ${n} of ${t}`","(n,t)=>`${n}/${t}. versenynap`"
+S.finalDay,Final day – last race counts double,Utolsó nap – az utolsó futam dupla pontot ér
+S.stream,▶ Live stream,▶ Élő közvetítés
+S.tracking,Tracking,Követés
+S.schedule,Schedule,Menetrend
+S.adv,"(a,b)=>`1st → ${a} · 2nd → ${b}`","(a,b)=>`1. → ${a} · 2. → ${b}`"
+S.advSf,1st–2nd → Final · 3rd–4th → Petit Final,1–2. → Döntő · 3–4. → Kisdöntő
+S.clinched,✓ through,✓ biztos továbbjutó
+S.elim,out,kiesett
+S.secNow,In the current round,Az aktuális fordulóban
+S.secSeeded,r=>`Seeded – enter in the ${r}`,r=>`Kiemelt – kezdés: ${r}`
+S.secOut,Out,Kiesett
+S.lineup,Line-up,Mezőny
+S.howT,How the Gold Cup works,Így működik a Gold Cup
+S.how[0],"National teams, one SSL47 boat each – all boats identical and provided by the organisers.","Nemzeti csapatok, mindegyik egy SSL47 hajóval – minden hajó azonos, a szervezők biztosítják."
+S.how[1],Groups of four. 4-3-2-1 points per race; the last race of each group counts double (8-6-4-2).,Négyes csoportok. Futamonként 4-3-2-1 pont; minden csoport utolsó futama dupla (8-6-4-2).
+S.how[2],The top two of every group advance; better-ranked nations enter later rounds.,Minden csoportból az első kettő jut tovább; a jobb rangsorú nemzetek később kapcsolódnak be.
+S.how[3],Semi-finals and finals are a single race each; the Grand Final decides the world champion.,Az elődöntő és a döntő egy-egy futam; a Nagydöntő dönti el a világbajnokot.
+S.race,Race,Futam
+S.nextRace,Next race,Következő futam
+S.todayRaces,Today's races,Mai futamok
+S.rioT,Rio time,riói idő
+S.loc,your time,helyi idő
+S.onWater,on the water,a vízen
+S.done,done,kész
+S.inX,"m=>m<60?`in ${m} min`:`in ${Math.floor(m/60)} h ${String(m%60).padStart(2,""0"")}`","m=>m<60?`${m} perc múlva`:`${Math.floor(m/60)} ó ${String(m%60).padStart(2,""0"")} p múlva`"
+S.firstStart,First start,Első rajt
+S.schedT,Race schedule,Futamrend
+S.schedNote,"Times are Rio de Janeiro time (UTC−3), from the official schedule. Its groups G1–G4 are shown here as groups A–D.","Az időpontok riói idő szerint (UTC−3), a hivatalos menetrend alapján. Az ottani G1–G4 csoportok itt A–D csoportként szerepelnek."
+S.needT,Before the final race (double points),Az utolsó futam előtt (dupla pont)
+S.need.sure,"through, whatever happens",biztosan továbbjut
+S.need.gone,"out, whatever happens",biztosan kiesik
+S.need.win,a win is enough,a győzelem elég
+S.need.top,k=>`${k} or better is enough`,k=>`${k} vagy jobb elég`
+S.need.mustWin,must win,nyernie kell
+S.need.help,and needs help from the others,és a többiek segítségére is szüksége van
+S.need.maybe,k=>`${k} may be enough – depends on the others`,k=>`${k} elég lehet – a többieken múlik`
+S.need.iff,"(k,c)=>`${k} is enough if ${c}`","(k,c)=>`${k} elég, ha ${c}`"
+S.need.mustIf,"c=>`must win, and only if ${c}`","c=>`nyernie kell, és csak ha ${c}`"
+S.need.ahead,R=>`ahead of ${R}`,R=>`${R} előtt`
+S.need.behind,R=>`behind ${R}`,R=>`${R} mögött`
+S.need.notWin,R=>`${R} doesn't win`,R=>`${R} nem nyer`
+S.need.last,R=>`${R} finishes last`,R=>`${R} utolsó`
+S.need.wins,R=>`${R} wins`,R=>`${R} nyer`
+S.need.tie,level on points possible – tie-break decides,pontegyenlőség lehetséges – a holtversenyszabály dönt
+S.needNote,"Worked out from the current points; ≈ means teams could finish level, then the official tie-break decides.","A jelenlegi pontokból számolva; ≈ azt jelenti, hogy pontegyenlőség lehet, ekkor a hivatalos holtversenyszabály dönt."
+S.install,Add to Home Screen for the app icon.,Add hozzá a kezdőképernyőhöz az alkalmazásikonért.
+S.home,Home,Kezdőlap
+S.more,More,Továbbiak
+S.sailors,Sailors,Vitorlázók
+S.welcome,Final Series · Rio de Janeiro,Final Series · Rio de Janeiro
+S.dates,19 Nov – 13 Dec 2026 · Marina da Glória,2026. nov. 19. – dec. 13. · Marina da Glória
+S.progress,Tournament,Torna
+S.latest,Latest results,Legfrissebb eredmények
+S.explore,Explore,Felfedezés
+S.tiles.board[0],Rounds,Fordulók
+S.tiles.board[1],"Groups, points, times","Csoportok, pontok, időpontok"
+S.tiles.bracket[0],Matchboard,Matchboard
+S.tiles.bracket[1],The whole draw at a glance,A teljes sorsolás egy pillantásra
+S.tiles.teams[0],Teams,Csapatok
+S.tiles.teams[1],"40 nations, crews, rankings","40 nemzet, legénységek, rangsor"
+S.tiles.sailors[0],Sailors,Vitorlázók
+S.tiles.sailors[1],Search every sailor,Minden vitorlázó keresése
+S.tiles.qualifying[0],Qualifying,Selejtezők
+S.tiles.qualifying[1],How the teams got to Rio,Így jutottak a csapatok Rióba
+S.tiles.gc2023[0],Gold Cup 2023,Gold Cup 2023
+S.tiles.gc2023[1],Last edition's bracket,Az előző kiírás ágrajza
+S.sailorsT,n=>`${n} sailors`,n=>`${n} vitorlázó`
+S.sSearch,"Search sailor, team or position","Vitorlázó, csapat vagy poszt keresése"
+S.withPhoto,With photo,Fotóval
+S.allS,All,Mind
+S.moreT,More,Továbbiak
+S.lang,Language,Nyelv
+S.design,Design,Megjelenés
+S.share,Share app,App megosztása
+S.shared,Link copied,Link másolva
+S.links,Links,Linkek
+S.about,About this app,Az alkalmazásról
+S.aboutT,Unofficial companion app for the SSL Gold Cup Rio 2026. Results update automatically from the official SSL results page.,Nem hivatalos kísérőalkalmazás az SSL Gold Cup Rio 2026-hoz. Az eredmények automatikusan frissülnek a hivatalos SSL-eredményoldalról.
+S.inst.t,Install the app,Alkalmazás telepítése
+S.inst.d,"Put SSL Gold Cup on your home screen – opens like an app, full screen, with live results.","Tedd az SSL Gold Cupot a kezdőképernyőre – alkalmazásként, teljes képernyőn nyílik, élő eredményekkel."
+S.inst.b,Install,Telepítés
+S.inst.done,Installed ✓,Telepítve ✓
+S.inst.ios[0],Tap the Share button,Koppints a Megosztás gombra
+S.inst.ios[1],at the bottom of Safari (top right on iPad).,a Safari alján (iPaden jobbra fent).
+S.inst.ios[2],Scroll down and tap “Add to Home Screen”.,"Görgess le, és koppints a „Főképernyőhöz adás” elemre."
+S.inst.ios[3],Tap “Add” – done.,Koppints a „Hozzáadás” gombra – kész.
+S.inst.iosOther,On iPhone this works in Safari: open this page in Safari first.,iPhone-on ez a Safariban működik: először nyisd meg ezt az oldalt a Safariban.
+S.inst.android[0],Tap the ⋮ menu in the top right of your browser.,Koppints a böngésző jobb felső sarkában a ⋮ menüre.
+S.inst.android[1],Tap “Install app” or “Add to Home screen”.,Koppints az „Alkalmazás telepítése” vagy „Hozzáadás a kezdőképernyőhöz” elemre.
+S.inst.android[2],Confirm with “Install”.,Erősítsd meg a „Telepítés” gombbal.
+S.inst.desk[0],"Click the install icon in the address bar,","Kattints a címsorban a telepítés ikonra,"
+S.inst.desk[1],or open the browser menu and choose “Install SSL Gold Cup”.,"vagy nyisd meg a böngésző menüjét, és válaszd az „SSL Gold Cup telepítése” lehetőséget."
+S.inst.how,How to install,Telepítés lépései
+S.inst.hide,Not now,Most nem
+S.inst.installedNote,You're using the installed app.,A telepített alkalmazást használod.
+S.champT,World Champion · Gold Cup 2026,Világbajnok · Gold Cup 2026
+S.standT,Final standings,Végeredmény
+S.statsT,In numbers,Számokban
+S.stRaces,Races,Futamok
+S.stWins,Race wins,Futamgyőzelmek
+S.stAvg,Avg. place,Átl. helyezés
+S.stPts,Points in Rio,Pontok Rióban
+S.stHist,Race by race,Futamról futamra
+S.calBtn,📅 Races in my calendar,📅 Futamok a naptáramban
+S.calT,Races in your calendar,Futamok a naptáradban
+S.calSub,"Subscribe (iPhone, Mac, Outlook)","Feliratkozás (iPhone, Mac, Outlook)"
+S.calG,Add to Google Calendar,Hozzáadás a Google Naptárhoz
+S.calDl,Download file (.ics),Fájl letöltése (.ics)
+S.calAll,All races in my calendar,Minden futam a naptáramban
+S.calNote,"A subscription updates itself: when a team qualifies, its next races appear automatically.","A feliratkozás magától frissül: ha egy csapat továbbjut, a következő futamai automatikusan megjelennek."
+S.wxT,Wind forecast · Marina da Glória,Szél-előrejelzés · Marina da Glória
+S.wxSrc,"Forecast by Open-Meteo, not measured on the course.","Az Open-Meteo előrejelzése, nem a pályán mért adat."
+S.trk,Tracking,Követés
+S.delayed,m=>`Results may be delayed – last successful check ${m} min ago.`,m=>`Az eredmények késhetnek – az utolsó sikeres ellenőrzés ${m} perce volt.`
+S.shareImg,Share as image,Megosztás képként
+S.imgDone,Image ready,A kép kész
+S.pT,Notifications,Értesítések
+S.pAll,All results,Minden eredmény
+S.pAllSub,A notification after every race,Értesítés minden futam után
+S.pTeamOff,🔔 Notify me about this team,🔔 Értesíts erről a csapatról
+S.pTeamOn,🔔 Notifications on ✓,🔔 Értesítések bekapcsolva ✓
+S.pTeams,Your teams,Csapataid
+S.pNone,No team yet: open a team and tap 🔔.,"Még nincs csapat: nyiss meg egy csapatot, és koppints a 🔔-ra."
+S.pNote,You only get race results and who goes through. Switch off here any time.,Csak futameredményeket és a továbbjutókat kapod. Itt bármikor kikapcsolhatod.
+S.pIOS,"On iPhone, notifications only work in the installed app: install it, open it from the home screen, then switch them on here.","iPhone-on az értesítések csak a telepített alkalmazásban működnek: telepítsd, nyisd meg a kezdőképernyőről, majd kapcsold be itt."
+S.pDenied,Notifications are blocked. Allow them for this app in your device settings.,Az értesítések le vannak tiltva. Engedélyezd őket ennek az alkalmazásnak az eszköz beállításaiban.
+S.pErr,That didn't work – please try again in a moment.,Nem sikerült – próbáld újra egy kicsit később.
+S.pOnT,Notifications on,Értesítések bekapcsolva
+S.pOffT,Notifications off,Értesítések kikapcsolva
+S.pUnsup,This browser can't receive notifications.,Ez a böngésző nem tud értesítéseket fogadni.
+S.obT,Get the app,Szerezd meg az alkalmazást
+S.obSub,"Free, no App Store needed – on your home screen in 20 seconds.","Ingyenes, App Store nélkül – 20 másodperc alatt a kezdőképernyőn."
+S.obPerks[0],Live results in one tap,Élő eredmények egy koppintással
+S.obPerks[1],"Full screen, like a real app","Teljes képernyő, mint egy igazi app"
+S.obPerks[2],Notifications for your team,Értesítések a csapatodról
+S.obBtn,Install now,Telepítés most
+S.obLater,Later – look around in the browser first,Később – előbb körülnézek a böngészőben
+S.obSteps,How it works,Így működik
+S.obStep,Step,Lépés
+S.ios26[0],Tap ⋯ next to the address bar,Koppints a címsor melletti ⋯ gombra
+S.ios26[1],Tap “Share”,Koppints a „Megosztás” elemre
+S.ios26[2],Scroll down and tap “Add to Home Screen”,"Görgess le, és koppints a „Főképernyőhöz adás” elemre"
+S.ios26[3],Leave “Open as Web App” on and tap “Add”,"Hagyd bekapcsolva a „Megnyitás webappként” opciót, és koppints a „Hozzáadás” gombra"
+S.iosOld[0],Tap the Share button at the bottom,Koppints alul a Megosztás gombra
+S.iosOld[1],Scroll down and tap “Add to Home Screen”,"Görgess le, és koppints a „Főképernyőhöz adás” elemre"
+S.iosOld[2],Tap “Add” in the top right,Koppints jobbra fent a „Hozzáadás” gombra
+S.iosAlt,"Easiest in Safari: copy the link, open Safari and paste it.","A Safariban a legegyszerűbb: másold a linket, nyisd meg a Safarit, és illeszd be."
+S.inApp,This page is open inside another app (e.g. WhatsApp or Instagram). Installing only works in the browser: tap ⋯ and choose “Open in browser” – or copy the link and open it in Safari or Chrome.,"Ez az oldal egy másik alkalmazáson belül nyílt meg (pl. WhatsApp vagy Instagram). Telepíteni csak böngészőben lehet: koppints a ⋯-ra, és válaszd a „Megnyitás böngészőben” lehetőséget – vagy másold a linket, és nyisd meg Safariban vagy Chrome-ban."
+S.copy,Copy link,Link másolása
+S.done2,Then open SSL Gold Cup from your home screen.,Utána nyisd meg az SSL Gold Cupot a kezdőképernyőről.
+S.ui.share,Share,Megosztás
+S.ui.home,Add to Home Screen,Főképernyőhöz adás
+S.ui.add,Add,Hozzáadás
+S.ui.web,Open as Web App,Megnyitás webappként
+S.ui.cancel,Cancel,Mégse
+S.ui.ainst,Install app,Alkalmazás telepítése
+S.ui.aok,Install,Telepítés
+S.trkOpen,📍 Watch live tracking,📍 Élő követés
+S.trkReplay,📍 Replay the race (tracking),📍 Futam visszajátszása (követés)
+S.trkNone,Tracking appears here as soon as Georacing has set up this race.,"A követés itt jelenik meg, amint a Georacing beállította ezt a futamot."
+S.trkExt,Open in Georacing ↗,Megnyitás a Georacingben ↗
+S.trkHint,"Every boat as a dot on the map – live during the race, as a replay afterwards.","Minden hajó a térképen – futam közben élőben, utána visszajátszásként."
+S.rcRes,Result of this race,A futam eredménye
+S.rcTeams,Teams in this race,A rajtvonalon
+S.rcStand,Group so far,A csoport állása
+S.rcPts,pts,pont
+S.rcGroup,Show group on the Matchboard,Csoport a Matchboardon
+S.rcTBD,Teams not decided yet,A csapatok még nem ismertek
+S.qrT,Scan with the phone camera – the app opens right away.,Olvasd be a telefon kamerájával – az app azonnal megnyílik.
+S.shareNow,Share…,Megosztás…
+S.qsep,"n=>""▲ advance""","n=>""▲ továbbjut"""
+S.shareSub,"Send via WhatsApp, Messages & co.","Küldés WhatsAppon, Üzenetekben stb."
+S.shareMsg,"SSL Gold Cup Rio 2026 – live results, race times and all teams:","SSL Gold Cup Rio 2026 – élő eredmények, futamidőpontok és minden csapat:"
+S.sCaps,Captains,Kapitányok
+S.sTeams,Crews,Legénységek
+S.sHint,Tap a team to see its crew – teams still in the race come first.,Koppints egy csapatra a legénységért – a még versenyben lévők elöl.
+S.sTeamPage,Team page,Csapatoldal
+S.fShow,Show,Mutat
+S.fSort,Sort,Rendezés
+S.spT,Spoiler-free,Spoilermentes
+S.spUntil,w=>`Results hidden after ${w}`,w=>`Eredmények elrejtve ${w} után`
+S.spNone,No hidden results right now,Jelenleg nincs elrejtett eredmény
+S.spShow,Show all,Mind mutatása
+S.spOff,Off,Ki
+S.spRow,Spoiler-free mode,Spoilermentes mód
+S.spSub,Hide results until you have watched the race,"Eredmények elrejtése, amíg meg nem nézted a futamot"
+S.spRace,Result hidden,Eredmény elrejtve
+S.spReveal,I've watched it – show result,Megnéztem – mutasd az eredményt
+S.spOnT,Results from today on are hidden,A mai naptól az eredmények rejtve vannak
+S.cmpBtn,⚖️ Compare,⚖️ Összehasonlítás
+S.cmpVs,vs,vs
+S.cmpPick,Pick a team to compare with.,Válassz csapatot az összehasonlításhoz.
+S.h2hT,Head to head,Egymás ellen
+S.h2hSub,races finished ahead,futamban végzett előrébb
+S.h2hNone,No races against each other yet.,Még nem találkoztak.
+S.cmpNote,Numbers from the races in Rio; ranking = SSL Nations Ranking.,Adatok a riói futamokból; rangsor = SSL Nations Ranking.
+S.vidT,🎬 Highlights & videos,🎬 Összefoglalók és videók
+S.vidAll,All videos on YouTube ↗,Minden videó a YouTube-on ↗
+S.vidOpen,Open on YouTube ↗,Megnyitás a YouTube-on ↗
+S.vidHid,"n=>`${n} newer video${n>1?""s"":""""} hidden (spoiler-free)`",n=>`${n} újabb videó elrejtve (spoilermentes)`
+S.pastL,Look back,Visszatekintés
+S.vnT,Venue · Marina da Glória,Helyszín · Marina da Glória
+S.vnSub,Where it all happens – map & directions,Itt történik minden – térkép és útvonal
+S.vnRoute,Directions,Útvonal
+S.vnApple,Apple Maps,Apple Térkép
+S.vnInfo[0],"The 2016 Olympic sailing venue, on Guanabara Bay with a view of Sugarloaf Mountain.","A 2016-os olimpia vitorlás helyszíne a Guanabara-öbölben, kilátással a Cukorsüvegre."
+S.vnInfo[1],The marina is open to the public during the event – see the boats up close and visit the athletes' village.,A kikötő az esemény alatt nyitva áll a nagyközönség előtt – közelről láthatod a hajókat és meglátogathatod a sportolói falut.
+S.vnInfo[2],Racing takes place on Guanabara Bay right in front of the marina.,"A futamok közvetlenül a kikötő előtt, a Guanabara-öbölben zajlanak."
+S.suT,Sustainability,Fenntarthatóság
+S.suSub,What the SSL does for the ocean and fair sport,Mit tesz az SSL az óceánért és a fair sportért
+S.suIntro,The SSL says that for them sustainability means protecting the ocean and making the sport fairer.,Az SSL szerint számukra a fenntarthatóság az óceán védelmét és a sport igazságosabbá tételét jelenti.
+S.suList[0],Every SSL Gold Cup boat must have two women on board.,Minden SSL Gold Cup hajón két nőnek kell lennie.
+S.suList[1],No plastic bottles in the athletes' village.,Nincs műanyag palack a sportolói faluban.
+S.suList[2],A dedicated Sustainability Manager since September 2025.,2025 szeptembere óta külön fenntarthatósági menedzser.
+S.suList[3],"Aligned with Clean Regattas, World Sailing's Sustainability Agenda 2030 and the IOC strategy; the goal is Platinum Clean Regattas certification.","Összhangban a Clean Regattas programmal, a World Sailing Sustainability Agenda 2030-cal és a NOB stratégiájával; a cél a Platinum Clean Regattas tanúsítvány."
+S.suList[4],Beach clean-ups with the teams at the qualifiers.,Strandtakarítás a csapatokkal a selejtezőkön.
+S.suList[5],"Few support boats: at the 2023 Finals, four coach boats served 440 sailors.",Kevés kísérőhajó: a 2023-as döntőkön négy edzőhajó szolgált ki 440 vitorlázót.
+S.suMore,Read more at the SSL ↗,Bővebben az SSL-nél ↗
+S.mcT,Merch,Termékek
+S.mcSub,"Jerseys, caps & more – coming soon","Mezek, sapkák és más – hamarosan"
+S.mcSoon,Coming soon,Hamarosan
+S.mcTxt,"The official SSL Gold Cup Store is not open yet. As soon as it is, you can shop here.","A hivatalos SSL Gold Cup Store még nem nyitott meg. Amint megnyit, itt vásárolhatsz."
+S.mcList[0],Captain's jerseys of the national teams,A nemzeti csapatok kapitányi mezei
+S.mcList[1],SSL caps,SSL-sapkák
+S.mcList[2],SSL47 boat and team figures as building sets,SSL47 hajó- és csapatfigurák építőkészletként
+S.mcGo,To the SSL store ↗,Az SSL-boltba ↗
+S.wxBtn,🌬️ Weather for sailors,🌬️ Időjárás vitorlázóknak
+S.wxH,Sailing weather,Vitorlás időjárás
+S.wxLoad,Loading forecast…,Előrejelzés betöltése…
+S.wxFail,The forecast could not be loaded right now.,Az előrejelzést most nem sikerült betölteni.
+S.wxGust,Gusts,Széllökés
+S.wxDir,Direction,Irány
+S.wxPres,Pressure,Légnyomás
+S.wxAtStart,Forecast for the start time.,Előrejelzés a rajt időpontjára.
+S.wxHours,Hour by hour,Óránként
+S.wxTime,Time,Idő
+S.wxWind,Wind kn,Szél kn
+S.wxKn,Wind in knots: mean – gusts. Arrows show where the wind blows to.,"Szél csomóban: átlag – lökés. A nyilak azt mutatják, merre fúj a szél."
+S.wxSea,Water,Víz
+S.wxWater,Water temperature,Vízhőmérséklet
+S.wxTide,Tide,Árapály
+S.wxRise,rising,dagály
+S.wxFall,falling,apály
+S.wxHigh,High,Dagálycsúcs
+S.wxLow,Low,Apálycsúcs
+S.wxCur,Current,Áramlás
+S.wxCurN,Model value at the bay entrance; arrow = where it flows.,Modellérték az öböl bejáratánál; nyíl = az áramlás iránya.
+S.wxWave,Swell,Hullámzás
+S.wxWaveN,"At the bay entrance, much smaller on the course.",Az öböl bejáratánál; a pályán sokkal kisebb.
+S.wxSun,Sunrise – sunset,Napkelte – napnyugta
+S.wxSrc2,"Forecast by Open-Meteo (weather models), not measured on the course.","Az Open-Meteo előrejelzése (időjárási modellek), nem a pályán mért adat."
+S.trkLive,Live tracking,Élő követés
+S.trkReplayS,Replay,Visszajátszás
+S.fcBtn,Forecast,Előrejelzés
+S.fcCond[0],Light wind,Gyenge szél
+S.fcCond[1],Medium wind,Közepes szél
+S.fcCond[2],Fresh breeze,Élénk szél
+S.fcCond[3],Strong wind,Erős szél
+S.fcTr.up,building,erősödik
+S.fcTr.down,easing,gyengül
+S.fcTr.steady,steady,állandó
+S.fcTr.veer,veering (clockwise),jobbra fordul (óramutató irányába)
+S.fcTr.back,backing (anti-clockwise),balra fordul (óramutatóval szemben)
+S.fcNext,Next hour,Következő óra
+S.fcChart,"Wind 10:00–18:00 · line = mean, band = gusts, marker = start","Szél 10:00–18:00 · vonal = átlag, sáv = lökések, jelölő = rajt"
+S.fcBft,Beaufort,Beaufort
+S.watchLive,Watch live,Élő nézés
+S.liveStream,Live stream,Élő közvetítés
+S.liveNow,The race is on – watch it here,Zajlik a futam – nézd itt
+S.liveNote,"If the player stays black, the stream hasn't started yet or YouTube blocks embedding – then open it on YouTube.","Ha a lejátszó fekete marad, a közvetítés még nem kezdődött el, vagy a YouTube nem engedi a beágyazást – ilyenkor nyisd meg a YouTube-on."
+S.achT,Achievements,Eredmények
+S.olyT,Olympic Games,Olimpiai játékok
+S.wcT,World Championship podiums,Világbajnoki dobogók
+S.ecT,Continental podiums,Kontinensbajnoki dobogók
+S.clubT,Club,Klub
+S.profSrc,Facts from the official SSL profile.,Adatok a hivatalos SSL-profilból.
+S.achL[0],World Champion,Világbajnok
+S.achL[1],Olympic gold,Olimpiai arany
+S.achL[2],Olympic silver,Olimpiai ezüst
+S.achL[3],Olympic bronze,Olimpiai bronz
+S.wxAtT,h=>`Forecast for ${h}`,h=>`Előrejelzés: ${h}`
+S.wxTap,Tap an hour for details.,Koppints egy órára a részletekért.
+S.fsT,Final Series,Final Series
+S.qsT,Qualifying Series,Qualifying Series
+S.qsLeg,Highlighted: qualified through this series. ● = in Rio via the SSL Nations Ranking. Tap a team in Rio for its page.,Kiemelve: ebből a sorozatból jutott tovább. ● = az SSL Nations Rankinggel került Rióba. Koppints egy riói csapatra az oldaláért.
+S.qsNote,"The winner of each qualifying group (group C: top two) was drawn into the 1/32 Finals. 29 teams qualified for the Final Series via the SSL Ranking, with spots per continent: 12 Europe, 8 Pan-America, 6 Asia, 1 Africa, 2 Oceania.","Minden selejtezőcsoport győztese (a C csoportban az első kettő) a 1/32-es döntőbe került. 29 csapat az SSL Ranking alapján jutott a Final Series-be, kontinensenkénti kvótával: Európa 12, Pánamerika 8, Ázsia 6, Afrika 1, Óceánia 2."
+S.reg.asia,Asia,Ázsia
+S.reg.afoc,Africa & Oceania,Afrika és Óceánia
+S.reg.eur,Europe,Európa
+S.reg.pam,Pan-America,Pánamerika
+S.fin,Final,Döntő
+S.petit,Petit F.,Kisdöntő
+S.swipe,Swipe sideways for later rounds →,Húzd oldalra a későbbi fordulókért →
+S.road2,Road to Rio,Út Rióba
+S.inRio,In Rio via SSL Ranking,Rióban az SSL Ranking alapján
+S.mbHint,Top two of each group advance. Tap a team for crew and history.,Csoportonként az első kettő jut tovább. Koppints egy csapatra a legénységért és az előzményekért.
+S.vmT,Event area,Rendezvényterület
+S.vmTap,Tap the map to zoom,Koppints a térképre a nagyításhoz
+S.vmL[0],SSL47 boats,SSL47 hajók
+S.vmL[1],Flag pole ashore (signals),Zászlórúd a parton (jelzések)
+S.vmL[2],"Village: partner stands, shop, waste sorting","Village: partnerstandok, bolt, szelektív gyűjtés"
+S.vmL[3],Video wall,Kivetítő
+S.vmL[4],Race office & jury room,Versenyiroda és zsűriterem
+S.vmL[5],Sailors Lounge,Sailors Lounge
+S.vmL[6],Uniforms,Egyenruhák
+S.vmL[7],TV broadcast,TV-közvetítés
+S.vmL[8],Exhibition boat,Kiállítási hajó
+S.vmL[9],Shore team tent,Parti csapatok sátra
+S.vmL[10],"Main stage: concert, final podium, closing ceremony","Főszínpad: koncert, döntős dobogó, záróünnepség"
+S.vmL[11],Spectator boat,Nézőhajó
+S.vmL[12],Press & production office,Sajtó- és produkciós iroda
+S.vmL[13],Lunch buffet,Ebédbüfé
+S.vmW,Water refill station,Vízvételi pont
+S.vdT,On race days,Versenynapokon
+S.vd[0],10:00 – Skippers’ briefing,10:00 – kormányos-eligazítás
+S.vd[1],12:00 – first warning signal,12:00 – első figyelmeztető jelzés
+S.vd[2],Signals ashore: flag pole in front of the Sailors Lounge (2),Jelzések a parton: zászlórúd a Sailors Lounge előtt (2)
+S.vmSrc,"Map: SSL Gold Cup, official notice board","Térkép: SSL Gold Cup, hivatalos hirdetőtábla"
+S.fbT,Wish or bug report,Ötlet vagy hiba bejelentése
+S.fbSub,Goes straight to the app maker,Egyenesen az app készítőjéhez megy
+S.fbPh,What should be better? What isn't working?,Mi lehetne jobb? Mi nem működik?
+S.fbName,Your name (optional),A neved (nem kötelező)
+S.fbSend,Send,Küldés
+S.fbOk,Thanks – sent!,Köszönjük – elküldve!
+S.fbErr,Couldn't send. Check your connection and try again.,"Nem sikerült elküldeni. Ellenőrizd a kapcsolatot, és próbáld újra."
+S.showMe,Show me where,"Mutasd, hol"
+S.openChrome,Open in Chrome,Megnyitás Chrome-ban
+S.openSafari,Open in Safari,Megnyitás Safariban
+S.prep,Getting ready … one moment,Előkészítés … egy pillanat
+S.coachT,Tap here,Koppints ide
+S.gotIt,Got it,Értem
+S.samsung[0],Tap ≡ (menu) at the bottom right.,Koppints jobb lent a ≡ (menü) gombra.
+S.samsung[1],Tap “Add page to” → “Home screen”.,Koppints: „Oldal hozzáadása” → „Kezdőképernyő”.
+S.samsung[2],Confirm with “Add”.,Erősítsd meg: „Hozzáadás”.
+S.noDots,No ⋯ button? Tap the Share icon instead.,Nincs ⋯ gomb? Koppints a Megosztás ikonra.
+S.tkLoad,Loading tracking…,Követés betöltése…
+S.tkNone,No tracking for this race yet.,Ehhez a futamhoz még nincs követés.
+S.tkNoData,No tracking data for this race.,Ehhez a futamhoz nincsenek követési adatok.
+S.tkOpens,Tracking opens at,A követés indul:
+S.tkStart,Start,Rajt
+S.tkLeg,Leg,Szakasz
+S.tkPre,pre-start,rajt előtt
+S.tkNoPos,no signal,nincs jel
+S.tkRep,Replay,Visszajátszás
+S.secOly,Olympic Games,Olimpiai játékok
+S.secWc,World Championships,Világbajnokságok
+S.secEc,Continental Championships,Kontinensbajnokságok
+S.bioT,About,Bemutatkozás
+S.srcSSL,Official bio · Star Sailors League,Hivatalos életrajz · Star Sailors League
+S.careerT,Career,Pályafutás
+S.evN,results listed,listázott eredmény
+S.podN,podiums,dobogó
+S.medRate,medal rate,éremarány
+S.bestR,best result,legjobb eredmény
+S.showAll,Show all,Mind mutatása
+S.sslPts,SSL points,SSL-pontok
+S.heightT,Height,Magasság
+S.weightT,Weight,Testsúly
+S.sslProf,Official SSL profile,Hivatalos SSL-profil
+S.teamSite,Team website,Csapat weboldala
+S.mySailors,My sailors,Vitorlázóim
+S.sFavHint,Tap ☆ on a sailor's page to follow them – they'll show up here.,Koppints a ☆-ra egy vitorlázó oldalán a követéshez – itt fog megjelenni.
+S.ownW,In their own words · from the SSL profile,Saját szavaival · az SSL-profilból
+S.pathHl,n=>`Path of ${n} highlighted`,n=>`${n} útja kiemelve`
+S.setT,Settings,Beállítások
+S.setSub,"Notifications, favourites, display, spoiler-free","Értesítések, kedvencek, megjelenés, spoilermentes"
+S.sNotAvail,Push notifications are being set up and will be available here soon.,A push-értesítések beállítása folyamatban van.
+S.sMaster,Push notifications,Push-értesítések
+S.sMasterSub,Main switch for this device,Főkapcsoló ezen az eszközön
+S.sRemT,Start reminder,Rajt-emlékeztető
+S.sRemSub,15 minutes before your teams race,15 perccel a csapataid futama előtt
+S.sLiveT,Livestream starts,Indul az élő közvetítés
+S.sLiveSub,When the SSL livestream goes live,Amikor az SSL élő adása elindul
+S.sVidT,New highlight video,Új összefoglaló videó
+S.sVidSub,When a new highlight film is out,Amikor új összefoglaló jelenik meg
+S.sResT,Results of my teams,Csapataim eredményei
+S.sResSub,After every race of these teams – your favourite teams and the teams of your favourite sailors.,E csapatok minden futama után – kedvenc csapataid és kedvenc vitorlázóid csapatai.
+S.sFavNone,No favourites yet – tap ☆ on a team or sailor.,Még nincs kedvenc – koppints a ☆-ra egy csapatnál vagy vitorlázónál.
+S.sQuietT,Quiet hours,Csendes órák
+S.sQuietSub,No notifications during this time (your local time),Ilyenkor nincs értesítés (helyi idő)
+S.sQoff,Off,Ki
+S.sSpoilN,"In spoiler-free mode, notifications only say that a race has finished.","Spoilermentes módban az értesítés csak annyit mond, hogy véget ért a futam."
+S.sDispT,Display,Megjelenés
+S.sTimeT,Times,Időpontok
+S.sTimeRio,Rio only,Csak Rio
+S.sTimeBoth,Rio + mine,Rio + saját
+S.sWindT,Wind,Szél
+S.sTempT,Temperature,Hőmérséklet
+S.sLvT,Commentary language,Kommentár nyelve
+S.sLvAuto,Same as the app,Mint az app
+S.sCalT,Calendar,Naptár
+S.sCalTeam,Races of this team,A csapat futamai
+S.sDataT,Data & privacy,Adatok és adatvédelem
+S.sPriv,"Everything you set here is stored only on this device. No account, no cookies; visits are counted anonymously.","Minden beállítás csak ezen az eszközön marad. Nincs fiók, nincs süti; a látogatásokat névtelenül számoljuk."
+S.sResetF,Remove favourites,Kedvencek törlése
+S.sResetA,Reset everything,Minden visszaállítása
+S.sResetQ,Tap again to confirm,Koppints újra a megerősítéshez
+S.sFeedback,Send feedback,Visszajelzés küldése
+S.sVer,Version,Verzió
+S.comp,Competition,Verseny
+S.rkT,SSL Nations Ranking,SSL nemzeti rangsor
+S.rkAsOf,As of,Állapot
+S.rkNat,n=>`${n} nations`,n=>`${n} nemzet`
+S.rkHist,Historical ranking,Korábbi rangsor
+S.rkCur,Current,Aktuális
+S.rkCont,Continent,Kontinens
+S.rkAll,All,Mind
+S.rkSearch,Search country,Ország keresése
+S.rkGC,Gold Cup teams,Gold Cup-csapatok
+S.rkSk,Skippers,Kormányosok
+S.rkCr,Crews,Legénység
+S.rkPts,Points (sum of the sailors' ranks),Pont (helyezések összege)
+S.rkNo,No.,Sz.
+S.rkGlob,Global,Világ
+S.rkName,Nation,Nemzet
+S.rkNone,No nation found.,Nincs találat.
+S.rkLoad,Loading ranking…,Rangsor betöltése…
+S.rkFail,The ranking can't be loaded right now.,A rangsor most nem tölthető be.
+S.rkSrc,Source: Star Sailors League · updated every week. The nation's rank comes from its best-ranked skippers and crews.,Forrás: Star Sailors League · hetente frissül. A nemzet helyezését a legjobb kormányosai és legénysége adja.
+S.rkTeam,Team page,Csapatoldal
+S.rkPrev,p=>`previous week: ${p}`,p=>`előző hét: ${p}`
+S.rkWas,p=>`was ${p}`,p=>`korábban ${p}`
+S.rkInd,World rank,Világranglista
+S.rkOpen,Open ranking ›,Rangsor megnyitása ›
+S.rkTap,Tap a nation for its sailors.,Koppints egy nemzetre a vitorlázóiért.
+S.alsoP,also,is:
+SOW,In their own words · from the SSL profile,Saját szavaival · az SSL-profilból
+NXG.[0],started,rajt
+NXG.[1],planned,tervezett
+NXF,After prior race,Az előző futam után
+RINC,Incoming,Hamarosan
+DOV.[0],Racing day over,Versenynap vége
+DOV.[1],"n=>`${n} race${n==1?"""":""s""} sailed`",n=>`${n} futam lement`
+DOV.[2],g=>`${g} postponed`,g=>`${g} elhalasztva`
+DSW.[0],Previous,Előző
+DSW.[1],Today,Ma
+DSW.[2],Next,Következő
+DSW.[3],Previous race day,Előző versenynap
+DSW.[4],Next race day,Következő versenynap
+DSW.[5],from {t},{t}-tól
+DSW.[6],{n} races,{n} futam
+DSW.[7],1 race,1 futam
+RESS.[0],Results,Eredmények
+RESS.[1],Overall results,Összesített eredmény
+RESS.[2],Qualifiers,Selejtezők
+RESS.[3],Final Series,Final Series
+RESS.[4],(to be determined),(még nem dőlt el)
+RESS.[5],Last chance race,Utolsó esély futam
+RESS.[6],Pos.,Hely
+CHT.t,What's new,
+CHT.sub,Everything new in the app – latest first,
+CHT.ver,Version,
+CHT.newB,New,
+CHT.seen,You're up to date,
+CHT.days[0],Race days at a glance,
+CHT.days[1],"On Home you can switch between the previous, today’s and the next race day; at midnight Rio time everything moves on by itself.",
+CHT.estd[0],Smart delay estimate,
+CHT.estd[1],The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races.,
+CHT.res[0],Results in the app,
+CHT.res[1],"Overall ranking, qualifiers and the Final Series – open places show “(to be determined)”.",
+CHT.rbox[0],Live race box,
+CHT.rbox[1],The header strip shows the race on the water and the countdown to the next start – and when a start is delayed.,
+CHT.inst2[0],Easier install,
+CHT.inst2[1],"One tap on Android, an arrow that points to the right button on iPhone, and “Open in Chrome/Safari” from WhatsApp & co.",
+CHT.trk2[0],Faster tracking,
+CHT.trk2[1],"Live positions appear right away, the race history loads in the background.",
+CHT.fbk[0],Send a wish or bug,
+CHT.fbk[1],Under More: tell the app maker what should be better.,
+CHT.rank[0],SSL Nations Ranking in the app,
+CHT.rank[1],"All 132 nations with continent filter, search, history back to 2025 and each nation's best skippers and crews.",
+CHT.pos[0],Positions checked,
+CHT.pos[1],Every sailor's position compared with the team pages and the Rio jersey numbers – several positions are shown where they differ.,
+CHT.linkin[0],No more jumps to other sites,
+CHT.linkin[1],Ranking and qualifier links now open inside the app.,
+CHT.compass[0],Clearer wind compass,
+CHT.compass[1],"The yellow wedge shows where the wind comes from, the wind speed sits right in the middle.",
+CHT.tap[0],Tap any team or sailor,
+CHT.tap[1],"Team and sailor names now open their page everywhere – tables, results, settings and more.",
+CHT.pl[0],Now in Polish,
+CHT.pl[1],Polski! The app now speaks 18 languages.,
+CHT.photos[0],Official portraits for the 1/16 teams,
+CHT.photos[1],"Japan, Czechia, Chile, Ecuador, Hungary, Peru, South Africa and Thailand – fresh from the event studio.",
+CHT.bright[0],Brightness button,
+CHT.bright[1],"Switch between Matchboard blue, day and night right in the header.",
+CHT.logo[0],Bigger SSL logo,
+CHT.logo[1],A little more presence at the top.,
+CHT.tabs[0],New tab bar,
+CHT.tabs[1],"Competition (rounds + matchboard), Teams and Sailors each have their own tab.",
+CHT.settings[0],Settings,
+CHT.settings[1],"Notifications, start reminders, quiet hours, units, local times and spoiler-free mode in one place.",
+CHT.pages[0],Real pages,
+CHT.pages[1],"Teams, sailors and races open as full pages with their own link – back always goes one step back.",
+CHT.anim[0],Smooth round switching,
+CHT.anim[1],"Swipe between rounds, with an animation like in the big apps.",
+CHT.install[0],Easier to install,
+CHT.install[1],An Install button next to the language – the app on your home screen in 20 seconds.,
+CHT.track[0],Live tracking inside the app,
+CHT.track[1],"Every boat on the map, live ranking, course and replay – no more external site.",
+CHT.profiles[0],New sailor profiles,
+CHT.profiles[1],"Bio, career, Olympic and world championship medals from the official SSL profiles.",
+CHT.favS[0],Follow sailors,
+CHT.favS[1],Tap ☆ on a sailor – your sailors get their own list.,
+CHT.langs6[0],Six more languages,
+CHT.langs6[1],"Japanese, Thai, Malay, Hungarian, Czech and Ukrainian.",
+CHT.stream[0],Live stream in the app,
+CHT.stream[1],With preview image and countdown until the broadcast starts.,
+CHT.spoil[0],Spoiler-free mode,
+CHT.spoil[1],Hide results until you've watched the race.,
+CHT.wx[0],Sailing weather per race,
+CHT.wx[1],"Wind, gusts, direction, waves and tide for every start time.",
+CHT.cmp[0],Team comparison,
+CHT.cmp[1],Two teams side by side – head to head and numbers from Rio.,
+CHT.vids[0],Highlights,
+CHT.vids[1],The latest SSL videos right in the app.,
+CHT.venue[0],Venue,
+CHT.venue[1],Marina da Glória with map and directions.,
+CHT.race[0],Race details,
+CHT.race[1],"Tap a race for result, group standings, wind and stream.",
+CHT.push[0],Push notifications,
+CHT.push[1],Results of your teams straight to your phone.,
+CHT.cal[0],Calendar,
+CHT.cal[1],All races of your team in your calendar – updates itself.,
+CHT.shareimg[0],Share as image,
+CHT.shareimg[1],Group tables as a picture for WhatsApp & co.,
+CHT.app[0],Install as an app,
+CHT.app[1],"Full screen, with icon, updates itself.",
+CONT.[0],Africa,Afrika
+CONT.[1],Asia,Ázsia
+CONT.[2],Europe,Európa
+CONT.[3],Oceania,Óceánia
+CONT.[4],Pan-America,Pánamerika
+NWS,News,Hírek
+NSRC,Source: worldofsailors.com (Star Sailors League),Forrás: worldofsailors.com (Star Sailors League)
+RRS.[0],Start,Rajt
+RRS.[1],Race time,Futamidő
+RRS.[2],Winner,Győztes
+RRS.[3],The full report for this race follows here.,A futam részletes beszámolója hamarosan itt lesz.
+ALSO,also,is:
+WXF,Wind from,Szél iránya
+NXS.[0],On schedule,Időben
+NXS.[1],Starting soon,Hamarosan rajt
+NXS.[2],Start delayed,Rajt késik
+NXS.[3],Delayed,Késik
+NXS.[4],Racing,Futam zajlik
+NXS.[5],t=>`Not before ${t}`,t=>`Nem ${t} előtt`
+NXW,Start pending,Rajtra vár
+NXP,Probably delayed,Valószínű késés
+ORD,"n=>n+(n%10==1&&n!=11?""st"":n%10==2&&n!=12?""nd"":n%10==3&&n!=13?""rd"":""th"")","n=>n+""."""
+OSL,en,hu
+FIX.GBR,Great Britain,Nagy-Britannia
+FIX.TAH,Tahiti,Tahiti
+FIX.MYA,Myanmar,Mianmar
+FIX.USA,USA,USA

@@ -1,0 +1,700 @@
+key,English,ไทย
+S.rounds,Rounds,รอบ
+S.bracket,Matchboard,แมตช์บอร์ด
+S.teams,Teams,ทีม
+S.official,Official results,ผลอย่างเป็นทางการ
+S.updated,Updated,อัปเดต
+S.ago,"m=>m<1?""just now"":m<60?`${m} min ago`:`${Math.round(m/60)} h ago`","m=>m<1?""เมื่อสักครู่"":m<60?`${m} นาทีที่แล้ว`:`${Math.round(m/60)} ชม. ที่แล้ว`"
+S.rio,Rio time,เวลาริโอ
+S.offline,offline – last saved data,ออฟไลน์ – ข้อมูลที่บันทึกล่าสุด
+S.rn.r32,1/32 Finals,รอบ 1/32
+S.rn.r16,1/16 Finals,รอบ 1/16
+S.rn.r8,1/8 Finals,รอบ 1/8
+S.rn.r4,Quarter-finals,รอบก่อนรองชนะเลิศ
+S.rn.sf,Semi-finals,รอบรองชนะเลิศ
+S.rn.pf,Petit Final,ชิงอันดับ 3
+S.rn.f,Grand Final,แกรนด์ไฟนอล
+S.group,Group,กลุ่ม
+S.decided,decided,ตัดสินแล้ว
+S.racing,racing,กำลังแข่ง
+S.open,open,ยังไม่ตัดสิน
+S.st.done,completed,จบแล้ว
+S.st.live,in progress,กำลังดำเนินการ
+S.st.up,upcoming,กำลังจะมาถึง
+S.races,"n=>`${n} race${n>1?""s"":""""} per group`",n=>`${n} เรซต่อกลุ่ม`
+S.upNext,Up next,ถัดไป
+S.startsIn,"d=>d<=0?""starts today"":d==1?""starts tomorrow"":`starts in ${d} days`","d=>d<=0?""เริ่มวันนี้"":d==1?""เริ่มพรุ่งนี้"":`เริ่มในอีก ${d} วัน`"
+S.groupsOf4,"n=>`${n} group${n>1?""s"":""""} of four`",n=>`${n} กลุ่ม กลุ่มละ 4 ทีม`
+S.oneRace,One race – the finishing order decides.,แข่งเรซเดียว – ลำดับเข้าเส้นชัยเป็นตัวตัดสิน
+S.through,through,ผ่าน
+S.out,out,ตกรอบ
+S.toFinal,to Final,เข้ารอบชิง
+S.toPetit,to Petit Final,ชิงอันดับ 3
+S.medals[0],Gold,ทอง
+S.medals[1],Silver,เงิน
+S.medals[2],Bronze,ทองแดง
+S.medals[3],4th,อันดับ 4
+S.pts,Pts,คะแนน
+S.outIn,"(r,g,p)=>`Out in the ${r} (Group ${g}, ${p})`","(r,g,p)=>`ตกรอบใน${r} (กลุ่ม ${g}, ${p})`"
+S.gf,m=>`Grand Final: ${m}`,m=>`แกรนด์ไฟนอล: ${m}`
+S.finished,p=>`Finished ${p}`,p=>`จบอันดับ ${p}`
+S.thrTbc,Through – next group to be confirmed,ผ่าน – รอยืนยันกลุ่มถัดไป
+S.seeded,"(r,g,d)=>`Seeded – enters the ${r}, Group ${g}, ${d}`","(r,g,d)=>`ทีมวาง – เริ่มแข่ง${r} กลุ่ม ${g}, ${d}`"
+S.racingNow,Racing now,กำลังแข่ง
+S.nations,n=>`${n} nations`,n=>`${n} ชาติ`
+S.stillIn,still in,ยังอยู่ในการแข่งขัน
+S.outN,out,ตกรอบ
+S.search,"Search nation, nickname or sailor",ค้นหาประเทศ ชื่อเล่น หรือนักแล่นเรือ
+S.all,All,ทั้งหมด
+S.chipIn,Still in,ยังอยู่
+S.chipOut,Out,ตกรอบ
+S.mine,★ My teams,★ ทีมของฉัน
+S.sStatus,Status,สถานะ
+S.sRank,Ranking,อันดับ
+S.sAz,A–Z,A–Z
+S.noTeam,No team found.,ไม่พบทีม
+S.rank,Rank,อันดับ
+S.captain,Captain,กัปตัน
+S.helm,Helm,นายท้าย
+S.ranking,SSL Nations Ranking,SSL Nations Ranking
+S.rankBoard,Ranking board ↗,ตารางอันดับ ↗
+S.entered,Entered Rio at,เริ่มแข่งที่ริโอใน
+S.showRound,Open round ›,เปิดรอบ ›
+S.gc23,Gold Cup 2023,โกลด์คัพ 2023
+S.br23,2023 bracket ›,สายการแข่งขัน 2023 ›
+S.status,Status,สถานะ
+S.stIn,Still in,ยังอยู่
+S.stOut,Out,ตกรอบ
+S.whereEnded,Where it ended ›,จบที่รอบไหน ›
+S.curGroup,Current group ›,กลุ่มปัจจุบัน ›
+S.background,Background,ข้อมูลพื้นฐาน
+S.road,Road to Rio,เส้นทางสู่ริโอ
+S.story,Story,เรื่องราว
+S.site,Team site,เว็บไซต์ทีม
+S.qualRes,Qualifier results ↗,ผลรอบคัดเลือก ↗
+S.sslRank,SSL Nations Ranking ↗,SSL Nations Ranking ↗
+S.resRio,Results in Rio,ผลที่ริโอ
+S.photos,Crew photos,รูปลูกเรือ
+S.byPos,Crew by position,ลูกเรือตามตำแหน่ง
+S.leader,Team leader,หัวหน้าทีม
+S.wider,Wider squad · position TBC,ผู้เล่นสำรอง · ยังไม่ระบุตำแหน่ง
+S.squadNote,"(n,p)=>`${n} names in the squad. 8–10 sail each race and the line-up can change from day to day. Positions and numbers from the official team site; portraits from the Gold Cup Rio graphics${p?"""":"" (none yet for this team)""}.`","(n,p)=>`มี ${n} รายชื่อในทีม แต่ละเรซลงแข่ง 8–10 คน และรายชื่ออาจเปลี่ยนทุกวัน ตำแหน่งและหมายเลขจากเว็บไซต์ทีมอย่างเป็นทางการ รูปจากกราฟิกของโกลด์คัพริโอ${p?"""":"" (ทีมนี้ยังไม่มี)""}`"
+S.noSquad,No squad list published for this team yet.,ทีมนี้ยังไม่ได้ประกาศรายชื่อ
+S.showPath,Show path in bracket,แสดงเส้นทางในสายการแข่งขัน
+S.copyLink,Copy link,คัดลอกลิงก์
+S.copied,Link copied,คัดลอกลิงก์แล้ว
+S.close,Close,ปิด
+S.jersey,Jersey,เสื้อหมายเลข
+S.numTbc,Number TBC,ยังไม่มีหมายเลข
+S.capTag,Captain,กัปตัน
+S.favOn,Following,กำลังติดตาม
+S.favOff,Follow,ติดตาม
+S.brHint,Tap a team for crew and history. Swipe for later rounds.,แตะทีมเพื่อดูลูกเรือและประวัติ ปัดเพื่อดูรอบถัดไป
+S.h23,Gold Cup 2023,โกลด์คัพ 2023
+S.champ23,Gran Canaria · champion,กรานคานาเรีย · แชมป์
+S.hl,highlighted,ไฮไลต์
+S.tap26,Tap a team for its Rio 2026 page.,แตะทีมเพื่อดูหน้าริโอ 2026
+S.off23,Official 2023 results ↗,ผลอย่างเป็นทางการ 2023 ↗
+S.myTeams,My teams,ทีมของฉัน
+S.myHint,Tap ☆ on a team page to follow it.,แตะ ☆ ในหน้าทีมเพื่อติดตาม
+S.foot,"Scoring: 4-3-2-1 points per race, double points in the last race of each group (8-6-4-2). Top two of each group advance. Results refresh automatically from the official SSL results page. Ranking = SSL Nations Ranking at the start of the Final Series.",การให้คะแนน: 4-3-2-1 คะแนนต่อเรซ เรซสุดท้ายของแต่ละกลุ่มได้คะแนนสองเท่า (8-6-4-2) สองอันดับแรกของแต่ละกลุ่มผ่านเข้ารอบ ผลอัปเดตอัตโนมัติจากหน้าผลอย่างเป็นทางการของ SSL อันดับ = SSL Nations Ranking ตอนเริ่ม Final Series
+S.notes.ocs,* OCS (early start)  ** Standard penalty,* OCS (ออกตัวก่อน)  ** โทษมาตรฐาน
+S.theme.auto,🌊 Matchboard,🌊 แมตช์บอร์ด
+S.theme.light,☀️ Day,☀️ กลางวัน
+S.theme.dark,🌙 Night,🌙 กลางคืน
+S.g23.champ,Champion (Gold),แชมป์ (ทอง)
+S.g23.second,Runner-up (Silver),รองแชมป์ (เงิน)
+S.g23.third,3rd (Bronze),อันดับ 3 (ทองแดง)
+S.g23.fourth,4th – Grand Final,อันดับ 4 – แกรนด์ไฟนอล
+S.g23.sf,Semi-finals,รอบรองชนะเลิศ
+S.g23.qf,Quarter-finals,รอบก่อนรองชนะเลิศ
+S.g23.r8,1/8 Finals,รอบ 1/8
+S.g23.r16,1/16 Finals,รอบ 1/16
+S.g23.r32,1/32 Finals,รอบ 1/32
+S.g23.none,Didn't race the 2023 Final Series,ไม่ได้แข่ง Final Series 2023
+S.ev.asia,Asian Qualifiers,รอบคัดเลือกเอเชีย
+S.ev.afoc,African & Oceanian Qualifiers,รอบคัดเลือกแอฟริกาและโอเชียเนีย
+S.ev.eu1,European Qualifiers 1,รอบคัดเลือกยุโรป 1
+S.ev.eu2,European Qualifiers 2,รอบคัดเลือกยุโรป 2
+S.ev.pan,Pan-American Qualifiers,รอบคัดเลือกแพนอเมริกา
+S.route.won,"(e,g)=>`Won the ${e}, Group ${g}`","(e,g)=>`ชนะ${e} กลุ่ม ${g}`"
+S.route.pos,"(p,e,g)=>`${p} in the ${e}, Group ${g}`","(p,e,g)=>`${p}ใน${e} กลุ่ม ${g}`"
+S.route.lc,"(e,g)=>`3rd in the ${e} Group ${g}, then won the Last Chance race`","(e,g)=>`อันดับ 3 ใน${e} กลุ่ม ${g} แล้วชนะเรซ Last Chance`"
+S.route.ranking,Qualified through the SSL Nations Ranking,ผ่านเข้ารอบด้วย SSL Nations Ranking
+S.route.host,"Host nation, seeded into the 1/8 Finals",เจ้าภาพ ได้เป็นทีมวางในรอบ 1/8
+S.route.seeded,r=>`Seeded into the ${r} via the SSL Nations Ranking`,r=>`เป็นทีมวางใน${r}จาก SSL Nations Ranking`
+S.roles.Helm,Steers the boat,บังคับเรือ
+S.roles.Tactician,Strategy & calls,วางแผนและตัดสินใจ
+S.roles.Main Trimmer,Mainsail,ใบหลัก
+S.roles.Trimmer,Jib & gennaker,ใบหน้าและเจนเนเกอร์
+S.roles.Grinder,Powers the winches,หมุนวินช์
+S.roles.Pit,Halyards & controls,เชือกชักใบและอุปกรณ์ควบคุม
+S.roles.Mid-Bow,Mast & foredeck,เสากระโดงและดาดฟ้าหน้า
+S.roles.Bow,Bow & starts,หัวเรือและการออกตัว
+S.roles.Floater,Utility / reserve,ตำแหน่งยืดหยุ่น/สำรอง
+S.back,‹ Back,‹ กลับ
+S.position,Position,ตำแหน่ง
+S.team,Team,ทีม
+S.indRank,SSL ranking,อันดับ SSL
+S.highlights,Highlights,ผลงานเด่น
+S.profile,SSL profile ↗,โปรไฟล์ SSL ↗
+S.findProfile,Find SSL profile ↗,ค้นหาโปรไฟล์ SSL ↗
+S.ws,World Sailing ↗,World Sailing ↗
+S.mates,Teammates,เพื่อนร่วมทีม
+S.posTbc,Position TBC,ยังไม่ระบุตำแหน่ง
+S.noInfo,No further details published yet – the links below search the official profiles.,ยังไม่มีข้อมูลเพิ่มเติม – ลิงก์ด้านล่างจะค้นหาโปรไฟล์อย่างเป็นทางการ
+S.today,Today,วันนี้
+S.raceDay,"(n,t)=>`race day ${n} of ${t}`","(n,t)=>`วันแข่งที่ ${n} จาก ${t}`"
+S.finalDay,Final day – last race counts double,วันสุดท้าย – เรซสุดท้ายคะแนนสองเท่า
+S.stream,▶ Live stream,▶ ถ่ายทอดสด
+S.tracking,Tracking,ติดตามเรือ
+S.schedule,Schedule,ตารางแข่ง
+S.adv,"(a,b)=>`1st → ${a} · 2nd → ${b}`","(a,b)=>`ที่ 1 → ${a} · ที่ 2 → ${b}`"
+S.advSf,1st–2nd → Final · 3rd–4th → Petit Final,ที่ 1–2 → รอบชิง · ที่ 3–4 → ชิงอันดับ 3
+S.clinched,✓ through,✓ ผ่านแน่นอน
+S.elim,out,ตกรอบ
+S.secNow,In the current round,ในรอบปัจจุบัน
+S.secSeeded,r=>`Seeded – enter in the ${r}`,r=>`ทีมวาง – เริ่มแข่ง${r}`
+S.secOut,Out,ตกรอบ
+S.lineup,Line-up,ทีมที่ลงแข่ง
+S.howT,How the Gold Cup works,โกลด์คัพแข่งอย่างไร
+S.how[0],"National teams, one SSL47 boat each – all boats identical and provided by the organisers.",ทีมชาติแต่ละทีมใช้เรือ SSL47 ลำเดียว – ทุกลำเหมือนกันและผู้จัดเป็นผู้จัดหา
+S.how[1],Groups of four. 4-3-2-1 points per race; the last race of each group counts double (8-6-4-2).,แบ่งกลุ่มละ 4 ทีม 4-3-2-1 คะแนนต่อเรซ เรซสุดท้ายของกลุ่มคะแนนสองเท่า (8-6-4-2)
+S.how[2],The top two of every group advance; better-ranked nations enter later rounds.,สองอันดับแรกของแต่ละกลุ่มผ่านเข้ารอบ ชาติอันดับดีกว่าเริ่มในรอบหลัง
+S.how[3],Semi-finals and finals are a single race each; the Grand Final decides the world champion.,รอบรองและรอบชิงแข่งเรซเดียว แกรนด์ไฟนอลตัดสินแชมป์โลก
+S.race,Race,เรซ
+S.nextRace,Next race,เรซถัดไป
+S.todayRaces,Today's races,เรซวันนี้
+S.rioT,Rio time,เวลาริโอ
+S.loc,your time,เวลาของคุณ
+S.onWater,on the water,กำลังแข่ง
+S.done,done,จบแล้ว
+S.inX,"m=>m<60?`in ${m} min`:`in ${Math.floor(m/60)} h ${String(m%60).padStart(2,""0"")}`","m=>m<60?`อีก ${m} นาที`:`อีก ${Math.floor(m/60)} ชม. ${String(m%60).padStart(2,""0"")} นาที`"
+S.firstStart,First start,ออกตัวแรก
+S.schedT,Race schedule,ตารางการแข่งขัน
+S.schedNote,"Times are Rio de Janeiro time (UTC−3), from the official schedule. Its groups G1–G4 are shown here as groups A–D.",เวลาเป็นเวลาริโอเดจาเนโร (UTC−3) ตามตารางอย่างเป็นทางการ กลุ่ม G1–G4 แสดงที่นี่เป็นกลุ่ม A–D
+S.needT,Before the final race (double points),ก่อนเรซสุดท้าย (คะแนนสองเท่า)
+S.need.sure,"through, whatever happens",ผ่านแน่นอนไม่ว่าผลจะเป็นอย่างไร
+S.need.gone,"out, whatever happens",ตกรอบแน่นอนไม่ว่าผลจะเป็นอย่างไร
+S.need.win,a win is enough,ชนะก็พอ
+S.need.top,k=>`${k} or better is enough`,k=>`${k}หรือดีกว่าก็พอ`
+S.need.mustWin,must win,ต้องชนะ
+S.need.help,and needs help from the others,และต้องพึ่งผลทีมอื่น
+S.need.maybe,k=>`${k} may be enough – depends on the others`,k=>`${k}อาจพอ – ขึ้นกับทีมอื่น`
+S.need.iff,"(k,c)=>`${k} is enough if ${c}`","(k,c)=>`${k}พอถ้า${c}`"
+S.need.mustIf,"c=>`must win, and only if ${c}`",c=>`ต้องชนะ และเฉพาะถ้า${c}`
+S.need.ahead,R=>`ahead of ${R}`,R=>`นำ ${R}`
+S.need.behind,R=>`behind ${R}`,R=>`ตามหลัง ${R}`
+S.need.notWin,R=>`${R} doesn't win`,R=>`${R} ไม่ชนะ`
+S.need.last,R=>`${R} finishes last`,R=>`${R} จบท้ายสุด`
+S.need.wins,R=>`${R} wins`,R=>`${R} ชนะ`
+S.need.tie,level on points possible – tie-break decides,อาจคะแนนเท่ากัน – ตัดสินด้วยไทเบรก
+S.needNote,"Worked out from the current points; ≈ means teams could finish level, then the official tie-break decides.",คำนวณจากคะแนนปัจจุบัน ≈ หมายถึงอาจคะแนนเท่ากัน แล้วตัดสินด้วยไทเบรกอย่างเป็นทางการ
+S.install,Add to Home Screen for the app icon.,เพิ่มลงหน้าจอหลักเพื่อให้มีไอคอนแอป
+S.home,Home,หน้าแรก
+S.more,More,เพิ่มเติม
+S.sailors,Sailors,นักแล่นเรือ
+S.welcome,Final Series · Rio de Janeiro,Final Series · ริโอเดจาเนโร
+S.dates,19 Nov – 13 Dec 2026 · Marina da Glória,19 พ.ย. – 13 ธ.ค. 2026 · มารีนาดากลอเรีย
+S.progress,Tournament,การแข่งขัน
+S.latest,Latest results,ผลล่าสุด
+S.explore,Explore,สำรวจ
+S.tiles.board[0],Rounds,รอบการแข่งขัน
+S.tiles.board[1],"Groups, points, times",กลุ่ม คะแนน เวลา
+S.tiles.bracket[0],Matchboard,แมตช์บอร์ด
+S.tiles.bracket[1],The whole draw at a glance,สายการแข่งขันทั้งหมดในหน้าเดียว
+S.tiles.teams[0],Teams,ทีม
+S.tiles.teams[1],"40 nations, crews, rankings",40 ชาติ ลูกเรือ อันดับ
+S.tiles.sailors[0],Sailors,นักแล่นเรือ
+S.tiles.sailors[1],Search every sailor,ค้นหานักแล่นเรือทุกคน
+S.tiles.qualifying[0],Qualifying,รอบคัดเลือก
+S.tiles.qualifying[1],How the teams got to Rio,ทีมมาถึงริโอได้อย่างไร
+S.tiles.gc2023[0],Gold Cup 2023,โกลด์คัพ 2023
+S.tiles.gc2023[1],Last edition's bracket,สายการแข่งขันครั้งก่อน
+S.sailorsT,n=>`${n} sailors`,n=>`นักแล่นเรือ ${n} คน`
+S.sSearch,"Search sailor, team or position",ค้นหานักแล่นเรือ ทีม หรือตำแหน่ง
+S.withPhoto,With photo,มีรูป
+S.allS,All,ทั้งหมด
+S.moreT,More,เพิ่มเติม
+S.lang,Language,ภาษา
+S.design,Design,ธีม
+S.share,Share app,แชร์แอป
+S.shared,Link copied,คัดลอกลิงก์แล้ว
+S.links,Links,ลิงก์
+S.about,About this app,เกี่ยวกับแอปนี้
+S.aboutT,Unofficial companion app for the SSL Gold Cup Rio 2026. Results update automatically from the official SSL results page.,แอปคู่หูอย่างไม่เป็นทางการสำหรับ SSL Gold Cup Rio 2026 ผลอัปเดตอัตโนมัติจากหน้าผลอย่างเป็นทางการของ SSL
+S.inst.t,Install the app,ติดตั้งแอป
+S.inst.d,"Put SSL Gold Cup on your home screen – opens like an app, full screen, with live results.",ใส่ SSL Gold Cup บนหน้าจอหลัก – เปิดเหมือนแอปแบบเต็มจอพร้อมผลสด
+S.inst.b,Install,ติดตั้ง
+S.inst.done,Installed ✓,ติดตั้งแล้ว ✓
+S.inst.ios[0],Tap the Share button,แตะปุ่มแชร์
+S.inst.ios[1],at the bottom of Safari (top right on iPad).,ที่ด้านล่างของ Safari (มุมขวาบนบน iPad)
+S.inst.ios[2],Scroll down and tap “Add to Home Screen”.,เลื่อนลงแล้วแตะ “เพิ่มไปยังหน้าจอโฮม”
+S.inst.ios[3],Tap “Add” – done.,แตะ “เพิ่ม” – เสร็จ
+S.inst.iosOther,On iPhone this works in Safari: open this page in Safari first.,บน iPhone ทำได้ใน Safari: เปิดหน้านี้ใน Safari ก่อน
+S.inst.android[0],Tap the ⋮ menu in the top right of your browser.,แตะเมนู ⋮ มุมขวาบนของเบราว์เซอร์
+S.inst.android[1],Tap “Install app” or “Add to Home screen”.,แตะ “ติดตั้งแอป” หรือ “เพิ่มลงในหน้าจอหลัก”
+S.inst.android[2],Confirm with “Install”.,ยืนยันด้วย “ติดตั้ง”
+S.inst.desk[0],"Click the install icon in the address bar,",คลิกไอคอนติดตั้งในแถบที่อยู่
+S.inst.desk[1],or open the browser menu and choose “Install SSL Gold Cup”.,หรือเปิดเมนูเบราว์เซอร์แล้วเลือก “ติดตั้ง SSL Gold Cup”
+S.inst.how,How to install,วิธีติดตั้ง
+S.inst.hide,Not now,ไว้ทีหลัง
+S.inst.installedNote,You're using the installed app.,คุณกำลังใช้แอปที่ติดตั้งแล้ว
+S.champT,World Champion · Gold Cup 2026,แชมป์โลก · โกลด์คัพ 2026
+S.standT,Final standings,อันดับสุดท้าย
+S.statsT,In numbers,ตัวเลข
+S.stRaces,Races,เรซ
+S.stWins,Race wins,ชนะเรซ
+S.stAvg,Avg. place,อันดับเฉลี่ย
+S.stPts,Points in Rio,คะแนนที่ริโอ
+S.stHist,Race by race,ผลแต่ละเรซ
+S.calBtn,📅 Races in my calendar,📅 เรซในปฏิทินของฉัน
+S.calT,Races in your calendar,เพิ่มเรซลงปฏิทิน
+S.calSub,"Subscribe (iPhone, Mac, Outlook)","สมัครรับ (iPhone, Mac, Outlook)"
+S.calG,Add to Google Calendar,เพิ่มใน Google Calendar
+S.calDl,Download file (.ics),ดาวน์โหลดไฟล์ (.ics)
+S.calAll,All races in my calendar,เรซทั้งหมดในปฏิทินของฉัน
+S.calNote,"A subscription updates itself: when a team qualifies, its next races appear automatically.",การสมัครรับจะอัปเดตเอง: เมื่อทีมผ่านเข้ารอบ เรซถัดไปจะปรากฏอัตโนมัติ
+S.wxT,Wind forecast · Marina da Glória,พยากรณ์ลม · มารีนาดากลอเรีย
+S.wxSrc,"Forecast by Open-Meteo, not measured on the course.",พยากรณ์โดย Open-Meteo ไม่ได้วัดบนสนามแข่ง
+S.trk,Tracking,ติดตามเรือ
+S.delayed,m=>`Results may be delayed – last successful check ${m} min ago.`,m=>`ผลอาจล่าช้า – ตรวจสอบสำเร็จครั้งล่าสุดเมื่อ ${m} นาทีที่แล้ว`
+S.shareImg,Share as image,แชร์เป็นรูปภาพ
+S.imgDone,Image ready,รูปภาพพร้อมแล้ว
+S.pT,Notifications,การแจ้งเตือน
+S.pAll,All results,ผลทั้งหมด
+S.pAllSub,A notification after every race,แจ้งเตือนหลังทุกเรซ
+S.pTeamOff,🔔 Notify me about this team,🔔 แจ้งเตือนทีมนี้
+S.pTeamOn,🔔 Notifications on ✓,🔔 เปิดการแจ้งเตือนแล้ว ✓
+S.pTeams,Your teams,ทีมของคุณ
+S.pNone,No team yet: open a team and tap 🔔.,ยังไม่มีทีม: เปิดหน้าทีมแล้วแตะ 🔔
+S.pNote,You only get race results and who goes through. Switch off here any time.,คุณจะได้รับเฉพาะผลเรซและทีมที่ผ่านเข้ารอบ ปิดได้ที่นี่ตลอดเวลา
+S.pIOS,"On iPhone, notifications only work in the installed app: install it, open it from the home screen, then switch them on here.",บน iPhone การแจ้งเตือนใช้ได้เฉพาะในแอปที่ติดตั้ง: ติดตั้ง เปิดจากหน้าจอหลัก แล้วเปิดการแจ้งเตือนที่นี่
+S.pDenied,Notifications are blocked. Allow them for this app in your device settings.,การแจ้งเตือนถูกบล็อก อนุญาตสำหรับแอปนี้ในการตั้งค่าอุปกรณ์
+S.pErr,That didn't work – please try again in a moment.,ไม่สำเร็จ – โปรดลองอีกครั้งในอีกสักครู่
+S.pOnT,Notifications on,เปิดการแจ้งเตือน
+S.pOffT,Notifications off,ปิดการแจ้งเตือน
+S.pUnsup,This browser can't receive notifications.,เบราว์เซอร์นี้รับการแจ้งเตือนไม่ได้
+S.obT,Get the app,รับแอป
+S.obSub,"Free, no App Store needed – on your home screen in 20 seconds.",ฟรี ไม่ต้องใช้ App Store – อยู่บนหน้าจอหลักใน 20 วินาที
+S.obPerks[0],Live results in one tap,ผลสดในแตะเดียว
+S.obPerks[1],"Full screen, like a real app",เต็มจอเหมือนแอปจริง
+S.obPerks[2],Notifications for your team,แจ้งเตือนทีมของคุณ
+S.obBtn,Install now,ติดตั้งเลย
+S.obLater,Later – look around in the browser first,ไว้ทีหลัง – ดูในเบราว์เซอร์ก่อน
+S.obSteps,How it works,วิธีการ
+S.obStep,Step,ขั้นตอน
+S.ios26[0],Tap ⋯ next to the address bar,แตะ ⋯ ข้างแถบที่อยู่
+S.ios26[1],Tap “Share”,แตะ “แชร์”
+S.ios26[2],Scroll down and tap “Add to Home Screen”,เลื่อนลงแล้วแตะ “เพิ่มไปยังหน้าจอโฮม”
+S.ios26[3],Leave “Open as Web App” on and tap “Add”,เปิด “เปิดเป็นเว็บแอป” ไว้แล้วแตะ “เพิ่ม”
+S.iosOld[0],Tap the Share button at the bottom,แตะปุ่มแชร์ด้านล่าง
+S.iosOld[1],Scroll down and tap “Add to Home Screen”,เลื่อนลงแล้วแตะ “เพิ่มไปยังหน้าจอโฮม”
+S.iosOld[2],Tap “Add” in the top right,แตะ “เพิ่ม” มุมขวาบน
+S.iosAlt,"Easiest in Safari: copy the link, open Safari and paste it.",ง่ายที่สุดใน Safari: คัดลอกลิงก์ เปิด Safari แล้ววาง
+S.inApp,This page is open inside another app (e.g. WhatsApp or Instagram). Installing only works in the browser: tap ⋯ and choose “Open in browser” – or copy the link and open it in Safari or Chrome.,หน้านี้เปิดอยู่ในแอปอื่น (เช่น WhatsApp หรือ Instagram) การติดตั้งทำได้เฉพาะในเบราว์เซอร์: แตะ ⋯ แล้วเลือก “เปิดในเบราว์เซอร์” – หรือคัดลอกลิงก์ไปเปิดใน Safari หรือ Chrome
+S.copy,Copy link,คัดลอกลิงก์
+S.done2,Then open SSL Gold Cup from your home screen.,จากนั้นเปิด SSL Gold Cup จากหน้าจอหลัก
+S.ui.share,Share,แชร์
+S.ui.home,Add to Home Screen,เพิ่มไปยังหน้าจอโฮม
+S.ui.add,Add,เพิ่ม
+S.ui.web,Open as Web App,เปิดเป็นเว็บแอป
+S.ui.cancel,Cancel,ยกเลิก
+S.ui.ainst,Install app,ติดตั้งแอป
+S.ui.aok,Install,ติดตั้ง
+S.trkOpen,📍 Watch live tracking,📍 ดูการติดตามสด
+S.trkReplay,📍 Replay the race (tracking),📍 ดูเรซย้อนหลัง (ติดตามเรือ)
+S.trkNone,Tracking appears here as soon as Georacing has set up this race.,การติดตามจะแสดงที่นี่ทันทีที่ Georacing ตั้งค่าเรซนี้
+S.trkExt,Open in Georacing ↗,เปิดใน Georacing ↗
+S.trkHint,"Every boat as a dot on the map – live during the race, as a replay afterwards.",เรือทุกลำบนแผนที่ – สดระหว่างแข่ง และดูย้อนหลังได้
+S.rcRes,Result of this race,ผลเรซนี้
+S.rcTeams,Teams in this race,บนเส้นออกตัว
+S.rcStand,Group so far,อันดับกลุ่มตอนนี้
+S.rcPts,pts,คะแนน
+S.rcGroup,Show group on the Matchboard,แสดงกลุ่มบนแมตช์บอร์ด
+S.rcTBD,Teams not decided yet,ยังไม่ทราบทีม
+S.qrT,Scan with the phone camera – the app opens right away.,สแกนด้วยกล้องโทรศัพท์ – แอปจะเปิดทันที
+S.shareNow,Share…,แชร์…
+S.qsep,"n=>""▲ advance""","n=>""▲ ผ่านเข้ารอบ"""
+S.shareSub,"Send via WhatsApp, Messages & co.",ส่งทาง WhatsApp ข้อความ และอื่น ๆ
+S.shareMsg,"SSL Gold Cup Rio 2026 – live results, race times and all teams:",SSL Gold Cup Rio 2026 – ผลสด เวลาแข่ง และทุกทีม:
+S.sCaps,Captains,กัปตัน
+S.sTeams,Crews,ลูกเรือ
+S.sHint,Tap a team to see its crew – teams still in the race come first.,แตะทีมเพื่อดูลูกเรือ – ทีมที่ยังอยู่แสดงก่อน
+S.sTeamPage,Team page,หน้าทีม
+S.fShow,Show,แสดง
+S.fSort,Sort,เรียง
+S.spT,Spoiler-free,กันสปอยล์
+S.spUntil,w=>`Results hidden after ${w}`,w=>`ซ่อนผลหลัง ${w}`
+S.spNone,No hidden results right now,ตอนนี้ไม่มีผลที่ถูกซ่อน
+S.spShow,Show all,แสดงทั้งหมด
+S.spOff,Off,ปิด
+S.spRow,Spoiler-free mode,โหมดกันสปอยล์
+S.spSub,Hide results until you have watched the race,ซ่อนผลจนกว่าคุณจะดูเรซแล้ว
+S.spRace,Result hidden,ซ่อนผล
+S.spReveal,I've watched it – show result,ดูแล้ว – แสดงผล
+S.spOnT,Results from today on are hidden,ซ่อนผลตั้งแต่วันนี้
+S.cmpBtn,⚖️ Compare,⚖️ เปรียบเทียบ
+S.cmpVs,vs,vs
+S.cmpPick,Pick a team to compare with.,เลือกทีมเพื่อเปรียบเทียบ
+S.h2hT,Head to head,เจอกันตรง ๆ
+S.h2hSub,races finished ahead,เรซที่เข้าก่อน
+S.h2hNone,No races against each other yet.,ยังไม่เคยแข่งกัน
+S.cmpNote,Numbers from the races in Rio; ranking = SSL Nations Ranking.,ตัวเลขจากเรซที่ริโอ อันดับ = SSL Nations Ranking
+S.vidT,🎬 Highlights & videos,🎬 ไฮไลต์และวิดีโอ
+S.vidAll,All videos on YouTube ↗,วิดีโอทั้งหมดบน YouTube ↗
+S.vidOpen,Open on YouTube ↗,เปิดบน YouTube ↗
+S.vidHid,"n=>`${n} newer video${n>1?""s"":""""} hidden (spoiler-free)`",n=>`ซ่อนวิดีโอใหม่ ${n} รายการ (กันสปอยล์)`
+S.pastL,Look back,ย้อนดู
+S.vnT,Venue · Marina da Glória,สนาม · มารีนาดากลอเรีย
+S.vnSub,Where it all happens – map & directions,ที่จัดการแข่งขัน – แผนที่และเส้นทาง
+S.vnRoute,Directions,เส้นทาง
+S.vnApple,Apple Maps,Apple Maps
+S.vnInfo[0],"The 2016 Olympic sailing venue, on Guanabara Bay with a view of Sugarloaf Mountain.",สนามแข่งเรือใบโอลิมปิก 2016 บนอ่าวกวานาบารา มองเห็นภูเขาชูการ์โลฟ
+S.vnInfo[1],The marina is open to the public during the event – see the boats up close and visit the athletes' village.,มารีนาเปิดให้ประชาชนเข้าชมระหว่างงาน – ชมเรือใกล้ ๆ และเยี่ยมหมู่บ้านนักกีฬา
+S.vnInfo[2],Racing takes place on Guanabara Bay right in front of the marina.,การแข่งขันจัดบนอ่าวกวานาบาราหน้ามารีนา
+S.suT,Sustainability,ความยั่งยืน
+S.suSub,What the SSL does for the ocean and fair sport,สิ่งที่ SSL ทำเพื่อมหาสมุทรและกีฬาที่เป็นธรรม
+S.suIntro,The SSL says that for them sustainability means protecting the ocean and making the sport fairer.,SSL ระบุว่าความยั่งยืนสำหรับพวกเขาคือการปกป้องมหาสมุทรและทำให้กีฬาเป็นธรรมยิ่งขึ้น
+S.suList[0],Every SSL Gold Cup boat must have two women on board.,เรือ SSL Gold Cup ทุกลำต้องมีผู้หญิงสองคนบนเรือ
+S.suList[1],No plastic bottles in the athletes' village.,ไม่มีขวดพลาสติกในหมู่บ้านนักกีฬา
+S.suList[2],A dedicated Sustainability Manager since September 2025.,มีผู้จัดการด้านความยั่งยืนโดยเฉพาะตั้งแต่กันยายน 2025
+S.suList[3],"Aligned with Clean Regattas, World Sailing's Sustainability Agenda 2030 and the IOC strategy; the goal is Platinum Clean Regattas certification.","สอดคล้องกับ Clean Regattas, Sustainability Agenda 2030 ของ World Sailing และกลยุทธ์ IOC เป้าหมายคือการรับรอง Clean Regattas ระดับแพลทินัม"
+S.suList[4],Beach clean-ups with the teams at the qualifiers.,เก็บขยะชายหาดร่วมกับทีมในรอบคัดเลือก
+S.suList[5],"Few support boats: at the 2023 Finals, four coach boats served 440 sailors.",เรือสนับสนุนน้อย: ในรอบชิง 2023 เรือโค้ช 4 ลำดูแลนักแล่นเรือ 440 คน
+S.suMore,Read more at the SSL ↗,อ่านเพิ่มเติมที่ SSL ↗
+S.mcT,Merch,สินค้า
+S.mcSub,"Jerseys, caps & more – coming soon",เสื้อ หมวก และอื่น ๆ – เร็ว ๆ นี้
+S.mcSoon,Coming soon,เร็ว ๆ นี้
+S.mcTxt,"The official SSL Gold Cup Store is not open yet. As soon as it is, you can shop here.",ร้านค้าอย่างเป็นทางการของ SSL Gold Cup ยังไม่เปิด เมื่อเปิดแล้วคุณช้อปได้ที่นี่
+S.mcList[0],Captain's jerseys of the national teams,เสื้อกัปตันของทีมชาติ
+S.mcList[1],SSL caps,หมวก SSL
+S.mcList[2],SSL47 boat and team figures as building sets,ชุดประกอบเรือ SSL47 และฟิกเกอร์ทีม
+S.mcGo,To the SSL store ↗,ไปที่ร้าน SSL ↗
+S.wxBtn,🌬️ Weather for sailors,🌬️ สภาพอากาศสำหรับนักแล่นเรือ
+S.wxH,Sailing weather,สภาพอากาศสำหรับแล่นเรือ
+S.wxLoad,Loading forecast…,กำลังโหลดพยากรณ์…
+S.wxFail,The forecast could not be loaded right now.,ไม่สามารถโหลดพยากรณ์ได้ในขณะนี้
+S.wxGust,Gusts,ลมกระโชก
+S.wxDir,Direction,ทิศทาง
+S.wxPres,Pressure,ความกดอากาศ
+S.wxAtStart,Forecast for the start time.,พยากรณ์ ณ เวลาออกตัว
+S.wxHours,Hour by hour,รายชั่วโมง
+S.wxTime,Time,เวลา
+S.wxWind,Wind kn,ลม kn
+S.wxKn,Wind in knots: mean – gusts. Arrows show where the wind blows to.,ลมเป็นนอต: เฉลี่ย – กระโชก ลูกศรชี้ทิศที่ลมพัดไป
+S.wxSea,Water,ทะเล
+S.wxWater,Water temperature,อุณหภูมิน้ำ
+S.wxTide,Tide,น้ำขึ้นน้ำลง
+S.wxRise,rising,น้ำขึ้น
+S.wxFall,falling,น้ำลง
+S.wxHigh,High,น้ำขึ้นสูงสุด
+S.wxLow,Low,น้ำลงต่ำสุด
+S.wxCur,Current,กระแสน้ำ
+S.wxCurN,Model value at the bay entrance; arrow = where it flows.,ค่าจากแบบจำลองที่ปากอ่าว ลูกศร = ทิศที่ไหล
+S.wxWave,Swell,คลื่น
+S.wxWaveN,"At the bay entrance, much smaller on the course.",ที่ปากอ่าว บนสนามแข่งเล็กกว่ามาก
+S.wxSun,Sunrise – sunset,พระอาทิตย์ขึ้น – ตก
+S.wxSrc2,"Forecast by Open-Meteo (weather models), not measured on the course.",พยากรณ์โดย Open-Meteo (แบบจำลองอากาศ) ไม่ได้วัดบนสนามแข่ง
+S.trkLive,Live tracking,ติดตามสด
+S.trkReplayS,Replay,ย้อนหลัง
+S.fcBtn,Forecast,พยากรณ์
+S.fcCond[0],Light wind,ลมเบา
+S.fcCond[1],Medium wind,ลมปานกลาง
+S.fcCond[2],Fresh breeze,ลมค่อนข้างแรง
+S.fcCond[3],Strong wind,ลมแรง
+S.fcTr.up,building,แรงขึ้น
+S.fcTr.down,easing,อ่อนลง
+S.fcTr.steady,steady,คงที่
+S.fcTr.veer,veering (clockwise),เปลี่ยนตามเข็มนาฬิกา
+S.fcTr.back,backing (anti-clockwise),เปลี่ยนทวนเข็มนาฬิกา
+S.fcNext,Next hour,ชั่วโมงถัดไป
+S.fcChart,"Wind 10:00–18:00 · line = mean, band = gusts, marker = start",ลม 10:00–18:00 · เส้น = เฉลี่ย แถบ = กระโชก เครื่องหมาย = ออกตัว
+S.fcBft,Beaufort,โบฟอร์ต
+S.watchLive,Watch live,ดูสด
+S.liveStream,Live stream,ถ่ายทอดสด
+S.liveNow,The race is on – watch it here,กำลังแข่ง – ดูได้ที่นี่
+S.liveNote,"If the player stays black, the stream hasn't started yet or YouTube blocks embedding – then open it on YouTube.",ถ้าเครื่องเล่นยังดำ แสดงว่าการถ่ายทอดยังไม่เริ่มหรือ YouTube ไม่อนุญาตให้ฝัง – เปิดบน YouTube แทน
+S.achT,Achievements,ความสำเร็จ
+S.olyT,Olympic Games,โอลิมปิก
+S.wcT,World Championship podiums,โพเดียมชิงแชมป์โลก
+S.ecT,Continental podiums,โพเดียมชิงแชมป์ทวีป
+S.clubT,Club,สโมสร
+S.profSrc,Facts from the official SSL profile.,ข้อมูลจากโปรไฟล์ SSL อย่างเป็นทางการ
+S.achL[0],World Champion,แชมป์โลก
+S.achL[1],Olympic gold,เหรียญทองโอลิมปิก
+S.achL[2],Olympic silver,เหรียญเงินโอลิมปิก
+S.achL[3],Olympic bronze,เหรียญทองแดงโอลิมปิก
+S.wxAtT,h=>`Forecast for ${h}`,h=>`พยากรณ์สำหรับ ${h}`
+S.wxTap,Tap an hour for details.,แตะชั่วโมงเพื่อดูรายละเอียด
+S.fsT,Final Series,Final Series
+S.qsT,Qualifying Series,Qualifying Series
+S.qsLeg,Highlighted: qualified through this series. ● = in Rio via the SSL Nations Ranking. Tap a team in Rio for its page.,ไฮไลต์: ผ่านเข้ารอบจากซีรีส์นี้ ● = มาริโอด้วย SSL Nations Ranking แตะทีมที่อยู่ริโอเพื่อดูหน้าทีม
+S.qsNote,"The winner of each qualifying group (group C: top two) was drawn into the 1/32 Finals. 29 teams qualified for the Final Series via the SSL Ranking, with spots per continent: 12 Europe, 8 Pan-America, 6 Asia, 1 Africa, 2 Oceania.",ผู้ชนะแต่ละกลุ่มคัดเลือก (กลุ่ม C: สองอันดับแรก) ได้เข้ารอบ 1/32 อีก 29 ทีมผ่านเข้า Final Series ด้วย SSL Ranking ตามโควตาทวีป: ยุโรป 12 แพนอเมริกา 8 เอเชีย 6 แอฟริกา 1 โอเชียเนีย 2
+S.reg.asia,Asia,เอเชีย
+S.reg.afoc,Africa & Oceania,แอฟริกาและโอเชียเนีย
+S.reg.eur,Europe,ยุโรป
+S.reg.pam,Pan-America,แพนอเมริกา
+S.fin,Final,รอบชิง
+S.petit,Petit F.,ชิงที่ 3
+S.swipe,Swipe sideways for later rounds →,ปัดด้านข้างเพื่อดูรอบถัดไป →
+S.road2,Road to Rio,เส้นทางสู่ริโอ
+S.inRio,In Rio via SSL Ranking,มาริโอด้วย SSL Ranking
+S.mbHint,Top two of each group advance. Tap a team for crew and history.,สองอันดับแรกของแต่ละกลุ่มผ่านเข้ารอบ แตะทีมเพื่อดูลูกเรือและประวัติ
+S.vmT,Event area,พื้นที่จัดงาน
+S.vmTap,Tap the map to zoom,แตะแผนที่เพื่อขยาย
+S.vmL[0],SSL47 boats,เรือ SSL47
+S.vmL[1],Flag pole ashore (signals),เสาธงบนฝั่ง (สัญญาณ)
+S.vmL[2],"Village: partner stands, shop, waste sorting",วิลเลจ: บูธพาร์ทเนอร์ ร้านค้า จุดแยกขยะ
+S.vmL[3],Video wall,จอวิดีโอ
+S.vmL[4],Race office & jury room,สำนักงานการแข่งขันและห้องคณะลูกขุน
+S.vmL[5],Sailors Lounge,Sailors Lounge
+S.vmL[6],Uniforms,ชุดเครื่องแบบ
+S.vmL[7],TV broadcast,ถ่ายทอดทีวี
+S.vmL[8],Exhibition boat,เรือจัดแสดง
+S.vmL[9],Shore team tent,เต็นท์ทีมฝั่ง
+S.vmL[10],"Main stage: concert, final podium, closing ceremony",เวทีหลัก: คอนเสิร์ต โพเดียมรอบชิง พิธีปิด
+S.vmL[11],Spectator boat,เรือผู้ชม
+S.vmL[12],Press & production office,สำนักงานสื่อและโปรดักชัน
+S.vmL[13],Lunch buffet,บุฟเฟต์มื้อกลางวัน
+S.vmW,Water refill station,จุดเติมน้ำดื่ม
+S.vdT,On race days,ในวันแข่งขัน
+S.vd[0],10:00 – Skippers’ briefing,10:00 – บรีฟฟิงสกิปเปอร์
+S.vd[1],12:00 – first warning signal,12:00 – สัญญาณเตือนแรก
+S.vd[2],Signals ashore: flag pole in front of the Sailors Lounge (2),สัญญาณบนฝั่ง: เสาธงหน้า Sailors Lounge (2)
+S.vmSrc,"Map: SSL Gold Cup, official notice board",แผนที่: SSL Gold Cup บอร์ดประกาศทางการ
+S.fbT,Wish or bug report,ข้อเสนอแนะหรือแจ้งปัญหา
+S.fbSub,Goes straight to the app maker,ส่งตรงถึงผู้สร้างแอป
+S.fbPh,What should be better? What isn't working?,อะไรควรดีขึ้น? อะไรใช้งานไม่ได้?
+S.fbName,Your name (optional),ชื่อของคุณ (ไม่บังคับ)
+S.fbSend,Send,ส่ง
+S.fbOk,Thanks – sent!,ขอบคุณ – ส่งแล้ว!
+S.fbErr,Couldn't send. Check your connection and try again.,ส่งไม่สำเร็จ ตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง
+S.showMe,Show me where,แสดงให้ดูว่าอยู่ตรงไหน
+S.openChrome,Open in Chrome,เปิดใน Chrome
+S.openSafari,Open in Safari,เปิดใน Safari
+S.prep,Getting ready … one moment,กำลังเตรียม … รอสักครู่
+S.coachT,Tap here,แตะตรงนี้
+S.gotIt,Got it,เข้าใจแล้ว
+S.samsung[0],Tap ≡ (menu) at the bottom right.,แตะ ≡ (เมนู) ที่มุมขวาล่าง
+S.samsung[1],Tap “Add page to” → “Home screen”.,แตะ “เพิ่มหน้าไปที่” → “หน้าจอหลัก”
+S.samsung[2],Confirm with “Add”.,ยืนยันด้วย “เพิ่ม”
+S.noDots,No ⋯ button? Tap the Share icon instead.,ไม่เห็นปุ่ม ⋯? แตะไอคอนแชร์แทน
+S.tkLoad,Loading tracking…,กำลังโหลดการติดตาม…
+S.tkNone,No tracking for this race yet.,ยังไม่มีการติดตามสำหรับเรซนี้
+S.tkNoData,No tracking data for this race.,ไม่มีข้อมูลการติดตามสำหรับเรซนี้
+S.tkOpens,Tracking opens at,การติดตามเริ่มเวลา
+S.tkStart,Start,ออกตัว
+S.tkLeg,Leg,เลก
+S.tkPre,pre-start,ก่อนออกตัว
+S.tkNoPos,no signal,ไม่มีสัญญาณ
+S.tkRep,Replay,ย้อนหลัง
+S.secOly,Olympic Games,โอลิมปิก
+S.secWc,World Championships,ชิงแชมป์โลก
+S.secEc,Continental Championships,ชิงแชมป์ทวีป
+S.bioT,About,ประวัติ
+S.srcSSL,Official bio · Star Sailors League,ประวัติอย่างเป็นทางการ · Star Sailors League
+S.careerT,Career,เส้นทางอาชีพ
+S.evN,results listed,ผลที่บันทึก
+S.podN,podiums,โพเดียม
+S.medRate,medal rate,อัตราเหรียญ
+S.bestR,best result,ผลดีที่สุด
+S.showAll,Show all,แสดงทั้งหมด
+S.sslPts,SSL points,คะแนน SSL
+S.heightT,Height,ส่วนสูง
+S.weightT,Weight,น้ำหนัก
+S.sslProf,Official SSL profile,โปรไฟล์ SSL อย่างเป็นทางการ
+S.teamSite,Team website,เว็บไซต์ทีม
+S.mySailors,My sailors,นักแล่นเรือของฉัน
+S.sFavHint,Tap ☆ on a sailor's page to follow them – they'll show up here.,แตะ ☆ ในหน้านักแล่นเรือเพื่อติดตาม – จะแสดงที่นี่
+S.ownW,In their own words · from the SSL profile,เล่าด้วยตัวเอง · จากโปรไฟล์ SSL
+S.pathHl,n=>`Path of ${n} highlighted`,n=>`ไฮไลต์เส้นทางของ ${n}`
+S.setT,Settings,การตั้งค่า
+S.setSub,"Notifications, favourites, display, spoiler-free",การแจ้งเตือน รายการโปรด การแสดงผล กันสปอยล์
+S.sNotAvail,Push notifications are being set up and will be available here soon.,กำลังตั้งค่าการแจ้งเตือน
+S.sMaster,Push notifications,การแจ้งเตือน
+S.sMasterSub,Main switch for this device,สวิตช์หลักของอุปกรณ์นี้
+S.sRemT,Start reminder,เตือนก่อนออกตัว
+S.sRemSub,15 minutes before your teams race,15 นาทีก่อนทีมของคุณแข่ง
+S.sLiveT,Livestream starts,เริ่มถ่ายทอดสด
+S.sLiveSub,When the SSL livestream goes live,เมื่อการถ่ายทอดสดของ SSL เริ่ม
+S.sVidT,New highlight video,วิดีโอไฮไลต์ใหม่
+S.sVidSub,When a new highlight film is out,เมื่อมีไฮไลต์ใหม่
+S.sResT,Results of my teams,ผลทีมของฉัน
+S.sResSub,After every race of these teams – your favourite teams and the teams of your favourite sailors.,หลังทุกเรซของทีมเหล่านี้ – ทีมโปรดและทีมของนักแล่นเรือคนโปรด
+S.sFavNone,No favourites yet – tap ☆ on a team or sailor.,ยังไม่มีรายการโปรด – แตะ ☆ ที่ทีมหรือนักแล่นเรือ
+S.sQuietT,Quiet hours,ช่วงเวลาเงียบ
+S.sQuietSub,No notifications during this time (your local time),ไม่แจ้งเตือนในช่วงนี้ (เวลาท้องถิ่น)
+S.sQoff,Off,ปิด
+S.sSpoilN,"In spoiler-free mode, notifications only say that a race has finished.",ในโหมดกันสปอยล์ การแจ้งเตือนจะบอกแค่ว่าเรซจบแล้ว
+S.sDispT,Display,การแสดงผล
+S.sTimeT,Times,เวลา
+S.sTimeRio,Rio only,ริโอเท่านั้น
+S.sTimeBoth,Rio + mine,ริโอ + ของฉัน
+S.sWindT,Wind,ลม
+S.sTempT,Temperature,อุณหภูมิ
+S.sLvT,Commentary language,ภาษาผู้บรรยาย
+S.sLvAuto,Same as the app,เหมือนแอป
+S.sCalT,Calendar,ปฏิทิน
+S.sCalTeam,Races of this team,เรซของทีมนี้
+S.sDataT,Data & privacy,ข้อมูลและความเป็นส่วนตัว
+S.sPriv,"Everything you set here is stored only on this device. No account, no cookies; visits are counted anonymously.",การตั้งค่าเก็บไว้บนอุปกรณ์นี้เท่านั้น ไม่มีบัญชี ไม่มีคุกกี้ นับการเข้าชมแบบไม่ระบุตัวตน
+S.sResetF,Remove favourites,ลบรายการโปรด
+S.sResetA,Reset everything,รีเซ็ตทั้งหมด
+S.sResetQ,Tap again to confirm,แตะอีกครั้งเพื่อยืนยัน
+S.sFeedback,Send feedback,ส่งความคิดเห็น
+S.sVer,Version,เวอร์ชัน
+S.comp,Competition,การแข่งขัน
+S.rkT,SSL Nations Ranking,อันดับประเทศ SSL
+S.rkAsOf,As of,ณ
+S.rkNat,n=>`${n} nations`,n=>`${n} ประเทศ`
+S.rkHist,Historical ranking,อันดับย้อนหลัง
+S.rkCur,Current,ปัจจุบัน
+S.rkCont,Continent,ทวีป
+S.rkAll,All,ทั้งหมด
+S.rkSearch,Search country,ค้นหาประเทศ
+S.rkGC,Gold Cup teams,ทีมโกลด์คัพ
+S.rkSk,Skippers,สกิปเปอร์
+S.rkCr,Crews,ลูกเรือ
+S.rkPts,Points (sum of the sailors' ranks),คะแนน (ผลรวมอันดับ)
+S.rkNo,No.,ลำดับ
+S.rkGlob,Global,โลก
+S.rkName,Nation,ประเทศ
+S.rkNone,No nation found.,ไม่พบประเทศ
+S.rkLoad,Loading ranking…,กำลังโหลดอันดับ…
+S.rkFail,The ranking can't be loaded right now.,ไม่สามารถโหลดอันดับได้ในขณะนี้
+S.rkSrc,Source: Star Sailors League · updated every week. The nation's rank comes from its best-ranked skippers and crews.,ที่มา: Star Sailors League · อัปเดตทุกสัปดาห์ อันดับประเทศมาจากสกิปเปอร์และลูกเรือที่ดีที่สุด
+S.rkTeam,Team page,หน้าทีม
+S.rkPrev,p=>`previous week: ${p}`,p=>`สัปดาห์ก่อน: ${p}`
+S.rkWas,p=>`was ${p}`,p=>`เดิม ${p}`
+S.rkInd,World rank,อันดับโลก
+S.rkOpen,Open ranking ›,เปิดอันดับ ›
+S.rkTap,Tap a nation for its sailors.,แตะประเทศเพื่อดูนักเรือใบ
+S.alsoP,also,หรือ
+SOW,In their own words · from the SSL profile,เล่าด้วยตัวเอง · จากโปรไฟล์ SSL
+NXG.[0],started,ออกตัว
+NXG.[1],planned,กำหนดการ
+NXF,After prior race,หลังรายการก่อนหน้า
+RINC,Incoming,เร็ว ๆ นี้
+DOV.[0],Racing day over,จบการแข่งขันวันนี้
+DOV.[1],"n=>`${n} race${n==1?"""":""s""} sailed`",n=>`แข่งแล้ว ${n} รายการ`
+DOV.[2],g=>`${g} postponed`,g=>`${g} เลื่อนออกไป`
+DSW.[0],Previous,ก่อนหน้า
+DSW.[1],Today,วันนี้
+DSW.[2],Next,ถัดไป
+DSW.[3],Previous race day,วันแข่งก่อนหน้า
+DSW.[4],Next race day,วันแข่งถัดไป
+DSW.[5],from {t},ตั้งแต่ {t}
+DSW.[6],{n} races,{n} การแข่งขัน
+DSW.[7],1 race,1 การแข่งขัน
+RESS.[0],Results,ผลการแข่งขัน
+RESS.[1],Overall results,อันดับรวม
+RESS.[2],Qualifiers,รอบคัดเลือก
+RESS.[3],Final Series,รอบไฟนอล
+RESS.[4],(to be determined),(รอผล)
+RESS.[5],Last chance race,เรซโอกาสสุดท้าย
+RESS.[6],Pos.,อันดับ
+CHT.t,What's new,
+CHT.sub,Everything new in the app – latest first,
+CHT.ver,Version,
+CHT.newB,New,
+CHT.seen,You're up to date,
+CHT.days[0],Race days at a glance,
+CHT.days[1],"On Home you can switch between the previous, today’s and the next race day; at midnight Rio time everything moves on by itself.",
+CHT.estd[0],Smart delay estimate,
+CHT.estd[1],The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races.,
+CHT.res[0],Results in the app,
+CHT.res[1],"Overall ranking, qualifiers and the Final Series – open places show “(to be determined)”.",
+CHT.rbox[0],Live race box,
+CHT.rbox[1],The header strip shows the race on the water and the countdown to the next start – and when a start is delayed.,
+CHT.inst2[0],Easier install,
+CHT.inst2[1],"One tap on Android, an arrow that points to the right button on iPhone, and “Open in Chrome/Safari” from WhatsApp & co.",
+CHT.trk2[0],Faster tracking,
+CHT.trk2[1],"Live positions appear right away, the race history loads in the background.",
+CHT.fbk[0],Send a wish or bug,
+CHT.fbk[1],Under More: tell the app maker what should be better.,
+CHT.rank[0],SSL Nations Ranking in the app,
+CHT.rank[1],"All 132 nations with continent filter, search, history back to 2025 and each nation's best skippers and crews.",
+CHT.pos[0],Positions checked,
+CHT.pos[1],Every sailor's position compared with the team pages and the Rio jersey numbers – several positions are shown where they differ.,
+CHT.linkin[0],No more jumps to other sites,
+CHT.linkin[1],Ranking and qualifier links now open inside the app.,
+CHT.compass[0],Clearer wind compass,
+CHT.compass[1],"The yellow wedge shows where the wind comes from, the wind speed sits right in the middle.",
+CHT.tap[0],Tap any team or sailor,
+CHT.tap[1],"Team and sailor names now open their page everywhere – tables, results, settings and more.",
+CHT.pl[0],Now in Polish,
+CHT.pl[1],Polski! The app now speaks 18 languages.,
+CHT.photos[0],Official portraits for the 1/16 teams,
+CHT.photos[1],"Japan, Czechia, Chile, Ecuador, Hungary, Peru, South Africa and Thailand – fresh from the event studio.",
+CHT.bright[0],Brightness button,
+CHT.bright[1],"Switch between Matchboard blue, day and night right in the header.",
+CHT.logo[0],Bigger SSL logo,
+CHT.logo[1],A little more presence at the top.,
+CHT.tabs[0],New tab bar,
+CHT.tabs[1],"Competition (rounds + matchboard), Teams and Sailors each have their own tab.",
+CHT.settings[0],Settings,
+CHT.settings[1],"Notifications, start reminders, quiet hours, units, local times and spoiler-free mode in one place.",
+CHT.pages[0],Real pages,
+CHT.pages[1],"Teams, sailors and races open as full pages with their own link – back always goes one step back.",
+CHT.anim[0],Smooth round switching,
+CHT.anim[1],"Swipe between rounds, with an animation like in the big apps.",
+CHT.install[0],Easier to install,
+CHT.install[1],An Install button next to the language – the app on your home screen in 20 seconds.,
+CHT.track[0],Live tracking inside the app,
+CHT.track[1],"Every boat on the map, live ranking, course and replay – no more external site.",
+CHT.profiles[0],New sailor profiles,
+CHT.profiles[1],"Bio, career, Olympic and world championship medals from the official SSL profiles.",
+CHT.favS[0],Follow sailors,
+CHT.favS[1],Tap ☆ on a sailor – your sailors get their own list.,
+CHT.langs6[0],Six more languages,
+CHT.langs6[1],"Japanese, Thai, Malay, Hungarian, Czech and Ukrainian.",
+CHT.stream[0],Live stream in the app,
+CHT.stream[1],With preview image and countdown until the broadcast starts.,
+CHT.spoil[0],Spoiler-free mode,
+CHT.spoil[1],Hide results until you've watched the race.,
+CHT.wx[0],Sailing weather per race,
+CHT.wx[1],"Wind, gusts, direction, waves and tide for every start time.",
+CHT.cmp[0],Team comparison,
+CHT.cmp[1],Two teams side by side – head to head and numbers from Rio.,
+CHT.vids[0],Highlights,
+CHT.vids[1],The latest SSL videos right in the app.,
+CHT.venue[0],Venue,
+CHT.venue[1],Marina da Glória with map and directions.,
+CHT.race[0],Race details,
+CHT.race[1],"Tap a race for result, group standings, wind and stream.",
+CHT.push[0],Push notifications,
+CHT.push[1],Results of your teams straight to your phone.,
+CHT.cal[0],Calendar,
+CHT.cal[1],All races of your team in your calendar – updates itself.,
+CHT.shareimg[0],Share as image,
+CHT.shareimg[1],Group tables as a picture for WhatsApp & co.,
+CHT.app[0],Install as an app,
+CHT.app[1],"Full screen, with icon, updates itself.",
+CONT.[0],Africa,แอฟริกา
+CONT.[1],Asia,เอเชีย
+CONT.[2],Europe,ยุโรป
+CONT.[3],Oceania,โอเชียเนีย
+CONT.[4],Pan-America,แพนอเมริกา
+NWS,News,ข่าว
+NSRC,Source: worldofsailors.com (Star Sailors League),ที่มา: worldofsailors.com (Star Sailors League)
+RRS.[0],Start,ออกตัว
+RRS.[1],Race time,เวลาแข่ง
+RRS.[2],Winner,ผู้ชนะ
+RRS.[3],The full report for this race follows here.,รายงานฉบับเต็มของการแข่งขันนี้จะตามมาที่นี่
+ALSO,also,หรือ
+WXF,Wind from,ลมมาจาก
+NXS.[0],On schedule,ตรงเวลา
+NXS.[1],Starting soon,ใกล้ออกตัว
+NXS.[2],Start delayed,ออกตัวล่าช้า
+NXS.[3],Delayed,ล่าช้า
+NXS.[4],Racing,กำลังแข่ง
+NXS.[5],t=>`Not before ${t}`,t=>`ไม่ก่อน ${t}`
+NXW,Start pending,รอออกสตาร์ท
+NXP,Probably delayed,อาจล่าช้า
+ORD,"n=>n+(n%10==1&&n!=11?""st"":n%10==2&&n!=12?""nd"":n%10==3&&n!=13?""rd"":""th"")","n=>""ที่ ""+n"
+OSL,en,th
+FIX.GBR,Great Britain,สหราชอาณาจักร
+FIX.TAH,Tahiti,ตาฮีตี
+FIX.MYA,Myanmar,เมียนมา
+FIX.USA,USA,สหรัฐอเมริกา

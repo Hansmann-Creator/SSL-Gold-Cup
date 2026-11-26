@@ -22,6 +22,7 @@ T = {  # reminder title/body, live, video – per app language
  "fr": ("Départ dans 15 minutes", "En direct : SSL Gold Cup", "Nouveaux temps forts", "Regardez le direct dans l'app"),
  "es": ("Salida en 15 minutos", "En directo: SSL Gold Cup", "Nuevos resúmenes", "Mira el directo en la app"),
  "pt": ("Largada em 15 minutos", "Ao vivo: SSL Gold Cup", "Novos destaques", "Assista à transmissão no app"),
+ "it": ("Partenza tra 15 minuti", "Ora in diretta: SSL Gold Cup", "Nuovi highlights", "Guarda la diretta nell’app"),
  "zh-Hans": ("15分钟后起航", "正在直播：SSL金杯", "新集锦", "在应用中观看直播"),
  "ar": ("الانطلاق بعد 15 دقيقة", "مباشر الآن: SSL Gold Cup", "ملخصات جديدة", "شاهد البث في التطبيق"),
  "hi": ("15 मिनट में स्टार्ट", "अभी लाइव: SSL गोल्ड कप", "नई हाइलाइट्स", "ऐप में लाइव स्ट्रीम देखें"),

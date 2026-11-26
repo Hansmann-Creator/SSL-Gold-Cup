@@ -5,10 +5,10 @@ const $=s=>document.querySelector(s);
 ["gesturestart","gesturechange"].forEach(t=>document.addEventListener(t,e=>{if(!(e.target.closest&&e.target.closest(".leaflet-container")))e.preventDefault()},{passive:false}));
 document.addEventListener("touchmove",e=>{if(e.touches.length>1&&!(e.target.closest&&e.target.closest(".leaflet-container")))e.preventDefault()},{passive:false});
 const LS={get(k,d){try{const v=localStorage.getItem("gcmb_"+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem("gcmb_"+k,JSON.stringify(v))}catch(e){}}};
-const LANGS={en:"English",de:"Deutsch",fr:"Français",es:"Español",pt:"Português",zh:"中文",ar:"العربية",hi:"हिन्दी",bn:"বাংলা",ur:"اردو",id:"Bahasa Indonesia",ms:"Bahasa Melayu",ja:"日本語",th:"ไทย",hu:"Magyar",cs:"Čeština",uk:"Українська",pl:"Polski"};
+const LANGS={en:"English",de:"Deutsch",fr:"Français",es:"Español",pt:"Português",it:"Italiano",zh:"中文",ar:"العربية",hi:"हिन्दी",bn:"বাংলা",ur:"اردو",id:"Bahasa Indonesia",ms:"Bahasa Melayu",ja:"日本語",th:"ไทย",hu:"Magyar",cs:"Čeština",uk:"Українська",pl:"Polski"};
 const RTL=l=>l=="ar"||l=="ur";
-const LOC=()=>({ar:"ar-u-nu-latn",zh:"zh-CN",pt:"pt-BR",hi:"hi-IN-u-nu-latn",bn:"bn-BD-u-nu-latn",ur:"ur-PK-u-nu-latn",id:"id-ID",ms:"ms-MY",ja:"ja-JP",th:"th-TH-u-nu-latn",hu:"hu-HU",cs:"cs-CZ",uk:"uk-UA",pl:"pl-PL"})[lang]||lang;
-let lang=LS.get("lang",null);if(!LANGS[lang])lang=["de","fr","es","pt","zh","ar","hi","bn","ur","id","ms","ja","th","hu","cs","uk","pl"].find(l=>(navigator.language||"").toLowerCase().startsWith(l))||"en";
+const LOC=()=>({ar:"ar-u-nu-latn",zh:"zh-CN",pt:"pt-BR",it:"it-IT",hi:"hi-IN-u-nu-latn",bn:"bn-BD-u-nu-latn",ur:"ur-PK-u-nu-latn",id:"id-ID",ms:"ms-MY",ja:"ja-JP",th:"th-TH-u-nu-latn",hu:"hu-HU",cs:"cs-CZ",uk:"uk-UA",pl:"pl-PL"})[lang]||lang;
+let lang=LS.get("lang",null);if(!LANGS[lang])lang=["de","fr","es","pt","it","zh","ar","hi","bn","ur","id","ms","ja","th","hu","cs","uk","pl"].find(l=>(navigator.language||"").toLowerCase().startsWith(l))||"en";
 let UNW=LS.get("unw","kn"),UNT=LS.get("unt","c"),TLOC=LS.get("tloc","auto"),LVL=LS.get("lvl","auto"),theme=LS.get("theme","auto"),favs=new Set(LS.get("favs",[])),sfavs=new Set(LS.get("sfavs",[]));
 
 let TRK={};try{const r=await fetch("tracking.json",{cache:"no-cache"});if(r.ok)TRK=await r.json()}catch(e){}
@@ -21,7 +21,7 @@ let RO={};try{RO=await (await fetch("roster.json",{cache:"no-cache"})).json()}ca
 let D=JSON.parse($("#snap").textContent),checkedAt=null,view="board",round=null,sel=null,filt="all",sortBy="status",q="",live=false,stale=false,jump=false;
 
 /* ---------- strings ---------- */
-const ORD={en:n=>n+(n%10==1&&n!=11?"st":n%10==2&&n!=12?"nd":n%10==3&&n!=13?"rd":"th"),de:n=>n+".",fr:n=>n==1?"1er":n+"e",es:n=>n+".º",pt:n=>n+"º",zh:n=>"第"+n+"名",ar:n=>({1:"الأول",2:"الثاني",3:"الثالث",4:"الرابع",5:"الخامس",6:"السادس",7:"السابع",8:"الثامن"})[n]||String(n),hi:n=>n+"वाँ",bn:n=>({1:"1ম",2:"2য়",3:"3য়",4:"4র্থ",5:"5ম",6:"6ষ্ঠ",7:"7ম",8:"8ম"})[n]||n+"তম",ur:n=>({1:"پہلا",2:"دوسرا",3:"تیسرا",4:"چوتھا",5:"پانچواں",6:"چھٹا",7:"ساتواں",8:"آٹھواں"})[n]||n+"واں",id:n=>"ke-"+n,ms:n=>"ke-"+n,ja:n=>n+"位",th:n=>"ที่ "+n,hu:n=>n+".",cs:n=>n+".",pl:n=>n+".",uk:n=>n+"-е"};
+const ORD={en:n=>n+(n%10==1&&n!=11?"st":n%10==2&&n!=12?"nd":n%10==3&&n!=13?"rd":"th"),de:n=>n+".",fr:n=>n==1?"1er":n+"e",es:n=>n+".º",pt:n=>n+"º",zh:n=>"第"+n+"名",ar:n=>({1:"الأول",2:"الثاني",3:"الثالث",4:"الرابع",5:"الخامس",6:"السادس",7:"السابع",8:"الثامن"})[n]||String(n),hi:n=>n+"वाँ",bn:n=>({1:"1ম",2:"2য়",3:"3য়",4:"4র্থ",5:"5ম",6:"6ষ্ঠ",7:"7ম",8:"8ম"})[n]||n+"তম",ur:n=>({1:"پہلا",2:"دوسرا",3:"تیسرا",4:"چوتھا",5:"پانچواں",6:"چھٹا",7:"ساتواں",8:"آٹھواں"})[n]||n+"واں",id:n=>"ke-"+n,ms:n=>"ke-"+n,ja:n=>n+"位",th:n=>"ที่ "+n,hu:n=>n+".",cs:n=>n+".",pl:n=>n+".",uk:n=>n+"-е",it:n=>n+"ª"};
 const S={
 en:{rounds:"Rounds",bracket:"Matchboard",teams:"Teams",official:"Official results",updated:"Updated",ago:m=>m<1?"just now":m<60?`${m} min ago`:`${Math.round(m/60)} h ago`,rio:"Rio time",offline:"offline copy",
  rn:{r32:"1/32 Finals",r16:"1/16 Finals",r8:"1/8 Finals",r4:"Quarter-finals",sf:"Semi-finals",pf:"Petit Final",f:"Grand Final"},
@@ -103,6 +103,443 @@ es:{rounds:"Rondas",bracket:"Matchboard",teams:"Equipos",official:"Resultados of
  ev:{asia:"clasificación asiática",afoc:"clasificación de África y Oceanía",eu1:"clasificación europea 1",eu2:"clasificación europea 2",pan:"clasificación panamericana"},
  route:{won:(e,g)=>`Ganó la ${e}, Grupo ${g}`,pos:(p,e,g)=>`${p} en la ${e}, Grupo ${g}`,lc:(e,g)=>`3.º en la ${e} (Grupo ${g}) y luego ganó la regata de última oportunidad`,ranking:"Clasificado por el Ranking SSL de naciones",host:"Anfitrión, directo a octavos",seeded:r=>`Cabeza de serie en ${r} por el Ranking SSL de naciones`},
  roles:{Helm:"Lleva el timón",Tactician:"Estrategia y decisiones","Main Trimmer":"Mayor",Trimmer:"Foque y gennaker",Grinder:"Mueve los winches",Pit:"Drizas y controles","Mid-Bow":"Mástil y proa",Bow:"Proa y salidas",Floater:"Comodín / reserva"}}};
+S.it={"rounds":"Turni",
+"bracket":"Matchboard",
+"teams":"Squadre",
+"official":"Risultati ufficiali",
+"updated":"Aggiornato",
+"ago":m=>m<1?"proprio ora":m<60?`${m} min fa`:`${Math.round(m/60)} h fa`,
+"rio":"Ora di Rio",
+"offline":"offline – ultimi dati salvati",
+"rn":{"r32":"1/32 di finale","r16":"1/16 di finale","r8":"1/8 di finale","r4":"Quarti di finale","sf":"Semifinali","pf":"Finalina","f":"Finale"},
+"group":"Gruppo",
+"decided":"deciso",
+"racing":"in regata",
+"open":"aperto",
+"st":{"done":"concluso","live":"in corso","up":"in programma"},
+"races":n=>`${n} ${n>1?"regate":"regata"} per gruppo`,
+"upNext":"Prossimo turno",
+"startsIn":d=>d<=0?"inizia oggi":d==1?"inizia domani":`inizia tra ${d} giorni`,
+"groupsOf4":n=>`${n} ${n>1?"gruppi":"gruppo"} da quattro`,
+"oneRace":"Una sola regata – decide l’ordine d’arrivo.",
+"through":"qualificata",
+"out":"eliminata",
+"toFinal":"in Finale",
+"toPetit":"in Finalina",
+"medals":["Oro","Argento","Bronzo","4°"],
+"pts":"Pt.",
+"outIn":(r,g,p)=>`Eliminata nel turno ${r} (gruppo ${g}, ${p})`,
+"gf":m=>`Finale: ${m}`,
+"finished":p=>`Arrivata ${p}`,
+"thrTbc":"Qualificata – prossimo gruppo da confermare",
+"seeded":(r,g,d)=>`Testa di serie – entra nel turno ${r}, gruppo ${g}, ${d}`,
+"racingNow":"In regata ora",
+"nations":n=>`${n} nazioni`,
+"stillIn":"ancora in gara",
+"outN":"eliminate",
+"search":"Cerca nazione, soprannome o velista",
+"all":"Tutte",
+"chipIn":"In gara",
+"chipOut":"Eliminate",
+"mine":"★ Le mie squadre",
+"sStatus":"Stato",
+"sRank":"Ranking",
+"sAz":"A–Z",
+"noTeam":"Nessuna squadra trovata.",
+"rank":"Posizione",
+"captain":"Capitano",
+"helm":"Timoniere",
+"ranking":"SSL Nations Ranking",
+"rankBoard":"Classifica ↗",
+"entered":"Entrata a Rio nel turno",
+"showRound":"Apri turno ›",
+"gc23":"Gold Cup 2023",
+"br23":"Tabellone 2023 ›",
+"status":"Stato",
+"stIn":"Ancora in gara",
+"stOut":"Eliminata",
+"whereEnded":"Dove si è fermata ›",
+"curGroup":"Gruppo attuale ›",
+"background":"Contesto",
+"road":"La strada per Rio",
+"story":"Storia",
+"site":"Sito della squadra",
+"qualRes":"Risultati delle qualificazioni ↗",
+"sslRank":"SSL Nations Ranking ↗",
+"resRio":"Risultati a Rio",
+"photos":"Foto dell’equipaggio",
+"byPos":"Equipaggio per ruolo",
+"leader":"Capo squadra",
+"wider":"Rosa allargata · ruolo da confermare",
+"squadNote":(n,p)=>`${n} nomi nella rosa. In ogni regata ne navigano 8–10 e la formazione può cambiare di giorno in giorno. Ruoli e numeri dal sito ufficiale della squadra; ritratti dalla grafica della Gold Cup Rio${p?"":" (per questa squadra non ancora disponibili)"}.`,
+"noSquad":"Per questa squadra non è ancora stata pubblicata una rosa.",
+"showPath":"Mostra il percorso nel tabellone",
+"copyLink":"Copia link",
+"copied":"Link copiato",
+"close":"Chiudi",
+"jersey":"Maglia",
+"numTbc":"Numero da confermare",
+"capTag":"Capitano",
+"favOn":"Segui già",
+"favOff":"Segui",
+"brHint":"Tocca una squadra per equipaggio e storia. Scorri per i turni successivi.",
+"h23":"Gold Cup 2023",
+"champ23":"Gran Canaria · campione",
+"hl":"evidenziata",
+"tap26":"Tocca una squadra per la sua pagina di Rio 2026.",
+"off23":"Risultati ufficiali 2023 ↗",
+"myTeams":"Le mie squadre",
+"myHint":"Tocca ☆ nella pagina di una squadra per seguirla.",
+"foot":"Punteggio: 4-3-2-1 punti per regata, punti doppi nell’ultima regata di ogni gruppo (8-6-4-2). Le prime due di ogni gruppo passano il turno. I risultati si aggiornano automaticamente dalla pagina ufficiale dei risultati SSL. Ranking = SSL Nations Ranking all’inizio delle Final Series.",
+"notes":{"ocs":"* OCS (partenza anticipata)  ** Penalità standard"},
+"theme":{"auto":"🌊 Matchboard","light":"☀️ Giorno","dark":"🌙 Notte"},
+"g23":{"champ":"Campione (oro)","second":"Seconda (argento)","third":"3ª (bronzo)","fourth":"4ª – Finale","sf":"Semifinali","qf":"Quarti di finale","r8":"1/8 di finale","r16":"1/16 di finale","r32":"1/32 di finale","none":"Non ha partecipato alle Final Series 2023"},
+"ev":{"asia":"Qualificazioni asiatiche","afoc":"Qualificazioni Africa e Oceania","eu1":"Qualificazioni europee 1","eu2":"Qualificazioni europee 2","pan":"Qualificazioni panamericane"},
+"route":{"won":(e,g)=>`Vincitrice di ${e}, gruppo ${g}`,"pos":(p,e,g)=>`${p} in ${e}, gruppo ${g}`,"lc":(e,g)=>`3ª in ${e}, gruppo ${g}, poi vincitrice della Last Chance Race`,"ranking":"Qualificata tramite lo SSL Nations Ranking","host":"Nazione ospitante, testa di serie negli 1/8 di finale","seeded":r=>`Testa di serie nel turno ${r} tramite lo SSL Nations Ranking`},
+"roles":{"Helm":"Guida la barca","Tactician":"Strategia e chiamate","Main Trimmer":"Randa","Trimmer":"Fiocco e gennaker","Grinder":"Gira i winch","Pit":"Drizze e regolazioni","Mid-Bow":"Albero e coperta di prua","Bow":"Prua e partenze","Floater":"Jolly / riserva"},
+"back":"‹ Indietro",
+"position":"Ruolo",
+"team":"Squadra",
+"indRank":"Ranking SSL",
+"highlights":"Momenti salienti",
+"profile":"Profilo SSL ↗",
+"findProfile":"Cerca il profilo SSL ↗",
+"ws":"World Sailing ↗",
+"mates":"Compagni di squadra",
+"posTbc":"Ruolo da confermare",
+"noInfo":"Non sono ancora stati pubblicati altri dettagli – i link qui sotto cercano nei profili ufficiali.",
+"today":"Oggi",
+"raceDay":(n,t)=>`giornata di regate ${n} di ${t}`,
+"finalDay":"Ultima giornata – l’ultima regata vale doppio",
+"stream":"▶ Diretta",
+"tracking":"Tracking",
+"schedule":"Programma",
+"adv":(a,b)=>`1ª → ${a} · 2ª → ${b}`,
+"advSf":"1ª–2ª → Finale · 3ª–4ª → Finalina",
+"clinched":"✓ qualificata",
+"elim":"eliminata",
+"secNow":"Nel turno attuale",
+"secSeeded":r=>`Teste di serie – entrano nel turno ${r}`,
+"secOut":"Eliminate",
+"lineup":"Formazione",
+"howT":"Come funziona la Gold Cup",
+"how":["Squadre nazionali, una barca SSL47 ciascuna – tutte identiche e fornite dagli organizzatori.","Gruppi da quattro. 4-3-2-1 punti per regata; l’ultima regata di ogni gruppo vale doppio (8-6-4-2).","Le prime due di ogni gruppo passano il turno; le nazioni meglio classificate entrano nei turni successivi.","Semifinali e finali si corrono in una sola regata; la Finale assegna il titolo di campione del mondo."],
+"race":"Regata",
+"nextRace":"Prossima regata",
+"todayRaces":"Regate di oggi",
+"rioT":"Ora di Rio",
+"loc":"ora locale",
+"onWater":"in acqua",
+"done":"conclusa",
+"inX":m=>m<60?`tra ${m} min`:`tra ${Math.floor(m/60)} h ${String(m%60).padStart(2,"0")}`,
+"firstStart":"Prima partenza",
+"schedT":"Programma delle regate",
+"schedNote":"Orari di Rio de Janeiro (UTC−3), dal programma ufficiale. I suoi gruppi G1–G4 qui sono indicati come gruppi A–D.",
+"needT":"Prima dell’ultima regata (punti doppi)",
+"need":{"sure":"qualificata, comunque vada","gone":"eliminata, comunque vada","win":"basta una vittoria","top":k=>`basta ${k} o meglio`,"mustWin":"deve vincere","help":"e ha bisogno dell’aiuto delle altre","maybe":k=>`${k} potrebbe bastare – dipende dalle altre`,"iff":(k,c)=>`${k} basta se ${c}`,"mustIf":c=>`deve vincere, e solo se ${c}`,"ahead":R=>`davanti a ${R}`,"behind":R=>`dietro a ${R}`,"notWin":R=>`${R} non vince`,"last":R=>`${R} arriva ultima`,"wins":R=>`${R} vince`,"tie":"possibile parità di punti – decide lo spareggio"},
+"needNote":"Calcolato sui punti attuali; ≈ significa che le squadre potrebbero finire a pari punti, e allora decide lo spareggio ufficiale.",
+"install":"Aggiungi alla schermata Home per avere l’icona dell’app.",
+"home":"Home",
+"more":"Altro",
+"sailors":"Velisti",
+"welcome":"Final Series · Rio de Janeiro",
+"dates":"19 nov – 13 dic 2026 · Marina da Glória",
+"progress":"Torneo",
+"latest":"Ultimi risultati",
+"explore":"Esplora",
+"tiles":{"board":["Turni","Gruppi, punti, orari"],"bracket":["Matchboard","Tutto il tabellone a colpo d’occhio"],"teams":["Squadre","40 nazioni, equipaggi, ranking"],"sailors":["Velisti","Cerca tra tutti i velisti"],"qualifying":["Qualificazioni","Come le squadre sono arrivate a Rio"],"gc2023":["Gold Cup 2023","Il tabellone dell’ultima edizione"]},
+"sailorsT":n=>`${n} velisti`,
+"sSearch":"Cerca velista, squadra o ruolo",
+"withPhoto":"Con foto",
+"allS":"Tutti",
+"moreT":"Altro",
+"lang":"Lingua",
+"design":"Aspetto",
+"share":"Condividi l’app",
+"shared":"Link copiato",
+"links":"Link",
+"about":"Informazioni sull’app",
+"aboutT":"App non ufficiale di accompagnamento alla SSL Gold Cup Rio 2026. I risultati si aggiornano automaticamente dalla pagina ufficiale dei risultati SSL.",
+"inst":{"t":"Installa l’app","d":"Metti la SSL Gold Cup nella schermata Home – si apre come un’app, a tutto schermo, con risultati in diretta.","b":"Installa","done":"Installata ✓","ios":["Tocca il pulsante Condividi","in basso in Safari (in alto a destra su iPad).","Scorri in basso e tocca “Aggiungi a schermata Home”.","Tocca “Aggiungi” – fatto."],"iosOther":"Su iPhone funziona in Safari: apri prima questa pagina in Safari.","android":["Tocca il menu ⋮ in alto a destra nel browser.","Tocca “Installa app” o “Aggiungi a schermata Home”.","Conferma con “Installa”."],"desk":["Clicca sull’icona di installazione nella barra degli indirizzi,","oppure apri il menu del browser e scegli “Installa SSL Gold Cup”."],"how":"Come installare","hide":"Non ora","installedNote":"Stai usando l’app installata."},
+"champT":"Campione del mondo · Gold Cup 2026",
+"standT":"Classifica finale",
+"statsT":"In cifre",
+"stRaces":"Regate",
+"stWins":"Regate vinte",
+"stAvg":"Piazzamento medio",
+"stPts":"Punti a Rio",
+"stHist":"Regata per regata",
+"calBtn":"📅 Regate nel mio calendario",
+"calT":"Regate nel tuo calendario",
+"calSub":"Abbonati (iPhone, Mac, Outlook)",
+"calG":"Aggiungi a Google Calendar",
+"calDl":"Scarica il file (.ics)",
+"calAll":"Tutte le regate nel mio calendario",
+"calNote":"L’abbonamento si aggiorna da solo: quando una squadra si qualifica, le sue prossime regate compaiono automaticamente.",
+"wxT":"Previsioni vento · Marina da Glória",
+"wxSrc":"Previsione di Open-Meteo, non misurata sul campo di regata.",
+"trk":"Tracking",
+"delayed":m=>`I risultati potrebbero essere in ritardo – ultimo controllo riuscito ${m} min fa.`,
+"shareImg":"Condividi come immagine",
+"imgDone":"Immagine pronta",
+"pT":"Notifiche",
+"pAll":"Tutti i risultati",
+"pAllSub":"Una notifica dopo ogni regata",
+"pTeamOff":"🔔 Avvisami per questa squadra",
+"pTeamOn":"🔔 Notifiche attive ✓",
+"pTeams":"Le tue squadre",
+"pNone":"Ancora nessuna squadra: apri una squadra e tocca 🔔.",
+"pNote":"Ricevi solo i risultati delle regate e chi passa il turno. Puoi disattivarle qui in qualsiasi momento.",
+"pIOS":"Su iPhone le notifiche funzionano solo nell’app installata: installala, aprila dalla schermata Home e poi attivale qui.",
+"pDenied":"Le notifiche sono bloccate. Consentile per questa app nelle impostazioni del dispositivo.",
+"pErr":"Non ha funzionato – riprova tra un momento.",
+"pOnT":"Notifiche attivate",
+"pOffT":"Notifiche disattivate",
+"pUnsup":"Questo browser non può ricevere notifiche.",
+"obT":"Scarica l’app",
+"obSub":"Gratis, senza App Store – nella schermata Home in 20 secondi.",
+"obPerks":["Risultati in diretta con un tocco","A tutto schermo, come una vera app","Notifiche per la tua squadra"],
+"obBtn":"Installa ora",
+"obLater":"Più tardi – prima do un’occhiata nel browser",
+"obSteps":"Come funziona",
+"obStep":"Passo",
+"ios26":["Tocca ⋯ accanto alla barra degli indirizzi","Tocca “Condividi”","Scorri in basso e tocca “Aggiungi a schermata Home”","Lascia attivo “Apri come app web” e tocca “Aggiungi”"],
+"iosOld":["Tocca il pulsante Condividi in basso","Scorri in basso e tocca “Aggiungi a schermata Home”","Tocca “Aggiungi” in alto a destra"],
+"iosAlt":"Più semplice in Safari: copia il link, apri Safari e incollalo.",
+"inApp":"Questa pagina è aperta all’interno di un’altra app (per es. WhatsApp o Instagram). L’installazione funziona solo nel browser: tocca ⋯ e scegli “Apri nel browser” – oppure copia il link e aprilo in Safari o Chrome.",
+"copy":"Copia link",
+"done2":"Poi apri SSL Gold Cup dalla schermata Home.",
+"ui":{"share":"Condividi","home":"Aggiungi a schermata Home","add":"Aggiungi","web":"Apri come app web","cancel":"Annulla","ainst":"Installa app","aok":"Installa"},
+"trkOpen":"📍 Segui il tracking in diretta",
+"trkReplay":"📍 Rivedi la regata (tracking)",
+"trkNone":"Il tracking compare qui non appena Georacing ha preparato questa regata.",
+"trkExt":"Apri in Georacing ↗",
+"trkHint":"Ogni barca come un punto sulla mappa – in diretta durante la regata, come replay dopo.",
+"rcRes":"Risultato di questa regata",
+"rcTeams":"Squadre in questa regata",
+"rcStand":"Il gruppo finora",
+"rcPts":"pt.",
+"rcGroup":"Mostra il gruppo sulla Matchboard",
+"rcTBD":"Squadre non ancora definite",
+"qrT":"Inquadra con la fotocamera del telefono – l’app si apre subito.",
+"shareNow":"Condividi…",
+"qsep":n=>"▲ passano il turno",
+"shareSub":"Invia via WhatsApp, Messaggi & co.",
+"shareMsg":"SSL Gold Cup Rio 2026 – risultati in diretta, orari delle regate e tutte le squadre:",
+"sCaps":"Capitani",
+"sTeams":"Equipaggi",
+"sHint":"Tocca una squadra per vederne l’equipaggio – prima le squadre ancora in gara.",
+"sTeamPage":"Pagina della squadra",
+"fShow":"Mostra",
+"fSort":"Ordina",
+"spT":"Senza spoiler",
+"spUntil":w=>`Risultati nascosti dopo ${w}`,
+"spNone":"Al momento nessun risultato nascosto",
+"spShow":"Mostra tutto",
+"spOff":"Off",
+"spRow":"Modalità senza spoiler",
+"spSub":"Nasconde i risultati finché non hai visto la regata",
+"spRace":"Risultato nascosto",
+"spReveal":"L’ho vista – mostra il risultato",
+"spOnT":"I risultati da oggi in poi sono nascosti",
+"cmpBtn":"⚖️ Confronta",
+"cmpVs":"vs",
+"cmpPick":"Scegli una squadra con cui confrontare.",
+"h2hT":"Testa a testa",
+"h2hSub":"regate concluse davanti",
+"h2hNone":"Non si sono ancora affrontate.",
+"cmpNote":"Dati delle regate di Rio; ranking = SSL Nations Ranking.",
+"vidT":"🎬 Highlights e video",
+"vidAll":"Tutti i video su YouTube ↗",
+"vidOpen":"Apri su YouTube ↗",
+"vidHid":n=>`${n} ${n>1?"video più recenti nascosti":"video più recente nascosto"} (senza spoiler)`,
+"pastL":"Uno sguardo indietro",
+"vnT":"Sede · Marina da Glória",
+"vnSub":"Dove succede tutto – mappa e indicazioni",
+"vnRoute":"Indicazioni",
+"vnApple":"Mappe Apple",
+"vnInfo":["Sede delle regate olimpiche di vela del 2016, sulla baia di Guanabara con vista sul Pan di Zucchero.","Durante l’evento la marina è aperta al pubblico – vedi le barche da vicino e visita il villaggio degli atleti.","Le regate si svolgono nella baia di Guanabara proprio davanti alla marina."],
+"suT":"Sostenibilità",
+"suSub":"Cosa fa la SSL per l’oceano e per uno sport equo",
+"suIntro":"Secondo la SSL, sostenibilità significa proteggere l’oceano e rendere lo sport più equo.",
+"suList":["Su ogni barca della SSL Gold Cup devono esserci due donne.","Niente bottiglie di plastica nel villaggio degli atleti.","Un Sustainability Manager dedicato da settembre 2025.","In linea con Clean Regattas, la Sustainability Agenda 2030 di World Sailing e la strategia del CIO; l’obiettivo è la certificazione Clean Regattas Platinum.","Pulizia delle spiagge con le squadre durante le qualificazioni.","Pochi gommoni di supporto: alle Finals 2023 quattro barche allenatori servivano 440 velisti."],
+"suMore":"Approfondisci sul sito SSL ↗",
+"mcT":"Merchandising",
+"mcSub":"Maglie, cappellini e altro – in arrivo",
+"mcSoon":"In arrivo",
+"mcTxt":"Lo store ufficiale della SSL Gold Cup non è ancora aperto. Appena aprirà potrai acquistare qui.",
+"mcList":["Maglie dei capitani delle squadre nazionali","Cappellini SSL","Barca SSL47 e personaggi delle squadre come set di costruzioni"],
+"mcGo":"Allo store SSL ↗",
+"wxBtn":"🌬️ Meteo per velisti",
+"wxH":"Meteo per la vela",
+"wxLoad":"Caricamento previsioni…",
+"wxFail":"Al momento non è stato possibile caricare la previsione.",
+"wxGust":"Raffiche",
+"wxDir":"Direzione",
+"wxPres":"Pressione",
+"wxAtStart":"Previsione per l’orario di partenza.",
+"wxHours":"Ora per ora",
+"wxTime":"Ora",
+"wxWind":"Vento kn",
+"wxKn":"Vento in nodi: medio – raffiche. Le frecce indicano dove soffia il vento.",
+"wxSea":"Acqua",
+"wxWater":"Temperatura dell’acqua",
+"wxTide":"Marea",
+"wxRise":"in crescita",
+"wxFall":"in calo",
+"wxHigh":"Alta",
+"wxLow":"Bassa",
+"wxCur":"Corrente",
+"wxCurN":"Valore del modello all’ingresso della baia; freccia = direzione del flusso.",
+"wxWave":"Onda lunga",
+"wxWaveN":"All’ingresso della baia, molto più piccola sul campo di regata.",
+"wxSun":"Alba – tramonto",
+"wxSrc2":"Previsione di Open-Meteo (modelli meteo), non misurata sul campo di regata.",
+"trkLive":"Tracking live",
+"trkReplayS":"Replay",
+"fcBtn":"Previsione",
+"fcCond":["Vento leggero","Vento medio","Brezza tesa","Vento forte"],
+"fcTr":{"up":"in rinforzo","down":"in calo","steady":"stabile","veer":"ruota in senso orario","back":"ruota in senso antiorario"},
+"fcNext":"Prossima ora",
+"fcChart":"Vento 10:00–18:00 · linea = medio, fascia = raffiche, segno = partenza",
+"fcBft":"Beaufort",
+"watchLive":"Guarda in diretta",
+"liveStream":"Diretta",
+"liveNow":"La regata è in corso – guardala qui",
+"liveNote":"Se il player resta nero, la diretta non è ancora iniziata oppure YouTube blocca l’incorporamento – in quel caso aprila su YouTube.",
+"achT":"Successi",
+"olyT":"Giochi Olimpici",
+"wcT":"Podi ai Mondiali",
+"ecT":"Podi continentali",
+"clubT":"Circolo",
+"profSrc":"Dati dal profilo ufficiale SSL.",
+"achL":["Campione del mondo","Oro olimpico","Argento olimpico","Bronzo olimpico"],
+"wxAtT":h=>`Previsione per le ${h}`,
+"wxTap":"Tocca un’ora per i dettagli.",
+"fsT":"Final Series",
+"qsT":"Qualifying Series",
+"qsLeg":"Evidenziate: qualificate tramite questa serie. ● = a Rio tramite lo SSL Nations Ranking. Tocca una squadra presente a Rio per la sua pagina.",
+"qsNote":"La vincitrice di ogni gruppo di qualificazione (gruppo C: le prime due) è stata sorteggiata negli 1/32 di finale. 29 squadre si sono qualificate alle Final Series tramite il ranking SSL, con posti per continente: 12 Europa, 8 Panamerica, 6 Asia, 1 Africa, 2 Oceania.",
+"reg":{"asia":"Asia","afoc":"Africa e Oceania","eur":"Europa","pam":"Panamerica"},
+"fin":"Finale",
+"petit":"Finalina",
+"swipe":"Scorri di lato per i turni successivi →",
+"road2":"La strada per Rio",
+"inRio":"A Rio tramite il ranking SSL",
+"mbHint":"Le prime due di ogni gruppo passano il turno. Tocca una squadra per equipaggio e storia.",
+"vmT":"Area dell’evento",
+"vmTap":"Tocca la mappa per ingrandire",
+"vmL":["Barche SSL47","Pennone a terra (segnali)","Villaggio: stand dei partner, shop, raccolta differenziata","Maxischermo","Ufficio di regata e sala giuria","Sailors Lounge","Divise","Regia TV","Barca in esposizione","Tenda dei team a terra","Palco principale: concerto, podio finale, cerimonia di chiusura","Barca per gli spettatori","Ufficio stampa e produzione","Buffet del pranzo"],
+"vmW":"Punto di ricarica acqua",
+"vdT":"Nei giorni di regata",
+"vd":["10:00 – Briefing degli skipper","12:00 – primo segnale di avviso","Segnali a terra: pennone davanti alla Sailors Lounge (2)"],
+"vmSrc":"Mappa: SSL Gold Cup, albo ufficiale dei comunicati",
+"fbT":"Desiderio o segnalazione di errore",
+"fbSub":"Arriva direttamente a chi ha creato l’app",
+"fbPh":"Cosa dovrebbe essere migliore? Cosa non funziona?",
+"fbName":"Il tuo nome (facoltativo)",
+"fbSend":"Invia",
+"fbOk":"Grazie – inviato!",
+"fbErr":"Invio non riuscito. Controlla la connessione e riprova.",
+"showMe":"Mostrami dove",
+"openChrome":"Apri in Chrome",
+"openSafari":"Apri in Safari",
+"prep":"Preparazione in corso … un momento",
+"coachT":"Tocca qui",
+"gotIt":"Capito",
+"samsung":["Tocca ≡ (menu) in basso a destra.","Tocca “Aggiungi pagina a” → “Schermata Home”.","Conferma con “Aggiungi”."],
+"noDots":"Non vedi il pulsante ⋯? Tocca invece l’icona Condividi.",
+"tkLoad":"Caricamento tracking…",
+"tkNone":"Per questa regata non c’è ancora tracking.",
+"tkNoData":"Nessun dato di tracking per questa regata.",
+"tkOpens":"Il tracking si apre alle",
+"tkStart":"Partenza",
+"tkLeg":"Lato",
+"tkPre":"pre-partenza",
+"tkNoPos":"nessun segnale",
+"tkRep":"Replay",
+"secOly":"Giochi Olimpici",
+"secWc":"Campionati del mondo",
+"secEc":"Campionati continentali",
+"bioT":"Chi è",
+"srcSSL":"Biografia ufficiale · Star Sailors League",
+"careerT":"Carriera",
+"evN":"risultati elencati",
+"podN":"podi",
+"medRate":"tasso di medaglie",
+"bestR":"miglior risultato",
+"showAll":"Mostra tutto",
+"sslPts":"Punti SSL",
+"heightT":"Altezza",
+"weightT":"Peso",
+"sslProf":"Profilo ufficiale SSL",
+"teamSite":"Sito web della squadra",
+"mySailors":"I miei velisti",
+"sFavHint":"Tocca ☆ nella pagina di un velista per seguirlo – comparirà qui.",
+"ownW":"Con parole sue · dal profilo SSL",
+"pathHl":n=>`Percorso di ${n} evidenziato`,
+"setT":"Impostazioni",
+"setSub":"Notifiche, preferiti, visualizzazione, senza spoiler",
+"sNotAvail":"Le notifiche push sono in preparazione e saranno presto disponibili qui.",
+"sMaster":"Notifiche push",
+"sMasterSub":"Interruttore principale per questo dispositivo",
+"sRemT":"Promemoria partenza",
+"sRemSub":"15 minuti prima che regatino le tue squadre",
+"sLiveT":"Inizio della diretta",
+"sLiveSub":"Quando parte la diretta della SSL",
+"sVidT":"Nuovo video highlights",
+"sVidSub":"Quando esce un nuovo video highlights",
+"sResT":"Risultati delle mie squadre",
+"sResSub":"Dopo ogni regata di queste squadre – le tue squadre preferite e le squadre dei tuoi velisti preferiti.",
+"sFavNone":"Ancora nessun preferito – tocca ☆ su una squadra o un velista.",
+"sQuietT":"Ore di silenzio",
+"sQuietSub":"Nessuna notifica in questa fascia oraria (ora locale)",
+"sQoff":"Off",
+"sSpoilN":"In modalità senza spoiler le notifiche dicono solo che una regata è finita.",
+"sDispT":"Visualizzazione",
+"sTimeT":"Orari",
+"sTimeRio":"Solo Rio",
+"sTimeBoth":"Rio + locale",
+"sWindT":"Vento",
+"sTempT":"Temperatura",
+"sLvT":"Lingua del commento",
+"sLvAuto":"Come l’app",
+"sCalT":"Calendario",
+"sCalTeam":"Regate di questa squadra",
+"sDataT":"Dati e privacy",
+"sPriv":"Tutto ciò che imposti qui viene salvato solo su questo dispositivo. Nessun account, nessun cookie; le visite vengono contate in forma anonima.",
+"sResetF":"Rimuovi preferiti",
+"sResetA":"Ripristina tutto",
+"sResetQ":"Tocca di nuovo per confermare",
+"sFeedback":"Invia feedback",
+"sVer":"Versione",
+"comp":"Competizione",
+"rkT":"SSL Nations Ranking",
+"rkAsOf":"Aggiornato al",
+"rkNat":n=>`${n} nazioni`,
+"rkHist":"Ranking storico",
+"rkCur":"Attuale",
+"rkCont":"Continente",
+"rkAll":"Tutti",
+"rkSearch":"Cerca paese",
+"rkGC":"Squadre della Gold Cup",
+"rkSk":"Skipper",
+"rkCr":"Equipaggi",
+"rkPts":"Punti (somma delle posizioni dei velisti)",
+"rkNo":"N.",
+"rkGlob":"Globale",
+"rkName":"Nazione",
+"rkNone":"Nessuna nazione trovata.",
+"rkLoad":"Caricamento ranking…",
+"rkFail":"Al momento il ranking non può essere caricato.",
+"rkSrc":"Fonte: Star Sailors League · aggiornato ogni settimana. La posizione della nazione deriva dai suoi skipper ed equipaggi meglio classificati.",
+"rkTeam":"Pagina della squadra",
+"rkPrev":p=>`settimana precedente: ${p}`,
+"rkWas":p=>`era ${p}`,
+"rkInd":"Posizione mondiale",
+"rkOpen":"Apri ranking ›",
+"rkTap":"Tocca una nazione per i suoi velisti.",
+"alsoP":"anche"};
 const SX={
 en:{back:"‹ Team",position:"Position",team:"Team",indRank:"SSL ranking",highlights:"Highlights",profile:"SSL profile ↗",findProfile:"Find SSL profile ↗",ws:"World Sailing ↗",mates:"Teammates",posTbc:"Position TBC",noInfo:"No further details published yet – the links below search the official profiles."},
 de:{back:"‹ Team",position:"Position",team:"Team",indRank:"SSL-Ranking",highlights:"Erfolge",profile:"SSL-Profil ↗",findProfile:"SSL-Profil suchen ↗",ws:"World Sailing ↗",mates:"Teamkollegen",posTbc:"Position offen",noInfo:"Noch keine weiteren Infos veröffentlicht – die Links unten suchen die offiziellen Profile."},
@@ -1122,8 +1559,8 @@ bn:{tkLoad:"ট্র্যাকিং লোড হচ্ছে…",tkNone:"�
 ur:{tkLoad:"ٹریکنگ لوڈ ہو رہی ہے…",tkNone:"اس ریس کی ٹریکنگ ابھی دستیاب نہیں۔",tkNoData:"اس ریس کا کوئی ٹریکنگ ڈیٹا نہیں۔",tkOpens:"ٹریکنگ شروع ہوگی",tkStart:"اسٹارٹ",tkLeg:"لیگ",tkPre:"اسٹارٹ سے پہلے",tkNoPos:"سگنل نہیں",tkRep:"ری پلے",secOly:"اولمپک کھیل",secWc:"عالمی چیمپئن شپ",secEc:"براعظمی چیمپئن شپ",bioT:"تعارف",srcSSL:"سرکاری تعارف · Star Sailors League",careerT:"کیریئر",evN:"درج نتائج",podN:"پوڈیم",medRate:"تمغوں کی شرح",bestR:"بہترین نتیجہ",showAll:"سب دکھائیں",sslPts:"SSL پوائنٹس",heightT:"قد",weightT:"وزن",sslProf:"سرکاری SSL پروفائل",teamSite:"ٹیم ویب سائٹ",mySailors:"میرے ملاح",sFavHint:"کسی ملاح کے صفحے پر ☆ دبا کر فالو کریں – وہ یہاں نظر آئیں گے۔"},
 id:{tkLoad:"Memuat pelacakan…",tkNone:"Belum ada pelacakan untuk lomba ini.",tkNoData:"Tidak ada data pelacakan untuk lomba ini.",tkOpens:"Pelacakan dibuka pukul",tkStart:"Start",tkLeg:"Leg",tkPre:"sebelum start",tkNoPos:"tanpa sinyal",tkRep:"Tayangan ulang",secOly:"Olimpiade",secWc:"Kejuaraan Dunia",secEc:"Kejuaraan kontinental",bioT:"Tentang",srcSSL:"Bio resmi · Star Sailors League",careerT:"Karier",evN:"hasil tercatat",podN:"podium",medRate:"rasio medali",bestR:"hasil terbaik",showAll:"Tampilkan semua",sslPts:"Poin SSL",heightT:"Tinggi",weightT:"Berat",sslProf:"Profil resmi SSL",teamSite:"Situs tim",mySailors:"Pelaut saya",sFavHint:"Ketuk ☆ di halaman pelaut untuk mengikutinya – mereka akan muncul di sini."}};
 for(const l in SADD)Object.assign(S[l],SADD[l]);
-const SOW={"en": "In their own words · from the SSL profile", "de": "In eigenen Worten · aus dem SSL-Profil", "fr": "Dans ses propres mots · profil SSL", "es": "En sus propias palabras · perfil SSL", "pt": "Nas próprias palavras · perfil SSL", "zh": "本人自述 · 来自SSL资料", "ar": "بكلماته · من ملف SSL", "hi": "अपने शब्दों में · SSL प्रोफ़ाइल से", "bn": "নিজের ভাষায় · SSL প্রোফাইল থেকে", "ur": "اپنے الفاظ میں · SSL پروفائل سے", "id": "Dengan kata-katanya sendiri · dari profil SSL", "ms": "Dalam kata-katanya sendiri · daripada profil SSL", "ja": "本人による紹介 · SSLプロフィールより", "th": "เล่าด้วยตัวเอง · จากโปรไฟล์ SSL", "hu": "Saját szavaival · az SSL-profilból", "cs": "Vlastními slovy · z profilu SSL", "pl": "Własnymi słowami · z profilu SSL", "uk": "Власними словами · з профілю SSL"};for(const l in SOW)if(S[l])S[l].ownW=SOW[l];
-S.de.nxS="Start in";S.pl.nxS="Start za";S.pl.pathHl=n=>`Droga: ${n} – wyróżniona`;S.en.pathHl=n=>`Path of ${n} highlighted`;S.de.pathHl=n=>`Weg von ${n} markiert`;S.fr.pathHl=n=>`Parcours de ${n} en surbrillance`;S.es.pathHl=n=>`Recorrido de ${n} resaltado`;S.pt.pathHl=n=>`Caminho de ${n} destacado`;
+const SOW={"en": "In their own words · from the SSL profile", "de": "In eigenen Worten · aus dem SSL-Profil", "fr": "Dans ses propres mots · profil SSL", "es": "En sus propias palabras · perfil SSL", "pt": "Nas próprias palavras · perfil SSL", "zh": "本人自述 · 来自SSL资料", "ar": "بكلماته · من ملف SSL", "hi": "अपने शब्दों में · SSL प्रोफ़ाइल से", "bn": "নিজের ভাষায় · SSL প্রোফাইল থেকে", "ur": "اپنے الفاظ میں · SSL پروفائل سے", "id": "Dengan kata-katanya sendiri · dari profil SSL", "ms": "Dalam kata-katanya sendiri · daripada profil SSL", "ja": "本人による紹介 · SSLプロフィールより", "th": "เล่าด้วยตัวเอง · จากโปรไฟล์ SSL", "hu": "Saját szavaival · az SSL-profilból", "cs": "Vlastními slovy · z profilu SSL", "pl": "Własnymi słowami · z profilu SSL", "uk": "Власними словами · з профілю SSL",it:"Con parole sue · dal profilo SSL"};for(const l in SOW)if(S[l])S[l].ownW=SOW[l];
+S.de.nxS="Start in";S.zh.pathHl=n=>`已标出 ${n} 的晋级路线`;S.ar.pathHl=n=>`تم تمييز مسار ${n}`;S.hi.pathHl=n=>`${n} का रास्ता हाइलाइट किया गया`;S.bn.pathHl=n=>`${n}-এর পথ চিহ্নিত`;S.ur.pathHl=n=>`${n} کا راستہ نمایاں`;S.id.pathHl=n=>`Jalur ${n} disorot`;S.ms.pathHl=n=>`Laluan ${n} diserlahkan`;S.ja.pathHl=n=>`${n} の勝ち上がりを表示中`;S.th.pathHl=n=>`ไฮไลต์เส้นทางของ ${n}`;S.hu.pathHl=n=>`${n} útja kiemelve`;S.cs.pathHl=n=>`Cesta týmu ${n} zvýrazněna`;S.uk.pathHl=n=>`Шлях ${n} виділено`;S.pl.nxS="Start za";S.pl.pathHl=n=>`Droga: ${n} – wyróżniona`;S.en.pathHl=n=>`Path of ${n} highlighted`;S.de.pathHl=n=>`Weg von ${n} markiert`;S.fr.pathHl=n=>`Parcours de ${n} en surbrillance`;S.es.pathHl=n=>`Recorrido de ${n} resaltado`;S.pt.pathHl=n=>`Caminho de ${n} destacado`;
 const SSET={
 en:{setT:"Settings",setSub:"Notifications, favourites, display, spoiler-free",sNotAvail:"Push notifications are being set up and will be available here soon.",sMaster:"Push notifications",sMasterSub:"Main switch for this device",sRemT:"Start reminder",sRemSub:"15 minutes before your teams race",sLiveT:"Livestream starts",sLiveSub:"When the SSL livestream goes live",sVidT:"New highlight video",sVidSub:"When a new highlight film is out",sResT:"Results of my teams",sResSub:"After every race of these teams – your favourite teams and the teams of your favourite sailors.",sFavNone:"No favourites yet – tap ☆ on a team or sailor.",sQuietT:"Quiet hours",sQuietSub:"No notifications during this time (your local time)",sQoff:"Off",sSpoilN:"In spoiler-free mode, notifications only say that a race has finished.",sDispT:"Display",sTimeT:"Times",sTimeRio:"Rio only",sTimeBoth:"Rio + mine",sWindT:"Wind",sTempT:"Temperature",sLvT:"Commentary language",sLvAuto:"Same as the app",sCalT:"Calendar",sCalTeam:"Races of this team",sDataT:"Data & privacy",sPriv:"Everything you set here is stored only on this device. No account, no cookies; visits are counted anonymously.",sResetF:"Remove favourites",sResetA:"Reset everything",sResetQ:"Tap again to confirm",sFeedback:"Send feedback",sVer:"Version"},
 de:{setT:"Einstellungen",setSub:"Benachrichtigungen, Favoriten, Anzeige, spoilerfrei",sNotAvail:"Push-Benachrichtigungen werden gerade eingerichtet und sind hier bald verfügbar.",sMaster:"Push-Benachrichtigungen",sMasterSub:"Hauptschalter für dieses Gerät",sRemT:"Start-Erinnerung",sRemSub:"15 Minuten bevor deine Teams segeln",sLiveT:"Livestream startet",sLiveSub:"Wenn der SSL-Livestream beginnt",sVidT:"Neues Highlight-Video",sVidSub:"Wenn ein neuer Highlight-Film erscheint",sResT:"Ergebnisse meiner Teams",sResSub:"Nach jedem Rennen dieser Teams – deine Lieblingsteams und die Teams deiner Lieblingssegler.",sFavNone:"Noch keine Favoriten – tippe auf ☆ bei einem Team oder Segler.",sQuietT:"Ruhezeiten",sQuietSub:"In dieser Zeit keine Benachrichtigungen (deine Ortszeit)",sQoff:"Aus",sSpoilN:"Im spoilerfreien Modus sagen Benachrichtigungen nur, dass ein Rennen beendet ist.",sDispT:"Anzeige",sTimeT:"Uhrzeiten",sTimeRio:"Nur Rio",sTimeBoth:"Rio + meine",sWindT:"Wind",sTempT:"Temperatur",sLvT:"Kommentarsprache",sLvAuto:"Wie die App",sCalT:"Kalender",sCalTeam:"Rennen dieses Teams",sDataT:"Daten & Datenschutz",sPriv:"Alles, was du hier einstellst, bleibt nur auf diesem Gerät. Kein Konto, keine Cookies; Besuche werden anonym gezählt.",sResetF:"Favoriten entfernen",sResetA:"Alles zurücksetzen",sResetQ:"Zum Bestätigen nochmal tippen",sFeedback:"Feedback senden",sVer:"Version"},
@@ -1143,8 +1580,8 @@ hu:{setT:"Beállítások",setSub:"Értesítések, kedvencek, megjelenés, spoile
 pl:{setT:"Ustawienia",setSub:"Powiadomienia, ulubione, wygląd, bez spoilerów",sNotAvail:"Powiadomienia push są właśnie przygotowywane.",sMaster:"Powiadomienia push",sMasterSub:"Główny przełącznik na tym urządzeniu",sRemT:"Przypomnienie o starcie",sRemSub:"15 minut przed wyścigiem twoich drużyn",sLiveT:"Start transmisji",sLiveSub:"Gdy rusza transmisja SSL na żywo",sVidT:"Nowy skrót",sVidSub:"Gdy pojawi się nowy skrót wideo",sResT:"Wyniki moich drużyn",sResSub:"Po każdym wyścigu tych drużyn – ulubione drużyny i drużyny ulubionych żeglarzy.",sFavNone:"Brak ulubionych – stuknij ☆ przy drużynie lub żeglarzu.",sQuietT:"Cisza nocna",sQuietSub:"Bez powiadomień w tym czasie (czas lokalny)",sQoff:"Wył.",sSpoilN:"W trybie bez spoilerów powiadomienie mówi tylko, że wyścig się zakończył.",sDispT:"Wyświetlanie",sTimeT:"Godziny",sTimeRio:"Tylko Rio",sTimeBoth:"Rio + mój",sWindT:"Wiatr",sTempT:"Temperatura",sLvT:"Język komentarza",sLvAuto:"Jak aplikacja",sCalT:"Kalendarz",sCalTeam:"Wyścigi tej drużyny",sDataT:"Dane i prywatność",sPriv:"Wszystko, co ustawisz, zostaje tylko na tym urządzeniu. Bez konta, bez cookies; wizyty liczone są anonimowo.",sResetF:"Usuń ulubione",sResetA:"Resetuj wszystko",sResetQ:"Stuknij ponownie, aby potwierdzić",sFeedback:"Wyślij opinię",sVer:"Wersja"},
 cs:{setT:"Nastavení",setSub:"Oznámení, oblíbené, zobrazení, bez spoilerů",sNotAvail:"Push oznámení se právě připravují.",sMaster:"Push oznámení",sMasterSub:"Hlavní vypínač tohoto zařízení",sRemT:"Připomínka startu",sRemSub:"15 minut před závodem vašich týmů",sLiveT:"Začíná přenos",sLiveSub:"Když začne živý přenos SSL",sVidT:"Nový sestřih",sVidSub:"Když vyjde nový sestřih",sResT:"Výsledky mých týmů",sResSub:"Po každé rozjížďce těchto týmů – oblíbené týmy a týmy oblíbených jachtařů.",sFavNone:"Zatím žádné oblíbené – klepněte na ☆ u týmu nebo jachtaře.",sQuietT:"Doba klidu",sQuietSub:"V tuto dobu žádná oznámení (místní čas)",sQoff:"Vyp.",sSpoilN:"V režimu bez spoilerů oznámení řekne jen, že rozjížďka skončila.",sDispT:"Zobrazení",sTimeT:"Časy",sTimeRio:"Jen Rio",sTimeBoth:"Rio + můj",sWindT:"Vítr",sTempT:"Teplota",sLvT:"Jazyk komentáře",sLvAuto:"Jako aplikace",sCalT:"Kalendář",sCalTeam:"Rozjížďky tohoto týmu",sDataT:"Data a soukromí",sPriv:"Vše, co nastavíte, zůstává jen v tomto zařízení. Žádný účet, žádné cookies; návštěvy se počítají anonymně.",sResetF:"Odebrat oblíbené",sResetA:"Obnovit vše",sResetQ:"Pro potvrzení klepněte znovu",sFeedback:"Poslat zpětnou vazbu",sVer:"Verze"},
 uk:{setT:"Налаштування",setSub:"Сповіщення, обране, вигляд, без спойлерів",sNotAvail:"Push-сповіщення зараз налаштовуються.",sMaster:"Push-сповіщення",sMasterSub:"Головний перемикач цього пристрою",sRemT:"Нагадування про старт",sRemSub:"За 15 хвилин до гонки ваших команд",sLiveT:"Початок трансляції",sLiveSub:"Коли починається трансляція SSL",sVidT:"Нове відео найкращих моментів",sVidSub:"Коли виходить новий огляд",sResT:"Результати моїх команд",sResSub:"Після кожної гонки цих команд – обрані команди й команди обраних яхтсменів.",sFavNone:"Ще немає обраного – торкніться ☆ у команди чи яхтсмена.",sQuietT:"Тихі години",sQuietSub:"У цей час без сповіщень (ваш місцевий час)",sQoff:"Вимк.",sSpoilN:"У режимі без спойлерів сповіщення лише кажуть, що гонка завершилась.",sDispT:"Вигляд",sTimeT:"Час",sTimeRio:"Лише Ріо",sTimeBoth:"Ріо + мій",sWindT:"Вітер",sTempT:"Температура",sLvT:"Мова коментаря",sLvAuto:"Як у застосунку",sCalT:"Календар",sCalTeam:"Гонки цієї команди",sDataT:"Дані й приватність",sPriv:"Усі налаштування зберігаються лише на цьому пристрої. Без акаунта й cookies; відвідування рахуються анонімно.",sResetF:"Видалити обране",sResetA:"Скинути все",sResetQ:"Торкніться ще раз для підтвердження",sFeedback:"Надіслати відгук",sVer:"Версія"}};
-for(const l in SSET)if(S[l])Object.assign(S[l],SSET[l]);
-{const CP={en:"Competition",de:"Wettkampf",fr:"Compétition",es:"Competición",pt:"Competição",zh:"赛事",ar:"المنافسة",hi:"प्रतियोगिता",bn:"প্রতিযোগিতা",ur:"مقابلہ",id:"Kompetisi",ms:"Pertandingan",ja:"大会",th:"การแข่งขัน",hu:"Verseny",cs:"Soutěž",uk:"Змагання",pl:"Rywalizacja"};for(const l in CP)if(S[l])S[l].comp=CP[l]}
+for(const l in SSET)if(S[l])Object.assign(S[l],SSET[l]);for(const D of [VMS,FBS,INS2])for(const l in D)if(S[l])for(const k in D[l])if(!(k in S[l]))S[l][k]=D[l][k];for(const l in RCT)if(S[l]&&!S[l].rcTeams)S[l].rcTeams=RCT[l];
+{const CP={en:"Competition",de:"Wettkampf",fr:"Compétition",es:"Competición",pt:"Competição",zh:"赛事",ar:"المنافسة",hi:"प्रतियोगिता",bn:"প্রতিযোগিতা",ur:"مقابلہ",id:"Kompetisi",ms:"Pertandingan",ja:"大会",th:"การแข่งขัน",hu:"Verseny",cs:"Soutěž",uk:"Змагання",pl:"Rywalizacja",it:"Competizione"};for(const l in CP)if(S[l])S[l].comp=CP[l]}
 const T=k=>S[lang][k]??S.en[k];
 const ord=n=>ORD[lang](n);
 
@@ -1152,12 +1589,12 @@ const ord=n=>ORD[lang](n);
 const X={SLO:["SI"],BUL:["BG"],AUT:["AT"],FIN:["FI"],CRO:["HR"],NOR:["NO"],BER:["BM"],PHI:["PH"],VIE:["VN"],UAE:["AE"],KAZ:["KZ"],MAR:["MA"],MOZ:["MZ"],BEL:["BE"],SRB:["RS"],TUR:["TR"],PUR:["PR"],VEN:["VE"],MEX:["MX"],ESA:["SV"]};
 const FC={"de":["#000001","#e50000","#e5b700"],"ae":["#e50000","#00732f","#000001"],"za":["#c22c23","#007847","#00075e"],"ch":["#e50000","#8e0000"],"es":["#aa151b","#e3b401"],"vn":["#ca221a","#7d1510"],"pe":["#d50f22","#840915"],"au":["#e50000","#00008b"],"kz":["#00abc2","#006a78"],"hr":["#e50001","#171796"],"ph":["#cca418","#0037a8","#ce1025"],"rs":["#b43136","#a16244","#0b3f76"],"sv":["#0f46af","#092c6c"],"mz":["#e50000","#19a217","#e5b500"],"nz":["#891640","#00247d"],"uy":["#0037a8","#002268"],"si":["#0000bf","#d50000"],"ee":["#0078e5","#000001"],"th":["#a51831","#2c294a"],"at":["#c8102d","#7b091c"],"se":["#e5b700","#005193"],"co":["#e5d000","#00138e","#da000f"],"sc":["#003d88","#e0b205","#c61f20"],"ua":["#0056b8","#e5c100"],"hu":["#cf3315","#378d00"],"mm":["#e5b700","#38ad37","#d11424"],"us":["#1a2f5d","#94515e","#ad373e"],"ar":["#2a76ba","#1a4973"],"fi":["#002e6c","#001d42"],"om":["#d5130f","#039027"],"cu":["#cb1515","#00298f"],"nl":["#ae1c27","#20458b"],"ma":["#be262c","#76171b"],"mx":["#006846","#ce1025"],"ca":["#c9281c","#7c1911"],"ag":["#050001","#ddb407","#ce1025"],"pr":["#004ce5","#e50000"],"lt":["#e3a201","#006a43","#be262c"],"bg":["#00966e","#d32511"],"pl":["#d21339","#820b23"],"bm":["#c91431","#88665d","#ce142a"],"kr":["#b92c39","#080809","#084699"],"fr":["#000091","#e1000e"],"it":["#009246","#bd2732"],"pt":["#036600","#e50000"],"jp":["#bc002c","#74001b"],"cz":["#10447e","#d11319"],"ve":["#e5b700","#00247d","#ce142a"],"no":["#002564","#d31121"],"tr":["#db0916","#88060d"],"cl":["#0038a6","#c9281c"],"dk":["#c8102d","#7b091c"],"pf":["#d61e0f","#841309"],"ec":["#e5d000","#271c70","#da000d"],"my":["#000066","#cb6b19","#cc0000"],"sg":["#df0000","#8a0000"],"gr":["#0d5dae","#083a6c"],"be":["#000001","#e5c100","#da0b21"],"gb":["#484f84","#c8102d"],"br":["#219e45","#dfcd06","#324fa3"]};
 const iso=c=>INFO[c]?INFO[c].iso:(X[c]||[])[0];
-const FIX={GBR:{en:"Great Britain",de:"Großbritannien",fr:"Grande-Bretagne",es:"Gran Bretaña",pt:"Grã-Bretanha",zh:"英国",ar:"بريطانيا العظمى",hi:"ग्रेट ब्रिटेन",bn:"গ্রেট ব্রিটেন",ur:"برطانیہ عظمیٰ",id:"Britania Raya",ja:"イギリス",th:"สหราชอาณาจักร",ms:"Great Britain",hu:"Nagy-Britannia",cs:"Velká Británie",pl:"Wielka Brytania",uk:"Велика Британія"},TAH:{en:"Tahiti",de:"Tahiti",fr:"Tahiti",es:"Tahití",pt:"Taiti",zh:"塔希提",ar:"تاهيتي",hi:"ताहिती",bn:"তাহিতি",ur:"تاہیتی",id:"Tahiti",ja:"タヒチ",th:"ตาฮีตี",ms:"Tahiti",hu:"Tahiti",cs:"Tahiti",uk:"Таїті"},MYA:{en:"Myanmar",de:"Myanmar",fr:"Myanmar",es:"Myanmar",pt:"Mianmar",zh:"缅甸",ar:"ميانمار",hi:"म्यांमार",bn:"মিয়ানমার",ur:"میانمار",id:"Myanmar",ja:"ミャンマー",th:"เมียนมา",ms:"Myanmar",hu:"Mianmar",cs:"Myanmar",pl:"Mjanma",uk:"М’янма"},USA:{en:"USA",de:"USA",fr:"États-Unis",es:"EE. UU.",pt:"EUA",zh:"美国",ar:"الولايات المتحدة",hi:"अमेरिका",bn:"যুক্তরাষ্ট্র",ur:"امریکہ",id:"Amerika Serikat",ja:"アメリカ",th:"สหรัฐอเมริกา",ms:"Amerika Syarikat",hu:"USA",cs:"USA",uk:"США"}};
+const FIX={GBR:{en:"Great Britain",de:"Großbritannien",fr:"Grande-Bretagne",es:"Gran Bretaña",pt:"Grã-Bretanha",zh:"英国",ar:"بريطانيا العظمى",hi:"ग्रेट ब्रिटेन",bn:"গ্রেট ব্রিটেন",ur:"برطانیہ عظمیٰ",id:"Britania Raya",ja:"イギリス",th:"สหราชอาณาจักร",ms:"Great Britain",hu:"Nagy-Britannia",cs:"Velká Británie",pl:"Wielka Brytania",uk:"Велика Британія",it:"Gran Bretagna"},TAH:{en:"Tahiti",de:"Tahiti",fr:"Tahiti",es:"Tahití",pt:"Taiti",zh:"塔希提",ar:"تاهيتي",hi:"ताहिती",bn:"তাহিতি",ur:"تاہیتی",id:"Tahiti",ja:"タヒチ",th:"ตาฮีตี",ms:"Tahiti",hu:"Tahiti",cs:"Tahiti",uk:"Таїті",it:"Tahiti"},MYA:{en:"Myanmar",de:"Myanmar",fr:"Myanmar",es:"Myanmar",pt:"Mianmar",zh:"缅甸",ar:"ميانمار",hi:"म्यांमार",bn:"মিয়ানমার",ur:"میانمار",id:"Myanmar",ja:"ミャンマー",th:"เมียนมา",ms:"Myanmar",hu:"Mianmar",cs:"Myanmar",pl:"Mjanma",uk:"М’янма",it:"Myanmar"},USA:{en:"USA",de:"USA",fr:"États-Unis",es:"EE. UU.",pt:"EUA",zh:"美国",ar:"الولايات المتحدة",hi:"अमेरिका",bn:"যুক্তরাষ্ট্র",ur:"امریکہ",id:"Amerika Serikat",ja:"アメリカ",th:"สหรัฐอเมริกา",ms:"Amerika Syarikat",hu:"USA",cs:"USA",uk:"США",it:"USA"}};
 let DN=null;const dn=()=>{try{if(!DN||DN.l!=lang){DN=new Intl.DisplayNames([LOC()],{type:"region"});DN.l=lang}}catch(e){DN=null}return DN};
 function NM(c){if(FIX[c]&&FIX[c][lang])return FIX[c][lang];const i=iso(c);try{if(i&&dn())return dn().of(i)}catch(e){}return INFO[c]?INFO[c].name:c}
 function FL(c){const i=iso(c);return i?`<img class="flg" src="img/fl/${i.toLowerCase()}.webp" alt="" width="22" height="16">`:""}
 function FG(c){const i=iso(c),a=i&&FC[i.toLowerCase()];return a?`--fg:linear-gradient(90deg,${a.join(",")})`:""}
-const MO={en:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],de:["Jan.","Feb.","März","Apr.","Mai","Juni","Juli","Aug.","Sep.","Okt.","Nov.","Dez."],fr:["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."],es:["ene","feb","mar","abr","may","jun","jul","ago","sept","oct","nov","dic"]};
+const MO={en:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],de:["Jan.","Feb.","März","Apr.","Mai","Juni","Juli","Aug.","Sep.","Okt.","Nov.","Dez."],fr:["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."],es:["ene","feb","mar","abr","may","jun","jul","ago","sept","oct","nov","dic"],it:["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"]};
 const fmtD=iso=>{const p=iso.split("-");if(!MO[lang]){try{return new Date(iso+"T12:00:00Z").toLocaleDateString(LOC(),{day:"numeric",month:"short",timeZone:"UTC"})}catch(e){return iso}}return lang=="de"?`${+p[2]}. ${MO.de[p[1]-1]}`:`${+p[2]} ${MO[lang][p[1]-1]}`};
 const range=r=>r.start===r.end?fmtD(r.start):!MO[lang]?`${fmtD(r.start)} – ${fmtD(r.end)}`:(r.start.slice(5,7)==r.end.slice(5,7)?`${+r.start.slice(8)}${lang=="de"?".":""}–${fmtD(r.end)}`:`${fmtD(r.start)} – ${fmtD(r.end)}`);
 const RNm=r=>T("rn")[r.id]||r.name;
@@ -1271,10 +1708,10 @@ async function loadWx(){try{const c=LS.get("wx",null);if(c&&Date.now()-c.at<30*6
   if(!r.ok)return;const j=await r.json();if(!j.hourly||!Array.isArray(j.hourly.time))return;WX=j.hourly;LS.set("wx",{at:Date.now(),d:WX});if(view=="home")render(true)}catch(e){}}
 function wxAt(x){if(!WX)return"";const k=`${x.d}T${x.t.slice(0,2)}:00`,i=WX.time.indexOf(k);if(i<0)return"";const w=Math.round(wvc(WX.wind_speed_10m[i])),gu=Math.round(wvc(WX.wind_gusts_10m[i])),dir=WX.wind_direction_10m[i];
   if(!isFinite(w))return"";return `<span class="wx" title="${esc(T("wxT"))}"><i class="wa" style="transform:rotate(${dir}deg)">↓</i>${w}<small> ${uW()}</small></span>`}
-const NXG={en:["started","planned"],de:["gestartet","geplant"],fr:["départ","prévu"],es:["salida","prevista"],pt:["largada","prevista"],it:["partita","prevista"],zh:["已开赛","计划"],ar:["انطلق","مخطط"],hi:["शुरू","निर्धारित"],bn:["শুরু","নির্ধারিত"],ur:["شروع","طے شدہ"],id:["dimulai","dijadwalkan"],ms:["bermula","dijadual"],ja:["スタート","予定"],th:["ออกตัว","กำหนดการ"],hu:["rajt","tervezett"],cs:["start","plán"],uk:["старт","план"],pl:["start","plan"]};
-const NXF={"en":"After prior race","de":"Nach Rennen davor","fr":"Après la course précédente","es":"Tras la regata anterior","pt":"Após a regata anterior","zh":"前一场结束后","ar":"بعد السباق السابق","hi":"पिछली रेस के बाद","bn":"আগের রেসের পরে","ur":"پچھلی ریس کے بعد","id":"Setelah balapan sebelumnya","ms":"Selepas perlumbaan sebelumnya","ja":"前のレース後","th":"หลังรายการก่อนหน้า","hu":"Az előző futam után","cs":"Po předchozím závodě","uk":"Після попередньої гонки","pl":"Po poprzednim wyścigu"};
-const RINC={"en":"Incoming","de":"Folgt","fr":"À venir","es":"En camino","pt":"Em breve","zh":"即将发布","ar":"قريبًا","hi":"जल्द","bn":"শীঘ্রই","ur":"جلد","id":"Segera","ms":"Akan datang","ja":"準備中","th":"เร็ว ๆ นี้","hu":"Hamarosan","cs":"Brzy","uk":"Незабаром","pl":"Wkrótce"};
-const DOV={en:["Racing day over",n=>`${n} race${n==1?"":"s"} sailed`,g=>`${g} postponed`],de:["Renntag beendet",n=>`${n} Rennen gesegelt`,g=>`${g} verschoben`],fr:["Journée de course terminée",n=>`${n} course${n>1?"s":""} disputée${n>1?"s":""}`,g=>`${g} reporté(s)`],es:["Jornada terminada",n=>`${n} regata${n==1?"":"s"} disputada${n==1?"":"s"}`,g=>`${g} aplazado(s)`],pt:["Dia de regatas encerrado",n=>`${n} regata${n==1?"":"s"} disputada${n==1?"":"s"}`,g=>`${g} adiado(s)`],zh:["今日比赛结束",n=>`已完成 ${n} 场`,g=>`${g} 延期`],ar:["انتهى يوم السباقات",n=>`أُقيم ${n} سباق`,g=>`تأجيل ${g}`],hi:["आज की रेस समाप्त",n=>`${n} रेस हुईं`,g=>`${g} स्थगित`],bn:["আজকের রেস শেষ",n=>`${n}টি রেস হয়েছে`,g=>`${g} স্থগিত`],ur:["آج کی ریسیں ختم",n=>`${n} ریس ہوئیں`,g=>`${g} ملتوی`],id:["Hari lomba selesai",n=>`${n} balapan selesai`,g=>`${g} ditunda`],ms:["Hari perlumbaan tamat",n=>`${n} perlumbaan selesai`,g=>`${g} ditangguhkan`],ja:["本日のレース終了",n=>`${n}レース実施`,g=>`${g} 延期`],th:["จบการแข่งขันวันนี้",n=>`แข่งแล้ว ${n} รายการ`,g=>`${g} เลื่อนออกไป`],hu:["Versenynap vége",n=>`${n} futam lement`,g=>`${g} elhalasztva`],cs:["Závodní den skončil",n=>`Odjeto závodů: ${n}`,g=>`${g} odloženo`],uk:["Гоночний день завершено",n=>`Проведено гонок: ${n}`,g=>`${g} перенесено`],pl:["Dzień regat zakończony",n=>`Rozegrane wyścigi: ${n}`,g=>`${g} przełożone`]};
+const NXG={en:["started","planned"],de:["gestartet","geplant"],fr:["départ","prévu"],es:["salida","prevista"],pt:["largada","prevista"],it:["partenza","prevista"],zh:["已开赛","计划"],ar:["انطلق","مخطط"],hi:["शुरू","निर्धारित"],bn:["শুরু","নির্ধারিত"],ur:["شروع","طے شدہ"],id:["dimulai","dijadwalkan"],ms:["bermula","dijadual"],ja:["スタート","予定"],th:["ออกตัว","กำหนดการ"],hu:["rajt","tervezett"],cs:["start","plán"],uk:["старт","план"],pl:["start","plan"]};
+const NXF={"en":"After prior race","de":"Nach Rennen davor","fr":"Après la course précédente","es":"Tras la regata anterior","pt":"Após a regata anterior","zh":"前一场结束后","ar":"بعد السباق السابق","hi":"पिछली रेस के बाद","bn":"আগের রেসের পরে","ur":"پچھلی ریس کے بعد","id":"Setelah balapan sebelumnya","ms":"Selepas perlumbaan sebelumnya","ja":"前のレース後","th":"หลังรายการก่อนหน้า","hu":"Az előző futam után","cs":"Po předchozím závodě","uk":"Після попередньої гонки","pl":"Po poprzednim wyścigu",it:"Dopo la regata precedente"};
+const RINC={"en":"Incoming","de":"Folgt","fr":"À venir","es":"En camino","pt":"Em breve","zh":"即将发布","ar":"قريبًا","hi":"जल्द","bn":"শীঘ্রই","ur":"جلد","id":"Segera","ms":"Akan datang","ja":"準備中","th":"เร็ว ๆ นี้","hu":"Hamarosan","cs":"Brzy","uk":"Незабаром","pl":"Wkrótce",it:"In arrivo"};
+const DOV={en:["Racing day over",n=>`${n} race${n==1?"":"s"} sailed`,g=>`${g} postponed`],de:["Renntag beendet",n=>`${n} Rennen gesegelt`,g=>`${g} verschoben`],fr:["Journée de course terminée",n=>`${n} course${n>1?"s":""} disputée${n>1?"s":""}`,g=>`${g} reporté(s)`],es:["Jornada terminada",n=>`${n} regata${n==1?"":"s"} disputada${n==1?"":"s"}`,g=>`${g} aplazado(s)`],pt:["Dia de regatas encerrado",n=>`${n} regata${n==1?"":"s"} disputada${n==1?"":"s"}`,g=>`${g} adiado(s)`],zh:["今日比赛结束",n=>`已完成 ${n} 场`,g=>`${g} 延期`],ar:["انتهى يوم السباقات",n=>`أُقيم ${n} سباق`,g=>`تأجيل ${g}`],hi:["आज की रेस समाप्त",n=>`${n} रेस हुईं`,g=>`${g} स्थगित`],bn:["আজকের রেস শেষ",n=>`${n}টি রেস হয়েছে`,g=>`${g} স্থগিত`],ur:["آج کی ریسیں ختم",n=>`${n} ریس ہوئیں`,g=>`${g} ملتوی`],id:["Hari lomba selesai",n=>`${n} balapan selesai`,g=>`${g} ditunda`],ms:["Hari perlumbaan tamat",n=>`${n} perlumbaan selesai`,g=>`${g} ditangguhkan`],ja:["本日のレース終了",n=>`${n}レース実施`,g=>`${g} 延期`],th:["จบการแข่งขันวันนี้",n=>`แข่งแล้ว ${n} รายการ`,g=>`${g} เลื่อนออกไป`],hu:["Versenynap vége",n=>`${n} futam lement`,g=>`${g} elhalasztva`],cs:["Závodní den skončil",n=>`Odjeto závodů: ${n}`,g=>`${g} odloženo`],uk:["Гоночний день завершено",n=>`Проведено гонок: ${n}`,g=>`${g} перенесено`],pl:["Dzień regat zakończony",n=>`Rozegrane wyścigi: ${n}`,g=>`${g} przełożone`],it:["Giornata conclusa",n=>`${n} ${n==1?"regata disputata":"regate disputate"}`,g=>`${g} ${/&| e /.test(g)?"rinviati":"rinviato"}`]};
 const dayOver=d=>!!(FLG&&FLG.days&&FLG.days[d]&&FLG.days[d].over);
 const APA='<svg class="apa" viewBox="0 0 40 28" width="34" height="24" aria-hidden="true"><rect x="1" y="1" width="38" height="12" rx="2" fill="#fff"/><path d="M1 3h38M1 6h38M1 9h38" stroke="#e53935" stroke-width="2.2"/><rect x="5" y="15" width="30" height="12" rx="2" fill="#fff"/><path d="M5 15h15l-4 6 4 6H5z" fill="#1a4486"/></svg>';
 function dayOverBox(list,d){const D0=DOV[lang]||DOV.en,done=list.filter(x=>x.d==d&&raceDone(x)).length,mv=list.filter(x=>x.d==d&&!raceDone(x)),fm=(FLG.days[d]||{}).moved||[];
@@ -1339,7 +1776,7 @@ function board(){const r=D.rounds.find(x=>x.id==round)||D.rounds[0],s=rState(r),
   let h=delayBanner()+selBar()+mine(true);const td=today();
   h+=`<div class="rhead"><h2>${esc(RNm(r))}</h2><p>${esc(range(r))} · ${T("races")(n)} · ${s=="live"&&td>=r.start&&td<=r.end?T("raceDay")(...raceDay(r)):T("st")[s]}</p></div>`;
   return h+boardGroups(r)}
-const DSW={en:["Previous","Today","Next","Previous race day","Next race day","from {t}","{n} races","1 race"],de:["Vorheriger","Heute","Nächster","Vorheriger Renntag","Nächster Renntag","ab {t}","{n} Rennen","1 Rennen"],fr:["Précédent","Aujourd’hui","Suivant","Journée précédente","Prochaine journée","dès {t}","{n} courses","1 course"],es:["Anterior","Hoy","Siguiente","Jornada anterior","Próxima jornada","desde las {t}","{n} regatas","1 regata"],pt:["Anterior","Hoje","Próximo","Dia de regata anterior","Próximo dia de regata","a partir das {t}","{n} regatas","1 regata"],zh:["上一个","今天","下一个","上一比赛日","下一比赛日","{t} 起","{n} 场比赛","1 场比赛"],ar:["السابق","اليوم","التالي","يوم السباق السابق","يوم السباق التالي","من {t}","السباقات: {n}","سباق واحد"],hi:["पिछला","आज","अगला","पिछला रेस दिवस","अगला रेस दिवस","{t} से","{n} रेस","1 रेस"],bn:["আগের","আজ","পরের","আগের রেস দিন","পরের রেস দিন","{t} থেকে","{n}টি রেস","১টি রেস"],ur:["پچھلا","آج","اگلا","پچھلا ریس ڈے","اگلا ریس ڈے","{t} سے","{n} ریسز","1 ریس"],id:["Sebelumnya","Hari ini","Berikutnya","Hari lomba sebelumnya","Hari lomba berikutnya","mulai {t}","{n} lomba","1 lomba"],ms:["Sebelumnya","Hari ini","Seterusnya","Hari perlumbaan sebelumnya","Hari perlumbaan seterusnya","dari {t}","{n} perlumbaan","1 perlumbaan"],ja:["前回","今日","次回","前のレース日","次のレース日","{t}から","{n}レース","1レース"],th:["ก่อนหน้า","วันนี้","ถัดไป","วันแข่งก่อนหน้า","วันแข่งถัดไป","ตั้งแต่ {t}","{n} การแข่งขัน","1 การแข่งขัน"],hu:["Előző","Ma","Következő","Előző versenynap","Következő versenynap","{t}-tól","{n} futam","1 futam"],cs:["Předchozí","Dnes","Další","Předchozí závodní den","Další závodní den","od {t}","Závody: {n}","1 závod"],uk:["Попередній","Сьогодні","Наступний","Попередній день гонок","Наступний день гонок","з {t}","Гонок: {n}","1 гонка"],pl:["Poprzedni","Dziś","Następny","Poprzedni dzień wyścigów","Następny dzień wyścigów","od {t}","Wyścigi: {n}","1 wyścig"]};
+const DSW={en:["Previous","Today","Next","Previous race day","Next race day","from {t}","{n} races","1 race"],de:["Vorheriger","Heute","Nächster","Vorheriger Renntag","Nächster Renntag","ab {t}","{n} Rennen","1 Rennen"],fr:["Précédent","Aujourd’hui","Suivant","Journée précédente","Prochaine journée","dès {t}","{n} courses","1 course"],es:["Anterior","Hoy","Siguiente","Jornada anterior","Próxima jornada","desde las {t}","{n} regatas","1 regata"],pt:["Anterior","Hoje","Próximo","Dia de regata anterior","Próximo dia de regata","a partir das {t}","{n} regatas","1 regata"],zh:["上一个","今天","下一个","上一比赛日","下一比赛日","{t} 起","{n} 场比赛","1 场比赛"],ar:["السابق","اليوم","التالي","يوم السباق السابق","يوم السباق التالي","من {t}","السباقات: {n}","سباق واحد"],hi:["पिछला","आज","अगला","पिछला रेस दिवस","अगला रेस दिवस","{t} से","{n} रेस","1 रेस"],bn:["আগের","আজ","পরের","আগের রেস দিন","পরের রেস দিন","{t} থেকে","{n}টি রেস","১টি রেস"],ur:["پچھلا","آج","اگلا","پچھلا ریس ڈے","اگلا ریس ڈے","{t} سے","{n} ریسز","1 ریس"],id:["Sebelumnya","Hari ini","Berikutnya","Hari lomba sebelumnya","Hari lomba berikutnya","mulai {t}","{n} lomba","1 lomba"],ms:["Sebelumnya","Hari ini","Seterusnya","Hari perlumbaan sebelumnya","Hari perlumbaan seterusnya","dari {t}","{n} perlumbaan","1 perlumbaan"],ja:["前回","今日","次回","前のレース日","次のレース日","{t}から","{n}レース","1レース"],th:["ก่อนหน้า","วันนี้","ถัดไป","วันแข่งก่อนหน้า","วันแข่งถัดไป","ตั้งแต่ {t}","{n} การแข่งขัน","1 การแข่งขัน"],hu:["Előző","Ma","Következő","Előző versenynap","Következő versenynap","{t}-tól","{n} futam","1 futam"],cs:["Předchozí","Dnes","Další","Předchozí závodní den","Další závodní den","od {t}","Závody: {n}","1 závod"],uk:["Попередній","Сьогодні","Наступний","Попередній день гонок","Наступний день гонок","з {t}","Гонок: {n}","1 гонка"],pl:["Poprzedni","Dziś","Następny","Poprzedni dzień wyścigów","Następny dzień wyścigów","od {t}","Wyścigi: {n}","1 wyścig"],it:["Precedente","Oggi","Successiva","Giornata precedente","Prossima giornata","dalle {t}","{n} regate","1 regata"]};
 var DSEL=null;
 function todayCard(){let h="";const td=today(),tl=SCH.filter(x=>x.d==td),W=DSW[lang]||DSW.en,ds=[...new Set(SCH.map(x=>x.d))].sort(),pv=ds.filter(d=>d<td).pop(),cur=tl.length?td:null,nx=ds.find(d=>d>td),def=cur||nx;
   if(!DSEL||DSEL.td!=td||![pv,cur,nx].includes(DSEL.d))DSEL={d:def,td};const sd=DSEL.d||def;if(!sd)return "";
@@ -1388,7 +1825,7 @@ function mbox(r,g,opt={}){const gs=gState(g,r),done=gs=="done",has=g.rows.some(x
   const bd=KO.includes(r.id)&&!opt.me&&!opt.nob?`<div class="bdgs" aria-hidden="true"><span>${esc(ord(1))}</span><span>${esc(ord(2))}</span></div>`:"";
   return `<div class="mb ${gs}"${opt.go?` data-go="${opt.go}" role="button" tabindex="0"`:""}>${bd}<div class="mh"><span>${esc(bcode(r,g))}</span>${gs=="live"&&raceNow(r.id,g.id)?liveTag():done?`<span class="ok">✓</span>`:""}</div>${rows}</div>`}
 /* ---------- official results page, rebuilt in the app (data: results.json rounds + overall + quals) ---------- */
-const RESS={en:["Results","Overall results","Qualifiers","Final Series","(to be determined)","Last chance race","Pos."],de:["Ergebnisse","Gesamtwertung","Qualifikation","Final Series","(noch offen)","Last-Chance-Rennen","Pl."],fr:["Résultats","Classement général","Qualifications","Final Series","(à déterminer)","Course de la dernière chance","Pos."],es:["Resultados","Clasificación general","Clasificatorias","Final Series","(por determinar)","Regata de última oportunidad","Pos."],pt:["Resultados","Classificação geral","Classificatórias","Final Series","(a definir)","Regata de última chance","Pos."],zh:["成绩","总排名","资格赛","总决赛系列","（待定）","最后机会赛","名次"],ar:["النتائج","الترتيب العام","التصفيات","السلسلة النهائية","(يُحدَّد لاحقًا)","سباق الفرصة الأخيرة","المركز"],hi:["परिणाम","कुल रैंकिंग","क्वालिफ़ायर","फ़ाइनल सीरीज़","(तय होना बाकी)","आख़िरी मौका रेस","स्थान"],bn:["ফলাফল","সামগ্রিক ফল","বাছাইপর্ব","ফাইনাল সিরিজ","(নির্ধারিত হয়নি)","শেষ সুযোগের রেস","অবস্থান"],ur:["نتائج","مجموعی نتائج","کوالیفائرز","فائنل سیریز","(طے ہونا باقی)","آخری موقع کی ریس","پوزیشن"],id:["Hasil","Klasemen akhir","Kualifikasi","Final Series","(belum ditentukan)","Lomba kesempatan terakhir","Pos."],ms:["Keputusan","Kedudukan keseluruhan","Kelayakan","Final Series","(belum ditentukan)","Perlumbaan peluang terakhir","Ked."],ja:["結果","総合順位","予選","ファイナルシリーズ","（未定）","ラストチャンスレース","順位"],th:["ผลการแข่งขัน","อันดับรวม","รอบคัดเลือก","รอบไฟนอล","(รอผล)","เรซโอกาสสุดท้าย","อันดับ"],hu:["Eredmények","Összesített eredmény","Selejtezők","Final Series","(még nem dőlt el)","Utolsó esély futam","Hely"],cs:["Výsledky","Celkové pořadí","Kvalifikace","Final Series","(bude určeno)","Rozjížďka poslední šance","Poř."],uk:["Результати","Загальний залік","Кваліфікація","Фінальна серія","(буде визначено)","Гонка останнього шансу","Місце"],pl:["Wyniki","Klasyfikacja generalna","Kwalifikacje","Final Series","(do ustalenia)","Wyścig ostatniej szansy","Poz."]};
+const RESS={en:["Results","Overall results","Qualifiers","Final Series","(to be determined)","Last chance race","Pos."],de:["Ergebnisse","Gesamtwertung","Qualifikation","Final Series","(noch offen)","Last-Chance-Rennen","Pl."],fr:["Résultats","Classement général","Qualifications","Final Series","(à déterminer)","Course de la dernière chance","Pos."],es:["Resultados","Clasificación general","Clasificatorias","Final Series","(por determinar)","Regata de última oportunidad","Pos."],pt:["Resultados","Classificação geral","Classificatórias","Final Series","(a definir)","Regata de última chance","Pos."],zh:["成绩","总排名","资格赛","总决赛系列","（待定）","最后机会赛","名次"],ar:["النتائج","الترتيب العام","التصفيات","السلسلة النهائية","(يُحدَّد لاحقًا)","سباق الفرصة الأخيرة","المركز"],hi:["परिणाम","कुल रैंकिंग","क्वालिफ़ायर","फ़ाइनल सीरीज़","(तय होना बाकी)","आख़िरी मौका रेस","स्थान"],bn:["ফলাফল","সামগ্রিক ফল","বাছাইপর্ব","ফাইনাল সিরিজ","(নির্ধারিত হয়নি)","শেষ সুযোগের রেস","অবস্থান"],ur:["نتائج","مجموعی نتائج","کوالیفائرز","فائنل سیریز","(طے ہونا باقی)","آخری موقع کی ریس","پوزیشن"],id:["Hasil","Klasemen akhir","Kualifikasi","Final Series","(belum ditentukan)","Lomba kesempatan terakhir","Pos."],ms:["Keputusan","Kedudukan keseluruhan","Kelayakan","Final Series","(belum ditentukan)","Perlumbaan peluang terakhir","Ked."],ja:["結果","総合順位","予選","ファイナルシリーズ","（未定）","ラストチャンスレース","順位"],th:["ผลการแข่งขัน","อันดับรวม","รอบคัดเลือก","รอบไฟนอล","(รอผล)","เรซโอกาสสุดท้าย","อันดับ"],hu:["Eredmények","Összesített eredmény","Selejtezők","Final Series","(még nem dőlt el)","Utolsó esély futam","Hely"],cs:["Výsledky","Celkové pořadí","Kvalifikace","Final Series","(bude určeno)","Rozjížďka poslední šance","Poř."],uk:["Результати","Загальний залік","Кваліфікація","Фінальна серія","(буде визначено)","Гонка останнього шансу","Місце"],pl:["Wyniki","Klasyfikacja generalna","Kwalifikacje","Final Series","(do ustalenia)","Wyścig ostatniej szansy","Poz."],it:["Risultati","Classifica generale","Qualificazioni","Final Series","(da definire)","Last Chance Race","Pos."]};
 const RS_=i=>(RESS[lang]||RESS.en)[i];
 const QDATES={asia:["2025-12-20","2025-12-22"],afoc:["2026-06-02","2026-06-04"],eu1:["2026-06-08","2026-06-11"],eu2:["2026-07-14","2026-07-17"],pan:["2026-11-12","2026-11-15"]};
 let RESJ="";
@@ -1786,7 +2223,7 @@ fr:{t:"Nouveautés",sub:"Toutes les nouveautés – les plus récentes d'abord",
  push:["Notifications push","Les résultats de vos équipes directement sur votre téléphone."],
  cal:["Calendrier","Toutes les courses de votre équipe dans votre agenda – mise à jour automatique."],
  shareimg:["Partager en image","Tableaux de groupe en image pour WhatsApp & co."],
- app:["Installer comme app","Plein écran, avec icône, se met à jour toute seule."]}};
+ app:["Installer comme app","Plein écran, avec icône, se met à jour toute seule."]},it:{"t":"Novità","sub":"Tutte le novità dell’app – le più recenti per prime","ver":"Versione","newB":"Nuovo","seen":"Sei aggiornato","days":["Giornate di regata a colpo d’occhio","Nella Home passi dalla giornata precedente a quella di oggi e alla successiva; a mezzanotte ora di Rio tutto avanza da solo."],"estd":["Stima intelligente dei ritardi","L’app impara da ogni regata quanto durano le regate e i cambi e mostra “Probabile ritardo ~HH:MM” per le regate successive."],"res":["Risultati nell’app","Classifica generale, qualificazioni e Final Series – i posti ancora aperti mostrano “(da definire)”."],"rbox":["Box regata live","La striscia in alto mostra la regata in acqua e il conto alla rovescia per la prossima partenza – e quando una partenza è rinviata."],"inst2":["Installazione più facile","Un tocco su Android, una freccia che indica il pulsante giusto su iPhone e “Apri in Chrome/Safari” da WhatsApp & co."],"trk2":["Tracking più veloce","Le posizioni live compaiono subito, lo storico della regata si carica in background."],"fbk":["Invia un desiderio o un errore","In Altro: di’ a chi ha creato l’app cosa migliorare."],"rank":["SSL Nations Ranking nell’app","Tutte le 132 nazioni con filtro per continente, ricerca, storico fino al 2025 e i migliori skipper ed equipaggi di ogni nazione."],"pos":["Ruoli verificati","Il ruolo di ogni velista confrontato con le pagine delle squadre e i numeri di maglia di Rio – dove differiscono vengono mostrati più ruoli."],"linkin":["Niente più salti su altri siti","I link a ranking e qualificazioni ora si aprono dentro l’app."],"compass":["Bussola del vento più chiara","Lo spicchio giallo mostra da dove arriva il vento, la velocità è proprio al centro."],"tap":["Tocca qualsiasi squadra o velista","Nomi di squadre e velisti aprono ovunque la loro pagina – tabelle, risultati, impostazioni e altro."],"pl":["Ora in polacco","Polski! L’app ora parla 18 lingue."],"photos":["Ritratti ufficiali per le squadre degli 1/16","Giappone, Cechia, Cile, Ecuador, Ungheria, Perù, Sudafrica e Thailandia – freschi dallo studio dell’evento."],"bright":["Pulsante luminosità","Passa tra il blu Matchboard, giorno e notte direttamente dall’intestazione."],"logo":["Logo SSL più grande","Un po’ più di presenza in alto."],"tabs":["Nuova barra delle schede","Competizione (turni + matchboard), Squadre e Velisti hanno ciascuno la propria scheda."],"settings":["Impostazioni","Notifiche, promemoria partenza, ore di silenzio, unità, orari locali e modalità senza spoiler in un unico posto."],"pages":["Pagine vere","Squadre, velisti e regate si aprono come pagine intere con un proprio link – indietro torna sempre di un passo."],"anim":["Cambio di turno fluido","Scorri tra i turni, con un’animazione come nelle grandi app."],"install":["Più facile da installare","Un pulsante Installa accanto alla lingua – l’app nella schermata Home in 20 secondi."],"track":["Tracking live dentro l’app","Ogni barca sulla mappa, classifica live, percorso e replay – senza più siti esterni."],"profiles":["Nuovi profili dei velisti","Biografia, carriera, medaglie olimpiche e mondiali dai profili ufficiali SSL."],"favS":["Segui i velisti","Tocca ☆ su un velista – i tuoi velisti hanno una lista tutta loro."],"langs6":["Sei lingue in più","Giapponese, thailandese, malese, ungherese, ceco e ucraino."],"stream":["Diretta nell’app","Con immagine di anteprima e conto alla rovescia fino all’inizio della trasmissione."],"spoil":["Modalità senza spoiler","Nasconde i risultati finché non hai visto la regata."],"wx":["Meteo per la vela per ogni regata","Vento, raffiche, direzione, onde e marea per ogni orario di partenza."],"cmp":["Confronto squadre","Due squadre a confronto – testa a testa e numeri da Rio."],"vids":["Highlights","Gli ultimi video SSL direttamente nell’app."],"venue":["Sede","Marina da Glória con mappa e indicazioni."],"race":["Dettagli della regata","Tocca una regata per risultato, classifica del gruppo, vento e diretta."],"push":["Notifiche push","I risultati delle tue squadre direttamente sul telefono."],"cal":["Calendario","Tutte le regate della tua squadra nel tuo calendario – si aggiorna da solo."],"shareimg":["Condividi come immagine","Le classifiche dei gruppi come immagine per WhatsApp & co."],"app":["Installa come app","A tutto schermo, con icona, si aggiorna da sola."]}};
 const CHV=CHL[0].v,CT=k=>(CHT[lang]||CHT.en)[k]||CHT.en[k];
 function chgNew(){return LS.get("chgSeen","")!==CHV}
 function pChanges(){const d=$("#pg");openCode=null;const nw=chgNew();
@@ -1819,7 +2256,7 @@ cs:{rkT:"SSL žebříček národů",rkAsOf:"Stav k",rkNat:n=>`${n} národů`,rkH
 uk:{rkT:"Рейтинг націй SSL",rkAsOf:"Станом на",rkNat:n=>`${n} націй`,rkHist:"Історичний рейтинг",rkCur:"Поточний",rkCont:"Континент",rkAll:"Усі",rkSearch:"Пошук країни",rkGC:"Команди Gold Cup",rkSk:"Шкіпери",rkCr:"Екіпаж",rkPts:"Бали (сума місць)",rkNo:"№",rkGlob:"Світ",rkName:"Нація",rkNone:"Націю не знайдено.",rkLoad:"Завантаження рейтингу…",rkFail:"Зараз не вдається завантажити рейтинг.",rkSrc:"Джерело: Star Sailors League · оновлюється щотижня. Місце нації визначають її найкращі шкіпери й члени екіпажу.",rkTeam:"Сторінка команди",rkPrev:p=>`минулий тиждень: ${p}`,rkWas:p=>`було ${p}`,rkInd:"Світовий рейтинг",rkOpen:"Відкрити рейтинг ›",rkTap:"Торкніться нації, щоб побачити яхтсменів."},
 pl:{rkT:"Ranking narodów SSL",rkAsOf:"Stan na",rkNat:n=>`${n} narodów`,rkHist:"Ranking historyczny",rkCur:"Aktualny",rkCont:"Kontynent",rkAll:"Wszystkie",rkSearch:"Szukaj kraju",rkGC:"Drużyny Gold Cup",rkSk:"Sternicy",rkCr:"Załoga",rkPts:"Punkty (suma miejsc)",rkNo:"Nr",rkGlob:"Świat",rkName:"Naród",rkNone:"Nie znaleziono narodu.",rkLoad:"Wczytuję ranking…",rkFail:"Nie można teraz wczytać rankingu.",rkSrc:"Źródło: Star Sailors League · aktualizacja co tydzień. Miejsce narodu wynika z jego najlepszych sterników i członków załogi.",rkTeam:"Strona drużyny",rkPrev:p=>`poprzedni tydzień: ${p}`,rkWas:p=>`wcześniej ${p}`,rkInd:"Ranking światowy",rkOpen:"Otwórz ranking ›",rkTap:"Stuknij naród, aby zobaczyć jego żeglarzy."}};
 for(const l in RKS)if(S[l])Object.assign(S[l],RKS[l]);
-const CONT={en:["Africa","Asia","Europe","Oceania","Pan-America"],de:["Afrika","Asien","Europa","Ozeanien","Panamerika"],fr:["Afrique","Asie","Europe","Océanie","Amériques"],es:["África","Asia","Europa","Oceanía","Panamérica"],pt:["África","Ásia","Europa","Oceania","Pan-América"],zh:["非洲","亚洲","欧洲","大洋洲","泛美"],ar:["أفريقيا","آسيا","أوروبا","أوقيانوسيا","الأمريكتان"],hi:["अफ़्रीका","एशिया","यूरोप","ओशिनिया","पैन-अमेरिका"],bn:["আফ্রিকা","এশিয়া","ইউরোপ","ওশেনিয়া","প্যান-আমেরিকা"],ur:["افریقہ","ایشیا","یورپ","اوشیانا","پین امریکا"],id:["Afrika","Asia","Eropa","Oseania","Pan-Amerika"],ms:["Afrika","Asia","Eropah","Oceania","Pan-Amerika"],ja:["アフリカ","アジア","ヨーロッパ","オセアニア","汎アメリカ"],th:["แอฟริกา","เอเชีย","ยุโรป","โอเชียเนีย","แพนอเมริกา"],hu:["Afrika","Ázsia","Európa","Óceánia","Pánamerika"],cs:["Afrika","Asie","Evropa","Oceánie","Panamerika"],uk:["Африка","Азія","Європа","Океанія","Панамерика"],pl:["Afryka","Azja","Europa","Oceania","Panameryka"]};
+const CONT={en:["Africa","Asia","Europe","Oceania","Pan-America"],de:["Afrika","Asien","Europa","Ozeanien","Panamerika"],fr:["Afrique","Asie","Europe","Océanie","Amériques"],es:["África","Asia","Europa","Oceanía","Panamérica"],pt:["África","Ásia","Europa","Oceania","Pan-América"],zh:["非洲","亚洲","欧洲","大洋洲","泛美"],ar:["أفريقيا","آسيا","أوروبا","أوقيانوسيا","الأمريكتان"],hi:["अफ़्रीका","एशिया","यूरोप","ओशिनिया","पैन-अमेरिका"],bn:["আফ্রিকা","এশিয়া","ইউরোপ","ওশেনিয়া","প্যান-আমেরিকা"],ur:["افریقہ","ایشیا","یورپ","اوشیانا","پین امریکا"],id:["Afrika","Asia","Eropa","Oseania","Pan-Amerika"],ms:["Afrika","Asia","Eropah","Oceania","Pan-Amerika"],ja:["アフリカ","アジア","ヨーロッパ","オセアニア","汎アメリカ"],th:["แอฟริกา","เอเชีย","ยุโรป","โอเชียเนีย","แพนอเมริกา"],hu:["Afrika","Ázsia","Európa","Óceánia","Pánamerika"],cs:["Afrika","Asie","Evropa","Oceánie","Panamerika"],uk:["Африка","Азія","Європа","Океанія","Панамерика"],pl:["Afryka","Azja","Europa","Oceania","Panameryka"],it:["Africa","Asia","Europa","Oceania","Panamerica"]};
 const CSLUG={africa:0,asia:1,europe:2,oceania:3,"pan-america":4};
 const RK={idx:null,wk:{},p:null};let RKST={c:"",q:"",w:"",gc:false,open:new Set()};
 function rkIdx(){if(RK.idx)return Promise.resolve(RK.idx);if(RK.p)return RK.p;RK.p=fetch("rank/index.json").then(r=>r.ok?r.json():null).then(j=>{RK.idx=j&&j.date?j:null;RK.p=null;return RK.idx}).catch(()=>{RK.p=null;return null});return RK.p}
@@ -2258,7 +2695,7 @@ function openVideo(id){const v=VIDS.find(x=>x.id==id);if(!v)return;const d=$("#t
   d.querySelector(".x").onclick=()=>d.close();show(d);gcEvent("video")}
 /* ---------- venue, sustainability, merch ---------- */
 const VENUE={lat:-22.9196,lng:-43.1700,q:"AXIA Marina da Glória, Av. Infante Dom Henrique, Rio de Janeiro"};
-const NWS={"en":"News","de":"News","fr":"Actualités","es":"Noticias","pt":"Notícias","zh":"新闻","ar":"الأخبار","hi":"समाचार","bn":"খবর","ur":"خبریں","id":"Berita","ms":"Berita","ja":"ニュース","th":"ข่าว","hu":"Hírek","cs":"Zprávy","uk":"Новини","pl":"Aktualności"},NSRC={"en":"Source: worldofsailors.com (Star Sailors League)","de":"Quelle: worldofsailors.com (Star Sailors League)","pt":"Fonte: worldofsailors.com (Star Sailors League)","es":"Fuente: worldofsailors.com (Star Sailors League)","fr":"Source : worldofsailors.com (Star Sailors League)"};
+const NWS={"en":"News","de":"News","fr":"Actualités","es":"Noticias","pt":"Notícias","zh":"新闻","ar":"الأخبار","hi":"समाचार","bn":"খবর","ur":"خبریں","id":"Berita","ms":"Berita","ja":"ニュース","th":"ข่าว","hu":"Hírek","cs":"Zprávy","uk":"Новини","pl":"Aktualności",it:"Notizie"},NSRC={"en":"Source: worldofsailors.com (Star Sailors League)","de":"Quelle: worldofsailors.com (Star Sailors League)","pt":"Fonte: worldofsailors.com (Star Sailors League)","es":"Fuente: worldofsailors.com (Star Sailors League)","fr":"Source : worldofsailors.com (Star Sailors League)",it:"Fonte: worldofsailors.com (Star Sailors League)","zh":"来源：worldofsailors.com（Star Sailors League）","ar":"المصدر: worldofsailors.com (Star Sailors League)","hi":"स्रोत: worldofsailors.com (Star Sailors League)","bn":"সূত্র: worldofsailors.com (Star Sailors League)","ur":"ماخذ: worldofsailors.com (Star Sailors League)","id":"Sumber: worldofsailors.com (Star Sailors League)","ms":"Sumber: worldofsailors.com (Star Sailors League)","ja":"出典：worldofsailors.com（Star Sailors League）","th":"ที่มา: worldofsailors.com (Star Sailors League)","hu":"Forrás: worldofsailors.com (Star Sailors League)","cs":"Zdroj: worldofsailors.com (Star Sailors League)","uk":"Джерело: worldofsailors.com (Star Sailors League)","pl":"Źródło: worldofsailors.com (Star Sailors League)"};
 /* news mirrored from worldofsailors.com (news.json, workflow news.yml) */
 var NEWS=null;async function pullNews(){try{const r=await fetch("news.json?t="+Math.floor(Date.now()/3e5),{cache:"no-store"});if(r.ok){const j=await r.json(),ch=JSON.stringify(j)!==JSON.stringify(NEWS);NEWS=j;if(ch&&view=="home")try{render(true)}catch(e){}}}catch(e){}}
 pullNews();setInterval(()=>{if(!document.hidden)pullNews()},5*6e4);
@@ -2268,7 +2705,7 @@ function newsSheet(i){const n=NEWS&&NEWS.items&&NEWS.items[i];if(!n)return;
   const d=sheetWrap(n.d||"",n.t,`${n.img?`<img class="nwhero" src="${esc(n.img)}" alt="">`:""}<div class="nwbody">${n.html||`<p>${esc(n.x||"")}</p>`}</div><p class="vsrc">${n.au?esc(n.au)+" · ":""}${esc(NSRC[lang]||NSRC.en)}</p>`);
   d.querySelectorAll(".nwbody a").forEach(a=>a.replaceWith(...a.childNodes));gcEvent("news")}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-news]");if(b){e.preventDefault();newsSheet(+b.dataset.news)}});
-const RRS={"en":["Start","Race time","Winner","The full report for this race follows here."],"de":["Start","Renndauer","Sieger","Der ausführliche Bericht zu diesem Rennen folgt hier."],"fr":["Départ","Durée","Vainqueur","Le compte rendu complet de cette course suivra ici."],"es":["Salida","Duración","Ganador","El informe completo de esta regata llegará aquí."],"pt":["Largada","Duração","Vencedor","O relatório completo desta regata virá aqui."],"zh":["起航","比赛用时","获胜","本场比赛的完整报告稍后在此发布。"],"ar":["الانطلاق","مدة السباق","الفائز","سيُنشر التقرير الكامل لهذا السباق هنا."],"hi":["स्टार्ट","रेस समय","विजेता","इस रेस की पूरी रिपोर्ट जल्द यहाँ आएगी।"],"bn":["স্টার্ট","রেসের সময়","বিজয়ী","এই রেসের পূর্ণ রিপোর্ট শিগগিরই এখানে আসবে।"],"ur":["اسٹارٹ","ریس کا وقت","فاتح","اس ریس کی مکمل رپورٹ جلد یہاں آئے گی۔"],"id":["Start","Durasi","Pemenang","Laporan lengkap balapan ini segera hadir di sini."],"ms":["Mula","Tempoh","Pemenang","Laporan penuh perlumbaan ini akan menyusul di sini."],"ja":["スタート","レース時間","勝者","このレースの詳しいレポートはここに掲載予定です。"],"th":["ออกตัว","เวลาแข่ง","ผู้ชนะ","รายงานฉบับเต็มของการแข่งขันนี้จะตามมาที่นี่"],"hu":["Rajt","Futamidő","Győztes","A futam részletes beszámolója hamarosan itt lesz."],"cs":["Start","Délka závodu","Vítěz","Podrobná zpráva o tomto závodě bude brzy zde."],"uk":["Старт","Тривалість","Переможець","Повний звіт про цю гонку з’явиться тут."],"pl":["Start","Czas wyścigu","Zwycięzca","Pełny raport z tego wyścigu pojawi się tutaj."]};
+const RRS={"en":["Start","Race time","Winner","The full report for this race follows here."],"de":["Start","Renndauer","Sieger","Der ausführliche Bericht zu diesem Rennen folgt hier."],"fr":["Départ","Durée","Vainqueur","Le compte rendu complet de cette course suivra ici."],"es":["Salida","Duración","Ganador","El informe completo de esta regata llegará aquí."],"pt":["Largada","Duração","Vencedor","O relatório completo desta regata virá aqui."],"zh":["起航","比赛用时","获胜","本场比赛的完整报告稍后在此发布。"],"ar":["الانطلاق","مدة السباق","الفائز","سيُنشر التقرير الكامل لهذا السباق هنا."],"hi":["स्टार्ट","रेस समय","विजेता","इस रेस की पूरी रिपोर्ट जल्द यहाँ आएगी।"],"bn":["স্টার্ট","রেসের সময়","বিজয়ী","এই রেসের পূর্ণ রিপোর্ট শিগগিরই এখানে আসবে।"],"ur":["اسٹارٹ","ریس کا وقت","فاتح","اس ریس کی مکمل رپورٹ جلد یہاں آئے گی۔"],"id":["Start","Durasi","Pemenang","Laporan lengkap balapan ini segera hadir di sini."],"ms":["Mula","Tempoh","Pemenang","Laporan penuh perlumbaan ini akan menyusul di sini."],"ja":["スタート","レース時間","勝者","このレースの詳しいレポートはここに掲載予定です。"],"th":["ออกตัว","เวลาแข่ง","ผู้ชนะ","รายงานฉบับเต็มของการแข่งขันนี้จะตามมาที่นี่"],"hu":["Rajt","Futamidő","Győztes","A futam részletes beszámolója hamarosan itt lesz."],"cs":["Start","Délka závodu","Vítěz","Podrobná zpráva o tomto závodě bude brzy zde."],"uk":["Старт","Тривалість","Переможець","Повний звіт про цю гонку з’явиться тут."],"pl":["Start","Czas wyścigu","Zwycięzca","Pełny raport z tego wyścigu pojawi się tutaj."],it:["Partenza","Durata della regata","Vincitrice","Il resoconto completo di questa regata arriverà qui."]};
 /* race report (popup from the race page): reports.json {"r16|A|1":{"html":"…"}} + facts from timing.json and results */
 var REPS={};async function pullReps(){try{const r=await fetch("reports.json?t="+Date.now(),{cache:"no-store"});if(r.ok){const j=await r.json(),ch=JSON.stringify(j)!==JSON.stringify(REPS);REPS=j;if(ch)try{render(true);pgRefresh()}catch(e){}}}catch(e){}}
 pullReps();setInterval(()=>{if(!document.hidden)pullReps()},120000);
@@ -2331,8 +2768,8 @@ async function openWx(x){const d=sheetWrap(`${T("wxH")} · Marina da Glória`,`$
   h+=`<p class="warn">${esc(T("wxSrc2"))}</p>${wxLinks()}`;const y=d.scrollTop;tb.innerHTML=h;d.scrollTop=y;tb.querySelectorAll("[data-hi]").forEach(el=>{el.onclick=()=>paint(+el.dataset.hi);el.onkeydown=e=>{if(e.key=="Enter")paint(+el.dataset.hi)}})};paint(st0)}
 const WI={t:'<path d="M10 14V5a2 2 0 014 0v9a4 4 0 11-4 0z"/>',r:'<path d="M7 15a4 4 0 01-.5-8A5.5 5.5 0 0117 6a3.5 3.5 0 01.5 7"/><path d="M9 17l-1 3M13 17l-1 3M17 16l-1 3"/>',c:'<path d="M7 18a4 4 0 01-.5-8A5.5 5.5 0 0117 9a3.5 3.5 0 01.5 7H7z"/>',p:'<circle cx="12" cy="13" r="8"/><path d="M12 13l4-3"/>'};
 const wi=k=>svg(WI[k],"wic");
-const ALSO={en:"also",de:"auch",fr:"aussi",es:"también",pt:"também",zh:"也任",ar:"أيضًا",hi:"यह भी",bn:"এছাড়াও",ur:"یہ بھی",id:"juga",ms:"juga",ja:"兼",th:"หรือ",hu:"is:",cs:"také",uk:"також",pl:"także"};for(const l in ALSO)if(S[l])S[l].alsoP=ALSO[l];
-const WXF={en:"Wind from",de:"Wind aus",fr:"Vent du",es:"Viento del",pt:"Vento de",zh:"风向（来自）",ar:"الرياح من",hi:"हवा की दिशा (से)",bn:"বাতাস আসছে",ur:"ہوا کا رخ (سے)",id:"Angin dari",ms:"Angin dari",ja:"風向（から）",th:"ลมมาจาก",hu:"Szél iránya",cs:"Vítr od",uk:"Вітер з",pl:"Wiatr z"};
+const ALSO={en:"also",de:"auch",fr:"aussi",es:"también",pt:"também",zh:"也任",ar:"أيضًا",hi:"यह भी",bn:"এছাড়াও",ur:"یہ بھی",id:"juga",ms:"juga",ja:"兼",th:"หรือ",hu:"is:",cs:"také",uk:"також",pl:"także",it:"anche"};for(const l in ALSO)if(S[l])S[l].alsoP=ALSO[l];
+const WXF={en:"Wind from",de:"Wind aus",fr:"Vent du",es:"Viento del",pt:"Vento de",zh:"风向（来自）",ar:"الرياح من",hi:"हवा की दिशा (से)",bn:"বাতাস আসছে",ur:"ہوا کا رخ (سے)",id:"Angin dari",ms:"Angin dari",ja:"風向（から）",th:"ลมมาจาก",hu:"Szél iránya",cs:"Vítr od",uk:"Вітер з",pl:"Wiatr z",it:"Vento da"};
 function rose(dir,w){const P=(r,a)=>[50+r*Math.sin(a*Math.PI/180),50-r*Math.cos(a*Math.PI/180)].map(v=>v.toFixed(1));
   const near=a=>Math.abs(((dir-a+540)%360)-180)<25;
   const pts=["N","E","S","W"].map((c,i)=>{const[x,y]=P(33,i*90);return `<text x="${x}" y="${(+y+3.2).toFixed(1)}" text-anchor="middle" font-size="9" fill="currentColor" opacity="${near(i*90)?0.12:0.6}">${c}</text>`}).join("");
@@ -2387,9 +2824,9 @@ function openLive(x){const d=$("#tmd");openCode=null;const id=LIVEV&&LIVEV.id?LI
 /* ---------- header countdown to the next race ---------- */
 function nextRaceX(){const n=nowMs();return SCH.filter(x=>at(x)>n).sort((a,b)=>at(a)-at(b))[0]}
 function cdLong(t){const d=Math.max(0,Math.round((t-nowMs())/1000)),dd=Math.floor(d/86400),h=Math.floor(d%86400/3600),m=Math.floor(d%3600/60),sc=d%60,p=n=>String(n).padStart(2,"0");return (dd?`${dd}d `:"")+`${p(h)}:${p(m)}:${p(sc)}`}
-const NXS={en:["On schedule","Starting soon","Start delayed","Delayed","Racing",t=>`Not before ${t}`],de:["Planmäßig","Start gleich","Start verzögert","Verspätet","Rennen läuft",t=>`Nicht vor ${t}`],fr:["À l'heure","Départ imminent","Départ retardé","Retardé","En course",t=>`Pas avant ${t}`],es:["Puntual","Salida inminente","Salida retrasada","Retrasada","En regata",t=>`No antes de ${t}`],pt:["No horário","Largada em breve","Com atraso","Atrasada","Em regata",t=>`Não antes de ${t}`],zh:["准时","即将起航","起航推迟","推迟","比赛中",t=>`${t} 前不开始`],ar:["في الموعد","الانطلاق قريبًا","تأخر الانطلاق","متأخر","السباق جارٍ",t=>`ليس قبل ${t}`],hi:["समय पर","शुरू होने वाली","शुरुआत में देरी","देरी","रेस जारी",t=>`${t} से पहले नहीं`],bn:["সময়মতো","শিগগির শুরু","শুরু দেরিতে","দেরি","রেস চলছে",t=>`${t}-এর আগে নয়`],ur:["وقت پر","آغاز قریب","آغاز میں تاخیر","تاخیر","ریس جاری",t=>`${t} سے پہلے نہیں`],id:["Sesuai jadwal","Segera mulai","Start tertunda","Tertunda","Sedang balapan",t=>`Setelah ${t}`],ms:["Ikut jadual","Hampir bermula","Lewat mula","Tertangguh","Sedang berlumba",t=>`Selepas ${t}`],ja:["定刻","まもなくスタート","スタート遅延","遅延","レース中",t=>`${t}以降`],th:["ตรงเวลา","ใกล้ออกตัว","ออกตัวล่าช้า","ล่าช้า","กำลังแข่ง",t=>`ไม่ก่อน ${t}`],hu:["Időben","Hamarosan rajt","Rajt késik","Késik","Futam zajlik",t=>`Nem ${t} előtt`],cs:["Podle plánu","Brzy start","Start zpožděn","Zpožděno","Závodí se",t=>`Ne dříve než ${t}`],uk:["За розкладом","Старт скоро","Запізнення","Затримка","Гонка триває",t=>`Не раніше ${t}`],pl:["Zgodnie z planem","Zaraz start","Start opóźniony","Opóźniony","Wyścig trwa",t=>`Nie przed ${t}`]};
-const NXW={en:"Start pending",de:"Start ausstehend",fr:"Départ à venir",es:"Salida pendiente",pt:"Largada pendente",zh:"等待起航",ar:"بانتظار الانطلاق",hi:"स्टार्ट बाकी",bn:"স্টার্ট বাকি",ur:"اسٹارٹ باقی",id:"Menunggu start",ms:"Menunggu mula",ja:"スタート待ち",th:"รอออกสตาร์ท",hu:"Rajtra vár",cs:"Čeká na start",uk:"Очікує старт",pl:"Czeka na start"};
-const NXP={en:"Probably delayed",de:"Wohl verspätet",fr:"Retard probable",es:"Retraso probable",pt:"Atraso provável",zh:"可能推迟",ar:"تأخير محتمل",hi:"देरी संभव",bn:"দেরি হতে পারে",ur:"تاخیر متوقع",id:"Mungkin tertunda",ms:"Mungkin lewat",ja:"遅延見込み",th:"อาจล่าช้า",hu:"Valószínű késés",cs:"Asi zpoždění",uk:"Ймовірна затримка",pl:"Możliwe opóźnienie"};
+const NXS={en:["On schedule","Starting soon","Start delayed","Delayed","Racing",t=>`Not before ${t}`],de:["Planmäßig","Start gleich","Start verzögert","Verspätet","Rennen läuft",t=>`Nicht vor ${t}`],fr:["À l'heure","Départ imminent","Départ retardé","Retardé","En course",t=>`Pas avant ${t}`],es:["Puntual","Salida inminente","Salida retrasada","Retrasada","En regata",t=>`No antes de ${t}`],pt:["No horário","Largada em breve","Com atraso","Atrasada","Em regata",t=>`Não antes de ${t}`],zh:["准时","即将起航","起航推迟","推迟","比赛中",t=>`${t} 前不开始`],ar:["في الموعد","الانطلاق قريبًا","تأخر الانطلاق","متأخر","السباق جارٍ",t=>`ليس قبل ${t}`],hi:["समय पर","शुरू होने वाली","शुरुआत में देरी","देरी","रेस जारी",t=>`${t} से पहले नहीं`],bn:["সময়মতো","শিগগির শুরু","শুরু দেরিতে","দেরি","রেস চলছে",t=>`${t}-এর আগে নয়`],ur:["وقت پر","آغاز قریب","آغاز میں تاخیر","تاخیر","ریس جاری",t=>`${t} سے پہلے نہیں`],id:["Sesuai jadwal","Segera mulai","Start tertunda","Tertunda","Sedang balapan",t=>`Setelah ${t}`],ms:["Ikut jadual","Hampir bermula","Lewat mula","Tertangguh","Sedang berlumba",t=>`Selepas ${t}`],ja:["定刻","まもなくスタート","スタート遅延","遅延","レース中",t=>`${t}以降`],th:["ตรงเวลา","ใกล้ออกตัว","ออกตัวล่าช้า","ล่าช้า","กำลังแข่ง",t=>`ไม่ก่อน ${t}`],hu:["Időben","Hamarosan rajt","Rajt késik","Késik","Futam zajlik",t=>`Nem ${t} előtt`],cs:["Podle plánu","Brzy start","Start zpožděn","Zpožděno","Závodí se",t=>`Ne dříve než ${t}`],uk:["За розкладом","Старт скоро","Запізнення","Затримка","Гонка триває",t=>`Не раніше ${t}`],pl:["Zgodnie z planem","Zaraz start","Start opóźniony","Opóźniony","Wyścig trwa",t=>`Nie przed ${t}`],it:["In orario","Partenza a breve","Partenza rinviata","In ritardo","In regata",t=>`Non prima delle ${t}`]};
+const NXW={en:"Start pending",de:"Start ausstehend",fr:"Départ à venir",es:"Salida pendiente",pt:"Largada pendente",zh:"等待起航",ar:"بانتظار الانطلاق",hi:"स्टार्ट बाकी",bn:"স্টার্ট বাকি",ur:"اسٹارٹ باقی",id:"Menunggu start",ms:"Menunggu mula",ja:"スタート待ち",th:"รอออกสตาร์ท",hu:"Rajtra vár",cs:"Čeká na start",uk:"Очікує старт",pl:"Czeka na start",it:"Partenza in attesa"};
+const NXP={en:"Probably delayed",de:"Wohl verspätet",fr:"Retard probable",es:"Retraso probable",pt:"Atraso provável",zh:"可能推迟",ar:"تأخير محتمل",hi:"देरी संभव",bn:"দেরি হতে পারে",ur:"تاخیر متوقع",id:"Mungkin tertunda",ms:"Mungkin lewat",ja:"遅延見込み",th:"อาจล่าช้า",hu:"Valószínű késés",cs:"Asi zpoždění",uk:"Ймовірна затримка",pl:"Możliwe opóźnienie",it:"Probabile ritardo"};
 /* estimated start of today's races: one race at a time on the course; ~50 min racing + ~30 min changeover */
 /* learned from Georacing (timing.json): typical race length and changeover, actual starts/finishes, operator's start times */
 let ESTC=null;
@@ -2459,7 +2896,8 @@ const pushCan=()=>!!CFG.push&&"serviceWorker" in navigator&&"PushManager" in win
 const pushShown=()=>!!CFG.push&&(pushCan()||isIOS);
 const pushReady=()=>pushCan()&&!(isIOS&&!isStandalone());
 let pSet=new Set(LS.get("push",[])),osP=null;
-const OSL={en:"en",de:"de",fr:"fr",es:"es",pt:"pt",zh:"zh-Hans",ar:"ar",hi:"hi",bn:"bn",ur:"ur",id:"id",ms:"ms",ja:"ja",th:"th",hu:"hu",cs:"cs",uk:"uk",pl:"pl"};
+const OSL={en:"en",de:"de",fr:"fr",es:"es",pt:"pt",zh:"zh-Hans",ar:"ar",hi:"hi",bn:"bn",ur:"ur",id:"id",ms:"ms",ja:"ja",th:"th",hu:"hu",cs:"cs",uk:"uk",pl:"pl",it:"it"};
+if(/[?&]i18ncheck/.test(location.search)){window.__S=S;window.__D={};try{window.__D.SOW=SOW}catch(e){}try{window.__D.MO=MO}catch(e){}try{window.__D.NXG=NXG}catch(e){}try{window.__D.NXF=NXF}catch(e){}try{window.__D.RINC=RINC}catch(e){}try{window.__D.DOV=DOV}catch(e){}try{window.__D.DSW=DSW}catch(e){}try{window.__D.RESS=RESS}catch(e){}try{window.__D.CHT=CHT}catch(e){}try{window.__D.CONT=CONT}catch(e){}try{window.__D.NWS=NWS}catch(e){}try{window.__D.NSRC=NSRC}catch(e){}try{window.__D.RRS=RRS}catch(e){}try{window.__D.ALSO=ALSO}catch(e){}try{window.__D.WXF=WXF}catch(e){}try{window.__D.NXS=NXS}catch(e){}try{window.__D.NXW=NXW}catch(e){}try{window.__D.NXP=NXP}catch(e){}try{window.__D.ORD=ORD}catch(e){}try{window.__D.OSL=OSL}catch(e){}try{window.__D.LANGS=LANGS}catch(e){}try{window.__D.FIX=FIX}catch(e){}}
 function loadOS(){if(osP)return osP;
   osP=new Promise((res,rej)=>{const to=setTimeout(()=>rej(new Error("timeout")),20000);
     window.OneSignalDeferred=window.OneSignalDeferred||[];

@@ -1,0 +1,700 @@
+key,English,Čeština
+S.rounds,Rounds,Kola
+S.bracket,Matchboard,Matchboard
+S.teams,Teams,Týmy
+S.official,Official results,Oficiální výsledky
+S.updated,Updated,Aktualizováno
+S.ago,"m=>m<1?""just now"":m<60?`${m} min ago`:`${Math.round(m/60)} h ago`","m=>m<1?""právě teď"":m<60?`před ${m} min`:`před ${Math.round(m/60)} h`"
+S.rio,Rio time,čas v Riu
+S.offline,offline – last saved data,offline – naposledy uložená data
+S.rn.r32,1/32 Finals,1/32 finále
+S.rn.r16,1/16 Finals,1/16 finále
+S.rn.r8,1/8 Finals,Osmifinále
+S.rn.r4,Quarter-finals,Čtvrtfinále
+S.rn.sf,Semi-finals,Semifinále
+S.rn.pf,Petit Final,Malé finále
+S.rn.f,Grand Final,Velké finále
+S.group,Group,Skupina
+S.decided,decided,rozhodnuto
+S.racing,racing,závodí se
+S.open,open,otevřené
+S.st.done,completed,dokončeno
+S.st.live,in progress,probíhá
+S.st.up,upcoming,nadcházející
+S.races,"n=>`${n} race${n>1?""s"":""""} per group`","n=>`${n} ${n==1?""rozjížďka"":n<5?""rozjížďky"":""rozjížděk""} na skupinu`"
+S.upNext,Up next,Na řadě
+S.startsIn,"d=>d<=0?""starts today"":d==1?""starts tomorrow"":`starts in ${d} days`","d=>d<=0?""začíná dnes"":d==1?""začíná zítra"":`začíná za ${d} ${d<5?""dny"":""dní""}`"
+S.groupsOf4,"n=>`${n} group${n>1?""s"":""""} of four`","n=>`${n} ${n==1?""čtyřčlenná skupina"":n<5?""čtyřčlenné skupiny"":""čtyřčlenných skupin""}`"
+S.oneRace,One race – the finishing order decides.,Jedna rozjížďka – rozhoduje pořadí v cíli.
+S.through,through,postup
+S.out,out,vypadl
+S.toFinal,to Final,do finále
+S.toPetit,to Petit Final,do malého finále
+S.medals[0],Gold,Zlato
+S.medals[1],Silver,Stříbro
+S.medals[2],Bronze,Bronz
+S.medals[3],4th,4.
+S.pts,Pts,Body
+S.outIn,"(r,g,p)=>`Out in the ${r} (Group ${g}, ${p})`","(r,g,p)=>`Vypadl: ${r} (skupina ${g}, ${p})`"
+S.gf,m=>`Grand Final: ${m}`,m=>`Velké finále: ${m}`
+S.finished,p=>`Finished ${p}`,p=>`Konečné umístění: ${p}`
+S.thrTbc,Through – next group to be confirmed,Postup – další skupina zatím neurčena
+S.seeded,"(r,g,d)=>`Seeded – enters the ${r}, Group ${g}, ${d}`","(r,g,d)=>`Nasazen – vstupuje: ${r}, skupina ${g}, ${d}`"
+S.racingNow,Racing now,Právě závodí
+S.nations,n=>`${n} nations`,"n=>`${n} ${n==1?""země"":n<5?""země"":""zemí""}`"
+S.stillIn,still in,ve hře
+S.outN,out,vypadlo
+S.search,"Search nation, nickname or sailor","Hledat zemi, přezdívku nebo jachtaře"
+S.all,All,Vše
+S.chipIn,Still in,Ve hře
+S.chipOut,Out,Vypadlé
+S.mine,★ My teams,★ Moje týmy
+S.sStatus,Status,Stav
+S.sRank,Ranking,Žebříček
+S.sAz,A–Z,A–Z
+S.noTeam,No team found.,Žádný tým nenalezen.
+S.rank,Rank,Pořadí
+S.captain,Captain,Kapitán
+S.helm,Helm,Kormidelník
+S.ranking,SSL Nations Ranking,SSL Nations Ranking
+S.rankBoard,Ranking board ↗,Žebříček ↗
+S.entered,Entered Rio at,Vstup v Riu
+S.showRound,Open round ›,Otevřít kolo ›
+S.gc23,Gold Cup 2023,Gold Cup 2023
+S.br23,2023 bracket ›,Pavouk 2023 ›
+S.status,Status,Stav
+S.stIn,Still in,Ve hře
+S.stOut,Out,Vypadl
+S.whereEnded,Where it ended ›,Kde skončil ›
+S.curGroup,Current group ›,Aktuální skupina ›
+S.background,Background,Pozadí
+S.road,Road to Rio,Cesta do Ria
+S.story,Story,Příběh
+S.site,Team site,Stránka týmu
+S.qualRes,Qualifier results ↗,Výsledky kvalifikace ↗
+S.sslRank,SSL Nations Ranking ↗,SSL Nations Ranking ↗
+S.resRio,Results in Rio,Výsledky v Riu
+S.photos,Crew photos,Fotky posádky
+S.byPos,Crew by position,Posádka podle pozic
+S.leader,Team leader,Vedoucí týmu
+S.wider,Wider squad · position TBC,Širší kádr · pozice zatím neurčena
+S.squadNote,"(n,p)=>`${n} names in the squad. 8–10 sail each race and the line-up can change from day to day. Positions and numbers from the official team site; portraits from the Gold Cup Rio graphics${p?"""":"" (none yet for this team)""}.`","(n,p)=>`V kádru je ${n} jmen. V každé rozjížďce jede 8–10 jachtařů a sestava se může den ode dne měnit. Pozice a čísla z oficiální stránky týmu; portréty z grafiky Gold Cup Rio${p?"""":"" (pro tento tým zatím žádné)""}.`"
+S.noSquad,No squad list published for this team yet.,Kádr tohoto týmu zatím nebyl zveřejněn.
+S.showPath,Show path in bracket,Ukázat cestu v pavouku
+S.copyLink,Copy link,Kopírovat odkaz
+S.copied,Link copied,Odkaz zkopírován
+S.close,Close,Zavřít
+S.jersey,Jersey,Dres
+S.numTbc,Number TBC,Číslo zatím neurčeno
+S.capTag,Captain,Kapitán
+S.favOn,Following,Sleduji
+S.favOff,Follow,Sledovat
+S.brHint,Tap a team for crew and history. Swipe for later rounds.,Klepněte na tým pro posádku a historii. Přejeďte pro další kola.
+S.h23,Gold Cup 2023,Gold Cup 2023
+S.champ23,Gran Canaria · champion,Gran Canaria · vítěz
+S.hl,highlighted,zvýrazněno
+S.tap26,Tap a team for its Rio 2026 page.,Klepněte na tým pro jeho stránku Rio 2026.
+S.off23,Official 2023 results ↗,Oficiální výsledky 2023 ↗
+S.myTeams,My teams,Moje týmy
+S.myHint,Tap ☆ on a team page to follow it.,Klepněte na ☆ na stránce týmu a začněte ho sledovat.
+S.foot,"Scoring: 4-3-2-1 points per race, double points in the last race of each group (8-6-4-2). Top two of each group advance. Results refresh automatically from the official SSL results page. Ranking = SSL Nations Ranking at the start of the Final Series.","Bodování: 4-3-2-1 body za rozjížďku, v poslední rozjížďce každé skupiny dvojnásobek (8-6-4-2). Z každé skupiny postupují první dva. Výsledky se automaticky aktualizují z oficiální stránky výsledků SSL. Žebříček = SSL Nations Ranking na začátku Final Series."
+S.notes.ocs,* OCS (early start)  ** Standard penalty,* OCS (předčasný start)  ** Standardní penalizace
+S.theme.auto,🌊 Matchboard,🌊 Matchboard
+S.theme.light,☀️ Day,☀️ Den
+S.theme.dark,🌙 Night,🌙 Noc
+S.g23.champ,Champion (Gold),Vítěz (zlato)
+S.g23.second,Runner-up (Silver),2. místo (stříbro)
+S.g23.third,3rd (Bronze),3. místo (bronz)
+S.g23.fourth,4th – Grand Final,4. – Velké finále
+S.g23.sf,Semi-finals,Semifinále
+S.g23.qf,Quarter-finals,Čtvrtfinále
+S.g23.r8,1/8 Finals,Osmifinále
+S.g23.r16,1/16 Finals,1/16 finále
+S.g23.r32,1/32 Finals,1/32 finále
+S.g23.none,Didn't race the 2023 Final Series,Nestartoval ve Final Series 2023
+S.ev.asia,Asian Qualifiers,Asijská kvalifikace
+S.ev.afoc,African & Oceanian Qualifiers,Africká a oceánská kvalifikace
+S.ev.eu1,European Qualifiers 1,Evropská kvalifikace 1
+S.ev.eu2,European Qualifiers 2,Evropská kvalifikace 2
+S.ev.pan,Pan-American Qualifiers,Panamerická kvalifikace
+S.route.won,"(e,g)=>`Won the ${e}, Group ${g}`","(e,g)=>`Vítěz: ${e}, skupina ${g}`"
+S.route.pos,"(p,e,g)=>`${p} in the ${e}, Group ${g}`","(p,e,g)=>`${p}: ${e}, skupina ${g}`"
+S.route.lc,"(e,g)=>`3rd in the ${e} Group ${g}, then won the Last Chance race`","(e,g)=>`3. místo: ${e}, skupina ${g}, poté výhra v rozjížďce Last Chance`"
+S.route.ranking,Qualified through the SSL Nations Ranking,Kvalifikace přes SSL Nations Ranking
+S.route.host,"Host nation, seeded into the 1/8 Finals","Pořadatelská země, nasazena do osmifinále"
+S.route.seeded,r=>`Seeded into the ${r} via the SSL Nations Ranking`,r=>`Nasazen (${r}) podle SSL Nations Ranking`
+S.roles.Helm,Steers the boat,Řídí loď
+S.roles.Tactician,Strategy & calls,Strategie a rozhodnutí
+S.roles.Main Trimmer,Mainsail,Hlavní plachta
+S.roles.Trimmer,Jib & gennaker,Kosatka a gennaker
+S.roles.Grinder,Powers the winches,Pohání navijáky
+S.roles.Pit,Halyards & controls,Vytahovací lana a ovládání
+S.roles.Mid-Bow,Mast & foredeck,Stěžeň a přední paluba
+S.roles.Bow,Bow & starts,Příď a starty
+S.roles.Floater,Utility / reserve,Univerzál / náhradník
+S.back,‹ Back,‹ Zpět
+S.position,Position,Pozice
+S.team,Team,Tým
+S.indRank,SSL ranking,Žebříček SSL
+S.highlights,Highlights,Hlavní úspěchy
+S.profile,SSL profile ↗,Profil SSL ↗
+S.findProfile,Find SSL profile ↗,Najít profil SSL ↗
+S.ws,World Sailing ↗,World Sailing ↗
+S.mates,Teammates,Spoluhráči
+S.posTbc,Position TBC,Pozice zatím neurčena
+S.noInfo,No further details published yet – the links below search the official profiles.,Další údaje zatím nebyly zveřejněny – odkazy níže hledají v oficiálních profilech.
+S.today,Today,Dnes
+S.raceDay,"(n,t)=>`race day ${n} of ${t}`","(n,t)=>`závodní den ${n} z ${t}`"
+S.finalDay,Final day – last race counts double,Poslední den – poslední rozjížďka se počítá dvojnásobně
+S.stream,▶ Live stream,▶ Živý přenos
+S.tracking,Tracking,Sledování
+S.schedule,Schedule,Program
+S.adv,"(a,b)=>`1st → ${a} · 2nd → ${b}`","(a,b)=>`1. → ${a} · 2. → ${b}`"
+S.advSf,1st–2nd → Final · 3rd–4th → Petit Final,1.–2. → Finále · 3.–4. → Malé finále
+S.clinched,✓ through,✓ jistý postup
+S.elim,out,vypadl
+S.secNow,In the current round,V aktuálním kole
+S.secSeeded,r=>`Seeded – enter in the ${r}`,r=>`Nasazení – vstupují: ${r}`
+S.secOut,Out,Vypadlé
+S.lineup,Line-up,Startovní pole
+S.howT,How the Gold Cup works,Jak funguje Gold Cup
+S.how[0],"National teams, one SSL47 boat each – all boats identical and provided by the organisers.","Národní týmy, každý s jednou lodí SSL47 – všechny lodě jsou identické a dodává je pořadatel."
+S.how[1],Groups of four. 4-3-2-1 points per race; the last race of each group counts double (8-6-4-2).,Čtyřčlenné skupiny. 4-3-2-1 body za rozjížďku; poslední rozjížďka každé skupiny se počítá dvojnásobně (8-6-4-2).
+S.how[2],The top two of every group advance; better-ranked nations enter later rounds.,Z každé skupiny postupují první dva; lépe hodnocené země vstupují v pozdějších kolech.
+S.how[3],Semi-finals and finals are a single race each; the Grand Final decides the world champion.,Semifinále a finále mají po jedné rozjížďce; Velké finále rozhodne o mistrovi světa.
+S.race,Race,Rozjížďka
+S.nextRace,Next race,Další rozjížďka
+S.todayRaces,Today's races,Dnešní rozjížďky
+S.rioT,Rio time,čas v Riu
+S.loc,your time,váš čas
+S.onWater,on the water,na vodě
+S.done,done,hotovo
+S.inX,"m=>m<60?`in ${m} min`:`in ${Math.floor(m/60)} h ${String(m%60).padStart(2,""0"")}`","m=>m<60?`za ${m} min`:`za ${Math.floor(m/60)} h ${String(m%60).padStart(2,""0"")}`"
+S.firstStart,First start,První start
+S.schedT,Race schedule,Program rozjížděk
+S.schedNote,"Times are Rio de Janeiro time (UTC−3), from the official schedule. Its groups G1–G4 are shown here as groups A–D.",Časy jsou v čase Rio de Janeiro (UTC−3) podle oficiálního programu. Jeho skupiny G1–G4 jsou zde uvedeny jako skupiny A–D.
+S.needT,Before the final race (double points),Před poslední rozjížďkou (dvojnásobné body)
+S.need.sure,"through, whatever happens","postupuje, ať se stane cokoli"
+S.need.gone,"out, whatever happens","vypadává, ať se stane cokoli"
+S.need.win,a win is enough,stačí výhra
+S.need.top,k=>`${k} or better is enough`,k=>`stačí ${k} nebo lépe`
+S.need.mustWin,must win,musí vyhrát
+S.need.help,and needs help from the others,a potřebuje pomoc ostatních
+S.need.maybe,k=>`${k} may be enough – depends on the others`,k=>`${k} může stačit – záleží na ostatních`
+S.need.iff,"(k,c)=>`${k} is enough if ${c}`","(k,c)=>`${k} stačí, pokud ${c}`"
+S.need.mustIf,"c=>`must win, and only if ${c}`","c=>`musí vyhrát, a jen pokud ${c}`"
+S.need.ahead,R=>`ahead of ${R}`,R=>`před ${R}`
+S.need.behind,R=>`behind ${R}`,R=>`za ${R}`
+S.need.notWin,R=>`${R} doesn't win`,R=>`${R} nevyhraje`
+S.need.last,R=>`${R} finishes last`,R=>`${R} skončí poslední`
+S.need.wins,R=>`${R} wins`,R=>`${R} vyhraje`
+S.need.tie,level on points possible – tie-break decides,možná bodová shoda – rozhodne tie-break
+S.needNote,"Worked out from the current points; ≈ means teams could finish level, then the official tie-break decides.","Spočteno z aktuálních bodů; ≈ znamená možnou bodovou shodu, pak rozhoduje oficiální tie-break."
+S.install,Add to Home Screen for the app icon.,Přidejte na plochu pro ikonu aplikace.
+S.home,Home,Domů
+S.more,More,Více
+S.sailors,Sailors,Jachtaři
+S.welcome,Final Series · Rio de Janeiro,Final Series · Rio de Janeiro
+S.dates,19 Nov – 13 Dec 2026 · Marina da Glória,19. 11. – 13. 12. 2026 · Marina da Glória
+S.progress,Tournament,Turnaj
+S.latest,Latest results,Nejnovější výsledky
+S.explore,Explore,Prozkoumat
+S.tiles.board[0],Rounds,Kola
+S.tiles.board[1],"Groups, points, times","Skupiny, body, časy"
+S.tiles.bracket[0],Matchboard,Matchboard
+S.tiles.bracket[1],The whole draw at a glance,Celý los na jeden pohled
+S.tiles.teams[0],Teams,Týmy
+S.tiles.teams[1],"40 nations, crews, rankings","40 zemí, posádky, žebříček"
+S.tiles.sailors[0],Sailors,Jachtaři
+S.tiles.sailors[1],Search every sailor,Hledat všechny jachtaře
+S.tiles.qualifying[0],Qualifying,Kvalifikace
+S.tiles.qualifying[1],How the teams got to Rio,Jak se týmy dostaly do Ria
+S.tiles.gc2023[0],Gold Cup 2023,Gold Cup 2023
+S.tiles.gc2023[1],Last edition's bracket,Pavouk minulého ročníku
+S.sailorsT,n=>`${n} sailors`,n=>`${n} jachtařů`
+S.sSearch,"Search sailor, team or position","Hledat jachtaře, tým nebo pozici"
+S.withPhoto,With photo,S fotkou
+S.allS,All,Vše
+S.moreT,More,Více
+S.lang,Language,Jazyk
+S.design,Design,Vzhled
+S.share,Share app,Sdílet aplikaci
+S.shared,Link copied,Odkaz zkopírován
+S.links,Links,Odkazy
+S.about,About this app,O aplikaci
+S.aboutT,Unofficial companion app for the SSL Gold Cup Rio 2026. Results update automatically from the official SSL results page.,Neoficiální doprovodná aplikace k SSL Gold Cup Rio 2026. Výsledky se automaticky aktualizují z oficiální stránky výsledků SSL.
+S.inst.t,Install the app,Nainstalovat aplikaci
+S.inst.d,"Put SSL Gold Cup on your home screen – opens like an app, full screen, with live results.","Dejte si SSL Gold Cup na plochu – otevře se jako aplikace, na celou obrazovku, s živými výsledky."
+S.inst.b,Install,Instalovat
+S.inst.done,Installed ✓,Nainstalováno ✓
+S.inst.ios[0],Tap the Share button,Klepněte na tlačítko Sdílet
+S.inst.ios[1],at the bottom of Safari (top right on iPad).,dole v Safari (na iPadu vpravo nahoře).
+S.inst.ios[2],Scroll down and tap “Add to Home Screen”.,Posuňte dolů a klepněte na „Přidat na plochu“.
+S.inst.ios[3],Tap “Add” – done.,Klepněte na „Přidat“ – hotovo.
+S.inst.iosOther,On iPhone this works in Safari: open this page in Safari first.,Na iPhonu to funguje v Safari: nejprve otevřete tuto stránku v Safari.
+S.inst.android[0],Tap the ⋮ menu in the top right of your browser.,Klepněte na nabídku ⋮ vpravo nahoře v prohlížeči.
+S.inst.android[1],Tap “Install app” or “Add to Home screen”.,Klepněte na „Nainstalovat aplikaci“ nebo „Přidat na plochu“.
+S.inst.android[2],Confirm with “Install”.,Potvrďte tlačítkem „Instalovat“.
+S.inst.desk[0],"Click the install icon in the address bar,","Klikněte na ikonu instalace v adresním řádku,"
+S.inst.desk[1],or open the browser menu and choose “Install SSL Gold Cup”.,nebo otevřete nabídku prohlížeče a zvolte „Nainstalovat SSL Gold Cup“.
+S.inst.how,How to install,Jak nainstalovat
+S.inst.hide,Not now,Teď ne
+S.inst.installedNote,You're using the installed app.,Používáte nainstalovanou aplikaci.
+S.champT,World Champion · Gold Cup 2026,Mistr světa · Gold Cup 2026
+S.standT,Final standings,Konečné pořadí
+S.statsT,In numbers,V číslech
+S.stRaces,Races,Rozjížďky
+S.stWins,Race wins,Výhry
+S.stAvg,Avg. place,Prům. umístění
+S.stPts,Points in Rio,Body v Riu
+S.stHist,Race by race,Rozjížďku po rozjížďce
+S.calBtn,📅 Races in my calendar,📅 Rozjížďky v mém kalendáři
+S.calT,Races in your calendar,Rozjížďky ve vašem kalendáři
+S.calSub,"Subscribe (iPhone, Mac, Outlook)","Odebírat (iPhone, Mac, Outlook)"
+S.calG,Add to Google Calendar,Přidat do Kalendáře Google
+S.calDl,Download file (.ics),Stáhnout soubor (.ics)
+S.calAll,All races in my calendar,Všechny rozjížďky v mém kalendáři
+S.calNote,"A subscription updates itself: when a team qualifies, its next races appear automatically.","Odběr se aktualizuje sám: když tým postoupí, jeho další rozjížďky se objeví automaticky."
+S.wxT,Wind forecast · Marina da Glória,Předpověď větru · Marina da Glória
+S.wxSrc,"Forecast by Open-Meteo, not measured on the course.","Předpověď Open-Meteo, neměřeno na dráze."
+S.trk,Tracking,Sledování
+S.delayed,m=>`Results may be delayed – last successful check ${m} min ago.`,m=>`Výsledky mohou být zpožděné – poslední úspěšná kontrola před ${m} min.`
+S.shareImg,Share as image,Sdílet jako obrázek
+S.imgDone,Image ready,Obrázek je připraven
+S.pT,Notifications,Oznámení
+S.pAll,All results,Všechny výsledky
+S.pAllSub,A notification after every race,Oznámení po každé rozjížďce
+S.pTeamOff,🔔 Notify me about this team,🔔 Upozorňovat na tento tým
+S.pTeamOn,🔔 Notifications on ✓,🔔 Oznámení zapnuta ✓
+S.pTeams,Your teams,Vaše týmy
+S.pNone,No team yet: open a team and tap 🔔.,Zatím žádný tým: otevřete tým a klepněte na 🔔.
+S.pNote,You only get race results and who goes through. Switch off here any time.,Dostanete jen výsledky rozjížděk a kdo postupuje. Kdykoli zde vypnete.
+S.pIOS,"On iPhone, notifications only work in the installed app: install it, open it from the home screen, then switch them on here.","Na iPhonu fungují oznámení jen v nainstalované aplikaci: nainstalujte ji, otevřete z plochy a pak je zde zapněte."
+S.pDenied,Notifications are blocked. Allow them for this app in your device settings.,Oznámení jsou zablokována. Povolte je pro tuto aplikaci v nastavení zařízení.
+S.pErr,That didn't work – please try again in a moment.,Nepovedlo se – zkuste to prosím za chvíli znovu.
+S.pOnT,Notifications on,Oznámení zapnuta
+S.pOffT,Notifications off,Oznámení vypnuta
+S.pUnsup,This browser can't receive notifications.,Tento prohlížeč nemůže přijímat oznámení.
+S.obT,Get the app,Získejte aplikaci
+S.obSub,"Free, no App Store needed – on your home screen in 20 seconds.","Zdarma, bez App Store – na ploše za 20 sekund."
+S.obPerks[0],Live results in one tap,Živé výsledky jedním klepnutím
+S.obPerks[1],"Full screen, like a real app",Celá obrazovka jako skutečná aplikace
+S.obPerks[2],Notifications for your team,Oznámení pro váš tým
+S.obBtn,Install now,Nainstalovat
+S.obLater,Later – look around in the browser first,Později – nejdřív se podívám v prohlížeči
+S.obSteps,How it works,Jak na to
+S.obStep,Step,Krok
+S.ios26[0],Tap ⋯ next to the address bar,Klepněte na ⋯ vedle adresního řádku
+S.ios26[1],Tap “Share”,Klepněte na „Sdílet“
+S.ios26[2],Scroll down and tap “Add to Home Screen”,Posuňte dolů a klepněte na „Přidat na plochu“
+S.ios26[3],Leave “Open as Web App” on and tap “Add”,Nechte zapnuté „Otevřít jako webovou aplikaci“ a klepněte na „Přidat“
+S.iosOld[0],Tap the Share button at the bottom,Klepněte dole na tlačítko Sdílet
+S.iosOld[1],Scroll down and tap “Add to Home Screen”,Posuňte dolů a klepněte na „Přidat na plochu“
+S.iosOld[2],Tap “Add” in the top right,Klepněte vpravo nahoře na „Přidat“
+S.iosAlt,"Easiest in Safari: copy the link, open Safari and paste it.","Nejsnazší v Safari: zkopírujte odkaz, otevřete Safari a vložte ho."
+S.inApp,This page is open inside another app (e.g. WhatsApp or Instagram). Installing only works in the browser: tap ⋯ and choose “Open in browser” – or copy the link and open it in Safari or Chrome.,Tato stránka je otevřená v jiné aplikaci (např. WhatsApp nebo Instagram). Instalace funguje jen v prohlížeči: klepněte na ⋯ a zvolte „Otevřít v prohlížeči“ – nebo zkopírujte odkaz a otevřete ho v Safari či Chrome.
+S.copy,Copy link,Kopírovat odkaz
+S.done2,Then open SSL Gold Cup from your home screen.,Pak otevřete SSL Gold Cup z plochy.
+S.ui.share,Share,Sdílet
+S.ui.home,Add to Home Screen,Přidat na plochu
+S.ui.add,Add,Přidat
+S.ui.web,Open as Web App,Otevřít jako webovou aplikaci
+S.ui.cancel,Cancel,Zrušit
+S.ui.ainst,Install app,Nainstalovat aplikaci
+S.ui.aok,Install,Instalovat
+S.trkOpen,📍 Watch live tracking,📍 Sledovat živě
+S.trkReplay,📍 Replay the race (tracking),📍 Záznam rozjížďky (sledování)
+S.trkNone,Tracking appears here as soon as Georacing has set up this race.,"Sledování se zde objeví, jakmile Georacing tuto rozjížďku připraví."
+S.trkExt,Open in Georacing ↗,Otevřít v Georacing ↗
+S.trkHint,"Every boat as a dot on the map – live during the race, as a replay afterwards.","Každá loď na mapě – živě během rozjížďky, poté jako záznam."
+S.rcRes,Result of this race,Výsledek rozjížďky
+S.rcTeams,Teams in this race,Na startovní čáře
+S.rcStand,Group so far,Průběžné pořadí skupiny
+S.rcPts,pts,b.
+S.rcGroup,Show group on the Matchboard,Ukázat skupinu na Matchboardu
+S.rcTBD,Teams not decided yet,Týmy zatím nejsou známy
+S.qrT,Scan with the phone camera – the app opens right away.,Naskenujte fotoaparátem telefonu – aplikace se hned otevře.
+S.shareNow,Share…,Sdílet…
+S.qsep,"n=>""▲ advance""","n=>""▲ postup"""
+S.shareSub,"Send via WhatsApp, Messages & co.","Poslat přes WhatsApp, Zprávy a další"
+S.shareMsg,"SSL Gold Cup Rio 2026 – live results, race times and all teams:","SSL Gold Cup Rio 2026 – živé výsledky, časy rozjížděk a všechny týmy:"
+S.sCaps,Captains,Kapitáni
+S.sTeams,Crews,Posádky
+S.sHint,Tap a team to see its crew – teams still in the race come first.,Klepněte na tým a uvidíte posádku – týmy ve hře jsou první.
+S.sTeamPage,Team page,Stránka týmu
+S.fShow,Show,Zobrazit
+S.fSort,Sort,Řadit
+S.spT,Spoiler-free,Bez spoilerů
+S.spUntil,w=>`Results hidden after ${w}`,w=>`Výsledky skryty od ${w}`
+S.spNone,No hidden results right now,Teď nejsou skryté žádné výsledky
+S.spShow,Show all,Ukázat vše
+S.spOff,Off,Vyp.
+S.spRow,Spoiler-free mode,Režim bez spoilerů
+S.spSub,Hide results until you have watched the race,"Skrýt výsledky, dokud rozjížďku neuvidíte"
+S.spRace,Result hidden,Výsledek skryt
+S.spReveal,I've watched it – show result,Viděl jsem – ukázat výsledek
+S.spOnT,Results from today on are hidden,Výsledky od dneška jsou skryty
+S.cmpBtn,⚖️ Compare,⚖️ Porovnat
+S.cmpVs,vs,vs
+S.cmpPick,Pick a team to compare with.,Vyberte tým k porovnání.
+S.h2hT,Head to head,Vzájemně
+S.h2hSub,races finished ahead,rozjížďky dojel před
+S.h2hNone,No races against each other yet.,Zatím se nepotkali.
+S.cmpNote,Numbers from the races in Rio; ranking = SSL Nations Ranking.,Čísla z rozjížděk v Riu; žebříček = SSL Nations Ranking.
+S.vidT,🎬 Highlights & videos,🎬 Sestřihy a videa
+S.vidAll,All videos on YouTube ↗,Všechna videa na YouTube ↗
+S.vidOpen,Open on YouTube ↗,Otevřít na YouTube ↗
+S.vidHid,"n=>`${n} newer video${n>1?""s"":""""} hidden (spoiler-free)`",n=>`Skryto novějších videí: ${n} (bez spoilerů)`
+S.pastL,Look back,Ohlédnutí
+S.vnT,Venue · Marina da Glória,Místo konání · Marina da Glória
+S.vnSub,Where it all happens – map & directions,Kde se vše odehrává – mapa a trasa
+S.vnRoute,Directions,Trasa
+S.vnApple,Apple Maps,Mapy Apple
+S.vnInfo[0],"The 2016 Olympic sailing venue, on Guanabara Bay with a view of Sugarloaf Mountain.",Jachtařské dějiště olympiády 2016 v zátoce Guanabara s výhledem na Cukrovou homoli.
+S.vnInfo[1],The marina is open to the public during the event – see the boats up close and visit the athletes' village.,Přístav je během akce přístupný veřejnosti – lodě zblízka a návštěva sportovní vesnice.
+S.vnInfo[2],Racing takes place on Guanabara Bay right in front of the marina.,Závodí se v zátoce Guanabara přímo před přístavem.
+S.suT,Sustainability,Udržitelnost
+S.suSub,What the SSL does for the ocean and fair sport,Co SSL dělá pro oceán a férový sport
+S.suIntro,The SSL says that for them sustainability means protecting the ocean and making the sport fairer.,"SSL uvádí, že udržitelnost pro ni znamená chránit oceán a dělat sport spravedlivější."
+S.suList[0],Every SSL Gold Cup boat must have two women on board.,Na každé lodi SSL Gold Cup musí být dvě ženy.
+S.suList[1],No plastic bottles in the athletes' village.,Ve sportovní vesnici žádné plastové lahve.
+S.suList[2],A dedicated Sustainability Manager since September 2025.,Od září 2025 vlastní manažer udržitelnosti.
+S.suList[3],"Aligned with Clean Regattas, World Sailing's Sustainability Agenda 2030 and the IOC strategy; the goal is Platinum Clean Regattas certification.","V souladu s Clean Regattas, agendou udržitelnosti 2030 World Sailing a strategií MOV; cílem je certifikace Platinum Clean Regattas."
+S.suList[4],Beach clean-ups with the teams at the qualifiers.,Úklid pláží s týmy během kvalifikací.
+S.suList[5],"Few support boats: at the 2023 Finals, four coach boats served 440 sailors.",Málo doprovodných člunů: na finále 2023 obsloužily čtyři trenérské čluny 440 jachtařů.
+S.suMore,Read more at the SSL ↗,Více u SSL ↗
+S.mcT,Merch,Merch
+S.mcSub,"Jerseys, caps & more – coming soon","Dresy, kšiltovky a další – brzy"
+S.mcSoon,Coming soon,Již brzy
+S.mcTxt,"The official SSL Gold Cup Store is not open yet. As soon as it is, you can shop here.","Oficiální obchod SSL Gold Cup zatím není otevřený. Jakmile bude, můžete nakupovat zde."
+S.mcList[0],Captain's jerseys of the national teams,Kapitánské dresy národních týmů
+S.mcList[1],SSL caps,Kšiltovky SSL
+S.mcList[2],SSL47 boat and team figures as building sets,Stavebnice lodí SSL47 a týmových figurek
+S.mcGo,To the SSL store ↗,Do obchodu SSL ↗
+S.wxBtn,🌬️ Weather for sailors,🌬️ Počasí pro jachtaře
+S.wxH,Sailing weather,Jachtařské počasí
+S.wxLoad,Loading forecast…,Načítám předpověď…
+S.wxFail,The forecast could not be loaded right now.,Předpověď teď nelze načíst.
+S.wxGust,Gusts,Nárazy
+S.wxDir,Direction,Směr
+S.wxPres,Pressure,Tlak
+S.wxAtStart,Forecast for the start time.,Předpověď pro čas startu.
+S.wxHours,Hour by hour,Po hodinách
+S.wxTime,Time,Čas
+S.wxWind,Wind kn,Vítr kn
+S.wxKn,Wind in knots: mean – gusts. Arrows show where the wind blows to.,"Vítr v uzlech: průměr – nárazy. Šipky ukazují, kam vítr fouká."
+S.wxSea,Water,Voda
+S.wxWater,Water temperature,Teplota vody
+S.wxTide,Tide,Příliv
+S.wxRise,rising,stoupá
+S.wxFall,falling,klesá
+S.wxHigh,High,Příliv
+S.wxLow,Low,Odliv
+S.wxCur,Current,Proud
+S.wxCurN,Model value at the bay entrance; arrow = where it flows.,Modelová hodnota u vjezdu do zátoky; šipka = směr proudu.
+S.wxWave,Swell,Vlnění
+S.wxWaveN,"At the bay entrance, much smaller on the course.","U vjezdu do zátoky, na dráze mnohem menší."
+S.wxSun,Sunrise – sunset,Východ – západ slunce
+S.wxSrc2,"Forecast by Open-Meteo (weather models), not measured on the course.","Předpověď Open-Meteo (meteorologické modely), neměřeno na dráze."
+S.trkLive,Live tracking,Živé sledování
+S.trkReplayS,Replay,Záznam
+S.fcBtn,Forecast,Předpověď
+S.fcCond[0],Light wind,Slabý vítr
+S.fcCond[1],Medium wind,Střední vítr
+S.fcCond[2],Fresh breeze,Čerstvý vítr
+S.fcCond[3],Strong wind,Silný vítr
+S.fcTr.up,building,sílí
+S.fcTr.down,easing,slábne
+S.fcTr.steady,steady,stálý
+S.fcTr.veer,veering (clockwise),stáčí se doprava (po směru hodin)
+S.fcTr.back,backing (anti-clockwise),stáčí se doleva (proti směru hodin)
+S.fcNext,Next hour,Příští hodina
+S.fcChart,"Wind 10:00–18:00 · line = mean, band = gusts, marker = start","Vítr 10:00–18:00 · čára = průměr, pás = nárazy, značka = start"
+S.fcBft,Beaufort,Beaufort
+S.watchLive,Watch live,Sledovat živě
+S.liveStream,Live stream,Živý přenos
+S.liveNow,The race is on – watch it here,Závodí se – sledujte zde
+S.liveNote,"If the player stays black, the stream hasn't started yet or YouTube blocks embedding – then open it on YouTube.","Pokud přehrávač zůstane černý, přenos ještě nezačal nebo YouTube nedovoluje vložení – pak ho otevřete na YouTube."
+S.achT,Achievements,Úspěchy
+S.olyT,Olympic Games,Olympijské hry
+S.wcT,World Championship podiums,Pódia na MS
+S.ecT,Continental podiums,Pódia na kontinentálních šampionátech
+S.clubT,Club,Klub
+S.profSrc,Facts from the official SSL profile.,Údaje z oficiálního profilu SSL.
+S.achL[0],World Champion,Mistr světa
+S.achL[1],Olympic gold,Olympijské zlato
+S.achL[2],Olympic silver,Olympijské stříbro
+S.achL[3],Olympic bronze,Olympijský bronz
+S.wxAtT,h=>`Forecast for ${h}`,h=>`Předpověď na ${h}`
+S.wxTap,Tap an hour for details.,Klepněte na hodinu pro podrobnosti.
+S.fsT,Final Series,Final Series
+S.qsT,Qualifying Series,Qualifying Series
+S.qsLeg,Highlighted: qualified through this series. ● = in Rio via the SSL Nations Ranking. Tap a team in Rio for its page.,Zvýrazněno: kvalifikace přes tuto sérii. ● = v Riu přes SSL Nations Ranking. Klepněte na tým v Riu pro jeho stránku.
+S.qsNote,"The winner of each qualifying group (group C: top two) was drawn into the 1/32 Finals. 29 teams qualified for the Final Series via the SSL Ranking, with spots per continent: 12 Europe, 8 Pan-America, 6 Asia, 1 Africa, 2 Oceania.","Vítěz každé kvalifikační skupiny (ve skupině C první dva) byl vylosován do 1/32 finále. 29 týmů se kvalifikovalo do Final Series přes SSL Ranking s kvótami podle kontinentů: Evropa 12, Panamerika 8, Asie 6, Afrika 1, Oceánie 2."
+S.reg.asia,Asia,Asie
+S.reg.afoc,Africa & Oceania,Afrika a Oceánie
+S.reg.eur,Europe,Evropa
+S.reg.pam,Pan-America,Panamerika
+S.fin,Final,Finále
+S.petit,Petit F.,Malé f.
+S.swipe,Swipe sideways for later rounds →,Přejeďte do strany pro další kola →
+S.road2,Road to Rio,Cesta do Ria
+S.inRio,In Rio via SSL Ranking,V Riu přes SSL Ranking
+S.mbHint,Top two of each group advance. Tap a team for crew and history.,Z každé skupiny postupují první dva. Klepněte na tým pro posádku a historii.
+S.vmT,Event area,Areál akce
+S.vmTap,Tap the map to zoom,Klepni na mapu pro přiblížení
+S.vmL[0],SSL47 boats,Lodě SSL47
+S.vmL[1],Flag pole ashore (signals),Stožár se signály na břehu
+S.vmL[2],"Village: partner stands, shop, waste sorting","Village: stánky partnerů, obchod, třídění odpadu"
+S.vmL[3],Video wall,Videostěna
+S.vmL[4],Race office & jury room,Závodní kancelář a místnost jury
+S.vmL[5],Sailors Lounge,Sailors Lounge
+S.vmL[6],Uniforms,Uniformy
+S.vmL[7],TV broadcast,TV přenos
+S.vmL[8],Exhibition boat,Výstavní loď
+S.vmL[9],Shore team tent,Stan pobřežních týmů
+S.vmL[10],"Main stage: concert, final podium, closing ceremony","Hlavní pódium: koncert, finálové stupně, závěrečný ceremoniál"
+S.vmL[11],Spectator boat,Divácká loď
+S.vmL[12],Press & production office,Tisková a produkční kancelář
+S.vmL[13],Lunch buffet,Obědový bufet
+S.vmW,Water refill station,Stanice s pitnou vodou
+S.vdT,On race days,V závodní dny
+S.vd[0],10:00 – Skippers’ briefing,10:00 – briefing kormidelníků
+S.vd[1],12:00 – first warning signal,12:00 – první výstražný signál
+S.vd[2],Signals ashore: flag pole in front of the Sailors Lounge (2),Signály na břehu: stožár před Sailors Lounge (2)
+S.vmSrc,"Map: SSL Gold Cup, official notice board","Mapa: SSL Gold Cup, oficiální vývěska"
+S.fbT,Wish or bug report,Návrh nebo nahlášení chyby
+S.fbSub,Goes straight to the app maker,Jde přímo autorovi aplikace
+S.fbPh,What should be better? What isn't working?,Co by mohlo být lepší? Co nefunguje?
+S.fbName,Your name (optional),Tvoje jméno (nepovinné)
+S.fbSend,Send,Odeslat
+S.fbOk,Thanks – sent!,Díky – odesláno!
+S.fbErr,Couldn't send. Check your connection and try again.,Odeslání se nepovedlo. Zkontroluj připojení a zkus to znovu.
+S.showMe,Show me where,Ukaž mi kde
+S.openChrome,Open in Chrome,Otevřít v Chrome
+S.openSafari,Open in Safari,Otevřít v Safari
+S.prep,Getting ready … one moment,Připravuji … chvilku
+S.coachT,Tap here,Klepni sem
+S.gotIt,Got it,Rozumím
+S.samsung[0],Tap ≡ (menu) at the bottom right.,Klepni vpravo dole na ≡ (menu).
+S.samsung[1],Tap “Add page to” → “Home screen”.,Klepni na „Přidat stránku do“ → „Domovská obrazovka“.
+S.samsung[2],Confirm with “Add”.,Potvrď „Přidat“.
+S.noDots,No ⋯ button? Tap the Share icon instead.,Nevidíš ⋯? Klepni na ikonu Sdílet.
+S.tkLoad,Loading tracking…,Načítám sledování…
+S.tkNone,No tracking for this race yet.,Pro tuto rozjížďku zatím není sledování.
+S.tkNoData,No tracking data for this race.,Pro tuto rozjížďku nejsou data sledování.
+S.tkOpens,Tracking opens at,Sledování začíná v
+S.tkStart,Start,Start
+S.tkLeg,Leg,Úsek
+S.tkPre,pre-start,před startem
+S.tkNoPos,no signal,bez signálu
+S.tkRep,Replay,Záznam
+S.secOly,Olympic Games,Olympijské hry
+S.secWc,World Championships,Mistrovství světa
+S.secEc,Continental Championships,Kontinentální mistrovství
+S.bioT,About,O jachtaři
+S.srcSSL,Official bio · Star Sailors League,Oficiální životopis · Star Sailors League
+S.careerT,Career,Kariéra
+S.evN,results listed,uvedených výsledků
+S.podN,podiums,pódií
+S.medRate,medal rate,podíl medailí
+S.bestR,best result,nejlepší výsledek
+S.showAll,Show all,Ukázat vše
+S.sslPts,SSL points,Body SSL
+S.heightT,Height,Výška
+S.weightT,Weight,Váha
+S.sslProf,Official SSL profile,Oficiální profil SSL
+S.teamSite,Team website,Web týmu
+S.mySailors,My sailors,Moji jachtaři
+S.sFavHint,Tap ☆ on a sailor's page to follow them – they'll show up here.,Klepněte na ☆ na stránce jachtaře a sledujte ho – objeví se zde.
+S.ownW,In their own words · from the SSL profile,Vlastními slovy · z profilu SSL
+S.pathHl,n=>`Path of ${n} highlighted`,n=>`Cesta týmu ${n} zvýrazněna`
+S.setT,Settings,Nastavení
+S.setSub,"Notifications, favourites, display, spoiler-free","Oznámení, oblíbené, zobrazení, bez spoilerů"
+S.sNotAvail,Push notifications are being set up and will be available here soon.,Push oznámení se právě připravují.
+S.sMaster,Push notifications,Push oznámení
+S.sMasterSub,Main switch for this device,Hlavní vypínač tohoto zařízení
+S.sRemT,Start reminder,Připomínka startu
+S.sRemSub,15 minutes before your teams race,15 minut před závodem vašich týmů
+S.sLiveT,Livestream starts,Začíná přenos
+S.sLiveSub,When the SSL livestream goes live,Když začne živý přenos SSL
+S.sVidT,New highlight video,Nový sestřih
+S.sVidSub,When a new highlight film is out,Když vyjde nový sestřih
+S.sResT,Results of my teams,Výsledky mých týmů
+S.sResSub,After every race of these teams – your favourite teams and the teams of your favourite sailors.,Po každé rozjížďce těchto týmů – oblíbené týmy a týmy oblíbených jachtařů.
+S.sFavNone,No favourites yet – tap ☆ on a team or sailor.,Zatím žádné oblíbené – klepněte na ☆ u týmu nebo jachtaře.
+S.sQuietT,Quiet hours,Doba klidu
+S.sQuietSub,No notifications during this time (your local time),V tuto dobu žádná oznámení (místní čas)
+S.sQoff,Off,Vyp.
+S.sSpoilN,"In spoiler-free mode, notifications only say that a race has finished.","V režimu bez spoilerů oznámení řekne jen, že rozjížďka skončila."
+S.sDispT,Display,Zobrazení
+S.sTimeT,Times,Časy
+S.sTimeRio,Rio only,Jen Rio
+S.sTimeBoth,Rio + mine,Rio + můj
+S.sWindT,Wind,Vítr
+S.sTempT,Temperature,Teplota
+S.sLvT,Commentary language,Jazyk komentáře
+S.sLvAuto,Same as the app,Jako aplikace
+S.sCalT,Calendar,Kalendář
+S.sCalTeam,Races of this team,Rozjížďky tohoto týmu
+S.sDataT,Data & privacy,Data a soukromí
+S.sPriv,"Everything you set here is stored only on this device. No account, no cookies; visits are counted anonymously.","Vše, co nastavíte, zůstává jen v tomto zařízení. Žádný účet, žádné cookies; návštěvy se počítají anonymně."
+S.sResetF,Remove favourites,Odebrat oblíbené
+S.sResetA,Reset everything,Obnovit vše
+S.sResetQ,Tap again to confirm,Pro potvrzení klepněte znovu
+S.sFeedback,Send feedback,Poslat zpětnou vazbu
+S.sVer,Version,Verze
+S.comp,Competition,Soutěž
+S.rkT,SSL Nations Ranking,SSL žebříček národů
+S.rkAsOf,As of,Stav k
+S.rkNat,n=>`${n} nations`,n=>`${n} národů`
+S.rkHist,Historical ranking,Historický žebříček
+S.rkCur,Current,Aktuální
+S.rkCont,Continent,Kontinent
+S.rkAll,All,Vše
+S.rkSearch,Search country,Hledat zemi
+S.rkGC,Gold Cup teams,Týmy Gold Cupu
+S.rkSk,Skippers,Kormidelníci
+S.rkCr,Crews,Posádka
+S.rkPts,Points (sum of the sailors' ranks),Body (součet umístění)
+S.rkNo,No.,Č.
+S.rkGlob,Global,Svět
+S.rkName,Nation,Národ
+S.rkNone,No nation found.,Žádný národ nenalezen.
+S.rkLoad,Loading ranking…,Načítám žebříček…
+S.rkFail,The ranking can't be loaded right now.,Žebříček teď nelze načíst.
+S.rkSrc,Source: Star Sailors League · updated every week. The nation's rank comes from its best-ranked skippers and crews.,Zdroj: Star Sailors League · aktualizováno každý týden. Pořadí národa určují jeho nejlepší kormidelníci a posádka.
+S.rkTeam,Team page,Stránka týmu
+S.rkPrev,p=>`previous week: ${p}`,p=>`minulý týden: ${p}`
+S.rkWas,p=>`was ${p}`,p=>`dříve ${p}`
+S.rkInd,World rank,Světový žebříček
+S.rkOpen,Open ranking ›,Otevřít žebříček ›
+S.rkTap,Tap a nation for its sailors.,Klepněte na národ pro jeho jachtaře.
+S.alsoP,also,také
+SOW,In their own words · from the SSL profile,Vlastními slovy · z profilu SSL
+NXG.[0],started,start
+NXG.[1],planned,plán
+NXF,After prior race,Po předchozím závodě
+RINC,Incoming,Brzy
+DOV.[0],Racing day over,Závodní den skončil
+DOV.[1],"n=>`${n} race${n==1?"""":""s""} sailed`",n=>`Odjeto závodů: ${n}`
+DOV.[2],g=>`${g} postponed`,g=>`${g} odloženo`
+DSW.[0],Previous,Předchozí
+DSW.[1],Today,Dnes
+DSW.[2],Next,Další
+DSW.[3],Previous race day,Předchozí závodní den
+DSW.[4],Next race day,Další závodní den
+DSW.[5],from {t},od {t}
+DSW.[6],{n} races,Závody: {n}
+DSW.[7],1 race,1 závod
+RESS.[0],Results,Výsledky
+RESS.[1],Overall results,Celkové pořadí
+RESS.[2],Qualifiers,Kvalifikace
+RESS.[3],Final Series,Final Series
+RESS.[4],(to be determined),(bude určeno)
+RESS.[5],Last chance race,Rozjížďka poslední šance
+RESS.[6],Pos.,Poř.
+CHT.t,What's new,
+CHT.sub,Everything new in the app – latest first,
+CHT.ver,Version,
+CHT.newB,New,
+CHT.seen,You're up to date,
+CHT.days[0],Race days at a glance,
+CHT.days[1],"On Home you can switch between the previous, today’s and the next race day; at midnight Rio time everything moves on by itself.",
+CHT.estd[0],Smart delay estimate,
+CHT.estd[1],The app learns from every race how long racing and changeovers take and shows “Probably delayed ~HH:MM” for the following races.,
+CHT.res[0],Results in the app,
+CHT.res[1],"Overall ranking, qualifiers and the Final Series – open places show “(to be determined)”.",
+CHT.rbox[0],Live race box,
+CHT.rbox[1],The header strip shows the race on the water and the countdown to the next start – and when a start is delayed.,
+CHT.inst2[0],Easier install,
+CHT.inst2[1],"One tap on Android, an arrow that points to the right button on iPhone, and “Open in Chrome/Safari” from WhatsApp & co.",
+CHT.trk2[0],Faster tracking,
+CHT.trk2[1],"Live positions appear right away, the race history loads in the background.",
+CHT.fbk[0],Send a wish or bug,
+CHT.fbk[1],Under More: tell the app maker what should be better.,
+CHT.rank[0],SSL Nations Ranking in the app,
+CHT.rank[1],"All 132 nations with continent filter, search, history back to 2025 and each nation's best skippers and crews.",
+CHT.pos[0],Positions checked,
+CHT.pos[1],Every sailor's position compared with the team pages and the Rio jersey numbers – several positions are shown where they differ.,
+CHT.linkin[0],No more jumps to other sites,
+CHT.linkin[1],Ranking and qualifier links now open inside the app.,
+CHT.compass[0],Clearer wind compass,
+CHT.compass[1],"The yellow wedge shows where the wind comes from, the wind speed sits right in the middle.",
+CHT.tap[0],Tap any team or sailor,
+CHT.tap[1],"Team and sailor names now open their page everywhere – tables, results, settings and more.",
+CHT.pl[0],Now in Polish,
+CHT.pl[1],Polski! The app now speaks 18 languages.,
+CHT.photos[0],Official portraits for the 1/16 teams,
+CHT.photos[1],"Japan, Czechia, Chile, Ecuador, Hungary, Peru, South Africa and Thailand – fresh from the event studio.",
+CHT.bright[0],Brightness button,
+CHT.bright[1],"Switch between Matchboard blue, day and night right in the header.",
+CHT.logo[0],Bigger SSL logo,
+CHT.logo[1],A little more presence at the top.,
+CHT.tabs[0],New tab bar,
+CHT.tabs[1],"Competition (rounds + matchboard), Teams and Sailors each have their own tab.",
+CHT.settings[0],Settings,
+CHT.settings[1],"Notifications, start reminders, quiet hours, units, local times and spoiler-free mode in one place.",
+CHT.pages[0],Real pages,
+CHT.pages[1],"Teams, sailors and races open as full pages with their own link – back always goes one step back.",
+CHT.anim[0],Smooth round switching,
+CHT.anim[1],"Swipe between rounds, with an animation like in the big apps.",
+CHT.install[0],Easier to install,
+CHT.install[1],An Install button next to the language – the app on your home screen in 20 seconds.,
+CHT.track[0],Live tracking inside the app,
+CHT.track[1],"Every boat on the map, live ranking, course and replay – no more external site.",
+CHT.profiles[0],New sailor profiles,
+CHT.profiles[1],"Bio, career, Olympic and world championship medals from the official SSL profiles.",
+CHT.favS[0],Follow sailors,
+CHT.favS[1],Tap ☆ on a sailor – your sailors get their own list.,
+CHT.langs6[0],Six more languages,
+CHT.langs6[1],"Japanese, Thai, Malay, Hungarian, Czech and Ukrainian.",
+CHT.stream[0],Live stream in the app,
+CHT.stream[1],With preview image and countdown until the broadcast starts.,
+CHT.spoil[0],Spoiler-free mode,
+CHT.spoil[1],Hide results until you've watched the race.,
+CHT.wx[0],Sailing weather per race,
+CHT.wx[1],"Wind, gusts, direction, waves and tide for every start time.",
+CHT.cmp[0],Team comparison,
+CHT.cmp[1],Two teams side by side – head to head and numbers from Rio.,
+CHT.vids[0],Highlights,
+CHT.vids[1],The latest SSL videos right in the app.,
+CHT.venue[0],Venue,
+CHT.venue[1],Marina da Glória with map and directions.,
+CHT.race[0],Race details,
+CHT.race[1],"Tap a race for result, group standings, wind and stream.",
+CHT.push[0],Push notifications,
+CHT.push[1],Results of your teams straight to your phone.,
+CHT.cal[0],Calendar,
+CHT.cal[1],All races of your team in your calendar – updates itself.,
+CHT.shareimg[0],Share as image,
+CHT.shareimg[1],Group tables as a picture for WhatsApp & co.,
+CHT.app[0],Install as an app,
+CHT.app[1],"Full screen, with icon, updates itself.",
+CONT.[0],Africa,Afrika
+CONT.[1],Asia,Asie
+CONT.[2],Europe,Evropa
+CONT.[3],Oceania,Oceánie
+CONT.[4],Pan-America,Panamerika
+NWS,News,Zprávy
+NSRC,Source: worldofsailors.com (Star Sailors League),Zdroj: worldofsailors.com (Star Sailors League)
+RRS.[0],Start,Start
+RRS.[1],Race time,Délka závodu
+RRS.[2],Winner,Vítěz
+RRS.[3],The full report for this race follows here.,Podrobná zpráva o tomto závodě bude brzy zde.
+ALSO,also,také
+WXF,Wind from,Vítr od
+NXS.[0],On schedule,Podle plánu
+NXS.[1],Starting soon,Brzy start
+NXS.[2],Start delayed,Start zpožděn
+NXS.[3],Delayed,Zpožděno
+NXS.[4],Racing,Závodí se
+NXS.[5],t=>`Not before ${t}`,t=>`Ne dříve než ${t}`
+NXW,Start pending,Čeká na start
+NXP,Probably delayed,Asi zpoždění
+ORD,"n=>n+(n%10==1&&n!=11?""st"":n%10==2&&n!=12?""nd"":n%10==3&&n!=13?""rd"":""th"")","n=>n+""."""
+OSL,en,cs
+FIX.GBR,Great Britain,Velká Británie
+FIX.TAH,Tahiti,Tahiti
+FIX.MYA,Myanmar,Myanmar
+FIX.USA,USA,USA

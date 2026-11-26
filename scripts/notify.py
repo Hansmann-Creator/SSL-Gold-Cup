@@ -8,7 +8,7 @@ Needs env ONESIGNAL_REST_KEY; the App ID comes from config.js. Never fails the c
 """
 import json, os, re, sys, urllib.request
 
-LANGS = ["en", "de", "fr", "es", "pt", "zh-Hans", "ar", "hi", "bn", "ur", "id", "ms", "ja", "th", "hu", "cs", "uk", "pl"]
+LANGS = ["en", "de", "fr", "es", "pt", "it", "zh-Hans", "ar", "hi", "bn", "ur", "id", "ms", "ja", "th", "hu", "cs", "uk", "pl"]
 APPL = {"zh-Hans": "zh"}  # tag value "l" = app language code
 RN = {
  "en": {"r32": "1/32 Finals", "r16": "1/16 Finals", "r8": "1/8 Finals", "r4": "Quarter-finals", "sf": "Semi-finals", "pf": "Petit Final", "f": "Grand Final"},
@@ -16,6 +16,7 @@ RN = {
  "fr": {"r32": "1/32 de finale", "r16": "1/16 de finale", "r8": "1/8 de finale", "r4": "Quarts de finale", "sf": "Demi-finales", "pf": "Petite finale", "f": "Grande finale"},
  "es": {"r32": "1/32 de final", "r16": "1/16 de final", "r8": "Octavos de final", "r4": "Cuartos de final", "sf": "Semifinales", "pf": "Final de consolación", "f": "Gran final"},
  "pt": {"r32": "1/32 de final", "r16": "1/16 de final", "r8": "Oitavas de final", "r4": "Quartas de final", "sf": "Semifinais", "pf": "Petit Final", "f": "Grande Final"},
+ "it": {"r32": "1/32 di finale", "r16": "1/16 di finale", "r8": "1/8 di finale", "r4": "Quarti di finale", "sf": "Semifinali", "pf": "Finalina", "f": "Finale"},
  "zh-Hans": {"r32": "1/32 决赛", "r16": "1/16 决赛", "r8": "1/8 决赛", "r4": "四分之一决赛", "sf": "半决赛", "pf": "小决赛", "f": "总决赛"},
  "ar": {"r32": "نهائيات 1/32", "r16": "نهائيات 1/16", "r8": "نهائيات 1/8", "r4": "ربع النهائي", "sf": "نصف النهائي", "pf": "النهائي الصغير", "f": "النهائي الكبير"},
  "hi": {"r32": "1/32 फ़ाइनल", "r16": "1/16 फ़ाइनल", "r8": "1/8 फ़ाइनल", "r4": "क्वार्टर फ़ाइनल", "sf": "सेमीफ़ाइनल", "pf": "पेटिट फ़ाइनल", "f": "ग्रैंड फ़ाइनल"},
@@ -36,6 +37,7 @@ W = {  # group, race, through, out, champion, decided
  "fr": ("Groupe", "Course", "qualifiés pour les", "éliminés", "Champion du monde", "terminé"),
  "es": ("Grupo", "Regata", "pasan a", "eliminados", "Campeón del mundo", "decidido"),
  "pt": ("Grupo", "Regata", "avançam para", "eliminados", "Campeão mundial", "decidido"),
+ "it": ("Gruppo", "Regata", "passano a", "eliminate", "Campione del mondo", "deciso"),
  "zh-Hans": ("小组", "第", "晋级", "出局", "世界冠军", "已决出"),
  "ar": ("المجموعة", "السباق", "يتأهلان إلى", "خرجا", "بطل العالم", "حُسمت"),
  "hi": ("ग्रुप", "रेस", "आगे:", "बाहर", "विश्व चैंपियन", "तय"),
@@ -144,7 +146,7 @@ def main():
                  f"{rid} {gid} race {k} [{lv}, spoiler-free]")
 
 SPOILER_TXT = {"en": "Race finished – result hidden (spoiler-free mode). Open the app when you're ready.", "de": "Rennen beendet – Ergebnis versteckt (spoilerfrei). Öffne die App, wenn du so weit bist.",
- "fr": "Course terminée – résultat masqué (sans spoiler).", "es": "Regata terminada – resultado oculto (sin spoilers).", "pt": "Regata encerrada – resultado oculto (sem spoilers).",
+ "fr": "Course terminée – résultat masqué (sans spoiler).", "es": "Regata terminada – resultado oculto (sin spoilers).", "pt": "Regata encerrada – resultado oculto (sem spoilers).", "it": "Regata conclusa – risultato nascosto (senza spoiler). Apri l’app quando sei pronto.",
  "zh-Hans": "比赛结束 – 结果已隐藏（防剧透）。", "ar": "انتهى السباق – النتيجة مخفية (وضع بلا حرق).", "hi": "रेस खत्म – नतीजा छिपा है (स्पॉइलर-फ़्री)।", "bn": "রেস শেষ – ফল লুকানো (স্পয়লার-মুক্ত)।",
  "ur": "ریس ختم – نتیجہ چھپا ہوا ہے (اسپائلر فری)۔", "id": "Lomba selesai – hasil disembunyikan (bebas spoiler).", "ms": "Perlumbaan tamat – keputusan disembunyikan (bebas spoiler).",
  "ja": "レース終了 – 結果は非表示(ネタバレ防止)。", "th": "เรซจบแล้ว – ซ่อนผล (กันสปอยล์)", "hu": "A futam véget ért – eredmény elrejtve (spoilermentes).", "pl": "Wyścig zakończony – wynik ukryty (bez spoilerów).", "cs": "Rozjížďka skončila – výsledek skryt (bez spoilerů).", "uk": "Гонка завершилася – результат приховано (без спойлерів)."}
