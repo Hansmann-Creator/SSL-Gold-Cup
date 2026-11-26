@@ -22,6 +22,7 @@ Read this first in any new session. Everything needed to keep developing the app
 | `img/` | Sailor portraits 320×320 webp, `CODE-NO-name-slug.webp`; `img/fl/` flags. |
 | `live.json` | Live-stream state (written by `live.yml`). |
 | `rank/` | SSL Nations Ranking mirror (`scripts/ranking.py`, workflow `ranking.yml`): `index.json` (weeks, continents) + one file per week. Shown in-app at `#ranking`; never link out to worldofsailors.com. |
+| `flags.json` | Manual race notes from Hansi, e.g. `{"races":{"r16|A|1":{"pd":true,"nb":"<UTC ISO>","until":"<UTC ISO>"}}}` → countdown shows "Probably delayed · Not before HH:MM". Countdown states otherwise come from the schedule and Georacing's live feed (waiting / racing / done). |
 | `config.js` | `CFG.push` = OneSignal App ID, `CFG.gc` = GoatCounter code. Empty = feature off. |
 | `tools/positions/` | Position audit: `audit.py` (runs in Actions, fetches team pages), `rebuild.py` (merges sources → roster.json + positions_report.json), `xls.json` (production sheet extract). |
 

@@ -2239,12 +2239,38 @@ function openLive(x){const d=$("#tmd");openCode=null;const id=LIVEV&&LIVEV.id?LI
 /* ---------- header countdown to the next race ---------- */
 function nextRaceX(){const n=nowMs();return SCH.filter(x=>at(x)>n).sort((a,b)=>at(a)-at(b))[0]}
 function cdLong(t){const d=Math.max(0,Math.round((t-nowMs())/1000)),dd=Math.floor(d/86400),h=Math.floor(d%86400/3600),m=Math.floor(d%3600/60),sc=d%60,p=n=>String(n).padStart(2,"0");return (dd?`${dd}d `:"")+`${p(h)}:${p(m)}:${p(sc)}`}
-function nxcPaint(){let b=$("#nxc");const L=SCH.filter(x=>rState2(x)=="now").sort((a,b)=>at(a)-at(b))[0],N=L?null:nextRaceX();
-  if(!L&&!N){if(b)b.remove();return}
-  if(!b){b=document.createElement("button");b.id="nxc";b.type="button";b.onclick=()=>{const x=b._x;if(!x)return;b.classList.contains("live")?openLive(x):openRace(x)};$(".bar").appendChild(b)}
-  b._x=L||N;b.classList.toggle("live",!!L);
-  const lbl=L?`<small><i class="ldot2"></i>LIVE</small><b>▶ ${esc(T("watchLive"))}</b>`:`<small>${esc(S[lang].nxS||T("nextRace"))}</small><b class="cdd">${mono(cdLong(at(N)))}</b>`;
-  if(b._h!==lbl){b.innerHTML=lbl;b._h=lbl}b.setAttribute("aria-label",(L?"LIVE ":T("nextRace")+" ")+(b._x?`${T("group")} ${b._x.g} · ${b._x.t}`:""))}
+const NXS={en:["On schedule","Starting soon","Start delayed","Probably delayed","Racing",t=>`Not before ${t}`],de:["Planmäßig","Start gleich","Start verzögert","Wohl verspätet","Rennen läuft",t=>`Nicht vor ${t}`],fr:["À l'heure","Départ imminent","Départ retardé","Retard probable","En course",t=>`Pas avant ${t}`],es:["Puntual","Salida inminente","Salida retrasada","Probable retraso","En regata",t=>`No antes de ${t}`],pt:["No horário","Largada em breve","Largada atrasada","Provável atraso","Em regata",t=>`Não antes de ${t}`],zh:["准时","即将起航","起航推迟","可能推迟","比赛中",t=>`${t} 前不开始`],ar:["في الموعد","الانطلاق قريبًا","تأخر الانطلاق","تأخير محتمل","السباق جارٍ",t=>`ليس قبل ${t}`],hi:["समय पर","शुरू होने वाली","शुरुआत में देरी","संभावित देरी","रेस जारी",t=>`${t} से पहले नहीं`],bn:["সময়মতো","শিগগির শুরু","শুরু দেরিতে","সম্ভবত দেরি","রেস চলছে",t=>`${t}-এর আগে নয়`],ur:["وقت پر","آغاز قریب","آغاز میں تاخیر","ممکنہ تاخیر","ریس جاری",t=>`${t} سے پہلے نہیں`],id:["Sesuai jadwal","Segera mulai","Start tertunda","Kemungkinan tertunda","Sedang balapan",t=>`Tidak sebelum ${t}`],ms:["Ikut jadual","Hampir bermula","Mula tertangguh","Mungkin tertangguh","Sedang berlumba",t=>`Bukan sebelum ${t}`],ja:["定刻","まもなくスタート","スタート遅延","遅延の見込み","レース中",t=>`${t}以降`],th:["ตรงเวลา","ใกล้ออกตัว","ออกตัวล่าช้า","อาจล่าช้า","กำลังแข่ง",t=>`ไม่ก่อน ${t}`],hu:["Menetrend szerint","Hamarosan rajt","Rajt késik","Valószínű késés","Futam zajlik",t=>`Nem ${t} előtt`],cs:["Podle plánu","Brzy start","Start zpožděn","Asi zpoždění","Závodí se",t=>`Ne dříve než ${t}`],uk:["За розкладом","Старт скоро","Старт затримано","Ймовірна затримка","Гонка триває",t=>`Не раніше ${t}`],pl:["Zgodnie z planem","Zaraz start","Start opóźniony","Możliwe opóźnienie","Wyścig trwa",t=>`Nie przed ${t}`]};
+let FLG={};async function pullFlags(){try{const r=await fetch("flags.json?t="+Date.now(),{cache:"no-store"});if(r.ok)FLG=await r.json()}catch(e){}}
+pullFlags();setInterval(()=>{if(!document.hidden)pullFlags()},60000);
+/* race status from Georacing's live feed (CORS-open): waiting = boats on the water, none past the start; racing = someone past the start */
+const RST={};
+function rsPoll(x){const k=raceKey(x),o=RST[k]||(RST[k]={s:"",at:0,busy:false}),n=nowMs();if(o.busy||n-o.at<30e3)return o;const u=trkUrl(x);if(!u)return o;let ev,rc;try{const q=new URL(u).searchParams;ev=q.get("event");rc=q.get("race")}catch(e){return o}
+  o.busy=true;geoJ(`${GEOL}${ev}/${rc}/live.json`).then(j=>{const P=[];(Array.isArray(j)?j:[]).forEach(s=>(s.positions||[]).forEach(p=>P.push(+p.cl||0)));
+    o.s=!P.length?"":P.every(c=>c==255)?"done":P.some(c=>c>=1)?"racing":"waiting"}).catch(()=>{o.s=""}).finally(()=>{o.at=nowMs();o.busy=false});return o}
+const rioHM=ms=>{try{return new Date(ms).toLocaleTimeString(LOC(),{hour:"2-digit",minute:"2-digit",timeZone:"America/Sao_Paulo"})}catch(e){return""}};
+function nxState(x){const t=at(x),n=nowMs(),f=FLG&&FLG.races&&FLG.races[raceKey(x)],nb=f&&f.nb?Date.parse(f.nb):0;
+  const o=n>t-10*60e3&&n<t+150*60e3?rsPoll(x):RST[raceKey(x)]||{},st=o.s;
+  if(st=="racing")return{k:"racing"};
+  if(st=="done")return{k:"done"};
+  if(f&&f.pd&&(!f.until||n<Date.parse(f.until))&&(!nb||n<nb+20*60e3))return{k:"prob",to:nb&&nb>n?nb:t,nb};
+  if(n<t-5*60e3)return{k:"ok",to:t};
+  if(n<t)return{k:"soon",to:t};
+  if(st=="waiting")return{k:"late",since:t};
+  return{k:"live"}}
+function nxcPaint(){let b=$("#nxc");const n=nowMs();
+  const cand=SCH.filter(x=>!raceDone(x)&&at(x)>n-150*60e3).sort((a,b)=>at(a)-at(b));let x=null,S0=null;
+  for(const c of cand){const s=nxState(c);if(s.k=="done")continue;if(s.k=="live"&&n>at(c)+75*60e3)continue;x=c;S0=s;break}
+  if(!x){if(b)b.remove();return}
+  if(!b){b=document.createElement("button");b.id="nxc";b.type="button";b.onclick=()=>{const y=b._x;if(!y)return;b.classList.contains("live")?openLive(y):openRace(y)};$(".bar").appendChild(b)}
+  const L=NXS[lang]||NXS.en,red=S0.k=="racing"||S0.k=="live";b._x=x;b.classList.toggle("live",red);b.dataset.st=S0.k;
+  const p2=v=>String(v).padStart(2,"0"),since=d=>{const s=Math.max(0,Math.round(d/1000));return`+${Math.floor(s/3600)?Math.floor(s/3600)+":":""}${p2(Math.floor(s%3600/60))}:${p2(s%60)}`};
+  let top,big,pill="";
+  if(red){top=`<i class="ldot2"></i>LIVE`;big=`▶ ${esc(T("watchLive"))}`;if(S0.k=="racing")pill=`<em class="nxp r">${esc(L[4])}</em>`}
+  else if(S0.k=="prob"){top=esc(S0.nb?L[5](rioHM(S0.nb)):(S[lang].nxS||T("nextRace")));big=mono(cdLong(S0.to));pill=`<em class="nxp o">${esc(L[3])}</em>`}
+  else if(S0.k=="late"){top=esc(S[lang].nxS||T("nextRace"));big=mono(since(n-S0.since));pill=`<em class="nxp o">${esc(L[2])}</em>`}
+  else{top=esc(S[lang].nxS||T("nextRace"));big=mono(cdLong(S0.to));pill=`<em class="nxp ${S0.k=="soon"?"y":"g"}">${esc(S0.k=="soon"?L[1]:L[0])}</em>`}
+  const lbl=`<small>${top}</small><b class="cdd">${big}</b>${pill}`;
+  if(b._h!==lbl){b.innerHTML=lbl;b._h=lbl}b.setAttribute("aria-label",`${T("group")} ${x.g} · ${x.t}`)}
 setInterval(()=>{if(!document.hidden)nxcPaint()},1000);
 /* ---------- push notifications (OneSignal) + private visitor counter (GoatCounter); both off until config.js has a value ---------- */
 const CFG=window.CFG||{};
