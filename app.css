@@ -916,3 +916,30 @@ dialog.tmd:has(.vframe iframe) .vframe{touch-action:auto}
 @media(prefers-reduced-motion:reduce){#main.swl,#main.swr{animation:none}}
 
 .lgw{height:40px;min-height:0;box-sizing:border-box}#setb{width:40px;height:40px;min-height:0}.bar{align-items:center}
+
+/* competition sub-tabs + tab bar style B */
+.stk:has(.ladder[hidden]){display:block}
+.stk:has(.ladder[hidden]):has(.cseg[hidden]){display:none}
+.cseg{max-width:1240px;margin:0 auto;padding:9px var(--pad) 0}
+.cseg[hidden]{display:none}
+.cseg .sgc{max-width:520px;margin:0 auto}
+.cseg .sgc button{flex:1 1 0;transition:background-color .25s ease,color .25s ease}
+.stk:has(.ladder[hidden]) .cseg{padding-bottom:9px}
+@media(max-width:760px){
+ .tabs button{position:relative;transition:color .2s ease}
+ .tabs button::before{content:"";position:absolute;top:-6px;left:50%;width:0;height:3px;border-radius:0 0 3px 3px;background:var(--tbOn);transform:translateX(-50%);transition:width .25s cubic-bezier(.2,.8,.25,1)}
+ .tabs button[aria-selected=true]::before{width:30px}
+ .tabs button svg{transition:transform .2s ease}
+ .tabs button[aria-selected=true] svg{transform:translateY(-1px) scale(1.06)}
+ .tabs button[aria-selected=true] span{font-weight:600}
+}
+
+.rcact{display:grid;grid-template-columns:1.25fr 1fr;gap:10px;margin:18px 0 6px}
+.rcact .rcb{justify-content:center}
+.lvbtn{display:flex;align-items:center;gap:10px;border:0;border-radius:14px;padding:10px 14px;color:#fff;text-align:start;background:linear-gradient(135deg,#e53935,#b71c1c);box-shadow:0 6px 18px rgba(229,57,53,.35);font:inherit}
+.lvbtn:active{transform:scale(.97)}
+.lvbtn .lvi{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;flex:none}
+.lvbtn b{display:block;font-size:15px;line-height:1.15}.lvbtn small{display:block;font-size:12px;opacity:.85}
+.lvbtn.on{animation:lvp 2s ease-in-out infinite}
+@keyframes lvp{0%,100%{box-shadow:0 6px 18px rgba(229,57,53,.35)}50%{box-shadow:0 6px 26px rgba(229,57,53,.75)}}
+.brand .sslg{height:clamp(24px,6vw,31px)}
