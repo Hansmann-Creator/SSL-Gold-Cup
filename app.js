@@ -494,6 +494,8 @@ for(const l in SWT)Object.assign(S[l],SWT[l]);
 
 
 const SZ={"en":{"fsT":"Final Series","qsT":"Qualifying Series","qsLeg":"Highlighted: qualified through this series. ● = in Rio via the SSL Nations Ranking. Tap a team in Rio for its page.","qsNote":"The winner of each qualifying group (group C: top two) was drawn into the 1/32 Finals. 29 teams qualified for the Final Series via the SSL Ranking, with spots per continent: 12 Europe, 8 Pan-America, 6 Asia, 1 Africa, 2 Oceania.","reg":{"asia":"Asia","afoc":"Africa & Oceania","eur":"Europe","pam":"Pan-America"},"fin":"Final","petit":"Petit F.","swipe":"Swipe sideways for later rounds →","road2":"Road to Rio","inRio":"In Rio via SSL Ranking","mbHint":"Top two of each group advance. Tap a team for crew and history."},"de":{"fsT":"Final Series","qsT":"Qualifying Series","qsLeg":"Hervorgehoben: über diese Serie qualifiziert. ● = über das SSL Nations Ranking in Rio. Team in Rio antippen für die Teamseite.","qsNote":"Der Sieger jeder Qualifikationsgruppe (Gruppe C: die ersten zwei) wurde in die 1/32-Finale gelost. 29 Teams kamen über das SSL Ranking in die Final Series, mit Plätzen je Kontinent: 12 Europa, 8 Panamerika, 6 Asien, 1 Afrika, 2 Ozeanien.","reg":{"asia":"Asien","afoc":"Afrika & Ozeanien","eur":"Europa","pam":"Panamerika"},"fin":"Finale","petit":"Kl. Finale","swipe":"Seitlich wischen für spätere Runden →","road2":"Weg nach Rio","inRio":"Über das SSL Ranking in Rio","mbHint":"Die ersten zwei jeder Gruppe kommen weiter. Team antippen für Crew und Historie."},"fr":{"fsT":"Final Series","qsT":"Qualifying Series","qsLeg":"En surbrillance : qualifiée par cette série. ● = à Rio via le classement SSL des nations. Touchez une équipe présente à Rio pour sa page.","qsNote":"Le vainqueur de chaque groupe de qualification (groupe C : les deux premiers) a été tiré au sort dans les 1/32 de finale. 29 équipes se sont qualifiées pour les Final Series via le classement SSL, avec des places par continent : 12 Europe, 8 Amériques, 6 Asie, 1 Afrique, 2 Océanie.","reg":{"asia":"Asie","afoc":"Afrique & Océanie","eur":"Europe","pam":"Amériques"},"fin":"Finale","petit":"Petite F.","swipe":"Balayez pour les tours suivants →","road2":"Route vers Rio","inRio":"À Rio via le classement SSL","mbHint":"Les deux premiers de chaque groupe passent. Touchez une équipe pour l'équipage et l'historique."},"es":{"fsT":"Final Series","qsT":"Qualifying Series","qsLeg":"Resaltado: clasificado en esta serie. ● = en Río por el Ranking SSL de naciones. Toca un equipo presente en Río para ver su página.","qsNote":"El ganador de cada grupo de clasificación (grupo C: los dos primeros) fue sorteado en los 1/32 de final. 29 equipos se clasificaron para las Final Series por el Ranking SSL, con plazas por continente: 12 Europa, 8 Panamérica, 6 Asia, 1 África, 2 Oceanía.","reg":{"asia":"Asia","afoc":"África y Oceanía","eur":"Europa","pam":"Panamérica"},"fin":"Final","petit":"Consolación","swipe":"Desliza para ver más rondas →","road2":"Camino a Río","inRio":"En Río por el Ranking SSL","mbHint":"Pasan los dos primeros de cada grupo. Toca un equipo para ver tripulación e historia."}};for(const l in SZ)Object.assign(S[l],SZ[l]);
+const STK={en:{tkLoad:"Loading tracking…",tkNone:"No tracking for this race yet.",tkNoData:"No tracking data for this race.",tkOpens:"Tracking opens at",tkStart:"Start",tkLeg:"Leg",tkPre:"pre-start",tkNoPos:"no signal",tkRep:"Replay"},de:{tkLoad:"Tracking wird geladen…",tkNone:"Für dieses Rennen gibt es noch kein Tracking.",tkNoData:"Keine Tracking-Daten für dieses Rennen.",tkOpens:"Tracking startet um",tkStart:"Start",tkLeg:"Schenkel",tkPre:"vor dem Start",tkNoPos:"kein Signal",tkRep:"Replay"},fr:{tkLoad:"Chargement du tracking…",tkNone:"Pas encore de tracking pour cette course.",tkNoData:"Aucune donnée de tracking pour cette course.",tkOpens:"Tracking ouvert à",tkStart:"Départ",tkLeg:"Bord",tkPre:"avant le départ",tkNoPos:"pas de signal",tkRep:"Replay"},es:{tkLoad:"Cargando tracking…",tkNone:"Aún no hay tracking para esta regata.",tkNoData:"No hay datos de tracking para esta regata.",tkOpens:"El tracking abre a las",tkStart:"Salida",tkLeg:"Tramo",tkPre:"antes de la salida",tkNoPos:"sin señal",tkRep:"Repetición"},pt:{tkLoad:"Carregando rastreamento…",tkNone:"Ainda não há rastreamento para esta regata.",tkNoData:"Sem dados de rastreamento para esta regata.",tkOpens:"O rastreamento abre às",tkStart:"Largada",tkLeg:"Perna",tkPre:"pré-largada",tkNoPos:"sem sinal",tkRep:"Replay"}};
+for(const l in STK)Object.assign(S[l],STK[l]);
 const T=k=>S[lang][k]??S.en[k];
 const ord=n=>ORD[lang](n);
 
@@ -963,10 +965,118 @@ function openRace(x){if(!x)return;const d=$("#tmd"),r=rnd(x.rid),g=r&&r.groups.f
   d.querySelectorAll("[data-tm]").forEach(b=>b.onclick=()=>{if(isTeam(b.dataset.tm))openTeam(b.dataset.tm)});
   d.querySelector("[data-go]").onclick=e=>{d.close();sel=null;jump=true;go(e.currentTarget.dataset.go)};
   show(d)}
-function openTrack(x){const u=x&&x.url?x.url:trkUrl(x);if(!u)return;const d=$("#tmd");d.classList.add("full");
-  d.innerHTML=`<div class="trkv"><div class="trkbar"><button class="trkb" data-back="1">${esc(T("back"))}</button><b>${esc(x.url?"Georacing":x.rid=="f"||x.rid=="pf"?RNm(rnd(x.rid)):`${T("group")} ${x.g} · ${T("race")} ${x.n}`)}</b><a class="trkb" href="${esc(u)}" target="_blank" rel="noopener">${esc(T("trkExt"))}</a></div><iframe src="${esc(u)}" title="Georacing" allow="fullscreen" sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-downloads" referrerpolicy="no-referrer-when-downgrade"></iframe></div>`;
-  d.querySelector("[data-back]").onclick=()=>{d.classList.remove("full");if(x.url)d.close();else openRace(x)};
-  openCode=null;show(d);gcEvent("tracking")}
+/* ---------- own tracking view: Georacing data (public, CORS-enabled) drawn in the app's design ---------- */
+const GEOD="https://player.georacing.com/datas/",GEOL="https://data-live.georacing.com/datas/";
+const GF=[["lg","f64",8,1e6],["lt","f64",8,1e6],["al","f32",4,1e6],["s","f32",4,1e6],["h","u16",2,65535],["vmg","f32",4,1e6],["status","u8",1,127],["cl","u8",1,127],["d","f32",4,-1],["dtnm","f32",4,-1],["r","u16",2,9999],["p","i16",2,9999],["gps","u16",2,65535],["gsm","u8",1,127],["bat","u8",1,127],["ecart_d","f32",4,1e6],["int_1","u16",2,65535],["s_1","f32",4,1e6],["h_1","u16",2,65535],["vmg_1","f32",4,1e6],["int_2","u16",2,65535],["s_2","f32",4,1e6],["h_2","u16",2,65535],["vmg_2","f32",4,1e6],["tws","f32",4,1e6],["twd","u16",2,65535],["water_temp","i16",2,65535],["air_temp","i16",2,65535],["air_pression","u16",2,65535],["dp_1","f32",4,1e6],["dp_2","f32",4,1e6]];
+function geoDecode(buf,day){const [Y,M,D]=day.split("_").map(Number),base=Date.UTC(Y,M-1,D),v=new DataView(buf),end=buf.byteLength,out=[];let o=0;
+  const rd=(f,t)=>t=="u8"?v.getUint8(f):t=="u16"?v.getUint16(f):t=="i16"?v.getInt16(f):t=="f32"?v.getFloat32(f,true):v.getFloat64(f,true);
+  while(o+5<=end){const ver=v.getUint8(o),na=v.getUint16(o+1),mn=v.getUint16(o+3);if(ver>3||!na)break;let hd,st,rs;
+    if(ver>=3){const nf=v.getUint8(o+9);hd=10+nf;st=[];rs=2;for(let i=0;i<nf;i++){const id=v.getUint8(o+10+i);if(!GF[id]){st=null;break}st.push(id);rs+=GF[id][2]}if(!st)break}else{hd=ver>=2?9:5;st=[10,7,8,0,1,2,3,4,9];rs=39}
+    const ms=ver>=2?v.getUint32(o+5):hd+(9+60*rs)*na;if(ms<=hd)break;const t0=base+6e4*mn;let p=o+hd;const A=[];
+    for(let a=0;a<na&&p+9<=end;a++){let tb=v.getUint16(p+5);if(tb>4091)tb-=65536;if(!tb)tb=1;A.push({id:v.getUint32(p),tb});p+=9}
+    let q=p;for(const a of A){const step=a.tb>0?a.tb:-1/a.tb,n=Math.max(1,Math.ceil(60/step));for(let k=0;k<n&&q+rs<=end;k++){if(!v.getUint8(q)){q+=rs;continue}const off=v.getUint8(q+1),r={id:a.id};let f=q+2;for(const id of st){const g=GF[id],x=rd(f,g[1]);r[g[0]]=x===g[3]?null:x;f+=g[2]}q+=rs;if(r.lt==null||r.lg==null||(!r.lg&&!r.lt))continue;r.t=t0+Math.round(1e3*(k*step+off));out.push(r)}}
+    o+=ms}
+  return out}
+let LEAF=null;
+function loadLeaflet(){return LEAF||(LEAF=new Promise((res,rej)=>{const c=document.createElement("link");c.rel="stylesheet";c.href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";document.head.appendChild(c);const s=document.createElement("script");s.src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";s.onload=()=>res(window.L);s.onerror=e=>{LEAF=null;rej(e)};document.head.appendChild(s)}))}
+const geoJ=async u=>{const r=await fetch(u,{cache:"no-store"});if(!r.ok)throw new Error(r.status);return r.json()};
+const dayStr=ms=>{const d=new Date(ms);return d.getUTCFullYear()+"_"+String(d.getUTCMonth()+1).padStart(2,"0")+"_"+String(d.getUTCDate()).padStart(2,"0")};
+let TK=null;
+window.gcmbTrack=u=>openTrack({url:u});
+function trkStop(){if(!TK)return;TK.dead=true;clearInterval(TK.tick);clearTimeout(TK.poll);clearInterval(TK.allPoll);try{TK.map&&TK.map.remove()}catch(e){}TK=null}
+function openTrack(x){const u=x&&x.url?x.url:trkUrl(x);if(!u)return;let ev,rc;try{const q=new URL(u).searchParams;ev=q.get("event");rc=q.get("race")}catch(e){}
+  const d=$("#tmd");trkStop();d.classList.add("full");openCode=null;
+  const title=x.url?T("trkLive"):x.rid=="f"||x.rid=="pf"?RNm(rnd(x.rid)):`${T("group")} ${x.g} · ${T("race")} ${x.n}`;
+  d.innerHTML=`<div class="trkv tk"><div class="trkbar"><button class="trkb" data-back="1">${esc(T("back"))}</button><b>${esc(title)}</b><span class="tkst" id="tkst"></span></div>
+  <div class="tkmap"><div id="tkm"></div><div class="tkhud" id="tkhud"></div><div class="tkmsg" id="tkmsg"><span class="spin"></span>${esc(T("tkLoad"))}</div><button class="tkfit" id="tkfit" aria-label="fit">${'<svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>'}</button></div>
+  <div class="tktl" id="tktl" hidden><button class="tkpl" id="tkpl" aria-label="play"></button><input type="range" id="tkr" min="0" max="1" step="1" value="0"><button class="tksp" id="tksp">1×</button><button class="tklv" id="tklv">LIVE</button></div>
+  <div class="tkrk" id="tkrk"></div><p class="tkcr">Tracking: Georacing · Map: Esri</p></div>`;
+  d.querySelector("[data-back]").onclick=()=>{trkStop();d.classList.remove("full");if(x.url)d.close();else openRace(x)};
+  show(d);gcEvent("tracking");
+  if(!ev||!rc){$("#tkmsg").textContent=T("tkNone");return}
+  trkRun(x,ev,rc).catch(e=>{const m=$("#tkmsg");if(m){m.hidden=false;m.textContent=T("tkNone")}})}
+async function trkRun(x,ev,rc){const Lf=await loadLeaflet().catch(()=>null);const base=`${GEOD}${ev}/${rc}/`;
+  const all=await geoJ(base+"all.json");if(!TK&&!$("#tkm"))return;
+  const S0=Date.parse(all.race.start_time),E0=Date.parse(all.race.end_time),AV=Date.parse(all.race.available_time||all.race.start_time),delay=1e3*(+all.race.time_delay_2d||8);
+  const tk=TK={ev,rc,all,map:null,tr:new Map(),start:S0,t:0,play:false,spd:1,live:false,follow:true,dead:false};
+  const ACT=new Map((all.actors||[]).map(a=>[+a.id,{code:(a.short_name||"").toUpperCase(),name:a.name,color:a.color||"#fff"}]));
+  const course=(all.courses||[]).find(c=>+c.active)||(all.courses||[])[0];const MK=new Map();
+  for(const c of all.courses||[])for(const o of c.course_objects||[])for(const e of o.course_elements||[])if(!MK.has(+e.id))MK.set(+e.id,{name:e.name,color:e.color||"#ff8700",jury:/committee|jury/i.test(e.name)});
+  const add=r=>{if(r.lt==null||r.lg==null)return;let a=tk.tr.get(r.id);if(!a)tk.tr.set(r.id,a=[]);if(a.length&&a[a.length-1].t>=r.t){if(a[a.length-1].t==r.t)return;a.push(r);a.sort((p,q)=>p.t-q.t);return}a.push(r)};
+  async function loadDay(day){try{const ix=await geoJ(`${base}positions/${day}__r.json`);const n=ix.lastIndex??0;for(let i=0;i<=n;i++){const r=await fetch(`${base}positions/${day}__r${i}__positions.bin`,{cache:"no-store"});if(r.ok)geoDecode(await r.arrayBuffer(),day).forEach(add)}return n}catch(e){return -1}}
+  const days=[...new Set([dayStr(AV),dayStr(S0),dayStr(Math.min(E0,Date.now()))])];
+  if(Date.now()>=AV-6e4)for(const dy of days)await loadDay(dy);
+  if(tk.dead)return;
+  /* map */
+  const msg=$("#tkmsg");
+  if(!Lf){msg.textContent=T("tkNone");return}
+  const map=tk.map=Lf.map("tkm",{zoomControl:false,attributionControl:false,preferCanvas:false}).setView([-22.92,-43.155],13);
+  Lf.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:18,maxNativeZoom:17}).addTo(map);
+  ["touchstart","wheel","mousedown"].forEach(ev2=>map.getContainer().addEventListener(ev2,()=>{tk.follow=false},{passive:true}));
+  const boatIcon=(c,h)=>`<svg viewBox="-12 -16 24 32" width="22" height="30" style="transform:rotate(${h||0}deg)"><path d="M0-15C5-8 6 0 5 14H-5C-6 0-5-8 0-15z" fill="${c}" stroke="#0a1730" stroke-width="2"/></svg>`;
+  const lay={boats:new Map(),trails:new Map(),marks:new Map(),course:Lf.layerGroup().addTo(map)};
+  const at=(id,t)=>{const a=tk.tr.get(id);if(!a||!a.length||a[0].t>t)return null;let lo=0,hi=a.length-1;while(lo<hi){const m=(lo+hi+1)>>1;if(a[m].t<=t)lo=m;else hi=m-1}const p=a[lo],q=a[lo+1];if(!q||q.t-p.t>2e4||t-p.t>12e4&&!q)return t-p.t>18e4?null:p;const f=(t-p.t)/(q.t-p.t);let dh=((q.h??0)-(p.h??0)+540)%360-180;return {...p,lt:p.lt+(q.lt-p.lt)*f,lg:p.lg+(q.lg-p.lg)*f,h:((p.h??0)+dh*f+360)%360}};
+  const range=()=>{let mn=Infinity,mx=0;for(const [id,a] of tk.tr)if(ACT.has(id)&&a.length){mn=Math.min(mn,a[0].t);mx=Math.max(mx,a[a.length-1].t)}return mn<Infinity?[Math.max(mn,S0-3e5),mx]:null};
+  const isLive=()=>Date.now()>=AV&&Date.now()<=E0&&!finishedAll();
+  const fin=()=>{const s=(all.splittimes||[]).find(z=>z.role=="finish");return s?s.splittimes||[]:[]};
+  const finishedAll=()=>{const f=fin();return ACT.size>0&&new Set(f.filter(z=>z.time).map(z=>+z.actor_id)).size>=ACT.size};
+  const rk=$("#tkrk"),hud=$("#tkhud"),tl=$("#tktl"),R=$("#tkr"),pl=$("#tkpl"),sp=$("#tksp"),lv=$("#tklv"),st=$("#tkst");
+  const kn=s=>s==null?"–":(s*1.94384).toFixed(1);
+  const mmss=ms=>{const s=Math.max(0,Math.round(ms/1e3));return `${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`};
+  const legs=course?(course.course_objects||[]).filter(o=>+o.order>0).length-1:0;
+  function drawCourse(t){lay.course.clearLayers();if(!course)return;const objs=(course.course_objects||[]).filter(o=>+o.order>0).sort((a,b)=>a.order-b.order);const pts=[];
+    for(const o of objs){const ps=(o.course_elements||[]).map(e=>at(+e.id,t)).filter(Boolean);if(!ps.length)continue;
+      if(ps.length>1&&(o.role=="start"||o.role=="finish"||o.type=="gate"))Lf.polyline(ps.map(p=>[p.lt,p.lg]),{color:o.role=="finish"?"#e8c547":o.role=="start"?"#fff":"#ffb347",weight:2,dashArray:o.type=="gate"&&o.role!="start"&&o.role!="finish"?"4 4":null,opacity:.9}).addTo(lay.course);
+      pts.push([ps.reduce((s,p)=>s+p.lt,0)/ps.length,ps.reduce((s,p)=>s+p.lg,0)/ps.length])}
+    if(pts.length>1)Lf.polyline(pts,{color:"#fff",weight:1.2,opacity:.45,dashArray:"2 6"}).addTo(lay.course)}
+  function frame(fit){const t=tk.t;
+    for(const [id,m] of MK){const p=at(id,t);let mk=lay.marks.get(id);if(!p){if(mk){mk.remove();lay.marks.delete(id)}continue}
+      if(!mk){mk=m.jury?Lf.circleMarker([p.lt,p.lg],{radius:4,color:"#fff",weight:2,fillColor:"#1a4486",fillOpacity:1}).addTo(map):Lf.circleMarker([p.lt,p.lg],{radius:5,color:"#0a1730",weight:2,fillColor:m.color,fillOpacity:1}).addTo(map);lay.marks.set(id,mk)}else mk.setLatLng([p.lt,p.lg])}
+    drawCourse(t);const rows=[];const bounds=[];
+    for(const [id,A] of ACT){const p=at(id,t);let b=lay.boats.get(id),tr=lay.trails.get(id);
+      if(!p){if(b){b.remove();lay.boats.delete(id)}if(tr){tr.remove();lay.trails.delete(id)}rows.push({id,A,p:null});continue}
+      const ic=Lf.divIcon({className:"tkboat",html:`${boatIcon(A.color,p.h)}<span>${FL(A.code)}${esc(A.code)}</span>`,iconSize:[22,30],iconAnchor:[11,15]});
+      if(!b){b=Lf.marker([p.lt,p.lg],{icon:ic,keyboard:false}).addTo(map);lay.boats.set(id,b)}else{b.setLatLng([p.lt,p.lg]);b.setIcon(ic)}
+      const a=tk.tr.get(id),i0=a.findIndex(z=>z.t>=t-9e4),pts=a.slice(Math.max(0,i0),a.findIndex(z=>z.t>t)<0?a.length:a.findIndex(z=>z.t>t)).map(z=>[z.lt,z.lg]);pts.push([p.lt,p.lg]);
+      if(!tr){tr=Lf.polyline(pts,{color:A.color,weight:2.5,opacity:.85}).addTo(map);lay.trails.set(id,tr)}else tr.setLatLngs(pts);
+      bounds.push([p.lt,p.lg]);rows.push({id,A,p})}
+    if(fit||tk.follow&&bounds.length){const bb=bounds.length?bounds:[...lay.marks.values()].map(m=>m.getLatLng());if(bb.length)map.fitBounds(Lf.latLngBounds(bb).pad(bounds.length>1?.35:2),{maxZoom:16,animate:!fit})}
+    /* ranking */
+    const F=fin(),ft=new Map(F.filter(z=>z.time&&Date.parse(z.time)<=t).map(z=>[+z.actor_id,Date.parse(z.time)]));
+    rows.sort((a,b)=>{const fa=ft.get(a.id),fb=ft.get(b.id);if(fa||fb)return (fa||Infinity)-(fb||Infinity);const ra=a.p&&a.p.r||99,rb=b.p&&b.p.r||99;return ra-rb||((b.p&&b.p.d)||0)-((a.p&&a.p.d)||0)});
+    const lead=rows[0]&&rows[0].p;
+    rk.innerHTML=rows.map((o,i)=>{const f=ft.get(o.id),p=o.p,leg=p&&p.cl!=null&&p.cl!=255&&p.cl>0?p.cl:null;
+      const gap=f?mmss(f-S0):i&&lead&&p&&lead.d!=null&&p.d!=null&&!ft.size?`−${Math.max(0,Math.round(lead.d-p.d))} m`:"";
+      return `<div class="tkrow"><span class="tkp">${f||p&&p.r?i+1:"–"}</span><span class="tkc" style="background:${esc(o.A.color)}"></span>${FL(o.A.code)}<span class="tkn"><b>${esc(NM(o.A.code)||o.A.name)}</b><small>${f?`✓ ${esc(T("done"))}`:leg?`${esc(T("tkLeg"))} ${leg}/${legs||"?"}`:p?esc(t<S0?T("tkPre"):""):esc(T("tkNoPos"))}</small></span><span class="tkv"><b>${f?mmss(f-S0):kn(p&&p.s)}</b><small>${f?"":"kn"}</small></span>${gap&&!f?`<span class="tkg">${gap}</span>`:""}</div>`}).join("");
+    /* hud */
+    const w=(all.weathers||[]).filter(z=>z.wind_direction!=null&&Date.parse(z.time)<=t).pop();const ldr=rows.find(r=>r.p);
+    hud.innerHTML=`<span class="tkclk">${esc(rioClock(t))}${t>=S0?` · +${mmss(t-S0)}`:` · −${mmss(S0-t)}`}</span>${w?`<span class="tkwd" title="wind"><svg viewBox="0 0 24 24" width="16" height="16" style="transform:rotate(${(w.wind_direction+180)%360}deg)"><path d="M12 3l5 14-5-3-5 3z" fill="currentColor"/></svg>${w.wind_direction}°</span>`:""}${ldr&&ldr.p.cl&&ldr.p.cl!=255?`<span>${esc(T("tkLeg"))} ${ldr.p.cl}/${legs||"?"}</span>`:""}`;
+    st.innerHTML=tk.live&&tk.atLive?`<i class="ldot2"></i>LIVE`:esc(T("tkRep"));
+    const rg=range();if(rg){R.min=rg[0];R.max=rg[1];R.value=t}}
+  /* timeline */
+  pl.innerHTML=`<svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>`;
+  const setPlay=on=>{tk.play=on;pl.innerHTML=on?`<svg viewBox="0 0 24 24" width="22" height="22"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg>`:`<svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>`};
+  pl.onclick=()=>{const rg=range();if(!rg)return;if(!tk.play&&tk.t>=rg[1]-1e3&&!tk.live)tk.t=rg[0];tk.atLive=false;setPlay(!tk.play)};
+  const SP=[1,5,20,60];sp.onclick=()=>{tk.spd=SP[(SP.indexOf(tk.spd)+1)%SP.length];sp.textContent=tk.spd+"×"};
+  R.oninput=()=>{tk.t=+R.value;tk.atLive=false;frame(false)};
+  lv.onclick=()=>{tk.atLive=true;tk.follow=true;setPlay(false);tk.t=Date.now()-delay;frame(false)};
+  $("#tkfit").onclick=()=>{tk.follow=true;frame(true)};
+  /* live feed: live.json every 2 s, falls back to re-reading the newest .bin file */
+  async function pollLive(){if(tk.dead)return;let ok=false;
+    try{const j=await geoJ(`${GEOL}${ev}/${rc}/live.json`);(Array.isArray(j)?j:[]).forEach(s=>{const tt=Date.parse(s.time);(s.positions||[]).forEach(p=>add({...p,id:+p.id,t:tt}))});ok=true}catch(e){}
+    if(!ok){try{const dy=dayStr(Date.now()),ix=await geoJ(`${base}positions/${dy}__r.json`),r=await fetch(`${base}positions/${dy}__r${ix.lastIndex??0}__positions.bin`,{cache:"no-store"});if(r.ok)geoDecode(await r.arrayBuffer(),dy).forEach(add)}catch(e){}}
+    tk.poll=setTimeout(pollLive,ok?2000:5000)}
+  tk.live=isLive();
+  const rg=range();
+  if(!rg&&!tk.live){msg.innerHTML=Date.now()<AV?`${esc(T("tkOpens"))} <b>${esc(rioClock(AV))}</b> ${esc(T("rioT"))}<br><small>${esc(T("tkStart"))} ${esc(rioClock(S0))}</small>`:esc(T("tkNoData"));
+    if(Date.now()<AV){tk.allPoll=setInterval(()=>{if(Date.now()>=AV-3e4){clearInterval(tk.allPoll);if(!tk.dead){trkStop();openTrack(x)}}},15e3)}return}
+  msg.hidden=true;tl.hidden=false;lv.hidden=!tk.live;
+  if(tk.live){tk.atLive=true;tk.t=Date.now()-delay;pollLive();tk.allPoll=setInterval(async()=>{try{const a2=await geoJ(base+"all.json");all.splittimes=a2.splittimes;all.weathers=a2.weathers}catch(e){}if(!isLive()){tk.live=false;lv.hidden=true}},2e4)}
+  else{tk.t=rg[0]+Math.min(9e4,(rg[1]-rg[0])*.02);setPlay(false)}
+  frame(true);
+  let last=performance.now();tk.tick=setInterval(()=>{if(tk.dead||document.hidden)return;const now=performance.now(),dt=now-last;last=now;
+    if(tk.atLive){tk.t=Date.now()-delay;frame(false);return}
+    if(tk.play){const rg=range();tk.t+=dt*tk.spd;if(rg&&tk.t>=rg[1]){tk.t=rg[1];if(tk.live){tk.atLive=true}else setPlay(false)}frame(false)}},250)}
 /* ---------- spoiler-free mode: hide results after a cutoff the user chooses ---------- */
 let SPOIL=!!LS.get("spoil",0),SPCUT=LS.get("spcut",0)||0;
 const PREVR={r16:"r32",r8:"r16",r4:"r8",sf:"r4",pf:"sf",f:"sf"},PHC={r32:"R1",r16:"R2",r8:"EF",r4:"QF",sf:"SF"};
@@ -1225,7 +1335,7 @@ $("#main").addEventListener("click",e=>{
 $("#tmd").addEventListener("click",e=>{if(e.target.id=="tmd")e.target.close()});
 $("#main").addEventListener("toggle",e=>{const dd=e.target;if(!dd.matches||!dd.matches("details[data-sq]"))return;dd.open?sOpen.add(dd.dataset.sq):sOpen.delete(dd.dataset.sq);LS.set("sOpen",[...sOpen])},true);
 $("#main").addEventListener("keydown",e=>{if(e.key!="Enter"&&e.key!=" ")return;const rc=e.target.closest&&e.target.closest("[data-race]");if(rc&&e.target===rc){e.preventDefault();openRace(raceBy(rc.dataset.race))}});
-$("#tmd").addEventListener("close",()=>{unlockScroll();$("#tmd").querySelectorAll("iframe,video,audio").forEach(f=>f.remove());openCode=null;if($("#tmd").querySelector(".ob"))LS.set("onb",1);$("#tmd").classList.remove("full");try{if(history.state&&history.state.sheet)history.back()}catch(e){}});
+$("#tmd").addEventListener("close",()=>{trkStop();unlockScroll();$("#tmd").querySelectorAll("iframe,video,audio").forEach(f=>f.remove());openCode=null;if($("#tmd").querySelector(".ob"))LS.set("onb",1);$("#tmd").classList.remove("full");try{if(history.state&&history.state.sheet)history.back()}catch(e){}});
 window.addEventListener("popstate",()=>{const d=$("#tmd");if(d.open)d.close()});
 window.addEventListener("hashchange",route);
 document.addEventListener("keydown",e=>{if(e.target.matches("input,select,textarea")||$("#tmd").open)return;
