@@ -1,0 +1,10 @@
+name: Temporary probe (results extras)
+on:
+  push:
+    paths: [".github/workflows/probe.yml"]
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install -q beautifulsoup4 && cp .github/probe_results.py scripts/probe_results.py && python scripts/probe_results.py --probe
