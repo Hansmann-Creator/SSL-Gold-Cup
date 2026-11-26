@@ -901,3 +901,17 @@ html.pgon .tabs{z-index:41}
 .setrow select{min-width:0}
 
 #off[hidden]{display:none}
+
+.hlk{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.hlk .rcb{justify-content:center}
+dialog.tmd:has(.vframe iframe){overflow:hidden;animation:none}
+dialog.tmd:has(.vframe iframe) .vframe{touch-action:auto}
+
+.ladder button{transition:background-color .25s ease,color .25s ease,border-color .25s ease,transform .15s ease}
+.ladder button:active{transform:scale(.96)}
+#main.swl{animation:swl .3s cubic-bezier(.2,.8,.25,1)}
+#main.swr{animation:swr .3s cubic-bezier(.2,.8,.25,1)}
+@keyframes swl{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:none}}
+@keyframes swr{from{opacity:0;transform:translateX(-36px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){#main.swl,#main.swr{animation:none}}
+#setb{order:9}

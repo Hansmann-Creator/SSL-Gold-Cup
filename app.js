@@ -1089,7 +1089,7 @@ function liveCalc(g){const n=g.rows[0].r.length;const tot=g.rows.map(x=>parseFlo
   const mx=g.rows.map((x,k)=>tot[k]+x.r.reduce((s,v,i)=>s+(String(v).trim()===""?(i==n-1?8:4):0),0));
   return g.rows.map((x,k)=>{const above=tot.filter((t,j)=>j!=k&&t>mx[k]).length;const reach=mx.filter((m,j)=>j!=k&&m>=tot[k]).length;return above>=2?"elim":reach<2?"clinch":""})}
 function raceDay(r){const t=days(r.start,r.end)+1,n=Math.min(t,Math.max(1,days(r.start,today())+1));return[n,t]}
-const LINKS=()=>`<span class="lk"><a href="https://www.youtube.com/@Starsailors/streams" target="_blank" rel="noopener">${T("stream")}</a><a href="https://app.georacing.com/?application_id=46" target="_blank" rel="noopener" data-trkurl="1">${T("tracking")}</a><a href="https://sslgoldcup.worldofsailors.com/schedule/" target="_blank" rel="noopener">${T("schedule")}</a></span>`;
+const LINKS=()=>`<div class="hlk"><button class="rcb" data-live="1">${svg('<path d="M6 4l14 8-14 8z"/>')}<b>${esc(T("liveStream"))}</b></button><button class="rcb" data-trkurl="1">${svg('<path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>')}<b>${esc(T("trkLive"))}</b></button></div>`;
 function current(){const r=D.rounds.find(r=>rState(r)!="done");return(r||D.rounds[D.rounds.length-1]).id}
 function teams(){const M={};
   D.rounds.forEach(r=>r.groups.forEach(g=>{const done=gState(g,r)=="done";g.rows.forEach((x,i)=>{if(!isTeam(x.team))return;
@@ -1201,9 +1201,13 @@ function needBox(r,g){const L=needs(r,g);if(!L)return"";return `<div class="need
 const raceNow=(rid,gid)=>SCH.some(x=>x.rid==rid&&(gid==null||x.g==gid)&&rState2(x)=="now");
 const liveTag=()=>`<span class="dot live"></span><b class="lvtag">LIVE</b>`;
 function ladder(){const L=$("#ladder");L.hidden=view!="board";if(L.hidden)return;
-  L.innerHTML=D.rounds.map(r=>{const s=rState(r),cls=s=="done"?"done":s=="live"?(raceNow(r.id)?"live":"amb"):(r.id==current()?"nx":"");
-    return `<button data-r="${r.id}" class="${r.id==round?"on":""}"><b>${esc(RS[r.id]||r.short)}</b><small><span class="dot ${cls}"></span>${esc(range(r))}</small></button>`}).join("");
-  const on=L.querySelector(".on");if(on)on.scrollIntoView({block:"nearest",inline:"center"})}
+  const html=D.rounds.map(r=>{const s=rState(r),cls=s=="done"?"done":s=="live"?(raceNow(r.id)?"live":"amb"):(r.id==current()?"nx":"");
+    return `<button data-r="${r.id}"><b>${esc(RS[r.id]||r.short)}</b><small><span class="dot ${cls}"></span>${esc(range(r))}</small></button>`}).join("");
+  if(L.dataset.h!==html){L.innerHTML=html;L.dataset.h=html}
+  L.querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.r==round));
+  const on=L.querySelector(".on");if(on){const x=on.offsetLeft-(L.clientWidth-on.offsetWidth)/2;try{L.scrollTo({left:x,behavior:RDIR?"smooth":"auto"})}catch(e){L.scrollLeft=x}}}
+let RDIR=0;
+function goRound(id){const ids=D.rounds.map(r=>r.id),a=ids.indexOf(round),b=ids.indexOf(id);if(b<0||id==round)return;RDIR=b>a?1:-1;round=id;go("round-"+id)}
 function note(g){return g.note?(/OCS|Frühstart|early/i.test(g.note)?T("notes").ocs:g.note):""}
 const QNX={r32:"r16",r16:"r8",r8:"r4",r4:"sf",sf:"f"};
 function qsep(r,g){const nx=rnd(QNX[r.id]),txt=T("qsep")(nx?RNm(nx):"");return `<tr class="qsep" aria-hidden="true"><td colspan="${g.rows[0].r.length+3}"><span>${esc(txt)}</span></td></tr>`}
@@ -1957,9 +1961,10 @@ let GOOD=null;
 function render(keepScroll){try{render0(keepScroll);GOOD=D;const F=$("#foot");if(F)F.hidden=!["board","bracket"].includes(view)}catch(e){console.error(e);if(GOOD&&GOOD!==D){D=GOOD;try{render0(keepScroll)}catch(e2){}}}}
 function render0(keepScroll){const y=scrollY;chrome();
   document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.v==view||(b.dataset.v=="bracket"&&(view=="qualifying"||view=="gc2023"))||(b.dataset.v=="more"&&view=="sailors")));
-  ladder();const M=$("#main");
+  ladder();const M=$("#main");const dir=view=="board"?RDIR:0;RDIR=0;
   M.innerHTML=(["home","board","bracket","teams"].includes(view)?spoilBanner():"")+(view=="home"?home():view=="more"?more():view=="sailors"?sailorsView():view=="board"?board():view=="bracket"?bracket():view=="qualifying"?qualifying():view=="gc2023"?gc23():teamView());
   document.body.dataset.view=view;
+  if(dir){M.classList.remove("swl","swr");void M.offsetWidth;M.classList.add(dir>0?"swl":"swr");setTimeout(()=>M.classList.remove("swl","swr"),400)}
   if(jump){jump=false;const sr=M.querySelector("tr.sel,.bx .sel,.mr.sel");if(sr)setTimeout(()=>sr.scrollIntoView({block:"center",inline:"center"}),60);else scrollTo(0,0)}else if(keepScroll)scrollTo(0,y);else if(!document.body.classList.contains("lock"))scrollTo(0,0);
   const i=$("#q");if(i)i.oninput=e=>{q=e.target.value;const p=i.selectionStart;render(true);const n=$("#q");n.focus();n.setSelectionRange(p,p)};
   const i2=$("#q2");if(i2)i2.oninput=e=>{sq2=e.target.value;const p=i2.selectionStart;render(true);const n=$("#q2");n.focus();n.setSelectionRange(p,p)}}
@@ -1975,7 +1980,11 @@ function route(){const h=location.hash.slice(1);let m;const pe=pgParse(h);
 const go=h=>{if(location.hash.slice(1)!==h){try{if(history.state&&history.state.sheet)location.replace("#"+h);else location.hash=h;return}catch(e){}}route()};
 
 document.querySelector(".tabs").addEventListener("click",e=>{const b=e.target.closest("button");if(b){sel=null;if(b.dataset.v==view&&scrollY>0)scrollTo({top:0,behavior:"smooth"});go(b.dataset.v=="board"?"round-"+(round||current()):b.dataset.v)}});
-$("#ladder").addEventListener("click",e=>{const b=e.target.closest("button");if(b){round=b.dataset.r;go("round-"+round)}});
+$("#ladder").addEventListener("click",e=>{const b=e.target.closest("button");if(b)goRound(b.dataset.r)});
+/* swipe left/right on a round to go to the next/previous round */
+{let sx=0,sy=0,st=0;const M=$("#main");M.addEventListener("touchstart",e=>{if(view!="board"||e.touches.length!=1)return;sx=e.touches[0].clientX;sy=e.touches[0].clientY;st=Date.now()},{passive:true});
+ M.addEventListener("touchend",e=>{if(view!="board"||!st)return;const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;st=0;if(Math.abs(dx)<70||Math.abs(dy)>Math.abs(dx)*.6)return;if(e.target.closest(".rt,.mbw,table,input,select"))return;
+  const ids=D.rounds.map(r=>r.id),i=ids.indexOf(round),j=i+(dx<0?1:-1);if(j>=0&&j<ids.length)goRound(ids[j])},{passive:true})}
 $("#main").addEventListener("click",e=>{
   const lvb=e.target.closest("[data-live]");if(lvb){openLive(SCH.filter(x=>rState2(x)=="now")[0]||null);return}
   const tu=e.target.closest("[data-trkurl],a[href^=\"https://app.georacing.com\"]");if(tu){e.preventDefault();const n=nowMs(),W=SCH.filter(x=>trkUrl(x));const b=W.filter(x=>at(x)<=n).sort((a,c)=>at(c)-at(a))[0]||W.sort((a,c)=>at(a)-at(c))[0];if(b)openTrack(b);else toast(T("tkNone"));return}
