@@ -5,7 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          U="https://hansmann-creator.github.io/SSL-Gold-Cup/"
-          for a in sslgoldcup ssl-goldcup goldcuprio sslgoldcuprio; do echo "== is.gd $a"; curl -s "https://is.gd/create.php?format=simple&url=$(python3 -c "import urllib.parse;print(urllib.parse.quote('$U'))")&shorturl=$a"; echo; done
-          echo "== check"; curl -sI https://is.gd/sslgoldcup | grep -i "^location\|^HTTP"
-          echo "== yt"; curl -sL -A "Mozilla/5.0" "https://www.youtube.com/@Starsailors" | grep -oE '"(channelId|externalId)":"UC[^"]+"' | sort -u | head
+          curl -sIL https://shop.sslgoldcup.com/ | grep -iE "^(HTTP|location)"
+          curl -sL -A "Mozilla/5.0" https://shop.sslgoldcup.com/ > s.html; wc -c s.html
+          grep -oE '<title>[^<]*' s.html; grep -oE 'woocommerce-loop-product__title">[^<]*' s.html | head -20; grep -oE 'product-category/[a-z0-9/-]+' s.html | sort -u | head -20
+          grep -ioE '(coming soon|closed|maintenance|out of stock)[^<]{0,60}' s.html | head -5
+          curl -sL -A "Mozilla/5.0" "https://shop.sslgoldcup.com/wp-json/wc/store/v1/products?per_page=30" | python3 -c "import json,sys;d=json.load(sys.stdin);[print(p['name'],'|',p['prices']['price'],p['prices']['currency_code'],'|',p['is_in_stock'],'|',p['permalink']) for p in d]" 2>&1 | head -40
