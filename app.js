@@ -121,6 +121,21 @@ fr:{race:"Course",nextRace:"Prochaine course",todayRaces:"Courses du jour",rioT:
 es:{race:"Regata",nextRace:"Próxima regata",todayRaces:"Regatas de hoy",rioT:"hora de Río",loc:"tu hora",onWater:"en el agua",done:"terminada",inX:m=>m<60?`en ${m} min`:`en ${Math.floor(m/60)} h ${String(m%60).padStart(2,"0")}`,firstStart:"Primera salida",schedT:"Calendario de la ronda",schedNote:"Horas de Río de Janeiro (UTC−3), según el calendario oficial. Sus grupos G1–G4 aparecen aquí como grupos A–D.",
  needT:"Antes de la última regata (puntos dobles)",need:{sure:"clasificado pase lo que pase",gone:"fuera pase lo que pase",win:"le basta ganar",top:k=>`${k} o mejor le basta`,mustWin:"tiene que ganar",help:"y necesita ayuda de los demás",maybe:k=>`${k} puede bastar – depende de los demás`,iff:(k,c)=>`${k} basta si ${c}`,mustIf:c=>`tiene que ganar, y solo si ${c}`,ahead:R=>`por delante de ${R}`,behind:R=>`por detrás de ${R}`,notWin:R=>`${R} no gana`,last:R=>`${R} queda último`,wins:R=>`${R} gana`,tie:"posible empate a puntos – decide el desempate"},needNote:"Calculado con los puntos actuales; ≈ significa posible empate, que resuelve el desempate oficial.",offline:"sin conexión – últimos datos guardados",install:"Añade a la pantalla de inicio para el icono."}};
 for(const l in SV)Object.assign(S[l],SV[l]);
+const SH={
+en:{home:"Home",more:"More",sailors:"Sailors",welcome:"Final Series · Rio de Janeiro",dates:"19 Nov – 13 Dec 2026 · Marina da Glória",progress:"Tournament",latest:"Latest results",explore:"Explore",tiles:{board:["Rounds","Groups, points, times"],bracket:["Matchboard","The whole draw at a glance"],teams:["Teams","40 nations, crews, rankings"],sailors:["Sailors","Search every sailor"],qualifying:["Qualifying","How the teams got to Rio"],gc2023:["Gold Cup 2023","Last edition's bracket"]},
+ showRound:"Open round ›",sailorsT:n=>`${n} sailors`,sSearch:"Search sailor, team or position",withPhoto:"With photo",allS:"All",moreT:"More",lang:"Language",design:"Design",share:"Share app",shared:"Link copied",links:"Links",about:"About this app",aboutT:"Unofficial companion app for the SSL Gold Cup Rio 2026. Results update automatically from the official SSL results page.",
+ inst:{t:"Install the app",d:"Put SSL Gold Cup on your home screen – opens like an app, full screen, with live results.",b:"Install",done:"Installed ✓",ios:["Tap the Share button","at the bottom of Safari (top right on iPad).","Scroll down and tap “Add to Home Screen”.","Tap “Add” – done."],iosOther:"On iPhone this works in Safari: open this page in Safari first.",android:["Tap the ⋮ menu in the top right of your browser.","Tap “Install app” or “Add to Home screen”.","Confirm with “Install”."],desk:["Click the install icon in the address bar,","or open the browser menu and choose “Install SSL Gold Cup”."],how:"How to install",hide:"Not now",installedNote:"You're using the installed app."}},
+de:{home:"Home",more:"Mehr",sailors:"Segler",welcome:"Final Series · Rio de Janeiro",dates:"19. Nov. – 13. Dez. 2026 · Marina da Glória",progress:"Turnier",latest:"Neueste Ergebnisse",explore:"Entdecken",tiles:{board:["Runden","Gruppen, Punkte, Zeiten"],bracket:["Matchboard","Der ganze Turnierbaum"],teams:["Teams","40 Nationen, Crews, Ranking"],sailors:["Segler","Alle Segler durchsuchen"],qualifying:["Qualifikation","Der Weg der Teams nach Rio"],gc2023:["Gold Cup 2023","Der Turnierbaum von 2023"]},
+ showRound:"Runde öffnen ›",sailorsT:n=>`${n} Segler`,sSearch:"Segler, Team oder Position suchen",withPhoto:"Mit Foto",allS:"Alle",moreT:"Mehr",lang:"Sprache",design:"Design",share:"App teilen",shared:"Link kopiert",links:"Links",about:"Über diese App",aboutT:"Inoffizielle Begleit-App zum SSL Gold Cup Rio 2026. Die Ergebnisse kommen automatisch von der offiziellen SSL-Ergebnisseite.",
+ inst:{t:"App installieren",d:"SSL Gold Cup auf den Homescreen legen – öffnet sich wie eine App, im Vollbild, mit Live-Ergebnissen.",b:"Installieren",done:"Installiert ✓",ios:["Tippe auf das Teilen-Symbol","unten in Safari (beim iPad oben rechts).","Runterscrollen und „Zum Home-Bildschirm“ antippen.","Auf „Hinzufügen“ tippen – fertig."],iosOther:"Auf dem iPhone geht das in Safari: Öffne diese Seite zuerst in Safari.",android:["Tippe oben rechts im Browser auf das ⋮-Menü.","Tippe auf „App installieren“ oder „Zum Startbildschirm hinzufügen“.","Mit „Installieren“ bestätigen."],desk:["Klicke auf das Installieren-Symbol in der Adresszeile","oder wähle im Browsermenü „SSL Gold Cup installieren“."],how:"So installierst du die App",hide:"Später",installedNote:"Du nutzt die installierte App."}},
+fr:{home:"Accueil",more:"Plus",sailors:"Marins",welcome:"Final Series · Rio de Janeiro",dates:"19 nov. – 13 déc. 2026 · Marina da Glória",progress:"Tournoi",latest:"Derniers résultats",explore:"Explorer",tiles:{board:["Tours","Groupes, points, horaires"],bracket:["Matchboard","Tout le tableau d'un coup d'œil"],teams:["Équipes","40 nations, équipages, classement"],sailors:["Marins","Chercher un marin"],qualifying:["Qualifications","Le parcours jusqu'à Rio"],gc2023:["Gold Cup 2023","Le tableau de 2023"]},
+ showRound:"Ouvrir le tour ›",sailorsT:n=>`${n} marins`,sSearch:"Chercher un marin, une équipe ou un poste",withPhoto:"Avec photo",allS:"Tous",moreT:"Plus",lang:"Langue",design:"Thème",share:"Partager l'app",shared:"Lien copié",links:"Liens",about:"À propos",aboutT:"Application non officielle pour la SSL Gold Cup Rio 2026. Les résultats viennent automatiquement de la page officielle de la SSL.",
+ inst:{t:"Installer l'app",d:"Ajoutez SSL Gold Cup à l'écran d'accueil – plein écran, comme une app, avec les résultats en direct.",b:"Installer",done:"Installée ✓",ios:["Touchez le bouton Partager","en bas de Safari (en haut à droite sur iPad).","Faites défiler et touchez « Sur l'écran d'accueil ».","Touchez « Ajouter » – c'est fait."],iosOther:"Sur iPhone, cela fonctionne dans Safari : ouvrez d'abord cette page dans Safari.",android:["Touchez le menu ⋮ en haut à droite du navigateur.","Touchez « Installer l'application » ou « Ajouter à l'écran d'accueil ».","Confirmez avec « Installer »."],desk:["Cliquez sur l'icône d'installation dans la barre d'adresse,","ou choisissez « Installer SSL Gold Cup » dans le menu."],how:"Comment installer l'app",hide:"Plus tard",installedNote:"Vous utilisez l'app installée."}},
+es:{home:"Inicio",more:"Más",sailors:"Regatistas",welcome:"Final Series · Río de Janeiro",dates:"19 nov – 13 dic 2026 · Marina da Glória",progress:"Torneo",latest:"Últimos resultados",explore:"Explorar",tiles:{board:["Rondas","Grupos, puntos, horarios"],bracket:["Matchboard","Todo el cuadro de un vistazo"],teams:["Equipos","40 naciones, tripulaciones, ranking"],sailors:["Regatistas","Busca a cualquier regatista"],qualifying:["Clasificación","El camino de los equipos a Río"],gc2023:["Gold Cup 2023","El cuadro de 2023"]},
+ showRound:"Abrir ronda ›",sailorsT:n=>`${n} regatistas`,sSearch:"Buscar regatista, equipo o puesto",withPhoto:"Con foto",allS:"Todos",moreT:"Más",lang:"Idioma",design:"Diseño",share:"Compartir app",shared:"Enlace copiado",links:"Enlaces",about:"Sobre esta app",aboutT:"App no oficial para la SSL Gold Cup Río 2026. Los resultados se actualizan solos desde la página oficial de la SSL.",
+ inst:{t:"Instalar la app",d:"Pon SSL Gold Cup en tu pantalla de inicio: se abre como una app, a pantalla completa, con resultados en directo.",b:"Instalar",done:"Instalada ✓",ios:["Toca el botón Compartir","abajo en Safari (arriba a la derecha en iPad).","Desliza y toca «Añadir a pantalla de inicio».","Toca «Añadir» y listo."],iosOther:"En iPhone funciona en Safari: abre primero esta página en Safari.",android:["Toca el menú ⋮ arriba a la derecha del navegador.","Toca «Instalar app» o «Añadir a pantalla de inicio».","Confirma con «Instalar»."],desk:["Haz clic en el icono de instalar de la barra de direcciones,","o elige «Instalar SSL Gold Cup» en el menú."],how:"Cómo instalar la app",hide:"Ahora no",installedNote:"Estás usando la app instalada."}}};
+for(const l in SH)Object.assign(S[l],SH[l]);
+
 const SZ={"en":{"fsT":"Final Series","qsT":"Qualifying Series","qsLeg":"Highlighted: qualified through this series. ● = in Rio via the SSL Nations Ranking. Tap a team in Rio for its page.","qsNote":"The winner of each qualifying group (group C: top two) was drawn into the 1/32 Finals. 29 teams qualified for the Final Series via the SSL Ranking, with spots per continent: 12 Europe, 8 Pan-America, 6 Asia, 1 Africa, 2 Oceania.","reg":{"asia":"Asia","afoc":"Africa & Oceania","eur":"Europe","pam":"Pan-America"},"fin":"Final","petit":"Petit F.","swipe":"Swipe sideways for later rounds →","road2":"Road to Rio","inRio":"In Rio via SSL Ranking","mbHint":"Top two of each group advance. Tap a team for crew and history."},"de":{"fsT":"Final Series","qsT":"Qualifying Series","qsLeg":"Hervorgehoben: über diese Serie qualifiziert. ● = über das SSL Nations Ranking in Rio. Team in Rio antippen für die Teamseite.","qsNote":"Der Sieger jeder Qualifikationsgruppe (Gruppe C: die ersten zwei) wurde in die 1/32-Finale gelost. 29 Teams kamen über das SSL Ranking in die Final Series, mit Plätzen je Kontinent: 12 Europa, 8 Panamerika, 6 Asien, 1 Afrika, 2 Ozeanien.","reg":{"asia":"Asien","afoc":"Afrika & Ozeanien","eur":"Europa","pam":"Panamerika"},"fin":"Finale","petit":"Kl. Finale","swipe":"Seitlich wischen für spätere Runden →","road2":"Weg nach Rio","inRio":"Über das SSL Ranking in Rio","mbHint":"Die ersten zwei jeder Gruppe kommen weiter. Team antippen für Crew und Historie."},"fr":{"fsT":"Final Series","qsT":"Qualifying Series","qsLeg":"En surbrillance : qualifiée par cette série. ● = à Rio via le classement SSL des nations. Touchez une équipe présente à Rio pour sa page.","qsNote":"Le vainqueur de chaque groupe de qualification (groupe C : les deux premiers) a été tiré au sort dans les 1/32 de finale. 29 équipes se sont qualifiées pour les Final Series via le classement SSL, avec des places par continent : 12 Europe, 8 Amériques, 6 Asie, 1 Afrique, 2 Océanie.","reg":{"asia":"Asie","afoc":"Afrique & Océanie","eur":"Europe","pam":"Amériques"},"fin":"Finale","petit":"Petite F.","swipe":"Balayez pour les tours suivants →","road2":"Route vers Rio","inRio":"À Rio via le classement SSL","mbHint":"Les deux premiers de chaque groupe passent. Touchez une équipe pour l'équipage et l'historique."},"es":{"fsT":"Final Series","qsT":"Qualifying Series","qsLeg":"Resaltado: clasificado en esta serie. ● = en Río por el Ranking SSL de naciones. Toca un equipo presente en Río para ver su página.","qsNote":"El ganador de cada grupo de clasificación (grupo C: los dos primeros) fue sorteado en los 1/32 de final. 29 equipos se clasificaron para las Final Series por el Ranking SSL, con plazas por continente: 12 Europa, 8 Panamérica, 6 Asia, 1 África, 2 Oceanía.","reg":{"asia":"Asia","afoc":"África y Oceanía","eur":"Europa","pam":"Panamérica"},"fin":"Final","petit":"Consolación","swipe":"Desliza para ver más rondas →","road2":"Camino a Río","inRio":"En Río por el Ranking SSL","mbHint":"Pasan los dos primeros de cada grupo. Toca un equipo para ver tripulación e historia."}};for(const l in SZ)Object.assign(S[l],SZ[l]);
 const T=k=>S[lang][k]??S.en[k];
 const ord=n=>ORD[lang](n);
@@ -276,12 +291,16 @@ function gtable(r,g,clickable){const gs=gState(g,r);const lc=gs=="live"&&g.rows.
 function mine(){if(!favs.size)return"";const TT=teams().filter(t=>favs.has(t.code));if(!TT.length)return"";
   return `<div class="mine"><h3>★ ${T("myTeams")}</h3>${TT.map(t=>`<button data-t="${esc(t.code)}" class="tmx"><span>${t.flag}</span><span><b>${esc(t.name)}</b><br><small>${esc(t.txt)}</small></span></button>`).join("")}</div>`}
 function board(){const r=D.rounds.find(x=>x.id==round)||D.rounds[0],s=rState(r),n=r.groups[0].rows[0].r.length;
-  let h=mine();const td=today(),tl=SCH.filter(x=>x.d==td);
+  let h=mine()+todayCard();const td=today();
+  h+=`<div class="rhead"><h2>${esc(RNm(r))}</h2><p>${esc(range(r))} · ${T("races")(n)} · ${s=="live"&&td>=r.start&&td<=r.end?T("raceDay")(...raceDay(r)):T("st")[s]}</p></div>`;
+  return h+boardGroups(r)}
+function todayCard(){let h="";const td=today(),tl=SCH.filter(x=>x.d==td);
   if(tl.length){const lr=rnd(tl[0].rid),[dn,dt]=raceDay(lr);
     h+=`<div class="next"><h3><span>${T("todayRaces")} · ${esc(RNm(lr))}</span><small>${esc(wday(td))} · ${T("raceDay")(dn,dt)}${dn==dt&&dt>1?` · <b class="cd">${T("finalDay")}</b>`:""}</small></h3>${raceList(tl)}${tzNote()}${LINKS()}</div>`}
   else{const up=SCH.filter(x=>x.d>td).sort((a,b)=>at(a)-at(b))[0];if(up){const ur=rnd(up.rid),d1=SCH.filter(x=>x.d==up.d);
     h+=`<div class="next"><h3><span>${T("upNext")}: ${esc(RNm(ur))}</span><small>${esc(wday(up.d))} · <span class="cd">${T("startsIn")(days(td,up.d))}</span></small></h3>${raceList(d1)}${tzNote()}${LINKS()}</div>`}}
-  h+=`<div class="rhead"><h2>${esc(RNm(r))}</h2><p>${esc(range(r))} · ${T("races")(n)} · ${s=="live"&&td>=r.start&&td<=r.end?T("raceDay")(...raceDay(r)):T("st")[s]}</p></div>`;
+  return h}
+function boardGroups(r){let h="";
   if(r.id=="f"||r.id=="pf")h+=`<p class="warn">${T("oneRace")}</p>`;
   h+=`<div class="grid">`+r.groups.map(g=>{const gs=gState(g,r),nx=gs!="done"?nextFor(r.id,g.id):null;
     return `<section class="g"><div class="gh"><b>${r.groups.length>1?T("group")+" "+esc(g.id):esc(RNm(r))}</b><span class="st"><span class="dot ${gs=="done"?"done":gs=="live"?"live":""}"></span>${T(gs=="done"?"decided":gs=="live"?"racing":"open")}</span></div>${nx?`<div class="gnx">${T("nextRace")}: <b>${["sf","pf","f"].includes(nx.rid)?"":T("race")+" "+nx.n+" · "}${esc(wday(nx.d))} · ${nx.t}</b>${showLocal?` (${esc(locT(nx))} ${T("loc")})`:""}</div>`:""}${gtable(r,g,true)}${needBox(r,g)}</section>`}).join("")+`</div>`;
@@ -293,7 +312,7 @@ function phm(c){const m=c.match(phRe);return m?`${m[1]} ${m[2]}${m[3]}`:c}
 function mrow(c,o){const tm=isTeam(c),w=o.w;return `<div class="mr${w?" w":""}${o.x?" x":""}${sel==c?" sel":""}${tm&&(o.click!==false)&&INFO[c]?" team":""}${o.me?" me":""}" data-t="${esc(c)}"${w&&tm?` style="${FG(c)}"`:""}>${tm?FL(c)+`<b>${esc(c)}</b>${star(c)}${o.dot?`<span class="rio" title="${esc(T("inRio"))}">●</span>`:""}`:`<i>${esc(phm(c))}</i>`}${o.v!=null?`<span class="v">${esc(o.v)}</span>`:""}</div>`}
 function mbox(r,g,opt={}){const gs=gState(g,r),done=gs=="done",has=g.rows.some(x=>String(x.total??"").trim()!=="");
   const rows=g.rows.map((x,i)=>{const o=outcome(r.id,i+1,done);return mrow(x.team,{w:o&&o[0]=="w",x:o&&o[2]===0&&r.id!="pf",v:has?String(x.total??"").trim():null,me:opt.me==x.team,click:!opt.me})}).join("");
-  const bd=KO.includes(r.id)&&!opt.me?`<div class="bdgs" aria-hidden="true"><span>${esc(ord(1))}</span><span>${esc(ord(2))}</span></div>`:"";
+  const bd=KO.includes(r.id)&&!opt.me&&!opt.nob?`<div class="bdgs" aria-hidden="true"><span>${esc(ord(1))}</span><span>${esc(ord(2))}</span></div>`:"";
   return `<div class="mb ${gs}"${opt.go?` data-go="${opt.go}" role="button" tabindex="0"`:""}>${bd}<div class="mh"><span>${esc(bcode(r,g))}</span>${gs=="live"?`<span class="dot live"></span>`:done?`<span class="ok">✓</span>`:""}</div>${rows}</div>`}
 function mbNav(k){return `<nav class="seg">${[["bracket",T("fsT")],["qualifying",T("qsT")],["gc2023",T("gc23")]].map(([h,l])=>`<a href="#${h}"${k==h?` class="on" aria-current="page"`:""}>${esc(l)}</a>`).join("")}</nav>`}
 function bracket(){const cols=KO.map(id=>D.rounds.find(r=>r.id==id)).filter(Boolean),fin=["f","pf"].map(id=>D.rounds.find(r=>r.id==id)).filter(Boolean);
@@ -340,6 +359,58 @@ function sections(list){const cur=current(),G=[];const add=(title,arr)=>{if(arr.
 function card(t){{const img=capPhoto(t.code),nick=squad(t.code).n;
     return `<button class="tm ${t.out?"out":""}" data-t="${esc(t.code)}"><span class="avt">${img?`<img src="${esc(img)}" alt="" loading="lazy">`:t.flag}</span><span><b>${img?t.flag+" ":""}${esc(t.name)}${favs.has(t.code)?` <span class="star">★</span>`:""}</b>${nick?`<span class="nk">${esc(nick)}</span>`:""}<small>${esc(t.short||t.txt)}</small></span>${t.I.rank?`<span class="rk"><small>${T("rank")}</small>#${t.I.rank}</span>`:""}</button>`}}
 
+/* ---------- home ---------- */
+const TI={board:'<path d="M4 6h16M4 12h16M4 18h10"/>',bracket:'<rect x="2.5" y="3.5" width="6" height="5" rx="1"/><rect x="2.5" y="15.5" width="6" height="5" rx="1"/><rect x="15.5" y="9.5" width="6" height="5" rx="1"/><path d="M8.5 6H12v12H8.5M12 12h3.5"/>',teams:'<path d="M5 21V3.5M5 4h12l-2.5 4.5L17 13H5"/>',sailors:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>',qualifying:'<path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.5 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/>',gc2023:'<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 01-10 0zM7 6H4v2a3 3 0 003 3M17 6h3v2a3 3 0 01-3 3"/>'};
+const svg=(p,cls="")=>`<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+function latestRound(){const L=D.rounds.filter(r=>r.groups.some(g=>gState(g,r)!="up"&&g.rows.some(x=>x.r.some(v=>String(v).trim()!==""))));return L[L.length-1]}
+function home(){let h=`<section class="hero"><img src="icons/icon-192.png" alt="" width="64" height="64"><div><b>${T("welcome")}</b><span>${T("dates")}</span></div></section>`;
+  h+=`<div class="prog" aria-label="${esc(T("progress"))}">${D.rounds.filter(r=>r.id!="pf").map(r=>{const s=rState(r);return `<button data-go="round-${r.id}" class="${s}${r.id==current()?" cur":""}"><i></i><span>${esc(RS[r.id]||r.short)}</span></button>`}).join("")}</div>`;
+  h+=installCard(true)+mine()+todayCard();
+  const lr=latestRound();
+  if(lr)h+=`<h3 class="sec">${T("latest")} · ${esc(RNm(lr))}</h3><div class="lat">${lr.groups.map(g=>mbox(lr,g,{go:"round-"+lr.id,nob:1})).join("")}</div><p class="more1"><a href="#round-${lr.id}">${T("showRound")}</a></p>`;
+  h+=`<h3 class="sec">${T("explore")}</h3><div class="tiles">${["board","bracket","teams","sailors","qualifying","gc2023"].map(k=>`<button data-go="${k=="board"?"round-"+current():k}">${svg(TI[k])}<b>${esc(T("tiles")[k][0])}</b><small>${esc(T("tiles")[k][1])}</small></button>`).join("")}</div>`;
+  return h}
+
+/* ---------- install ---------- */
+let BIP=null;const UA=navigator.userAgent||"";
+const isIOS=/iPhone|iPad|iPod/.test(UA)||(/Macintosh/.test(UA)&&navigator.maxTouchPoints>1),isAndroid=/Android/.test(UA);
+const isStandalone=()=>{try{return matchMedia("(display-mode: standalone)").matches||navigator.standalone===true}catch(e){return false}};
+const canInstall=()=>!isStandalone()&&(location.protocol=="https:"||location.hostname=="localhost")&&window.top===window;
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();BIP=e;if(view=="home"||view=="more")render(true)});
+window.addEventListener("appinstalled",()=>{BIP=null;LS.set("installed",1);toast(T("inst").done);render(true)});
+function installCard(dismissable){if(!canInstall()||(dismissable&&LS.get("instHide",0)>Date.now()))return"";const I=T("inst");
+  return `<section class="inst"><img src="icons/icon-192.png" alt="" width="52" height="52"><div><b>${I.t}</b><span>${I.d}</span></div><div class="ib"><button class="ibtn" data-inst="1">${BIP?I.b:I.how}</button>${dismissable?`<button class="ilater" data-insthide="1">${I.hide}</button>`:""}</div></section>`}
+function installHelp(){const I=T("inst"),d=$("#tmd");let steps;
+  const shareIc='<svg class="shr" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M8 7l4-4 4 4M6 11H5a1 1 0 00-1 1v8a1 1 0 001 1h14a1 1 0 001-1v-8a1 1 0 00-1-1h-1"/></svg>';
+  if(isIOS){const safari=!/CriOS|FxiOS|EdgiOS|GSA|Instagram|FBAN|FBAV|WhatsApp/.test(UA);
+    steps=(safari?"":`<p class="warn">${I.iosOther}</p>`)+`<ol class="isteps"><li>${I.ios[0]} ${shareIc} ${I.ios[1]}</li><li>${I.ios[2]}</li><li>${I.ios[3]}</li></ol>`}
+  else if(isAndroid)steps=`<ol class="isteps">${I.android.map(x=>`<li>${x}</li>`).join("")}</ol>`;
+  else steps=`<ol class="isteps">${I.desk.map(x=>`<li>${x}</li>`).join("")}</ol>`;
+  d.innerHTML=`<div class="th"><div><div class="nick">SSL Gold Cup</div><h2>${I.how}</h2></div><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb"><div class="ihero"><img src="icons/icon-192.png" alt="" width="72" height="72"><span>${I.d}</span></div>${steps}</div>`;
+  d.querySelector(".x").onclick=()=>d.close();openCode=null;show(d)}
+async function doInstall(){if(BIP){const e=BIP;BIP=null;try{await e.prompt();const c=await e.userChoice;if(c&&c.outcome=="accepted")LS.set("installed",1)}catch(x){}render(true)}else installHelp()}
+
+/* ---------- more ---------- */
+function more(){const I=T("inst");
+  const row=(href,ic,t,sub)=>`<a class="mrow" href="${href}"${/^https?:/.test(href)?' target="_blank" rel="noopener"':""}>${svg(ic)}<span><b>${esc(t)}</b>${sub?`<small>${esc(sub)}</small>`:""}</span></a>`;
+  let h=`<h2 class="pill">${T("moreT")}</h2>`;
+  h+=isStandalone()?`<p class="warn">✓ ${I.installedNote}</p>`:installCard(false);
+  h+=`<div class="mlist">${row("#sailors",TI.sailors,T("tiles").sailors[0],T("tiles").sailors[1])}${row("#qualifying",TI.qualifying,T("tiles").qualifying[0],T("tiles").qualifying[1])}${row("#gc2023",TI.gc2023,T("tiles").gc2023[0],T("tiles").gc2023[1])}<button class="mrow" data-share="1">${svg('<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/>')}<span><b>${T("share")}</b><small>${esc(location.href.split("#")[0])}</small></span></button></div>`;
+  h+=`<h3 class="sec">${T("links")}</h3><div class="mlist">${row("https://www.youtube.com/@Starsailors/streams",'<path d="M5 4l14 8-14 8z"/>',T("stream").replace("▶ ",""),"YouTube")}${row("https://app.georacing.com/?application_id=46",'<path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',T("tracking"),"Georacing")}${row("https://sslgoldcup.worldofsailors.com/results/",TI.board,T("official"),"sslgoldcup.worldofsailors.com")}${row("https://sslgoldcup.worldofsailors.com/schedule/",'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',T("schedule"),"")}</div>`;
+  h+=`<h3 class="sec">${T("how")?T("howT"):""}</h3><div class="card pad"><ul class="howl">${T("how").map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
+  h+=`<h3 class="sec">${T("about")}</h3><div class="card pad"><p>${esc(T("aboutT"))}</p><p class="warn">${esc(T("foot"))}</p></div>`;
+  return h}
+
+/* ---------- sailors ---------- */
+let sq2="",sPh=false;
+function sailorsView(){const all=[];Object.keys(INFO).forEach(c=>{try{squad(c).ppl.forEach(p=>all.push({c,p}))}catch(e){}});
+  const qq=sq2.trim().toLowerCase();
+  let L=all.filter(x=>(!sPh||x.p.img)&&(!qq||(x.p.name+" "+x.c+" "+NM(x.c)+" "+(x.p.k||"")+" "+(squad(x.c).n||"")).toLowerCase().includes(qq)));
+  L.sort((a,b)=>(b.p.img?1:0)-(a.p.img?1:0)||NM(a.c).localeCompare(NM(b.c),lang)||(+a.p.no||99)-(+b.p.no||99));
+  const shown=L.slice(0,qq?200:120);
+  return `<h2 class="pill">${T("sailors")}</h2><div class="tools"><input id="q2" type="search" placeholder="${esc(T("sSearch"))}" value="${esc(sq2)}" aria-label="${esc(T("sSearch"))}"></div><div class="tools"><button class="chip ${!sPh?"on":""}" data-sp="0">${T("allS")}</button><button class="chip ${sPh?"on":""}" data-sp="1">${T("withPhoto")}</button><span class="warn" style="margin:auto 0 auto 8px">${T("sailorsT")(L.length)}</span></div>
+  <div class="slist">${shown.map(({c,p})=>`<button class="srow" data-sc="${esc(c)}" data-si="${p.i}">${av(p,1)}<span><b>${esc(p.name)}</b><small>${FL(c)}${esc(NM(c))}${p.k?" · "+esc(p.k):p.cap?" · "+esc(T("captain")):""}</small></span></button>`).join("")}</div>${L.length>shown.length?`<p class="warn">+${L.length-shown.length} …</p>`:""}`}
+
 /* ---------- team sheet ---------- */
 let openCode=null;
 function openTeam(code){if(!isTeam(code))return;openCode=code;const d=$("#tmd"),sq=squad(code),I=INFO[code]||{},TM=teams().find(x=>x.code==code);
@@ -376,7 +447,7 @@ function openTeam(code){if(!isTeam(code))return;openCode=code;const d=$("#tmd"),
   d.querySelectorAll("[data-go]").forEach(b=>{const f=()=>{d.close();sel=code;jump=true;go(b.dataset.go)};b.onclick=f;b.onkeydown=e=>{if(e.key=="Enter")f()}});
   d.querySelectorAll("[data-pi]").forEach(el=>{const f=()=>openSailor(code,+el.dataset.pi);el.onclick=f;el.onkeydown=e=>{if(e.key=="Enter")f()}});
   show(d)}
-function show(d){if(!d.open)d.showModal();d.scrollTop=0;const th=d.querySelector(".th");if(th){th.tabIndex=-1;th.focus({preventScroll:true})}}
+function show(d){if(!d.open){d.showModal();try{history.pushState({sheet:1},"")}catch(e){}}d.scrollTop=0;const th=d.querySelector(".th");if(th){th.tabIndex=-1;th.focus({preventScroll:true})}}
 function openSailor(code,i){const d=$("#tmd"),sq=squad(code),p=sq.ppl[i];if(!p)return;openCode=code;const PE=pinfo(code,p),TM=teams().find(x=>x.code==code),n=sq.ppl.length;
   const q2=encodeURIComponent;let h=`<div class="th"><button class="bk">${T("back")}</button><div class="thb"><button class="pv" aria-label="previous">‹</button><button class="nx2" aria-label="next">›</button><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">`;
   h+=`<div class="shero">${p.img?`<img src="${esc(p.img)}" alt="${esc(p.name)}">`:`<span class="big">${esc(ini(p.name))}</span>`}<div><div class="nick">${FL(code)} ${esc(NM(code))}${sq.n?" · "+esc(sq.n):""}</div><h2>${esc(p.name)}</h2>${p.cap?`<span class="ctag">${T("capTag")}</span>`:""}</div></div>`;
@@ -395,11 +466,12 @@ function toast(m){let el=$(".toast");if(!el){el=document.createElement("div");el
 
 /* ---------- chrome: header bar, theme, language ---------- */
 function applyTheme(){const r=document.documentElement,t=theme=="auto"?"mb":theme;r.setAttribute("data-theme",t);let m=$("meta[name=theme-color]");if(!m){m=document.createElement("meta");m.name="theme-color";document.head.appendChild(m)}m.content={mb:"#1c4688",light:"#192550",dark:"#0b1630"}[t]}
-const ICO=['<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="4" rx="1.5"/><rect x="3" y="10" width="18" height="4" rx="1.5"/><rect x="3" y="16" width="18" height="4" rx="1.5"/></svg>','<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="3.5" width="6" height="5" rx="1"/><rect x="2.5" y="15.5" width="6" height="5" rx="1"/><rect x="15.5" y="9.5" width="6" height="5" rx="1"/><path d="M8.5 6H12v12H8.5M12 12h3.5"/></svg>','<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 21V3.5M5 4h12l-2.5 4.5L17 13H5"/></svg>'];
+const ICO0=['<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="4" rx="1.5"/><rect x="3" y="10" width="18" height="4" rx="1.5"/><rect x="3" y="16" width="18" height="4" rx="1.5"/></svg>','<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="3.5" width="6" height="5" rx="1"/><rect x="2.5" y="15.5" width="6" height="5" rx="1"/><rect x="15.5" y="9.5" width="6" height="5" rx="1"/><path d="M8.5 6H12v12H8.5M12 12h3.5"/></svg>','<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 21V3.5M5 4h12l-2.5 4.5L17 13H5"/></svg>'];
 $("#lang").onchange=e=>{lang=e.target.value;LS.set("lang",lang);for(const k in SQ)delete SQ[k];render();if($("#tmd").open&&openCode)openTeam(openCode)};
 $("#thm").onclick=()=>{theme={auto:"light",light:"dark",dark:"auto"}[theme];LS.set("theme",theme);applyTheme();chrome()};
+const ICO=['<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1z"/></svg>',ICO0[0],ICO0[1],ICO0[2],'<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="19" cy="12" r="1.9"/></svg>'];
 function chrome(){document.documentElement.lang=lang;$("#lang").value=lang;$("#thm").textContent=T("theme")[theme];
-  const tb=document.querySelectorAll(".tabs button");[T("rounds"),T("bracket"),T("teams")].forEach((l,i)=>tb[i].innerHTML=ICO[i]+`<span>${esc(l)}</span>`);
+  const tb=document.querySelectorAll(".tabs button");[T("home"),T("rounds"),T("bracket"),T("teams"),T("more")].forEach((l,i)=>{if(tb[i])tb[i].innerHTML=ICO[i]+`<span>${esc(l)}</span>`});
   $("#off").textContent=T("official");const F=$("#foot");const op=F.querySelector("details")?.open;F.innerHTML=`<details class="how"${op?" open":""}><summary>${esc(T("howT"))}</summary><ul>${T("how").map(x=>`<li>${esc(x)}</li>`).join("")}</ul></details><p>${esc(T("foot"))}</p>`;$("#tmd").setAttribute("aria-label",T("teams"));stand()}
 function stand(){const u=new Date(checkedAt&&Date.parse(checkedAt)>Date.parse(D.updatedAt)?checkedAt:D.updatedAt);if(isNaN(u)){$("#stand").textContent="–";return}
   const m=Math.max(0,Math.round((Date.now()-u)/6e4)),abs=u.toLocaleString(lang,{timeZone:"America/Sao_Paulo",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
@@ -410,30 +482,41 @@ applyTheme();
 let GOOD=null;
 function render(keepScroll){try{render0(keepScroll);GOOD=D}catch(e){console.error(e);if(GOOD&&GOOD!==D){D=GOOD;try{render0(keepScroll)}catch(e2){}}}}
 function render0(keepScroll){const y=scrollY;chrome();
-  document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.v==view||(b.dataset.v=="bracket"&&(view=="qualifying"||view=="gc2023"))));
+  document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.v==view||(b.dataset.v=="bracket"&&(view=="qualifying"||view=="gc2023"))||(b.dataset.v=="more"&&view=="sailors")));
   ladder();const M=$("#main");
-  M.innerHTML=view=="board"?board():view=="bracket"?bracket():view=="qualifying"?qualifying():view=="gc2023"?gc23():teamView();
+  M.innerHTML=view=="home"?home():view=="more"?more():view=="sailors"?sailorsView():view=="board"?board():view=="bracket"?bracket():view=="qualifying"?qualifying():view=="gc2023"?gc23():teamView();
+  document.body.dataset.view=view;
   if(jump){jump=false;const sr=M.querySelector("tr.sel,.bx .sel,.mr.sel");if(sr)setTimeout(()=>sr.scrollIntoView({block:"center",inline:"center"}),60);else scrollTo(0,0)}else if(keepScroll)scrollTo(0,y);
-  const i=$("#q");if(i)i.oninput=e=>{q=e.target.value;const p=i.selectionStart;render(true);const n=$("#q");n.focus();n.setSelectionRange(p,p)}}
+  const i=$("#q");if(i)i.oninput=e=>{q=e.target.value;const p=i.selectionStart;render(true);const n=$("#q");n.focus();n.setSelectionRange(p,p)};
+  const i2=$("#q2");if(i2)i2.oninput=e=>{sq2=e.target.value;const p=i2.selectionStart;render(true);const n=$("#q2");n.focus();n.setSelectionRange(p,p)}}
 function route(){const h=location.hash.slice(1);let m;
-  if(h=="bracket"||h=="teams"||h=="gc2023"||h=="qualifying")view=h;
+  if(["bracket","teams","gc2023","qualifying","home","more","sailors"].includes(h))view=h;
+  else if(!h||!/^(round|runde)-/.test(h)&&!/^team-/.test(h)){view="home"}
   else if(m=h.match(/^team-([A-Z]{3})$/)){if(view=="board"&&!round)view="teams";render();openTeam(m[1]);return}
-  else{view="board";m=h.match(/^(?:round|runde)-(\w+)$/);round=m&&D.rounds.some(r=>r.id==m[1])?m[1]:(round||current())}
+  else if(/^(round|runde)-/.test(h)){view="board";m=h.match(/^(?:round|runde)-(\w+)$/);round=m&&D.rounds.some(r=>r.id==m[1])?m[1]:(round||current())}
   LS.set("view",h);render()}
-const go=h=>{if(location.hash.slice(1)!==h){try{location.hash=h;return}catch(e){}}route()};
+const go=h=>{if(location.hash.slice(1)!==h){try{if(history.state&&history.state.sheet)location.replace("#"+h);else location.hash=h;return}catch(e){}}route()};
 
-document.querySelector(".tabs").addEventListener("click",e=>{const b=e.target.closest("button");if(b)go(b.dataset.v=="board"?"round-"+(round||current()):b.dataset.v)});
+document.querySelector(".tabs").addEventListener("click",e=>{const b=e.target.closest("button");if(b){if(b.dataset.v==view&&scrollY>0)scrollTo({top:0,behavior:"smooth"});go(b.dataset.v=="board"?"round-"+(round||current()):b.dataset.v)}});
 $("#ladder").addEventListener("click",e=>{const b=e.target.closest("button");if(b){round=b.dataset.r;go("round-"+round)}});
-$("#main").addEventListener("click",e=>{const f=e.target.closest("[data-f]");if(f){filt=f.dataset.f;render(true);return}
+$("#main").addEventListener("click",e=>{
+  const ins=e.target.closest("[data-inst]");if(ins){doInstall();return}
+  const ih=e.target.closest("[data-insthide]");if(ih){LS.set("instHide",Date.now()+3*864e5);render(true);return}
+  const sh=e.target.closest("[data-share]");if(sh){const u=location.href.split("#")[0];(async()=>{try{if(navigator.share){await navigator.share({title:"SSL Gold Cup",url:u});return}}catch(x){return}try{await navigator.clipboard.writeText(u);toast(T("shared"))}catch(x){toast(u)}})();return}
+  const sp=e.target.closest("[data-sp]");if(sp){sPh=sp.dataset.sp=="1";render(true);return}
+  const sr=e.target.closest("[data-sc]");if(sr){openSailor(sr.dataset.sc,+sr.dataset.si);return}
+  const g=e.target.closest("[data-go]");if(g&&!e.target.closest(".mr.team")){go(g.dataset.go);return}
+  const f=e.target.closest("[data-f]");if(f){filt=f.dataset.f;render(true);return}
   const s=e.target.closest("[data-s]");if(s){sortBy=s.dataset.s;render(true);return}
   const t=e.target.closest(".team,.tm,.tmx");if(t)openTeam(t.dataset.t)});
 $("#tmd").addEventListener("click",e=>{if(e.target.id=="tmd")e.target.close()});
-$("#tmd").addEventListener("close",()=>{openCode=null;if(/^#team-/.test(location.hash))try{location.hash="teams"}catch(e){}});
+$("#tmd").addEventListener("close",()=>{openCode=null;try{if(history.state&&history.state.sheet)history.back()}catch(e){}});
+window.addEventListener("popstate",()=>{const d=$("#tmd");if(d.open)d.close()});
 window.addEventListener("hashchange",route);
 document.addEventListener("keydown",e=>{if(e.target.matches("input,select,textarea")||$("#tmd").open)return;
   if(e.key=="/"){const i=$("#q");if(i){e.preventDefault();i.focus()}}
   if(view=="board"&&(e.key=="ArrowRight"||e.key=="ArrowLeft")){const ids=D.rounds.map(r=>r.id),i=ids.indexOf(round)+(e.key=="ArrowRight"?1:-1);if(ids[i]){round=ids[i];go("round-"+round)}}});
-setInterval(()=>{stand();if(view=="board"&&!$("#tmd").open&&!document.hidden&&!(document.activeElement&&document.activeElement.matches("input,select")))render(true)},60000);
+setInterval(()=>{stand();if((view=="board"||view=="home")&&!$("#tmd").open&&!document.hidden&&!(document.activeElement&&document.activeElement.matches("input,select")))render(true)},60000);
 setInterval(async()=>{if(document.hidden)return;if(await pullFile()){render(true);if($("#tmd").open&&openCode){const y=$("#tmd").scrollTop;openTeam(openCode);$("#tmd").scrollTop=y}}else stand()},60000);
 document.addEventListener("visibilitychange",async()=>{if(!document.hidden&&await pullFile())render(true)});
 await pullFile();live=true;
