@@ -292,6 +292,15 @@ pt:{trkOpen:"📍 Ver rastreamento ao vivo",trkReplay:"📍 Rever a regata (rast
 zh:{trkOpen:"📍 查看实时追踪",trkReplay:"📍 回放比赛（追踪）",trkNone:"Georacing 创建本场比赛后，追踪将显示在这里。",trkExt:"在 Georacing 中打开 ↗",trkHint:"每条船都是地图上的一个点——比赛中实时显示，赛后可回放。",back:"‹ 返回",rcRes:"本场成绩",rcTeams:"参赛队伍",rcStand:"小组目前排名",rcPts:"分",rcGroup:"在 Matchboard 中查看小组",rcTBD:"参赛队伍尚未确定"},
 ar:{trkOpen:"📍 شاهد التتبع المباشر",trkReplay:"📍 أعد مشاهدة السباق (التتبع)",trkNone:"سيظهر التتبع هنا بمجرد أن تُنشئ Georacing هذا السباق.",trkExt:"افتح في Georacing ↗",trkHint:"كل قارب نقطة على الخريطة – مباشرة أثناء السباق، ثم كإعادة بعده.",back:"رجوع ›",rcRes:"نتيجة هذا السباق",rcTeams:"على خط الانطلاق",rcStand:"المجموعة حتى الآن",rcPts:"نقطة",rcGroup:"اعرض المجموعة في Matchboard",rcTBD:"لم تُحدَّد الفرق بعد"}};
 for(const l in SR)Object.assign(S[l],SR[l]);
+const SS={
+en:{qsep:n=>`▲ Top 2 go through to the ${n}`,shareSub:"Send via WhatsApp, Messages & co.",shareMsg:"SSL Gold Cup Rio 2026 – live results, race times and all teams:",sCaps:"Captains",sTeams:"Crews",sHint:"Tap a team to see its crew – teams still in the race come first.",sTeamPage:"Team page",fShow:"Show",fSort:"Sort"},
+de:{qsep:n=>`▲ Platz 1 und 2 kommen weiter: ${n}`,shareSub:"Per WhatsApp, Nachrichten & Co. verschicken",shareMsg:"SSL Gold Cup Rio 2026 – Live-Ergebnisse, Startzeiten und alle Teams:",sCaps:"Kapitäne",sTeams:"Crews",sHint:"Tippe auf ein Team, um die Crew zu sehen – Teams, die noch dabei sind, stehen oben.",sTeamPage:"Zur Teamseite",fShow:"Zeigen",fSort:"Sortieren"},
+fr:{qsep:n=>`▲ Les 2 premiers se qualifient : ${n}`,shareSub:"Envoyer par WhatsApp, Messages, etc.",shareMsg:"SSL Gold Cup Rio 2026 – résultats en direct, horaires et toutes les équipes :",sCaps:"Capitaines",sTeams:"Équipages",sHint:"Touchez une équipe pour voir l'équipage – les équipes encore en course d'abord.",sTeamPage:"Page de l'équipe",fShow:"Afficher",fSort:"Trier"},
+es:{qsep:n=>`▲ Los 2 primeros pasan: ${n}`,shareSub:"Enviar por WhatsApp, Mensajes, etc.",shareMsg:"SSL Gold Cup Rio 2026: resultados en directo, horarios y todos los equipos:",sCaps:"Capitanes",sTeams:"Tripulaciones",sHint:"Toca un equipo para ver su tripulación; primero los que siguen en competición.",sTeamPage:"Página del equipo",fShow:"Mostrar",fSort:"Ordenar"},
+pt:{qsep:n=>`▲ Os 2 primeiros avançam: ${n}`,shareSub:"Enviar por WhatsApp, Mensagens etc.",shareMsg:"SSL Gold Cup Rio 2026 – resultados ao vivo, horários e todas as equipes:",sCaps:"Capitães",sTeams:"Tripulações",sHint:"Toque numa equipe para ver a tripulação – as que seguem na disputa vêm primeiro.",sTeamPage:"Página da equipe",fShow:"Mostrar",fSort:"Ordenar"},
+zh:{qsep:n=>`▲ 前 2 名晋级：${n}`,shareSub:"通过微信、WhatsApp 等发送",shareMsg:"SSL Gold Cup 里约 2026——实时成绩、比赛时间和全部队伍：",sCaps:"队长",sTeams:"各队阵容",sHint:"点按队伍查看阵容——仍在比赛中的队伍排在前面。",sTeamPage:"队伍页面",fShow:"显示",fSort:"排序"},
+ar:{qsep:n=>`▲ أول فريقين يتأهلان: ${n}`,shareSub:"أرسله عبر واتساب والرسائل وغيرها",shareMsg:"SSL Gold Cup ريو 2026 – النتائج المباشرة ومواعيد السباقات وكل الفرق:",sCaps:"القادة",sTeams:"الأطقم",sHint:"اضغط على فريق لرؤية طاقمه – الفرق التي ما زالت في المنافسة أولًا.",sTeamPage:"صفحة الفريق",fShow:"عرض",fSort:"ترتيب"}};
+for(const l in SS)Object.assign(S[l],SS[l]);
 
 
 
@@ -448,12 +457,14 @@ function ladder(){const L=$("#ladder");L.hidden=view!="board";if(L.hidden)return
     return `<button data-r="${r.id}" class="${r.id==round?"on":""}"><b>${esc(RS[r.id]||r.short)}</b><small><span class="dot ${cls}"></span>${esc(range(r))}</small></button>`}).join("");
   const on=L.querySelector(".on");if(on)on.scrollIntoView({block:"nearest",inline:"center"})}
 function note(g){return g.note?(/OCS|Frühstart|early/i.test(g.note)?T("notes").ocs:g.note):""}
+const QNX={r32:"r16",r16:"r8",r8:"r4",r4:"sf",sf:"f"};
+function qsep(r,g){const nx=rnd(QNX[r.id]),txt=T("qsep")(nx?RNm(nx):"");return `<tr class="qsep" aria-hidden="true"><td colspan="${g.rows[0].r.length+3}"><span>${esc(txt)}${r.id=="sf"?` · ▼ ${esc(RNm(rnd("pf")||{id:"pf"}))}`:""}</span></td></tr>`}
 function gtable(r,g,clickable){const gs=gState(g,r);const lc=gs=="live"&&g.rows.some(x=>x.r.some(v=>String(v).trim()!==""))&&["r32","r16","r8","r4"].includes(r.id)?liveCalc(g):null;
   return `<table><thead><tr><th>#</th><th>${T("team")}</th>${g.rows[0].r.map((_,i)=>`<th class="r">R${i+1}</th>`).join("")}<th>${T("pts")}</th></tr></thead><tbody>${
   g.rows.map((x,i)=>{const o=outcome(r.id,i+1,gs=="done"),tm=isTeam(x.team);const c=[o?(o[0]=="w"?"q":(o[2]===0&&r.id!="pf"?"x":"")):"",sel==x.team?"sel":"",clickable&&tm?"team":""].join(" ");
     const nm=tm?`<span class="fl">${FL(x.team)}</span><span class="n">${esc(NM(x.team))}</span>${star(x.team)}`:`<span class="ph">${esc(ph(x.team))}</span>`;
     const lt=lc&&lc[i]?`<span class="tag ${lc[i]=="clinch"?"w":"o"}">${T(lc[i]=="clinch"?"clinched":"elim")}</span>`:"";
-    return `<tr class="${c}${gs!="done"&&i==1&&g.rows.length>2&&r.id!="f"&&r.id!="pf"?" qline":""}${lc&&lc[i]=="elim"?" x":""}" data-t="${esc(x.team)}"><td class="p">${i+1}</td><td class="t">${nm}${o?(o[0]=="w"&&["r32","r16","r8","r4","sf"].includes(r.id)?`<span class="bdg" title="${esc(o[1])}">${esc(ord(i+1))}</span>`:`<span class="tag ${o[0]}">${esc(o[1])}</span>`):lt}${clickable&&tm?`<span class="chev">›</span>`:""}</td>${x.r.map(v=>`<td class="r">${esc(v)||"–"}</td>`).join("")}<td class="tot">${String(x.total??"").trim()?esc(x.total):x.r.some(v=>String(v).trim()!=="")?`<span class="run" title="provisional">${x.r.reduce((s,v)=>s+num(v),0)}</span>`:"–"}</td></tr>`}).join("")
+    return `<tr class="${c}${gs!="done"&&i==1&&g.rows.length>2&&r.id!="f"&&r.id!="pf"?" qline":""}${lc&&lc[i]=="elim"?" x":""}" data-t="${esc(x.team)}"><td class="p">${i+1}</td><td class="t">${nm}${o?(o[0]=="w"&&["r32","r16","r8","r4","sf"].includes(r.id)?`<span class="bdg" title="${esc(o[1])}">${esc(ord(i+1))}</span>`:`<span class="tag ${o[0]}">${esc(o[1])}</span>`):lt}${clickable&&tm?`<span class="chev">›</span>`:""}</td>${x.r.map(v=>`<td class="r">${esc(v)||"–"}</td>`).join("")}<td class="tot">${String(x.total??"").trim()?esc(x.total):x.r.some(v=>String(v).trim()!=="")?`<span class="run" title="provisional">${x.r.reduce((s,v)=>s+num(v),0)}</span>`:"–"}</td></tr>${gs!="done"&&i==1&&g.rows.length>2&&QNX[r.id]?qsep(r,g):""}`}).join("")
   }</tbody></table>${note(g)?`<div class="note">${esc(note(g))}</div>`:""}${clickable&&advText(r,g)?`<div class="adv">${esc(advText(r,g))}</div>`:""}`}
 function mine(){if(!favs.size)return"";const TT=teams().filter(t=>favs.has(t.code));if(!TT.length)return"";
   return `<div class="mine"><h3>★ ${T("myTeams")}</h3>${TT.map(t=>`<button data-t="${esc(t.code)}" class="tmx"><span>${t.flag}</span><span><b>${esc(t.name)}</b><br><small>${esc(t.txt)}</small></span></button>`).join("")}</div>`}
@@ -514,7 +525,8 @@ function teamView(){const TT=teams(),inn=TT.filter(t=>!t.out).length;
   list.sort(sortBy=="rank"?(a,b)=>(a.I.rank||999)-(b.I.rank||999):sortBy=="name"?(a,b)=>a.name.localeCompare(b.name,lang):(a,b)=>a.out-b.out||b.lvl-a.lvl||(a.I.rank||999)-(b.I.rank||999));
   return `<div class="rhead"><h2>${T("nations")(TT.length)}</h2><p>${inn} ${T("stillIn")} · ${TT.length-inn} ${T("outN")}</p></div>
   <div class="tools"><input id="q" type="search" placeholder="${esc(T("search"))}" value="${esc(q)}" aria-label="${esc(T("search"))}"></div>
-  <div class="tools">${[["all",T("all")],["in",T("chipIn")],["out",T("chipOut")],["fav",T("mine")]].map(([k,l])=>`<button class="chip ${filt==k?"on":""}" data-f="${k}">${l}</button>`).join("")}<span style="flex:1"></span>${[["status",T("sStatus")],["rank",T("sRank")],["name",T("sAz")]].map(([k,l])=>`<button class="chip ${sortBy==k?"on":""}" data-s="${k}">${l}</button>`).join("")}</div>
+  <div class="fbar"><span class="flab">${T("fShow")}</span><div class="seg" role="group" aria-label="${esc(T("fShow"))}">${[["all",T("all")],["in",T("chipIn")],["out",T("chipOut")],["fav",T("mine")]].map(([k,l])=>`<button class="${filt==k?"on":""}" aria-pressed="${filt==k}" data-f="${k}">${l}</button>`).join("")}</div></div>
+  <div class="fbar"><span class="flab">${T("fSort")}</span><div class="seg sm" role="group" aria-label="${esc(T("fSort"))}">${[["status",T("sStatus")],["rank",T("sRank")],["name",T("sAz")]].map(([k,l])=>`<button class="${sortBy==k?"on":""}" aria-pressed="${sortBy==k}" data-s="${k}">${l}</button>`).join("")}</div></div>
   ${filt=="fav"&&!favs.size?`<p class="warn">${T("myHint")}</p>`:""}
   ${sortBy=="status"?sections(list):`<div class="tl">${list.map(card).join("")}</div>`}`}
 function sections(list){const cur=current(),G=[];const add=(title,arr)=>{if(arr.length)G.push(`<h3 class="sec">${esc(title)} <span>${arr.length}</span></h3><div class="tl">${arr.map(card).join("")}</div>`)};
@@ -561,7 +573,7 @@ function more(){const I=T("inst");
   const row=(href,ic,t,sub)=>`<a class="mrow" href="${href}"${/^https?:/.test(href)?' target="_blank" rel="noopener"':""}>${svg(ic)}<span><b>${esc(t)}</b>${sub?`<small>${esc(sub)}</small>`:""}</span></a>`;
   let h=`<h2 class="pill">${T("moreT")}</h2>`;
   h+=isStandalone()?`<p class="warn">✓ ${I.installedNote}</p>`:installCard(false);
-  h+=`<div class="mlist">${row("#sailors",TI.sailors,T("tiles").sailors[0],T("tiles").sailors[1])}${row("#qualifying",TI.qualifying,T("tiles").qualifying[0],T("tiles").qualifying[1])}${row("#gc2023",TI.gc2023,T("tiles").gc2023[0],T("tiles").gc2023[1])}<button class="mrow" data-calall="1">${svg('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>')}<span><b>${T("calAll")}</b></span></button><button class="mrow" data-share="1">${svg('<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/>')}<span><b>${T("share")}</b><small>${esc(location.href.split("#")[0])}</small></span></button></div>`;
+  h+=`<div class="mlist">${row("#sailors",TI.sailors,T("tiles").sailors[0],T("tiles").sailors[1])}${row("#qualifying",TI.qualifying,T("tiles").qualifying[0],T("tiles").qualifying[1])}${row("#gc2023",TI.gc2023,T("tiles").gc2023[0],T("tiles").gc2023[1])}<button class="mrow" data-calall="1">${svg('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>')}<span><b>${T("calAll")}</b></span></button><button class="mrow" data-share="1">${svg('<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/>')}<span><b>${T("share")}</b><small>${esc(T("shareSub"))}</small></span></button></div>`;
   h+=pushMore();
   h+=`<h3 class="sec">${T("links")}</h3><div class="mlist">${row("https://www.youtube.com/@Starsailors/streams",'<path d="M5 4l14 8-14 8z"/>',T("stream").replace("▶ ",""),"YouTube")}${row("https://app.georacing.com/?application_id=46",'<path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',T("tracking"),"Georacing")}${row("https://sslgoldcup.worldofsailors.com/results/",TI.board,T("official"),"sslgoldcup.worldofsailors.com")}${row("https://sslgoldcup.worldofsailors.com/schedule/",'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',T("schedule"),"")}</div>`;
   h+=`<h3 class="sec">${T("how")?T("howT"):""}</h3><div class="card pad"><ul class="howl">${T("how").map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
@@ -569,15 +581,27 @@ function more(){const I=T("inst");
   return h}
 
 /* ---------- sailors ---------- */
-let sq2="",sPh=false;
-function sailorsView(){const all=[];Object.keys(INFO).forEach(c=>{try{squad(c).ppl.forEach(p=>all.push({c,p}))}catch(e){}});
+let sq2="",sOpen=new Set(LS.get("sOpen",[]));
+function sailorsView(){const TT=teams(),byC={};TT.forEach(t=>byC[t.code]=t);
+  const codes=Object.keys(INFO).filter(c=>{try{return squad(c).ppl.length>0}catch(e){return false}});
+  const o=c=>byC[c]||{};
+  codes.sort((a,b)=>(favs.has(b)?1:0)-(favs.has(a)?1:0)||(o(a).out?1:0)-(o(b).out?1:0)||NM(a).localeCompare(NM(b),lang));
+  const all=[];codes.forEach(c=>squad(c).ppl.forEach(p=>all.push({c,p})));
   const qq=sq2.trim().toLowerCase();
-  let L=all.filter(x=>(!sPh||x.p.img)&&(!qq||(x.p.name+" "+x.c+" "+NM(x.c)+" "+(x.p.k||"")+" "+(squad(x.c).n||"")).toLowerCase().includes(qq)));
-  L.sort((a,b)=>(b.p.img?1:0)-(a.p.img?1:0)||NM(a.c).localeCompare(NM(b.c),lang)||(+a.p.no||99)-(+b.p.no||99));
-  const shown=L.slice(0,qq?200:120);
-  return `<h2 class="pill">${T("sailors")}</h2><div class="tools"><input id="q2" type="search" placeholder="${esc(T("sSearch"))}" value="${esc(sq2)}" aria-label="${esc(T("sSearch"))}"></div><div class="tools"><button class="chip ${!sPh?"on":""}" data-sp="0">${T("allS")}</button><button class="chip ${sPh?"on":""}" data-sp="1">${T("withPhoto")}</button><span class="warn" style="margin:auto 0 auto 8px">${T("sailorsT")(L.length)}</span></div>
-  <div class="slist">${shown.map(({c,p})=>`<button class="srow" data-sc="${esc(c)}" data-si="${p.i}">${av(p,1)}<span><b>${esc(p.name)}</b><small>${FL(c)}${esc(NM(c))}${p.k?" · "+esc(p.k):p.cap?" · "+esc(T("captain")):""}</small></span></button>`).join("")}</div>${L.length>shown.length?`<p class="warn">+${L.length-shown.length} …</p>`:""}`}
-
+  let h=`<div class="rhead"><h2>${T("sailors")}</h2><p>${T("sailorsT")(all.length)} · ${T("nations")(codes.length)}</p></div><div class="tools"><input id="q2" type="search" placeholder="${esc(T("sSearch"))}" value="${esc(sq2)}" aria-label="${esc(T("sSearch"))}"></div>`;
+  if(qq){const L=all.filter(x=>(x.p.name+" "+x.c+" "+NM(x.c)+" "+(x.p.k||"")+" "+(squad(x.c).n||"")).toLowerCase().includes(qq));
+    L.sort((a,b)=>(b.p.img?1:0)-(a.p.img?1:0)||NM(a.c).localeCompare(NM(b.c),lang)||(+a.p.no||99)-(+b.p.no||99));
+    const shown=L.slice(0,200);
+    return h+(L.length?`<div class="slist">${shown.map(({c,p})=>`<button class="srow" data-sc="${esc(c)}" data-si="${p.i}">${av(p,1)}<span><b>${esc(p.name)}</b><small>${FL(c)}${esc(NM(c))}${p.k?" · "+esc(p.k):p.cap?" · "+esc(T("captain")):""}</small></span></button>`).join("")}</div>`:`<p>${T("noTeam")}</p>`)}
+  /* captains */
+  const caps=codes.map(c=>{const pp=squad(c).ppl;const p=pp.find(x=>x.cap)||pp.find(x=>x.k=="Captain");return p?{c,p}:null}).filter(Boolean).sort((a,b)=>(b.p.img?1:0)-(a.p.img?1:0));
+  if(caps.length)h+=`<h3 class="sec">${T("sCaps")}</h3><div class="capr">${caps.map(({c,p})=>`<button class="capc" data-sc="${esc(c)}" data-si="${p.i}"><span class="cpa">${p.img?`<img src="${esc(p.img)}" alt="" loading="lazy">`:`<b>${esc(ini(p.name))}</b>`}</span><span class="cpn">${esc(p.name.split(" ")[0])}<small>${esc(p.name.split(" ").slice(1).join(" "))}</small></span><span class="cpf">${FL(c)}${esc(c)}</span></button>`).join("")}</div>`;
+  /* squads, by tournament status */
+  h+=`<h3 class="sec">${T("sTeams")}</h3><p class="warn">${T("sHint")}</p><div class="sacc">${codes.map(c=>{const sq=squad(c),pp=sq.ppl.filter(p=>!p.extra),t=o(c),pics=pp.filter(p=>p.img).slice(0,4);
+    const crew=[...pp].sort((a,b)=>(b.cap?1:0)-(a.cap?1:0)||(/^\d+$/.test(a.no)?+a.no:99)-(/^\d+$/.test(b.no)?+b.no:99));
+    return `<details data-sq="${esc(c)}"${sOpen.has(c)?" open":""}${t.out?' class="out"':""}><summary><span class="sqf">${FL(c)}</span><span class="sqn"><b>${esc(NM(c))}${favs.has(c)?' <span class="star">★</span>':""}</b><small>${sq.n?esc(sq.n)+" · ":""}${pp.length} ${esc(T("sailors"))}${t.out?" · "+esc(T("stOut")):""}</small></span><span class="sqs" aria-hidden="true">${pics.map(p=>`<img src="${esc(p.img)}" alt="" loading="lazy">`).join("")}</span><span class="sqc" aria-hidden="true">›</span></summary>
+      <div class="sgrid">${crew.map(p=>`<button class="stile" data-sc="${esc(c)}" data-si="${p.i}"><span class="stp">${p.img?`<img src="${esc(p.img)}" alt="" loading="lazy">`:`<b>${esc(ini(p.name))}</b>`}${/^\d+$/.test(p.no)?`<i>${esc(p.no)}</i>`:""}</span><b>${esc(p.name)}</b><small>${esc(p.k?(T("roles")[p.k]?p.k:p.k):p.cap?T("captain"):"")}</small></button>`).join("")}</div><button class="sqteam" data-t="${esc(c)}">${T("sTeamPage")} ›</button></details>`}).join("")}</div>`;
+  return h}
 /* ---------- team numbers ---------- */
 function teamStats(TM){if(!TM)return"";let races=0,wins=0,pl=[],pts=0;const hist=[];
   TM.path.forEach(s=>{const row=s.g.rows[s.pos-1];if(!row)return;const n=row.r.length;const H=[];
@@ -707,7 +731,7 @@ function installHelp(first){const I=T("inst"),d=$("#tmd"),U=T("ui"),x=s=>esc(s);
   openCode=null;show(d);try{d.querySelector(".obhero").focus({preventScroll:true})}catch(e){}}
 /* first visit in a phone browser: show the install guide once, full screen */
 function firstRun(){try{if(LS.get("onb",0)||LS.get("installed",0)||!canInstall()||!(isIOS||isAndroid)||navigator.webdriver)return;
-  setTimeout(()=>{if(!$("#tmd").open&&!LS.get("onb",0))installHelp(true)},900)}catch(e){}}
+  setTimeout(()=>{if(!$("#tmd").open&&!LS.get("onb",0))installHelp(true)},window.SPLASH?2900:900)}catch(e){}}
 /* ---------- race sheet + in-app tracking ---------- */
 const raceKey=x=>`${x.rid}|${x.g}|${x.n}`;
 const raceBy=k=>{const[a,b,c]=String(k).split("|");return SCH.find(x=>x.rid==a&&x.g==b&&String(x.n)==c)};
@@ -717,7 +741,7 @@ function openRace(x){if(!x)return;const d=$("#tmd"),r=rnd(x.rid),g=r&&r.groups.f
   const s=st=="done"?`✓ ${T("done")}`:st=="now"?`● ${T("onWater")}`:st=="up"&&at(x)-nowMs()<24*36e5?T("inX")(Math.max(1,Math.round((at(x)-nowMs())/6e4))):"";
   let h=`<div class="th"><div><div class="nick">${esc(r?RNm(r):"")}</div><h2>${esc(title)}</h2></div><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">`;
   h+=`<div class="rchead"><span>${when}</span>${s?`<b class="rcs ${st}">${esc(s)}</b>`:""}${wxAt(x)}</div>`;
-  h+=u?`<button class="obgo trkgo" data-trkin="1">${esc(T(st=="done"||st=="past"?"trkReplay":"trkOpen"))}</button><p class="warn">${esc(T("trkHint"))}</p>`:`<p class="warn">${esc(T("trkNone"))} <a href="https://app.georacing.com/?application_id=46" target="_blank" rel="noopener">${esc(T("trkExt"))}</a></p>`;
+  h+=u?`<button class="trkgo" data-trkin="1">${esc(T(st=="done"||st=="past"?"trkReplay":"trkOpen"))}</button><p class="warn">${esc(T("trkHint"))}</p>`:`<p class="warn">${esc(T("trkNone"))} <a href="https://app.georacing.com/?application_id=46" target="_blank" rel="noopener">${esc(T("trkExt"))}</a></p>`;
   if(g){const rows=g.rows,i=x.n-1,known=rows.filter(z=>isTeam(z.team));
     if(st=="done"){const ord2=[...rows].sort((a,b)=>num(b.r[i])-num(a.r[i]));
       h+=`<h3>${T("rcRes")}</h3><div class="grp rcl">${ord2.map((z,k)=>`<button class="rcrow" data-tm="${esc(z.team)}"><span class="rcp p${k+1}">${k+1}</span>${FL(z.team)}<b>${esc(isTeam(z.team)?NM(z.team):phm(z.team))}</b><small>${esc(String(z.r[i]).trim())} ${T("rcPts")}</small></button>`).join("")}</div>`}
@@ -768,7 +792,7 @@ if(CFG.push&&pSet.size&&pushCan()){if(Notification.permission!=="granted"){pSet.
 /* visitor counter: anonymous, no cookies; dashboard only visible to the account owner */
 function gcEvent(name){try{if(CFG.gc&&window.goatcounter&&goatcounter.count)goatcounter.count({path:name,title:name,event:true})}catch(e){}}
 if(CFG.gc&&!/claude/.test(location.hostname)&&!navigator.webdriver){try{window.goatcounter={no_onload:true};const s=document.createElement("script");s.async=true;s.src="https://gc.zgo.at/count.js";s.dataset.goatcounter=`https://${CFG.gc}.goatcounter.com/count`;
-  s.onload=()=>{try{goatcounter.count({path:location.pathname});gcEvent(isStandalone()?"start-app":"start-browser");gcEvent("lang-"+lang)}catch(e){}};document.head.appendChild(s)}catch(e){}}
+  s.onload=()=>{try{goatcounter.count({path:location.pathname});gcEvent(isStandalone()?"start-app":"start-browser");gcEvent("lang-"+lang);if(isStandalone()&&!LS.get("firstApp",0)){LS.set("firstApp",1);gcEvent("install")}}catch(e){}};document.head.appendChild(s)}catch(e){}}
 
 /* ---------- chrome: header bar, theme, language ---------- */
 function applyTheme(){const r=document.documentElement,t=theme=="auto"?"mb":theme;r.setAttribute("data-theme",t);let m=$("meta[name=theme-color]");if(!m){m=document.createElement("meta");m.name="theme-color";document.head.appendChild(m)}m.content={mb:"#1a4486",light:"#192550",dark:"#0b1630"}[t]}
@@ -814,17 +838,17 @@ $("#main").addEventListener("click",e=>{
   const rc=e.target.closest("[data-race]");if(rc){openRace(raceBy(rc.dataset.race));return}
   const ins=e.target.closest("[data-inst]");if(ins){doInstall();return}
   const ih=e.target.closest("[data-insthide]");if(ih){LS.set("instHide",Date.now()+3*864e5);render(true);return}
-  const sh=e.target.closest("[data-share]");if(sh){const u=location.href.split("#")[0];(async()=>{try{if(navigator.share){await navigator.share({title:"SSL Gold Cup",url:u});return}}catch(x){return}try{await navigator.clipboard.writeText(u);toast(T("shared"))}catch(x){toast(u)}})();return}
+  const sh=e.target.closest("[data-share]");if(sh){const u=location.href.split("#")[0];(async()=>{try{if(navigator.share){await navigator.share({title:"SSL Gold Cup Rio 2026",text:T("shareMsg"),url:u});return}}catch(x){return}try{await navigator.clipboard.writeText(u);toast(T("shared"))}catch(x){toast(u)}})();return}
   const si=e.target.closest("[data-shimg]");if(si){const[a,b]=si.dataset.shimg.split("|");shareGroup(a,b);return}
   const ca=e.target.closest("[data-calall]");if(ca){calSheet(null);return}
   const pa=e.target.closest("[data-pall]");if(pa){pa.disabled=true;pushToggle("all").finally(()=>render(true));return}
-  const sp=e.target.closest("[data-sp]");if(sp){sPh=sp.dataset.sp=="1";render(true);return}
   const sr=e.target.closest("[data-sc]");if(sr){openSailor(sr.dataset.sc,+sr.dataset.si);return}
   const g=e.target.closest("[data-go]");if(g&&!e.target.closest(".mr.team")){go(g.dataset.go);return}
   const f=e.target.closest("[data-f]");if(f){filt=f.dataset.f;render(true);return}
   const s=e.target.closest("[data-s]");if(s){sortBy=s.dataset.s;render(true);return}
   const t=e.target.closest(".team,.tm,.tmx");if(t)openTeam(t.dataset.t)});
 $("#tmd").addEventListener("click",e=>{if(e.target.id=="tmd")e.target.close()});
+$("#main").addEventListener("toggle",e=>{const dd=e.target;if(!dd.matches||!dd.matches("details[data-sq]"))return;dd.open?sOpen.add(dd.dataset.sq):sOpen.delete(dd.dataset.sq);LS.set("sOpen",[...sOpen])},true);
 $("#main").addEventListener("keydown",e=>{if(e.key!="Enter"&&e.key!=" ")return;const rc=e.target.closest&&e.target.closest("[data-race]");if(rc&&e.target===rc){e.preventDefault();openRace(raceBy(rc.dataset.race))}});
 $("#tmd").addEventListener("close",()=>{openCode=null;if($("#tmd").querySelector(".ob"))LS.set("onb",1);$("#tmd").classList.remove("full");try{if(history.state&&history.state.sheet)history.back()}catch(e){}});
 window.addEventListener("popstate",()=>{const d=$("#tmd");if(d.open)d.close()});
