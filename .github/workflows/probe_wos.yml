@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: python3 scripts/probe_wos.py # v3
+      - run: python3 scripts/probe_wos.py # v4
       - run: |
           cd probe && git init -q && git checkout -q -b probe-wos && git add . && git -c user.name=bot -c user.email=bot@x commit -qm probe
           git push -f -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" probe-wos
