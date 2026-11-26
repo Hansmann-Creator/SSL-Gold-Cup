@@ -1,0 +1,16 @@
+name: probe worldofsailors
+on:
+  push:
+    branches: [main]
+    paths: [scripts/probe_wos.py, .github/workflows/probe_wos.yml]
+  workflow_dispatch:
+permissions: { contents: write }
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/probe_wos.py
+      - run: |
+          cd probe && git init -q && git checkout -q -b probe-wos && git add . && git -c user.name=bot -c user.email=bot@x commit -qm probe
+          git push -f -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" probe-wos
