@@ -889,7 +889,7 @@ html.pgon .tabs{z-index:41}
 .favr button{border:0;background:var(--ctl);color:var(--ink);width:32px;height:32px;border-radius:9px;flex:none}
 .favr button:disabled{opacity:.3}
 .favr::after{display:none}
-.mrow[data-st]::after,a.mrow::after{display:none}
+.mrow[data-st]::after{display:none}
 .mrow[disabled]{opacity:.6}
 #nxc{width:122px}#nxc small{letter-spacing:.03em}
 
