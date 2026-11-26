@@ -1,0 +1,11 @@
+name: Temporary probe
+on: workflow_dispatch
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          U="https://hansmann-creator.github.io/SSL-Gold-Cup/"
+          for a in sslgoldcup ssl-goldcup goldcuprio sslgoldcuprio; do echo "== is.gd $a"; curl -s "https://is.gd/create.php?format=simple&url=$(python3 -c "import urllib.parse;print(urllib.parse.quote('$U'))")&shorturl=$a"; echo; done
+          echo "== check"; curl -sI https://is.gd/sslgoldcup | grep -i "^location\|^HTTP"
+          echo "== yt"; curl -sL -A "Mozilla/5.0" "https://www.youtube.com/@Starsailors" | grep -oE '"(channelId|externalId)":"UC[^"]+"' | sort -u | head
