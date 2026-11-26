@@ -1,0 +1,64 @@
+{
+ "/_next/static/chunks/2293-dfb6e420abd0d9a8.js": [
+  "unction(r){return r.skipper=\"ranking.type.skipper\",r.crew=\"ranking.type.crew\",r}({}),h=function(r){return r.open=\"1\",r[\"non-open\"]=\"0.4\",r}({}),d=function(r){return r.recent=\"1\",r[\"mid-term\"]=\"0.5\",r.historical=\"0\",r}({}),u=function(r){return r[\"main-menu\"]=\"Main Menu\",r}({}),p=function(r){return r.image=\"image\",r.video=\"video\",r}({}),g=function(r){return r.draft=\"Draft\",r[\"for-review\"]=\"For revie",
+  "ngs\")}catch(r){throw console.error(\"Database Error:\",r),Error(\"Failed to fetch settings.\")}}async function K(){let r=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};try{return await n(\"/api/rankings/updates/informations\",{params:r,revalidate:10})}catch(r){throw console.error(\"Database Error:\",r),Error(\"Failed to fetch Ranking Update Informations.\")}}async function rr(){let r=arguments.le",
+  "e.error(\"Database Error:\",r),Error(\"Failed to fetch Ranking Update Informations.\")}}async function rr(){let r=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};try{return(await e.A.post(\"/api/rankings/generate-full\",r,{headers:c})).data}catch(r){throw console.error(\"Database Error:\",r),Error(\"Failed to fetch Ranking Full Updates.\")}}async function rt(r){try{return await n(\"/api/regattas/\"."
+ ],
+ "/_next/static/chunks/462-d7b8397f56247d45.js": [
+  "ours:{one:\"about 1 hour\",other:\"about {{count}} hours\"},xHours:{one:\"1 hour\",other:\"{{count}} hours\"},xDays:{one:\"1 day\",other:\"{{count}} days\"},aboutXWeeks:{one:\"about 1 week\",other:\"about {{count}} weeks\"},xWeeks:{one:\"1 week\",other:\"{{count}} weeks\"},aboutXMonths:{one:\"about 1 month\",other:\"about {{count}} months\"},xMonths:{one:\"1 month\",other:\"{{count}} months\"},aboutXYears:{one:\"about 1 year\"",
+  "} hours\"},xHours:{one:\"1 hour\",other:\"{{count}} hours\"},xDays:{one:\"1 day\",other:\"{{count}} days\"},aboutXWeeks:{one:\"about 1 week\",other:\"about {{count}} weeks\"},xWeeks:{one:\"1 week\",other:\"{{count}} weeks\"},aboutXMonths:{one:\"about 1 month\",other:\"about {{count}} months\"},xMonths:{one:\"1 month\",other:\"{{count}} months\"},aboutXYears:{one:\"about 1 year\",other:\"about {{count}} years\"},xYears:{one:\"1"
+ ],
+ "/_next/static/chunks/6144-07c214e887cee1f4.js": [
+  "mation:t,rankingDate:l,setValue:r}=e;(0,x.useSearchParams)(),(0,x.usePathname)();let{replace:s}=(0,x.useRouter)(),[n,i]=(0,o.useState)(t.status),[h,b]=(0,o.useState)(t.message),[f,y]=(0,o.useState)(t.weeks[0]),[v,w]=(0,o.useState)(t.update),[j,N]=(0,o.useState)(!1),[k,S]=(0,o.useState)(!1),_=t.weeks,B=Object.values(_).map(e=>({value:e,label:(0,d.pU)(e,\"dd MMMM yyyy\")})),P=async()=>{if(S(!0),w(null",
+  "=(0,x.useRouter)(),[n,i]=(0,o.useState)(t.status),[h,b]=(0,o.useState)(t.message),[f,y]=(0,o.useState)(t.weeks[0]),[v,w]=(0,o.useState)(t.update),[j,N]=(0,o.useState)(!1),[k,S]=(0,o.useState)(!1),_=t.weeks,B=Object.values(_).map(e=>({value:e,label:(0,d.pU)(e,\"dd MMMM yyyy\")})),P=async()=>{if(S(!0),w(null),f){let e=await (0,m.FL)({action_server:!1,date:f});e&&(i(e.status),b(e.message),w(e.update))}",
+  "30),y=l(34357),v=l(96508),w=l(89421),j=l(11928),N=l(3991);let k=e=>{var t,l,s,u,m,k,S,_,B,P,V,A;let{title:C=\"Rankings\",titleType:M=\"section\",rankingSkipper:O,rankingCrew:U,rankingNation:F,countries:R,continents:I,competitionClasses:T,showCounter:E=100,showNationCounter:L=150,onFrontend:D=!0,updateInformation:H,setting:q,rankingDateLimit:G=\"\",mainKind:z=0}=e,J=(0,x.useSearchParams)(),K=(0,x.usePath",
+  "00,showNationCounter:L=150,onFrontend:D=!0,updateInformation:H,setting:q,rankingDateLimit:G=\"\",mainKind:z=0}=e,J=(0,x.useSearchParams)(),K=(0,x.usePathname)(),{replace:Y,push:Q}=(0,x.useRouter)(),W=H.weeks,X=(0,g.f)((0,p.H)(G))?new Date(G):null,Z=(0,o.useMemo)(()=>Object.values(W).filter(e=>!X||new Date(e)>X).map(e=>({value:e,label:(0,d.pU)(e,\"dd.MM.yyyy\")})),[W,X]),$=[\"asc\",\"desc\"],[ee,et]=(0,o.u",
+  "(()=>(()=>{let e=null==J?void 0:J.get(\"query\");return e?(0,d.m9)(e):\"\"})()),[ec,eu]=(0,o.useState)(()=>(()=>{let e=null==J?void 0:J.get(\"order_by\");return e&&[\"rank\",\"position\",\"name\",\"points\",\"total_weeks\"].includes(e)?e:\"position\"})()),[em,eg]=(0,o.useState)(()=>(()=>{let e=null==J?void 0:J.get(\"order_by_nation\");return e?(\"rank\"==e&&(e=\"position\"),[\"position\",\"country_name\",\"points\"].includes(e",
+  "e=>{var t;let l=R.find(t=>t.slug===e);return null==l||null==(t=l.id)?void 0:t.toString()}).filter(e=>\"\"!==e&&void 0!==e):[])}return null})()),[ej,eN]=(0,o.useState)(()=>(()=>{if(null==J?void 0:J.get(\"continent\")){var e;let t=I.find(e=>e.slug===J.get(\"continent\"));return(null==t||null==(e=t.id)?void 0:e.toString())||null}return null})()),[ek,eS]=(0,o.useState)(!0),[e_,eB]=(0,o.useTransition)(),[eP,",
+  "l||null==(t=l.id)?void 0:t.toString()}).filter(e=>\"\"!==e&&void 0!==e):[])}return null})()),[ej,eN]=(0,o.useState)(()=>(()=>{if(null==J?void 0:J.get(\"continent\")){var e;let t=I.find(e=>e.slug===J.get(\"continent\"));return(null==t||null==(e=t.id)?void 0:e.toString())||null}return null})()),[ek,eS]=(0,o.useState)(!0),[e_,eB]=(0,o.useTransition)(),[eP,eV]=(0,o.useState)((null==O||null==(t=O.lines)?void",
+  "=ef&&parseInt(ef)?T.find(e=>e.id===parseInt(ef)):null;eW(\"class\",null!=(e=null==t?void 0:t.slug)?e:\"\")},[ef]),(0,o.useEffect)(()=>{var e;let t=ej&&parseInt(ej)?I.find(e=>e.id===parseInt(ej)):null;eW(\"continent\",null!=(e=null==t?void 0:t.name)?e:\"\")},[ej]),(0,o.useEffect)(()=>{let e=ev?JSON.parse(ev):[],t=Array.isArray(e)&&e.length?e.map(e=>{var t;return null==(t=R.find(t=>t.id===parseInt(e)))?void",
+  "ons:eQ,fullName:\"Class\",placeholder:\"Select class\",isSearchable:!0,isClearable:!0})})}),\"nation\"===el&&(0,a.jsx)(a.Fragment,{children:(0,a.jsx)(\"div\",{className:\"w-full\",children:(0,a.jsx)(c.A,{name:\"continent\",setValue:eN,defaultValue:ej,options:eY,fullName:\"Continent\",placeholder:\"Select continent\",multiple:!1,isSearchable:!0,isClearable:!0})})}),(0,a.jsx)(\"div\",{className:\"w-full\",children:(0,a",
+  "tion\"===el&&(0,a.jsx)(a.Fragment,{children:(0,a.jsx)(\"div\",{className:\"w-full\",children:(0,a.jsx)(c.A,{name:\"continent\",setValue:eN,defaultValue:ej,options:eY,fullName:\"Continent\",placeholder:\"Select continent\",multiple:!1,isSearchable:!0,isClearable:!0})})}),(0,a.jsx)(\"div\",{className:\"w-full\",children:(0,a.jsx)(c.A,{name:\"country\",setValue:ew,defaultValue:ev,options:eK,fullName:\"Country\",placeho",
+  "der:\"Select country\",multiple:!0,isSearchable:!0,isClearable:!1})}),(0,a.jsx)(\"div\",{className:\"w-full\",children:(0,a.jsx)(c.A,{name:\"date\",setValue:et,defaultValue:null!=ee?ee:\"\",options:Z,fullName:\"Historical Ranking\",placeholder:\"Select date\",required:!1,multiple:!1,inSearchForm:!0,isClearable:!0})})]})]},K),(0,a.jsx)(\"div\",{ref:eG,className:\"full-ranking \".concat(!0===e_&&\"opacity-30\"),childre"
+ ],
+ "page": [
+  "01 01 GREAT BRITAIN",
+  "02 02 UNITED STATES",
+  "03 03 ITALY",
+  "04 04 AUSTRALIA",
+  "05 05 SPAIN"
+ ],
+ "page?date=2026-01-06": [
+  "01 01 GREAT BRITAIN",
+  "02 02 AUSTRALIA",
+  "03 03 UNITED STATES",
+  "04 04 ITALY",
+  "05 05 NETHERLANDS"
+ ],
+ "page?week=2026-01-06": [
+  "01 01 GREAT BRITAIN",
+  "02 02 UNITED STATES",
+  "03 03 ITALY",
+  "04 04 AUSTRALIA",
+  "05 05 SPAIN"
+ ],
+ "page?historical=2026-01-06": [
+  "01 01 GREAT BRITAIN",
+  "02 02 UNITED STATES",
+  "03 03 ITALY",
+  "04 04 AUSTRALIA",
+  "05 05 SPAIN"
+ ],
+ "page?continent=europe": [
+  "01 01 GREAT BRITAIN",
+  "02 03 ITALY",
+  "03 05 SPAIN",
+  "04 07 SWEDEN",
+  "05 08 NETHERLANDS"
+ ],
+ "page?continent=3": [],
+ "page?country=GBR": [],
+ "page?country=great-britain": [
+  "01 01 GREAT BRITAIN"
+ ]
+}
