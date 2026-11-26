@@ -109,6 +109,59 @@ def parse(html):
     return found
 
 
+QLABEL = re.compile(r"(ASIAN QUALIFIERS|AFRICAN OCEANIAN QUALIFIERS|EUROPEAN QUALIFIERS 1|EUROPEAN QUALIFIERS 2|PAN-AMERICAN QUALIFIERS)\s*-\s*Group\s+([A-J])\b(?:\s*\(([^)]*)\))?(?:\s*-\s*(.+))?", re.I)
+QIDS = {"ASIAN QUALIFIERS": "asia", "AFRICAN OCEANIAN QUALIFIERS": "afoc", "EUROPEAN QUALIFIERS 1": "eu1", "EUROPEAN QUALIFIERS 2": "eu2", "PAN-AMERICAN QUALIFIERS": "pan"}
+
+
+def extras(html):
+    """Overall standings (Position/Team) and the qualifier group tables – shown in the app's results page.
+    Best effort: any problem here returns None and never touches the Finals Series data."""
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+        overall, quals = [], []
+        for table in soup.find_all("table"):
+            heads = [clean(th.get_text(" ")) for th in table.find_all("th")]
+            if not heads or "Team" not in heads:
+                continue
+            tcol = heads.index("Team")
+            rcols = [i for i, h in enumerate(heads) if re.fullmatch(r"R\d+", h)]
+            if not rcols and not overall:
+                pcol = next((i for i, h in enumerate(heads) if h.lower().startswith("pos")), 0)
+                for tr in table.find_all("tr"):
+                    tds = tr.find_all("td")
+                    if len(tds) >= len(heads):
+                        code = team_code(tds[tcol])
+                        overall.append([clean(tds[pcol].get_text(" ")), code if re.fullmatch(r"[A-Z]{3}", code or "") else ""])
+                continue
+            lab = None
+            for el in table.find_all_previous(string=True, limit=60):
+                t = clean(el)
+                if LABEL.search(t):
+                    break
+                m = QLABEL.search(t)
+                if m:
+                    lab = m; break
+            if not lab:
+                continue
+            totcol = next((i for i, h in enumerate(heads) if "Total" in h or h == "Pts"), len(heads) - 1)
+            rows = []
+            for tr in table.find_all("tr"):
+                tds = tr.find_all("td")
+                if len(tds) < len(heads):
+                    continue
+                rows.append({"team": team_code(tds[tcol]), "r": [clean(tds[i].get_text(" ")) for i in rcols], "total": clean(tds[totcol].get_text(" "))})
+            q = {"ev": QIDS[lab.group(1).upper()], "id": lab.group(2).upper(), "dates": clean(lab.group(4) or ""), "extra": clean(lab.group(3) or ""), "rows": rows}
+            n = note_after(table)
+            if n:
+                q["note"] = n
+            if not any(x["ev"] == q["ev"] and x["id"] == q["id"] for x in quals):
+                quals.append(q)
+        return {"overall": overall, "quals": quals} if (overall or quals) else None
+    except Exception as ex:
+        print("extras skipped:", ex)
+        return None
+
+
 def merge(old, found):
     new = json.loads(json.dumps(old))
     for r in new["rounds"]:
@@ -132,7 +185,11 @@ def main():
     html = fetch(URL)
     found = parse(html)
     new = merge(old, found)
-    changed = json.dumps(new["rounds"], sort_keys=True) != json.dumps(old["rounds"], sort_keys=True)
+    ex = extras(html)
+    if ex:
+        new.update(ex)
+    keys = ("rounds", "overall", "quals")
+    changed = any(json.dumps(new.get(k), sort_keys=True) != json.dumps(old.get(k), sort_keys=True) for k in keys)
     t = now()
     if changed or stamp:
         new["checkedAt"] = t
@@ -144,4 +201,6 @@ def main():
 
 
 if __name__ == "__main__":
+    if "--probe" in sys.argv:
+        h = fetch(URL); print(json.dumps(extras(h), ensure_ascii=False, indent=1)[:6000]); sys.exit(0)
     main()
