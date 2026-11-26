@@ -470,3 +470,28 @@ dialog.tmd.full .x{background:rgba(255,255,255,.16);color:#fff}
 .ob .warn{color:rgba(255,255,255,.85)}
 .oblater{display:block;width:100%;margin:10px 0 0;padding:14px;border:1px solid rgba(255,255,255,.35);border-radius:14px;background:none;color:#fff;font-size:16px}
 .ill{direction:ltr}.obhero:focus{outline:none}
+/* clickable races */
+.races li.rc{grid-template-columns:62px 1fr auto 12px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .15s,transform .12s;user-select:none}
+.races li.rc:hover{background:color-mix(in srgb,var(--ink) 7%,transparent)}
+.races li.rc:active{transform:scale(.97);background:color-mix(in srgb,var(--gold) 22%,transparent)}
+.races li.rc:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.races li .chev{color:var(--mute);font-size:20px;line-height:1}
+.races li.past{opacity:.6}
+/* race sheet */
+.rchead{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-size:15px;color:var(--mute);margin:0 0 14px}
+.rcs{font-size:14px}.rcs.now{color:var(--live)}.rcs.up{color:var(--gold)}.rcs.done{color:var(--ink)}
+.trkgo{background:var(--gold);color:#10203f}
+.rcl{padding:4px 0}
+.rcrow{display:flex;align-items:center;gap:10px;width:100%;padding:11px 16px;background:none;border:0;border-top:1px solid var(--line);color:var(--ink);font-size:16px;text-align:start;transition:background .15s}
+.rcl>.rcrow:first-child{border-top:0}
+button.rcrow:active{background:color-mix(in srgb,var(--gold) 20%,transparent)}
+.rcrow b{font-weight:600;flex:1}.rcrow small{color:var(--mute);font-size:14px;font-variant-numeric:tabular-nums}
+.rcp{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:14px;background:var(--line);flex:none}
+.rcp.p1{background:#f5b800;color:#10203f}.rcp.p2{background:#c9d2de;color:#10203f}
+/* in-app tracking */
+dialog.tmd.full .trkv{display:flex;flex-direction:column;height:100dvh}
+.trkbar{display:flex;align-items:center;gap:8px;padding:calc(env(safe-area-inset-top) + 8px) 10px 8px;background:#1a4486;color:#fff}
+.trkbar b{flex:1;text-align:center;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trkb{background:rgba(255,255,255,.16);color:#fff;border:0;border-radius:12px;padding:8px 12px;font-size:14px;text-decoration:none;white-space:nowrap}
+.trkv iframe{flex:1;width:100%;border:0;background:#fff}
+.tact a.tbtn{flex:1;display:flex;align-items:center;justify-content:center;border:var(--bd);background:var(--card);color:var(--link);border-radius:14px;padding:12px 16px;min-height:48px;font-weight:500;font-size:17px;text-decoration:none}

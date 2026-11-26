@@ -283,6 +283,15 @@ ar:{obT:"ثبّت التطبيق",obSub:"مجاني، دون متجر تطبيق
  iosAlt:"الأسهل في Safari: انسخ الرابط وافتح Safari والصقه.",inApp:"هذه الصفحة مفتوحة داخل تطبيق آخر (مثل واتساب أو إنستغرام). التثبيت يعمل من المتصفح فقط: اضغط ⋯ واختر «فتح في المتصفح» – أو انسخ الرابط وافتحه في Safari أو Chrome.",copy:"نسخ الرابط",done2:"بعد ذلك افتح SSL Gold Cup من الشاشة الرئيسية.",
  ui:{share:"مشاركة",home:"إضافة إلى الشاشة الرئيسية",add:"إضافة",web:"فتح كتطبيق ويب",cancel:"إلغاء",ainst:"تثبيت التطبيق",aok:"تثبيت"}}};
 for(const l in SO)Object.assign(S[l],SO[l]);
+const SR={
+en:{trkOpen:"📍 Watch live tracking",trkReplay:"📍 Replay the race (tracking)",trkNone:"Tracking appears here as soon as Georacing has set up this race.",trkExt:"Open in Georacing ↗",trkHint:"Every boat as a dot on the map – live during the race, as a replay afterwards.",back:"‹ Back",rcRes:"Result of this race",rcTeams:"On the start line",rcStand:"Group so far",rcPts:"pts",rcGroup:"Show group on the Matchboard",rcTBD:"Teams not decided yet"},
+de:{trkOpen:"📍 Live-Tracking ansehen",trkReplay:"📍 Rennen nochmal ansehen (Tracking)",trkNone:"Das Tracking erscheint hier, sobald Georacing dieses Rennen angelegt hat.",trkExt:"In Georacing öffnen ↗",trkHint:"Jedes Boot als Punkt auf der Karte – live während des Rennens, danach als Wiederholung.",back:"‹ Zurück",rcRes:"Ergebnis dieses Rennens",rcTeams:"Am Start",rcStand:"Gruppe bisher",rcPts:"Pkt.",rcGroup:"Gruppe im Matchboard zeigen",rcTBD:"Teams stehen noch nicht fest"},
+fr:{trkOpen:"📍 Suivre le tracking en direct",trkReplay:"📍 Revoir la course (tracking)",trkNone:"Le tracking apparaîtra ici dès que Georacing aura créé cette course.",trkExt:"Ouvrir dans Georacing ↗",trkHint:"Chaque bateau est un point sur la carte – en direct pendant la course, puis en replay.",back:"‹ Retour",rcRes:"Résultat de cette course",rcTeams:"Au départ",rcStand:"Le groupe jusqu'ici",rcPts:"pts",rcGroup:"Voir le groupe dans le Matchboard",rcTBD:"Équipes pas encore connues"},
+es:{trkOpen:"📍 Ver el tracking en directo",trkReplay:"📍 Volver a ver la regata (tracking)",trkNone:"El tracking aparecerá aquí en cuanto Georacing cree esta regata.",trkExt:"Abrir en Georacing ↗",trkHint:"Cada barco es un punto en el mapa: en directo durante la regata y como repetición después.",back:"‹ Volver",rcRes:"Resultado de esta regata",rcTeams:"En la salida",rcStand:"El grupo hasta ahora",rcPts:"pts",rcGroup:"Ver el grupo en el Matchboard",rcTBD:"Equipos aún por decidir"},
+pt:{trkOpen:"📍 Ver rastreamento ao vivo",trkReplay:"📍 Rever a regata (rastreamento)",trkNone:"O rastreamento aparece aqui assim que a Georacing criar esta regata.",trkExt:"Abrir no Georacing ↗",trkHint:"Cada barco é um ponto no mapa – ao vivo durante a regata e depois como replay.",back:"‹ Voltar",rcRes:"Resultado desta regata",rcTeams:"Na largada",rcStand:"O grupo até agora",rcPts:"pts",rcGroup:"Ver o grupo no Matchboard",rcTBD:"Equipes ainda não definidas"},
+zh:{trkOpen:"📍 查看实时追踪",trkReplay:"📍 回放比赛（追踪）",trkNone:"Georacing 创建本场比赛后，追踪将显示在这里。",trkExt:"在 Georacing 中打开 ↗",trkHint:"每条船都是地图上的一个点——比赛中实时显示，赛后可回放。",back:"‹ 返回",rcRes:"本场成绩",rcTeams:"参赛队伍",rcStand:"小组目前排名",rcPts:"分",rcGroup:"在 Matchboard 中查看小组",rcTBD:"参赛队伍尚未确定"},
+ar:{trkOpen:"📍 شاهد التتبع المباشر",trkReplay:"📍 أعد مشاهدة السباق (التتبع)",trkNone:"سيظهر التتبع هنا بمجرد أن تُنشئ Georacing هذا السباق.",trkExt:"افتح في Georacing ↗",trkHint:"كل قارب نقطة على الخريطة – مباشرة أثناء السباق، ثم كإعادة بعده.",back:"رجوع ›",rcRes:"نتيجة هذا السباق",rcTeams:"على خط الانطلاق",rcStand:"المجموعة حتى الآن",rcPts:"نقطة",rcGroup:"اعرض المجموعة في Matchboard",rcTBD:"لم تُحدَّد الفرق بعد"}};
+for(const l in SR)Object.assign(S[l],SR[l]);
 
 
 
@@ -395,7 +404,7 @@ function raceLi(x,nx){const st=rState2(x),r=rnd(x.rid),g=r&&r.groups.find(y=>y.i
   const fl=g?g.rows.filter(z=>isTeam(z.team)).map(z=>FL(z.team)).join(""):"";
   const lbl=x.rid=="f"?RNm(rnd("f")):x.rid=="pf"?RNm(rnd("pf")):`${T("group")} ${x.g}`;
   const s=st=="done"?`✓ ${T("done")}`:st=="now"?T("onWater"):x===nx&&at(x)-nowMs()<12*36e5?T("inX")(Math.max(1,Math.round((at(x)-nowMs())/6e4))):"";
-  return `<li class="${st=="done"||st=="past"?"past":st=="now"?"now":x===nx?"nxt":""}"><span class="ti">${x.t}${showLocal?`<small>${esc(locT(x))}</small>`:""}</span><span class="gt"><b>${esc(lbl)}</b><i>${["sf","pf","f"].includes(x.rid)?esc(RS[x.rid]):T("race")+" "+x.n}</i><span class="fls">${fl}</span>${trkUrl(x)&&st!="done"&&st!="past"?`<a class="trk" href="${esc(trkUrl(x))}" target="_blank" rel="noopener">📍 ${T("trk")}</a>`:""}</span><span class="s">${esc(s)}${wxAt(x)}</span></li>`}
+  return `<li class="rc ${st=="done"||st=="past"?"past":st=="now"?"now":x===nx?"nxt":""}" data-race="${raceKey(x)}" role="button" tabindex="0"><span class="ti">${x.t}${showLocal?`<small>${esc(locT(x))}</small>`:""}</span><span class="gt"><b>${esc(lbl)}</b><i>${["sf","pf","f"].includes(x.rid)?esc(RS[x.rid]):T("race")+" "+x.n}</i><span class="fls">${fl}</span>${trkUrl(x)&&st!="done"&&st!="past"?`<a class="trk" data-trk="${raceKey(x)}" href="${esc(trkUrl(x))}" target="_blank" rel="noopener">📍 ${T("trk")}</a>`:""}</span><span class="s">${esc(s)}${wxAt(x)}</span><span class="chev" aria-hidden="true">›</span></li>`}
 const trkUrl=x=>{try{const u=TRK[x.rid][x.g][String(x.n)];return /^https:\/\/player\.georacing\.com\//.test(u)?u:""}catch(e){return""}};
 /* wind forecast (Open-Meteo, no key) */
 let WX=null;
@@ -645,7 +654,7 @@ function openTeam(code){if(!isTeam(code))return;openCode=code;const d=$("#tmd"),
   d.querySelectorAll("[data-go]").forEach(b=>{const f=()=>{d.close();sel=code;jump=true;go(b.dataset.go)};b.onclick=f;b.onkeydown=e=>{if(e.key=="Enter")f()}});
   d.querySelectorAll("[data-pi]").forEach(el=>{const f=()=>openSailor(code,+el.dataset.pi);el.onclick=f;el.onkeydown=e=>{if(e.key=="Enter")f()}});
   show(d)}
-function show(d){if(!d.querySelector(".ob"))d.classList.remove("full");if(!d.open){d.showModal();try{history.pushState({sheet:1},"")}catch(e){}}d.scrollTop=0;const th=d.querySelector(".th");if(th){th.tabIndex=-1;th.focus({preventScroll:true})}}
+function show(d){if(!d.querySelector(".ob,.trkv"))d.classList.remove("full");if(!d.open){d.showModal();try{history.pushState({sheet:1},"")}catch(e){}}d.scrollTop=0;const th=d.querySelector(".th");if(th){th.tabIndex=-1;th.focus({preventScroll:true})}}
 function openSailor(code,i){const d=$("#tmd"),sq=squad(code),p=sq.ppl[i];if(!p)return;openCode=code;const PE=pinfo(code,p),TM=teams().find(x=>x.code==code),n=sq.ppl.length;
   const q2=encodeURIComponent;let h=`<div class="th"><button class="bk">${T("back")}</button><div class="thb"><button class="pv" aria-label="previous">‹</button><button class="nx2" aria-label="next">›</button><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">`;
   h+=`<div class="shero">${p.img?`<img src="${esc(p.img)}" alt="${esc(p.name)}">`:`<span class="big">${esc(ini(p.name))}</span>`}<div><div class="nick">${FL(code)} ${esc(NM(code))}${sq.n?" · "+esc(sq.n):""}</div><h2>${esc(p.name)}</h2>${p.cap?`<span class="ctag">${T("capTag")}</span>`:""}</div></div>`;
@@ -699,6 +708,31 @@ function installHelp(first){const I=T("inst"),d=$("#tmd"),U=T("ui"),x=s=>esc(s);
 /* first visit in a phone browser: show the install guide once, full screen */
 function firstRun(){try{if(LS.get("onb",0)||LS.get("installed",0)||!canInstall()||!(isIOS||isAndroid)||navigator.webdriver)return;
   setTimeout(()=>{if(!$("#tmd").open&&!LS.get("onb",0))installHelp(true)},900)}catch(e){}}
+/* ---------- race sheet + in-app tracking ---------- */
+const raceKey=x=>`${x.rid}|${x.g}|${x.n}`;
+const raceBy=k=>{const[a,b,c]=String(k).split("|");return SCH.find(x=>x.rid==a&&x.g==b&&String(x.n)==c)};
+function openRace(x){if(!x)return;const d=$("#tmd"),r=rnd(x.rid),g=r&&r.groups.find(y=>y.id==x.g),st=rState2(x),u=trkUrl(x);openCode=null;
+  const title=["sf","pf","f"].includes(x.rid)&&x.rid!="sf"?RNm(r||{id:x.rid}):`${T("group")} ${x.g} · ${T("race")} ${x.n}`;
+  const when=`${esc(wday(x.d))} · ${x.t} ${T("rioT")}${showLocal?` · ${esc(locT(x))} ${T("loc")}`:""}`;
+  const s=st=="done"?`✓ ${T("done")}`:st=="now"?`● ${T("onWater")}`:st=="up"&&at(x)-nowMs()<24*36e5?T("inX")(Math.max(1,Math.round((at(x)-nowMs())/6e4))):"";
+  let h=`<div class="th"><div><div class="nick">${esc(r?RNm(r):"")}</div><h2>${esc(title)}</h2></div><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">`;
+  h+=`<div class="rchead"><span>${when}</span>${s?`<b class="rcs ${st}">${esc(s)}</b>`:""}${wxAt(x)}</div>`;
+  h+=u?`<button class="obgo trkgo" data-trkin="1">${esc(T(st=="done"||st=="past"?"trkReplay":"trkOpen"))}</button><p class="warn">${esc(T("trkHint"))}</p>`:`<p class="warn">${esc(T("trkNone"))} <a href="https://app.georacing.com/?application_id=46" target="_blank" rel="noopener">${esc(T("trkExt"))}</a></p>`;
+  if(g){const rows=g.rows,i=x.n-1,known=rows.filter(z=>isTeam(z.team));
+    if(st=="done"){const ord2=[...rows].sort((a,b)=>num(b.r[i])-num(a.r[i]));
+      h+=`<h3>${T("rcRes")}</h3><div class="grp rcl">${ord2.map((z,k)=>`<button class="rcrow" data-tm="${esc(z.team)}"><span class="rcp p${k+1}">${k+1}</span>${FL(z.team)}<b>${esc(isTeam(z.team)?NM(z.team):phm(z.team))}</b><small>${esc(String(z.r[i]).trim())} ${T("rcPts")}</small></button>`).join("")}</div>`}
+    else h+=`<h3>${T("rcTeams")}</h3><div class="grp rcl">${known.length?rows.map(z=>isTeam(z.team)?`<button class="rcrow" data-tm="${esc(z.team)}">${FL(z.team)}<b>${esc(NM(z.team))}</b><small>${String(z.total??"").trim()!==""?esc(String(z.total))+" "+T("rcPts"):""}</small></button>`:`<div class="rcrow"><b style="opacity:.7">${esc(ph(z.team)||z.team)}</b></div>`).join(""):`<p class="pad">${T("rcTBD")}</p>`}</div>`;
+    if(rows.some(z=>z.r.some(v=>String(v).trim()!==""))){h+=`<h3>${T("rcStand")}</h3><div class="grp rt">${gtable(r,g,false)}</div>`;try{h+=needBox(r,g)}catch(e){}}}
+  h+=`<div class="tact"><button data-go="round-${esc(x.rid)}">${T("rcGroup")}</button><a class="tbtn" href="https://www.youtube.com/@Starsailors/streams" target="_blank" rel="noopener">${T("stream")}</a></div></div>`;
+  d.innerHTML=h;d.querySelector(".x").onclick=()=>d.close();
+  const tb=d.querySelector("[data-trkin]");if(tb)tb.onclick=()=>openTrack(x);
+  d.querySelectorAll("[data-tm]").forEach(b=>b.onclick=()=>{if(isTeam(b.dataset.tm))openTeam(b.dataset.tm)});
+  d.querySelector("[data-go]").onclick=e=>{d.close();sel=null;jump=true;go(e.currentTarget.dataset.go)};
+  show(d)}
+function openTrack(x){const u=trkUrl(x);if(!u)return;const d=$("#tmd");d.classList.add("full");
+  d.innerHTML=`<div class="trkv"><div class="trkbar"><button class="trkb" data-back="1">${esc(T("back"))}</button><b>${esc(x.rid=="f"||x.rid=="pf"?RNm(rnd(x.rid)):`${T("group")} ${x.g} · ${T("race")} ${x.n}`)}</b><a class="trkb" href="${esc(u)}" target="_blank" rel="noopener">${esc(T("trkExt"))}</a></div><iframe src="${esc(u)}" title="Georacing" allow="fullscreen; geolocation" referrerpolicy="no-referrer-when-downgrade"></iframe></div>`;
+  d.querySelector("[data-back]").onclick=()=>{d.classList.remove("full");openRace(x)};
+  openCode=null;show(d);gcEvent("tracking")}
 /* ---------- push notifications (OneSignal) + private visitor counter (GoatCounter); both off until config.js has a value ---------- */
 const CFG=window.CFG||{};
 const pushCan=()=>!!CFG.push&&"serviceWorker" in navigator&&"PushManager" in window&&"Notification" in window&&(location.protocol=="https:"||location.hostname=="localhost");
@@ -776,6 +810,8 @@ const go=h=>{if(location.hash.slice(1)!==h){try{if(history.state&&history.state.
 document.querySelector(".tabs").addEventListener("click",e=>{const b=e.target.closest("button");if(b){if(b.dataset.v==view&&scrollY>0)scrollTo({top:0,behavior:"smooth"});go(b.dataset.v=="board"?"round-"+(round||current()):b.dataset.v)}});
 $("#ladder").addEventListener("click",e=>{const b=e.target.closest("button");if(b){round=b.dataset.r;go("round-"+round)}});
 $("#main").addEventListener("click",e=>{
+  const tk=e.target.closest("[data-trk]");if(tk){e.preventDefault();const x=raceBy(tk.dataset.trk);if(x)openTrack(x);return}
+  const rc=e.target.closest("[data-race]");if(rc){openRace(raceBy(rc.dataset.race));return}
   const ins=e.target.closest("[data-inst]");if(ins){doInstall();return}
   const ih=e.target.closest("[data-insthide]");if(ih){LS.set("instHide",Date.now()+3*864e5);render(true);return}
   const sh=e.target.closest("[data-share]");if(sh){const u=location.href.split("#")[0];(async()=>{try{if(navigator.share){await navigator.share({title:"SSL Gold Cup",url:u});return}}catch(x){return}try{await navigator.clipboard.writeText(u);toast(T("shared"))}catch(x){toast(u)}})();return}
@@ -789,6 +825,7 @@ $("#main").addEventListener("click",e=>{
   const s=e.target.closest("[data-s]");if(s){sortBy=s.dataset.s;render(true);return}
   const t=e.target.closest(".team,.tm,.tmx");if(t)openTeam(t.dataset.t)});
 $("#tmd").addEventListener("click",e=>{if(e.target.id=="tmd")e.target.close()});
+$("#main").addEventListener("keydown",e=>{if(e.key!="Enter"&&e.key!=" ")return;const rc=e.target.closest&&e.target.closest("[data-race]");if(rc&&e.target===rc){e.preventDefault();openRace(raceBy(rc.dataset.race))}});
 $("#tmd").addEventListener("close",()=>{openCode=null;if($("#tmd").querySelector(".ob"))LS.set("onb",1);$("#tmd").classList.remove("full");try{if(history.state&&history.state.sheet)history.back()}catch(e){}});
 window.addEventListener("popstate",()=>{const d=$("#tmd");if(d.open)d.close()});
 window.addEventListener("hashchange",route);
