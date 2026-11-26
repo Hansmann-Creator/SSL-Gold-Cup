@@ -47,4 +47,7 @@ Read this first in any new session. Everything needed to keep developing the app
 
 ## Open items (waiting for Hansi)
 - OneSignal App ID (+ secret `ONESIGNAL_REST_KEY`) → push notifications go live.
-- GoatCounter code → visitor counter. Feedback address (`CFG.fb`).
+- Feedback: Google Form link (prefilled link with entry IDs) from Hansi → in-app "Wunsch melden".
+
+## Done
+- GoatCounter live: `CFG.gc="ssl-gold-cup"` → https://ssl-gold-cup.goatcounter.com (events: start-app/start-browser, install = first launch from home screen per device, install-tap, install-guide-*, install-confirmed, lang-*).
