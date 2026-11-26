@@ -1025,6 +1025,7 @@ bn:{tkLoad:"ট্র্যাকিং লোড হচ্ছে…",tkNone:"�
 ur:{tkLoad:"ٹریکنگ لوڈ ہو رہی ہے…",tkNone:"اس ریس کی ٹریکنگ ابھی دستیاب نہیں۔",tkNoData:"اس ریس کا کوئی ٹریکنگ ڈیٹا نہیں۔",tkOpens:"ٹریکنگ شروع ہوگی",tkStart:"اسٹارٹ",tkLeg:"لیگ",tkPre:"اسٹارٹ سے پہلے",tkNoPos:"سگنل نہیں",tkRep:"ری پلے",secOly:"اولمپک کھیل",secWc:"عالمی چیمپئن شپ",secEc:"براعظمی چیمپئن شپ",bioT:"تعارف",srcSSL:"سرکاری تعارف · Star Sailors League",careerT:"کیریئر",evN:"درج نتائج",podN:"پوڈیم",medRate:"تمغوں کی شرح",bestR:"بہترین نتیجہ",showAll:"سب دکھائیں",sslPts:"SSL پوائنٹس",heightT:"قد",weightT:"وزن",sslProf:"سرکاری SSL پروفائل",teamSite:"ٹیم ویب سائٹ",mySailors:"میرے ملاح",sFavHint:"کسی ملاح کے صفحے پر ☆ دبا کر فالو کریں – وہ یہاں نظر آئیں گے۔"},
 id:{tkLoad:"Memuat pelacakan…",tkNone:"Belum ada pelacakan untuk lomba ini.",tkNoData:"Tidak ada data pelacakan untuk lomba ini.",tkOpens:"Pelacakan dibuka pukul",tkStart:"Start",tkLeg:"Leg",tkPre:"sebelum start",tkNoPos:"tanpa sinyal",tkRep:"Tayangan ulang",secOly:"Olimpiade",secWc:"Kejuaraan Dunia",secEc:"Kejuaraan kontinental",bioT:"Tentang",srcSSL:"Bio resmi · Star Sailors League",careerT:"Karier",evN:"hasil tercatat",podN:"podium",medRate:"rasio medali",bestR:"hasil terbaik",showAll:"Tampilkan semua",sslPts:"Poin SSL",heightT:"Tinggi",weightT:"Berat",sslProf:"Profil resmi SSL",teamSite:"Situs tim",mySailors:"Pelaut saya",sFavHint:"Ketuk ☆ di halaman pelaut untuk mengikutinya – mereka akan muncul di sini."}};
 for(const l in SADD)Object.assign(S[l],SADD[l]);
+const SOW={"en": "In their own words · from the SSL profile", "de": "In eigenen Worten · aus dem SSL-Profil", "fr": "Dans ses propres mots · profil SSL", "es": "En sus propias palabras · perfil SSL", "pt": "Nas próprias palavras · perfil SSL", "zh": "本人自述 · 来自SSL资料", "ar": "بكلماته · من ملف SSL", "hi": "अपने शब्दों में · SSL प्रोफ़ाइल से", "bn": "নিজের ভাষায় · SSL প্রোফাইল থেকে", "ur": "اپنے الفاظ میں · SSL پروفائل سے", "id": "Dengan kata-katanya sendiri · dari profil SSL", "ms": "Dalam kata-katanya sendiri · daripada profil SSL", "ja": "本人による紹介 · SSLプロフィールより", "th": "เล่าด้วยตัวเอง · จากโปรไฟล์ SSL", "hu": "Saját szavaival · az SSL-profilból", "cs": "Vlastními slovy · z profilu SSL", "uk": "Власними словами · з профілю SSL"};for(const l in SOW)if(S[l])S[l].ownW=SOW[l];
 const T=k=>S[lang][k]??S.en[k];
 const ord=n=>ORD[lang](n);
 
@@ -1347,7 +1348,7 @@ function teamStats(TM){if(!TM)return"";let races=0,wins=0,pl=[],pts=0;const hist
 function calSheet(code){const d=$("#tmd"),base=location.href.split("#")[0].replace(/[^/]*$/,""),file=code?`cal/${code}.ics`:"races.ics",web=base.replace(/^https?:/,"webcal:")+file;
   d.innerHTML=`<div class="th">${code?`<button class="bk">${T("back")}</button>`:""}<div><div class="nick">SSL Gold Cup</div><h2>${T("calT")}</h2></div><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">
   ${code?`<p class="tst">${FL(code)} <b>${esc(NM(code))}</b></p>`:""}<div class="mlist" style="margin-top:12px"><a class="mrow" href="${esc(web)}">${svg('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>')}<span><b>${T("calSub")}</b></span></a><a class="mrow" href="https://calendar.google.com/calendar/r?cid=${encodeURIComponent(web)}" target="_blank" rel="noopener">${svg('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M12 14v4M10 16h4"/>')}<span><b>${T("calG")}</b></span></a><a class="mrow" href="${esc(file)}" download>${svg('<path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>')}<span><b>${T("calDl")}</b></span></a></div><p class="warn">${T("calNote")}</p></div>`;
-  d.querySelector(".x").onclick=()=>d.close();const bk=d.querySelector(".bk");if(bk)bk.onclick=()=>openTeam(code);openCode=code||null;show(d)}
+  d.querySelector(".x").onclick=()=>d.close();const bk=d.querySelector(".bk");if(bk)bk.onclick=()=>d.close();openCode=code||null;show(d)}
 /* ---------- share a group as image ---------- */
 function loadImg(src){return new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=src})}
 async function shareGroup(rid,gid){const r=rnd(rid),g=r&&r.groups.find(x=>x.id==gid);if(!g)return;
@@ -1374,7 +1375,27 @@ async function shareGroup(rid,gid){const r=rnd(rid),g=r&&r.groups.find(x=>x.id==
 
 /* ---------- team sheet ---------- */
 let openCode=null;
-function openTeam(code){if(!isTeam(code))return;openCode=code;const d=$("#tmd"),sq=squad(code),I=INFO[code]||{},TM=teams().find(x=>x.code==code);
+
+/* ---------- pages: team, sailor and race open as real pages (own URL, back = one step back) ---------- */
+let PGS=null,NOBACK=false;
+const pgHash=e=>e.t=="team"?`team-${e.a}`:e.t=="sailor"?`sailor-${e.a}-${e.i}`:`race-${e.k.replace(/\|/g,"-")}`;
+function pgParse(h){let m;if(m=h.match(/^team-([A-Z]{3})$/))return{t:"team",a:m[1]};if(m=h.match(/^sailor-([A-Z]{3})-(\d+)$/))return{t:"sailor",a:m[1],i:+m[2]};if(m=h.match(/^race-(\w+)-([A-D])-(\d+)$/))return{t:"race",k:`${m[1]}|${m[2]}|${m[3]}`};return null}
+function pgRender(e){PGS=e;if(e.t=="team")pTeam(e.a);else if(e.t=="sailor")pSailor(e.a,e.i);else{const x=raceBy(e.k);if(x)pRace(x);else pgHide()}}
+function pgGo(e,replace){const d=$("#tmd");if(d.open){NOBACK=true;replace=replace||!!(history.state&&history.state.sheet);d.close()}
+  const same=PGS&&!$("#pg").hidden&&pgHash(PGS)==pgHash(e);
+  try{const H=history.state||{},cd=H.d||0;if(replace||same)history.replaceState({pg:e,d:H.sheet?Math.max(1,cd):cd},"","#"+pgHash(e));else history.pushState({pg:e,d:cd+1},"","#"+pgHash(e))}catch(x){}
+  pgRender(e);if(!same)$("#pg").scrollTop=0}
+function pgShow(d){const first=d.hidden;d.hidden=false;lockScroll();document.documentElement.classList.add("pgon");
+  const th=d.querySelector(".th");if(th){th.querySelectorAll(".x,.bk").forEach(b=>b.remove());const b=document.createElement("button");b.className="pgb";b.setAttribute("aria-label",T("back").replace(/[‹\s]/g,"")||"Back");b.innerHTML='<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';b.onclick=pgBack;th.prepend(b)}
+  if(first){d.classList.remove("pgin");void d.offsetWidth;d.classList.add("pgin")}}
+function pgBack(){if(history.state&&history.state.pg&&history.state.d>0)history.back();else{pgHide();try{history.replaceState(null,"","#"+(LS.get("view","")||"home"))}catch(e){}route()}}
+let PGPUSHED=false;
+function pgHide(){const d=$("#pg");if(d.hidden)return;d.hidden=true;d.innerHTML="";PGS=null;openCode=null;document.documentElement.classList.remove("pgon");unlockScroll()}
+function pgRefresh(){if(PGS&&!$("#pg").hidden){const d=$("#pg"),y=d.scrollTop;pgRender(PGS);d.scrollTop=y}}
+function openTeam(code){if(!isTeam(code))return;PGPUSHED=true;pgGo({t:"team",a:code})}
+function openSailor(code,i,replace){PGPUSHED=true;pgGo({t:"sailor",a:code,i:+i},replace)}
+function openRace(x){if(!x)return;PGPUSHED=true;pgGo({t:"race",k:raceKey(x)})}
+function pTeam(code){if(!isTeam(code))return;openCode=code;const d=$("#pg"),sq=squad(code),I=INFO[code]||{},TM=teams().find(x=>x.code==code);
   const path=TM?TM.path.map(s=>{const o=s.o;return `<span role="button" tabindex="0" data-go="round-${s.r.id}" class="${o?(o[0]=="w"?"w":(o[2]===0?"o":"")):""}">${esc(RS[s.r.id])} · ${T("group")} ${esc(s.g.id)}${s.done?` · ${ord(s.pos)}`:""} ›</span>`}).join(""):"";
   const lastP=TM?TM.path[TM.path.length-1]:null;
   let h=`<div class="th"><span class="fg">${FL(code)}</span><div><div class="nick">${esc(sq.n||code)}</div><h2>${esc(NM(code))}</h2></div>
@@ -1403,24 +1424,23 @@ function openTeam(code){if(!isTeam(code))return;openCode=code;const d=$("#tmd"),
     h+=`<div class="tf">${T("squadNote")(rl.length,pics.length)}</div>`}
   h+=`<div class="tact">${pushShown()?`<button data-push="1" class="${pSet.has(code)?"on":""}" aria-pressed="${pSet.has(code)}">${T(pSet.has(code)?"pTeamOn":"pTeamOff")}</button>`:""}<button data-cal="${esc(code)}">${T("calBtn")}</button><button data-cmp="1">${T("cmpBtn")}</button><button data-br="1">${T("showPath")}</button></div></div>`;
   d.innerHTML=h;
-  d.querySelector(".x").onclick=()=>d.close();
-  d.querySelector(".fv").onclick=()=>{favs.has(code)?favs.delete(code):favs.add(code);LS.set("favs",[...favs]);const y=d.scrollTop;openTeam(code);d.scrollTop=y;render(true)};
+  d.querySelector(".fv").onclick=()=>{favs.has(code)?favs.delete(code):favs.add(code);LS.set("favs",[...favs]);const y=d.scrollTop;pTeam(code);d.scrollTop=y;render(true)};
   d.querySelector(".ln").onclick=async()=>{const u=location.href.split("#")[0]+"#team-"+code;try{if(navigator.share){await navigator.share({title:`${NM(code)} · SSL Gold Cup Rio 2026`,url:u});return}}catch(e){if(e&&e.name=="AbortError")return}try{await navigator.clipboard.writeText(u);toast(T("copied"))}catch(e){toast(u)}};d.querySelectorAll(".hrc[data-race]").forEach(b=>b.onclick=()=>{const x=raceBy(b.dataset.race);if(x)openRace(x)});
   d.querySelector("[data-cal]").onclick=()=>calSheet(code);
   d.querySelector("[data-cmp]").onclick=()=>comparePick(code);
-  {const pb=d.querySelector("[data-push]");if(pb)pb.onclick=async()=>{pb.disabled=true;await pushToggle(code);if(d.open&&openCode==code){const y=d.scrollTop;openTeam(code);d.scrollTop=y}};}
-  d.querySelector("[data-br]").onclick=()=>{d.close();sel=code;jump=true;go("bracket")};
-  d.querySelectorAll("[data-go]").forEach(b=>{const f=()=>{d.close();sel=code;jump=true;go(b.dataset.go)};b.onclick=f;b.onkeydown=e=>{if(e.key=="Enter")f()}});
+  {const pb=d.querySelector("[data-push]");if(pb)pb.onclick=async()=>{pb.disabled=true;await pushToggle(code);if(PGS&&PGS.t=="team"&&PGS.a==code){const y=d.scrollTop;pTeam(code);d.scrollTop=y}};}
+  d.querySelector("[data-br]").onclick=()=>{sel=code;jump=true;go("bracket")};
+  d.querySelectorAll("[data-go]").forEach(b=>{const f=()=>{sel=code;jump=true;go(b.dataset.go)};b.onclick=f;b.onkeydown=e=>{if(e.key=="Enter")f()}});
   d.querySelectorAll("[data-pi]").forEach(el=>{const f=()=>openSailor(code,+el.dataset.pi);el.onclick=f;el.onkeydown=e=>{if(e.key=="Enter")f()}});
-  show(d)}
+  pgShow(d)}
 let lockY=0;
 function lockScroll(){const b=document.body;if(b.classList.contains("lock"))return;lockY=scrollY;b.style.top=-lockY+"px";b.classList.add("lock")}
-function unlockScroll(){const b=document.body;if(!b.classList.contains("lock"))return;b.classList.remove("lock");b.style.top="";scrollTo(0,lockY)}
+function unlockScroll(){const b=document.body;if(PGS&&!$("#pg").hidden)return;if(!b.classList.contains("lock"))return;b.classList.remove("lock");b.style.top="";scrollTo(0,lockY)}
 const NMH=n=>{const g=givenN(n);return `${g?`<span class="gn">${esc(g)}</span> `:""}<b class="sn">${esc(surname(n))}</b>`};
 function givenN(n){const sn=surname(n),w=String(n).trim();return w.endsWith(sn)?w.slice(0,w.length-sn.length).trim():""}
 function surname(n){const w=String(n).trim().split(/\s+/);if(w.length<2)return w[0]||"";let i=w.length-1;while(i>1&&/^(de|da|do|dos|das|del|della|di|van|von|der|den|ter|le|la|al|el|bin|ben|mac|st\.?)$/i.test(w[i-1]))i--;return w.slice(i).join(" ")}
-function show(d){if(!d.querySelector(".ob,.trkv"))d.classList.remove("full");if(!d.open){lockScroll();d.showModal();try{history.pushState({sheet:1},"")}catch(e){}}d.scrollTop=0;const th=d.querySelector(".th");if(th){th.tabIndex=-1;th.focus({preventScroll:true})}}
-function openSailor(code,i){const d=$("#tmd"),sq=squad(code),p=sq.ppl[i];if(!p)return;openCode=code;const PE=pinfo(code,p),TM=teams().find(x=>x.code==code),n=sq.ppl.length;
+function show(d){if(!d.querySelector(".ob,.trkv"))d.classList.remove("full");if(!d.open){lockScroll();d.showModal();try{history.pushState({sheet:1,d:((history.state&&history.state.d)||0)+1},"")}catch(e){}}d.scrollTop=0;const th=d.querySelector(".th");if(th){th.tabIndex=-1;th.focus({preventScroll:true})}}
+function pSailor(code,i){const d=$("#pg"),sq=squad(code),p=sq.ppl[i];if(!p)return;openCode=code;const PE=pinfo(code,p),TM=teams().find(x=>x.code==code),n=sq.ppl.length;
   const q2=encodeURIComponent;let h=`<div class="th"><button class="bk">${T("back")}</button><div class="thb"><button class="fv ${sfavs.has(code+"|"+p.name)?"on":""}" data-sfv="1" aria-pressed="${sfavs.has(code+"|"+p.name)}" title="${esc(T("sFavHint"))}">${sfavs.has(code+"|"+p.name)?"★":"☆"}</button><button class="pv" aria-label="previous">‹</button><button class="nx2" aria-label="next">›</button><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">`;
   h+=`<div class="shero">${p.img?`<img src="${esc(p.img)}" alt="${esc(p.name)}">`:`<span class="big">${esc(ini(p.name))}</span>`}<div><div class="nick">${FL(code)} ${esc(NM(code))}${sq.n?" · "+esc(sq.n):""}</div><h2 class="snh">${NMH(p.name)}</h2>${p.cap?`<span class="ctag">${T("capTag")}</span>`:""}</div></div>`;
   const PF=PROF[code+"|"+p.name]||{};const tile=(k,v,e,cls)=>`<div class="sl${cls?" "+cls:""}"><small>${k}</small><b>${v}</b>${e?`<em>${e}</em>`:""}</div>`;
@@ -1432,12 +1452,12 @@ function openSailor(code,i){const d=$("#tmd"),sq=squad(code),p=sq.ppl[i];if(!p)r
   h+=`<h3>${T("moreT")}</h3><div class="grp plks">${slug?lk(`https://worldofsailors.com/sailor/${esc(slug)}`,'<img src="brand/ssl.png" alt="" class="sslg">',esc(T("sslProf")),"worldofsailors.com"):lk(`https://www.google.com/search?q=${q2('site:worldofsailors.com/sailor "'+p.name+'"')}`,'<img src="brand/ssl.png" alt="" class="sslg">',esc(T("findProfile")),"worldofsailors.com")}${lk(`https://www.google.com/search?q=${q2('site:sailing.org "'+p.name+'"')}`,'<svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>',"World Sailing","sailing.org")}${lk(`https://${esc(code.toLowerCase())}.sslgoldcup.com/`,FL(code)||"⚑",esc(T("teamSite")),esc(NM(code)))}</div>`;
   h+=`<h3>${T("mates")}</h3><div class="grp mates">${sq.ppl.filter(x=>x.i!=i).map(x=>`<button data-pi="${x.i}">${av(x,1)}<span>${NMH(x.name)}</span></button>`).join("")}</div></div>`;
   d.innerHTML=h;
-  d.querySelector(".x").onclick=()=>d.close();d.querySelector(".bk").onclick=()=>openTeam(code);d.querySelector("[data-tm]").onclick=()=>openTeam(code);
-  d.querySelector("[data-sfv]").onclick=()=>{const k=code+"|"+p.name;const on=!sfavs.has(k);on?sfavs.add(k):sfavs.delete(k);LS.set("sfavs",[...sfavs]);toast(on?"★ "+T("mySailors"):"☆");const y=d.scrollTop;openSailor(code,i);d.scrollTop=y;render(true)};
-  d.querySelector(".pv").onclick=()=>openSailor(code,(i-1+n)%n);d.querySelector(".nx2").onclick=()=>openSailor(code,(i+1)%n);
+  d.querySelector("[data-tm]").onclick=()=>openTeam(code);
+  d.querySelector("[data-sfv]").onclick=()=>{const k=code+"|"+p.name;const on=!sfavs.has(k);on?sfavs.add(k):sfavs.delete(k);LS.set("sfavs",[...sfavs]);toast(on?"★ "+T("mySailors"):"☆");const y=d.scrollTop;pSailor(code,i);d.scrollTop=y;render(true)};
+  d.querySelector(".pv").onclick=()=>openSailor(code,(i-1+n)%n,1);d.querySelector(".nx2").onclick=()=>openSailor(code,(i+1)%n,1);
   d.querySelectorAll("[data-pi]").forEach(el=>el.onclick=()=>openSailor(code,+el.dataset.pi));d.querySelectorAll("[data-more]").forEach(b=>b.onclick=()=>{b.parentNode.classList.add("open");b.remove()});
-  d.onkeydown=e=>{if(!d.querySelector(".shero"))return;if(e.key=="ArrowLeft")openSailor(code,(i-1+n)%n);if(e.key=="ArrowRight")openSailor(code,(i+1)%n)};
-  show(d)}
+  d.onkeydown=e=>{if(!d.querySelector(".shero"))return;if(e.key=="ArrowLeft")openSailor(code,(i-1+n)%n,1);if(e.key=="ArrowRight")openSailor(code,(i+1)%n,1)};
+  pgShow(d)}
 function toast(m){let el=$(".toast");if(!el){el=document.createElement("div");el.className="toast";el.setAttribute("role","status");document.body.appendChild(el)}el.textContent=m;el.classList.add("on");clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove("on"),1800)}
 
 function installHelp(first){const I=T("inst"),d=$("#tmd"),U=T("ui"),x=s=>esc(s);
@@ -1480,11 +1500,11 @@ function firstRun(){try{if(LS.get("onb",0)||LS.get("installed",0)||!canInstall()
 /* ---------- race sheet + in-app tracking ---------- */
 const raceKey=x=>`${x.rid}|${x.g}|${x.n}`;
 const raceBy=k=>{const[a,b,c]=String(k).split("|");return SCH.find(x=>x.rid==a&&x.g==b&&String(x.n)==c)};
-function openRace(x){if(!x)return;const d=$("#tmd"),r=rnd(x.rid),g=r&&r.groups.find(y=>y.id==x.g),st=rState2(x),u=trkUrl(x);openCode=null;
+function pRace(x){if(!x)return;const d=$("#pg"),r=rnd(x.rid),g=r&&r.groups.find(y=>y.id==x.g),st=rState2(x),u=trkUrl(x);openCode=null;
   const title=["sf","pf","f"].includes(x.rid)&&x.rid!="sf"?RNm(r||{id:x.rid}):`${T("group")} ${x.g} · ${T("race")} ${x.n}`;
   const when=`${esc(wday(x.d))} · ${x.t} ${T("rioT")}${showLocal?` · ${esc(locT(x))} ${T("loc")}`:""}`;
   const s=st=="done"?`✓ ${T("done")}`:st=="now"?`● ${T("onWater")}`:st=="up"&&at(x)-nowMs()<24*36e5?T("inX")(Math.max(1,Math.round((at(x)-nowMs())/6e4))):"";
-  let h=`<div class="th"><div><div class="nick">${esc(r?RNm(r):"")}</div><h2>${esc(title)}</h2></div><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">`;
+  let h=`<div class="th"><div><div class="nick">${esc(r?RNm(r):"")}</div><h2>${esc(title)}</h2></div></div><div class="tb">`;
   h+=`<div class="rchead"><span>${when}</span>${s?`<b class="rcs ${st}">${esc(s)}</b>`:""}${wxAt(x)}</div>`;
   {const fc=at(x)>nowMs()-36e5*12&&at(x)-nowMs()<15*864e5;h+=`<div class="rcbtns">${u?`<button class="rcb trk2" data-trkin="1">${svg('<path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>')}<b>${esc(T(st=="done"||st=="past"?"trkReplayS":"trkLive"))}</b></button>`:""}${fc?`<button class="rcb fc2" data-wxo="1">${svg('<path d="M3 8h10.5a3 3 0 1 0-3-3"/><path d="M3 12h15.5a3 3 0 1 1-3 3"/><path d="M3 16h7"/>')}<b>${esc(T("fcBtn"))}</b></button>`:""}</div>${u?"":`<p class="warn">${esc(T("trkNone"))}</p>`}`;}
   if(hiddenRace(x))h+=`<div class="sprc"><b>🙈 ${esc(T("spRace"))}</b><button data-sprv="1">${esc(T("spReveal"))}</button></div>`;
@@ -1494,13 +1514,13 @@ function openRace(x){if(!x)return;const d=$("#tmd"),r=rnd(x.rid),g=r&&r.groups.f
     else h+=`<h3>${T("rcTeams")}</h3><div class="grp rcl">${known.length?rows.map(z=>isTeam(z.team)?`<button class="rcrow" data-tm="${esc(z.team)}">${FL(z.team)}<b>${esc(NM(z.team))}</b><small>${String(z.total??"").trim()!==""?esc(String(z.total))+" "+T("rcPts"):""}</small></button>`:`<div class="rcrow"><b style="opacity:.7">${esc(ph(z.team)||z.team)}</b></div>`).join(""):`<p class="pad">${T("rcTBD")}</p>`}</div>`;
     if(rows.some(z=>z.r.some(v=>String(v).trim()!==""))){h+=`<h3>${T("rcStand")}</h3><div class="grp rt">${gtable(r,g,false)}</div>`;try{h+=needBox(r,g)}catch(e){}}}
   h+=`<div class="tact"><button data-go="round-${esc(x.rid)}">${T("rcGroup")}</button><a class="tbtn" href="https://www.youtube.com/@Starsailors/streams" target="_blank" rel="noopener">${T("stream")}</a></div></div>`;
-  d.innerHTML=h;d.querySelector(".x").onclick=()=>d.close();
+  d.innerHTML=h;
   const tb=d.querySelector("[data-trkin]");if(tb)tb.onclick=()=>openTrack(x);
   const wo=d.querySelector("[data-wxo]");if(wo)wo.onclick=()=>openWx(x);
-  const rv=d.querySelector("[data-sprv]");if(rv)rv.onclick=()=>{spoilSet(true,Math.max(SPCUT,at(x)+60e3));openRace(x)};
+  const rv=d.querySelector("[data-sprv]");if(rv)rv.onclick=()=>{spoilSet(true,Math.max(SPCUT,at(x)+60e3));pRace(x)};
   d.querySelectorAll("[data-tm]").forEach(b=>b.onclick=()=>{if(isTeam(b.dataset.tm))openTeam(b.dataset.tm)});
-  d.querySelector("[data-go]").onclick=e=>{d.close();sel=null;jump=true;go(e.currentTarget.dataset.go)};
-  show(d)}
+  d.querySelector("[data-go]").onclick=e=>{sel=null;jump=true;go(e.currentTarget.dataset.go)};
+  pgShow(d)}
 /* ---------- own tracking view: Georacing data (public, CORS-enabled) drawn in the app's design ---------- */
 const GEOD="https://player.georacing.com/datas/",GEOL="https://data-live.georacing.com/datas/";
 const GF=[["lg","f64",8,1e6],["lt","f64",8,1e6],["al","f32",4,1e6],["s","f32",4,1e6],["h","u16",2,65535],["vmg","f32",4,1e6],["status","u8",1,127],["cl","u8",1,127],["d","f32",4,-1],["dtnm","f32",4,-1],["r","u16",2,9999],["p","i16",2,9999],["gps","u16",2,65535],["gsm","u8",1,127],["bat","u8",1,127],["ecart_d","f32",4,1e6],["int_1","u16",2,65535],["s_1","f32",4,1e6],["h_1","u16",2,65535],["vmg_1","f32",4,1e6],["int_2","u16",2,65535],["s_2","f32",4,1e6],["h_2","u16",2,65535],["vmg_2","f32",4,1e6],["tws","f32",4,1e6],["twd","u16",2,65535],["water_temp","i16",2,65535],["air_temp","i16",2,65535],["air_pression","u16",2,65535],["dp_1","f32",4,1e6],["dp_2","f32",4,1e6]];
@@ -1527,7 +1547,7 @@ function openTrack(x){const u=x&&x.url?x.url:trkUrl(x);if(!u)return;let ev,rc;tr
   <div class="tkmap"><div id="tkm"></div><div class="tkhud" id="tkhud"></div><div class="tkmsg" id="tkmsg"><span class="spin"></span>${esc(T("tkLoad"))}</div><button class="tkfit" id="tkfit" aria-label="fit">${'<svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>'}</button></div>
   <div class="tktl" id="tktl" hidden><button class="tkpl" id="tkpl" aria-label="play"></button><input type="range" id="tkr" min="0" max="1" step="1" value="0"><button class="tksp" id="tksp">1×</button><button class="tklv" id="tklv">LIVE</button></div>
   <div class="tkrk" id="tkrk"></div><p class="tkcr">Tracking: Georacing · Map: Esri</p></div>`;
-  d.querySelector("[data-back]").onclick=()=>{trkStop();d.classList.remove("full");if(x.url)d.close();else openRace(x)};
+  d.querySelector("[data-back]").onclick=()=>{trkStop();d.close()};
   show(d);gcEvent("tracking");
   if(!ev||!rc){$("#tkmsg").textContent=T("tkNone");return}
   trkRun(x,ev,rc).catch(e=>{const m=$("#tkmsg");if(m){m.hidden=false;m.textContent=T("tkNone")}})}
@@ -1637,7 +1657,7 @@ function hiddenRace(x){if(!SPOIL||at(x)<=SPCUT)return false;const r=RAWD.rounds.
 function anyHidden(){return SPOIL&&JSON.stringify(D.rounds)!==JSON.stringify(RAWD.rounds)}
 function spoilSet(on,cut){SPOIL=on;if(cut!=null)SPCUT=cut;LS.set("spoil",on?1:0);LS.set("spcut",SPCUT);setD(RAWD);
   try{if(osP&&pSet.size)osP.then(O=>{on?O.User.addTag("spoiler","1"):O.User.removeTag("spoiler")}).catch(()=>{})}catch(e){}
-  render(true);if($("#tmd").open&&openCode){const y=$("#tmd").scrollTop;openTeam(openCode);$("#tmd").scrollTop=y}}
+  render(true);pgRefresh()}
 const todayStart=()=>Date.parse(today()+"T00:00:00-03:00");
 function spoilBanner(){if(!SPOIL)return"";const when=new Date(SPCUT).toLocaleString(LOC(),{timeZone:"America/Sao_Paulo",weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
   return `<div class="spb"><span>🙈 <b>${esc(T("spT"))}</b><small>${esc(anyHidden()?T("spUntil")(when):T("spNone"))}</small></span>${anyHidden()?`<button data-spall="1">${esc(T("spShow"))}</button>`:""}<button class="spoff" data-spoff="1" aria-label="${esc(T("spOff"))}">${esc(T("spOff"))}</button></div>`}
@@ -1744,10 +1764,11 @@ const ACHK=["World Champion","Olympic Gold medalist","Olympic Silver medalist","
 const medal=r=>r==1?"🥇":r==2?"🥈":r==3?"🥉":ord(r);
 const SECK={"Olympic Games":"secOly","World Championship":"secWc","Continental Championship":"secEc"};
 function rankPill(r){return r<=3?`<span class="rp m${r}">${r}</span>`:`<span class="rp">${r}</span>`}
+function bioClean(t){return String(t).replace(/^.{0,90}?\b(?:auto)?biograph(?:ical|y)(?:\s+summary)?\s*[:–—-]?\s*/i,"").replace(/^(?:bio|about)\s*[:–—-]\s*/i,"").trim()}
 function profHtml(code,name,part){const P=PROF[code+"|"+name];if(!P)return"";let h="";
   const ach=(P.ach||[]).map(([n,l])=>{const k=ACHK.findIndex(x=>x.toLowerCase()==String(l).toLowerCase());return `<span class="ach"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 2h10l-2.5 6.2A6 6 0 1 1 9.5 8.2zM12 11a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" fill="currentColor"/></svg>${n>1?n+"× ":""}${esc(k>=0?T("achL")[k]:l)}</span>`}).join("");
   if(part=="top"){if(ach)h+=`<div class="achs">${ach}</div>`;return h}
-  if(part=="bio"){if(P.bio&&typeof P.bio=="string")h+=`<h3>${T("bioT")}</h3><div class="grp pbio"><p>${esc(P.bio)}</p><small>${esc(T("srcSSL"))}${lang!="en"?" · English":""}</small></div>`;return h}
+  if(part=="bio"){if(P.bio&&typeof P.bio=="string"){const bt=bioClean(P.bio),own=/(^|[\s(])(I|I'm|I’m|I've|my|My|me)\b/.test(bt);if(bt)h+=`<h3>${T("bioT")}</h3><div class="grp pbio"><p>${esc(bt)}</p><small>${esc(own?T("ownW"):T("srcSSL"))}${lang!="en"?" · English":""}</small></div>`}return h}
   const rec=P.rec||{};const secs=Object.keys(rec).length?Object.entries(rec):[["Olympic Games",(P.oly||[]).map(([y,c,cl,r])=>[y,"",c,"",cl,"",r])],["World Championship",(P.wc||[]).map(([y,cl,r])=>[y,"","","",cl,"",r])],["Continental Championship",(P.ec||[]).map(([y,cl,r])=>[y,"","","",cl,"",r])]].filter(x=>x[1].length);
   if(secs.length){const all=secs.flatMap(x=>x[1]),pod=all.filter(r=>r[6]<=3).length,best=Math.min(...all.map(r=>r[6]));
     h+=`<h3>${T("careerT")}</h3><div class="pst"><div><b>${all.length}</b><small>${esc(T("evN"))}</small></div><div><b>${pod}</b><small>${esc(T("podN"))}</small></div><div><b>${all.length?Math.round(pod/all.length*100):0}%</b><small>${esc(T("medRate"))}</small></div><div><b>${best<=3?["","🥇","🥈","🥉"][best]:ord(best)}</b><small>${esc(T("bestR"))}</small></div></div>`;
@@ -1845,10 +1866,13 @@ function render0(keepScroll){const y=scrollY;chrome();
   if(jump){jump=false;const sr=M.querySelector("tr.sel,.bx .sel,.mr.sel");if(sr)setTimeout(()=>sr.scrollIntoView({block:"center",inline:"center"}),60);else scrollTo(0,0)}else if(keepScroll)scrollTo(0,y);else if(!document.body.classList.contains("lock"))scrollTo(0,0);
   const i=$("#q");if(i)i.oninput=e=>{q=e.target.value;const p=i.selectionStart;render(true);const n=$("#q");n.focus();n.setSelectionRange(p,p)};
   const i2=$("#q2");if(i2)i2.oninput=e=>{sq2=e.target.value;const p=i2.selectionStart;render(true);const n=$("#q2");n.focus();n.setSelectionRange(p,p)}}
-function route(){const h=location.hash.slice(1);let m;
+function route(){const h=location.hash.slice(1);let m;const pe=pgParse(h);
+  if(pe){if(!(PGS&&!$("#pg").hidden&&pgHash(PGS)==h)){if(view=="board"&&!round)view="teams";if(!$("#main").children.length||$("#main").querySelector(".warn:only-child"))render();pgRender(pe)}return}
+  const wasPg=!$("#pg").hidden;pgHide();
+  const nv=["bracket","teams","gc2023","qualifying","home","more","sailors"].includes(h)?h:(!h||!/^(round|runde)-/.test(h))?"home":"board";
+  if(wasPg&&!jump&&nv==view&&(nv!="board"||h==="round-"+round||h==="runde-"+round)){LS.set("view",h);return}
   if(["bracket","teams","gc2023","qualifying","home","more","sailors"].includes(h))view=h;
-  else if(!h||!/^(round|runde)-/.test(h)&&!/^team-/.test(h)){view="home"}
-  else if(m=h.match(/^team-([A-Z]{3})$/)){if(view=="board"&&!round)view="teams";render();openTeam(m[1]);return}
+  else if(!h||!/^(round|runde)-/.test(h)){view="home"}
   else if(/^(round|runde)-/.test(h)){view="board";m=h.match(/^(?:round|runde)-(\w+)$/);round=m&&D.rounds.some(r=>r.id==m[1])?m[1]:(round||current())}
   LS.set("view",h);render()}
 const go=h=>{if(location.hash.slice(1)!==h){try{if(history.state&&history.state.sheet)location.replace("#"+h);else location.hash=h;return}catch(e){}}route()};
@@ -1879,14 +1903,14 @@ $("#main").addEventListener("click",e=>{
 $("#tmd").addEventListener("click",e=>{if(e.target.id=="tmd")e.target.close()});
 $("#main").addEventListener("toggle",e=>{const dd=e.target;if(!dd.matches||!dd.matches("details[data-sq]"))return;dd.open?sOpen.add(dd.dataset.sq):sOpen.delete(dd.dataset.sq);LS.set("sOpen",[...sOpen])},true);
 $("#main").addEventListener("keydown",e=>{if(e.key!="Enter"&&e.key!=" ")return;const rc=e.target.closest&&e.target.closest("[data-race]");if(rc&&e.target===rc){e.preventDefault();openRace(raceBy(rc.dataset.race))}});
-$("#tmd").addEventListener("close",()=>{trkStop();unlockScroll();$("#tmd").querySelectorAll("iframe,video,audio").forEach(f=>f.remove());openCode=null;if($("#tmd").querySelector(".ob"))LS.set("onb",1);$("#tmd").classList.remove("full");try{if(history.state&&history.state.sheet)history.back()}catch(e){}});
-window.addEventListener("popstate",()=>{const d=$("#tmd");if(d.open)d.close()});
+$("#tmd").addEventListener("close",()=>{trkStop();unlockScroll();$("#tmd").querySelectorAll("iframe,video,audio").forEach(f=>f.remove());openCode=null;if($("#tmd").querySelector(".ob"))LS.set("onb",1);$("#tmd").classList.remove("full");try{if(!NOBACK&&history.state&&history.state.sheet)history.back()}catch(e){}NOBACK=false});
+window.addEventListener("popstate",e=>{const d=$("#tmd");if(d.open){NOBACK=true;d.close();return}const pe=pgParse(location.hash.slice(1));if(pe&&!(PGS&&!$("#pg").hidden&&pgHash(PGS)==pgHash(pe)))pgRender(pe)});
 window.addEventListener("hashchange",route);
 document.addEventListener("keydown",e=>{if(e.target.matches("input,select,textarea")||$("#tmd").open)return;
   if(e.key=="/"){const i=$("#q");if(i){e.preventDefault();i.focus()}}
   if(view=="board"&&(e.key=="ArrowRight"||e.key=="ArrowLeft")){const ids=D.rounds.map(r=>r.id),i=ids.indexOf(round)+(e.key=="ArrowRight"?1:-1);if(ids[i]){round=ids[i];go("round-"+round)}}});
 setInterval(()=>{stand();if((view=="board"||view=="home")&&!$("#tmd").open&&!document.hidden&&!(document.activeElement&&document.activeElement.matches("input,select")))render(true)},60000);
-setInterval(async()=>{if(document.hidden)return;if(await pullFile()){render(true);if($("#tmd").open&&openCode){const y=$("#tmd").scrollTop;openTeam(openCode);$("#tmd").scrollTop=y}}else stand()},60000);
+setInterval(async()=>{if(document.hidden)return;if(await pullFile()){render(true);pgRefresh()}else stand()},60000);
 document.addEventListener("visibilitychange",async()=>{if(!document.hidden&&await pullFile())render(true)});
 await pullFile();live=true;loadWx();setInterval(loadWx,30*6e4);
 round=current();
@@ -1908,6 +1932,6 @@ try{if("serviceWorker" in navigator&&window.top===window&&location.protocol=="ht
 (async()=>{try{const db=await window.claude?.use?.("db");if(!db)return;
   const timer=setTimeout(()=>{if(!live){stale=true;stand()}},10000);
   db.doc("gc/results").onSnapshot(s=>{if(s.exists){const d=s.data();if(d&&d.checkedAt)checkedAt=d.checkedAt;if(okData(d)&&(!RAWD.updatedAt||Date.parse(d.updatedAt)>=Date.parse(RAWD.updatedAt))){setD(JSON.parse(JSON.stringify(d)));live=true;
-      if(!D.rounds.some(r=>r.id==round))round=current();render(true);if($("#tmd").open&&openCode){const y=$("#tmd").scrollTop;openTeam(openCode);$("#tmd").scrollTop=y}}}
+      if(!D.rounds.some(r=>r.id==round))round=current();render(true);pgRefresh()}}
     if(!s.metadata.fromCache)clearTimeout(timer)},()=>clearTimeout(timer))}catch(e){}})();
 })();

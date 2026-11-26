@@ -850,3 +850,21 @@ td.t .bdg,td.t>.tag{margin-inline-start:30px}
 .hrc small{font-size:11px;color:var(--mute)}.hrc b{font-size:17px;font-weight:800}.hrc em{font-style:normal;font-size:11px;color:var(--mute)}
 .hrc.p1{background:linear-gradient(145deg,#ffe27a,#d4a017);color:#3a2a00}.hrc.p2{background:linear-gradient(145deg,#f1f3f6,#a9b1bd);color:#22262c}.hrc.p3{background:linear-gradient(145deg,#f0b27a,#b0682a);color:#2e1600}
 .hrc.p1 small,.hrc.p1 em,.hrc.p2 small,.hrc.p2 em,.hrc.p3 small,.hrc.p3 em{color:inherit;opacity:.75}
+
+/* pages (team, sailor, race) */
+.pg{position:fixed;inset:0;z-index:35;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:var(--sheet);color:var(--ink)}
+.pg[hidden]{display:none}
+.pg>.th,.pg>.tb{max-width:760px;margin-inline:auto}
+.pg>.th{padding-top:calc(env(safe-area-inset-top) + 10px);max-width:none}
+.pg .tb{padding-bottom:40px}
+@media(max-width:760px){.pg{bottom:calc(62px + env(safe-area-inset-bottom))}}
+@media(min-width:761px){.pg{top:0}}
+.pg.pgin{animation:pgin .28s cubic-bezier(.2,.9,.3,1)}
+@keyframes pgin{from{transform:translateX(28%);opacity:.4}to{transform:none;opacity:1}}
+@media(prefers-reduced-motion:reduce){.pg.pgin{animation:none}}
+.pgb{flex:none;width:40px;height:40px;margin-inline-start:-8px;border:0;border-radius:50%;background:none;color:var(--ink);display:grid;place-items:center}
+.pgb:active{background:var(--card)}
+[dir=rtl] .pgb svg{transform:scaleX(-1)}
+html.pgon .tabs{z-index:41}
+
+.pbio{padding:12px 14px}

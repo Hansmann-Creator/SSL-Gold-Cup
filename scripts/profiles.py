@@ -58,7 +58,10 @@ def parse(t, first, last):
     m = re.search(r"\|Weight\|(\d{2,3})\|kg\|", t)
     if m: out["kg"] = int(m.group(1))
     m = re.search(r"\|Bio\|(.{20,2500}?)\|(?:Records and Statistics|Statistics)\|", t)
-    if m: out["bio"] = m.group(1).replace("|", " ").strip()
+    if m:
+        b = re.sub(r"\s+", " ", m.group(1).replace("|", " ")).strip()
+        b = re.sub(r"(?i)^.{0,90}?\b(?:auto)?biograph(?:ical|y)(?:\s+summary)?\s*[:–—-]?\s*", "", b).strip()
+        if b: out["bio"] = b
     sec = sections(t)
     if sec: out["rec"] = sec
     # compact lists kept for older app versions
