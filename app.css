@@ -868,3 +868,7 @@ td.t .bdg,td.t>.tag{margin-inline-start:30px}
 html.pgon .tabs{z-index:41}
 
 .pbio{padding:12px 14px}
+
+.selbar{display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:8px 8px 8px 12px;border-radius:14px;background:rgba(255,210,31,.14);box-shadow:inset 0 0 0 1.5px var(--gold,#ffd21f)}
+.selbar span{flex:1;font-size:14px}.selbar .flg{width:24px;height:17px;border-radius:3px}
+.selbar button{border:0;background:rgba(255,255,255,.12);color:var(--ink);width:30px;height:30px;border-radius:50%;font-size:14px}

@@ -1026,6 +1026,7 @@ ur:{tkLoad:"ٹریکنگ لوڈ ہو رہی ہے…",tkNone:"اس ریس کی ٹ
 id:{tkLoad:"Memuat pelacakan…",tkNone:"Belum ada pelacakan untuk lomba ini.",tkNoData:"Tidak ada data pelacakan untuk lomba ini.",tkOpens:"Pelacakan dibuka pukul",tkStart:"Start",tkLeg:"Leg",tkPre:"sebelum start",tkNoPos:"tanpa sinyal",tkRep:"Tayangan ulang",secOly:"Olimpiade",secWc:"Kejuaraan Dunia",secEc:"Kejuaraan kontinental",bioT:"Tentang",srcSSL:"Bio resmi · Star Sailors League",careerT:"Karier",evN:"hasil tercatat",podN:"podium",medRate:"rasio medali",bestR:"hasil terbaik",showAll:"Tampilkan semua",sslPts:"Poin SSL",heightT:"Tinggi",weightT:"Berat",sslProf:"Profil resmi SSL",teamSite:"Situs tim",mySailors:"Pelaut saya",sFavHint:"Ketuk ☆ di halaman pelaut untuk mengikutinya – mereka akan muncul di sini."}};
 for(const l in SADD)Object.assign(S[l],SADD[l]);
 const SOW={"en": "In their own words · from the SSL profile", "de": "In eigenen Worten · aus dem SSL-Profil", "fr": "Dans ses propres mots · profil SSL", "es": "En sus propias palabras · perfil SSL", "pt": "Nas próprias palavras · perfil SSL", "zh": "本人自述 · 来自SSL资料", "ar": "بكلماته · من ملف SSL", "hi": "अपने शब्दों में · SSL प्रोफ़ाइल से", "bn": "নিজের ভাষায় · SSL প্রোফাইল থেকে", "ur": "اپنے الفاظ میں · SSL پروفائل سے", "id": "Dengan kata-katanya sendiri · dari profil SSL", "ms": "Dalam kata-katanya sendiri · daripada profil SSL", "ja": "本人による紹介 · SSLプロフィールより", "th": "เล่าด้วยตัวเอง · จากโปรไฟล์ SSL", "hu": "Saját szavaival · az SSL-profilból", "cs": "Vlastními slovy · z profilu SSL", "uk": "Власними словами · з профілю SSL"};for(const l in SOW)if(S[l])S[l].ownW=SOW[l];
+S.en.pathHl=n=>`Path of ${n} highlighted`;S.de.pathHl=n=>`Weg von ${n} markiert`;S.fr.pathHl=n=>`Parcours de ${n} en surbrillance`;S.es.pathHl=n=>`Recorrido de ${n} resaltado`;S.pt.pathHl=n=>`Caminho de ${n} destacado`;
 const T=k=>S[lang][k]??S.en[k];
 const ord=n=>ORD[lang](n);
 
@@ -1198,7 +1199,7 @@ function sCarousel(L){return `<div class="capr">${L.map(({c,p})=>`<button class=
 function mine(compact){const TT=favs.size?teams().filter(t=>favs.has(t.code)):[],SF=compact?[]:favSailors();if(!TT.length&&!SF.length)return"";
   return `<div class="mine">${TT.length?`<h3>★ ${T("myTeams")}</h3>${TT.map(t=>`<button data-t="${esc(t.code)}" class="tmx"><span>${t.flag}</span><span><b>${esc(t.name)}</b><br><small>${esc(t.txt)}</small></span></button>`).join("")}`:""}${SF.length?`<h3>★ ${T("mySailors")}</h3>${sCarousel(SF)}`:""}</div>`}
 function board(){const r=D.rounds.find(x=>x.id==round)||D.rounds[0],s=rState(r),n=r.groups[0].rows[0].r.length;
-  let h=delayBanner()+mine(true);const td=today();
+  let h=delayBanner()+selBar()+mine(true);const td=today();
   h+=`<div class="rhead"><h2>${esc(RNm(r))}</h2><p>${esc(range(r))} · ${T("races")(n)} · ${s=="live"&&td>=r.start&&td<=r.end?T("raceDay")(...raceDay(r)):T("st")[s]}</p></div>`;
   return h+boardGroups(r)}
 function todayCard(){let h="";const td=today(),tl=SCH.filter(x=>x.d==td);
@@ -1223,9 +1224,10 @@ function mbox(r,g,opt={}){const gs=gState(g,r),done=gs=="done",has=g.rows.some(x
   return `<div class="mb ${gs}"${opt.go?` data-go="${opt.go}" role="button" tabindex="0"`:""}>${bd}<div class="mh"><span>${esc(bcode(r,g))}</span>${gs=="live"&&raceNow(r.id,g.id)?liveTag():done?`<span class="ok">✓</span>`:""}</div>${rows}</div>`}
 function mbNav(k){const a=(h,l,c)=>`<a href="#${h}" class="${c}${k==h?" on":""}"${k==h?` aria-current="page"`:""}>${l}</a>`;
   return `<nav class="mbn2">${a("bracket",`<span class="lvd" aria-hidden="true"></span><b>${esc(T("fsT"))}</b><small>Rio 2026</small>`,"cur")}<div class="lb"><small>${esc(T("pastL"))}</small><div>${a("qualifying",esc(T("tiles").qualifying[0]),"p")}${a("gc2023",esc(T("gc23")),"p")}</div></div></nav>`}
+function selBar(){if(!sel||!isTeam(sel))return"";return `<div class="selbar">${FL(sel)}<span>${S[lang].pathHl?S[lang].pathHl(`<b>${esc(NM(sel))}</b>`):`<b>${esc(NM(sel))}</b> · ${esc(T("hl"))}`}</span><button data-unsel="1" aria-label="${esc(T("close"))}">✕</button></div>`}
 function bracket(){const cols=KO.map(id=>D.rounds.find(r=>r.id==id)).filter(Boolean),fin=["f","pf"].map(id=>D.rounds.find(r=>r.id==id)).filter(Boolean);
   const head=r=>{const s=rState(r);return `<div class="mch"><b>${esc(RNm(r))}</b><small>${s=="live"&&raceNow(r.id)?liveTag():`<span class="dot ${s=="done"?"done":s=="live"?"amb":r.id==current()?"nx":""}"></span>`}${esc(range(r))}</small></div>`};
-  let h=mbNav("bracket")+`<h2 class="pill">${T("fsT")}</h2><p class="warn mbh">${T("mbHint")} <span class="sw">${T("swipe")}</span></p><div class="mbw" dir="ltr"><div class="mbg">`;
+  let h=mbNav("bracket")+selBar()+`<h2 class="pill">${T("fsT")}</h2><p class="warn mbh">${T("mbHint")} <span class="sw">${T("swipe")}</span></p><div class="mbw" dir="ltr"><div class="mbg">`;
   h+=cols.map(r=>`<div class="mc">${head(r)}<div class="mcb">${r.groups.map(g=>mbox(r,g)).join("")}</div></div>`).join("");
   if(fin.length)h+=`<div class="mc fin">${head(fin[0])}<div class="mcb">${fin.map(r=>r.groups.map(g=>mbox(r,g)).join("")).join("")}</div></div>`;
   return h+`</div></div>`}
@@ -1877,7 +1879,7 @@ function route(){const h=location.hash.slice(1);let m;const pe=pgParse(h);
   LS.set("view",h);render()}
 const go=h=>{if(location.hash.slice(1)!==h){try{if(history.state&&history.state.sheet)location.replace("#"+h);else location.hash=h;return}catch(e){}}route()};
 
-document.querySelector(".tabs").addEventListener("click",e=>{const b=e.target.closest("button");if(b){if(b.dataset.v==view&&scrollY>0)scrollTo({top:0,behavior:"smooth"});go(b.dataset.v=="board"?"round-"+(round||current()):b.dataset.v)}});
+document.querySelector(".tabs").addEventListener("click",e=>{const b=e.target.closest("button");if(b){sel=null;if(b.dataset.v==view&&scrollY>0)scrollTo({top:0,behavior:"smooth"});go(b.dataset.v=="board"?"round-"+(round||current()):b.dataset.v)}});
 $("#ladder").addEventListener("click",e=>{const b=e.target.closest("button");if(b){round=b.dataset.r;go("round-"+round)}});
 $("#main").addEventListener("click",e=>{
   const lvb=e.target.closest("[data-live]");if(lvb){openLive(SCH.filter(x=>rState2(x)=="now")[0]||null);return}
@@ -1895,6 +1897,7 @@ $("#main").addEventListener("click",e=>{
   const sa=e.target.closest("[data-spall]");if(sa){spoilSet(true,nowMs());return}
   const so=e.target.closest("[data-spoff]");if(so){spoilSet(false);return}
   const pa=e.target.closest("[data-pall]");if(pa){pa.disabled=true;pushToggle("all").finally(()=>render(true));return}
+  const us=e.target.closest("[data-unsel]");if(us){sel=null;render(true);return}
   const sr=e.target.closest("[data-sc]");if(sr){openSailor(sr.dataset.sc,+sr.dataset.si);return}
   const g=e.target.closest("[data-go]");if(g&&!e.target.closest(".mr.team")){go(g.dataset.go);return}
   const f=e.target.closest("[data-f]");if(f){filt=f.dataset.f;render(true);return}
