@@ -1097,3 +1097,22 @@ tr.tlink{cursor:pointer}tr.tlink:active td{background:color-mix(in srgb,var(--go
 #nxc .nxdot0{width:6px;height:6px;border-radius:50%;background:#fff;flex:none}
 #nxc .nxhr{border:0;height:1px;align-self:stretch;margin:4px 6px 3px;background:rgba(255,255,255,.2)}
 @media(max-width:420px){#nxc .nxnow{font-size:9px;letter-spacing:.02em;padding:3px 6px;gap:4px}}
+
+/* install: secondary buttons + coach marks pointing at the browser UI */
+.obgo.obsec{background:transparent!important;color:inherit!important;border:1.5px solid rgba(255,255,255,.35)!important;box-shadow:none!important;margin-top:10px}
+a.obgo{text-decoration:none}
+.obgo.wait{opacity:.75}
+#coach{position:fixed;inset:0;z-index:9999;background:rgba(4,14,34,.72);display:flex;flex-direction:column;align-items:flex-end;padding:12px 14px calc(10px + env(safe-area-inset-bottom));color:#fff}
+#coach.c-br,#coach.c-bc{justify-content:flex-end}
+#coach.c-tr{justify-content:flex-start;flex-direction:column-reverse;padding-top:calc(6px + env(safe-area-inset-top))}
+#coach.c-bc{align-items:center}
+#coach .ccard{max-width:340px;width:100%;background:#fff;color:#10203f;border-radius:20px;padding:16px 18px;box-shadow:0 10px 40px rgba(0,0,0,.4)}
+#coach .ctap{display:block;font-size:22px;font-weight:800;color:#1a4486;margin-bottom:6px}
+#coach ol{margin:0;padding-inline-start:20px;font-size:16px;line-height:1.45}#coach li{margin:4px 0}
+#coach .cnote{margin:8px 0 0;font-size:14px;color:#4a5a78}
+#coach .cok{margin-top:12px;width:100%;height:44px;border:0;border-radius:99px;background:#1a4486;color:#fff;font:inherit;font-weight:700;font-size:16px}
+#coach .carr{width:44px;height:60px;color:#ffd21f;margin:6px 10px 0;animation:cbob 1s ease-in-out infinite;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+#coach.c-tr .carr{transform:rotate(180deg);margin:0 4px 6px;animation-name:cbobu}
+@keyframes cbob{50%{transform:translateY(10px)}}
+@keyframes cbobu{0%,100%{transform:rotate(180deg) translateY(0)}50%{transform:rotate(180deg) translateY(10px)}}
+@media(prefers-reduced-motion:reduce){#coach .carr{animation:none}}
