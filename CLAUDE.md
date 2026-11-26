@@ -43,7 +43,7 @@ Read this first in any new session. Everything needed to keep developing the app
 - New features → add an entry to the changelog (`CHL`/`CHT` in app.js, bump version `v`).
 
 ## Recurring jobs
-- **New portraits** (`/Volumes/data/26_GOLD_CUP_RIO/05_Footage_Graphic/SAILOR_PHOTOS/<TEAM>/`): official RAID photos always win and may overwrite older ones. Prefer the clean files in the team folder root (600×600 PNG, transparent) → 320 px webp in `img/`, add/update `teaminfo.json` crew `{no,name,img}`.
+- **New portraits** (`/Volumes/data/26_GOLD_CUP_RIO/05_Footage_Graphic/SAILOR_PHOTOS/<TEAM>/`): official RAID photos always win and may overwrite older ones. Prefer the clean files in the team folder root (600×600 PNG, transparent) → 320 px webp in `img/` **and** 600 px webp with the same name in `img/hd/` (tap-to-zoom on the sailor page), add/update `teaminfo.json` crew `{no,name,img}`.
 - **Positions**: run audit in Actions → `python tools/positions/rebuild.py audit.json tools/positions/xls.json` → review `positions_report.json` (conflicts, added/removed sailors).
 - **New language**: add to `LANGS`, `LOC`, lang auto-detect list, `ORD`, `OSL`, `<select id="lang">`, a full `S.<lang>` block (copy the `cs` block), SSET, SOW, CP, WXF, ALSO, FIX; plus `scripts/notify.py` (LANGS, RN, W, spoiler text) and `scripts/push_extra.py`; add to `scripts/smoke.py`.
 
