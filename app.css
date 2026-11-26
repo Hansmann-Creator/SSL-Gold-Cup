@@ -1055,3 +1055,7 @@ tr.tlink{cursor:pointer}tr.tlink:active td{background:color-mix(in srgb,var(--go
 #nxc .nxp.r{background:rgba(255,255,255,.2);color:#fff}
 #nxc[data-st=prob],#nxc[data-st=late]{box-shadow:inset 0 0 0 1.5px rgba(255,140,60,.85),0 0 18px rgba(255,140,60,.3)}
 @media(max-width:375px){#nxc{width:126px!important}#nxc b{font-size:20px!important}}
+@media(max-width:420px){#nxc{width:128px!important}#nxc b{font-size:21px!important}#ins span{display:none!important}#ins{padding:0!important;width:40px;justify-content:center}}
+@media(max-width:375px){#nxc{width:120px!important}#nxc b{font-size:19px!important}#ins{width:36px}}
+#nxc .nxp{letter-spacing:.03em}
+@media(max-width:420px){#nxc{padding-inline:5px!important}#nxc .nxp{font-size:8.8px;letter-spacing:0;padding:2px 6px;gap:4px}#nxc .nxp::before{width:5px;height:5px}}
