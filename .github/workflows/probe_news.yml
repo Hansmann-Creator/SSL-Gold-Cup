@@ -1,0 +1,17 @@
+name: probe news
+on: { push: { paths: [".github/workflows/probe_news.yml"] }, workflow_dispatch: {} }
+permissions: { contents: write }
+jobs:
+  get:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          mkdir out && cd out
+          UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/131 Safari/537.36"
+          curl -sSL -A "$UA" -o home.html https://worldofsailors.com/ || echo fail home
+          curl -sSL -A "$UA" -o wpjson.json "https://worldofsailors.com/wp-json/wp/v2/posts?per_page=5&_embed=1" || echo fail wp
+          curl -sSL -A "$UA" -o feed.xml https://worldofsailors.com/feed/ || echo fail feed
+          curl -sSL -A "$UA" -o news.html https://worldofsailors.com/news/ || echo fail news
+          ls -la; head -c 300 wpjson.json; echo; head -c 300 feed.xml
+          git init -q && git checkout -q -b probe-news && git add . && git -c user.name=probe -c user.email=probe@users.noreply.github.com commit -qm probe
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" probe-news
