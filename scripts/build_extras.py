@@ -1,0 +1,89 @@
+#!/usr/bin/env python3
+"""Build-time extras for the Pages site (never committed):
+- races.ics and cal/<TEAM>.ics: calendar feeds from the official schedule + current groups
+- tracking.json: Georacing race links per round/group/race (best effort)
+"""
+import json, os, re, datetime, urllib.request
+
+ROOT = os.path.join(os.path.dirname(__file__), "..")
+R = json.load(open(os.path.join(ROOT, "results.json"), encoding="utf-8"))
+ROT = [["A","B","C","D"],["D","A","B","C"],["C","D","A","B"],["B","C","D","A"]]
+T4 = ["12:00","13:10","14:30","16:00"]
+T32 = [["12:00","13:20","14:40","16:00"],["11:00","12:20","13:40","15:00"],["12:00","13:20","14:40","16:00"],["12:00","13:20","14:40","16:00"]]
+DAYS = {"r32":["2026-11-19","2026-11-20","2026-11-21","2026-11-22"],"r16":["2026-11-26","2026-11-27","2026-11-28","2026-11-29"],
+        "r8":["2026-12-02","2026-12-03","2026-12-04","2026-12-05"],"r4":["2026-12-07","2026-12-08","2026-12-09","2026-12-10"]}
+SCH = []
+for rid, ds in DAYS.items():
+    for i, d in enumerate(ds):
+        for j, g in enumerate(ROT[i]):
+            SCH.append(dict(rid=rid, d=d, t=(T32[i] if rid == "r32" else T4)[j], g=g, n=i + 1))
+SCH += [dict(rid="sf", d="2026-12-12", t="12:00", g="A", n=1), dict(rid="sf", d="2026-12-12", t="13:10", g="B", n=1),
+        dict(rid="pf", d="2026-12-13", t="12:00", g="A", n=1), dict(rid="f", d="2026-12-13", t="13:10", g="A", n=1)]
+NAME = {r["id"]: r["name"] for r in R["rounds"]}
+PH = re.compile(r"^(R1|R2|EF|QF|SF)([A-D])(\d)$")
+
+
+def teams_of(rid, gid):
+    r = next((x for x in R["rounds"] if x["id"] == rid), None)
+    g = r and next((x for x in r["groups"] if x["id"] == gid), None)
+    return [x["team"] for x in g["rows"]] if g else []
+
+
+def ics_event(x, prefix=""):
+    st = datetime.datetime.fromisoformat(f"{x['d']}T{x['t']}:00-03:00").astimezone(datetime.timezone.utc)
+    en = st + datetime.timedelta(minutes=50)
+    tm = teams_of(x["rid"], x["g"])
+    shown = " · ".join(t if not PH.match(t) else "TBC" for t in tm)
+    title = NAME.get(x["rid"], x["rid"]) + ("" if x["rid"] in ("pf", "f") else f" · Group {x['g']} · Race {x['n']}")
+    f = "%Y%m%dT%H%M%SZ"
+    return "\r\n".join(["BEGIN:VEVENT", f"UID:gc26-{x['rid']}-{x['g']}-{x['n']}{('-' + prefix) if prefix else ''}@ssl-gold-cup",
+                        f"DTSTAMP:{datetime.datetime.now(datetime.timezone.utc).strftime(f)}", f"DTSTART:{st.strftime(f)}", f"DTEND:{en.strftime(f)}",
+                        f"SUMMARY:{(prefix + ': ') if prefix else ''}{title}", f"DESCRIPTION:{shown}\\nSSL Gold Cup Rio 2026 – times are official start times (Rio)",
+                        "LOCATION:Marina da Glória\\, Rio de Janeiro", "END:VEVENT"])
+
+
+def ics(name, events):
+    return "\r\n".join(["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//SSL Gold Cup Matchboard//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
+                        f"X-WR-CALNAME:{name}", "X-WR-TIMEZONE:America/Sao_Paulo", "REFRESH-INTERVAL;VALUE=DURATION:PT2H", "X-PUBLISHED-TTL:PT2H"] + events + ["END:VCALENDAR", ""])
+
+
+def build_ics():
+    open(os.path.join(ROOT, "races.ics"), "w", encoding="utf-8", newline="").write(ics("SSL Gold Cup Rio 2026", [ics_event(x) for x in SCH]))
+    os.makedirs(os.path.join(ROOT, "cal"), exist_ok=True)
+    info = json.load(open(os.path.join(ROOT, "teaminfo.json"), encoding="utf-8"))
+    for code in info:
+        ev = [ics_event(x, code) for x in SCH if code in teams_of(x["rid"], x["g"])]
+        open(os.path.join(ROOT, "cal", f"{code}.ics"), "w", encoding="utf-8", newline="").write(ics(f"SSL Gold Cup – {info[code].get('name', code)}", ev))
+
+
+def build_tracking():
+    out = {}
+    try:
+        get = lambda u: json.load(urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0"}), timeout=20))
+        app = get("https://player.georacing.com/datas/applications/app_46.json")
+        RM = [("1/32", "r32"), ("1/16", "r16"), ("1/8", "r8"), ("1/4", "r4"), ("Quarter", "r4"), ("1/2", "sf"), ("Semi", "sf")]
+        for e in app.get("events", []):
+            if "2026" not in e.get("name", "") or "Qualif" in e.get("name", ""):
+                continue
+            rid = next((v for k, v in RM if k in e["name"]), None)
+            for x in get(f"https://player.georacing.com/datas/{e['id']}/races.json"):
+                nm = x.get("name") or ""
+                url = f"https://player.georacing.com/{x.get('player_name') or ''}?event={e['id']}&race={x['id']}&application_id=46"
+                m = re.match(r"Race\s*(\d)\s*-\s*Group\s*([A-D])", nm, re.I)
+                if m and rid:
+                    out.setdefault(rid, {}).setdefault(m.group(2).upper(), {})[m.group(1)] = url
+                elif re.search(r"petit", nm, re.I):
+                    out.setdefault("pf", {}).setdefault("A", {})["1"] = url
+                elif re.fullmatch(r"\s*(grand\s*)?final\s*", nm, re.I):
+                    out.setdefault("f", {}).setdefault("A", {})["1"] = url
+                elif rid == "sf" and (m2 := re.search(r"\b([AB])\b", nm)):
+                    out.setdefault("sf", {}).setdefault(m2.group(1), {})["1"] = url
+    except Exception as ex:
+        print("tracking: skipped –", ex)
+    json.dump(out, open(os.path.join(ROOT, "tracking.json"), "w"), separators=(",", ":"))
+    print("tracking rounds:", {k: sum(len(v) for v in g.values()) for k, g in out.items()})
+
+
+if __name__ == "__main__":
+    build_ics()
+    build_tracking()

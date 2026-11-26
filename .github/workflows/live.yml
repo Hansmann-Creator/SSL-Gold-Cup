@@ -15,6 +15,7 @@ on:
 permissions:
   contents: write
   actions: write
+  issues: write
 
 concurrency:
   group: live
@@ -46,7 +47,7 @@ jobs:
           START=$(date +%s)
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then END=$((START + ${{ inputs.minutes || 5 }} * 60)); else
             END=$((START + 345 * 60)); STOP=$(date -u -d "today 22:00" +%s); [ $END -gt $STOP ] && END=$STOP; fi
-          LAST=0
+          LAST=0; FAIL=0; ALERT=""
           while [ "$(date +%s)" -lt "$END" ]; do
             git pull -q --rebase origin main || { git rebase --abort; git reset -q --hard origin/main; }
             NOW=$(date +%s); STAMP=""; [ $((NOW - LAST)) -ge 600 ] && STAMP="--stamp"
@@ -55,6 +56,12 @@ jobs:
                 git add results.json; git commit -qm "results $(date -u +%FT%TZ)"
                 if git push -q origin main; then gh workflow run deploy.yml --ref main && LAST=$NOW; else git reset -q --hard origin/main; fi
               fi
-            else echo "check failed, retrying next minute"; git checkout -q results.json; fi
+              FAIL=0
+              if [ -n "$ALERT" ]; then gh issue close "$ALERT" -c "Results are updating again ($(date -u +%H:%M) UTC)." || true; ALERT=""; fi
+            else echo "check failed, retrying next minute"; git checkout -q results.json 2>/dev/null; FAIL=$((FAIL+1))
+              if [ "$FAIL" -eq 10 ] && [ -z "$ALERT" ]; then
+                ALERT=$(gh issue create -t "⚠ Gold Cup app: results not updating" -b "@Hansmann-Creator The official results page could not be read for 10 minutes in a row (since about $(TZ=America/Sao_Paulo date -d '-10 min' +%H:%M) Rio time). The app keeps showing the last good results and tells users that results may be delayed. This issue closes itself as soon as reading works again." | grep -oE '[0-9]+$' || true)
+              fi
+            fi
             sleep $((60 - $(date +%s) % 60))
           done
