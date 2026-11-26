@@ -18,6 +18,8 @@ Read this first in any new session. Everything needed to keep developing the app
 | `teaminfo.json` | 40 teams: name, nick, captain, helm, rank, route, notes, `crew` = official Rio portraits `{no,name,img}`. |
 | `roster.json` | Squads from the official team pages `xxx.sslgoldcup.com`: `{"n":nick,"c":captain,"s":[[name, raw position, number, [positions…]]]}`. Position list: first = Rio jersey (1–9), then other positions from the team page ("also …" in the app). |
 | `profiles.json` | Facts + bios from worldofsailors.com profiles, keyed `CODE|Name` (workflow `profiles.yml`). |
+| `overrides.json` | Manual corrections for the daily update (`set` position/number, `keep`, `drop`). Never written by bots. |
+| `sp/` | One JSON per sailor (worldofsailors.com public profile: results, ranking history, records, achievements, socials); `rank/ind.json` men/women individual rankings (top 500 skipper + crew). No e-mail/phone/birth data. |
 | `people.json` | Hand-written highlight bullets for famous sailors. |
 | `img/` | Sailor portraits 320×320 webp, `CODE-NO-name-slug.webp`; `img/fl/` flags. |
 | `live.json` | Live-stream state (written by `live.yml`). |
@@ -34,6 +36,7 @@ Read this first in any new session. Everything needed to keep developing the app
 - `deploy.yml` – on push: build_extras.py (tracking mirror `trk/`), Playwright smoke test (`scripts/smoke.py`, must pass), publish Pages.
 - `live.yml` – race days 14–22 UTC, minute loop: results + push (`notify.py`), live stream (`live_video.py`), start reminders and live push (`push_extra.py`), tracking watcher (`trk_watch.py`).
 - `ranking.yml` – mirrors the nations ranking twice a day.
+- `daily.yml` – every night 03:07 Rio: `scripts/daily.py` rebuilds roster.json from the team pages (plausibility checks, removals only after 2 days missing, `overrides.json` wins), then `scripts/sailors.py all` (profiles.json, `sp/<slug>.json` per sailor, `rank/ind.json` men/women rankings). Anomalies/squad changes → GitHub issue (mail to Hansi). Log in `updates.json`. Bots only write data JSON, never app code.
 - `update.yml` – results backup every 10 min. `extras.yml` – highlight-video push every 30 min. `profiles.yml` – Mondays and whenever roster.json changes.
 
 ## Conventions

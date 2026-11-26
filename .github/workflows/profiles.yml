@@ -1,11 +1,6 @@
-name: Sailor profiles + individual rankings (worldofsailors.com)
+name: Sailor profiles + individual rankings (manual run; daily.yml runs it every night)
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths: [roster.json, scripts/sailors.py, .github/workflows/profiles.yml]
-  schedule:
-    - cron: "17 7 * 11,12 2"   # Tuesdays during the event (the ranking updates Monday night)
 permissions:
   contents: write
   actions: write

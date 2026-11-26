@@ -1,0 +1,28 @@
+name: Daily refresh (squads, profiles, rankings)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "7 6 * * *"   # 03:07 Rio time
+permissions:
+  contents: write
+  actions: write
+  issues: write
+concurrency: { group: profiles, cancel-in-progress: false }
+jobs:
+  d:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: run
+        run: |
+          set +e; python3 scripts/daily.py; c=$?; echo "code=$c" >> $GITHUB_OUTPUT
+          if [ $c -ne 0 ] && [ $c -ne 3 ]; then exit $c; fi
+      - run: |
+          git config user.name "results-bot"; git config user.email "results-bot@users.noreply.github.com"
+          git add roster.json profiles.json sp rank/ind.json updates.json positions_report.json 2>/dev/null
+          if ! git diff --cached --quiet; then git commit -qm "daily refresh $(date -u +%F)"; git pull -q --rebase origin main; git push -q origin main && gh workflow run deploy.yml --ref main; fi
+      - if: steps.run.outputs.code == '3'
+        run: gh issue create --title "Tägliches Update $(TZ=America/Sao_Paulo date +%d.%m.%Y): bitte ansehen" --body-file /tmp/report.md
