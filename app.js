@@ -1539,7 +1539,8 @@ async function trkRun(x,ev,rc){const Lf=await loadLeaflet().catch(()=>null);cons
   const ACT=new Map((all.actors||[]).map(a=>[+a.id,{code:(a.short_name||"").toUpperCase(),name:a.name,color:a.color||"#fff"}]));
   const course=(all.courses||[]).find(c=>+c.active)||(all.courses||[])[0];const MK=new Map();
   for(const c of all.courses||[])for(const o of c.course_objects||[])for(const e of o.course_elements||[])if(!MK.has(+e.id))MK.set(+e.id,{name:e.name,color:e.color||"#ff8700",jury:/committee|jury/i.test(e.name)});
-  const add=r=>{if(r.lt==null||r.lg==null)return;let a=tk.tr.get(r.id);if(!a)tk.tr.set(r.id,a=[]);if(a.length&&a[a.length-1].t>=r.t){if(a[a.length-1].t==r.t)return;a.push(r);a.sort((p,q)=>p.t-q.t);return}a.push(r)};
+  const add=r=>{if(r.lt==null||r.lg==null)return;let a=tk.tr.get(r.id);if(!a)tk.tr.set(r.id,a=[]);
+    if(a.length&&ACT.has(r.id)){const q=a[a.length-1],dt=Math.abs(r.t-q.t)/1e3,dm=Math.hypot((r.lt-q.lt)*111e3,(r.lg-q.lg)*102e3);if(dm>60+dt*15&&(a.rej=(a.rej||0)+1)<6)return;a.rej=0}if(a.length&&a[a.length-1].t>=r.t){if(a[a.length-1].t==r.t)return;a.push(r);a.sort((p,q)=>p.t-q.t);return}a.push(r)};
   const lastBin={};async function bin(day,i){try{const r=await fetch(`${base}positions/${day}__r${i}__positions.bin`,{cache:"no-store"});if(!r.ok)return false;geoDecode(await r.arrayBuffer(),day).forEach(add);lastBin[day]=i;return true}catch(e){return false}}
   async function loadDay(day){let i=0;while(i<40&&await bin(day,i))i++;return i}
   const days=[...new Set([dayStr(AV),dayStr(S0),dayStr(Math.min(E0,Date.now()))])];
