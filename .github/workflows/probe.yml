@@ -4,5 +4,22 @@ jobs:
   p:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: pip install playwright -q && python -m playwright install --with-deps chromium >/dev/null 2>&1 && python scripts/probe_trk.py
+      - run: |
+          B=https://player.georacing.com/datas/102233/103496
+          for u in $B/all.json $B/stats.json $B/positions/2026_11_15__r0__positions.bin; do echo "== $u"; curl -sI -H "Origin: https://hansmann-creator.github.io" "$u" | grep -i "access-control\|content-type\|cache"; done
+          curl -s $B/all.json > all.json; python3 -c "
+          import json;d=json.load(open('all.json'));print('KEYS',list(d))
+          for k,v in d.items():
+            s=json.dumps(v)[:700];print('K',k,s)"
+          curl -s $B/stats.json | head -c 2500; echo
+          curl -s "https://player.georacing.com/js/script.js?v=20261029123804" > s.js
+          grep -o ".\{200\}positions.bin.\{400\}" s.js | head -3
+          grep -o ".\{300\}getInt16.\{300\}" s.js | head -4
+          grep -o "wss\?://[^\"' ]*" s.js | sort -u | head
+          curl -s https://worldofsailors.com/sailor/zsombor-berecz > p.html; python3 - <<'PY'
+          import re,html
+          s=open('p.html').read()
+          s=re.sub(r"<script.*?</script>|<style.*?</style>|<svg.*?</svg>","",s,flags=re.S)
+          t=html.unescape(re.sub(r"\s+"," ",re.sub(r"<[^>]+>","|",s)));t=re.sub(r"(\s*\|\s*)+","|",t)
+          i=t.find("|Rank|");print("PROFILE",t[i-300:i+6000])
+          PY
