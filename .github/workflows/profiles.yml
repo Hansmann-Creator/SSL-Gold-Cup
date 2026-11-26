@@ -1,24 +1,25 @@
-name: Sailor profiles (facts from the SSL site)
+name: Sailor profiles + individual rankings (worldofsailors.com)
 on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: [roster.json]
+    paths: [roster.json, scripts/sailors.py, .github/workflows/profiles.yml]
   schedule:
-    - cron: "17 7 * 11,12 1"   # Mondays during the event
+    - cron: "17 7 * 11,12 2"   # Tuesdays during the event (the ranking updates Monday night)
 permissions:
   contents: write
   actions: write
+concurrency: { group: profiles, cancel-in-progress: false }
 jobs:
   p:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120
     env:
       GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
-      - run: python3 scripts/profiles.py
+      - run: python3 scripts/sailors.py all 100
       - run: |
           git config user.name "results-bot"; git config user.email "results-bot@users.noreply.github.com"
-          git add profiles.json
-          if ! git diff --cached --quiet; then git commit -qm "sailor profiles"; git pull -q --rebase origin main; git push -q origin main && gh workflow run deploy.yml --ref main; fi
+          git add profiles.json sp rank/ind.json
+          if ! git diff --cached --quiet; then git commit -qm "sailor profiles + individual rankings"; git pull -q --rebase origin main; git push -q origin main && gh workflow run deploy.yml --ref main; fi
