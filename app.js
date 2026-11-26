@@ -2506,7 +2506,10 @@ document.addEventListener("keydown",e=>{if(e.target.matches("input,select,textar
   if(e.key=="/"){const i=$("#q");if(i){e.preventDefault();i.focus()}}
   if(view=="board"&&(e.key=="ArrowRight"||e.key=="ArrowLeft")){const ids=D.rounds.map(r=>r.id),i=ids.indexOf(round)+(e.key=="ArrowRight"?1:-1);if(ids[i]){round=ids[i];go("round-"+round)}}});
 setInterval(()=>{stand();if((view=="board"||view=="home")&&!$("#tmd").open&&!document.hidden&&!(document.activeElement&&document.activeElement.matches("input,select")))render(true)},60000);
-setInterval(async()=>{if(document.hidden)return;if(await pullFile()){render(true);pgRefresh()}else stand()},60000);
+/* results: every minute; every 20 s while a race is about to finish or its result is due (learned timing) */
+let LASTPULL=Date.now();
+function hotNow(){try{const n=nowMs(),d=((TIM&&TIM.dur)||45)*60e3;return Object.entries((TIM&&TIM.races)||{}).some(([k,o])=>{const x=SCH.find(y=>raceKey(y)==k);if(!x||raceDone(x)||!o.s)return false;const s=Date.parse(o.s),f=o.f?Date.parse(o.f):0;return f?n-f<30*6e4:n>=s+d-8*6e4&&n<=s+d+60*6e4})}catch(e){return false}}
+setInterval(async()=>{if(document.hidden)return;const n=Date.now();if(n-LASTPULL<55e3&&!hotNow())return;LASTPULL=n;if(await pullFile()){render(true);pgRefresh()}else stand()},20000);
 document.addEventListener("visibilitychange",async()=>{if(!document.hidden&&await pullFile())render(true)});
 await pullFile();live=true;loadWx();setInterval(loadWx,30*6e4);
 round=current();

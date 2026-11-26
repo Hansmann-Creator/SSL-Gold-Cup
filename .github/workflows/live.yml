@@ -66,7 +66,7 @@ jobs:
               if timeout 60 python scripts/trk_watch.py | grep -q '^changed'; then gh workflow run deploy.yml --ref main || true; fi
             fi
             # race timing learned from Georacing (actual starts/finishes, operator start times), every 2 min
-            if [ $(( $(date +%s) / 60 % 2 )) -eq 1 ]; then
+            if [ $(( $(date +%s) / 60 % 2 )) -eq 1 ] || [ "$(timeout 10 python scripts/hot.py)" = "hot" ]; then
               if timeout 90 python scripts/timing.py | grep -q '^changed'; then git add timing.json; git commit -qm "timing $(date -u +%H:%M)" && { git push -q origin main && gh workflow run deploy.yml --ref main || git reset -q --hard origin/main; }; fi
             fi
             # start reminders (15 min before a race, opt-in)
@@ -83,6 +83,17 @@ jobs:
               if [ "$FAIL" -eq 10 ] && [ -z "$ALERT" ]; then
                 ALERT=$(gh issue create -t "⚠ Gold Cup app: results not updating" -b "@Hansmann-Creator The official results page could not be read for 10 minutes in a row (since about $(TZ=America/Sao_Paulo date -d '-10 min' +%H:%M) Rio time). The app keeps showing the last good results and tells users that results may be delayed. This issue closes itself as soon as reading works again." | grep -oE '[0-9]+$' || true)
               fi
+            fi
+            # hot window (race about to finish / finished, result not online yet): re-check results at :20 and :40
+            if [ "$(timeout 10 python scripts/hot.py)" = "hot" ]; then
+              for i in 1 2; do
+                sleep 20
+                cp results.json /tmp/old.json
+                if timeout 30 python scripts/update_results.py && ! git diff --quiet results.json; then
+                  git add results.json; git commit -qm "results $(date -u +%FT%TZ) (hot)"
+                  if git push -q origin main; then gh workflow run deploy.yml --ref main && LAST=$(date +%s); timeout 60 python scripts/notify.py /tmp/old.json results.json || true; else git reset -q --hard origin/main; fi
+                else git checkout -q results.json 2>/dev/null || true; fi
+              done
             fi
             sleep $((60 - $(date +%s) % 60))
           done
