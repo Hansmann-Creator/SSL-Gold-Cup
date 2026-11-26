@@ -1229,3 +1229,6 @@ header.top>#nxc .nxrow b{margin-inline-start:auto}
 .rrf{margin-bottom:12px}.rrf .sl b img{width:22px;height:auto;vertical-align:-3px;border-radius:3px}
 .rrsoon{margin:14px 0 0;color:var(--mute);font-size:14px;text-align:center}
 .rrb{margin-top:14px}
+
+.races li.rc.done .rtab.ready::after{content:"";position:absolute;top:8px;inset-inline-end:8px;width:9px;height:9px;border-radius:50%;background:#36c28c;box-shadow:0 0 0 2px #fff}
+.rcb.rrep .rrdy{font-style:normal;font-size:10px;font-weight:800;background:#10203f;color:#ffd21f;border-radius:99px;padding:2px 7px;margin-inline-start:8px}

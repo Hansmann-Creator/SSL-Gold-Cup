@@ -46,7 +46,8 @@ jobs:
       - name: Check every minute
         if: steps.day.outputs.run == 'true'
         run: |
-          pip install -q beautifulsoup4
+          pip install -q beautifulsoup4 python-docx
+          sudo apt-get install -y -qq poppler-utils >/dev/null 2>&1 || true
           git config user.name "results-bot"; git config user.email "results-bot@users.noreply.github.com"
           START=$(date +%s)
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then END=$((START + ${{ inputs.minutes || 5 }} * 60)); else
@@ -68,6 +69,11 @@ jobs:
             # race timing learned from Georacing (actual starts/finishes, operator start times), every 2 min
             if [ $(( $(date +%s) / 60 % 2 )) -eq 1 ] || [ "$(timeout 10 python scripts/hot.py)" = "hot" ]; then
               if timeout 90 python scripts/timing.py | grep -q '^changed'; then git add timing.json; git commit -qm "timing $(date -u +%H:%M)" && { git push -q origin main && gh workflow run deploy.yml --ref main || git reset -q --hard origin/main; }; fi
+            fi
+            # race reports from the Google Drive folder 02_Race-Reports, every 5 min
+            if [ $(( $(date +%s) / 60 % 5 )) -eq 2 ]; then
+              if timeout 120 python scripts/reports.py | tee /tmp/rep.txt | grep -q '^changed'; then git add reports.json; git commit -qm "race report $(date -u +%H:%M)" && { git push -q origin main && gh workflow run deploy.yml --ref main || git reset -q --hard origin/main; }; fi
+              cat /tmp/rep.txt
             fi
             # start reminders (15 min before a race, opt-in)
             PUSH_STATE=/tmp/push_state.json timeout 60 python scripts/push_extra.py remind || true
