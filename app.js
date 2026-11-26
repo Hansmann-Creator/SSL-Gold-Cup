@@ -2222,7 +2222,7 @@ pullNews();setInterval(()=>{if(!document.hidden)pullNews()},5*6e4);
 function newsHome(){const L=(NEWS&&NEWS.items||[]).slice(0,8);if(!L.length)return"";
   return `<h3 class="sec">${esc(NWS[lang]||NWS.en)}</h3><div class="newsr">${L.map((n,i)=>`<button class="newsc" data-news="${i}">${n.img?`<span class="nwi"><img src="${esc(n.img)}" alt="" loading="lazy"></span>`:""}<span class="nwt"><small>${esc(n.d||"")}</small><b>${esc(n.t)}</b></span></button>`).join("")}</div>`}
 function newsSheet(i){const n=NEWS&&NEWS.items&&NEWS.items[i];if(!n)return;
-  const d=sheetWrap(n.d||"",n.t,`${n.img?`<img class="nwhero" src="${esc(n.img)}" alt="">`:""}<div class="nwbody">${n.html||`<p>${esc(n.x||"")}</p>`}</div><p class="vsrc">${esc(NSRC[lang]||NSRC.en)}</p>`);
+  const d=sheetWrap(n.d||"",n.t,`${n.img?`<img class="nwhero" src="${esc(n.img)}" alt="">`:""}<div class="nwbody">${n.html||`<p>${esc(n.x||"")}</p>`}</div><p class="vsrc">${n.au?esc(n.au)+" · ":""}${esc(NSRC[lang]||NSRC.en)}</p>`);
   d.querySelectorAll(".nwbody a").forEach(a=>a.replaceWith(...a.childNodes));gcEvent("news")}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-news]");if(b){e.preventDefault();newsSheet(+b.dataset.news)}});
 function sheetWrap(nick,title,body){const d=$("#tmd");openCode=null;d.innerHTML=`<div class="th"><div><div class="nick">${esc(nick)}</div><h2>${esc(title)}</h2></div><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">${body}</div>`;d.querySelector(".x").onclick=()=>d.close();show(d);return d}

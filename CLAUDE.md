@@ -24,6 +24,7 @@ Read this first in any new session. Everything needed to keep developing the app
 | `rank/` | SSL Nations Ranking mirror (`scripts/ranking.py`, workflow `ranking.yml`): `index.json` (weeks, continents) + one file per week. Shown in-app at `#ranking`; never link out to worldofsailors.com. |
 | `flags.json` | Manual race notes from Hansi, e.g. `{"races":{"r16|A|1":{"pd":true,"nb":"<UTC ISO>","until":"<UTC ISO>"}}}` → header strip and race list show "Delayed · not before HH:MM" (manual, wins over the estimate). Countdown states otherwise come from the schedule and Georacing's live feed (waiting / racing / done). |
 | `timing.json` | Learned race timing (`scripts/timing.py`, live loop every 2 min): Georacing actual start/finish per race key, operator start time (`plan`), median race length `dur` and changeover `gap` (minutes). The app estimates delays of following races from it (“Probably delayed ~HH:MM”); flags.json still wins. |
+| `news.json` | Latest news from worldofsailors.com (`scripts/news.py`, workflow `news.yml` every 20 min in Nov/Dec): cards on Home above Explore, full article in an in-app reader (images hot-linked from platform.worldofsailors.com). |
 | `config.js` | `CFG.push` = OneSignal App ID, `CFG.gc` = GoatCounter code. Empty = feature off. |
 | `tools/positions/` | Position audit: `audit.py` (runs in Actions, fetches team pages), `rebuild.py` (merges sources → roster.json + positions_report.json), `xls.json` (production sheet extract). |
 
