@@ -36,6 +36,7 @@ dur = [(f - s).total_seconds() / 60 for s, f in rows if 15 < (f - s).total_secon
 gap = [(rows[i + 1][0] - rows[i][1]).total_seconds() / 60 for i in range(len(rows) - 1)
        if rows[i + 1][0].date() == rows[i][1].date() and 5 < (rows[i + 1][0] - rows[i][1]).total_seconds() / 60 < 120]
 res = {"dur": round(statistics.median(dur), 1) if dur else 45, "gap": round(statistics.median(gap), 1) if gap else 35,
+       "dmin": round(min(dur), 1) if dur else 35, "gmin": round(min(gap), 1) if gap else 25,
        "nd": len(dur), "ng": len(gap), "races": dict(sorted(out.items()))}
 path = os.path.join(os.path.dirname(__file__), "..", "timing.json")
 old = open(path).read() if os.path.exists(path) else ""

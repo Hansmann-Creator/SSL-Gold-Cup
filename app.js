@@ -1254,13 +1254,13 @@ const mono=t=>String(t).replace(/\d/g,d=>`<i class="dg">${d}</i>`);
 function cdTxt(t){const d=Math.max(0,Math.round((t-nowMs())/1000)),h=Math.floor(d/3600),m=Math.floor(d%3600/60),sec=d%60,p=n=>String(n).padStart(2,"0");return (h?`${h}:${p(m)}`:`${m}`)+`:${p(sec)}`}
 setInterval(()=>{if(document.hidden)return;document.querySelectorAll("[data-lat]").forEach(el=>{const t=+el.dataset.lat;el.innerHTML=mono(cdLong(Math.max(t,nowMs())))});document.querySelectorAll(".cdn[data-at]").forEach(el=>{const t=+el.dataset.at;if(t-nowMs()<=0){el.remove();return}el.innerHTML=mono(cdTxt(t))})},1000);
 function raceLi(x,nx){const st=rState2(x),r=rnd(x.rid),g=r&&r.groups.find(y=>y.id==x.g);
-  const fl=g?g.rows.filter(z=>isTeam(z.team)).map(z=>FL(z.team)).join(""):"";
+  const fl=g?(st=="done"?[...g.rows].filter(z=>isTeam(z.team)).sort((a,b)=>num(b.r[x.n-1])-num(a.r[x.n-1])).map((z,k)=>k?FL(z.team):`<span class="w1">${FL(z.team)}</span>`):g.rows.filter(z=>isTeam(z.team)).map(z=>FL(z.team))).join(""):"";
   const lbl=x.rid=="f"?RNm(rnd("f")):x.rid=="pf"?RNm(rnd("pf")):`${T("group")} ${x.g}`;
   const s=st=="done"?`✓ ${T("done")}`:st=="now"?T("onWater"):"";const FG=(FLG&&FLG.races&&FLG.races[raceKey(x)])||null,NB0=FG&&FG.pd&&FG.nb&&st!="done"&&(!FG.until||nowMs()<Date.parse(FG.until))?Date.parse(FG.nb):0,EST=!NB0&&st!="done"&&st!="past"&&!(RST[raceKey(x)]&&RST[raceKey(x)].s=="racing")&&!timOf(x).s?estOf(x):0,NB=NB0||EST;
-  const dly=NB&&NB>nowMs();const s2=dly?`<span class="dlyt">${esc(EST?(NXP[lang]||NXP.en):(NXS[lang]||NXS.en)[3])}</span>`:s;const st2=dly?"up":st;
+  const dly=NB&&NB>nowMs();const s2=dly?`<span class="dlyt">${esc(EST&&!estSure(x)?(NXP[lang]||NXP.en):(NXS[lang]||NXS.en)[3])}</span>`:s;const st2=dly?"up":st;
   const cdn=NB&&NB>nowMs()?`<small class="cdn" data-at="${NB}">${mono(cdTxt(NB))}</small>`:st=="up"&&at(x)-nowMs()<24*36e5?`<small class="cdn" data-at="${at(x)}">${mono(cdTxt(at(x)))}</small>`:"";
   const tk=trkUrl(x)&&st!="done"&&st!="past"?`<a class="trk" data-trk="${raceKey(x)}" href="${esc(trkUrl(x))}" target="_blank" rel="noopener">📍 ${T("trk")}</a>`:"";
-  return `<li class="rc ${st2=="done"||st2=="past"?"past":st2=="now"?"now":x===nx||dly?"nxt":""}" data-race="${raceKey(x)}" role="button" tabindex="0"><span class="ti">${NB?`<s class="tod">${x.t}</s><span class="tnb">${EST?"~":"≥"} ${esc(rioHM(NB))}</span>`:x.t}${showLocal?`<small>${esc(locT(x))}</small>`:""}${cdn}</span><span class="gt"><b>${esc(lbl)}</b>${["sf","pf","f"].includes(x.rid)?`<i>${esc(RS[x.rid])}</i>`:`<i>${T("race")} ${x.n}</i>`}</span><span class="s">${dly?s2:esc(s)}</span><span class="meta"><span class="fls">${fl}</span>${wxAt(x)}${tk}</span><span class="chev" aria-hidden="true">›</span></li>`}
+  return `<li class="rc ${st2=="done"?"done":st2=="past"?"past":st2=="now"?"now":x===nx||dly?"nxt":""}" data-race="${raceKey(x)}" role="button" tabindex="0"><span class="ti">${NB?`<s class="tod">${x.t}</s><span class="tnb">${EST?"~":"≥"}${esc(rioHM(NB).replace(/^0(\d)/,"$1"))}</span>`:x.t}${showLocal?`<small>${esc(locT(x))}</small>`:""}${cdn}</span><span class="gt"><b>${esc(lbl)}</b>${["sf","pf","f"].includes(x.rid)?`<i>${esc(RS[x.rid])}</i>`:`<i>${T("race")} ${x.n}</i>`}</span><span class="s">${dly?s2:esc(s)}</span><span class="meta"><span class="fls">${fl}</span>${wxAt(x)}${tk}</span>${st2=="done"?`<span class="rtab" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><span>Race<br>Report</span><b>›</b></span>`:`<span class="chev" aria-hidden="true">›</span>`}</li>`}
 const trkUrl=x=>{try{const u=TRK[x.rid][x.g][String(x.n)];return /^https:\/\/player\.georacing\.com\//.test(u)?u:""}catch(e){return""}};
 /* wind forecast (Open-Meteo, no key) */
 let WX=null;
@@ -2339,15 +2339,19 @@ const NXP={en:"Probably delayed",de:"Wohl verspätet",fr:"Retard probable",es:"R
 /* learned from Georacing (timing.json): typical race length and changeover, actual starts/finishes, operator's start times */
 let ESTC=null;
 function estDay(){const n=nowMs();if(ESTC&&ESTC.D===D&&ESTC.F===FLG&&ESTC.T===TIM&&n-ESTC.at<5e3)return ESTC.E;
-  const RDUR=((TIM&&TIM.dur)||45)*60e3,RGAP=((TIM&&TIM.gap)||35)*60e3,TR=(TIM&&TIM.races)||{},day=today(),E={};let end=0;
+  const RDUR=((TIM&&TIM.dur)||45)*60e3,RGAP=((TIM&&TIM.gap)||35)*60e3,DMIN=((TIM&&TIM.dmin)||Math.max(20,((TIM&&TIM.dur)||45)-8))*60e3,GMIN=((TIM&&TIM.gmin)||Math.max(15,((TIM&&TIM.gap)||35)-8))*60e3;
+  const TR=(TIM&&TIM.races)||{},day=today(),E={},SURE={};let end=0,endB=0;
   for(const x of SCH.filter(y=>y.d==day).sort((a,b)=>at(a)-at(b))){const k=raceKey(x),t=at(x),o=RST[k]||{},g=TR[k]||{},gs=g.s?Date.parse(g.s):0,gf=g.f?Date.parse(g.f):0,gp=g.plan?Date.parse(g.plan):0;
-    if(gf||raceDone(x)||o.s=="done"){end=gf||(o.doneAt&&n-o.doneAt<3*36e5?o.doneAt:0)||(gs?gs+RDUR:0);continue}
-    const f=FLG&&FLG.races&&FLG.races[k],nb=f&&f.pd&&f.nb&&(!f.until||n<Date.parse(f.until))?Date.parse(f.nb):0;let st;
+    if(gf||raceDone(x)||o.s=="done"){end=gf||(o.doneAt&&n-o.doneAt<3*36e5?o.doneAt:0)||(gs?gs+RDUR:0);endB=gf||(gs?gs+DMIN:0)||end;continue}
+    const f=FLG&&FLG.races&&FLG.races[k],nb=f&&f.pd&&f.nb&&(!f.until||n<Date.parse(f.until))?Date.parse(f.nb):0;let st,sb;
     const plan=gp&&Math.abs(gp-t)<6*36e5?gp:t;
-    if(gs||o.s=="racing"){st=gs||o.since||Math.max(plan,nb);end=Math.max(st+RDUR,n+3*60e3)}
-    else{st=Math.max(plan,nb,end?end+RGAP:0,n>=plan?n+3*60e3:0);end=st+RDUR}
+    if(gs||o.s=="racing"){st=gs||o.since||Math.max(plan,nb);end=Math.max(st+RDUR,n+3*60e3);endB=Math.max(st+DMIN,n+60e3)}
+    else{st=Math.max(plan,nb,end?end+RGAP:0,n>=plan?n+3*60e3:0);end=st+RDUR;sb=Math.max(plan,nb,endB?endB+GMIN:0,n>=t?n:0);endB=sb+DMIN;
+      /* certain: the operator moved the start, or even the fastest race + changeover seen so far cannot make the planned time */
+      if(plan-t>5*60e3||sb-t>5*60e3)SURE[k]=1}
     E[k]=st}
-  ESTC={at:n,E,D,F:FLG,T:TIM};return E}
+  ESTC={at:n,E,SURE,D,F:FLG,T:TIM};return E}
+const estSure=x=>{estDay();return!!(ESTC&&ESTC.SURE&&ESTC.SURE[raceKey(x)])};
 const timOf=x=>(TIM&&TIM.races&&TIM.races[raceKey(x)])||{};
 const estOf=x=>{const e=estDay()[raceKey(x)],n=nowMs();return e&&e-at(x)>=10*60e3&&e>n+4*60e3?e:0};
 var FLG={},TIM=null;async function pullFlags(){try{const r=await fetch("timing.json?t="+Date.now(),{cache:"no-store"});if(r.ok){const j=await r.json(),ch=JSON.stringify(j)!==JSON.stringify(TIM);TIM=j;ESTC=null;if(ch)try{render(true)}catch(e){}}}catch(e){}try{const r=await fetch("flags.json?t="+Date.now(),{cache:"no-store"});if(r.ok){const j=await r.json(),ch=JSON.stringify(j)!==JSON.stringify(FLG);FLG=j;if(ch)try{render(true)}catch(e){}}}catch(e){}}
@@ -2379,7 +2383,7 @@ function nxcPaint(){let b=$("#nxc");const n=nowMs();
   let top,big,pill="";
   if(red){top="";big=`<i class="ldot2 nxdot"></i>${esc(T("watchLive"))}`;if(S0.k=="racing")pill=`<em class="nxp r">${esc(L[4])}</em>`}
   else if(S0.k=="prob"){top=esc(S0.nb?L[5](rioHM(S0.nb)):(S[lang].nxS||T("nextRace")));big=mono(cdLong(S0.to));pill=`<em class="nxp o">${esc(L[3])}</em>`}
-  else if(S0.k=="est"){top=esc(`${x.rid=="f"||x.rid=="pf"?RNm(rnd(x.rid)):T("group")+" "+x.g} · ~${rioHM(S0.est).replace(/^0(\d)/,"$1")}`);big=mono(cdLong(S0.to));pill=`<em class="nxp o">${esc(NXP[lang]||NXP.en)}</em>`}
+  else if(S0.k=="est"){top=esc(`${x.rid=="f"||x.rid=="pf"?RNm(rnd(x.rid)):T("group")+" "+x.g} · ~${rioHM(S0.est).replace(/^0(\d)/,"$1")}`);big=mono(cdLong(S0.to));pill=`<em class="nxp o">${esc(estSure(x)?L[3]:(NXP[lang]||NXP.en))}</em>`}
   else if(S0.k=="late"){top=esc(S[lang].nxS||T("nextRace"));big=mono(since(n-S0.since));pill=`<em class="nxp o">${esc(L[2])}</em>`}
   else{top=esc(S[lang].nxS||T("nextRace"));big=mono(cdLong(S0.to));pill=`<em class="nxp ${S0.k=="soon"?"y":"g"}">${esc(S0.k=="soon"?L[1]:L[0])}</em>`}
   const hm=ms=>rioHM(ms).replace(/^0(\d)/,"$1");
@@ -2489,7 +2493,7 @@ $("#main").addEventListener("click",e=>{
   const tu=e.target.closest("[data-trkurl],a[href^=\"https://app.georacing.com\"]");if(tu){e.preventDefault();const n=nowMs(),W=SCH.filter(x=>trkUrl(x));const b=W.filter(x=>at(x)<=n).sort((a,c)=>at(c)-at(a))[0]||W.sort((a,c)=>at(a)-at(c))[0];if(b)openTrack(b);else toast(T("tkNone"));return}
   const vd=e.target.closest("[data-vid]");if(vd){openVideo(vd.dataset.vid);return}
   const tk=e.target.closest("[data-trk]");if(tk){e.preventDefault();const x=raceBy(tk.dataset.trk);if(x)openTrack(x);return}
-  const rc=e.target.closest("[data-race]");if(rc){openRace(raceBy(rc.dataset.race));return}
+  const rc=e.target.closest("[data-race]");if(rc){if(rc.classList.contains("done")){rc.classList.add("tap");const k0=rc.dataset.race;setTimeout(()=>{rc.classList.remove("tap");openRace(raceBy(k0))},170)}else openRace(raceBy(rc.dataset.race));return}
   const ins=e.target.closest("[data-inst]");if(ins){doInstall();return}
   const ih=e.target.closest("[data-insthide]");if(ih){LS.set("instHide",Date.now()+3*864e5);render(true);return}
   const sh=e.target.closest("[data-share]");if(sh){shareSheet();return}
