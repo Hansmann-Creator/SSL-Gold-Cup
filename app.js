@@ -1424,7 +1424,7 @@ function quietUtc(start){const off=new Date().getTimezoneOffset();return String(
 let RSTQ=0;
 function pSettings(){const d=$("#pg");openCode=null;const tg=(k,on,t,sub,dis)=>`<button class="mrow" data-st="${k}" role="switch" aria-checked="${!!on}"${dis?" disabled":""}><span><b>${t}</b>${sub?`<small>${sub}</small>`:""}</span><i class="tgl${on?" on":""}" aria-hidden="true"></i></button>`;
   const seg=(k,cur,opts)=>`<div class="sgc sm" role="group">${opts.map(([v,l])=>`<button data-sg="${k}" data-v="${v}" class="${String(cur)==String(v)?"on":""}">${esc(l)}</button>`).join("")}</div>`;
-  const sl=(t,inner)=>`<div class="setrow"><span>${t}</span>${inner}</div>`;
+  const sl=(t,inner,full)=>`<div class="setrow${full?" full":""}"><span>${t}</span>${inner}</div>`;
   let h=`<div class="th"><div><div class="nick">SSL Gold Cup</div><h2>${esc(T("setT"))}</h2></div></div><div class="tb set">`;
   /* notifications */
   h+=`<h3>${esc(T("pT"))}</h3>`;
@@ -1444,8 +1444,8 @@ function pSettings(){const d=$("#pg");openCode=null;const tg=(k,on,t,sub,dis)=>`
   /* display */
   h+=`<h3>${esc(T("sDispT"))}</h3><div class="card pad setc">`;
   h+=sl(esc(T("lang")),`<select data-sel="lang">${Object.entries(LANGS).map(([k,v])=>`<option value="${k}"${k==lang?" selected":""}>${v}</option>`).join("")}</select>`);
-  h+=sl(esc(T("design")),seg("theme",theme,[["auto",T("theme").auto],["light",T("theme").light],["dark",T("theme").dark]]));
-  h+=sl(esc(T("sTimeT")),seg("tloc",TLOC,[["auto","Auto"],["off",T("sTimeRio")],["on",T("sTimeBoth")]]));
+  h+=sl(esc(T("design")),seg("theme",theme,[["auto",T("theme").auto],["light",T("theme").light],["dark",T("theme").dark]]),1);
+  h+=sl(esc(T("sTimeT")),seg("tloc",TLOC,[["auto","Auto"],["off",T("sTimeRio")],["on",T("sTimeBoth")]]),1);
   h+=sl(esc(T("sWindT")),seg("unw",UNW,[["kn","kn"],["kmh","km/h"]]));
   h+=sl(esc(T("sTempT")),seg("unt",UNT,[["c","°C"],["f","°F"]]))+`</div>`;
   /* livestream */

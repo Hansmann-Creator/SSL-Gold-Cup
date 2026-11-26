@@ -892,3 +892,10 @@ html.pgon .tabs{z-index:41}
 .mrow[data-st]::after,a.mrow::after{display:none}
 .mrow[disabled]{opacity:.6}
 #nxc{width:122px}#nxc small{letter-spacing:.03em}
+
+.setrow>:last-child{margin-inline-start:auto}
+.setrow.full{flex-direction:column;align-items:stretch;gap:8px}
+.setrow.full>:last-child{margin-inline-start:0}
+.setrow.full .sgc{flex:1 1 auto;width:100%}
+.setrow.full .sgc button{flex:1 1 0}
+.setrow select{min-width:0}
