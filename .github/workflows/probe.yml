@@ -1,29 +1,22 @@
 name: Temporary probe
 on: workflow_dispatch
+permissions: {contents: write}
 jobs:
   p:
     runs-on: ubuntu-latest
     steps:
       - shell: bash {0}
         run: |
+          mkdir g && cd g
+          H=(-A "Mozilla/5.0 Chrome/131" -e "https://player.georacing.com/")
           B=https://player.georacing.com/datas/102233/103496
-          for u in $B/all.json $B/stats.json $B/positions/2026_11_15__r0__positions.bin; do echo "== $u"; curl -sI -A "Mozilla/5.0 Chrome/131" -e "https://player.georacing.com/" -H "Origin: https://hansmann-creator.github.io" "$u" | grep -i "access-control\|content-type\|cache"; done
-          curl -s -A "Mozilla/5.0 Chrome/131" -e "https://player.georacing.com/" $B/all.json > all.json; head -c 300 all.json; echo; python3 -c "
-          import json
-          try: d=json.load(open('all.json'))
-          except Exception: d={}
-          print('KEYS',list(d))
-          for k,v in d.items():
-            s=json.dumps(v)[:700];print('K',k,s)"
-          curl -s -A "Mozilla/5.0 Chrome/131" -e "https://player.georacing.com/" $B/stats.json | head -c 2500; echo
-          curl -s "https://player.georacing.com/js/script.js?v=20261029123804" > s.js
-          grep -o ".\{200\}positions.bin.\{400\}" s.js | head -3
-          grep -o ".\{300\}getInt16.\{300\}" s.js | head -4
-          grep -o "wss\?://[^\"' ]*" s.js | sort -u | head
-          curl -s https://worldofsailors.com/sailor/zsombor-berecz > p.html; python3 - <<'PY'
-          import re,html
-          s=open('p.html').read()
-          s=re.sub(r"<script.*?</script>|<style.*?</style>|<svg.*?</svg>","",s,flags=re.S)
-          t=html.unescape(re.sub(r"\s+"," ",re.sub(r"<[^>]+>","|",s)));t=re.sub(r"(\s*\|\s*)+","|",t)
-          i=t.find("|Rank|");print("PROFILE",t[i-300:i+6000])
-          PY
+          curl -s "${H[@]}" "https://player.georacing.com/js/script.js?v=20261029123804" -o script.js
+          curl -s "${H[@]}" "https://player.georacing.com/?event=102233&race=103496&application_id=46" -o player.html
+          for f in all.json stats.json positions/2026_11_15__r.json positions/2026_11_15__r0__positions.bin positions/2026_11_15__r1__positions.bin positions/OneBigFile__r__positions.bin; do curl -s "${H[@]}" "$B/$f" -o "$(echo $f | tr / _)"; done
+          # an upcoming Rio race too (1/16 finals)
+          curl -s "${H[@]}" https://player.georacing.com/datas/102235/races.json -o r16_races.json
+          RID=$(python3 -c "import json;print([x['id'] for x in json.load(open('r16_races.json')) if x['name'].startswith('Race 1 - Group A')][0])")
+          curl -s "${H[@]}" https://player.georacing.com/datas/102235/$RID/all.json -o r16_all.json
+          ls -la
+          git init -q && git checkout -q -b geo && git add -A && git -c user.name=x -c user.email=x@x commit -qm geo
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" geo
