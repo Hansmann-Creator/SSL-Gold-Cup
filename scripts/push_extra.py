@@ -32,6 +32,7 @@ T = {  # reminder title/body, live, video – per app language
  "ja": ("15分後にスタート", "ライブ配信中:SSLゴールドカップ", "新しいハイライト", "アプリでライブ配信を見る"),
  "th": ("ออกตัวในอีก 15 นาที", "ถ่ายทอดสดตอนนี้: SSL Gold Cup", "ไฮไลต์ใหม่", "ดูถ่ายทอดสดในแอป"),
  "hu": ("Rajt 15 perc múlva", "Most élőben: SSL Gold Cup", "Új összefoglaló", "Nézd az élő közvetítést az appban"),
+ "pl": ("Start za 15 minut", "Teraz na żywo: SSL Gold Cup", "Nowy skrót", "Oglądaj transmisję w aplikacji"),
  "cs": ("Start za 15 minut", "Právě živě: SSL Gold Cup", "Nový sestřih", "Sledujte přenos v aplikaci"),
  "uk": ("Старт за 15 хвилин", "Наживо: SSL Gold Cup", "Нові найкращі моменти", "Дивіться трансляцію в застосунку"),
 }

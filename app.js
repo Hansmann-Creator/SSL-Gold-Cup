@@ -5,10 +5,10 @@ const $=s=>document.querySelector(s);
 ["gesturestart","gesturechange"].forEach(t=>document.addEventListener(t,e=>{if(!(e.target.closest&&e.target.closest(".leaflet-container")))e.preventDefault()},{passive:false}));
 document.addEventListener("touchmove",e=>{if(e.touches.length>1&&!(e.target.closest&&e.target.closest(".leaflet-container")))e.preventDefault()},{passive:false});
 const LS={get(k,d){try{const v=localStorage.getItem("gcmb_"+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem("gcmb_"+k,JSON.stringify(v))}catch(e){}}};
-const LANGS={en:"English",de:"Deutsch",fr:"Français",es:"Español",pt:"Português",zh:"中文",ar:"العربية",hi:"हिन्दी",bn:"বাংলা",ur:"اردو",id:"Bahasa Indonesia",ms:"Bahasa Melayu",ja:"日本語",th:"ไทย",hu:"Magyar",cs:"Čeština",uk:"Українська"};
+const LANGS={en:"English",de:"Deutsch",fr:"Français",es:"Español",pt:"Português",zh:"中文",ar:"العربية",hi:"हिन्दी",bn:"বাংলা",ur:"اردو",id:"Bahasa Indonesia",ms:"Bahasa Melayu",ja:"日本語",th:"ไทย",hu:"Magyar",cs:"Čeština",uk:"Українська",pl:"Polski"};
 const RTL=l=>l=="ar"||l=="ur";
-const LOC=()=>({ar:"ar-u-nu-latn",zh:"zh-CN",pt:"pt-BR",hi:"hi-IN-u-nu-latn",bn:"bn-BD-u-nu-latn",ur:"ur-PK-u-nu-latn",id:"id-ID",ms:"ms-MY",ja:"ja-JP",th:"th-TH-u-nu-latn",hu:"hu-HU",cs:"cs-CZ",uk:"uk-UA"})[lang]||lang;
-let lang=LS.get("lang",null);if(!LANGS[lang])lang=["de","fr","es","pt","zh","ar","hi","bn","ur","id","ms","ja","th","hu","cs","uk"].find(l=>(navigator.language||"").toLowerCase().startsWith(l))||"en";
+const LOC=()=>({ar:"ar-u-nu-latn",zh:"zh-CN",pt:"pt-BR",hi:"hi-IN-u-nu-latn",bn:"bn-BD-u-nu-latn",ur:"ur-PK-u-nu-latn",id:"id-ID",ms:"ms-MY",ja:"ja-JP",th:"th-TH-u-nu-latn",hu:"hu-HU",cs:"cs-CZ",uk:"uk-UA",pl:"pl-PL"})[lang]||lang;
+let lang=LS.get("lang",null);if(!LANGS[lang])lang=["de","fr","es","pt","zh","ar","hi","bn","ur","id","ms","ja","th","hu","cs","uk","pl"].find(l=>(navigator.language||"").toLowerCase().startsWith(l))||"en";
 let UNW=LS.get("unw","kn"),UNT=LS.get("unt","c"),TLOC=LS.get("tloc","auto"),LVL=LS.get("lvl","auto"),theme=LS.get("theme","auto"),favs=new Set(LS.get("favs",[])),sfavs=new Set(LS.get("sfavs",[]));
 
 let TRK={};try{const r=await fetch("tracking.json",{cache:"no-cache"});if(r.ok)TRK=await r.json()}catch(e){}
@@ -20,7 +20,7 @@ let RO={};try{RO=await (await fetch("roster.json",{cache:"no-cache"})).json()}ca
 let D=JSON.parse($("#snap").textContent),checkedAt=null,view="board",round=null,sel=null,filt="all",sortBy="status",q="",live=false,stale=false,jump=false;
 
 /* ---------- strings ---------- */
-const ORD={en:n=>n+(n%10==1&&n!=11?"st":n%10==2&&n!=12?"nd":n%10==3&&n!=13?"rd":"th"),de:n=>n+".",fr:n=>n==1?"1er":n+"e",es:n=>n+".º",pt:n=>n+"º",zh:n=>"第"+n+"名",ar:n=>({1:"الأول",2:"الثاني",3:"الثالث",4:"الرابع",5:"الخامس",6:"السادس",7:"السابع",8:"الثامن"})[n]||String(n),hi:n=>n+"वाँ",bn:n=>({1:"1ম",2:"2য়",3:"3য়",4:"4র্থ",5:"5ম",6:"6ষ্ঠ",7:"7ম",8:"8ম"})[n]||n+"তম",ur:n=>({1:"پہلا",2:"دوسرا",3:"تیسرا",4:"چوتھا",5:"پانچواں",6:"چھٹا",7:"ساتواں",8:"آٹھواں"})[n]||n+"واں",id:n=>"ke-"+n,ms:n=>"ke-"+n,ja:n=>n+"位",th:n=>"ที่ "+n,hu:n=>n+".",cs:n=>n+".",uk:n=>n+"-е"};
+const ORD={en:n=>n+(n%10==1&&n!=11?"st":n%10==2&&n!=12?"nd":n%10==3&&n!=13?"rd":"th"),de:n=>n+".",fr:n=>n==1?"1er":n+"e",es:n=>n+".º",pt:n=>n+"º",zh:n=>"第"+n+"名",ar:n=>({1:"الأول",2:"الثاني",3:"الثالث",4:"الرابع",5:"الخامس",6:"السادس",7:"السابع",8:"الثامن"})[n]||String(n),hi:n=>n+"वाँ",bn:n=>({1:"1ম",2:"2য়",3:"3য়",4:"4র্থ",5:"5ম",6:"6ষ্ঠ",7:"7ম",8:"8ম"})[n]||n+"তম",ur:n=>({1:"پہلا",2:"دوسرا",3:"تیسرا",4:"چوتھا",5:"پانچواں",6:"چھٹا",7:"ساتواں",8:"آٹھواں"})[n]||n+"واں",id:n=>"ke-"+n,ms:n=>"ke-"+n,ja:n=>n+"位",th:n=>"ที่ "+n,hu:n=>n+".",cs:n=>n+".",pl:n=>n+".",uk:n=>n+"-е"};
 const S={
 en:{rounds:"Rounds",bracket:"Matchboard",teams:"Teams",official:"Official results",updated:"Updated",ago:m=>m<1?"just now":m<60?`${m} min ago`:`${Math.round(m/60)} h ago`,rio:"Rio time",offline:"offline copy",
  rn:{r32:"1/32 Finals",r16:"1/16 Finals",r8:"1/8 Finals",r4:"Quarter-finals",sf:"Semi-finals",pf:"Petit Final",f:"Grand Final"},
@@ -848,6 +848,91 @@ mbHint:"Csoportonként az első kettő jut tovább. Koppints egy csapatra a leg�
 tkLoad:"Követés betöltése…",tkNone:"Ehhez a futamhoz még nincs követés.",tkNoData:"Ehhez a futamhoz nincsenek követési adatok.",tkOpens:"A követés indul:",tkStart:"Rajt",tkLeg:"Szakasz",tkPre:"rajt előtt",tkNoPos:"nincs jel",tkRep:"Visszajátszás",
 secOly:"Olimpiai játékok",secWc:"Világbajnokságok",secEc:"Kontinensbajnokságok",bioT:"Bemutatkozás",srcSSL:"Hivatalos életrajz · Star Sailors League",careerT:"Pályafutás",evN:"listázott eredmény",podN:"dobogó",medRate:"éremarány",bestR:"legjobb eredmény",showAll:"Mind mutatása",
 sslPts:"SSL-pontok",heightT:"Magasság",weightT:"Testsúly",sslProf:"Hivatalos SSL-profil",teamSite:"Csapat weboldala",mySailors:"Vitorlázóim",sFavHint:"Koppints a ☆-ra egy vitorlázó oldalán a követéshez – itt fog megjelenni."},
+pl:{rounds:"Rundy",bracket:"Matchboard",teams:"Drużyny",official:"Oficjalne wyniki",updated:"Zaktualizowano",
+ago:m=>m<1?"przed chwilą":m<60?`${m} min temu`:`${Math.round(m/60)} godz. temu`,
+rio:"czas w Rio",offline:"offline – ostatnio zapisane dane",
+rn:{r32:"1/32 finału",r16:"1/16 finału",r8:"1/8 finału",r4:"Ćwierćfinały",sf:"Półfinały",pf:"Mały finał",f:"Wielki finał"},
+group:"Grupa",decided:"rozstrzygnięte",racing:"trwa",open:"otwarte",st:{done:"zakończone",live:"trwa",up:"nadchodzące"},
+races:n=>`${n} ${n==1?"wyścig":n%10>=2&&n%10<=4&&(n%100<12||n%100>14)?"wyścigi":"wyścigów"} na grupę`,upNext:"Następne",
+startsIn:d=>d<=0?"start dziś":d==1?"start jutro":`start za ${d} dni`,
+groupsOf4:n=>`${n} ${n==1?"grupa":n%10>=2&&n%10<=4&&(n%100<12||n%100>14)?"grupy":"grup"} po 4 drużyny`,oneRace:"Jeden wyścig – decyduje kolejność na mecie.",
+through:"awans",out:"odpada",toFinal:"do finału",toPetit:"do małego finału",medals:["Złoto","Srebro","Brąz","4."],pts:"Pkt",
+outIn:(r,g,p)=>`Odpadła: ${r} (grupa ${g}, ${p})`,gf:m=>`Wielki finał: ${m}`,finished:p=>`Miejsce końcowe: ${p}`,
+thrTbc:"Awans – kolejna grupa jeszcze nieustalona",seeded:(r,g,d)=>`Rozstawiona – start: ${r}, grupa ${g}, ${d}`,racingNow:"Teraz się ściga",
+nations:n=>`${n} ${n==1?"kraj":n%10>=2&&n%10<=4&&(n%100<12||n%100>14)?"kraje":"krajów"}`,stillIn:"w grze",outN:"odpadło",search:"Szukaj kraju, przydomka lub żeglarza",all:"Wszystkie",chipIn:"W grze",chipOut:"Odpadły",mine:"★ Moje drużyny",
+sStatus:"Status",sRank:"Ranking",sAz:"A–Z",noTeam:"Nie znaleziono drużyny.",rank:"Ranking",captain:"Kapitan",helm:"Sternik",
+ranking:"SSL Nations Ranking",rankBoard:"Ranking ↗",entered:"Wejście w Rio",showRound:"Otwórz rundę ›",gc23:"Gold Cup 2023",br23:"Drabinka 2023 ›",
+status:"Status",stIn:"W grze",stOut:"Odpadła",whereEnded:"Gdzie skończyła ›",curGroup:"Bieżąca grupa ›",background:"Tło",road:"Droga do Rio",story:"Historia",site:"Strona drużyny",
+qualRes:"Wyniki kwalifikacji ↗",sslRank:"SSL Nations Ranking ↗",resRio:"Wyniki w Rio",photos:"Zdjęcia załogi",byPos:"Załoga według pozycji",leader:"Lider drużyny",wider:"Szersza kadra · pozycja jeszcze nieustalona",
+squadNote:(n,p)=>`W kadrze jest ${n} nazwisk. W każdym wyścigu płynie 8–10 żeglarzy, a skład może się zmieniać z dnia na dzień. Pozycje i numery z oficjalnej strony drużyny; portrety z grafik Gold Cup Rio${p?"":" (dla tej drużyny jeszcze brak)"}.`,
+noSquad:"Kadra tej drużyny nie została jeszcze opublikowana.",showPath:"Pokaż drogę w drabince",copyLink:"Kopiuj link",copied:"Link skopiowany",close:"Zamknij",
+jersey:"Koszulka",numTbc:"Numer jeszcze nieustalony",capTag:"Kapitan",favOn:"Obserwuję",favOff:"Obserwuj",
+brHint:"Stuknij drużynę, aby zobaczyć załogę i historię. Przesuń, aby zobaczyć kolejne rundy.",h23:"Gold Cup 2023",champ23:"Gran Canaria · mistrz",hl:"wyróżniona",
+tap26:"Stuknij drużynę, aby otworzyć jej stronę Rio 2026.",off23:"Oficjalne wyniki 2023 ↗",myTeams:"Moje drużyny",myHint:"Stuknij ☆ na stronie drużyny, aby ją obserwować.",
+foot:"Punktacja: 4-3-2-1 pkt za wyścig, w ostatnim wyścigu każdej grupy podwójnie (8-6-4-2). Z każdej grupy awansują dwie pierwsze drużyny. Wyniki aktualizują się automatycznie z oficjalnej strony wyników SSL. Ranking = SSL Nations Ranking na początku Final Series.",
+notes:{ocs:"* OCS (falstart)  ** Kara standardowa"},theme:{auto:"🌊 Matchboard",light:"☀️ Dzień",dark:"🌙 Noc"},
+g23:{champ:"Mistrz (złoto)",second:"2. miejsce (srebro)",third:"3. miejsce (brąz)",fourth:"4. – Wielki finał",sf:"Półfinał",qf:"Ćwierćfinał",r8:"1/8 finału",r16:"1/16 finału",r32:"1/32 finału",none:"Nie startowała w Final Series 2023"},
+ev:{asia:"Kwalifikacje Azji",afoc:"Kwalifikacje Afryki i Oceanii",eu1:"Kwalifikacje europejskie 1",eu2:"Kwalifikacje europejskie 2",pan:"Kwalifikacje panamerykańskie"},
+route:{won:(e,g)=>`Zwycięzca: ${e}, grupa ${g}`,pos:(p,e,g)=>`${p}: ${e}, grupa ${g}`,lc:(e,g)=>`3. miejsce: ${e}, grupa ${g}, potem wygrany wyścig Last Chance`,ranking:"Kwalifikacja przez SSL Nations Ranking",host:"Gospodarz, rozstawiony w 1/8 finału",seeded:r=>`Rozstawiona (${r}) wg SSL Nations Ranking`},
+roles:{Helm:"Steruje łodzią",Tactician:"Strategia i decyzje",["Main Trimmer"]:"Grot",Trimmer:"Fok i gennaker",Grinder:"Napędza kabestany",Pit:"Fały i sterowanie linami",["Mid-Bow"]:"Maszt i pokład dziobowy",Bow:"Dziób i starty",Floater:"Uniwersalny / rezerwa"},
+back:"‹ Wstecz",position:"Pozycja",team:"Drużyna",indRank:"Ranking SSL",highlights:"Najważniejsze sukcesy",profile:"Profil SSL ↗",findProfile:"Znajdź profil SSL ↗",ws:"World Sailing ↗",mates:"Koledzy z drużyny",posTbc:"Pozycja jeszcze nieustalona",
+noInfo:"Więcej danych jeszcze nie opublikowano – linki poniżej prowadzą do oficjalnych profili.",
+today:"Dziś",raceDay:(n,t)=>`dzień wyścigów ${n} z ${t}`,finalDay:"Ostatni dzień – ostatni wyścig liczy się podwójnie",stream:"▶ Transmisja na żywo",tracking:"Śledzenie",schedule:"Program",
+adv:(a,b)=>`1. → ${a} · 2. → ${b}`,advSf:"1.–2. → Finał · 3.–4. → Mały finał",clinched:"✓ awans pewny",elim:"odpada",secNow:"W bieżącej rundzie",secSeeded:r=>`Rozstawione – start: ${r}`,secOut:"Odpadły",lineup:"Skład",
+howT:"Jak działa Gold Cup",how:["Drużyny narodowe, każda z jedną łodzią SSL47 – wszystkie łodzie są identyczne i zapewnia je organizator.","Grupy po cztery drużyny. 4-3-2-1 pkt za wyścig; ostatni wyścig każdej grupy liczy się podwójnie (8-6-4-2).","Z każdej grupy awansują dwie pierwsze drużyny; wyżej notowane kraje wchodzą w późniejszych rundach.","Półfinały i finały to po jednym wyścigu; Wielki finał wyłania mistrza świata."],
+race:"Wyścig",nextRace:"Następny wyścig",todayRaces:"Dzisiejsze wyścigi",rioT:"czas w Rio",loc:"twój czas",onWater:"na wodzie",done:"zakończony",
+inX:m=>m<60?`za ${m} min`:`za ${Math.floor(m/60)} h ${String(m%60).padStart(2,"0")}`,firstStart:"Pierwszy start",schedT:"Program wyścigów",
+schedNote:"Godziny w czasie Rio de Janeiro (UTC−3) według oficjalnego programu. Jego grupy G1–G4 są tu pokazane jako grupy A–D.",
+needT:"Przed ostatnim wyścigiem (podwójne punkty)",need:{sure:"awansuje bez względu na wszystko",gone:"odpada bez względu na wszystko",win:"wystarczy wygrana",top:k=>`wystarczy ${k} lub lepiej`,mustWin:"musi wygrać",help:"i potrzebuje pomocy innych",maybe:k=>`${k} może wystarczyć – zależy od innych`,iff:(k,c)=>`${k} wystarczy, jeśli ${c}`,mustIf:c=>`musi wygrać, i tylko jeśli ${c}`,ahead:R=>`przed ${R}`,behind:R=>`za ${R}`,notWin:R=>`${R} nie wygra`,last:R=>`${R} będzie ostatnia`,wins:R=>`${R} wygra`,tie:"możliwy remis punktowy – decyduje tie-break"},
+needNote:"Obliczone z bieżących punktów; ≈ oznacza możliwy remis, wtedy decyduje oficjalny tie-break.",
+install:"Dodaj do ekranu głównego, aby mieć ikonę aplikacji.",home:"Start",more:"Więcej",sailors:"Żeglarze",welcome:"Final Series · Rio de Janeiro",dates:"19.11 – 13.12.2026 · Marina da Glória",
+progress:"Turniej",latest:"Najnowsze wyniki",explore:"Odkrywaj",
+tiles:{board:["Rundy","Grupy, punkty, godziny"],bracket:["Matchboard","Całe losowanie w jednym widoku"],teams:["Drużyny","40 krajów, załogi, ranking"],sailors:["Żeglarze","Szukaj wszystkich żeglarzy"],qualifying:["Kwalifikacje","Jak drużyny dostały się do Rio"],gc2023:["Gold Cup 2023","Drabinka poprzedniej edycji"]},
+sailorsT:n=>`${n} żeglarzy`,sSearch:"Szukaj żeglarza, drużyny lub pozycji",withPhoto:"Ze zdjęciem",allS:"Wszyscy",moreT:"Więcej",lang:"Język",design:"Wygląd",share:"Udostępnij aplikację",shared:"Link skopiowany",links:"Linki",about:"O aplikacji",
+aboutT:"Nieoficjalna aplikacja towarzysząca SSL Gold Cup Rio 2026. Wyniki aktualizują się automatycznie z oficjalnej strony wyników SSL.",
+inst:{t:"Zainstaluj aplikację",d:"Umieść SSL Gold Cup na ekranie głównym – otwiera się jak aplikacja, na pełnym ekranie, z wynikami na żywo.",b:"Zainstaluj",done:"Zainstalowano ✓",ios:["Stuknij przycisk Udostępnij","na dole w Safari (na iPadzie w prawym górnym rogu).","Przewiń w dół i stuknij „Do ekranu początkowego”.","Stuknij „Dodaj” – gotowe."],iosOther:"Na iPhonie działa to w Safari: najpierw otwórz tę stronę w Safari.",android:["Stuknij menu ⋮ w prawym górnym rogu przeglądarki.","Stuknij „Zainstaluj aplikację” lub „Dodaj do ekranu głównego”.","Potwierdź przyciskiem „Zainstaluj”."],desk:["Kliknij ikonę instalacji na pasku adresu,","albo otwórz menu przeglądarki i wybierz „Zainstaluj SSL Gold Cup”."],how:"Jak zainstalować",hide:"Nie teraz",installedNote:"Używasz zainstalowanej aplikacji."},
+champT:"Mistrz świata · Gold Cup 2026",standT:"Klasyfikacja końcowa",statsT:"W liczbach",stRaces:"Wyścigi",stWins:"Wygrane",stAvg:"Śr. miejsce",stPts:"Punkty w Rio",stHist:"Wyścig po wyścigu",
+calBtn:"📅 Wyścigi w moim kalendarzu",calT:"Wyścigi w twoim kalendarzu",calSub:"Subskrybuj (iPhone, Mac, Outlook)",calG:"Dodaj do Kalendarza Google",calDl:"Pobierz plik (.ics)",calAll:"Wszystkie wyścigi w moim kalendarzu",
+calNote:"Subskrypcja aktualizuje się sama: gdy drużyna awansuje, jej kolejne wyścigi pojawią się automatycznie.",wxT:"Prognoza wiatru · Marina da Glória",wxSrc:"Prognoza Open-Meteo, nie pomiar na trasie.",trk:"Śledzenie",
+delayed:m=>`Wyniki mogą być opóźnione – ostatnie udane sprawdzenie ${m} min temu.`,shareImg:"Udostępnij jako obraz",imgDone:"Obraz gotowy",
+pT:"Powiadomienia",pAll:"Wszystkie wyniki",pAllSub:"Powiadomienie po każdym wyścigu",pTeamOff:"🔔 Powiadamiaj o tej drużynie",pTeamOn:"🔔 Powiadomienia włączone ✓",pTeams:"Twoje drużyny",pNone:"Jeszcze brak drużyny: otwórz drużynę i stuknij 🔔.",
+pNote:"Dostajesz tylko wyniki wyścigów i informację, kto awansuje. Wyłączysz to tutaj w każdej chwili.",pIOS:"Na iPhonie powiadomienia działają tylko w zainstalowanej aplikacji: zainstaluj ją, otwórz z ekranu głównego i włącz je tutaj.",
+pDenied:"Powiadomienia są zablokowane. Zezwól na nie dla tej aplikacji w ustawieniach urządzenia.",pErr:"Nie udało się – spróbuj ponownie za chwilę.",pOnT:"Powiadomienia włączone",pOffT:"Powiadomienia wyłączone",pUnsup:"Ta przeglądarka nie obsługuje powiadomień.",
+obT:"Pobierz aplikację",obSub:"Za darmo, bez App Store – na ekranie głównym w 20 sekund.",obPerks:["Wyniki na żywo jednym stuknięciem","Pełny ekran jak prawdziwa aplikacja","Powiadomienia o twojej drużynie"],obBtn:"Zainstaluj",obLater:"Później – najpierw rozejrzę się w przeglądarce",obSteps:"Jak to zrobić",obStep:"Krok",
+ios26:["Stuknij ⋯ obok paska adresu","Stuknij „Udostępnij”","Przewiń w dół i stuknij „Do ekranu początkowego”","Zostaw włączone „Otwórz jako aplikację internetową” i stuknij „Dodaj”"],
+iosOld:["Stuknij przycisk Udostępnij na dole","Przewiń w dół i stuknij „Do ekranu początkowego”","Stuknij „Dodaj” w prawym górnym rogu"],
+iosAlt:"Najprościej w Safari: skopiuj link, otwórz Safari i wklej go.",
+inApp:"Ta strona jest otwarta w innej aplikacji (np. WhatsApp lub Instagram). Instalacja działa tylko w przeglądarce: stuknij ⋯ i wybierz „Otwórz w przeglądarce” – albo skopiuj link i otwórz go w Safari lub Chrome.",
+copy:"Kopiuj link",done2:"Potem otwórz SSL Gold Cup z ekranu głównego.",
+ui:{share:"Udostępnij",home:"Do ekranu początkowego",add:"Dodaj",web:"Otwórz jako aplikację internetową",cancel:"Anuluj",ainst:"Zainstaluj aplikację",aok:"Zainstaluj"},
+trkOpen:"📍 Śledź na żywo",trkReplay:"📍 Powtórka wyścigu (śledzenie)",trkNone:"Śledzenie pojawi się tutaj, gdy Georacing przygotuje ten wyścig.",trkExt:"Otwórz w Georacing ↗",
+trkHint:"Każda łódź na mapie – na żywo podczas wyścigu, potem jako powtórka.",rcRes:"Wynik wyścigu",rcTeams:"Na linii startu",rcStand:"Bieżąca tabela grupy",rcPts:"pkt",rcGroup:"Grupa na Matchboard",rcTBD:"Drużyny jeszcze nieznane",
+qrT:"Zeskanuj aparatem telefonu – aplikacja otworzy się od razu.",shareNow:"Udostępnij…",qsep:n=>"▲ awans",shareSub:"Wyślij przez WhatsApp, Wiadomości i inne",shareMsg:"SSL Gold Cup Rio 2026 – wyniki na żywo, godziny wyścigów i wszystkie drużyny:",
+sCaps:"Kapitanowie",sTeams:"Załogi",sHint:"Stuknij drużynę, aby zobaczyć załogę – drużyny w grze są pierwsze.",sTeamPage:"Strona drużyny",fShow:"Pokaż",fSort:"Sortuj",
+spT:"Bez spoilerów",spUntil:w=>`Wyniki ukryte od ${w}`,spNone:"Obecnie żadne wyniki nie są ukryte",spShow:"Pokaż wszystko",spOff:"Wył.",spRow:"Tryb bez spoilerów",spSub:"Ukryj wyniki, dopóki nie obejrzysz wyścigu",spRace:"Wynik ukryty",spReveal:"Obejrzałem – pokaż wynik",spOnT:"Wyniki od dziś są ukryte",
+cmpBtn:"⚖️ Porównaj",cmpVs:"vs",cmpPick:"Wybierz drużynę do porównania.",h2hT:"Bezpośrednio",h2hSub:"wyścigów przed rywalem",h2hNone:"Jeszcze się nie spotkały.",cmpNote:"Liczby z wyścigów w Rio; ranking = SSL Nations Ranking.",
+vidT:"🎬 Skróty i wideo",vidAll:"Wszystkie filmy na YouTube ↗",vidOpen:"Otwórz na YouTube ↗",vidHid:n=>`Ukryto nowsze filmy: ${n} (bez spoilerów)`,pastL:"Wstecz",
+vnT:"Miejsce · Marina da Glória",vnSub:"Gdzie wszystko się dzieje – mapa i trasa",vnRoute:"Trasa",vnApple:"Mapy Apple",
+vnInfo:["Żeglarska arena igrzysk olimpijskich 2016 w zatoce Guanabara z widokiem na Głowę Cukru.","Marina jest w czasie imprezy otwarta dla publiczności – łodzie z bliska i wioska sportowa.","Wyścigi odbywają się w zatoce Guanabara tuż przed mariną."],
+suT:"Zrównoważony rozwój",suSub:"Co SSL robi dla oceanu i uczciwego sportu",suIntro:"SSL deklaruje, że zrównoważony rozwój oznacza dla niej ochronę oceanu i bardziej sprawiedliwy sport.",
+suList:["Na każdej łodzi SSL Gold Cup muszą być dwie kobiety.","Żadnych plastikowych butelek w wiosce sportowej.","Od września 2025 własny menedżer ds. zrównoważonego rozwoju.","Zgodnie z Clean Regattas, agendą zrównoważonego rozwoju 2030 World Sailing i strategią MKOl; celem jest certyfikat Platinum Clean Regattas.","Sprzątanie plaż z drużynami podczas kwalifikacji.","Mało łodzi towarzyszących: na finałach 2023 cztery łodzie trenerskie obsłużyły 440 żeglarzy."],
+suMore:"Więcej w SSL ↗",mcT:"Gadżety",mcSub:"Koszulki, czapki i więcej – wkrótce",mcSoon:"Wkrótce",mcTxt:"Oficjalny sklep SSL Gold Cup nie jest jeszcze otwarty. Gdy ruszy, kupisz tutaj.",
+mcList:["Koszulki kapitanów drużyn narodowych","Czapki SSL","Modele łodzi SSL47 i figurki drużyn"],mcGo:"Do sklepu SSL ↗",
+wxBtn:"🌬️ Pogoda dla żeglarzy",wxH:"Pogoda żeglarska",wxLoad:"Wczytuję prognozę…",wxFail:"Nie można teraz wczytać prognozy.",wxGust:"Porywy",wxDir:"Kierunek",wxPres:"Ciśnienie",wxAtStart:"Prognoza na godzinę startu.",wxHours:"Godzina po godzinie",wxTime:"Godz.",wxWind:"Wiatr kn",
+wxKn:"Wiatr w węzłach: średnia – porywy. Strzałki pokazują, dokąd wieje wiatr.",wxSea:"Woda",wxWater:"Temperatura wody",wxTide:"Pływ",wxRise:"przypływ",wxFall:"odpływ",wxHigh:"Przypływ",wxLow:"Odpływ",wxCur:"Prąd",
+wxCurN:"Wartość modelowa przy wejściu do zatoki; strzałka = kierunek prądu.",wxWave:"Fala",wxWaveN:"Przy wejściu do zatoki, na trasie znacznie mniejsza.",wxSun:"Wschód – zachód słońca",wxSrc2:"Prognoza Open-Meteo (modele pogodowe), nie pomiar na trasie.",
+trkLive:"Śledzenie na żywo",trkReplayS:"Powtórka",fcBtn:"Prognoza",fcCond:["Słaby wiatr","Umiarkowany wiatr","Świeży wiatr","Silny wiatr"],fcTr:{up:"wzmaga się",down:"słabnie",steady:"stały",veer:"skręca w prawo (zgodnie z zegarem)",back:"skręca w lewo (przeciwnie do zegara)"},
+fcNext:"Następna godzina",fcChart:"Wiatr 10:00–18:00 · linia = średnia, pas = porywy, znacznik = start",fcBft:"Beaufort",
+watchLive:"Oglądaj na żywo",liveStream:"Transmisja na żywo",liveNow:"Trwają wyścigi – oglądaj tutaj",liveNote:"Jeśli odtwarzacz pozostaje czarny, transmisja jeszcze się nie zaczęła albo YouTube nie pozwala jej osadzić – wtedy otwórz ją na YouTube.",
+achT:"Osiągnięcia",olyT:"Igrzyska olimpijskie",wcT:"Podia MŚ",ecT:"Podia mistrzostw kontynentalnych",clubT:"Klub",profSrc:"Dane z oficjalnego profilu SSL.",achL:["Mistrz świata","Złoto olimpijskie","Srebro olimpijskie","Brąz olimpijski"],
+wxAtT:h=>`Prognoza na ${h}`,wxTap:"Stuknij godzinę, aby zobaczyć szczegóły.",fsT:"Final Series",qsT:"Qualifying Series",
+qsLeg:"Wyróżnione: kwalifikacja przez tę serię. ● = w Rio przez SSL Nations Ranking. Stuknij drużynę w Rio, aby otworzyć jej stronę.",
+qsNote:"Zwycięzca każdej grupy kwalifikacyjnej (w grupie C dwie pierwsze drużyny) trafił w losowaniu do 1/32 finału. 29 drużyn zakwalifikowało się do Final Series przez SSL Ranking, z limitami na kontynenty: Europa 12, Panameryka 8, Azja 6, Afryka 1, Oceania 2.",
+reg:{asia:"Azja",afoc:"Afryka i Oceania",eur:"Europa",pam:"Panameryka"},fin:"Finał",petit:"Mały f.",swipe:"Przesuń w bok, aby zobaczyć kolejne rundy →",road2:"Droga do Rio",inRio:"W Rio przez SSL Ranking",
+mbHint:"Z każdej grupy awansują dwie pierwsze drużyny. Stuknij drużynę, aby zobaczyć załogę i historię.",
+tkLoad:"Wczytuję śledzenie…",tkNone:"Dla tego wyścigu nie ma jeszcze śledzenia.",tkNoData:"Brak danych śledzenia dla tego wyścigu.",tkOpens:"Śledzenie startuje o",tkStart:"Start",tkLeg:"Odcinek",tkPre:"przed startem",tkNoPos:"brak sygnału",tkRep:"Powtórka",
+secOly:"Igrzyska olimpijskie",secWc:"Mistrzostwa świata",secEc:"Mistrzostwa kontynentalne",bioT:"O żeglarzu",srcSSL:"Oficjalna biografia · Star Sailors League",careerT:"Kariera",evN:"wyników na liście",podN:"podiów",medRate:"odsetek medali",bestR:"najlepszy wynik",showAll:"Pokaż wszystko",
+sslPts:"Punkty SSL",heightT:"Wzrost",weightT:"Waga",sslProf:"Oficjalny profil SSL",teamSite:"Strona drużyny",mySailors:"Moi żeglarze",sFavHint:"Stuknij ☆ na stronie żeglarza, aby go obserwować – pojawi się tutaj."},
 cs:{rounds:"Kola",bracket:"Matchboard",teams:"Týmy",official:"Oficiální výsledky",updated:"Aktualizováno",
 ago:m=>m<1?"právě teď":m<60?`před ${m} min`:`před ${Math.round(m/60)} h`,
 rio:"čas v Riu",offline:"offline – naposledy uložená data",
@@ -1028,8 +1113,8 @@ bn:{tkLoad:"ট্র্যাকিং লোড হচ্ছে…",tkNone:"�
 ur:{tkLoad:"ٹریکنگ لوڈ ہو رہی ہے…",tkNone:"اس ریس کی ٹریکنگ ابھی دستیاب نہیں۔",tkNoData:"اس ریس کا کوئی ٹریکنگ ڈیٹا نہیں۔",tkOpens:"ٹریکنگ شروع ہوگی",tkStart:"اسٹارٹ",tkLeg:"لیگ",tkPre:"اسٹارٹ سے پہلے",tkNoPos:"سگنل نہیں",tkRep:"ری پلے",secOly:"اولمپک کھیل",secWc:"عالمی چیمپئن شپ",secEc:"براعظمی چیمپئن شپ",bioT:"تعارف",srcSSL:"سرکاری تعارف · Star Sailors League",careerT:"کیریئر",evN:"درج نتائج",podN:"پوڈیم",medRate:"تمغوں کی شرح",bestR:"بہترین نتیجہ",showAll:"سب دکھائیں",sslPts:"SSL پوائنٹس",heightT:"قد",weightT:"وزن",sslProf:"سرکاری SSL پروفائل",teamSite:"ٹیم ویب سائٹ",mySailors:"میرے ملاح",sFavHint:"کسی ملاح کے صفحے پر ☆ دبا کر فالو کریں – وہ یہاں نظر آئیں گے۔"},
 id:{tkLoad:"Memuat pelacakan…",tkNone:"Belum ada pelacakan untuk lomba ini.",tkNoData:"Tidak ada data pelacakan untuk lomba ini.",tkOpens:"Pelacakan dibuka pukul",tkStart:"Start",tkLeg:"Leg",tkPre:"sebelum start",tkNoPos:"tanpa sinyal",tkRep:"Tayangan ulang",secOly:"Olimpiade",secWc:"Kejuaraan Dunia",secEc:"Kejuaraan kontinental",bioT:"Tentang",srcSSL:"Bio resmi · Star Sailors League",careerT:"Karier",evN:"hasil tercatat",podN:"podium",medRate:"rasio medali",bestR:"hasil terbaik",showAll:"Tampilkan semua",sslPts:"Poin SSL",heightT:"Tinggi",weightT:"Berat",sslProf:"Profil resmi SSL",teamSite:"Situs tim",mySailors:"Pelaut saya",sFavHint:"Ketuk ☆ di halaman pelaut untuk mengikutinya – mereka akan muncul di sini."}};
 for(const l in SADD)Object.assign(S[l],SADD[l]);
-const SOW={"en": "In their own words · from the SSL profile", "de": "In eigenen Worten · aus dem SSL-Profil", "fr": "Dans ses propres mots · profil SSL", "es": "En sus propias palabras · perfil SSL", "pt": "Nas próprias palavras · perfil SSL", "zh": "本人自述 · 来自SSL资料", "ar": "بكلماته · من ملف SSL", "hi": "अपने शब्दों में · SSL प्रोफ़ाइल से", "bn": "নিজের ভাষায় · SSL প্রোফাইল থেকে", "ur": "اپنے الفاظ میں · SSL پروفائل سے", "id": "Dengan kata-katanya sendiri · dari profil SSL", "ms": "Dalam kata-katanya sendiri · daripada profil SSL", "ja": "本人による紹介 · SSLプロフィールより", "th": "เล่าด้วยตัวเอง · จากโปรไฟล์ SSL", "hu": "Saját szavaival · az SSL-profilból", "cs": "Vlastními slovy · z profilu SSL", "uk": "Власними словами · з профілю SSL"};for(const l in SOW)if(S[l])S[l].ownW=SOW[l];
-S.de.nxS="Start in";S.en.pathHl=n=>`Path of ${n} highlighted`;S.de.pathHl=n=>`Weg von ${n} markiert`;S.fr.pathHl=n=>`Parcours de ${n} en surbrillance`;S.es.pathHl=n=>`Recorrido de ${n} resaltado`;S.pt.pathHl=n=>`Caminho de ${n} destacado`;
+const SOW={"en": "In their own words · from the SSL profile", "de": "In eigenen Worten · aus dem SSL-Profil", "fr": "Dans ses propres mots · profil SSL", "es": "En sus propias palabras · perfil SSL", "pt": "Nas próprias palavras · perfil SSL", "zh": "本人自述 · 来自SSL资料", "ar": "بكلماته · من ملف SSL", "hi": "अपने शब्दों में · SSL प्रोफ़ाइल से", "bn": "নিজের ভাষায় · SSL প্রোফাইল থেকে", "ur": "اپنے الفاظ میں · SSL پروفائل سے", "id": "Dengan kata-katanya sendiri · dari profil SSL", "ms": "Dalam kata-katanya sendiri · daripada profil SSL", "ja": "本人による紹介 · SSLプロフィールより", "th": "เล่าด้วยตัวเอง · จากโปรไฟล์ SSL", "hu": "Saját szavaival · az SSL-profilból", "cs": "Vlastními slovy · z profilu SSL", "pl": "Własnymi słowami · z profilu SSL", "uk": "Власними словами · з профілю SSL"};for(const l in SOW)if(S[l])S[l].ownW=SOW[l];
+S.de.nxS="Start in";S.pl.nxS="Start za";S.pl.pathHl=n=>`Droga: ${n} – wyróżniona`;S.en.pathHl=n=>`Path of ${n} highlighted`;S.de.pathHl=n=>`Weg von ${n} markiert`;S.fr.pathHl=n=>`Parcours de ${n} en surbrillance`;S.es.pathHl=n=>`Recorrido de ${n} resaltado`;S.pt.pathHl=n=>`Caminho de ${n} destacado`;
 const SSET={
 en:{setT:"Settings",setSub:"Notifications, favourites, display, spoiler-free",sNotAvail:"Push notifications are being set up and will be available here soon.",sMaster:"Push notifications",sMasterSub:"Main switch for this device",sRemT:"Start reminder",sRemSub:"15 minutes before your teams race",sLiveT:"Livestream starts",sLiveSub:"When the SSL livestream goes live",sVidT:"New highlight video",sVidSub:"When a new highlight film is out",sResT:"Results of my teams",sResSub:"After every race of these teams – your favourite teams and the teams of your favourite sailors.",sFavNone:"No favourites yet – tap ☆ on a team or sailor.",sQuietT:"Quiet hours",sQuietSub:"No notifications during this time (your local time)",sQoff:"Off",sSpoilN:"In spoiler-free mode, notifications only say that a race has finished.",sDispT:"Display",sTimeT:"Times",sTimeRio:"Rio only",sTimeBoth:"Rio + mine",sWindT:"Wind",sTempT:"Temperature",sLvT:"Commentary language",sLvAuto:"Same as the app",sCalT:"Calendar",sCalTeam:"Races of this team",sDataT:"Data & privacy",sPriv:"Everything you set here is stored only on this device. No account, no cookies; visits are counted anonymously.",sResetF:"Remove favourites",sResetA:"Reset everything",sResetQ:"Tap again to confirm",sFeedback:"Send feedback",sVer:"Version"},
 de:{setT:"Einstellungen",setSub:"Benachrichtigungen, Favoriten, Anzeige, spoilerfrei",sNotAvail:"Push-Benachrichtigungen werden gerade eingerichtet und sind hier bald verfügbar.",sMaster:"Push-Benachrichtigungen",sMasterSub:"Hauptschalter für dieses Gerät",sRemT:"Start-Erinnerung",sRemSub:"15 Minuten bevor deine Teams segeln",sLiveT:"Livestream startet",sLiveSub:"Wenn der SSL-Livestream beginnt",sVidT:"Neues Highlight-Video",sVidSub:"Wenn ein neuer Highlight-Film erscheint",sResT:"Ergebnisse meiner Teams",sResSub:"Nach jedem Rennen dieser Teams – deine Lieblingsteams und die Teams deiner Lieblingssegler.",sFavNone:"Noch keine Favoriten – tippe auf ☆ bei einem Team oder Segler.",sQuietT:"Ruhezeiten",sQuietSub:"In dieser Zeit keine Benachrichtigungen (deine Ortszeit)",sQoff:"Aus",sSpoilN:"Im spoilerfreien Modus sagen Benachrichtigungen nur, dass ein Rennen beendet ist.",sDispT:"Anzeige",sTimeT:"Uhrzeiten",sTimeRio:"Nur Rio",sTimeBoth:"Rio + meine",sWindT:"Wind",sTempT:"Temperatur",sLvT:"Kommentarsprache",sLvAuto:"Wie die App",sCalT:"Kalender",sCalTeam:"Rennen dieses Teams",sDataT:"Daten & Datenschutz",sPriv:"Alles, was du hier einstellst, bleibt nur auf diesem Gerät. Kein Konto, keine Cookies; Besuche werden anonym gezählt.",sResetF:"Favoriten entfernen",sResetA:"Alles zurücksetzen",sResetQ:"Zum Bestätigen nochmal tippen",sFeedback:"Feedback senden",sVer:"Version"},
@@ -1046,10 +1131,11 @@ ms:{setT:"Tetapan",setSub:"Pemberitahuan, kegemaran, paparan, bebas spoiler",sNo
 ja:{setT:"設定",setSub:"通知、お気に入り、表示、ネタバレ防止",sNotAvail:"プッシュ通知は準備中です。",sMaster:"プッシュ通知",sMasterSub:"この端末のメインスイッチ",sRemT:"スタートのお知らせ",sRemSub:"チームのレース15分前",sLiveT:"ライブ配信開始",sLiveSub:"SSLのライブ配信が始まったとき",sVidT:"新しいハイライト動画",sVidSub:"新しいハイライトが公開されたとき",sResT:"マイチームの結果",sResSub:"これらのチームの各レース後 – お気に入りチームとお気に入り選手のチーム。",sFavNone:"お気に入りはまだありません – チームや選手の☆をタップ。",sQuietT:"おやすみ時間",sQuietSub:"この時間は通知しません(現地時間)",sQoff:"オフ",sSpoilN:"ネタバレ防止モードでは、レース終了だけを通知します。",sDispT:"表示",sTimeT:"時刻",sTimeRio:"リオのみ",sTimeBoth:"リオ+現地",sWindT:"風",sTempT:"気温",sLvT:"実況の言語",sLvAuto:"アプリと同じ",sCalT:"カレンダー",sCalTeam:"このチームのレース",sDataT:"データとプライバシー",sPriv:"設定はこの端末にのみ保存されます。アカウントやCookieは不要、訪問は匿名で集計されます。",sResetF:"お気に入りを削除",sResetA:"すべてリセット",sResetQ:"もう一度タップして確定",sFeedback:"フィードバックを送る",sVer:"バージョン"},
 th:{setT:"การตั้งค่า",setSub:"การแจ้งเตือน รายการโปรด การแสดงผล กันสปอยล์",sNotAvail:"กำลังตั้งค่าการแจ้งเตือน",sMaster:"การแจ้งเตือน",sMasterSub:"สวิตช์หลักของอุปกรณ์นี้",sRemT:"เตือนก่อนออกตัว",sRemSub:"15 นาทีก่อนทีมของคุณแข่ง",sLiveT:"เริ่มถ่ายทอดสด",sLiveSub:"เมื่อการถ่ายทอดสดของ SSL เริ่ม",sVidT:"วิดีโอไฮไลต์ใหม่",sVidSub:"เมื่อมีไฮไลต์ใหม่",sResT:"ผลทีมของฉัน",sResSub:"หลังทุกเรซของทีมเหล่านี้ – ทีมโปรดและทีมของนักแล่นเรือคนโปรด",sFavNone:"ยังไม่มีรายการโปรด – แตะ ☆ ที่ทีมหรือนักแล่นเรือ",sQuietT:"ช่วงเวลาเงียบ",sQuietSub:"ไม่แจ้งเตือนในช่วงนี้ (เวลาท้องถิ่น)",sQoff:"ปิด",sSpoilN:"ในโหมดกันสปอยล์ การแจ้งเตือนจะบอกแค่ว่าเรซจบแล้ว",sDispT:"การแสดงผล",sTimeT:"เวลา",sTimeRio:"ริโอเท่านั้น",sTimeBoth:"ริโอ + ของฉัน",sWindT:"ลม",sTempT:"อุณหภูมิ",sLvT:"ภาษาผู้บรรยาย",sLvAuto:"เหมือนแอป",sCalT:"ปฏิทิน",sCalTeam:"เรซของทีมนี้",sDataT:"ข้อมูลและความเป็นส่วนตัว",sPriv:"การตั้งค่าเก็บไว้บนอุปกรณ์นี้เท่านั้น ไม่มีบัญชี ไม่มีคุกกี้ นับการเข้าชมแบบไม่ระบุตัวตน",sResetF:"ลบรายการโปรด",sResetA:"รีเซ็ตทั้งหมด",sResetQ:"แตะอีกครั้งเพื่อยืนยัน",sFeedback:"ส่งความคิดเห็น",sVer:"เวอร์ชัน"},
 hu:{setT:"Beállítások",setSub:"Értesítések, kedvencek, megjelenés, spoilermentes",sNotAvail:"A push-értesítések beállítása folyamatban van.",sMaster:"Push-értesítések",sMasterSub:"Főkapcsoló ezen az eszközön",sRemT:"Rajt-emlékeztető",sRemSub:"15 perccel a csapataid futama előtt",sLiveT:"Indul az élő közvetítés",sLiveSub:"Amikor az SSL élő adása elindul",sVidT:"Új összefoglaló videó",sVidSub:"Amikor új összefoglaló jelenik meg",sResT:"Csapataim eredményei",sResSub:"E csapatok minden futama után – kedvenc csapataid és kedvenc vitorlázóid csapatai.",sFavNone:"Még nincs kedvenc – koppints a ☆-ra egy csapatnál vagy vitorlázónál.",sQuietT:"Csendes órák",sQuietSub:"Ilyenkor nincs értesítés (helyi idő)",sQoff:"Ki",sSpoilN:"Spoilermentes módban az értesítés csak annyit mond, hogy véget ért a futam.",sDispT:"Megjelenés",sTimeT:"Időpontok",sTimeRio:"Csak Rio",sTimeBoth:"Rio + saját",sWindT:"Szél",sTempT:"Hőmérséklet",sLvT:"Kommentár nyelve",sLvAuto:"Mint az app",sCalT:"Naptár",sCalTeam:"A csapat futamai",sDataT:"Adatok és adatvédelem",sPriv:"Minden beállítás csak ezen az eszközön marad. Nincs fiók, nincs süti; a látogatásokat névtelenül számoljuk.",sResetF:"Kedvencek törlése",sResetA:"Minden visszaállítása",sResetQ:"Koppints újra a megerősítéshez",sFeedback:"Visszajelzés küldése",sVer:"Verzió"},
+pl:{setT:"Ustawienia",setSub:"Powiadomienia, ulubione, wygląd, bez spoilerów",sNotAvail:"Powiadomienia push są właśnie przygotowywane.",sMaster:"Powiadomienia push",sMasterSub:"Główny przełącznik na tym urządzeniu",sRemT:"Przypomnienie o starcie",sRemSub:"15 minut przed wyścigiem twoich drużyn",sLiveT:"Start transmisji",sLiveSub:"Gdy rusza transmisja SSL na żywo",sVidT:"Nowy skrót",sVidSub:"Gdy pojawi się nowy skrót wideo",sResT:"Wyniki moich drużyn",sResSub:"Po każdym wyścigu tych drużyn – ulubione drużyny i drużyny ulubionych żeglarzy.",sFavNone:"Brak ulubionych – stuknij ☆ przy drużynie lub żeglarzu.",sQuietT:"Cisza nocna",sQuietSub:"Bez powiadomień w tym czasie (czas lokalny)",sQoff:"Wył.",sSpoilN:"W trybie bez spoilerów powiadomienie mówi tylko, że wyścig się zakończył.",sDispT:"Wyświetlanie",sTimeT:"Godziny",sTimeRio:"Tylko Rio",sTimeBoth:"Rio + mój",sWindT:"Wiatr",sTempT:"Temperatura",sLvT:"Język komentarza",sLvAuto:"Jak aplikacja",sCalT:"Kalendarz",sCalTeam:"Wyścigi tej drużyny",sDataT:"Dane i prywatność",sPriv:"Wszystko, co ustawisz, zostaje tylko na tym urządzeniu. Bez konta, bez cookies; wizyty liczone są anonimowo.",sResetF:"Usuń ulubione",sResetA:"Resetuj wszystko",sResetQ:"Stuknij ponownie, aby potwierdzić",sFeedback:"Wyślij opinię",sVer:"Wersja"},
 cs:{setT:"Nastavení",setSub:"Oznámení, oblíbené, zobrazení, bez spoilerů",sNotAvail:"Push oznámení se právě připravují.",sMaster:"Push oznámení",sMasterSub:"Hlavní vypínač tohoto zařízení",sRemT:"Připomínka startu",sRemSub:"15 minut před závodem vašich týmů",sLiveT:"Začíná přenos",sLiveSub:"Když začne živý přenos SSL",sVidT:"Nový sestřih",sVidSub:"Když vyjde nový sestřih",sResT:"Výsledky mých týmů",sResSub:"Po každé rozjížďce těchto týmů – oblíbené týmy a týmy oblíbených jachtařů.",sFavNone:"Zatím žádné oblíbené – klepněte na ☆ u týmu nebo jachtaře.",sQuietT:"Doba klidu",sQuietSub:"V tuto dobu žádná oznámení (místní čas)",sQoff:"Vyp.",sSpoilN:"V režimu bez spoilerů oznámení řekne jen, že rozjížďka skončila.",sDispT:"Zobrazení",sTimeT:"Časy",sTimeRio:"Jen Rio",sTimeBoth:"Rio + můj",sWindT:"Vítr",sTempT:"Teplota",sLvT:"Jazyk komentáře",sLvAuto:"Jako aplikace",sCalT:"Kalendář",sCalTeam:"Rozjížďky tohoto týmu",sDataT:"Data a soukromí",sPriv:"Vše, co nastavíte, zůstává jen v tomto zařízení. Žádný účet, žádné cookies; návštěvy se počítají anonymně.",sResetF:"Odebrat oblíbené",sResetA:"Obnovit vše",sResetQ:"Pro potvrzení klepněte znovu",sFeedback:"Poslat zpětnou vazbu",sVer:"Verze"},
 uk:{setT:"Налаштування",setSub:"Сповіщення, обране, вигляд, без спойлерів",sNotAvail:"Push-сповіщення зараз налаштовуються.",sMaster:"Push-сповіщення",sMasterSub:"Головний перемикач цього пристрою",sRemT:"Нагадування про старт",sRemSub:"За 15 хвилин до гонки ваших команд",sLiveT:"Початок трансляції",sLiveSub:"Коли починається трансляція SSL",sVidT:"Нове відео найкращих моментів",sVidSub:"Коли виходить новий огляд",sResT:"Результати моїх команд",sResSub:"Після кожної гонки цих команд – обрані команди й команди обраних яхтсменів.",sFavNone:"Ще немає обраного – торкніться ☆ у команди чи яхтсмена.",sQuietT:"Тихі години",sQuietSub:"У цей час без сповіщень (ваш місцевий час)",sQoff:"Вимк.",sSpoilN:"У режимі без спойлерів сповіщення лише кажуть, що гонка завершилась.",sDispT:"Вигляд",sTimeT:"Час",sTimeRio:"Лише Ріо",sTimeBoth:"Ріо + мій",sWindT:"Вітер",sTempT:"Температура",sLvT:"Мова коментаря",sLvAuto:"Як у застосунку",sCalT:"Календар",sCalTeam:"Гонки цієї команди",sDataT:"Дані й приватність",sPriv:"Усі налаштування зберігаються лише на цьому пристрої. Без акаунта й cookies; відвідування рахуються анонімно.",sResetF:"Видалити обране",sResetA:"Скинути все",sResetQ:"Торкніться ще раз для підтвердження",sFeedback:"Надіслати відгук",sVer:"Версія"}};
 for(const l in SSET)if(S[l])Object.assign(S[l],SSET[l]);
-{const CP={en:"Competition",de:"Wettkampf",fr:"Compétition",es:"Competición",pt:"Competição",zh:"赛事",ar:"المنافسة",hi:"प्रतियोगिता",bn:"প্রতিযোগিতা",ur:"مقابلہ",id:"Kompetisi",ms:"Pertandingan",ja:"大会",th:"การแข่งขัน",hu:"Verseny",cs:"Soutěž",uk:"Змагання"};for(const l in CP)if(S[l])S[l].comp=CP[l]}
+{const CP={en:"Competition",de:"Wettkampf",fr:"Compétition",es:"Competición",pt:"Competição",zh:"赛事",ar:"المنافسة",hi:"प्रतियोगिता",bn:"প্রতিযোগিতা",ur:"مقابلہ",id:"Kompetisi",ms:"Pertandingan",ja:"大会",th:"การแข่งขัน",hu:"Verseny",cs:"Soutěž",uk:"Змагання",pl:"Rywalizacja"};for(const l in CP)if(S[l])S[l].comp=CP[l]}
 const T=k=>S[lang][k]??S.en[k];
 const ord=n=>ORD[lang](n);
 
@@ -1057,7 +1143,7 @@ const ord=n=>ORD[lang](n);
 const X={SLO:["SI"],BUL:["BG"],AUT:["AT"],FIN:["FI"],CRO:["HR"],NOR:["NO"],BER:["BM"],PHI:["PH"],VIE:["VN"],UAE:["AE"],KAZ:["KZ"],MAR:["MA"],MOZ:["MZ"],BEL:["BE"],SRB:["RS"],TUR:["TR"],PUR:["PR"],VEN:["VE"],MEX:["MX"],ESA:["SV"]};
 const FC={"de":["#000001","#e50000","#e5b700"],"ae":["#e50000","#00732f","#000001"],"za":["#c22c23","#007847","#00075e"],"ch":["#e50000","#8e0000"],"es":["#aa151b","#e3b401"],"vn":["#ca221a","#7d1510"],"pe":["#d50f22","#840915"],"au":["#e50000","#00008b"],"kz":["#00abc2","#006a78"],"hr":["#e50001","#171796"],"ph":["#cca418","#0037a8","#ce1025"],"rs":["#b43136","#a16244","#0b3f76"],"sv":["#0f46af","#092c6c"],"mz":["#e50000","#19a217","#e5b500"],"nz":["#891640","#00247d"],"uy":["#0037a8","#002268"],"si":["#0000bf","#d50000"],"ee":["#0078e5","#000001"],"th":["#a51831","#2c294a"],"at":["#c8102d","#7b091c"],"se":["#e5b700","#005193"],"co":["#e5d000","#00138e","#da000f"],"sc":["#003d88","#e0b205","#c61f20"],"ua":["#0056b8","#e5c100"],"hu":["#cf3315","#378d00"],"mm":["#e5b700","#38ad37","#d11424"],"us":["#1a2f5d","#94515e","#ad373e"],"ar":["#2a76ba","#1a4973"],"fi":["#002e6c","#001d42"],"om":["#d5130f","#039027"],"cu":["#cb1515","#00298f"],"nl":["#ae1c27","#20458b"],"ma":["#be262c","#76171b"],"mx":["#006846","#ce1025"],"ca":["#c9281c","#7c1911"],"ag":["#050001","#ddb407","#ce1025"],"pr":["#004ce5","#e50000"],"lt":["#e3a201","#006a43","#be262c"],"bg":["#00966e","#d32511"],"pl":["#d21339","#820b23"],"bm":["#c91431","#88665d","#ce142a"],"kr":["#b92c39","#080809","#084699"],"fr":["#000091","#e1000e"],"it":["#009246","#bd2732"],"pt":["#036600","#e50000"],"jp":["#bc002c","#74001b"],"cz":["#10447e","#d11319"],"ve":["#e5b700","#00247d","#ce142a"],"no":["#002564","#d31121"],"tr":["#db0916","#88060d"],"cl":["#0038a6","#c9281c"],"dk":["#c8102d","#7b091c"],"pf":["#d61e0f","#841309"],"ec":["#e5d000","#271c70","#da000d"],"my":["#000066","#cb6b19","#cc0000"],"sg":["#df0000","#8a0000"],"gr":["#0d5dae","#083a6c"],"be":["#000001","#e5c100","#da0b21"],"gb":["#484f84","#c8102d"],"br":["#219e45","#dfcd06","#324fa3"]};
 const iso=c=>INFO[c]?INFO[c].iso:(X[c]||[])[0];
-const FIX={GBR:{en:"Great Britain",de:"Großbritannien",fr:"Grande-Bretagne",es:"Gran Bretaña",pt:"Grã-Bretanha",zh:"英国",ar:"بريطانيا العظمى",hi:"ग्रेट ब्रिटेन",bn:"গ্রেট ব্রিটেন",ur:"برطانیہ عظمیٰ",id:"Britania Raya",ja:"イギリス",th:"สหราชอาณาจักร",ms:"Great Britain",hu:"Nagy-Britannia",cs:"Velká Británie",uk:"Велика Британія"},TAH:{en:"Tahiti",de:"Tahiti",fr:"Tahiti",es:"Tahití",pt:"Taiti",zh:"塔希提",ar:"تاهيتي",hi:"ताहिती",bn:"তাহিতি",ur:"تاہیتی",id:"Tahiti",ja:"タヒチ",th:"ตาฮีตี",ms:"Tahiti",hu:"Tahiti",cs:"Tahiti",uk:"Таїті"},MYA:{en:"Myanmar",de:"Myanmar",fr:"Myanmar",es:"Myanmar",pt:"Mianmar",zh:"缅甸",ar:"ميانمار",hi:"म्यांमार",bn:"মিয়ানমার",ur:"میانمار",id:"Myanmar",ja:"ミャンマー",th:"เมียนมา",ms:"Myanmar",hu:"Mianmar",cs:"Myanmar",uk:"М’янма"},USA:{en:"USA",de:"USA",fr:"États-Unis",es:"EE. UU.",pt:"EUA",zh:"美国",ar:"الولايات المتحدة",hi:"अमेरिका",bn:"যুক্তরাষ্ট্র",ur:"امریکہ",id:"Amerika Serikat",ja:"アメリカ",th:"สหรัฐอเมริกา",ms:"Amerika Syarikat",hu:"USA",cs:"USA",uk:"США"}};
+const FIX={GBR:{en:"Great Britain",de:"Großbritannien",fr:"Grande-Bretagne",es:"Gran Bretaña",pt:"Grã-Bretanha",zh:"英国",ar:"بريطانيا العظمى",hi:"ग्रेट ब्रिटेन",bn:"গ্রেট ব্রিটেন",ur:"برطانیہ عظمیٰ",id:"Britania Raya",ja:"イギリス",th:"สหราชอาณาจักร",ms:"Great Britain",hu:"Nagy-Britannia",cs:"Velká Británie",pl:"Wielka Brytania",uk:"Велика Британія"},TAH:{en:"Tahiti",de:"Tahiti",fr:"Tahiti",es:"Tahití",pt:"Taiti",zh:"塔希提",ar:"تاهيتي",hi:"ताहिती",bn:"তাহিতি",ur:"تاہیتی",id:"Tahiti",ja:"タヒチ",th:"ตาฮีตี",ms:"Tahiti",hu:"Tahiti",cs:"Tahiti",uk:"Таїті"},MYA:{en:"Myanmar",de:"Myanmar",fr:"Myanmar",es:"Myanmar",pt:"Mianmar",zh:"缅甸",ar:"ميانمار",hi:"म्यांमार",bn:"মিয়ানমার",ur:"میانمار",id:"Myanmar",ja:"ミャンマー",th:"เมียนมา",ms:"Myanmar",hu:"Mianmar",cs:"Myanmar",pl:"Mjanma",uk:"М’янма"},USA:{en:"USA",de:"USA",fr:"États-Unis",es:"EE. UU.",pt:"EUA",zh:"美国",ar:"الولايات المتحدة",hi:"अमेरिका",bn:"যুক্তরাষ্ট্র",ur:"امریکہ",id:"Amerika Serikat",ja:"アメリカ",th:"สหรัฐอเมริกา",ms:"Amerika Syarikat",hu:"USA",cs:"USA",uk:"США"}};
 let DN=null;const dn=()=>{try{if(!DN||DN.l!=lang){DN=new Intl.DisplayNames([LOC()],{type:"region"});DN.l=lang}}catch(e){DN=null}return DN};
 function NM(c){if(FIX[c]&&FIX[c][lang])return FIX[c][lang];const i=iso(c);try{if(i&&dn())return dn().of(i)}catch(e){}return INFO[c]?INFO[c].name:c}
 function FL(c){const i=iso(c);return i?`<img class="flg" src="img/fl/${i.toLowerCase()}.webp" alt="" width="22" height="16">`:""}
@@ -1199,7 +1285,7 @@ function needs(r,g){if(!["r32","r16","r8","r4"].includes(r.id))return null;const
       else{txt=k==1?N.win:N.top(ok(k-1));if(k<4&&(C[k]=="mix"||C[k]=="tie")){const ck=C[k]=="mix"?cond(k):null;txt+=" · "+(ck?N.iff(ok(k),ck):N.maybe(ok(k)));if(C[k]=="tie"||at4[k].some(o=>o.st[i]=="tie"))tie=true}}
       if(!tie)tie=at4.slice(0,k+1).some(L=>L.some(o=>o.st[i]=="tie"))}
     return{c,txt,tie}})}
-function needBox(r,g){const L=needs(r,g);if(!L)return"";return `<div class="need"><h4>${T("needT")}</h4><ul>${L.map(x=>`<li><b>${FL(x.c)}${esc(x.c)}</b><span>${esc(x.txt)}${x.tie?" ≈":""}</span></li>`).join("")}</ul><small>${T("needNote")}</small></div>`}
+function needBox(r,g){const L=needs(r,g);if(!L)return"";return `<div class="need"><h4>${T("needT")}</h4><ul>${L.map(x=>`<li><b data-ot="${esc(x.c)}" role="button" tabindex="0">${FL(x.c)}${esc(x.c)}</b><span>${esc(x.txt)}${x.tie?" ≈":""}</span></li>`).join("")}</ul><small>${T("needNote")}</small></div>`}
 
 /* ---------- views ---------- */
 const raceNow=(rid,gid)=>SCH.some(x=>x.rid==rid&&(gid==null||x.g==gid)&&rState2(x)=="now");
@@ -1217,7 +1303,7 @@ const QNX={r32:"r16",r16:"r8",r8:"r4",r4:"sf",sf:"f"};
 function qsep(r,g){const nx=rnd(QNX[r.id]),txt=T("qsep")(nx?RNm(nx):"");return `<tr class="qsep" aria-hidden="true"><td colspan="${g.rows[0].r.length+3}"><span>${esc(txt)}</span></td></tr>`}
 function gtable(r,g,clickable){const gs=gState(g,r),started=g.rows.some(x=>x.r.some(v=>String(v).trim()!=="")||String(x.total??"").trim()!=="");const lc=gs=="live"&&g.rows.some(x=>x.r.some(v=>String(v).trim()!==""))&&["r32","r16","r8","r4"].includes(r.id)?liveCalc(g):null;
   return `<table><thead><tr><th>#</th><th>${T("team")}</th>${g.rows[0].r.map((_,i)=>`<th class="r">R${i+1}</th>`).join("")}<th>${T("pts")}</th></tr></thead><tbody>${
-  (started?g.rows:[...g.rows].sort((a,b)=>(isTeam(a.team)?0:1)-(isTeam(b.team)?0:1)||(isTeam(a.team)?NM(a.team):a.team).localeCompare(isTeam(b.team)?NM(b.team):b.team,lang))).map((x,i)=>{const o=started?outcome(r.id,i+1,gs=="done"):null,tm=isTeam(x.team);const c=[o?(o[0]=="w"?"q":(o[2]===0&&r.id!="pf"?"x":"")):"",sel==x.team?"sel":"",clickable&&tm?"team":""].join(" ");
+  (started?g.rows:[...g.rows].sort((a,b)=>(isTeam(a.team)?0:1)-(isTeam(b.team)?0:1)||(isTeam(a.team)?NM(a.team):a.team).localeCompare(isTeam(b.team)?NM(b.team):b.team,lang))).map((x,i)=>{const o=started?outcome(r.id,i+1,gs=="done"):null,tm=isTeam(x.team);const c=[o?(o[0]=="w"?"q":(o[2]===0&&r.id!="pf"?"x":"")):"",sel==x.team?"sel":"",clickable&&tm?"team":"",tm?"tlink":""].join(" ");
     const nm=tm?`<span class="fl">${FL(x.team)}</span><span class="n">${esc(NM(x.team))}</span>${star(x.team)}`:`<span class="ph">${esc(ph(x.team))}</span>`;
     const lt=lc&&lc[i]?`<span class="tag ${lc[i]=="clinch"?"w":"o"}">${T(lc[i]=="clinch"?"clinched":"elim")}</span>`:"";
     return `<tr class="${c}${lc&&lc[i]=="elim"?" x":""}" data-t="${esc(x.team)}"><td class="p">${started?i+1:""}</td><td class="t"><span class="tnm">${nm}${clickable&&tm?`<span class="chev">›</span>`:""}</span>${o?(o[0]=="w"&&["r32","r16","r8","r4","sf"].includes(r.id)?`<span class="bdg" title="${esc(o[1])}">${esc(ord(i+1))}</span>`:`<span class="tag ${o[0]}">${esc(o[1])}</span>`):lt}</td>${x.r.map(v=>`<td class="r">${esc(v)||"–"}</td>`).join("")}<td class="tot">${String(x.total??"").trim()?esc(x.total):x.r.some(v=>String(v).trim()!=="")?`<span class="run" title="provisional">${x.r.reduce((s,v)=>s+num(v),0)}</span>`:"–"}</td></tr>${started&&gs!="done"&&i==1&&g.rows.length>2&&QNX[r.id]?qsep(r,g):""}`}).join("")
@@ -1252,7 +1338,7 @@ function mbox(r,g,opt={}){const gs=gState(g,r),done=gs=="done",has=g.rows.some(x
   return `<div class="mb ${gs}"${opt.go?` data-go="${opt.go}" role="button" tabindex="0"`:""}>${bd}<div class="mh"><span>${esc(bcode(r,g))}</span>${gs=="live"&&raceNow(r.id,g.id)?liveTag():done?`<span class="ok">✓</span>`:""}</div>${rows}</div>`}
 function mbNav(k){const a=(h,l,c)=>`<a href="#${h}" class="${c}${k==h?" on":""}"${k==h?` aria-current="page"`:""}>${l}</a>`;
   return `<nav class="mbn2">${a("bracket",`<span class="lvd" aria-hidden="true"></span><b>${esc(T("fsT"))}</b><small>Rio 2026</small>`,"cur")}<div class="lb"><small>${esc(T("pastL"))}</small><div>${a("qualifying",esc(T("tiles").qualifying[0]),"p")}${a("gc2023",esc(T("gc23")),"p")}</div></div></nav>`}
-function selBar(){if(!sel||!isTeam(sel))return"";return `<div class="selbar">${FL(sel)}<span>${S[lang].pathHl?S[lang].pathHl(`<b>${esc(NM(sel))}</b>`):`<b>${esc(NM(sel))}</b> · ${esc(T("hl"))}`}</span><button data-unsel="1" aria-label="${esc(T("close"))}">✕</button></div>`}
+function selBar(){if(!sel||!isTeam(sel))return"";return `<div class="selbar">${FL(sel)}<span>${S[lang].pathHl?S[lang].pathHl(`<b data-ot="${esc(sel)}" role="button">${esc(NM(sel))}</b>`):`<b data-ot="${esc(sel)}" role="button">${esc(NM(sel))}</b> · ${esc(T("hl"))}`}</span><button data-unsel="1" aria-label="${esc(T("close"))}">✕</button></div>`}
 function bracket(){const cols=KO.map(id=>D.rounds.find(r=>r.id==id)).filter(Boolean),fin=["f","pf"].map(id=>D.rounds.find(r=>r.id==id)).filter(Boolean);
   const head=r=>{const s=rState(r);return `<div class="mch"><b>${esc(RNm(r))}</b><small>${s=="live"&&raceNow(r.id)?liveTag():`<span class="dot ${s=="done"?"done":s=="live"?"amb":r.id==current()?"nx":""}"></span>`}${esc(range(r))}</small></div>`};
   let h=mbNav("bracket")+selBar()+`<h2 class="pill">${T("fsT")}</h2><p class="warn mbh">${T("mbHint")} <span class="sw">${T("swipe")}</span></p><div class="mbw" dir="ltr"><div class="mbg">`;
@@ -1274,7 +1360,7 @@ function road(code,TM){const q=qsOf(code);let h="";
 function bx2(adv,cells,title,status){const h=bx(cells,title,status);return adv?h.slice(0,-6)+`<div class="advb">${esc(adv)}</div></div>`:h}
 function bx(cells,title,status){return `<div class="bx"><div><span>${title}</span><span>${status}</span></div>${cells}</div>`}
 const G23=[["1/32","10–14 Nov 2023",["TAH 19,SLO 14,BUL 8,PER 7","POR 15,EST 14,CHI 12,CUB 8","MAS 16,BER 12,ANT 12,UKR 8","LTU 18,RSA 16,CZE 10,OMA 6"]],["1/16","Nov 2023",["CHI 8,MAS 8,EST 8,AUT 6","HUN 17,TAH 15,FIN 11,BER 7","POR 14,RSA 13,ANT 12,CRO 11","LTU 11,SLO 8,CAN 6,JPN 5"]],["1/8","Nov 2023",["MAS 14,HUN 13,ARG 12,USA 11","LTU 20,BRA 13,TAH 11,POL 4","CHI 16,SUI 13,RSA 11,NOR 10","POR 17,FRA 12,SWE 10,SLO 10"]],["1/4","Nov 2023",["GBR 20,FRA 13,MAS 12,DEN 4","HUN 18,NED 12,CHI 10,GER 10","BRA 16,NZL 13,AUS 12,POR 9","ESP 19,ITA 14,SUI 10,LTU 7"]],["1/2","2 Dec 2023",["ITA 4,NED 3,GBR 2,BRA 1","ESP 4,HUN 3,NZL 2,FRA 1"]],["Final","3 Dec 2023",["HUN 4,ITA 3,NED 2,ESP 1"]]];
-function gc23(){let h=mbNav("gc2023")+`<div class="rhead"><h2>${T("h23")}</h2><p>${T("champ23")} ${FL("HUN")} ${esc(NM("HUN"))}</p></div><p class="warn" style="margin:0 0 12px">${sel?`${FL(sel)} ${esc(NM(sel))} ${T("hl")}. `:""}${T("tap26")} <a href="https://nationscircuit.worldofsailors.com/results/" target="_blank" rel="noopener" style="color:var(--link);text-decoration:none">${T("off23")}</a></p><div class="bracket">`;
+function gc23(){let h=mbNav("gc2023")+`<div class="rhead"><h2>${T("h23")}</h2><p>${T("champ23")} <b data-ot="HUN" role="button" class="olink">${FL("HUN")} ${esc(NM("HUN"))}</b></p></div><p class="warn" style="margin:0 0 12px">${sel?`${FL(sel)} ${esc(NM(sel))} ${T("hl")}. `:""}${T("tap26")} <a href="https://nationscircuit.worldofsailors.com/results/" target="_blank" rel="noopener" style="color:var(--link);text-decoration:none">${T("off23")}</a></p><div class="bracket">`;
   h+=G23.map(([rn,dt,gs],ri)=>{const nxt=ri<G23.length-1?G23[ri+1][2].join(",")+",":"";
     return `<div class="col"><h3>${rn} <small>${dt}</small></h3>${gs.map((g,gi)=>bx(g.split(",").map((e,i)=>{const[c,p]=e.trim().split(" "),w=rn=="Final"?i<3:nxt.includes(c+" ");
       return `<div class="${w?"q":"x"} ${sel==c?"sel":""} ${INFO[c]?"team":""}" data-t="${c}"><span>${FL(c)} ${c}${star(c)}</span><span class="v">${p}</span></div>`}).join(""),gs.length>1?T("group")+" "+(gi+1):rn,"✓")).join("")}</div>`}).join("");
@@ -1339,7 +1425,7 @@ function more(){const I=T("inst");
   h+=`<div class="mlist"><button class="mrow" data-calall="1">${svg('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>')}<span><b>${T("calAll")}</b></span></button><button class="mrow" data-share="1">${svg('<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/>')}<span><b>${T("share")}</b><small>${esc(T("shareSub"))} · QR</small></span></button></div>`;
   h+=`<h3 class="sec">Rio 2026</h3><div class="mlist"><button class="mrow" data-more="venue">${svg('<path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>')}<span><b>${T("vnT")}</b><small>${T("vnSub")}</small></span></button><button class="mrow" data-more="merch">${svg('<path d="M6 7h12l1 13H5z"/><path d="M9 7a3 3 0 016 0"/>')}<span><b>${T("mcT")}</b><small>${T("mcSub")}</small></span></button><button class="mrow" data-more="sust">${svg('<path d="M5 19c8 0 14-6 14-14-8 0-14 6-14 14z"/><path d="M5 19l7-7"/>')}<span><b>${T("suT")}</b><small>${T("suSub")}</small></span></button></div>`;
   h+=`<h3 class="sec">${T("links")}</h3><div class="mlist">${row("https://www.youtube.com/@Starsailors/streams",'<path d="M5 4l14 8-14 8z"/>',T("stream").replace("▶ ",""),"YouTube")}${row("https://sslgoldcup.worldofsailors.com/results/",TI.board,T("official"),"sslgoldcup.worldofsailors.com")}${row("https://sslgoldcup.worldofsailors.com/schedule/",'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',T("schedule"),"")}</div>`;
-  h+=`<div class="mlist"><button class="mrow" data-settings="1">${svg('<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/>')}<span><b>${T("setT")}</b><small>${esc(T("setSub"))}</small></span></button></div>`;
+  h+=`<div class="mlist"><button class="mrow" data-settings="1">${svg('<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/>')}<span><b>${T("setT")}</b><small>${esc(T("setSub"))}</small></span></button><button class="mrow" data-chg="1">${svg(CHI.logo)}<span><b>${esc(CT("t"))}${chgNew()?` <span class="chnew">${esc(CT("newB"))}</span>`:""}</b><small>${esc(CT("ver"))} ${esc(CHV)} · ${esc(CT("sub"))}</small></span></button></div>`;
   h+=`<h3 class="sec">${T("how")?T("howT"):""}</h3><div class="card pad"><ul class="howl">${T("how").map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
   h+=`<h3 class="sec">${T("about")}</h3><div class="card pad"><p>${esc(T("aboutT"))}</p><p class="warn">${esc(T("foot"))}</p></div>`;
   return h}
@@ -1378,7 +1464,7 @@ function teamStats(TM){if(!TM)return"";let races=0,wins=0,pl=[],pts=0;const hist
 /* ---------- calendar ---------- */
 function calSheet(code){const d=$("#tmd"),base=location.href.split("#")[0].replace(/[^/]*$/,""),file=code?`cal/${code}.ics`:"races.ics",web=base.replace(/^https?:/,"webcal:")+file;
   d.innerHTML=`<div class="th">${code?`<button class="bk">${T("back")}</button>`:""}<div><div class="nick">SSL Gold Cup</div><h2>${T("calT")}</h2></div><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">
-  ${code?`<p class="tst">${FL(code)} <b>${esc(NM(code))}</b></p>`:""}<div class="mlist" style="margin-top:12px"><a class="mrow" href="${esc(web)}">${svg('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>')}<span><b>${T("calSub")}</b></span></a><a class="mrow" href="https://calendar.google.com/calendar/r?cid=${encodeURIComponent(web)}" target="_blank" rel="noopener">${svg('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M12 14v4M10 16h4"/>')}<span><b>${T("calG")}</b></span></a><a class="mrow" href="${esc(file)}" download>${svg('<path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>')}<span><b>${T("calDl")}</b></span></a></div><p class="warn">${T("calNote")}</p></div>`;
+  ${code?`<p class="tst" data-ot="${esc(code)}" role="button">${FL(code)} <b>${esc(NM(code))}</b> ›</p>`:""}<div class="mlist" style="margin-top:12px"><a class="mrow" href="${esc(web)}">${svg('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>')}<span><b>${T("calSub")}</b></span></a><a class="mrow" href="https://calendar.google.com/calendar/r?cid=${encodeURIComponent(web)}" target="_blank" rel="noopener">${svg('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M12 14v4M10 16h4"/>')}<span><b>${T("calG")}</b></span></a><a class="mrow" href="${esc(file)}" download>${svg('<path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>')}<span><b>${T("calDl")}</b></span></a></div><p class="warn">${T("calNote")}</p></div>`;
   d.querySelector(".x").onclick=()=>d.close();const bk=d.querySelector(".bk");if(bk)bk.onclick=()=>d.close();openCode=code||null;show(d)}
 /* ---------- share a group as image ---------- */
 function loadImg(src){return new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=src})}
@@ -1409,9 +1495,9 @@ let openCode=null;
 
 /* ---------- pages: team, sailor and race open as real pages (own URL, back = one step back) ---------- */
 let PGS=null,NOBACK=false;
-const pgHash=e=>e.t=="set"?"settings":e.t=="team"?`team-${e.a}`:e.t=="sailor"?`sailor-${e.a}-${e.i}`:`race-${e.k.replace(/\|/g,"-")}`;
-function pgParse(h){let m;if(h=="settings")return{t:"set"};if(m=h.match(/^team-([A-Z]{3})$/))return{t:"team",a:m[1]};if(m=h.match(/^sailor-([A-Z]{3})-(\d+)$/))return{t:"sailor",a:m[1],i:+m[2]};if(m=h.match(/^race-(\w+)-([A-D])-(\d+)$/))return{t:"race",k:`${m[1]}|${m[2]}|${m[3]}`};return null}
-function pgRender(e){PGS=e;if(e.t=="set")pSettings();else if(e.t=="team")pTeam(e.a);else if(e.t=="sailor")pSailor(e.a,e.i);else{const x=raceBy(e.k);if(x)pRace(x);else pgHide()}}
+const pgHash=e=>e.t=="set"?"settings":e.t=="chg"?"changes":e.t=="team"?`team-${e.a}`:e.t=="sailor"?`sailor-${e.a}-${e.i}`:`race-${e.k.replace(/\|/g,"-")}`;
+function pgParse(h){let m;if(h=="settings")return{t:"set"};if(h=="changes")return{t:"chg"};if(m=h.match(/^team-([A-Z]{3})$/))return{t:"team",a:m[1]};if(m=h.match(/^sailor-([A-Z]{3})-(\d+)$/))return{t:"sailor",a:m[1],i:+m[2]};if(m=h.match(/^race-(\w+)-([A-D])-(\d+)$/))return{t:"race",k:`${m[1]}|${m[2]}|${m[3]}`};return null}
+function pgRender(e){PGS=e;if(e.t=="set")pSettings();else if(e.t=="chg")pChanges();else if(e.t=="team")pTeam(e.a);else if(e.t=="sailor")pSailor(e.a,e.i);else{const x=raceBy(e.k);if(x)pRace(x);else pgHide()}}
 function pgGo(e,replace){const d=$("#tmd");if(d.open){NOBACK=true;replace=replace||!!(history.state&&history.state.sheet);d.close()}
   const same=PGS&&!$("#pg").hidden&&pgHash(PGS)==pgHash(e);
   try{const H=history.state||{},cd=H.d||0;if(replace||same)history.replaceState({pg:e,d:H.sheet?Math.max(1,cd):cd},"","#"+pgHash(e));else history.pushState({pg:e,d:cd+1},"","#"+pgHash(e))}catch(x){}
@@ -1432,6 +1518,193 @@ const pushOn=()=>!!CFG.push&&LS.get("pon",pSet.size?1:0)==1&&"Notification" in w
 async function pushPref(k,v){const O=await pushEnsure();if(!O)return;try{if(v===false||v==null||v==="off"){O.User.removeTag(k);delete PP[k]}else{O.User.addTag(k,String(v));PP[k]=v}ppSave();toast(T("pOnT"))}catch(e){toast(T("pErr"))}}
 function quietUtc(start){const off=new Date().getTimezoneOffset();return String(((Math.round((start*60+off)/60))%24+24)%24)}
 let RSTQ=0;
+/* ---------- changelog ("What's new") ---------- */
+const CHL=[
+ {d:"2026-11-26",v:"2.4",it:[["compass","#f5b800"],["tap","#4ec3ff"],["pl","#e8475f"],["photos","#36c28c"],["bright","#f5b800"],["logo","#9b8cff"]]},
+ {d:"2026-11-26",v:"2.3",it:[["tabs","#4ec3ff"],["settings","#9b8cff"],["pages","#36c28c"],["anim","#f5b800"],["install","#e8475f"]]},
+ {d:"2026-11-26",v:"2.2",it:[["track","#36c28c"],["profiles","#4ec3ff"],["favS","#f5b800"],["langs6","#e8475f"],["stream","#e8475f"]]},
+ {d:"2026-11-26",v:"2.1",it:[["spoil","#9b8cff"],["wx","#4ec3ff"],["cmp","#f5b800"],["vids","#e8475f"],["venue","#36c28c"]]},
+ {d:"2026-11-25",v:"2.0",it:[["race","#4ec3ff"],["push","#e8475f"],["cal","#36c28c"],["shareimg","#f5b800"],["app","#9b8cff"]]},
+];
+const CHI={compass:'<circle cx="12" cy="12" r="9"/><path d="M12 3l2.5 6h-5z" fill="currentColor"/>',tap:'<path d="M9 11V5.5a1.5 1.5 0 013 0V11"/><path d="M12 10.5a1.5 1.5 0 013 0V12m0-1a1.5 1.5 0 013 0v4a6 6 0 01-6 6h-1a6 6 0 01-5-2.7L4 15a1.6 1.6 0 012.6-1.8L9 15"/>',pl:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',photos:'<rect x="3" y="5" width="18" height="15" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M8 5l1.5-2h5L16 5"/>',bright:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',logo:'<path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.5 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/>',
+ tabs:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15h18M9 15v5M15 15v5"/>',settings:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>',pages:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/>',anim:'<path d="M4 12h12M12 6l6 6-6 6"/>',install:'<rect x="6" y="2" width="12" height="20" rx="3"/><path d="M12 7v7M9 11l3 3 3-3M10 18h4"/>',
+ track:'<path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',profiles:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/>',favS:'<path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.5 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/>',langs6:'<path d="M4 5h8M8 3v2M6 5c0 4 2 7 6 8M10 5c0 4-2 7-6 9"/><path d="M13 21l4-10 4 10M14.5 17h5"/>',stream:'<rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9l5 3-5 3z" fill="currentColor"/>',
+ spoil:'<path d="M3 3l18 18"/><path d="M10.6 6.1A10 10 0 0122 12a17 17 0 01-3 3.9M6.6 6.6A16 16 0 002 12s3.6 7 10 7a9.5 9.5 0 004.4-1"/>',wx:'<path d="M3 8h10.5a3 3 0 1 0-3-3"/><path d="M3 12h15.5a3 3 0 1 1-3 3"/><path d="M3 16h7"/>',cmp:'<path d="M12 3v18M5 7h14M5 7l-3 7a3 3 0 006 0zM19 7l-3 7a3 3 0 006 0z"/>',vids:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4l-2 5M14 4l-2 5"/>',venue:'<path d="M3 20l6-14 4 8 3-4 5 10z"/>',
+ race:'<path d="M4 21V4M4 4h12l-2 4 2 4H4"/>',push:'<path d="M6 16V11a6 6 0 0112 0v5l2 2H4z"/><path d="M10 20a2 2 0 004 0"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',shareimg:'<path d="M12 3v12M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>',app:'<rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 18h4"/>'};
+const CHT={
+en:{t:"What's new",sub:"Everything new in the app – latest first",ver:"Version",newB:"New",seen:"You're up to date",
+ compass:["Clearer wind compass","The yellow wedge shows where the wind comes from, the wind speed sits right in the middle."],
+ tap:["Tap any team or sailor","Team and sailor names now open their page everywhere – tables, results, settings and more."],
+ pl:["Now in Polish","Polski! The app now speaks 18 languages."],
+ photos:["Official portraits for the 1/16 teams","Japan, Czechia, Chile, Ecuador, Hungary, Peru, South Africa and Thailand – fresh from the event studio."],
+ bright:["Brightness button","Switch between Matchboard blue, day and night right in the header."],
+ logo:["Bigger SSL logo","A little more presence at the top."],
+ tabs:["New tab bar","Competition (rounds + matchboard), Teams and Sailors each have their own tab."],
+ settings:["Settings","Notifications, start reminders, quiet hours, units, local times and spoiler-free mode in one place."],
+ pages:["Real pages","Teams, sailors and races open as full pages with their own link – back always goes one step back."],
+ anim:["Smooth round switching","Swipe between rounds, with an animation like in the big apps."],
+ install:["Easier to install","An Install button next to the language – the app on your home screen in 20 seconds."],
+ track:["Live tracking inside the app","Every boat on the map, live ranking, course and replay – no more external site."],
+ profiles:["New sailor profiles","Bio, career, Olympic and world championship medals from the official SSL profiles."],
+ favS:["Follow sailors","Tap ☆ on a sailor – your sailors get their own list."],
+ langs6:["Six more languages","Japanese, Thai, Malay, Hungarian, Czech and Ukrainian."],
+ stream:["Live stream in the app","With preview image and countdown until the broadcast starts."],
+ spoil:["Spoiler-free mode","Hide results until you've watched the race."],
+ wx:["Sailing weather per race","Wind, gusts, direction, waves and tide for every start time."],
+ cmp:["Team comparison","Two teams side by side – head to head and numbers from Rio."],
+ vids:["Highlights","The latest SSL videos right in the app."],
+ venue:["Venue","Marina da Glória with map and directions."],
+ race:["Race details","Tap a race for result, group standings, wind and stream."],
+ push:["Push notifications","Results of your teams straight to your phone."],
+ cal:["Calendar","All races of your team in your calendar – updates itself."],
+ shareimg:["Share as image","Group tables as a picture for WhatsApp & co."],
+ app:["Install as an app","Full screen, with icon, updates itself."]},
+de:{t:"Neu in der App",sub:"Alle Neuerungen – die neuesten zuerst",ver:"Version",newB:"Neu",seen:"Du bist auf dem neuesten Stand",
+ compass:["Klarerer Windkompass","Der gelbe Keil zeigt, woher der Wind kommt, die Windstärke steht direkt in der Mitte."],
+ tap:["Teams und Segler überall antippen","Team- und Seglernamen öffnen jetzt überall ihre Seite – in Tabellen, Ergebnissen, Einstellungen und mehr."],
+ pl:["Jetzt auf Polnisch","Polski! Die App spricht jetzt 18 Sprachen."],
+ photos:["Offizielle Porträts der 1/16-Teams","Japan, Tschechien, Chile, Ecuador, Ungarn, Peru, Südafrika und Thailand – frisch aus dem Event-Studio."],
+ bright:["Helligkeits-Button","Oben direkt zwischen Matchboard-Blau, Tag und Nacht wechseln."],
+ logo:["Größeres SSL-Logo","Etwas mehr Präsenz oben rechts."],
+ tabs:["Neue Menüleiste","Wettkampf (Runden + Matchboard), Teams und Segler haben je einen eigenen Tab."],
+ settings:["Einstellungen","Benachrichtigungen, Start-Erinnerungen, Ruhezeiten, Einheiten, Ortszeit und spoilerfrei an einem Ort."],
+ pages:["Echte Seiten","Teams, Segler und Rennen öffnen als eigene Seite mit eigenem Link – Zurück geht immer einen Schritt zurück."],
+ anim:["Flüssiger Rundenwechsel","Zwischen den Runden wischen, mit Animation wie in den großen Apps."],
+ install:["Einfacher installieren","Install-Button neben der Sprache – die App in 20 Sekunden auf dem Homescreen."],
+ track:["Live-Tracking in der App","Jedes Boot auf der Karte, Live-Rangliste, Kurs und Replay – ohne externe Seite."],
+ profiles:["Neue Seglerprofile","Bio, Karriere, Olympia- und WM-Medaillen aus den offiziellen SSL-Profilen."],
+ favS:["Seglern folgen","☆ beim Segler antippen – deine Segler bekommen eine eigene Liste."],
+ langs6:["Sechs weitere Sprachen","Japanisch, Thai, Malaiisch, Ungarisch, Tschechisch und Ukrainisch."],
+ stream:["Livestream in der App","Mit Vorschaubild und Countdown bis zum Sendestart."],
+ spoil:["Spoilerfrei-Modus","Ergebnisse verstecken, bis du das Rennen gesehen hast."],
+ wx:["Segelwetter pro Rennen","Wind, Böen, Richtung, Wellen und Tide für jede Startzeit."],
+ cmp:["Teamvergleich","Zwei Teams nebeneinander – direkter Vergleich und Zahlen aus Rio."],
+ vids:["Highlights","Die neuesten SSL-Videos direkt in der App."],
+ venue:["Austragungsort","Marina da Glória mit Karte und Route."],
+ race:["Renndetails","Rennen antippen für Ergebnis, Gruppenstand, Wind und Stream."],
+ push:["Push-Benachrichtigungen","Ergebnisse deiner Teams direkt aufs Handy."],
+ cal:["Kalender","Alle Rennen deines Teams im Kalender – aktualisiert sich selbst."],
+ shareimg:["Als Bild teilen","Gruppentabellen als Bild für WhatsApp & Co."],
+ app:["Als App installieren","Vollbild, mit Icon, aktualisiert sich selbst."]},
+pl:{t:"Nowości w aplikacji",sub:"Wszystkie nowości – najnowsze na górze",ver:"Wersja",newB:"Nowe",seen:"Masz najnowszą wersję",
+ compass:["Czytelniejszy kompas wiatru","Żółty klin pokazuje, skąd wieje wiatr, a jego prędkość jest na środku."],
+ tap:["Stuknij dowolną drużynę lub żeglarza","Nazwy drużyn i żeglarzy wszędzie otwierają ich stronę – w tabelach, wynikach, ustawieniach i nie tylko."],
+ pl:["Teraz po polsku","Aplikacja mówi już w 18 językach."],
+ photos:["Oficjalne portrety drużyn z 1/16","Japonia, Czechy, Chile, Ekwador, Węgry, Peru, RPA i Tajlandia – prosto ze studia."],
+ bright:["Przycisk jasności","Przełączaj między niebieskim Matchboard, dniem i nocą w nagłówku."],
+ logo:["Większe logo SSL","Trochę więcej obecności u góry."],
+ tabs:["Nowy pasek kart","Rywalizacja (rundy + matchboard), Drużyny i Żeglarze mają własne karty."],
+ settings:["Ustawienia","Powiadomienia, przypomnienia o starcie, cisza nocna, jednostki, czas lokalny i tryb bez spoilerów w jednym miejscu."],
+ pages:["Prawdziwe strony","Drużyny, żeglarze i wyścigi otwierają się jako osobne strony z własnym linkiem."],
+ anim:["Płynne przełączanie rund","Przesuwaj między rundami, z animacją jak w dużych aplikacjach."],
+ install:["Łatwiejsza instalacja","Przycisk Zainstaluj obok języka – aplikacja na ekranie głównym w 20 sekund."],
+ track:["Śledzenie na żywo w aplikacji","Każda łódź na mapie, ranking na żywo, trasa i powtórka."],
+ profiles:["Nowe profile żeglarzy","Biografia, kariera, medale olimpijskie i MŚ z oficjalnych profili SSL."],
+ favS:["Obserwuj żeglarzy","Stuknij ☆ przy żeglarzu – twoi żeglarze mają własną listę."],
+ langs6:["Sześć nowych języków","Japoński, tajski, malajski, węgierski, czeski i ukraiński."],
+ stream:["Transmisja w aplikacji","Z podglądem i odliczaniem do startu transmisji."],
+ spoil:["Tryb bez spoilerów","Ukryj wyniki, dopóki nie obejrzysz wyścigu."],
+ wx:["Pogoda dla każdego wyścigu","Wiatr, porywy, kierunek, fale i pływ dla każdej godziny startu."],
+ cmp:["Porównanie drużyn","Dwie drużyny obok siebie – bezpośrednie starcia i liczby z Rio."],
+ vids:["Skróty wideo","Najnowsze filmy SSL w aplikacji."],
+ venue:["Miejsce","Marina da Glória z mapą i trasą dojazdu."],
+ race:["Szczegóły wyścigu","Stuknij wyścig: wynik, tabela grupy, wiatr i transmisja."],
+ push:["Powiadomienia push","Wyniki twoich drużyn prosto na telefon."],
+ cal:["Kalendarz","Wszystkie wyścigi twojej drużyny w kalendarzu – aktualizuje się sam."],
+ shareimg:["Udostępnij jako obraz","Tabele grup jako obrazek do WhatsAppa i innych."],
+ app:["Zainstaluj jako aplikację","Pełny ekran, z ikoną, aktualizuje się sama."]},
+pt:{t:"Novidades",sub:"Tudo o que há de novo no app – mais recentes primeiro",ver:"Versão",newB:"Novo",seen:"Você está em dia",
+ compass:["Bússola de vento mais clara","A cunha amarela mostra de onde vem o vento; a velocidade fica no centro."],
+ tap:["Toque em qualquer equipe ou velejador","Nomes de equipes e velejadores abrem a página deles em todo lugar."],
+ pl:["Agora em polonês","O app agora fala 18 idiomas."],
+ photos:["Retratos oficiais das equipes da 1/16","Japão, Tchéquia, Chile, Equador, Hungria, Peru, África do Sul e Tailândia."],
+ bright:["Botão de brilho","Alterne entre azul Matchboard, dia e noite no topo."],
+ logo:["Logo SSL maior","Um pouco mais de presença no topo."],
+ tabs:["Nova barra de abas","Competição (rodadas + matchboard), Equipes e Velejadores com abas próprias."],
+ settings:["Configurações","Notificações, lembretes de largada, horário silencioso, unidades, hora local e modo sem spoilers."],
+ pages:["Páginas de verdade","Equipes, velejadores e regatas abrem como páginas com link próprio."],
+ anim:["Troca de rodada suave","Deslize entre as rodadas, com animação como nos grandes apps."],
+ install:["Instalação mais fácil","Botão Instalar ao lado do idioma – o app na tela inicial em 20 segundos."],
+ track:["Rastreamento ao vivo no app","Todos os barcos no mapa, classificação ao vivo, percurso e replay."],
+ profiles:["Novos perfis de velejadores","Bio, carreira e medalhas dos perfis oficiais da SSL."],
+ favS:["Siga velejadores","Toque em ☆ num velejador – eles ganham uma lista própria."],
+ langs6:["Seis novos idiomas","Japonês, tailandês, malaio, húngaro, tcheco e ucraniano."],
+ stream:["Transmissão no app","Com imagem de prévia e contagem regressiva."],
+ spoil:["Modo sem spoilers","Esconda resultados até assistir à regata."],
+ wx:["Tempo para velejar por regata","Vento, rajadas, direção, ondas e maré para cada largada."],
+ cmp:["Comparar equipes","Duas equipes lado a lado – confronto direto e números do Rio."],
+ vids:["Melhores momentos","Os vídeos mais recentes da SSL no app."],
+ venue:["Local","Marina da Glória com mapa e rota."],
+ race:["Detalhes da regata","Toque numa regata para resultado, classificação, vento e transmissão."],
+ push:["Notificações push","Resultados das suas equipes direto no celular."],
+ cal:["Calendário","Todas as regatas da sua equipe no calendário – atualiza sozinho."],
+ shareimg:["Compartilhar como imagem","Tabelas de grupo como imagem para WhatsApp e cia."],
+ app:["Instalar como app","Tela cheia, com ícone, atualiza sozinho."]},
+es:{t:"Novedades",sub:"Todo lo nuevo en la app – lo más reciente primero",ver:"Versión",newB:"Nuevo",seen:"Estás al día",
+ compass:["Brújula de viento más clara","La cuña amarilla muestra de dónde viene el viento; la velocidad está en el centro."],
+ tap:["Toca cualquier equipo o regatista","Los nombres de equipos y regatistas abren su página en toda la app."],
+ pl:["Ahora en polaco","La app ya habla 18 idiomas."],
+ photos:["Retratos oficiales de los equipos de 1/16","Japón, Chequia, Chile, Ecuador, Hungría, Perú, Sudáfrica y Tailandia."],
+ bright:["Botón de brillo","Cambia entre azul Matchboard, día y noche desde la cabecera."],
+ logo:["Logo SSL más grande","Un poco más de presencia arriba."],
+ tabs:["Nueva barra de pestañas","Competición (rondas + matchboard), Equipos y Regatistas con pestaña propia."],
+ settings:["Ajustes","Notificaciones, recordatorios de salida, horas de silencio, unidades, hora local y modo sin spoilers."],
+ pages:["Páginas de verdad","Equipos, regatistas y regatas se abren como páginas con enlace propio."],
+ anim:["Cambio de ronda fluido","Desliza entre rondas, con animación como en las grandes apps."],
+ install:["Instalación más fácil","Botón Instalar junto al idioma – la app en tu pantalla de inicio en 20 segundos."],
+ track:["Seguimiento en vivo en la app","Cada barco en el mapa, clasificación en vivo, recorrido y repetición."],
+ profiles:["Nuevos perfiles de regatistas","Bio, trayectoria y medallas de los perfiles oficiales de la SSL."],
+ favS:["Sigue a regatistas","Toca ☆ en un regatista – tendrán su propia lista."],
+ langs6:["Seis idiomas más","Japonés, tailandés, malayo, húngaro, checo y ucraniano."],
+ stream:["Directo en la app","Con imagen de vista previa y cuenta atrás."],
+ spoil:["Modo sin spoilers","Oculta resultados hasta que veas la regata."],
+ wx:["Tiempo de vela por regata","Viento, rachas, dirección, olas y marea para cada salida."],
+ cmp:["Comparar equipos","Dos equipos lado a lado – cara a cara y cifras de Río."],
+ vids:["Resúmenes","Los vídeos más recientes de la SSL en la app."],
+ venue:["Sede","Marina da Glória con mapa y ruta."],
+ race:["Detalles de regata","Toca una regata para resultado, clasificación, viento y directo."],
+ push:["Notificaciones push","Resultados de tus equipos directo al móvil."],
+ cal:["Calendario","Todas las regatas de tu equipo en tu calendario – se actualiza solo."],
+ shareimg:["Compartir como imagen","Tablas de grupo como imagen para WhatsApp y más."],
+ app:["Instalar como app","Pantalla completa, con icono, se actualiza sola."]},
+fr:{t:"Nouveautés",sub:"Toutes les nouveautés – les plus récentes d'abord",ver:"Version",newB:"Nouveau",seen:"Vous êtes à jour",
+ compass:["Boussole du vent plus claire","Le coin jaune montre d'où vient le vent ; la force du vent est au centre."],
+ tap:["Touchez n'importe quelle équipe ou marin","Les noms d'équipes et de marins ouvrent leur page partout dans l'app."],
+ pl:["Désormais en polonais","L'app parle maintenant 18 langues."],
+ photos:["Portraits officiels des équipes des 1/16","Japon, Tchéquie, Chili, Équateur, Hongrie, Pérou, Afrique du Sud et Thaïlande."],
+ bright:["Bouton de luminosité","Passez du bleu Matchboard au jour ou à la nuit depuis l'en-tête."],
+ logo:["Logo SSL plus grand","Un peu plus de présence en haut."],
+ tabs:["Nouvelle barre d'onglets","Compétition (tours + matchboard), Équipes et Marins ont chacun leur onglet."],
+ settings:["Réglages","Notifications, rappels de départ, heures calmes, unités, heure locale et mode sans spoiler."],
+ pages:["De vraies pages","Équipes, marins et courses s'ouvrent comme des pages avec leur propre lien."],
+ anim:["Changement de tour fluide","Balayez entre les tours, avec une animation comme dans les grandes apps."],
+ install:["Installation simplifiée","Bouton Installer à côté de la langue – l'app sur l'écran d'accueil en 20 secondes."],
+ track:["Suivi en direct dans l'app","Chaque bateau sur la carte, classement en direct, parcours et replay."],
+ profiles:["Nouveaux profils de marins","Bio, carrière et médailles issues des profils officiels SSL."],
+ favS:["Suivez des marins","Touchez ☆ sur un marin – ils ont leur propre liste."],
+ langs6:["Six nouvelles langues","Japonais, thaï, malais, hongrois, tchèque et ukrainien."],
+ stream:["Direct dans l'app","Avec image d'aperçu et compte à rebours."],
+ spoil:["Mode sans spoiler","Masquez les résultats jusqu'à ce que vous ayez vu la course."],
+ wx:["Météo voile par course","Vent, rafales, direction, vagues et marée pour chaque départ."],
+ cmp:["Comparer des équipes","Deux équipes côte à côte – face-à-face et chiffres de Rio."],
+ vids:["Temps forts","Les dernières vidéos SSL dans l'app."],
+ venue:["Site","Marina da Glória avec carte et itinéraire."],
+ race:["Détails de course","Touchez une course pour le résultat, le classement, le vent et le direct."],
+ push:["Notifications push","Les résultats de vos équipes directement sur votre téléphone."],
+ cal:["Calendrier","Toutes les courses de votre équipe dans votre agenda – mise à jour automatique."],
+ shareimg:["Partager en image","Tableaux de groupe en image pour WhatsApp & co."],
+ app:["Installer comme app","Plein écran, avec icône, se met à jour toute seule."]}};
+const CHV=CHL[0].v,CT=k=>(CHT[lang]||CHT.en)[k]||CHT.en[k];
+function chgNew(){return LS.get("chgSeen","")!==CHV}
+function pChanges(){const d=$("#pg");openCode=null;const nw=chgNew();
+  const fmt=s=>{try{return new Date(s+"T12:00:00").toLocaleDateString(LOC(),{day:"numeric",month:"long"})}catch(e){return s}};
+  let h=`<div class="th"><div><div class="nick">SSL Gold Cup</div><h2>${esc(CT("t"))}</h2></div></div><div class="tb chg">`;
+  h+=`<div class="chhero"><div class="chbadge">${svg(CHI.logo)}</div><div><b>${esc(CT("ver"))} ${esc(CHV)}</b><small>${esc(CT("sub"))}</small></div></div>`;
+  h+=CHL.map((r,ri)=>`<section class="chrel${ri==0?" latest":""}"><div class="chdate"><span class="chv">${esc(r.v)}</span><span>${esc(fmt(r.d))}</span>${ri==0&&nw?`<span class="chnew">${esc(CT("newB"))}</span>`:""}</div><div class="chlist">${r.it.map(([k,c])=>{const t=CT(k)||["",""];return `<div class="chit"><span class="chic" style="--c:${c}">${svg(CHI[k]||CHI.logo)}</span><span><b>${esc(t[0])}</b><small>${esc(t[1])}</small></span></div>`}).join("")}</div></section>`).join("");
+  h+=`<p class="warn" style="text-align:center;margin-top:18px">✓ ${esc(CT("seen"))}</p></div>`;
+  d.innerHTML=h;LS.set("chgSeen",CHV);pgShow(d);try{render(true)}catch(e){}}
+function openChanges(){PGPUSHED=true;pgGo({t:"chg"})}
+
 function pSettings(){const d=$("#pg");openCode=null;const tg=(k,on,t,sub,dis)=>`<button class="mrow" data-st="${k}" role="switch" aria-checked="${!!on}"${dis?" disabled":""}><span><b>${t}</b>${sub?`<small>${sub}</small>`:""}</span><i class="tgl${on?" on":""}" aria-hidden="true"></i></button>`;
   const seg=(k,cur,opts)=>`<div class="sgc sm" role="group">${opts.map(([v,l])=>`<button data-sg="${k}" data-v="${v}" class="${String(cur)==String(v)?"on":""}">${esc(l)}</button>`).join("")}</div>`;
   const sl=(t,inner,full)=>`<div class="setrow${full?" full":""}"><span>${t}</span>${inner}</div>`;
@@ -1448,7 +1721,7 @@ function pSettings(){const d=$("#pg");openCode=null;const tg=(k,on,t,sub,dis)=>`
   /* favourites */
   h+=`<h3>${esc(T("myTeams"))} · ${esc(T("mySailors"))}</h3>`;
   const FT=[...favs].filter(isTeam),FS=favSailors();
-  h+=FT.length||FS.length?`<div class="mlist">${FT.map((c,i)=>`<div class="mrow favr"><span class="favn">${FL(c)} <b>${esc(NM(c))}</b></span><button data-fm="t|${i}|-1" aria-label="up"${i?"":" disabled"}>↑</button><button data-fm="t|${i}|1" aria-label="down"${i<FT.length-1?"":" disabled"}>↓</button><button data-fx="t|${esc(c)}" aria-label="remove">✕</button></div>`).join("")}${FS.map(({c,p},i)=>`<div class="mrow favr"><span class="favn">${FL(c)} ${NMH(p.name)}</span><button data-fm="s|${i}|-1"${i?"":" disabled"}>↑</button><button data-fm="s|${i}|1"${i<FS.length-1?"":" disabled"}>↓</button><button data-fx="s|${esc(c+"|"+p.name)}">✕</button></div>`).join("")}</div>`:`<div class="card pad"><p class="warn" style="margin:0">${esc(T("sFavNone"))}</p></div>`;
+  h+=FT.length||FS.length?`<div class="mlist">${FT.map((c,i)=>`<div class="mrow favr"><span class="favn" data-ot="${esc(c)}" role="button">${FL(c)} <b>${esc(NM(c))}</b></span><button data-fm="t|${i}|-1" aria-label="up"${i?"":" disabled"}>↑</button><button data-fm="t|${i}|1" aria-label="down"${i<FT.length-1?"":" disabled"}>↓</button><button data-fx="t|${esc(c)}" aria-label="remove">✕</button></div>`).join("")}${FS.map(({c,p},i)=>`<div class="mrow favr"><span class="favn">${FL(c)} ${NMH(p.name)}</span><button data-fm="s|${i}|-1"${i?"":" disabled"}>↑</button><button data-fm="s|${i}|1"${i<FS.length-1?"":" disabled"}>↓</button><button data-fx="s|${esc(c+"|"+p.name)}">✕</button></div>`).join("")}</div>`:`<div class="card pad"><p class="warn" style="margin:0">${esc(T("sFavNone"))}</p></div>`;
   /* spoiler */
   h+=`<h3>${esc(T("spT"))}</h3><div class="mlist">${tg("spoil",SPOIL,esc(T("spRow")),esc(T("spSub")))}</div>`;
   /* display */
@@ -1776,7 +2049,7 @@ function tStats(TM){let races=0,wins=0,pl=[],pts=0;if(TM)TM.path.forEach(s=>{con
 function h2h(a,b){let A=0,B=0;D.rounds.forEach(r=>r.groups.forEach(g=>{const ra=g.rows.find(z=>z.team==a),rb=g.rows.find(z=>z.team==b);if(!ra||!rb)return;
   ra.r.forEach((v,i)=>{const w=rb.r[i];if(String(v).trim()===""||String(w??"").trim()==="")return;num(v)>num(w)?A++:num(w)>num(v)?B++:0})}));return {A,B}}
 function comparePick(a){const d=$("#tmd"),TT=teams().filter(t=>t.code!=a).sort((x,y)=>(favs.has(y.code)?1:0)-(favs.has(x.code)?1:0)||x.name.localeCompare(y.name,lang));
-  d.innerHTML=`<div class="th"><button class="bk">${T("back")}</button><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb"><h2 style="margin:0 0 12px">${FL(a)} ${esc(NM(a))} ${esc(T("cmpVs"))} …</h2><p class="warn">${esc(T("cmpPick"))}</p><div class="grp rcl">${TT.map(t=>`<button class="rcrow" data-cb="${esc(t.code)}">${FL(t.code)}<b>${esc(t.name)}${favs.has(t.code)?' <span class="star">★</span>':""}</b><small>${t.out?esc(T("stOut")):""}</small></button>`).join("")}</div></div>`;
+  d.innerHTML=`<div class="th"><button class="bk">${T("back")}</button><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb"><h2 style="margin:0 0 12px"><span data-ot="${esc(a)}" role="button">${FL(a)} ${esc(NM(a))}</span> ${esc(T("cmpVs"))} …</h2><p class="warn">${esc(T("cmpPick"))}</p><div class="grp rcl">${TT.map(t=>`<button class="rcrow" data-cb="${esc(t.code)}">${FL(t.code)}<b>${esc(t.name)}${favs.has(t.code)?' <span class="star">★</span>':""}</b><small>${t.out?esc(T("stOut")):""}</small></button>`).join("")}</div></div>`;
   d.querySelector(".x").onclick=()=>d.close();d.querySelector(".bk").onclick=()=>openTeam(a);
   d.querySelectorAll("[data-cb]").forEach(b=>b.onclick=()=>compareSheet(a,b.dataset.cb));openCode=null;show(d);d.scrollTop=0}
 function compareSheet(a,b){const d=$("#tmd"),TA=teams().find(t=>t.code==a),TB=teams().find(t=>t.code==b),IA=INFO[a]||{},IB=INFO[b]||{},SA=tStats(TA),SB=tStats(TB),H=h2h(a,b);
@@ -1835,7 +2108,7 @@ async function openWx(x){const d=sheetWrap(`${T("wxH")} · Marina da Glória`,`$
     const n1=Math.min(H.time.length-1,st+1),dw=H.wind_speed_10m[n1]-w,dd=((H.wind_direction_10m[n1]-dir+540)%360)-180;
     const tr=[Math.abs(dw)>=2?T("fcTr")[dw>0?"up":"down"]:T("fcTr").steady,Math.abs(dd)>=10?T("fcTr")[dd>0?"veer":"back"]+` (${dd>0?"+":""}${r1(dd)}°)`:""].filter(Boolean).join(" · ");
     h+=`<div class="fcbar"><span class="fcc">${esc(cond)}</span><span>${esc(T("fcBft"))} ${bft}</span><span>${esc(T("fcNext"))}: ${esc(tr)}</span></div>`;
-    h+=`<div class="wxhero"><div class="wxtop">${rose(dir,w)}<div class="wxbig"><b>${r1(w)}</b><span>${uW()}</span><em>${esc(cmp16(dir))} · ${r1(dir)}°</em></div><div class="wxgust"><small>${esc(T("wxGust"))}</small><b>${r1(g)}</b><span>${uW()}</span></div></div><div class="wxtiles"><div>${wi("t")}<b>${f1(H.temperature_2m[st])} ${uT()}</b></div><div>${wi("r")}<b>${r1(H.precipitation_probability[st]??0)} %</b></div><div>${wi("c")}<b>${r1(H.cloud_cover[st])} %</b></div><div>${wi("p")}<b>${r1(p0)}<i> hPa ${p0-p3>1?"↗":p0-p3<-1?"↘":"→"}</i></b></div></div></div><p class="warn">${esc(st==st0?T("wxAtStart"):T("wxAtT")(hh))} · ${esc(T("wxTap"))}</p>`}
+    h+=`<div class="wxhero"><div class="wxtop">${rose(dir,w)}<div class="wxdir"><small>${esc(WXF[lang]||WXF.en)}</small><b>${esc(cmp16(dir))}</b><em>${r1(dir)}°</em><div class="wxgust"><small>${esc(T("wxGust"))}</small><b>${r1(g)}</b><span>${uW()}</span></div></div></div><div class="wxtiles"><div>${wi("t")}<b>${f1(H.temperature_2m[st])} ${uT()}</b></div><div>${wi("r")}<b>${r1(H.precipitation_probability[st]??0)} %</b></div><div>${wi("c")}<b>${r1(H.cloud_cover[st])} %</b></div><div>${wi("p")}<b>${r1(p0)}<i> hPa ${p0-p3>1?"↗":p0-p3<-1?"↘":"→"}</i></b></div></div></div><p class="warn">${esc(st==st0?T("wxAtStart"):T("wxAtT")(hh))} · ${esc(T("wxTap"))}</p>`}
   h+=wxChart(H,hrs,st,mx);
   h+=`<h3>${esc(T("wxHours"))}</h3><div class="grp wxt"><div class="wxr wxhd"><span>${esc(T("wxTime"))}</span><span>${esc(T("wxWind").replace("kn",uW()))}</span><span></span><span>${esc(T("wxDir"))}</span><span>${uT()}</span><span>${wi("r")}</span></div>${hrs.map(i=>{const w=H.wind_speed_10m[i],g=H.wind_gusts_10m[i],dir=H.wind_direction_10m[i];return `<div class="wxr${i==st?" now":""}${i==st0?" st":""}" data-hi="${i}" role="button" tabindex="0"><span>${H.time[i].slice(11,16)}</span><span><b>${r1(w)}</b>–${r1(g)}</span><span class="wbar"><i style="width:${w/mx*100}%"></i><i class="gu" style="width:${(g-w)/mx*100}%"></i></span><span>${arr(dir)}${esc(cmp16(dir))}</span><span>${r1(H.temperature_2m[i])}</span><span>${r1(H.precipitation_probability[i]??0)}%</span></div>`}).join("")}</div><p class="warn">${esc(T("wxKn"))}</p>`;
   if(M&&M.time){const mi=t=>M.time.indexOf(`${x.d}T${t}`),ms=mi(hh);const v=(k,i)=>M[k]&&M[k][i]!=null?M[k][i]:null;
@@ -1847,8 +2120,12 @@ async function openWx(x){const d=sheetWrap(`${T("wxH")} · Marina da Glória`,`$
   h+=`<p class="warn">${esc(T("wxSrc2"))}</p>${wxLinks()}`;const y=d.scrollTop;tb.innerHTML=h;d.scrollTop=y;tb.querySelectorAll("[data-hi]").forEach(el=>{el.onclick=()=>paint(+el.dataset.hi);el.onkeydown=e=>{if(e.key=="Enter")paint(+el.dataset.hi)}})};paint(st0)}
 const WI={t:'<path d="M10 14V5a2 2 0 014 0v9a4 4 0 11-4 0z"/>',r:'<path d="M7 15a4 4 0 01-.5-8A5.5 5.5 0 0117 6a3.5 3.5 0 01.5 7"/><path d="M9 17l-1 3M13 17l-1 3M17 16l-1 3"/>',c:'<path d="M7 18a4 4 0 01-.5-8A5.5 5.5 0 0117 9a3.5 3.5 0 01.5 7H7z"/>',p:'<circle cx="12" cy="13" r="8"/><path d="M12 13l4-3"/>'};
 const wi=k=>svg(WI[k],"wic");
-function rose(dir,w){const pts=["N","E","S","W"].map((c,i)=>`<text x="${50+40*Math.sin(i*Math.PI/2)}" y="${53+40*-Math.cos(i*Math.PI/2)}" text-anchor="middle" font-size="9" fill="currentColor" opacity=".7">${c}</text>`).join("");
-  return `<svg class="rose" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" opacity=".25"/>${Array.from({length:16},(_,i)=>{const a=i*22.5*Math.PI/180,r1=i%4?40:36;return `<line x1="${50+r1*Math.sin(a)}" y1="${50-r1*Math.cos(a)}" x2="${50+44*Math.sin(a)}" y2="${50-44*Math.cos(a)}" stroke="currentColor" opacity=".35"/>`}).join("")}${pts}<g transform="rotate(${dir} 50 50)"><path d="M50 14 L57 34 L50 30 L43 34 Z" fill="#f5b800"/><line x1="50" y1="30" x2="50" y2="78" stroke="#f5b800" stroke-width="3" stroke-linecap="round"/><path d="M50 86 L43 72 L57 72 Z" fill="#f5b800"/></g></svg>`}
+const WXF={en:"Wind from",de:"Wind aus",fr:"Vent du",es:"Viento del",pt:"Vento de",zh:"风向（来自）",ar:"الرياح من",hi:"हवा की दिशा (से)",bn:"বাতাস আসছে",ur:"ہوا کا رخ (سے)",id:"Angin dari",ms:"Angin dari",ja:"風向（から）",th:"ลมมาจาก",hu:"Szél iránya",cs:"Vítr od",uk:"Вітер з",pl:"Wiatr z"};
+function rose(dir,w){const P=(r,a)=>[50+r*Math.sin(a*Math.PI/180),50-r*Math.cos(a*Math.PI/180)].map(v=>v.toFixed(1));
+  const near=a=>Math.abs(((dir-a+540)%360)-180)<25;
+  const pts=["N","E","S","W"].map((c,i)=>{const[x,y]=P(33,i*90);return `<text x="${x}" y="${(+y+3.2).toFixed(1)}" text-anchor="middle" font-size="9" fill="currentColor" opacity="${near(i*90)?0.12:0.6}">${c}</text>`}).join("");
+  const tk=Array.from({length:36},(_,i)=>{const a=i*10,[x1,y1]=P(i%9?44:41.5,a),[x2,y2]=P(47,a);return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="currentColor" stroke-width="${i%9?0.8:1.4}" opacity="${i%9?0.25:0.55}"/>`}).join("");
+  return `<svg class="rose" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" opacity=".18"/>${tk}${pts}<g transform="rotate(${Math.round(dir)} 50 50)"><path d="M50 27 L41.5 4.5 Q50 1 58.5 4.5 Z" fill="#f5b800"/></g><text x="50" y="57" text-anchor="middle" font-size="25" font-weight="700" fill="currentColor">${Math.round(w)}</text><text x="50" y="68" text-anchor="middle" font-size="8.5" fill="currentColor" opacity=".6">${uW()}</text></svg>`}
 function wxChart(H,hrs,st,mx){if(hrs.length<2)return"";const W=320,Hh=110,px=i=>20+i*(W-30)/(hrs.length-1),py=v=>Hh-18-(v/mx)*(Hh-30);
   const top=hrs.map((h,i)=>`${px(i)},${py(H.wind_gusts_10m[h])}`),bot=hrs.map((h,i)=>`${px(i)},${py(H.wind_speed_10m[h])}`).reverse();
   const si=hrs.indexOf(st);
@@ -1911,7 +2188,7 @@ const pushCan=()=>!!CFG.push&&"serviceWorker" in navigator&&"PushManager" in win
 const pushShown=()=>!!CFG.push&&(pushCan()||isIOS);
 const pushReady=()=>pushCan()&&!(isIOS&&!isStandalone());
 let pSet=new Set(LS.get("push",[])),osP=null;
-const OSL={en:"en",de:"de",fr:"fr",es:"es",pt:"pt",zh:"zh-Hans",ar:"ar",hi:"hi",bn:"bn",ur:"ur",id:"id",ms:"ms",ja:"ja",th:"th",hu:"hu",cs:"cs",uk:"uk"};
+const OSL={en:"en",de:"de",fr:"fr",es:"es",pt:"pt",zh:"zh-Hans",ar:"ar",hi:"hi",bn:"bn",ur:"ur",id:"id",ms:"ms",ja:"ja",th:"th",hu:"hu",cs:"cs",uk:"uk",pl:"pl"};
 function loadOS(){if(osP)return osP;
   osP=new Promise((res,rej)=>{const to=setTimeout(()=>rej(new Error("timeout")),20000);
     window.OneSignalDeferred=window.OneSignalDeferred||[];
@@ -1943,17 +2220,18 @@ if(CFG.gc&&!/claude/.test(location.hostname)&&!navigator.webdriver){try{window.g
   s.onload=()=>{try{goatcounter.count({path:location.pathname});gcEvent(isStandalone()?"start-app":"start-browser");gcEvent("lang-"+lang);if(isStandalone()&&!LS.get("firstApp",0)){LS.set("firstApp",1);gcEvent("install")}}catch(e){}};document.head.appendChild(s)}catch(e){}}
 
 /* ---------- chrome: header bar, theme, language ---------- */
+const THI={auto:'<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M2 9c2.5-2 4.5-2 7 0s4.5 2 7 0 3.5-1.6 6-.2"/><path d="M2 14c2.5-2 4.5-2 7 0s4.5 2 7 0 3.5-1.6 6-.2"/><path d="M2 19c2.5-2 4.5-2 7 0s4.5 2 7 0 3.5-1.6 6-.2"/></svg>',light:'<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',dark:'<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 019.5 4a8 8 0 1010.5 10.5z"/></svg>'};
 function applyTheme(){const r=document.documentElement,t=theme=="auto"?"mb":theme;r.setAttribute("data-theme",t);let m=$("meta[name=theme-color]");if(!m){m=document.createElement("meta");m.name="theme-color";document.head.appendChild(m)}m.content={mb:"#1a4486",light:"#192550",dark:"#0b1630"}[t]}
 const ICO0=['<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="4" rx="1.5"/><rect x="3" y="10" width="18" height="4" rx="1.5"/><rect x="3" y="16" width="18" height="4" rx="1.5"/></svg>','<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="3.5" width="6" height="5" rx="1"/><rect x="2.5" y="15.5" width="6" height="5" rx="1"/><rect x="15.5" y="9.5" width="6" height="5" rx="1"/><path d="M8.5 6H12v12H8.5M12 12h3.5"/></svg>','<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 21V3.5M5 4h12l-2.5 4.5L17 13H5"/></svg>'];
 $("#lang").onchange=e=>{lang=e.target.value;LS.set("lang",lang);if(osP)osP.then(O=>{try{O.User.setLanguage(OSL[lang]||"en");if(pSet.size)O.User.addTag("l",lang)}catch(x){}}).catch(()=>{});for(const k in SQ)delete SQ[k];render();pgRefresh()};
 $("#setb").onclick=()=>openSettings();
-$("#thm").onclick=()=>{theme={auto:"light",light:"dark",dark:"auto"}[theme];LS.set("theme",theme);applyTheme();chrome()};
+$("#thm").onclick=()=>{theme={auto:"light",light:"dark",dark:"auto"}[theme];LS.set("theme",theme);applyTheme();chrome();{const tl=T("theme")[theme];toast(tl.slice(tl.indexOf(" ")+1))}};
 const ICO=['<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1z"/></svg>',ICO0[0],ICO0[1],ICO0[2],'<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="19" cy="12" r="1.9"/></svg>'];
 function insBtn(){let b=$("#ins");const show=canInstall()&&!LS.get("installed",0);
   if(!show){if(b)b.remove();return}
   if(!b){b=document.createElement("button");b.id="ins";b.type="button";b.onclick=()=>doInstall();const lg=$(".lgw");lg?lg.after(b):$(".bar").appendChild(b)}
-  b.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><span>${esc(T("inst").b)}</span>`;b.title=T("inst").t}
-function chrome(){insBtn();{const c=$("#lgc");if(c)c.textContent=lang.toUpperCase()}try{nxcPaint()}catch(e){}document.documentElement.lang=lang;document.documentElement.dir=RTL(lang)?"rtl":"ltr";$("#lang").value=lang;{const tl=T("theme")[theme],i=tl.indexOf(" ");$("#thm").innerHTML=`<span>${esc(tl.slice(0,i))}</span><span class="tht"> ${esc(tl.slice(i+1))}</span>`;$("#thm").title=tl.slice(i+1)}
+  b.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><span>App</span>`;b.title=T("inst").t;b.setAttribute("aria-label",T("inst").t)}
+function chrome(){insBtn();try{const mt=document.querySelector('.tabs [data-v="more"],[data-v="more"]');if(mt)mt.classList.toggle("dot",chgNew())}catch(e){}{const c=$("#lgc");if(c)c.textContent=lang.toUpperCase()}try{nxcPaint()}catch(e){}document.documentElement.lang=lang;document.documentElement.dir=RTL(lang)?"rtl":"ltr";$("#lang").value=lang;{const tl=T("theme")[theme],i=tl.indexOf(" ");$("#thm").innerHTML=THI[theme];$("#thm").title=tl.slice(i+1);$("#thm").setAttribute("aria-label",tl.slice(i+1))}
   const tb=document.querySelectorAll(".tabs button");const ICN=[ICO[0],'<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 01-10 0z"/><path d="M17 5h3v2a3 3 0 01-3 3M7 5H4v2a3 3 0 003 3"/></svg>',ICO[3],'<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg>',ICO[4]];
   [T("home"),T("comp"),T("teams"),T("sailors"),T("more")].forEach((l,i)=>{if(tb[i])tb[i].innerHTML=ICN[i]+`<span>${esc(l)}</span>`});
   $("#off").textContent=T("official");const F=$("#foot");const op=F.querySelector("details")?.open;F.innerHTML=`<details class="how"${op?" open":""}><summary>${esc(T("howT"))}</summary><ul>${T("how").map(x=>`<li>${esc(x)}</li>`).join("")}</ul></details><p>${esc(T("foot"))}</p>`;$("#tmd").setAttribute("aria-label",T("teams"));stand()}
@@ -2013,13 +2291,18 @@ $("#main").addEventListener("click",e=>{
   const so=e.target.closest("[data-spoff]");if(so){spoilSet(false);return}
   const pa=e.target.closest("[data-pall]");if(pa){pa.disabled=true;pushToggle("all").finally(()=>render(true));return}
   const stg=e.target.closest("[data-settings]");if(stg){openSettings();return}
+  const chb=e.target.closest("[data-chg]");if(chb){openChanges();return}
   const us=e.target.closest("[data-unsel]");if(us){sel=null;render(true);return}
+  const ot=e.target.closest("[data-ot]");if(ot){openTeam(ot.dataset.ot);return}
   const sr=e.target.closest("[data-sc]");if(sr){openSailor(sr.dataset.sc,+sr.dataset.si);return}
   const g=e.target.closest("[data-go]");if(g&&!e.target.closest(".mr.team")){go(g.dataset.go);return}
   const f=e.target.closest("[data-f]");if(f){filt=f.dataset.f;render(true);return}
   const s=e.target.closest("[data-s]");if(s){sortBy=s.dataset.s;render(true);return}
-  const t=e.target.closest(".team,.tm,.tmx");if(t)openTeam(t.dataset.t)});
+  const t=e.target.closest(".team,.tm,.tmx,tr.tlink");if(t)openTeam(t.dataset.t)});
 $("#tmd").addEventListener("click",e=>{if(e.target.id=="tmd")e.target.close()});
+for(const root of [$("#pg"),$("#tmd")])root.addEventListener("click",e=>{if(e.defaultPrevented)return;const cur=PGS&&PGS.t=="team"&&!$("#pg").hidden&&root.id=="pg"?PGS.a:null;
+  const ot=e.target.closest("[data-ot],tr.tlink[data-t]");if(ot){const c=ot.dataset.ot||ot.dataset.t;if(isTeam(c)&&c!==cur){e.preventDefault();if(root.id=="tmd"&&root.open){root.close();setTimeout(()=>openTeam(c),120)}else openTeam(c)}return}
+  const sr=e.target.closest("[data-sc]");if(sr&&!sr.onclick){e.preventDefault();if(root.id=="tmd"&&root.open){root.close();setTimeout(()=>openSailor(sr.dataset.sc,+sr.dataset.si),120)}else openSailor(sr.dataset.sc,+sr.dataset.si)}});
 $("#main").addEventListener("toggle",e=>{const dd=e.target;if(!dd.matches||!dd.matches("details[data-sq]"))return;dd.open?sOpen.add(dd.dataset.sq):sOpen.delete(dd.dataset.sq);LS.set("sOpen",[...sOpen])},true);
 $("#main").addEventListener("keydown",e=>{if(e.key!="Enter"&&e.key!=" ")return;const rc=e.target.closest&&e.target.closest("[data-race]");if(rc&&e.target===rc){e.preventDefault();openRace(raceBy(rc.dataset.race))}});
 $("#tmd").addEventListener("close",()=>{trkStop();unlockScroll();$("#tmd").querySelectorAll("iframe,video,audio").forEach(f=>f.remove());openCode=null;if($("#tmd").querySelector(".ob"))LS.set("onb",1);$("#tmd").classList.remove("full");try{if(!NOBACK&&history.state&&history.state.sheet)history.back()}catch(e){}NOBACK=false});

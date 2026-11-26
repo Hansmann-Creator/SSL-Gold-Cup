@@ -8,7 +8,7 @@ Needs env ONESIGNAL_REST_KEY; the App ID comes from config.js. Never fails the c
 """
 import json, os, re, sys, urllib.request
 
-LANGS = ["en", "de", "fr", "es", "pt", "zh-Hans", "ar", "hi", "bn", "ur", "id", "ms", "ja", "th", "hu", "cs", "uk"]
+LANGS = ["en", "de", "fr", "es", "pt", "zh-Hans", "ar", "hi", "bn", "ur", "id", "ms", "ja", "th", "hu", "cs", "uk", "pl"]
 APPL = {"zh-Hans": "zh"}  # tag value "l" = app language code
 RN = {
  "en": {"r32": "1/32 Finals", "r16": "1/16 Finals", "r8": "1/8 Finals", "r4": "Quarter-finals", "sf": "Semi-finals", "pf": "Petit Final", "f": "Grand Final"},
@@ -27,6 +27,7 @@ RN = {
  "th": {"r32": "รอบ 1/32", "r16": "รอบ 1/16", "r8": "รอบ 1/8", "r4": "รอบก่อนรองชนะเลิศ", "sf": "รอบรองชนะเลิศ", "pf": "ชิงอันดับ 3", "f": "แกรนด์ไฟนอล"},
  "hu": {"r32": "1/32-es döntő", "r16": "1/16-os döntő", "r8": "Nyolcaddöntő", "r4": "Negyeddöntő", "sf": "Elődöntő", "pf": "Kisdöntő", "f": "Nagydöntő"},
  "cs": {"r32": "1/32 finále", "r16": "1/16 finále", "r8": "Osmifinále", "r4": "Čtvrtfinále", "sf": "Semifinále", "pf": "Malé finále", "f": "Velké finále"},
+ "pl": {"r32": "1/32 finału", "r16": "1/16 finału", "r8": "1/8 finału", "r4": "Ćwierćfinały", "sf": "Półfinały", "pf": "Mały finał", "f": "Wielki finał"},
  "uk": {"r32": "1/32 фіналу", "r16": "1/16 фіналу", "r8": "1/8 фіналу", "r4": "Чвертьфінали", "sf": "Півфінали", "pf": "Малий фінал", "f": "Гранд-фінал"},
 }
 W = {  # group, race, through, out, champion, decided
@@ -46,6 +47,7 @@ W = {  # group, race, through, out, champion, decided
  "th": ("กลุ่ม", "เรซ", "ผ่านเข้า", "ตกรอบ", "แชมป์โลก", "ตัดสินแล้ว"),
  "hu": ("Csoport", "futam", "továbbjut:", "kiesett", "Világbajnok", "eldőlt"),
  "cs": ("Skupina", "Rozjížďka", "postup:", "vypadli", "Mistr světa", "rozhodnuto"),
+ "pl": ("Grupa", "Wyścig", "awans do", "odpadają", "Mistrz świata", "rozstrzygnięte"),
  "uk": ("Група", "Гонка", "проходять у", "вибули", "Чемпіон світу", "визначено"),
 }
 NEXT = {"r32": "r16", "r16": "r8", "r8": "r4", "r4": "sf", "sf": "f"}
@@ -145,7 +147,7 @@ SPOILER_TXT = {"en": "Race finished – result hidden (spoiler-free mode). Open 
  "fr": "Course terminée – résultat masqué (sans spoiler).", "es": "Regata terminada – resultado oculto (sin spoilers).", "pt": "Regata encerrada – resultado oculto (sem spoilers).",
  "zh-Hans": "比赛结束 – 结果已隐藏（防剧透）。", "ar": "انتهى السباق – النتيجة مخفية (وضع بلا حرق).", "hi": "रेस खत्म – नतीजा छिपा है (स्पॉइलर-फ़्री)।", "bn": "রেস শেষ – ফল লুকানো (স্পয়লার-মুক্ত)।",
  "ur": "ریس ختم – نتیجہ چھپا ہوا ہے (اسپائلر فری)۔", "id": "Lomba selesai – hasil disembunyikan (bebas spoiler).", "ms": "Perlumbaan tamat – keputusan disembunyikan (bebas spoiler).",
- "ja": "レース終了 – 結果は非表示(ネタバレ防止)。", "th": "เรซจบแล้ว – ซ่อนผล (กันสปอยล์)", "hu": "A futam véget ért – eredmény elrejtve (spoilermentes).", "cs": "Rozjížďka skončila – výsledek skryt (bez spoilerů).", "uk": "Гонка завершилася – результат приховано (без спойлерів)."}
+ "ja": "レース終了 – 結果は非表示(ネタバレ防止)。", "th": "เรซจบแล้ว – ซ่อนผล (กันสปอยล์)", "hu": "A futam véget ért – eredmény elrejtve (spoilermentes).", "pl": "Wyścig zakończony – wynik ukryty (bez spoilerów).", "cs": "Rozjížďka skončila – výsledek skryt (bez spoilerů).", "uk": "Гонка завершилася – результат приховано (без спойлерів)."}
 
 def quiet_ranges(now_utc_hour=None):
     """Users pick a 9-hour night quiet time; tag q = its start as UTC hour. Returns the allowed q ranges right now."""
