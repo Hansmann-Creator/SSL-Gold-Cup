@@ -575,7 +575,7 @@ function squad(code){if(SQ[code])return SQ[code];const t=RO[code],I=INFO[code]||
   return SQ[code]={n:(t&&t.n)||I.nick||"",c:t?tc(t.c):(I.captain||""),ppl:out}}
 const av=(p,small)=>`<span class="av${small?" s":""}${p.img?" ph":""}">${p.img?`<img src="${esc(p.img)}" alt="" loading="lazy">`:esc(ini(p.name))}${/^\d+$/.test(p.no)?`<i>${esc(p.no)}</i>`:""}</span>`;
 const pinfo=(code,p)=>{const tk=tok(p.name);return PEOPLE.find(e=>e.t==code&&tk.includes(e.m))};
-const person=p=>`<div class="pp" role="button" tabindex="0" data-pi="${p.i}">${av(p)}<span class="nm">${esc(p.name)}${p.cap?`<span class="ctag">${T("capTag")}</span>`:""}<small>${/^\d+$/.test(p.no)?T("jersey")+" "+esc(p.no):T("numTbc")}${p.code&&pinfo(p.code,p)&&pinfo(p.code,p).rank?" · SSL #"+pinfo(p.code,p).rank:""}</small></span></div>`;
+const person=p=>`<div class="pp" role="button" tabindex="0" data-pi="${p.i}">${av(p)}<span class="nm">${NMH(p.name)}${p.cap?`<span class="ctag">${T("capTag")}</span>`:""}<small>${/^\d+$/.test(p.no)?T("jersey")+" "+esc(p.no):T("numTbc")}${p.code&&pinfo(p.code,p)&&pinfo(p.code,p).rank?" · SSL #"+pinfo(p.code,p).rank:""}</small></span></div>`;
 function capPhoto(code){const sq=squad(code);const p=sq.ppl.find(x=>x.cap&&x.img)||sq.ppl.find(x=>x.no=="10"&&x.img)||sq.ppl.find(x=>x.img);return p&&p.img}
 function routeText(code,T0){const R=(INFO[code]||{}).route,r=T("route"),e=R&&R.ev?T("ev")[R.ev]:"";
   if(!R)return T0?r.seeded(RNm(T0.path[0].r)):"–";
@@ -791,15 +791,15 @@ function sailorsView(){const TT=teams(),byC={};TT.forEach(t=>byC[t.code]=t);
   if(qq){const L=all.filter(x=>(x.p.name+" "+x.c+" "+NM(x.c)+" "+(x.p.k||"")+" "+(squad(x.c).n||"")).toLowerCase().includes(qq));
     L.sort((a,b)=>(b.p.img?1:0)-(a.p.img?1:0)||NM(a.c).localeCompare(NM(b.c),lang)||(+a.p.no||99)-(+b.p.no||99));
     const shown=L.slice(0,200);
-    return h+(L.length?`<div class="slist">${shown.map(({c,p})=>`<button class="srow" data-sc="${esc(c)}" data-si="${p.i}">${av(p,1)}<span><b>${esc(p.name)}</b><small>${FL(c)}${esc(NM(c))}${p.k?" · "+esc(p.k):p.cap?" · "+esc(T("captain")):""}</small></span></button>`).join("")}</div>`:`<p>${T("noTeam")}</p>`)}
+    return h+(L.length?`<div class="slist">${shown.map(({c,p})=>`<button class="srow" data-sc="${esc(c)}" data-si="${p.i}">${av(p,1)}<span><span class="nmx">${NMH(p.name)}</span><small>${FL(c)}${esc(NM(c))}${p.k?" · "+esc(p.k):p.cap?" · "+esc(T("captain")):""}</small></span></button>`).join("")}</div>`:`<p>${T("noTeam")}</p>`)}
   /* captains */
   const caps=codes.map(c=>{const pp=squad(c).ppl;const p=pp.find(x=>x.cap)||pp.find(x=>x.k=="Captain");return p?{c,p}:null}).filter(Boolean).sort((a,b)=>(b.p.img?1:0)-(a.p.img?1:0));
-  if(caps.length)h+=`<h3 class="sec">${T("sCaps")}</h3><div class="capr">${caps.map(({c,p})=>`<button class="capc" data-sc="${esc(c)}" data-si="${p.i}"><span class="cpa">${p.img?`<img src="${esc(p.img)}" alt="" loading="lazy">`:`<b>${esc(ini(p.name))}</b>`}</span><span class="cpn">${esc(p.name.split(" ")[0])}<small>${esc(p.name.split(" ").slice(1).join(" "))}</small></span><span class="cpf">${FL(c)}${esc(c)}</span></button>`).join("")}</div>`;
+  if(caps.length)h+=`<h3 class="sec">${T("sCaps")}</h3><div class="capr">${caps.map(({c,p})=>`<button class="capc" data-sc="${esc(c)}" data-si="${p.i}"><span class="cpa">${p.img?`<img src="${esc(p.img)}" alt="" loading="lazy">`:`<b>${esc(ini(p.name))}</b>`}</span><span class="cpn"><small>${esc(givenN(p.name))}</small>${esc(surname(p.name))}</span><span class="cpf">${FL(c)}${esc(c)}</span></button>`).join("")}</div>`;
   /* squads, by tournament status */
   h+=`<h3 class="sec">${T("sTeams")}</h3><p class="warn">${T("sHint")}</p><div class="sacc">${codes.map(c=>{const sq=squad(c),pp=sq.ppl.filter(p=>!p.extra),t=o(c),pics=pp.filter(p=>p.img).slice(0,4);
     const crew=[...pp].sort((a,b)=>(b.cap?1:0)-(a.cap?1:0)||(/^\d+$/.test(a.no)?+a.no:99)-(/^\d+$/.test(b.no)?+b.no:99));
     return `<details data-sq="${esc(c)}"${sOpen.has(c)?" open":""}${t.out?' class="out"':""}><summary><span class="sqf">${FL(c)}</span><span class="sqn"><b>${esc(NM(c))}${favs.has(c)?' <span class="star">★</span>':""}</b><small>${sq.n?esc(sq.n)+" · ":""}${pp.length} ${esc(T("sailors"))}${t.out?" · "+esc(T("stOut")):""}</small></span><span class="sqs" aria-hidden="true">${pics.map(p=>`<img src="${esc(p.img)}" alt="" loading="lazy">`).join("")}</span><span class="sqc" aria-hidden="true">›</span></summary>
-      <div class="sgrid">${crew.map(p=>`<button class="stile" data-sc="${esc(c)}" data-si="${p.i}"><span class="stp">${p.img?`<img src="${esc(p.img)}" alt="" loading="lazy">`:`<b>${esc(ini(p.name))}</b>`}${/^\d+$/.test(p.no)?`<i>${esc(p.no)}</i>`:""}</span><b>${esc(p.name)}</b><small>${esc(p.k?(T("roles")[p.k]?p.k:p.k):p.cap?T("captain"):"")}</small></button>`).join("")}</div><button class="sqteam" data-t="${esc(c)}">${T("sTeamPage")} ›</button></details>`}).join("")}</div>`;
+      <div class="sgrid">${crew.map(p=>`<button class="stile" data-sc="${esc(c)}" data-si="${p.i}"><span class="stp">${p.img?`<img src="${esc(p.img)}" alt="" loading="lazy">`:`<b>${esc(ini(p.name))}</b>`}${/^\d+$/.test(p.no)?`<i>${esc(p.no)}</i>`:""}</span><span class="sgn"><small>${esc(givenN(p.name))}</small><b>${esc(surname(p.name))}</b></span><small>${esc(p.k?(T("roles")[p.k]?p.k:p.k):p.cap?T("captain"):"")}</small></button>`).join("")}</div><button class="sqteam" data-t="${esc(c)}">${T("sTeamPage")} ›</button></details>`}).join("")}</div>`;
   return h}
 /* ---------- team numbers ---------- */
 function teamStats(TM){if(!TM)return"";let races=0,wins=0,pl=[],pts=0;const hist=[];
@@ -864,7 +864,7 @@ function openTeam(code){if(!isTeam(code))return;openCode=code;const d=$("#tmd"),
       L.sort((a,b)=>(/^\d+$/.test(a.no)?0:1)-(/^\d+$/.test(b.no)?0:1)||(b.img?1:0)-(a.img?1:0));
       h+=`<div class="role"><div class="rl"><b>${esc(k)}</b><small>${esc(T("roles")[k])}</small></div><div class="ppl">${L.map(person).join("")}</div></div>`});
     h+=`</div>`;const rest=rl.filter(p=>!p.k&&!p.cap);
-    if(rest.length)h+=`<h3>${T("wider")}</h3><div class="grp rest">${rest.map(p=>`<div class="pp" role="button" tabindex="0" data-pi="${p.i}">${av(p,1)}<span class="nm">${esc(p.name)}</span></div>`).join("")}</div>`;
+    if(rest.length)h+=`<h3>${T("wider")}</h3><div class="grp rest">${rest.map(p=>`<div class="pp" role="button" tabindex="0" data-pi="${p.i}">${av(p,1)}<span class="nm">${NMH(p.name)}</span></div>`).join("")}</div>`;
     h+=`<div class="tf">${T("squadNote")(rl.length,pics.length)}</div>`}
   h+=`<div class="tact">${pushShown()?`<button data-push="1" class="${pSet.has(code)?"on":""}" aria-pressed="${pSet.has(code)}">${T(pSet.has(code)?"pTeamOn":"pTeamOff")}</button>`:""}<button data-cal="${esc(code)}">${T("calBtn")}</button><button data-cmp="1">${T("cmpBtn")}</button><button data-br="1">${T("showPath")}</button></div></div>`;
   d.innerHTML=h;
@@ -881,17 +881,19 @@ function openTeam(code){if(!isTeam(code))return;openCode=code;const d=$("#tmd"),
 let lockY=0;
 function lockScroll(){const b=document.body;if(b.classList.contains("lock"))return;lockY=scrollY;b.style.top=-lockY+"px";b.classList.add("lock")}
 function unlockScroll(){const b=document.body;if(!b.classList.contains("lock"))return;b.classList.remove("lock");b.style.top="";scrollTo(0,lockY)}
+const NMH=n=>{const g=givenN(n);return `${g?`<span class="gn">${esc(g)}</span> `:""}<b class="sn">${esc(surname(n))}</b>`};
+function givenN(n){const sn=surname(n),w=String(n).trim();return w.endsWith(sn)?w.slice(0,w.length-sn.length).trim():""}
 function surname(n){const w=String(n).trim().split(/\s+/);if(w.length<2)return w[0]||"";let i=w.length-1;while(i>1&&/^(de|da|do|dos|das|del|della|di|van|von|der|den|ter|le|la|al|el|bin|ben|mac|st\.?)$/i.test(w[i-1]))i--;return w.slice(i).join(" ")}
 function show(d){if(!d.querySelector(".ob,.trkv"))d.classList.remove("full");if(!d.open){lockScroll();d.showModal();try{history.pushState({sheet:1},"")}catch(e){}}d.scrollTop=0;const th=d.querySelector(".th");if(th){th.tabIndex=-1;th.focus({preventScroll:true})}}
 function openSailor(code,i){const d=$("#tmd"),sq=squad(code),p=sq.ppl[i];if(!p)return;openCode=code;const PE=pinfo(code,p),TM=teams().find(x=>x.code==code),n=sq.ppl.length;
   const q2=encodeURIComponent;let h=`<div class="th"><button class="bk">${T("back")}</button><div class="thb"><button class="pv" aria-label="previous">‹</button><button class="nx2" aria-label="next">›</button><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">`;
-  h+=`<div class="shero">${p.img?`<img src="${esc(p.img)}" alt="${esc(p.name)}">`:`<span class="big">${esc(ini(p.name))}</span>`}<div><div class="nick">${FL(code)} ${esc(NM(code))}${sq.n?" · "+esc(sq.n):""}</div><h2>${esc(p.name)}</h2>${p.cap?`<span class="ctag">${T("capTag")}</span>`:""}</div></div>`;
+  h+=`<div class="shero">${p.img?`<img src="${esc(p.img)}" alt="${esc(p.name)}">`:`<span class="big">${esc(ini(p.name))}</span>`}<div><div class="nick">${FL(code)} ${esc(NM(code))}${sq.n?" · "+esc(sq.n):""}</div><h2 class="snh">${NMH(p.name)}</h2>${p.cap?`<span class="ctag">${T("capTag")}</span>`:""}</div></div>`;
   h+=`<div class="sstats"><div class="sl"><small>${T("position")}</small><b>${esc(p.k||(p.cap?T("captain"):T("posTbc")))}</b>${p.k?`<em style="color:var(--mute)">${esc(T("roles")[p.k])}</em>`:""}</div><div class="sl"><small>${T("jersey")}</small><b>${/^\d+$/.test(p.no)?"#"+esc(p.no):"–"}</b></div>${PE&&PE.rank?`<a class="sl" href="https://worldofsailors.com/ranking/men" target="_blank" rel="noopener"><small>${T("indRank")}</small><b>#${PE.rank}</b><em>${T("rankBoard")}</em></a>`:""}<button class="sl" data-tm="1"><small>${T("team")}</small><b>${FL(code)} ${esc(NM(code))}</b><em>${esc(TM?TM.txt:"")}</em></button></div>`;
   const hl=PE&&PE.b&&(PE.b[lang]||PE.b.en);
   const ph=profHtml(code,p.name);
   h+=(hl&&hl.length?`<h3>${T("highlights")}</h3><div class="grp"><ul class="hl">${hl.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`:"")+ph+(!(hl&&hl.length)&&!ph?`<p class="warn">${T("noInfo")}</p>`:"");
   h+=`<div class="slinks">${(PE&&PE.slug)||(PROF[code+"|"+p.name]||{}).slug?`<a href="https://worldofsailors.com/sailor/${esc((PE&&PE.slug)||PROF[code+"|"+p.name].slug)}" target="_blank" rel="noopener">${T("profile")}</a>`:`<a href="https://www.google.com/search?q=${q2('site:worldofsailors.com/sailor "'+p.name+'"')}" target="_blank" rel="noopener">${T("findProfile")}</a>`}<a href="https://www.google.com/search?q=${q2('site:sailing.org/sailor "'+p.name+'"')}" target="_blank" rel="noopener">${T("ws")}</a><a href="https://${esc(code.toLowerCase())}.sslgoldcup.com/" target="_blank" rel="noopener">${esc(code.toLowerCase())}.sslgoldcup.com ↗</a></div>`;
-  h+=`<h3>${T("mates")}</h3><div class="grp mates">${sq.ppl.filter(x=>x.i!=i).map(x=>`<button data-pi="${x.i}">${av(x,1)}<span>${esc(x.name)}</span></button>`).join("")}</div></div>`;
+  h+=`<h3>${T("mates")}</h3><div class="grp mates">${sq.ppl.filter(x=>x.i!=i).map(x=>`<button data-pi="${x.i}">${av(x,1)}<span>${NMH(x.name)}</span></button>`).join("")}</div></div>`;
   d.innerHTML=h;
   d.querySelector(".x").onclick=()=>d.close();d.querySelector(".bk").onclick=()=>openTeam(code);d.querySelector("[data-tm]").onclick=()=>openTeam(code);
   d.querySelector(".pv").onclick=()=>openSailor(code,(i-1+n)%n);d.querySelector(".nx2").onclick=()=>openSailor(code,(i+1)%n);
