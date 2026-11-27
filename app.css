@@ -1546,3 +1546,45 @@ html:not([data-tabv=home]) #nxc,html.pgon #nxc{display:none!important}
 .kcr i{font-style:normal;color:var(--mute);font-size:16px}.kcr.done i,.kcr.past i{color:var(--green)}
 .kctz{display:block;margin:6px 2px 14px;font-size:12px;color:var(--mute)}
 .kcal .obgo svg{width:20px;height:20px}
+/* install guide v3 – app look, tailored to the detected device */
+dialog.tmd.full:has(.ig){background:radial-gradient(120% 60% at 50% -10%,#2a63b8 0%,transparent 60%),linear-gradient(180deg,#123a7a 0%,#0b4f86 45%,#0a5a7a 100%)}
+dialog.tmd.full:has(.ig) .obtop{background:linear-gradient(180deg,#123a7a 65%,transparent)}
+.ig{max-width:480px}
+.ighero{text-align:center;margin:0 0 18px}
+.igapp{position:relative;display:inline-block;padding:6px;border-radius:28px;background:linear-gradient(150deg,rgba(255,210,31,.55),rgba(255,255,255,.08));box-shadow:0 14px 40px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.18) inset}
+.igapp img{display:block;border-radius:22px}
+.ighero h2{font-size:30px;font-weight:700;margin:14px 0 6px;color:#fff;letter-spacing:-.01em}
+.ighero p{font-size:16px;opacity:.9;margin:0 auto 12px;line-height:1.4;max-width:340px}
+.igperks{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.igperks span{font-size:13px;font-weight:600;padding:6px 11px;border-radius:99px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18)}
+.igdet{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);margin:0 0 12px}
+.igdi{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:rgba(255,210,31,.18);color:#ffd21f;flex:none}.igdi svg{width:22px;height:22px}
+.igdet>span:nth-child(2){flex:1;min-width:0;display:flex;flex-direction:column}.igdet small{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#ffd21f}
+.igdet b{font-size:14.5px;font-weight:600;line-height:1.3;overflow-wrap:anywhere}
+.igdet button{flex:none;max-width:42%;border:0;background:none;color:rgba(255,255,255,.85);font:inherit;font-size:12.5px;text-decoration:underline;text-underline-offset:3px;text-align:end}
+.igpk{display:flex;flex-wrap:wrap;gap:6px;margin:-2px 0 14px}
+.igpk button{border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);color:#fff;font:inherit;font-size:13px;font-weight:500;padding:7px 11px;border-radius:99px}
+.igpk button.on{background:#ffd21f;color:#10203f;border-color:transparent;font-weight:700}
+.ig .obgo{border-radius:18px;min-height:60px}.ig .obgo.obsec{background:rgba(255,255,255,.14);color:#fff;box-shadow:none;border:1px solid rgba(255,255,255,.25);min-height:52px;font-size:17px}
+.ig .obgo.igone{animation:igpulse 2.4s ease-in-out infinite}
+@keyframes igpulse{0%,100%{box-shadow:0 8px 24px rgba(0,0,0,.3),0 0 0 0 rgba(255,210,31,.55)}50%{box-shadow:0 8px 24px rgba(0,0,0,.3),0 0 0 10px rgba(255,210,31,0)}}
+.igintro{margin:6px 2px 12px;font-size:15px;line-height:1.45;opacity:.92}.igintro:empty{display:none}
+.igsteps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.igsteps>li{display:flex;gap:12px;padding:14px;border-radius:20px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14)}
+.ign{flex:none;width:32px;height:32px;border-radius:50%;background:#ffd21f;color:#10203f;font-weight:800;display:grid;place-items:center;font-size:16px}
+.igfin .ign{background:#34c759;color:#fff}
+.igb{flex:1;min-width:0}.igb p{margin:4px 0 10px;font-size:16.5px;line-height:1.45;font-weight:500}
+.igic{display:inline-grid;place-items:center;width:28px;height:28px;margin:0 1px;border-radius:9px;background:#fff;color:#14305f;vertical-align:-8px;box-shadow:0 2px 6px rgba(0,0,0,.25)}.igic svg{width:18px;height:18px}
+.igpic{display:block;width:100%;height:auto;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.28)}
+.igring{transform-box:fill-box;transform-origin:center;animation:igring 1.6s ease-in-out infinite}
+@keyframes igring{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.14);opacity:.7}}
+@media (prefers-reduced-motion:reduce){.igring,.ig .obgo.igone{animation:none}}
+.igtr{margin:14px 0 0;border-radius:18px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);padding:0 14px}
+.igtr summary{cursor:pointer;padding:13px 0;font-weight:700;font-size:15.5px;list-style:none;display:flex;justify-content:space-between}
+.igtr summary::after{content:"›";transform:rotate(90deg);opacity:.7}.igtr[open] summary::after{transform:rotate(-90deg)}
+.igtr ul{margin:0 0 12px;padding-inline-start:18px;font-size:15px;line-height:1.5}.igtr li+li{margin-top:6px}
+.igtr .igic{width:24px;height:24px;vertical-align:-6px}.igtr .igic svg{width:15px;height:15px}
+.igqr{display:flex;align-items:center;gap:14px;margin:14px 0 0;padding:14px;border-radius:18px;background:#fff;color:#14305f}
+.igqr img{flex:none;border-radius:8px}.igqr p{margin:0;font-weight:600;font-size:15px;line-height:1.4}
+dialog.tmd.full:has(.ig) .x{border-radius:50%;width:40px;height:40px;border:1px solid rgba(255,255,255,.25)}
+dialog.tmd.full:has(.ig) .oblang{border-radius:99px;padding:8px 14px}
