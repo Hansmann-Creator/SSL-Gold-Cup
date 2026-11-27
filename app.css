@@ -1623,7 +1623,7 @@ dialog.tmd.full:has(.ig) .oblang{border-radius:99px;padding:8px 14px}
 .cpr2{display:flex;align-items:center;gap:12px;padding:10px 14px;border:0;border-top:1px solid var(--line);background:none;color:var(--ink);font:inherit;text-align:start}
 .cpr2:first-child{border-top:0}.cpr2:active{background:var(--card2)}
 .cpr2 .cpf.s img,.cpr2 .cpf.s .flg{width:34px;height:24px;border-radius:4px;object-fit:cover}
-.cpn{flex:1;min-width:0;display:flex;flex-direction:column}.cpn b{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cpn small{font-size:12.5px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cpnm{flex:1;min-width:0;display:flex;flex-direction:column}.cpnm b{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cpnm small{font-size:12.5px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cprk{font-size:13px;font-weight:700;color:var(--mute);font-variant-numeric:tabular-nums}
 .cpduel2{display:flex;flex-direction:column;gap:8px;margin:0 0 14px}
 .cpduel2>div{display:grid;grid-template-columns:56px 1fr 56px;align-items:center;text-align:center;padding:12px 10px;border-radius:18px;background:var(--card);border:var(--bd)}
@@ -1659,7 +1659,14 @@ dialog.tmd.full:has(.ig) .oblang{border-radius:99px;padding:8px 14px}
 .cpq2 span{font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .cpq2 .ctag{font-style:normal;font-size:9.5px;padding:1px 5px;margin-inline-start:3px}
 .cpn0{color:var(--mute);font-size:14px}.cpsb .cpn0{text-align:end}
-.cpr2 .cpn{text-align:start;align-items:flex-start}
+.cpr2 .cpnm{text-align:start;align-items:flex-start}
 .cpq2 span{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.2;font-size:13px}
 .cpsq,.cpsqh{grid-template-columns:1fr 76px 1fr}.cprole{font-size:10.5px;padding:4px 4px}
 .cpq2 .av{margin:0!important}.cpsqg{padding:4px 12px}
+
+/* fit long names */
+.fitn{display:block;max-width:100%;white-space:nowrap;overflow:hidden}
+.fitn.fit2{white-space:normal;overflow-wrap:anywhere;line-height:1.1}
+.snh .sn.fitn{display:inline-block;vertical-align:bottom}
+.strip figcaption .fitn{text-overflow:clip}
+.strip figcaption .fitn{line-height:15px;min-height:15px}
