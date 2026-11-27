@@ -1417,3 +1417,22 @@ span.s3ph{cursor:default}
 .s3hero .s3ph{object-position:top;background:linear-gradient(180deg,#1d4a63,#0c3347)}
 
 .s3tabs{margin:2px 0 4px!important;padding:0!important}
+/* favourites: compact card (Home) + page */
+.fvwrap{margin:0 0 16px}
+.fvB{display:flex;align-items:center;gap:10px;width:100%;padding:11px 14px;border-radius:18px;background:var(--card);border:var(--bd);color:var(--ink);font:inherit;text-align:start;cursor:pointer}
+.fvBl{flex:1;min-width:0;display:flex;flex-direction:column}
+.fvBl small{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#ffd21f}
+:root[data-theme=light] .fvBl small{color:#a86d00}
+.fvBl b{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fvBs{display:flex;flex:none;padding-inline-start:8px}
+.fvBs>span{width:30px;height:30px;border-radius:50%;overflow:hidden;margin-inline-start:-8px;box-shadow:0 0 0 2px var(--bg);background:var(--card2);display:grid;place-items:center;flex:none}
+.fvBs>span img{width:100%;height:100%;object-fit:cover;object-position:top}
+.fvBs>span.t img,.fvBs>span .flg{width:100%!important;height:100%!important;object-fit:cover;object-position:center;border-radius:0;margin:0}
+.fvBs>span b{font-size:10px}
+.fvBs>span.more{font-size:11px;font-weight:800;background:#ffd21f;color:#1d2b4f}
+.fvB>i{font-style:normal;font-size:22px;color:var(--mute);flex:none}
+.fvBn{display:flex;align-items:center;gap:6px;flex-wrap:wrap;width:100%;border:0;background:none;color:var(--mute);font:inherit;font-size:13px;margin:7px 0 0;padding:0 6px;text-align:start;cursor:pointer}
+.fvBn .flg{width:18px;height:13px;border-radius:2px;margin:0}.fvBn b{color:var(--ink)}
+.fvh{margin:6px 0 4px;font-size:24px}
+.tb .fvBn{margin:0 0 6px;padding:0}
+.mine.fvpg{padding:4px 14px}
