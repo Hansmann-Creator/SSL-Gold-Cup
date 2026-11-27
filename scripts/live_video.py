@@ -48,6 +48,8 @@ def watch_info(vid):
         w = urllib.request.urlopen(urllib.request.Request(f"https://www.youtube.com/watch?v={vid}", headers=H), timeout=20).read().decode("utf-8", "replace")
     except Exception:
         return None, None, None
+    # a bot check / consent page has no player data: then the channel list's LIVE badge decides
+    if '"isLiveNow":' not in w: return None, None, None
     live = '"isLiveNow":true' in w
     st = re.search(r'"scheduledStartTime":"(\d+)"', w)
     ended = '"endTimestamp"' in w and not live
@@ -62,7 +64,7 @@ def main():
         print("live: could not read channel:", e); return
     vids = []; walk(data, vids)
     streams = []
-    now = datetime.datetime.utcnow().timestamp()
+    now = datetime.datetime.now(datetime.timezone.utc).timestamp()
     for kind, v in vids:
         if kind == "l":
             vid, title, live, up = from_lockup(v)
