@@ -74,7 +74,9 @@ def main():
     if mode == "window":
         print(int(first - LEAD * 60), int(last + dur + TAIL * 60), int(first))
     else:
-        print("on" if now >= first + dur - EARLY * 60 else "off")
+        # tracking can be ahead of the schedule: a finish reported by Georacing switches results on at once
+        fin = any(o.get("f") for k, o in (T.get("races") or {}).items() if k in keys)
+        print("on" if fin or now >= first + dur - EARLY * 60 else "off")
 
 
 if __name__ == "__main__":
