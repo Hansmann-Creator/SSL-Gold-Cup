@@ -19,6 +19,13 @@ jobs:
       ONESIGNAL_REST_KEY: ${{ secrets.ONESIGNAL_REST_KEY }}
     steps:
       - uses: actions/checkout@v4
+      - name: Keep the channel's video list for the race pages (hl.json)
+        run: |
+          timeout 60 python3 scripts/hl_videos.py || true
+          if [ -n "$(git status --porcelain hl.json)" ]; then
+            git config user.name "results-bot"; git config user.email "results-bot@users.noreply.github.com"
+            git add hl.json && git commit -qm "hl videos" && { git push -q origin main || { git pull -q --rebase origin main && git push -q origin main; }; } || true
+          fi
       - name: New highlight video? Notify followers who switched it on
         run: |
           timeout 90 python3 scripts/push_extra.py video || true
