@@ -1,6 +1,13 @@
 name: Sailor profiles + individual rankings (manual run; daily.yml runs it every night)
 on:
   workflow_dispatch:
+    inputs:
+      retry:
+        description: "Search again for sailors not found this week (1 = yes)"
+        default: "1"
+      budget:
+        description: "Time budget in minutes"
+        default: "300"
 permissions:
   contents: write
   actions: write
@@ -8,9 +15,12 @@ concurrency: { group: profiles, cancel-in-progress: false }
 jobs:
   p:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 340
     env:
       GH_TOKEN: ${{ github.token }}
+      SAIL_RETRY_MISS: ${{ inputs.retry || '1' }}
+      SAIL_BUDGET_MIN: ${{ inputs.budget || '300' }}
+      SAIL_THREADS: "6"
     steps:
       - uses: actions/checkout@v4
       - run: python3 scripts/sailors.py all 100

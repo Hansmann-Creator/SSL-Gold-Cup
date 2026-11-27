@@ -1842,3 +1842,4 @@ dialog.tmd:has(.kcal)>.th{flex:none}
 .kcd,.kcd.rd,.kcd:not(.rd):not(.out){height:49px}
 .kcls{-webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 26px),transparent);mask-image:linear-gradient(180deg,#000 calc(100% - 26px),transparent);padding-bottom:22px}
 :root[data-theme=light] .kcd>i:not(.kmo),:root[data-theme=light] .kclg i{color:color-mix(in srgb,var(--rc) 70%,#000)}:root[data-theme=light] .kclg i{background:color-mix(in srgb,var(--rc) 80%,#000)}
+#cbar img.cbssl{height:24px;width:auto;margin-inline-start:4px;opacity:.95}

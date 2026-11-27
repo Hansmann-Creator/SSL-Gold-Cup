@@ -25,4 +25,5 @@ jobs:
           git add roster.json profiles.json sp rank/ind.json updates.json positions_report.json 2>/dev/null
           if ! git diff --cached --quiet; then git commit -qm "daily refresh $(date -u +%F)"; git pull -q --rebase origin main; git push -q origin main && gh workflow run deploy.yml --ref main; fi
       - if: steps.run.outputs.code == '3'
-        run: gh issue create --title "Tägliches Update $(TZ=America/Sao_Paulo date +%d.%m.%Y): bitte ansehen" --body-file /tmp/report.md
+        run: |
+          gh issue create --title "Tägliches Update $(TZ=America/Sao_Paulo date +%d.%m.%Y): bitte ansehen" --body-file /tmp/report.md

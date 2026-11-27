@@ -3659,7 +3659,7 @@ function openQuick(){const d=$("#tmd");openCode=null;const th=T("theme"),ln=$("#
   d.querySelector(".x").onclick=()=>d.close();show(d);gcEvent("quick-open")}
 $("#setb").onclick=()=>openQuick();
 (function(){const c=document.createElement("div");c.id="cbar";c.setAttribute("aria-hidden","true");
-  c.innerHTML=`<img src="brand/lockup.webp" alt=""><i></i><button type="button" data-cbi hidden tabindex="-1">${QDL}</button><button type="button" data-cbs tabindex="-1">${$("#setb").querySelector("svg").outerHTML}</button>`;
+  c.innerHTML=`<img src="brand/lockup.webp" alt=""><i></i><button type="button" data-cbi hidden tabindex="-1">${QDL}</button><button type="button" data-cbs tabindex="-1">${$("#setb").querySelector("svg").outerHTML}</button><img class="cbssl" src="brand/ssl.png" alt="SSL">`;
   document.body.appendChild(c);c.querySelector("[data-cbi]").onclick=()=>doInstall();c.querySelector("[data-cbs]").onclick=()=>openQuick();
   const br=$("header.top>.brand");let away=false,up=false,ly=scrollY;const set=()=>{const on=away&&up;document.documentElement.classList.toggle("cbon",on);c.setAttribute("aria-hidden",on?"false":"true");c.querySelectorAll("button").forEach(b=>b.tabIndex=on?0:-1)};
   if(br&&"IntersectionObserver"in window)new IntersectionObserver(es=>{away=!es[0].isIntersecting;if(!away)up=false;set()}).observe(br);

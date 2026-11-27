@@ -12,7 +12,8 @@ Only fields the public profile page shows are kept: no e-mail, phone, date or pl
 Runs in GitHub Actions (the site is not reachable from the Claude container).
 Usage: python scripts/sailors.py [ranking|profiles|all] [top_n_profiles]
 """
-import json, os, re, sys, time, html, unicodedata, urllib.request
+import json, os, re, sys, time, html, unicodedata, urllib.request, threading
+from concurrent.futures import ThreadPoolExecutor
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 UA = {"User-Agent": "Mozilla/5.0 (compatible; GoldCupApp/1.0)"}
@@ -244,48 +245,61 @@ def profiles(top):
             for pl in (r[7] or []) + (r[8] or []):
                 known[(r[4], " ".join(norm(pl[2] + " " + pl[3])))] = pl[4]
     except Exception as e: print("no nations ranking", e)
-    cache, OUT, miss, done = {}, {}, [], 0
+    cache, OUT, miss = {}, {}, []
+    done = [0]
+    lock = threading.Lock()
     t0 = time.time(); budget = float(os.environ.get("SAIL_BUDGET_MIN", "95")) * 60
+    retry_all = os.environ.get("SAIL_RETRY_MISS") == "1"
     try: prev_miss = json.load(open(os.path.join(SP, "_miss.json"), encoding="utf-8")).get("seen", {})
     except Exception: prev_miss = {}
     today = time.strftime("%Y-%m-%d")
     seen_miss = {}
 
     def load(sl):
-        if sl not in cache:
-            cache[sl] = profile(sl); time.sleep(0.5)
-        return cache[sl]
+        with lock:
+            if sl in cache: return cache[sl]
+        r = profile(sl); time.sleep(0.3)
+        with lock: cache[sl] = r
+        return r
 
-    for code, t in RO.items():
-        iso = (TI.get(code) or {}).get("iso", "").lower()
-        for row in t.get("s", []):
-            name = row[0].strip(); key = f"{code}|{name}"; w = name.split()
-            if len(w) < 2: continue
-            if time.time() - t0 > budget:            # out of time: keep yesterday's entry
-                if key in OLD: OUT[key] = OLD[key]
-                continue
-            pm = prev_miss.get(key)
-            if pm and pm > time.strftime("%Y-%m-%d", time.gmtime(time.time() - 6 * 86400)) and not OLD.get(key, {}).get("slug"):
-                miss.append(key); seen_miss[key] = pm; continue   # searched in vain this week already
-            cands = []
-            k = (iso, " ".join(norm(name)))
-            if k in known: cands.append(known[k])
-            if OLD.get(key, {}).get("slug"): cands.append(OLD[key]["slug"])
-            base = list(dict.fromkeys([slugify(name), slugify(w[0] + " " + w[-1]), slugify(w[0] + " " + " ".join(w[-2:]))]))
-            cands += base + [b + "-1" for b in base] + [b + "-2" for b in base[:1]]
-            got = None
-            for c in dict.fromkeys(cands):
-                r = load(c)
-                if not r: continue
-                p, det = r
-                if not name_ok(p, name): continue
-                if p["iso"] == iso or ssl_gc(det): got = r; break
-            if got:
-                p, det = got
-                OUT[key] = legacy(p, det); done += 1
-                json.dump(det, open(os.path.join(SP, p["slug"] + ".json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
-            else:
-                miss.append(key); seen_miss[key] = today
+    def one(code, iso, row):
+        name = row[0].strip(); key = f"{code}|{name}"; w = name.split()
+        if len(w) < 2: return
+        if time.time() - t0 > budget:            # out of time: keep yesterday's entry
+            if key in OLD: OUT[key] = OLD[key]
+            return
+        pm = prev_miss.get(key)
+        if not retry_all and pm and pm > time.strftime("%Y-%m-%d", time.gmtime(time.time() - 6 * 86400)) and not OLD.get(key, {}).get("slug"):
+            with lock: miss.append(key); seen_miss[key] = pm
+            return   # searched in vain this week already
+        cands = []
+        k = (iso, " ".join(norm(name)))
+        if k in known: cands.append(known[k])
+        if OLD.get(key, {}).get("slug"): cands.append(OLD[key]["slug"])
+        # name orders seen on the team pages: "First Last", "LAST First", doubled first names
+        ww = list(dict.fromkeys(w))
+        base = list(dict.fromkeys([slugify(name), slugify(" ".join(ww)), slugify(w[0] + " " + w[-1]), slugify(w[0] + " " + " ".join(w[-2:])),
+                                   slugify(w[-1] + " " + " ".join(w[:-1])), slugify(w[-1] + " " + w[0]), slugify(" ".join(w[:2]))]))
+        cands += base + [b + "-1" for b in base[:4]] + [b + "-2" for b in base[:1]]
+        got = None
+        for c in dict.fromkeys(cands):
+            r = load(c)
+            if not r: continue
+            p, det = r
+            if not name_ok(p, name): continue
+            if p["iso"] == iso or ssl_gc(det): got = r; break
+        if got:
+            p, det = got
+            OUT[key] = legacy(p, det)
+            with lock: done[0] += 1
+            json.dump(det, open(os.path.join(SP, p["slug"] + ".json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+        else:
+            with lock: miss.append(key); seen_miss[key] = today
+
+    jobs = [(code, (TI.get(code) or {}).get("iso", "").lower(), row) for code, t in RO.items() for row in t.get("s", [])]
+    with ThreadPoolExecutor(int(os.environ.get("SAIL_THREADS", "6"))) as ex:
+        list(ex.map(lambda a: one(*a), jobs))
+    done = done[0]
     # top of the individual rankings (pages for sailors outside the Rio squads)
     try: R = json.load(open(os.path.join(ROOT, "rank", "ind.json"), encoding="utf-8"))
     except Exception: R = {}
@@ -293,12 +307,16 @@ def profiles(top):
     for g in ("men", "women"):
         for t in ("s", "c"):
             xs += [r[5] for r in (R.get(g, {}).get(t) or [])[:top]]
-    ext = 0
-    for sl in dict.fromkeys(xs):
-        if not sl or time.time() - t0 > budget: continue
+    ext = [0]
+    def rk1(sl):
+        if not sl or time.time() - t0 > budget: return
         r = load(sl)
         if r:
-            json.dump(r[1], open(os.path.join(SP, sl + ".json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":")); ext += 1
+            json.dump(r[1], open(os.path.join(SP, sl + ".json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+            with lock: ext[0] += 1
+    with ThreadPoolExecutor(int(os.environ.get("SAIL_THREADS", "6"))) as ex:
+        list(ex.map(rk1, list(dict.fromkeys(xs))))
+    ext = ext[0]
     # keep earlier matches the site did not answer this time (temporary errors), drop wrong ones we now reject
     for k, v in OLD.items():
         if k not in OUT and k not in miss and v.get("slug") and cache.get(v["slug"]) is None and os.path.exists(os.path.join(SP, v["slug"] + ".json")):
