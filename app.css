@@ -1873,3 +1873,6 @@ dialog.tmd:has(.kcal)>.th{flex:none}
 .glim figcaption{position:absolute;inset-inline:0;bottom:0;padding:14px 10px 5px;font-size:10px;line-height:1.3;background:linear-gradient(180deg,transparent,rgba(0,0,0,.6));text-align:end}
 .glim figcaption a{color:rgba(255,255,255,.85);text-decoration:none}
 .glh{position:static}
+.kcd .kfv{position:absolute;top:0;inset-inline-end:8px;font-size:10px;color:#ffd21f;line-height:1}
+.kcr .kfv2{color:#ffd21f;font-weight:800}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}

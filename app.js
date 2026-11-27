@@ -3360,6 +3360,7 @@ const KCX={en:["Race calendar","No racing scheduled",n=>`${n} race${n==1?"":"s"}
 for(const l in KCX)if(S[l])Object.assign(S[l],{kcT:KCX[l][0],kcRest:KCX[l][1],kcN:KCX[l][2]});
 var KCSEL=null;
 function kcDays(){const o=[],t0=Date.UTC(2026,10,16);for(let i=0;i<28;i++)o.push(new Date(t0+i*864e5).toISOString().slice(0,10));return o}
+function raceFav(x){try{const r=rnd(x.rid),g=r&&r.groups.find(y=>y.id==x.g);if(!g)return false;const F=new Set([...favs]);try{favSailors().forEach(z=>{if(z&&z.c)F.add(z.c)})}catch(e){}return g.rows.some(z=>F.has(z.team))}catch(e){return false}}
 const KRC={r32:"#36c28c",r16:"#4ec3ff",r8:"#9b8cff",r4:"#ff9f43",sf:"#ff5c8a",pf:"#9fb2d0",f:"#ffd21f"};
 function calPop(sel){const d=$("#tmd"),td=today(),days=kcDays(),ev=x=>x>="2026-11-19"&&x<="2026-12-13",byD={};SCH.forEach(x=>(byD[x.d]=byD[x.d]||[]).push(x));
   const rdays=Object.keys(byD).sort();KCSEL=sel||KCSEL||(byD[td]?td:rdays.find(x=>x>=td)||rdays[rdays.length-1]);
@@ -3367,12 +3368,12 @@ function calPop(sel){const d=$("#tmd"),td=today(),days=kcDays(),ev=x=>x>="2026-1
   const dt=(x,o)=>new Date(x+"T12:00:00Z").toLocaleDateString(LOC(),Object.assign({timeZone:"UTC"},o));
   const ridOf=L=>L.some(y=>y.rid=="f")?"f":L[0]&&L[0].rid;
   const cell=x=>{const L=byD[x]||[],n=+x.slice(8),rid=ridOf(L),done=L.length&&L.every(y=>raceDone(y)||rState2(y)=="past"),live=L.some(y=>rState2(y)=="now"),over=dayOver(x);
-    const cls=["kcd",ev(x)?"":"out",L.length?"rd":"",(done||over)&&L.length?"dn":"",x<td?"past":"",x==td?"tod":"",x==KCSEL?"sel":"",live?"live":""].filter(Boolean).join(" ");
+    const fv=L.some(raceFav);const cls=["kcd",fv?"fv":"",ev(x)?"":"out",L.length?"rd":"",(done||over)&&L.length?"dn":"",x<td?"past":"",x==td?"tod":"",x==KCSEL?"sel":"",live?"live":""].filter(Boolean).join(" ");
     const lab=rid?`<i>${live?'<span class="ldot"></span>':""}${esc(RS[rid]||"")}</i>`:(n==1||x==days[0])?`<i class="kmo">${esc(dt(x,{month:"short"}))}</i>`:"<i></i>";
-    return `<button class="${cls}"${rid?` style="--rc:${KRC[rid]||"#4ec3ff"}"`:""} data-kcd="${x}"${L.length||ev(x)?"":" disabled"} aria-pressed="${x==KCSEL}" aria-label="${esc(dt(x,{weekday:"long",day:"numeric",month:"long"}))}${L.length?" · "+esc(T("kcN")(L.length)):""}"><span class="kn">${n}</span>${lab}</button>`};
+    return `<button class="${cls}"${rid?` style="--rc:${KRC[rid]||"#4ec3ff"}"`:""} data-kcd="${x}"${L.length||ev(x)?"":" disabled"} aria-pressed="${x==KCSEL}" aria-label="${esc(dt(x,{weekday:"long",day:"numeric",month:"long"}))}${L.length?" · "+esc(T("kcN")(L.length)):""}"><span class="kn">${n}</span>${lab}${fv?'<b class="kfv" aria-hidden="true">★</b>':""}</button>`};
   const L=(byD[KCSEL]||[]).slice().sort((a,b)=>at(a)-at(b));
   const row=x=>{const st=rState2(x),multi=(rnd(x.rid)||{groups:[]}).groups.length>1,ok=raceDone(x)||st=="past";
-    return `<button class="kcr ${st}${ok?" ok":""}" style="--rc:${KRC[x.rid]||"#4ec3ff"}" data-race="${raceKey(x)}"><b>${x.ap?"~":""}${esc(x.t)}</b><u aria-hidden="true"></u><span><em>${esc(RNm(rnd(x.rid)))}</em>${multi?`${esc(T("group"))} ${esc(x.g)} · `:""}${esc(T("race"))} ${esc(x.n)}</span><i>${st=="now"?'<span class="ldot"></span>':ok?"✓":"›"}</i></button>`};
+    return `<button class="kcr ${st}${ok?" ok":""}" style="--rc:${KRC[x.rid]||"#4ec3ff"}" data-race="${raceKey(x)}"><b>${x.ap?"~":""}${esc(x.t)}</b><u aria-hidden="true"></u><span><em>${raceFav(x)?'<b class="kfv2">★</b> ':""}${esc(RNm(rnd(x.rid)))}</em>${multi?`${esc(T("group"))} ${esc(x.g)} · `:""}${esc(T("race"))} ${esc(x.n)}</span><i>${st=="now"?'<span class="ldot"></span>':ok?"✓":"›"}</i></button>`};
   const rids=[...new Set(SCH.map(x=>x.rid))].filter(r=>KRC[r]);
   const inR=td>=days[0]&&td<=days[days.length-1];
   d.innerHTML=`<div class="th"><div><div class="nick">SSL Gold Cup · Rio 2026</div><h2>${esc(T("kcT"))}</h2></div><div class="thb">${inR&&KCSEL!=td?`<button class="kctd" data-kcd="${td}">${esc(relDay(td,td))}</button>`:""}<button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb kcal">
@@ -3682,6 +3683,8 @@ function openQuick(){const d=$("#tmd");openCode=null;const th=T("theme"),ln=$("#
   d.querySelector("[data-qa]").onclick=()=>{d.close();openSettings()};
   d.querySelector(".x").onclick=()=>d.close();show(d);gcEvent("quick-open")}
 $("#setb").onclick=()=>openQuick();
+/* app icon badge while a race is on the water (installed app, Badging API) */
+{const bd=()=>{try{if(!("setAppBadge"in navigator))return;const on=SCH.some(x=>rState2(x)=="now");on?navigator.setAppBadge(1).catch(()=>{}):navigator.clearAppBadge().catch(()=>{})}catch(e){}};setTimeout(bd,4000);setInterval(bd,60000)}
 (function(){const c=document.createElement("div");c.id="cbar";c.setAttribute("aria-hidden","true");
   c.innerHTML=`<img src="brand/lockup.webp" alt=""><i></i><button type="button" data-cbi hidden tabindex="-1">${QDL}</button><button type="button" data-cbs tabindex="-1">${$("#setb").querySelector("svg").outerHTML}</button><img class="cbssl" src="brand/ssl.png" alt="SSL">`;
   document.body.appendChild(c);c.querySelector("[data-cbi]").onclick=()=>doInstall();c.querySelector("[data-cbs]").onclick=()=>openQuick();
