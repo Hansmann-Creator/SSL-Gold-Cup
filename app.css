@@ -1997,3 +1997,13 @@ dialog.tmd:has(.kcal)>.th{flex:none}
 @keyframes tkspin{to{transform:rotate(360deg)}}
 .tkdone{animation:tkin .35s ease-out}
 @keyframes tkin{from{transform:translateY(-8px);opacity:0}to{transform:none;opacity:1}}
+
+/* live leaderboard on a running race */
+#rlb .lbh{display:flex;align-items:baseline;justify-content:space-between;margin:2px 2px 8px}#rlb .lbh b{font-size:17px;display:flex;align-items:center;gap:8px}#rlb .lbh small{opacity:.65;font-variant-numeric:tabular-nums}
+#rlb .lbl{padding:4px 0;margin-bottom:6px}
+#rlb .lbr{display:flex;align-items:center;gap:10px;width:100%;padding:11px 14px;border:0;background:none;color:inherit;font:inherit;text-align:start}
+#rlb .lbr+.lbr{border-top:1px solid rgba(255,255,255,.08)}
+#rlb .lbr .rcp{flex:0 0 auto}#rlb .lbr img{width:28px;height:20px;border-radius:4px;flex:0 0 auto}
+#rlb .lbn{flex:1;min-width:0;display:flex;flex-direction:column}#rlb .lbn b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#rlb .lbn small{opacity:.7;font-size:12.5px}
+#rlb .lbv{display:flex;flex-direction:column;align-items:flex-end;font-variant-numeric:tabular-nums}#rlb .lbv b{font-size:16px}#rlb .lbv small{opacity:.6;font-size:11px}#rlb .lbv em{font-style:normal;font-size:12px;color:#ffcf5a}
+#rlb .lbn2{font-size:12px;opacity:.6;margin:0 4px 14px}
