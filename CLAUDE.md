@@ -20,6 +20,7 @@ Read this first in any new session. Everything needed to keep developing the app
 | `profiles.json` | Facts + bios from worldofsailors.com profiles, keyed `CODE|Name` (workflow `profiles.yml`). |
 | `overrides.json` | Manual corrections for the daily update (`set` position/number, `keep`, `drop`). Never written by bots. |
 | `sp/` | One JSON per sailor (worldofsailors.com public profile: results, ranking history, records, achievements, socials); `rank/ind.json` men/women individual rankings (top 500 skipper + crew). No e-mail/phone/birth data. |
+| `pron.json` | Name pronunciation per sailor (`ph` phonetic, `audio` → `audio/names/…`, `ok` verified). Shown on the sailor page. |
 | `people.json` | Hand-written highlight bullets for famous sailors. |
 | `img/` | Sailor portraits 320×320 webp, `CODE-NO-name-slug.webp`; `img/fl/` flags. |
 | `live.json` | Live-stream state (written by `live.yml`). |
@@ -59,4 +60,5 @@ Read this first in any new session. Everything needed to keep developing the app
 
 ## Done
 - GoatCounter live: `CFG.gc="ssl-gold-cup"` → https://ssl-gold-cup.goatcounter.com (events: start-app/start-browser, install = first launch from home screen per device – also counts iPhones, install-tap, install-guide-*, install-confirmed (Android only), lang-*, lang-auto-*/lang-manual-*). Open the app once with `?gcskip=1` on a device to exclude it from the stats (`?gcskip=0` undoes it).
+- Sailors tab (variant A): segment Rio 2026 / Men / Women (`rank/ind.json`), sailor page tabs Overview / Results / Ranking (history chart) / Bio from `sp/<slug>.json`; ranked sailors outside Rio open `#sailorx-<slug>` (top 100 of each list have an sp file).
 - Races show the actual start from Georacing (`timing.json` `s`/`plan`): “started 12:25”, planned time struck through.
