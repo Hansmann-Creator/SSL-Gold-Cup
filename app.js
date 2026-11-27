@@ -3316,8 +3316,10 @@ const isLiveT=t=>/\blive\b|ao vivo|en vivo|en direct|livestream/i.test(t)&&!/hig
 function hlFor(x){const P=(HLJ&&HLJ.pin)||{},all=[...((HLJ&&HLJ.v)||[]),...VIDS],by={};all.forEach(v=>{if(v&&v.id)by[v.id]=v});
   const pid=P[raceKey(x)]||P[x.d];if(pid)return by[pid]||{id:pid,t:T("hlT"),d:x.d+"T23:00:00Z"};
   const days=[...new Set(SCH.map(y=>y.d))].sort(),nx=days.find(d=>d>x.d)||"9999";
-  const L=Object.values(by).filter(v=>isHL(v)&&!isLiveT(v.t)&&(!SPOIL||Date.parse(v.d)<=SPCUT)).filter(v=>{const d=new Date(Date.parse(v.d)-13*36e5).toISOString().slice(0,10);return d>=x.d&&d<nx});
-  L.sort((a,b)=>Date.parse(a.d)-Date.parse(b.d));return L[0]||null}
+  const HLR=/highlight|recap|resumo|resumen|résumé|melhores momentos|best of|zusammenfassung/i,RN={r32:/1\/32/,r16:/1\/16/,r8:/1\/8|round of 16|octavos|oitavas/i,r4:/1\/4|quarter/i,sf:/semi/i,pf:/petit/i,f:/grand final|\bfinal\b/i}[x.rid];
+  const L=Object.values(by).filter(v=>HLR.test(v.t)&&!isLiveT(v.t)&&(!SPOIL||Date.parse(v.d)<=SPCUT)).filter(v=>{const d=new Date(Date.parse(v.d)-13*36e5).toISOString().slice(0,10);return d>=x.d&&d<nx});
+  const sc=v=>(new RegExp("(group|grupo|gruppe|groupe|gruppo)\\s*"+x.g+"\\b","i").test(v.t)?4:/(group|grupo|gruppe|groupe|gruppo)\s*[A-D]\b/i.test(v.t)?-4:0)+(RN&&RN.test(v.t)?2:0);
+  L.sort((a,b)=>sc(b)-sc(a)||Date.parse(a.d)-Date.parse(b.d));return L[0]||null}
 function hlCard(x){const v=hlFor(x);if(!v)return"";
   return `<h3>${esc(T("hlT"))}</h3><button class="hlc" data-hlv="${esc(v.id)}" data-hlt="${esc(v.t)}"><span class="hlth"><img src="https://i.ytimg.com/vi/${esc(v.id)}/hqdefault.jpg" alt="" loading="lazy"><i aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></i><em>${esc(wday(x.d))}</em></span><span class="hlb"><b>${esc(v.t)}</b><small>▶ ${esc(T("hlPlay"))} · YouTube</small></span></button>`}
 function openVid(id,t){const d=$("#tmd");openCode=null;
