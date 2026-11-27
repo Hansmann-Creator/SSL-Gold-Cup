@@ -1,0 +1,15 @@
+name: diag formsubmit
+on: { push: { branches: [diag-fs] } }
+jobs:
+  d:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for O in https://hansmann-creator.github.io ""; do
+            echo "== origin '$O'"
+            curl -sS -m 20 -i -X POST "https://formsubmit.co/ajax/diag-test@example.com" \
+              -H "Content-Type: application/json" -H "Accept: application/json" ${O:+-H "Origin: $O"} -H "Referer: https://hansmann-creator.github.io/SSL-Gold-Cup/" \
+              -d '{"Ticket":"DIAG","Beschreibung":"diag","_captcha":"false"}' | head -c 1500; echo
+          done
+          echo "== preflight"
+          curl -sS -m 20 -i -X OPTIONS "https://formsubmit.co/ajax/diag-test@example.com" -H "Origin: https://hansmann-creator.github.io" -H "Access-Control-Request-Method: POST" -H "Access-Control-Request-Headers: content-type,accept" | head -c 1200
