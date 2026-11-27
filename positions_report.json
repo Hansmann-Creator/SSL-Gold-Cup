@@ -1,0 +1,1042 @@
+{
+ "POR": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ },
+ "UKR": {
+  "removed": [],
+  "added": [],
+  "conf": [
+   {
+    "name": "ANASTASIA KOLESNICHENKO",
+    "rio": 11,
+    "rioPos": null,
+    "chart": [
+     "Floater"
+    ],
+    "site": [
+     "Trimmer"
+    ],
+    "xls": [],
+    "show": [
+     "Floater",
+     "Trimmer"
+    ]
+   }
+  ],
+  "multi": []
+ },
+ "COL": {
+  "removed": [],
+  "added": [],
+  "conf": [
+   {
+    "name": "Paula Sanchez",
+    "rio": 8,
+    "rioPos": "Helm",
+    "chart": [
+     "Floater"
+    ],
+    "site": [
+     "Floater"
+    ],
+    "xls": [],
+    "show": [
+     "Helm",
+     "Floater"
+    ]
+   }
+  ],
+  "multi": []
+ },
+ "ANT": {
+  "removed": [],
+  "added": [],
+  "conf": [
+   {
+    "name": "Shanoy Malone",
+    "rio": 7,
+    "rioPos": "Main Trimmer",
+    "chart": [],
+    "site": [
+     "Floater"
+    ],
+    "xls": [],
+    "show": [
+     "Main Trimmer",
+     "Floater"
+    ]
+   }
+  ],
+  "multi": []
+ },
+ "LTU": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ },
+ "TAH": {
+  "removed": [],
+  "added": [],
+  "conf": [
+   {
+    "name": "Teiki Hacheche",
+    "rio": 8,
+    "rioPos": "Helm",
+    "chart": [
+     "Tactician"
+    ],
+    "site": [
+     "Tactician"
+    ],
+    "xls": [],
+    "show": [
+     "Helm",
+     "Tactician"
+    ]
+   }
+  ],
+  "multi": []
+ },
+ "GRE": {
+  "removed": [],
+  "added": [],
+  "conf": [
+   {
+    "name": "Antonios BOUGIOURIS",
+    "rio": 2,
+    "rioPos": "Mid-Bow",
+    "chart": [
+     "Grinder"
+    ],
+    "site": [
+     "Grinder"
+    ],
+    "xls": [],
+    "show": [
+     "Mid-Bow",
+     "Grinder"
+    ]
+   },
+   {
+    "name": "Chrysa Marinou",
+    "rio": 3,
+    "rioPos": "Pit",
+    "chart": [
+     "Floater"
+    ],
+    "site": [
+     "Floater"
+    ],
+    "xls": [],
+    "show": [
+     "Pit",
+     "Floater"
+    ]
+   }
+  ],
+  "multi": []
+ },
+ "KOR": {
+  "removed": [],
+  "added": [],
+  "conf": [
+   {
+    "name": "Juhyeon Park",
+    "rio": 7,
+    "rioPos": "Main Trimmer",
+    "chart": [
+     "Bow"
+    ],
+    "site": [
+     "Bow"
+    ],
+    "xls": [],
+    "show": [
+     "Main Trimmer",
+     "Bow"
+    ]
+   },
+   {
+    "name": "SIYOU SUNG",
+    "rio": 4,
+    "rioPos": "Grinder",
+    "chart": [
+     "Mid-Bow"
+    ],
+    "site": [
+     "Mid-Bow"
+    ],
+    "xls": [],
+    "show": [
+     "Grinder",
+     "Mid-Bow"
+    ]
+   },
+   {
+    "name": "SUNGBIN SON",
+    "rio": 8,
+    "rioPos": "Helm",
+    "chart": [
+     "Pit"
+    ],
+    "site": [
+     "Pit"
+    ],
+    "xls": [],
+    "show": [
+     "Helm",
+     "Pit"
+    ]
+   },
+   {
+    "name": "MINJE LEE",
+    "rio": 1,
+    "rioPos": "Bow",
+    "chart": [
+     "Grinder"
+    ],
+    "site": [
+     "Grinder"
+    ],
+    "xls": [],
+    "show": [
+     "Bow",
+     "Grinder"
+    ]
+   },
+   {
+    "name": "DAJEONG KIM",
+    "rio": 2,
+    "rioPos": "Mid-Bow",
+    "chart": [
+     "Trimmer"
+    ],
+    "site": [
+     "Trimmer"
+    ],
+    "xls": [],
+    "show": [
+     "Mid-Bow",
+     "Trimmer"
+    ]
+   },
+   {
+    "name": "Sunjin An",
+    "rio": 5,
+    "rioPos": "Trimmer",
+    "chart": [],
+    "site": [
+     "Main Trimmer"
+    ],
+    "xls": [],
+    "show": [
+     "Trimmer",
+     "Main Trimmer"
+    ]
+   },
+   {
+    "name": "Yeongun Kim",
+    "rio": 3,
+    "rioPos": "Pit",
+    "chart": [
+     "Floater"
+    ],
+    "site": [
+     "Floater"
+    ],
+    "xls": [],
+    "show": [
+     "Pit",
+     "Floater"
+    ]
+   }
+  ],
+  "multi": []
+ },
+ "EST": {
+  "removed": [],
+  "added": [],
+  "conf": [
+   {
+    "name": "Aasav Kevin Melvin",
+    "rio": 1,
+    "rioPos": "Bow",
+    "chart": [
+     "Bow"
+    ],
+    "site": [
+     "Bow",
+     "Pit"
+    ],
+    "xls": [],
+    "show": [
+     "Bow",
+     "Pit"
+    ]
+   },
+   {
+    "name": "Karl Kolk",
+    "rio": null,
+    "rioPos": null,
+    "chart": [],
+    "site": [
+     "Bow",
+     "Pit"
+    ],
+    "xls": [],
+    "show": [
+     "Bow",
+     "Pit"
+    ]
+   }
+  ],
+  "multi": []
+ },
+ "MAS": {
+  "removed": [],
+  "added": [],
+  "conf": [
+   {
+    "name": "Khairulnizam Mohd Afendy",
+    "rio": 10,
+    "rioPos": null,
+    "chart": [
+     "Helm"
+    ],
+    "site": [
+     "Floater"
+    ],
+    "xls": [],
+    "show": [
+     "Helm",
+     "Floater"
+    ]
+   },
+   {
+    "name": "Nasrul Syazwi Hanami",
+    "rio": 1,
+    "rioPos": "Bow",
+    "chart": [
+     "Bow",
+     "Floater"
+    ],
+    "site": [
+     "Bow"
+    ],
+    "xls": [],
+    "show": [
+     "Bow",
+     "Floater"
+    ]
+   }
+  ],
+  "multi": []
+ },
+ "CUB": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ },
+ "SEY": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ },
+ "URU": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ },
+ "MYA": {
+  "removed": [],
+  "added": [
+   [
+    "Min Min",
+    [
+     "rio",
+     "site"
+    ],
+    6,
+    [
+     "Trimmer"
+    ]
+   ]
+  ],
+  "conf": [],
+  "multi": []
+ },
+ "OMA": {
+  "removed": [],
+  "added": [],
+  "conf": [
+   {
+    "name": "Marwa Al Khaifi",
+    "rio": 6,
+    "rioPos": "Trimmer",
+    "chart": [
+     "Floater"
+    ],
+    "site": [
+     "Floater"
+    ],
+    "xls": [],
+    "show": [
+     "Trimmer",
+     "Floater"
+    ]
+   }
+  ],
+  "multi": []
+ },
+ "SGP": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ },
+ "HUN": {
+  "removed": [],
+  "added": [],
+  "conf": [
+   {
+    "name": "Aron Nemeth",
+    "rio": 8,
+    "rioPos": "Helm",
+    "chart": [
+     "Helm"
+    ],
+    "site": [
+     "Bow"
+    ],
+    "xls": [],
+    "show": [
+     "Helm"
+    ]
+   },
+   {
+    "name": "Marcell Goszleth",
+    "rio": 9,
+    "rioPos": "Tactician",
+    "chart": [
+     "Trimmer"
+    ],
+    "site": [
+     "Main Trimmer"
+    ],
+    "xls": [],
+    "show": [
+     "Tactician",
+     "Trimmer",
+     "Main Trimmer"
+    ]
+   },
+   {
+    "name": "Zsombor Gyapjas",
+    "rio": 7,
+    "rioPos": "Main Trimmer",
+    "chart": [
+     "Main Trimmer"
+    ],
+    "site": [
+     "Trimmer"
+    ],
+    "xls": [],
+    "show": [
+     "Main Trimmer"
+    ]
+   },
+   {
+    "name": "Róbert Bakóczy",
+    "rio": 6,
+    "rioPos": "Trimmer",
+    "chart": [
+     "Trimmer"
+    ],
+    "site": [
+     "Pit"
+    ],
+    "xls": [],
+    "show": [
+     "Trimmer"
+    ]
+   }
+  ],
+  "multi": []
+ },
+ "ECU": {
+  "removed": [],
+  "added": [],
+  "conf": [
+   {
+    "name": "Samuel Herrera",
+    "rio": 3,
+    "rioPos": "Pit",
+    "chart": [],
+    "site": [
+     "Bow"
+    ],
+    "xls": [],
+    "show": [
+     "Pit",
+     "Bow"
+    ]
+   },
+   {
+    "name": "Tadas Koreiva",
+    "rio": 6,
+    "rioPos": "Trimmer",
+    "chart": [],
+    "site": [
+     "Bow"
+    ],
+    "xls": [],
+    "show": [
+     "Trimmer",
+     "Bow"
+    ]
+   },
+   {
+    "name": "Juan Andres Santos",
+    "rio": 8,
+    "rioPos": "Helm",
+    "chart": [
+     "Pit"
+    ],
+    "site": [
+     "Pit"
+    ],
+    "xls": [],
+    "show": [
+     "Helm",
+     "Pit"
+    ]
+   },
+   {
+    "name": "John Birkett",
+    "rio": 9,
+    "rioPos": "Tactician",
+    "chart": [
+     "Grinder"
+    ],
+    "site": [
+     "Grinder"
+    ],
+    "xls": [],
+    "show": [
+     "Tactician",
+     "Grinder"
+    ]
+   },
+   {
+    "name": "Sebastian Herrera",
+    "rio": 1,
+    "rioPos": "Bow",
+    "chart": [],
+    "site": [
+     "Trimmer"
+    ],
+    "xls": [],
+    "show": [
+     "Bow",
+     "Trimmer"
+    ]
+   },
+   {
+    "name": "Daniela Rodriguez",
+    "rio": 4,
+    "rioPos": "Grinder",
+    "chart": [
+     "Floater"
+    ],
+    "site": [
+     "Floater"
+    ],
+    "xls": [],
+    "show": [
+     "Grinder",
+     "Floater"
+    ]
+   }
+  ],
+  "multi": []
+ },
+ "CHI": {
+  "removed": [],
+  "added": [],
+  "conf": [
+   {
+    "name": "Andrés Ducasse",
+    "rio": 5,
+    "rioPos": "Trimmer",
+    "chart": [
+     "Grinder"
+    ],
+    "site": [
+     "Grinder"
+    ],
+    "xls": [],
+    "show": [
+     "Trimmer",
+     "Grinder"
+    ]
+   },
+   {
+    "name": "Paula Herman",
+    "rio": 4,
+    "rioPos": "Grinder",
+    "chart": [
+     "Trimmer"
+    ],
+    "site": [
+     "Trimmer"
+    ],
+    "xls": [],
+    "show": [
+     "Grinder",
+     "Trimmer"
+    ]
+   }
+  ],
+  "multi": []
+ },
+ "RSA": {
+  "removed": [],
+  "added": [],
+  "conf": [
+   {
+    "name": "Georgeo Davaris",
+    "rio": 2,
+    "rioPos": "Mid-Bow",
+    "chart": [
+     "Floater"
+    ],
+    "site": [
+     "Floater"
+    ],
+    "xls": [],
+    "show": [
+     "Mid-Bow",
+     "Floater"
+    ]
+   }
+  ],
+  "multi": []
+ },
+ "THA": {
+  "removed": [],
+  "added": [],
+  "conf": [
+   {
+    "name": "Kala Phiriyaporn",
+    "rio": 17,
+    "rioPos": null,
+    "chart": [
+     "Mid-Bow"
+    ],
+    "site": [
+     "Bow"
+    ],
+    "xls": [],
+    "show": [
+     "Mid-Bow",
+     "Bow"
+    ]
+   },
+   {
+    "name": "Alex Frefel",
+    "rio": 2,
+    "rioPos": "Mid-Bow",
+    "chart": [
+     "Bow"
+    ],
+    "site": [
+     "Mid-Bow"
+    ],
+    "xls": [],
+    "show": [
+     "Mid-Bow",
+     "Bow"
+    ]
+   },
+   {
+    "name": "Nut Butmarasri",
+    "rio": 21,
+    "rioPos": null,
+    "chart": [
+     "Grinder"
+    ],
+    "site": [
+     "Trimmer"
+    ],
+    "xls": [],
+    "show": [
+     "Grinder",
+     "Trimmer"
+    ]
+   },
+   {
+    "name": "Navee Thumpsuntorn",
+    "rio": 7,
+    "rioPos": "Main Trimmer",
+    "chart": [
+     "Helm"
+    ],
+    "site": [
+     "Main Trimmer"
+    ],
+    "xls": [],
+    "show": [
+     "Main Trimmer",
+     "Helm"
+    ]
+   },
+   {
+    "name": "Don Whitcraft",
+    "rio": 8,
+    "rioPos": "Helm",
+    "chart": [
+     "Tactician"
+    ],
+    "site": [
+     "Tactician"
+    ],
+    "xls": [],
+    "show": [
+     "Helm",
+     "Tactician"
+    ]
+   }
+  ],
+  "multi": []
+ },
+ "JPN": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ },
+ "PER": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ },
+ "CZE": {
+  "removed": [],
+  "added": [],
+  "conf": [
+   {
+    "name": "Petr Fiala",
+    "rio": 8,
+    "rioPos": "Helm",
+    "chart": [
+     "Tactician"
+    ],
+    "site": [
+     "Helm"
+    ],
+    "xls": [],
+    "show": [
+     "Helm",
+     "Tactician"
+    ]
+   },
+   {
+    "name": "Tomas Musil",
+    "rio": null,
+    "rioPos": null,
+    "chart": [],
+    "site": [
+     "Main Trimmer",
+     "Tactician",
+     "Helm"
+    ],
+    "xls": [],
+    "show": [
+     "Main Trimmer",
+     "Tactician",
+     "Helm"
+    ]
+   },
+   {
+    "name": "Tomas Vika",
+    "rio": 4,
+    "rioPos": "Grinder",
+    "chart": [
+     "Grinder"
+    ],
+    "site": [
+     "Main Trimmer"
+    ],
+    "xls": [],
+    "show": [
+     "Grinder"
+    ]
+   },
+   {
+    "name": "Pavel Bobek",
+    "rio": 2,
+    "rioPos": "Mid-Bow",
+    "chart": [
+     "Helm"
+    ],
+    "site": [],
+    "xls": [],
+    "show": [
+     "Mid-Bow",
+     "Helm"
+    ]
+   },
+   {
+    "name": "Michaela Pavlišová",
+    "rio": null,
+    "rioPos": null,
+    "chart": [],
+    "site": [
+     "Pit",
+     "Bow"
+    ],
+    "xls": [],
+    "show": [
+     "Pit",
+     "Bow"
+    ]
+   },
+   {
+    "name": "Martin Trcka",
+    "rio": 9,
+    "rioPos": "Tactician",
+    "chart": [
+     "Main Trimmer"
+    ],
+    "site": [],
+    "xls": [],
+    "show": [
+     "Tactician",
+     "Main Trimmer"
+    ]
+   }
+  ],
+  "multi": []
+ },
+ "NZL": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ },
+ "SUI": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ },
+ "POL": {
+  "removed": [],
+  "added": [],
+  "conf": [
+   {
+    "name": "Mateusz Kusznierewicz",
+    "rio": null,
+    "rioPos": null,
+    "chart": [
+     "Helm"
+    ],
+    "site": [
+     "Pit"
+    ],
+    "xls": [],
+    "show": [
+     "Helm",
+     "Pit"
+    ]
+   },
+   {
+    "name": "Wiktoria Gołebiowska",
+    "rio": null,
+    "rioPos": null,
+    "chart": [
+     "Floater"
+    ],
+    "site": [
+     "Tactician"
+    ],
+    "xls": [],
+    "show": [
+     "Floater",
+     "Tactician"
+    ]
+   }
+  ],
+  "multi": []
+ },
+ "BRA": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ },
+ "CAN": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ },
+ "SWE": {
+  "removed": [],
+  "added": [],
+  "conf": [
+   {
+    "name": "Jesper Stålheim",
+    "rio": null,
+    "rioPos": null,
+    "chart": [
+     "Trimmer"
+    ],
+    "site": [
+     "Tactician"
+    ],
+    "xls": [],
+    "show": [
+     "Trimmer",
+     "Tactician"
+    ]
+   },
+   {
+    "name": "Emil Forsgren",
+    "rio": null,
+    "rioPos": null,
+    "chart": [
+     "Bow",
+     "Trimmer"
+    ],
+    "site": [
+     "Bow"
+    ],
+    "xls": [],
+    "show": [
+     "Bow",
+     "Trimmer"
+    ]
+   }
+  ],
+  "multi": []
+ },
+ "ARG": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ },
+ "FRA": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ },
+ "GBR": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ },
+ "DEN": {
+  "removed": [],
+  "added": [],
+  "conf": [
+   {
+    "name": "Sebastian Wright Olsen",
+    "rio": null,
+    "rioPos": null,
+    "chart": [
+     "Main Trimmer"
+    ],
+    "site": [
+     "Grinder"
+    ],
+    "xls": [],
+    "show": [
+     "Main Trimmer",
+     "Grinder"
+    ]
+   }
+  ],
+  "multi": []
+ },
+ "AUS": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ },
+ "NED": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ },
+ "ESP": {
+  "removed": [],
+  "added": [],
+  "conf": [
+   {
+    "name": "Alfredo Gonzalez",
+    "rio": null,
+    "rioPos": null,
+    "chart": [
+     "Tactician"
+    ],
+    "site": [
+     "Trimmer"
+    ],
+    "xls": [],
+    "show": [
+     "Tactician",
+     "Trimmer"
+    ]
+   },
+   {
+    "name": "Roberto Bermudez",
+    "rio": null,
+    "rioPos": null,
+    "chart": [
+     "Floater"
+    ],
+    "site": [
+     "Helm"
+    ],
+    "xls": [],
+    "show": [
+     "Floater",
+     "Helm"
+    ]
+   }
+  ],
+  "multi": []
+ },
+ "ITA": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ },
+ "GER": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ },
+ "USA": {
+  "removed": [],
+  "added": [],
+  "conf": [],
+  "multi": []
+ }
+}
