@@ -3,7 +3,7 @@ name: Backup check (every 10 minutes)
 # Safety net: runs only when the minute-by-minute job is not running.
 on:
   schedule:
-    - cron: "*/10 14-21 * 11,12 *"
+    - cron: "*/10 0-2,13-23 * 11,12 *"
   workflow_dispatch:
 
 permissions:
@@ -26,8 +26,8 @@ jobs:
         id: day
         run: |
           D=$(TZ=America/Sao_Paulo date +%F); H=$(TZ=America/Sao_Paulo date +%H)
-          case "$D" in 2026-11-2[6-9]|2026-12-0[2-5]|2026-12-0[7-9]|2026-12-10|2026-12-1[23]) RD=true;; *) RD=false;; esac
-          { [ "$H" -lt 11 ] || [ "$H" -ge 19 ]; } && RD=false
+          W=$(python3 scripts/plan.py window); RD=false
+          if [ "$W" != "none" ]; then read S E F <<< "$W"; [ "$(date +%s)" -le "$E" ] && [ "$(python3 scripts/plan.py results)" = "on" ] && RD=true; fi
           [ "${{ github.event_name }}" = "workflow_dispatch" ] && RD=true
           LIVE=$(gh run list -R "$GITHUB_REPOSITORY" --workflow live.yml --status in_progress --json databaseId -q length)
           [ "$LIVE" != "0" ] && RD=false && echo "live job running – nothing to do"

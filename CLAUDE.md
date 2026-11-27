@@ -35,10 +35,10 @@ Read this first in any new session. Everything needed to keep developing the app
 
 ## Workflows (.github/workflows)
 - `deploy.yml` – on push: build_extras.py (tracking mirror `trk/`), Playwright smoke test (`scripts/smoke.py`, must pass), publish Pages.
-- `live.yml` – race days 14–22 UTC, minute loop: results + push (`notify.py`), live stream (`live_video.py`), start reminders and live push (`push_extra.py`), tracking watcher (`trk_watch.py`).
+- `live.yml` – race days, window from `scripts/plan.py` (60 min before the first race until 2 h after the last can finish; results polled from first start + race length − 15 min; attempts every 20 min, runs queue, 6-h handover), minute loop: results + push (`notify.py`), live stream (`live_video.py`), start reminders and live push (`push_extra.py`), tracking watcher (`trk_watch.py`).
 - `ranking.yml` – mirrors the nations ranking twice a day.
 - `daily.yml` – every night 03:07 Rio: `scripts/daily.py` rebuilds roster.json from the team pages (plausibility checks, removals only after 2 days missing, `overrides.json` wins), then `scripts/sailors.py all` (profiles.json, `sp/<slug>.json` per sailor, `rank/ind.json` men/women rankings). Anomalies/squad changes → GitHub issue (mail to Hansi). Log in `updates.json`. Bots only write data JSON, never app code.
-- `update.yml` – results backup every 10 min. `extras.yml` – highlight-video push every 30 min. `profiles.yml` – manual run only (daily.yml does it every night).
+- `update.yml` – results backup every 10 min (only in the plan.py results phase, when live.yml isn't running). Schedule logic exists 3× (app.js SCH, build_extras.py, plan.py) – keep in sync. `extras.yml` – highlight-video push every 30 min. `profiles.yml` – manual run only (daily.yml does it every night).
 
 ## Conventions
 - Commit as `Hansi (via Claude) <hansmann-creator@users.noreply.github.com>`; push with `git pull -q --rebase --depth=20 origin main && git -c push.negotiate=true push -q origin main`.

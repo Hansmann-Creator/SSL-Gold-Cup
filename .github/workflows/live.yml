@@ -1,11 +1,14 @@
 name: Live results (every minute)
 
-# Race days, 11:00-19:00 Rio time (UTC-3) = 14:00-22:00 UTC.
-# A job may run at most 6 h, so two jobs cover the day; the second replaces the first.
+# Race days. The window comes from scripts/plan.py (same schedule as the app, incl. sched.json):
+#   loop starts 60 min before the first race (livestream, tracking, reminders),
+#   results are polled from ~15 min before the first race can finish (learned race length, timing.json),
+#   loop ends 2 h after the last race could finish (later if races are delayed).
+# GitHub's schedule is often late, so a run is attempted every 20 min; runs queue (no cancelling),
+# a run outside the window exits at once, and a queued run takes over when the 6-hour job limit is reached.
 on:
   schedule:
-    - cron: "0 14 * 11,12 *"
-    - cron: "40 19 * 11,12 *"
+    - cron: "*/20 0-2,11-23 * 11,12 *"
   push:
     branches: [main]
     paths: [".github/live_kick"]   # commit this file to (re)start the loop when GitHub's schedule is late
@@ -22,7 +25,7 @@ permissions:
 
 concurrency:
   group: live
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   live:
@@ -33,13 +36,16 @@ jobs:
       ONESIGNAL_REST_KEY: ${{ secrets.ONESIGNAL_REST_KEY }}
     steps:
       - uses: actions/checkout@v4
-      - name: Race day in Rio?
+      - name: Race day in Rio / inside the live window?
         id: day
         run: |
-          D=$(TZ=America/Sao_Paulo date +%F)
-          case "$D" in 2026-11-2[6-9]|2026-12-0[2-5]|2026-12-0[7-9]|2026-12-10|2026-12-1[23]) RD=true;; *) RD=false;; esac
+          W=$(python3 scripts/plan.py window); NOW=$(date +%s); RD=false
+          if [ "$W" != "none" ]; then read S E F <<< "$W"; RD=true
+            [ "$NOW" -gt "$E" ] && RD=false                      # window over
+            [ "$NOW" -lt $((S - 50 * 60)) ] && RD=false          # too early: a later run starts the loop
+          fi
           [ "${{ github.event_name }}" = "workflow_dispatch" ] && RD=true
-          echo "run=$RD" >> $GITHUB_OUTPUT; echo "Rio $D race-day=$RD"
+          echo "run=$RD" >> $GITHUB_OUTPUT; echo "Rio $(TZ=America/Sao_Paulo date '+%F %H:%M') window=$W run=$RD"
       - uses: actions/setup-python@v5
         if: steps.day.outputs.run == 'true'
         with: { python-version: "3.12" }
@@ -51,10 +57,19 @@ jobs:
           git config user.name "results-bot"; git config user.email "results-bot@users.noreply.github.com"
           START=$(date +%s)
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then END=$((START + ${{ inputs.minutes || 5 }} * 60)); else
-            END=$((START + 345 * 60)); STOP=$(date -u -d "today 22:00" +%s); [ $END -gt $STOP ] && END=$STOP; fi
+            END=$((START + 345 * 60)); fi
+          DISP=${{ github.event_name == 'workflow_dispatch' }}
           LAST=0; FAIL=0; ALERT=""
           while [ "$(date +%s)" -lt "$END" ]; do
             git pull -q --rebase origin main || { git rebase --abort; git reset -q --hard origin/main; }
+            RES=on
+            if [ "$DISP" != "true" ]; then
+              W=$(python3 scripts/plan.py window); [ "$W" = "none" ] && { echo "no races today"; break; }
+              read WS WE WF <<< "$W"
+              [ "$(date +%s)" -ge "$WE" ] && { echo "live window over"; break; }
+              if [ "$(date +%s)" -lt "$WS" ]; then sleep $((60 - $(date +%s) % 60)); continue; fi
+              RES=$(python3 scripts/plan.py results)
+            fi
             NOW=$(date +%s); STAMP=""; [ $((NOW - LAST)) -ge 600 ] && STAMP="--stamp"
             # live video of the SSL channel, every 2 minutes
             if [ $(( $(date +%s) / 60 % 2 )) -eq 0 ]; then
@@ -77,6 +92,7 @@ jobs:
             fi
             # start reminders (15 min before a race, opt-in)
             PUSH_STATE=/tmp/push_state.json timeout 60 python scripts/push_extra.py remind || true
+            if [ "$RES" = "on" ]; then
             cp results.json /tmp/old.json
             if timeout 50 python scripts/update_results.py $STAMP; then
               if ! git diff --quiet results.json; then
@@ -101,5 +117,6 @@ jobs:
                 else git checkout -q results.json 2>/dev/null || true; fi
               done
             fi
+            fi   # results phase
             sleep $((60 - $(date +%s) % 60))
           done
