@@ -192,6 +192,7 @@ def profile(slug):
     for t in sorted(ag.get("types") or [], key=lambda x: x.get("position") or 99):
         L = [[a.get("place") or "", short(a.get("received_at"))[:4], cls_name(a.get("competition_class_id"))] for a in t.get("achievements") or []]
         if L: ach.append([t.get("name") or "", t.get("color") or "", L])
+    ach = fix_gc_ach(ach, p.get("cc"))
     if ach: p["ach2"] = [[a[0], a[1], len(a[2])] for a in ach]
     rec = []
     rg = obj(s, "recordsGroup", lambda v: isinstance(v, dict) and "types" in v) or {}
@@ -204,9 +205,51 @@ def profile(slug):
                       "Crew" if "crew" in (r.get("user_role") or "") else "Skipper", r.get("rank")])
         L.sort(key=lambda x: x[0], reverse=True)
         if L: rec.append([t.get("name") or "", L])
+    rec = fix_gc_rec(rec)
     if rg.get("total") is not None: p["recn"] = rg.get("total")
     det = {"p": p, "res": res, "hist": hist, "ach": ach, "rec": rec}
     return p, det
+
+
+GC_YEAR = "2026"          # running edition
+GC_END = "2026-12-14"      # day after the Grand Final (13 Dec 2026)
+
+
+def gc_champion():
+    """Gold Cup 2026 winner (team code), set by hand in overrides.json as "gc_champion" after the Grand Final."""
+    try: return json.load(open("overrides.json")).get("gc_champion")
+    except Exception: return None
+
+
+def gc_running():
+    return time.strftime("%Y-%m-%d", time.gmtime()) < GC_END
+
+
+def fix_gc_ach(ach, cc=None):
+    """worldofsailors.com lists every sailor of a 2026 qualifier team as 'SSL Gold Cup Winner · Rio de Janeiro 2026'
+    (also Estonia/Lithuania/Portugal, who qualified in Grandson). That is the Qualifying Series, not the Gold Cup:
+    relabel it and drop the place. Only the real champion (overrides.json gc_champion, after the final) keeps 'Winner'.
+    Older editions (e.g. 2023) stay untouched."""
+    if not gc_running() and cc and cc == gc_champion(): return ach
+    out, q = [], []
+    for name, color, L in ach:
+        if name == "SSL Gold Cup Winner":
+            q += [["", e[1], e[2]] for e in L if e[1] == GC_YEAR]
+            L = [e for e in L if e[1] != GC_YEAR]
+        if L: out.append([name, color, L])
+    if q: out.append(["SSL Gold Cup Qualifier", "q", q[:1]])
+    return out
+
+
+def fix_gc_rec(rec):
+    """While the Final Series is running, worldofsailors shows an interim 'SSL Gold Cup 2026' rank (1/2/3) –
+    not a result. Drop those rows until the Grand Final is over; the qualifier rows stay."""
+    if not gc_running(): return rec
+    out = []
+    for t, L in rec:
+        L = [r for r in L if r[1] != "SSL Gold Cup " + GC_YEAR]
+        if L: out.append([t, L])
+    return out
 
 
 def name_ok(p, name):

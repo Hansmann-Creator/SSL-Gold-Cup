@@ -2935,8 +2935,9 @@ async function indLoad(){if(IND||INDL)return IND;INDL=true;try{const r=await fet
 const nf0=n=>{try{return Math.round(n).toLocaleString(LOC())}catch(e){return String(Math.round(n))}};
 const dfmt=d=>{try{return new Date(d+"T12:00:00Z").toLocaleDateString(LOC(),{day:"numeric",month:"short",year:"numeric",timeZone:"UTC"})}catch(e){return d}};
 const trendH=(pos,bef)=>{if(!pos||!bef)return "";const d=bef-pos;return d>0?`<i class="str up">▲${d}</i>`:d<0?`<i class="str dn">▼${-d}</i>`:""};
-const achName=n=>{const k=ACHK.findIndex(x=>x.toLowerCase()==String(n).toLowerCase());return k>=0?T("achL")[k]:n};
-const achIco=(n,c)=>/gold/i.test(n)||c=="gold"&&!/silver|bronze/i.test(n)?"🥇":/silver/i.test(n)?"🥈":/bronze/i.test(n)?"🥉":"🏆";
+const ACHQ={"en": "Qualified for the Final Series", "de": "Für die Final Series qualifiziert", "fr": "Qualifié pour les Final Series", "es": "Clasificado para las Final Series", "pt": "Classificado para a Final Series", "it": "Qualificato per le Final Series", "zh": "晋级总决赛阶段", "ar": "تأهل إلى السلسلة النهائية", "hi": "फ़ाइनल सीरीज़ के लिए क्वालिफ़ाई", "bn": "ফাইনাল সিরিজে কোয়ালিফাই", "ur": "فائنل سیریز کے لیے کوالیفائی", "id": "Lolos ke Final Series", "ms": "Layak ke Final Series", "ja": "ファイナルシリーズ出場権獲得", "th": "ผ่านเข้ารอบ Final Series", "hu": "Bejutott a Final Seriesbe", "cs": "Kvalifikace do Final Series", "uk": "Кваліфікувався до Final Series", "pl": "Awans do Final Series"};for(const l in ACHQ)if(S[l])S[l].achQ=ACHQ[l];
+const achName=n=>{if(n=="SSL Gold Cup Qualifier"||n=="SSL Gold Cup Winner 2026")return T("achQ");const k=ACHK.findIndex(x=>x.toLowerCase()==String(n).toLowerCase());return k>=0?T("achL")[k]:n};
+const achIco=(n,c)=>c=="q"||n=="SSL Gold Cup Qualifier"?"🎟️":/gold/i.test(n)||c=="gold"&&!/silver|bronze/i.test(n)?"🥇":/silver/i.test(n)?"🥈":/bronze/i.test(n)?"🥉":"🏆";
 const medEm=PF=>(PF.ach2||[]).filter(a=>/olympic/i.test(a[0])).map(a=>achIco(a[0]).repeat(Math.min(3,a[2]||1))).join("");
 const rioRank=PF=>PF.rk?(PF.rk.s||PF.rk.c||[])[0]:PF.rank;
 const catL=c=>{const m=T("cat")||{};return m[c]||c};
@@ -3005,7 +3006,7 @@ function sBody(C){/* C: {key,name,iso,flag,country,nick,code,chips,img,hd,PF,D,m
   h+=`<div class="s3tabs" role="tablist">${TB.map(([k,l])=>`<button role="tab" data-stab="${k}" class="${STAB==k?"on":""}" aria-selected="${STAB==k}">${esc(l)}</button>`).join("")}</div><div class="s3pane">`;
   const res=D?[...(D.res.s||[]).map(r=>[...r,"s"]),...(D.res.c||[]).map(r=>[...r,"c"])].sort((a,b)=>a[0]<b[0]?1:-1):[];
   const resRow=r=>`<div class="s3r">${rankPill(r[6]??"–")}<span><b>${esc(r[1])}</b><small>${esc([String(r[0]).slice(0,4),r[2],r[4],r[7]?T("boatsN")(r[7]):""].filter(Boolean).join(" · "))}</small></span><span class="s3rp"><em>${esc(catL(r[5]))}</em><small>${r[8]?nf0(r[8])+" "+esc(T("ptsS")):""}</small></span></div>`;
-  const achs=D&&D.ach&&D.ach.length?D.ach.map(a=>`<div class="s3a"><span class="s3ai">${achIco(a[0],a[1])}</span><span><b>${esc(achName(a[0]))}${a[2].length>1?` <em>×${a[2].length}</em>`:""}</b><small>${esc(a[2].map(x=>x[0]+" "+x[1]).join(" · "))}</small></span></div>`).join(""):"";
+  const achs=D&&D.ach&&D.ach.length?D.ach.map(a=>a[0]=="SSL Gold Cup Winner"&&a[2].every(x=>x[1]=="2026")?["SSL Gold Cup Qualifier","q",[["","2026",""]]]:a).map(a=>`<div class="s3a"><span class="s3ai">${achIco(a[0],a[1])}</span><span><b>${esc(achName(a[0]))}${a[2].length>1?` <em>×${a[2].length}</em>`:""}</b><small>${esc(a[2].map(x=>(x[0]+" "+x[1]).trim()).join(" · "))}</small></span></div>`).join(""):"";
   if(STAB=="ov"){
     if(achs)h+=`<h3>${T("achT")}</h3><div class="grp">${achs}</div>`;else{const top=C.code?profHtml(C.code,C.name,"top"):"";if(top)h+=top}
     h+=olyHtml(E);
@@ -3148,7 +3149,7 @@ function cmpTeamsH(a,b){const all=teams(),TA=all.find(t=>t.code==a),TB=all.find(
   return h+`<p class="warn">${esc(T("cmpNote"))}</p>`}
 function cmpRk(PF){const k=PF.rk||{};if(k.s&&k.c)return k.s[0]<=k.c[0]?["s",k.s]:["c",k.c];if(k.s)return["s",k.s];if(k.c)return["c",k.c];return PF.rank?["",[PF.rank,PF.pts]]:null}
 function cmpSailH(va,vb){const A=cmpP(va),B=cmpP(vb),RA=cmpRk(A.PF),RB=cmpRk(B.PF),SA=A.PF.st||{},SB=B.PF.st||{};
-  const best=R=>R&&R[1][4]?R[1][4][0]:null,med=PF=>(PF.ach2||[]).reduce((s,a)=>s+(+a[2]||0),0)||null,rate=s=>s.ev>=5?Math.round((s.pod||0)/s.ev*100):null;
+  const best=R=>R&&R[1][4]?R[1][4][0]:null,med=PF=>(PF.ach2||[]).filter(a=>a[1]!="q").reduce((s,a)=>s+(+a[2]||0),0)||null,rate=s=>s.ev>=5?Math.round((s.pod||0)/s.ev*100):null;
   const pos=p=>(p.ks&&p.ks.length?p.ks:p.k?[p.k]:[]).join(" / ")||(p.cap?T("capTag"):"–");
   let h=`<div class="grp cbg"><div class="cbr cbt2"><span>${FL(A.c)} ${esc(NM(A.c))}</span><small>${esc(T("team"))}</small><span>${FL(B.c)} ${esc(NM(B.c))}</span></div><div class="cbr cbt2"><span>${esc(pos(A.p))}</span><small>${esc(T("position"))}</small><span>${esc(pos(B.p))}</span></div></div>`;
   h+=`<h3>${esc(T("stRank"))} · worldofsailors.com</h3><div class="grp cbg">${cmpBar(T("stRank"),RA&&RA[1][0],RB&&RB[1][0],{low:1,fmt:v=>v?"#"+nf0(v):"–",sub:[RA,RB].some(R=>R&&R[0])?[RA,RB].map(R=>R&&R[0]?(R[0]=="c"?T("svCr"):T("svSk")):"–").join(" / "):""})}${cmpBar(T("stPtsT"),RA&&RA[1][1],RB&&RB[1][1])}${cmpBar(T("stBest"),best(RA),best(RB),{low:1,fmt:v=>v?"#"+nf0(v):"–"})}${cmpBar(T("stEv"),SA.ev,SB.ev,{cmp:false})}${cmpBar(T("winsN"),SA.win,SB.win)}${cmpBar(T("podN"),SA.pod,SB.pod)}${cmpBar(T("scRate"),rate(SA),rate(SB),{fmt:v=>v==null?"–":v+" %",sub:T("scRateMin")})}${cmpBar(T("scMed"),med(A.PF),med(B.PF))}${cmpBar(T("recT"),A.PF.recn,B.PF.recn,{cmp:false})}</div>`;
@@ -3529,7 +3530,7 @@ function pFav(){const d=$("#pg"),TT=teams().filter(t=>favs.has(t.code)),SF=favSa
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-favpg]");if(!b)return;e.preventDefault();PGPUSHED=true;pgGo({t:"fav"})});
 
 function profHtml(code,name,part){const P=PROF[code+"|"+name];if(!P)return"";let h="";
-  const ach=(P.ach||[]).map(([n,l])=>{const k=ACHK.findIndex(x=>x.toLowerCase()==String(l).toLowerCase());return `<span class="ach"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 2h10l-2.5 6.2A6 6 0 1 1 9.5 8.2zM12 11a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" fill="currentColor"/></svg>${n>1?n+"× ":""}${esc(k>=0?T("achL")[k]:l)}</span>`}).join("");
+  const ach=(P.ach||[]).map(([n,l])=>{const k=ACHK.findIndex(x=>x.toLowerCase()==String(l).toLowerCase());return `<span class="ach"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 2h10l-2.5 6.2A6 6 0 1 1 9.5 8.2zM12 11a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" fill="currentColor"/></svg>${n>1?n+"× ":""}${esc(k>=0?T("achL")[k]:achName(l))}</span>`}).join("");
   if(part=="top"){if(ach)h+=`<div class="achs">${ach}</div>`;return h}
   if(part=="bio"){if(P.bio&&typeof P.bio=="string"){const bt=bioClean(P.bio),own=/(^|[\s(])(I|I'm|I’m|I've|my|My|me)\b/.test(bt);if(bt)h+=`<h3>${T("bioT")}</h3><div class="grp pbio"><p>${esc(bt)}</p><small>${esc(own?T("ownW"):T("srcSSL"))}${lang!="en"?" · English":""}</small></div>`}return h}
   const rec=P.rec||{};const secs=Object.keys(rec).length?Object.entries(rec):[["Olympic Games",(P.oly||[]).map(([y,c,cl,r])=>[y,"",c,"",cl,"",r])],["World Championship",(P.wc||[]).map(([y,cl,r])=>[y,"","","",cl,"",r])],["Continental Championship",(P.ec||[]).map(([y,cl,r])=>[y,"","","",cl,"",r])]].filter(x=>x[1].length);
