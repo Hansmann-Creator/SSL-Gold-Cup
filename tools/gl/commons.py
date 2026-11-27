@@ -10,15 +10,13 @@ from PIL import Image, ImageDraw, ImageFont
 UA = {"User-Agent": "SSLGoldCupCompanion/1.0 (https://hansmann-creator.github.io/SSL-Gold-Cup/; glossary images)"}
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
 Q = {
- "ssl47": "SSL47 Star Sailors League", "mainsail": "mainsail racing yacht close up", "jib": "jib sail racing yacht", "gennaker": "gennaker racing yacht",
- "bowsprit": "bowsprit gennaker regatta", "keel": "bulb keel sailing yacht", "rudder": "rudder racing yacht stern", "boom": "boom mainsail regatta",
- "winch": "winch sailing yacht", "telltales": "telltales sail", "traveller": "mainsheet traveller yacht", "backstay": "backstay racing yacht",
- "tack": "yacht tacking regatta", "gybe": "gybe regatta gennaker", "broach": "broach sailing yacht", "hoist": "spinnaker hoist regatta",
- "drop": "spinnaker drop crew regatta", "start-line": "regatta start line yachts", "committee": "regatta committee boat flags",
- "windward-mark": "windward mark rounding regatta", "gate": "leeward mark rounding regatta", "umpire": "umpire boat match race",
- "close-hauled": "yachts close hauled regatta", "run": "yachts downwind spinnakers regatta", "sea-breeze": "Guanabara Bay sailing boats",
- "current": "Guanabara Bay entrance Sugarloaf", "grinder": "grinder pedestal winch yacht", "helm": "helmsman racing yacht wheel",
- "heel": "racing yacht heeling", "overlap": "yachts overlapped mark rounding", "gust": "dinghy gust heeling", "halyard": "halyards mast sailing yacht",
+ "ssl47": "Star Sailors League", "mainsail": "mainsail", "jib": "jib sail", "gennaker": "gennaker", "bowsprit": "bowsprit yacht",
+ "keel": "keel bulb", "rudder": "rudder yacht", "boom": "sailboat boom", "winch": "sailing winch", "telltales": "telltales sail",
+ "traveller": "mainsheet traveller", "backstay": "backstay", "tack": "tacking yacht", "gybe": "gybing", "broach": "broaching yacht",
+ "hoist": "spinnaker hoist", "drop": "spinnaker takedown", "start-line": "regatta start", "committee": "committee boat regatta",
+ "windward-mark": "mark rounding", "gate": "regatta buoy", "umpire": "umpire boat", "close-hauled": "close hauled", "run": "spinnaker downwind",
+ "sea-breeze": "Guanabara Bay regatta", "current": "Guanabara Bay", "grinder": "grinder winch", "helm": "helmsman yacht",
+ "heel": "heeling yacht", "overlap": "yachts racing", "gust": "regatta wind", "halyard": "halyard",
 }
 FREE = re.compile(r"^(cc0|public domain|pd|cc by(-sa)? [0-9.]+|cc-by(-sa)?-[0-9.]+)", re.I)
 
@@ -36,7 +34,7 @@ def strip(x): return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", x 
 
 
 def search(q, n=8):
-    p = {"action": "query", "format": "json", "generator": "search", "gsrnamespace": 6, "gsrsearch": q + " filetype:bitmap", "gsrlimit": 24,
+    p = {"action": "query", "format": "json", "generator": "search", "gsrnamespace": 6, "gsrsearch": q + " filetype:bitmap -map -drawing -diagram", "gsrlimit": 24,
          "prop": "imageinfo", "iiprop": "url|extmetadata|size", "iiurlwidth": 420}
     r = get("https://commons.wikimedia.org/w/api.php?" + urllib.parse.urlencode(p)) or {}
     out = []
