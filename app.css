@@ -1718,3 +1718,7 @@ dialog.tmd.full:has(.ig) .oblang{border-radius:99px;padding:8px 14px}
 @keyframes glhl{0%{background:color-mix(in srgb,#ffd21f 30%,var(--card))}100%{background:var(--card)}}
 button.ch2.chgl{border:0;font:inherit;cursor:pointer}button.ch2.chgl::after{content:" ?";opacity:.6;font-size:.85em}
 .s3gl{cursor:pointer}.glin{display:inline-grid;place-items:center;width:14px;height:14px;border-radius:50%;background:var(--card2);font-style:normal;font-size:9px;font-weight:800;margin-inline-start:3px}
+/* hero chips always side by side; day chips one word */
+.hch{flex-wrap:nowrap}.hch button{flex:0 1 auto;min-width:0;max-width:62%}.hch button:last-child{max-width:48%}
+.hch .fitn{min-width:0}
+.dchips button b{font-size:15px}.dchips button{padding-block:10px}
