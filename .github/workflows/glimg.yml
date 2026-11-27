@@ -1,0 +1,27 @@
+name: Glossary photos from Wikimedia Commons
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "cand = contact sheets to branch glcand, get = download tools/gl/pick.json"
+        default: "cand"
+permissions:
+  contents: write
+jobs:
+  g:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install pillow -q
+      - if: inputs.mode == 'cand'
+        run: |
+          python3 tools/gl/commons.py cand
+          cd /tmp/glcand && git init -q && git checkout -q -b glcand && git add . && git -c user.name=bot -c user.email=bot@x commit -qm cand
+          git push -f -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" glcand
+      - if: inputs.mode == 'get'
+        run: |
+          python3 tools/gl/commons.py get tools/gl/pick.json
+          git config user.name "results-bot"; git config user.email "results-bot@users.noreply.github.com"
+          git add img/gl school/gl_img.json
+          if ! git diff --cached --quiet; then git commit -qm "glossary photos (Wikimedia Commons)"; git pull -q --rebase origin main; git push -q origin main; fi
