@@ -130,7 +130,7 @@ def wiki(e):
         t = s["title"]
         r = get(f"https://{L}.wikipedia.org/api/rest_v1/page/summary/" + urllib.parse.quote(t.replace(" ", "_"), safe=""))
         if not r or r.get("type") == "disambiguation": continue
-        x = (r.get("extract") or "").strip()
+        x = no_birth((r.get("extract") or "").strip())
         if len(x) < 40: continue
         u = ((r.get("content_urls") or {}).get("mobile") or {}).get("page") or f"https://{L}.wikipedia.org/wiki/" + urllib.parse.quote(t.replace(" ", "_"))
         out[L] = [t, x[:900], u]
@@ -141,19 +141,35 @@ def wiki(e):
 def olympedia(oid):
     h = get(f"https://www.olympedia.org/athletes/{oid}", js=False)
     if not h: return []
-    m = re.search(r'<table class="table"[^>]*>(.*?)</table>', h, re.S)
-    if not m: return []
-    rows, games = [], ""
-    for tr in re.findall(r"<tr[^>]*>(.*?)</tr>", m.group(1), re.S):
-        td = [html.unescape(re.sub(r"<[^>]+>", "", x)).strip() for x in re.findall(r"<td[^>]*>(.*?)</td>", tr, re.S)]
-        if len(td) < 4: continue
-        if td[0]: games = td[0]
-        if not games: continue
-        ev = td[1]; pos = td[-2] if len(td) >= 5 else td[-1]; med = td[-1] if len(td) >= 5 else ""
-        if ev.lower().startswith("sailing") and not td[0]: continue
-        yr = (re.search(r"(19|20)\d\d", games) or [""])[0]
-        rows.append([yr, games, ev, pos, med])
-    return rows[:20]
+    clean = lambda x: re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", x))).strip()
+    for tb in re.findall(r"<table[^>]*>(.*?)</table>", h, re.S):
+        hd = [clean(x).lower() for x in re.findall(r"<th[^>]*>(.*?)</th>", tb, re.S)]
+        if not hd or "games" not in hd[0]: continue
+        ix = lambda *ks: next((i for i, x in enumerate(hd) if any(k in x for k in ks)), None)
+        iev, ipos, imed = ix("discipline", "event"), ix("pos"), ix("medal")
+        rows, games = [], ""
+        for tr in re.findall(r"<tr[^>]*>(.*?)</tr>", tb, re.S):
+            td = [clean(x) for x in re.findall(r"<td[^>]*>(.*?)</td>", tr, re.S)]
+            if len(td) < len(hd) - 1: continue
+            if td[0]: games = td[0]; continue          # sport row: "2004 Summer Olympics | Sailing | UKR"
+            if not games or iev is None: continue
+            ev = re.sub(r"\s*\((Olympic|non-Olympic)\)", "", td[iev]).strip()
+            pos = td[ipos] if ipos is not None and ipos < len(td) else ""
+            med = td[imed] if imed is not None and imed < len(td) else ""
+            yr = (re.search(r"(19|20)\d\d", games) or [""])[0]
+            rows.append([yr, games, ev, pos, med])
+        if rows: return rows[:24]
+    return []
+
+
+BIRTH = re.compile(r"\b(born|geboren|née?|nacid[oa]|nascid[oa]|nat[oa]|lahir|dilahirkan|született|narozen[áa]?|urodzon[ya]|народив(ся|ся|лася))\b|出生|生まれ|ولد|وُلد|ولدت|जन्म|জন্ম|پیدا|เกิด|\*\s*\d", re.I)
+
+
+def no_birth(x):
+    """Wikipedia intros start with birth dates/places – drop them (the app keeps no birth data)."""
+    x = re.sub(r"\s*[\(（][^()（）]*\d{4}[^()（）]*[\)）]", "", x)
+    parts = re.split(r"(?<=[.!?。！？])\s*", x)
+    return " ".join(p for p in parts if p and not BIRTH.search(p)).strip()
 
 
 def main():
@@ -217,7 +233,8 @@ def main():
         aw = o.pop("_aw", []); pi = o.pop("_pi", []); ext = o.pop("_ext", {})
         o["aw"] = sorted({(LABELS.get(v, v), y) for v, y in aw}, key=lambda x: (x[1] or "0000"), reverse=True)
         o["pi"] = sorted({(LABELS.get(v, v), y) for v, y in pi if re.search(r"sailing|olympic|world|championship|cup|regatta|games", LABELS.get(v, ""), re.I)}, key=lambda x: (x[1] or x[0]), reverse=True)[:25]
-        o["ln"] = [[fmt[p][0], fmt[p][1].replace("$1", urllib.parse.quote(v, safe=""))] for p, v in ext.items() if p in fmt and fmt[p][1] and KEEP.search(fmt[p][0]) and "Instagram" not in fmt[p][0]]
+        o["ln"] = [[re.sub(r"\s*(people |athlete |sailor )?ID.*$", "", fmt[p][0]).strip(), fmt[p][1].replace("$1", urllib.parse.quote(v, safe=""))] for p, v in ext.items()
+                   if p in fmt and fmt[p][1] and KEEP.search(fmt[p][0]) and not re.search(r"Instagram|archived|Sports-Reference|member ID", fmt[p][0])]
         for k in ("aw", "pi", "ln", "ol", "wp"):
             if not o.get(k): o.pop(k, None)
     json.dump(OUT, open(os.path.join(ROOT, "ext.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"), sort_keys=True)
