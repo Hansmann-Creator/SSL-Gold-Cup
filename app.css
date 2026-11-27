@@ -1910,3 +1910,13 @@ dialog.tmd:has(.kcal)>.th{flex:none}
 .rht small{font-size:12px;color:var(--mute);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rht em{font-style:normal;font-size:12px;font-weight:700;color:var(--gold,#ffd21f)}
 .rht.ph{opacity:.7;justify-content:center;min-height:64px}
+
+/* glossary: titled sticky header with category filter */
+.glth{flex-wrap:wrap;row-gap:8px;padding-bottom:8px}
+.glth .glhd{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.15}
+.glth .glhd small{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#ffd21f}
+.glth .glhd b{font-size:19px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.glth .glcp{flex:0 0 calc(100% + 32px)!important;width:auto!important;order:9;margin:0 -16px!important;padding:0 16px 2px!important}
+.glth .glcp button small{opacity:.65;font-weight:600;margin-inline-start:2px}
+.glr .glt em[data-glc]{cursor:pointer}
+.glr .glt em[data-glc]:active{transform:scale(.95)}
