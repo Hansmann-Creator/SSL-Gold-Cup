@@ -1762,3 +1762,35 @@ html[data-tabv=home] header.top>#nxc{margin-top:20px!important}
 .hlc>button.hlth{width:100%;padding:0;border:0;margin:0;cursor:pointer;font:inherit;color:inherit}
 .hlth.hlon iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
 .hlb a{text-decoration:none;align-self:flex-start}
+/* header v3 (27 Nov): two glass buttons in the light arc (install left, display & language right), sheet behind the gear, compact bar when scrolling */
+header.top>.brand{display:grid!important;grid-template-columns:34px minmax(0,1fr) 34px;align-items:center;column-gap:10px;padding-inline:14px!important}
+header.top>.brand .lkp{grid-column:2;grid-row:1;justify-self:center;width:100%;max-width:560px}
+.hb{display:contents}
+.hb>.lgw,.hb>#thm{display:none!important}
+.hb>#ins,.hb>#setb{grid-row:1;width:34px!important;height:34px!important;min-width:0!important;min-height:0!important;padding:0!important;margin:0!important;border:0!important;border-radius:50%!important;display:grid!important;place-items:center;background:rgba(255,255,255,.12)!important;box-shadow:none!important;color:#fff!important;-webkit-tap-highlight-color:transparent;transition:background .15s}
+.hb>#ins{grid-column:1}.hb>#setb{grid-column:3}
+.hb>#ins span{display:none!important}.hb>#ins svg,.hb>#setb svg{width:17px!important;height:17px!important}
+.hb>#ins:active,.hb>#setb:active{background:rgba(255,255,255,.24)!important}
+header.top>.bar:has(#stand[hidden]):not(:has(#off:not([hidden]))){display:none!important}
+html[data-tabv=home] header.top>#nxc{margin-top:4px!important}
+@media(min-width:761px){header.top>.brand{grid-template-columns:40px minmax(0,1fr) 40px}.hb>#ins,.hb>#setb{width:40px!important;height:40px!important}}
+/* sheet: display & language */
+.qs .tb{display:flex;flex-direction:column;gap:10px}
+.qsl{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:var(--link);margin:4px 2px 0}
+.qseg{display:flex;gap:4px;padding:4px;border-radius:14px;background:var(--ctl,rgba(127,127,127,.14))}
+.qseg button{flex:1;min-width:0;border:0;border-radius:11px;padding:10px 4px;font:inherit;font-size:14px;font-weight:600;background:transparent;color:inherit;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qseg button.on{background:#fff;color:#0b2a5c;font-weight:800;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.qrow{position:relative;display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;padding:13px 14px;border-radius:14px;border:0;background:var(--ctl,rgba(127,127,127,.12));color:inherit;font:inherit;text-align:start}
+.qrow>b{flex:1;font-weight:600}.qrow>span{opacity:.8}.qrow svg{flex:none}
+.qrow select{position:absolute;inset:0;opacity:0;width:100%;height:100%;font-size:16px}
+.qrow.qin{background:rgba(255,210,31,.15)}.qrow.qin i{width:30px;height:30px;border-radius:50%;background:#ffd21f;color:#1d2b4f;display:grid;place-items:center;flex:none}
+.qrow.qin small{display:block;font-size:13px;opacity:.8;font-weight:400}
+/* compact bar */
+#cbar{position:fixed;top:0;left:0;right:0;z-index:30;display:flex;align-items:center;gap:10px;padding:calc(8px + env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) 8px max(14px,env(safe-area-inset-left));background:rgba(20,62,124,.8);-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.18);box-shadow:0 6px 20px rgba(0,20,60,.25);transform:translateY(-110%);transition:transform .22s ease;pointer-events:none}
+html.cbon:not(.pgon) #cbar{transform:none;pointer-events:auto}
+#cbar img{height:32px;width:auto;display:block}#cbar>i{flex:1}
+#cbar button{width:34px;height:34px;border-radius:50%;border:0;padding:0;display:grid;place-items:center;background:rgba(255,255,255,.12);color:#fff}
+#cbar button[hidden]{display:none}#cbar svg{width:17px;height:17px}
+:root[data-theme=light] #cbar{background:rgba(25,37,80,.86)}:root[data-theme=dark] #cbar{background:rgba(11,22,48,.86)}
+@media(min-width:761px){#cbar{display:none}}
+html:not([data-tabv=home]) header.top{padding-bottom:0}html:not([data-tabv=home]) header.top>.brand{margin-bottom:6px!important}
