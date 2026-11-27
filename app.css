@@ -1877,3 +1877,6 @@ dialog.tmd:has(.kcal)>.th{flex:none}
 .kcr .kfv2{color:#ffd21f;font-weight:800}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
 .glim img{height:auto!important;max-height:240px}
+/* school drawings: geometry is left-to-right, also in Arabic/Urdu (text anchors would flip otherwise) */
+.schsvg{direction:ltr;unicode-bidi:isolate}
+.schsvg text{unicode-bidi:plaintext}
