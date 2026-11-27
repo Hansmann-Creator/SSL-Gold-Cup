@@ -2013,10 +2013,10 @@ html.lvxon[data-tabv=home] #nxc{display:none!important}
 .lvx{display:block;margin:0 0 18px;padding:16px 16px 14px;border-radius:22px;background:rgba(8,22,58,.55);border:1px solid rgba(255,255,255,.14);color:#fff;text-align:start;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .12s}
 .lvx:active{transform:scale(.985)}
 .lvx .lvxt{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.lvx .lvxp{display:inline-flex;align-items:center;gap:7px;font-weight:800;font-size:14.5px;letter-spacing:.06em;padding:5px 12px 5px 10px;border-radius:999px;background:#e5383b;color:#fff;animation:lvxP 1.6s ease-in-out infinite}
+.lvx .lvxp{display:inline-flex;align-items:center;gap:7px;font-weight:800;font-size:14.5px;letter-spacing:.06em;padding:5px 12px 5px 10px;border-radius:999px;background:#e5383b;color:#fff;animation:lvxP 1.3s ease-in-out infinite;transform-origin:left center}
 .lvx .lvxp i{width:9px;height:9px;border-radius:50%;background:#fff;animation:lvxD 1.6s ease-in-out infinite}
-@keyframes lvxP{0%,100%{box-shadow:0 0 0 0 rgba(229,56,59,.55)}50%{box-shadow:0 0 0 7px rgba(229,56,59,0)}}
-@keyframes lvxD{50%{opacity:.3}}
+@keyframes lvxP{0%{box-shadow:0 0 0 0 rgba(229,56,59,.8);transform:scale(1)}45%{transform:scale(1.07)}70%{box-shadow:0 0 0 14px rgba(229,56,59,0)}100%{box-shadow:0 0 0 0 rgba(229,56,59,0);transform:scale(1)}}
+@keyframes lvxD{50%{opacity:.15;transform:scale(.7)}}
 @media (prefers-reduced-motion:reduce){.lvx .lvxp,.lvx .lvxp i{animation:none}}
 .lvx .lvxd{display:inline-flex;align-items:center;gap:4px;font-size:13.5px;font-weight:600;padding:5px 10px 5px 12px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16)}
 .lvx .lvxd b{font-size:17px;line-height:1;margin-top:-1px}
@@ -2036,3 +2036,9 @@ html.lvxon[data-tabv=home] #nxc{display:none!important}
 .lvx .lvxn{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.12);font-size:14.5px}
 .lvx .lvxn small{display:block;opacity:.65;font-size:13px}.lvx .lvxn b{font-weight:600}.lvx .lvxn em{font-style:normal;font-weight:700;color:#ffcf5a;white-space:nowrap}
 :root[data-theme=light] .lvx{background:#14306b}
+
+.lvx .lvxc{font-variant-numeric:tabular-nums}
+.lvx .lvxo .fls{display:flex;justify-content:space-between;align-items:center;gap:0;padding:0 4px;width:100%}
+.lvx .lvxo .fpB{gap:6px}.lvx .lvxo .fpB small{font-size:15px}.lvx .lvxo .fpB .flg,.lvx .lvxo .fls>.flg{width:32px!important;height:23px!important;border-radius:4px}
+.lvx .lvxo .fpB.w{padding:4px 10px 4px 8px}
+.lvx .lvxn{cursor:pointer;border-radius:0}.lvx .lvxn em b{margin-inline-start:6px;font-size:18px;line-height:1;opacity:.8}
