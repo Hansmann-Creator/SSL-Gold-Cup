@@ -3292,9 +3292,9 @@ function pTicket(){const d=$("#pg"),L=tkList(),C=T("tkCat"),ico={w:"💡",b:"�
   d.querySelectorAll("[data-tkcp]").forEach(b=>b.onclick=async()=>{const t=find(b.dataset.tkcp);if(!t)return;try{await navigator.clipboard.writeText(tkText(t));toast(T("tkCopied"))}catch(e){}});
   d.querySelectorAll("[data-tkgh]").forEach(a=>a.addEventListener("click",()=>gcEvent("ticket-github")));
   d.querySelectorAll("[data-tkre]").forEach(b=>b.onclick=async()=>{const L=tkList(),t=L.find(x=>x.id==b.dataset.tkre);if(!t)return;b.disabled=true;if(await tkSend(t)){t.st="sent";tkSave(L);TKLAST=t;gcEvent("ticket-sent")}pTicket();d.scrollTop=0});
-  f.onsubmit=async ev=>{ev.preventDefault();if(f._honey.value)return;const txt=f.m.value.trim();if(txt.length<10){msg.textContent=T("tkShort");f.m.focus();return}
+  f.onsubmit=async ev=>{ev.preventDefault();if(f._honey.value)return;const txt=f.m.value.trim();if(txt.length<10){msg.textContent=T("tkShort");msg.className="fbmsg err";f.m.classList.add("bad");f.m.after(msg);f.m.focus({preventScroll:true});f.m.scrollIntoView({block:"center",behavior:"smooth"});f.m.oninput=()=>{if(f.m.value.trim().length>=10){f.m.classList.remove("bad");msg.textContent=""}};return}
     const t={id:tkId(),cat:TKC,title:f.t.value.trim(),txt,name:f.n.value.trim(),mail:f.e.value.trim(),ctx:f.c.checked?tkCtxInfo():null,ts:Date.now(),st:"local"};
-    btn.disabled=true;msg.textContent="…";if(await tkSend(t))t.st="sent";const L=tkList();L.unshift(t);tkSave(L);TKLAST=t;gcEvent("ticket-"+TKC+(t.st=="sent"?"":"-local"));pTicket();d.scrollTop=0};
+    btn.disabled=true;btn.classList.add("busy");msg.className="fbmsg";btn.after(msg);msg.textContent="…";if(await tkSend(t))t.st="sent";const L=tkList();L.unshift(t);tkSave(L);TKLAST=t;gcEvent("ticket-"+TKC+(t.st=="sent"?"":"-local"));pTicket();d.scrollTop=0};
   pgShow(d)}
 /* ---------- QR bonus (#bonus): codes shown in the live broadcast unlock badges; codes are checked against hashes in bonus.json
    (generated with tools/bonus/make_codes.py – the plain codes never go into the repo). Not linked to any betting game. ---------- */

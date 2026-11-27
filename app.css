@@ -1988,3 +1988,12 @@ dialog.tmd:has(.kcal)>.th{flex:none}
 .rcg>button svg{flex:none}
 .rcg>button:only-child,.rcg>button:last-child:nth-child(odd){grid-column:1/-1}
 #cbar img.cbssl{margin-inline-start:0;margin-inline-end:2px}
+
+/* ticket form: visible validation and sending state */
+.tkf textarea.bad{border-color:#ff6b6b!important;box-shadow:0 0 0 3px rgba(255,107,107,.25)}
+.fbmsg.err{color:#ff8a8a;font-weight:600;margin:6px 2px 8px;font-size:14px}
+.obgo.busy{opacity:.7;pointer-events:none}
+.obgo.busy span::after{content:"";display:inline-block;width:14px;height:14px;margin-inline-start:8px;vertical-align:-2px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:tkspin .8s linear infinite}
+@keyframes tkspin{to{transform:rotate(360deg)}}
+.tkdone{animation:tkin .35s ease-out}
+@keyframes tkin{from{transform:translateY(-8px);opacity:0}to{transform:none;opacity:1}}
