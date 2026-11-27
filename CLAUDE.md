@@ -18,7 +18,7 @@ Read this first in any new session. Everything needed to keep developing the app
 | `teaminfo.json` | 40 teams: name, nick, captain, helm, rank, route, notes, `crew` = official Rio portraits `{no,name,img}`. |
 | `roster.json` | Squads from the official team pages `xxx.sslgoldcup.com`: `{"n":nick,"c":captain,"s":[[name, raw position, number, [positions…]]]}`. Position list: first = Rio jersey (1–9), then other positions from the team page ("also …" in the app). |
 | `profiles.json` | Facts + bios from worldofsailors.com profiles, keyed `CODE|Name` (workflow `profiles.yml`). |
-| `overrides.json` | Manual corrections for the daily update (`set` position/number, `keep`, `drop`). Never written by bots. |
+| `overrides.json` | Manual corrections for the daily update (`set` position/number, `keep`, `drop`). `spfix` = per-sailor fixes for worldofsailors errors (namesakes, wrong medals: `drop`/`noach`/`rank` by [year, class]); `gc_champion` = team code of the 2026 winner, to be set by hand after the Grand Final (until then all 'SSL Gold Cup Winner 2026' badges from worldofsailors are shown as 'Qualified for the Final Series', and interim 'SSL Gold Cup 2026' ranks are hidden). Never written by bots. |
 | `sp/` | One JSON per sailor (worldofsailors.com public profile: results, ranking history, records, achievements, socials); `rank/ind.json` men/women individual rankings (top 500 skipper + crew). No e-mail/phone/birth data. |
 | `pron.json` | Name pronunciation per sailor (`ph` phonetic, `audio` → `audio/names/…`, `ok` verified). Shown on the sailor page. |
 | `people.json` | Hand-written highlight bullets for famous sailors. |

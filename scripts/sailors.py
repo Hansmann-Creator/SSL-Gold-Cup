@@ -179,6 +179,8 @@ def profile(slug):
                          r.get("competition_class_name") or "", (r.get("category_name") or "").title(), r.get("position"),
                          g.get("boats"), round(r.get("ssl_points") or 0, 1), r.get("race_count")])
             if r.get("competition_class_id"): classes.add(r["competition_class_id"])
+        for x in rows:   # worldofsailors names the Gran Canaria edition (Nov–Dec 2023) "SSL Gold Cup 2022"
+            if x[1] == "SSL Gold Cup 2022" and x[0][:4] == "2023": x[1] = "SSL Gold Cup 2023"
         rows.sort(key=lambda x: x[0], reverse=True)
         res[typ] = rows[:80]; allres += rows
     res, _, _ = sp_fix(slug, res, [], [])
@@ -202,7 +204,9 @@ def profile(slug):
         L = []
         for r in t.get("records") or []:
             g = r.get("regatta") or {}; gc = g.get("country") or {}
-            L.append([short(r.get("date"))[:4], g.get("name") or r.get("regatta_name") or "", r.get("city") or g.get("place") or "",
+            nm = g.get("name") or r.get("regatta_name") or ""
+            if nm == "SSL Gold Cup 2022" and short(r.get("date"))[:4] == "2023": nm = "SSL Gold Cup 2023"
+            L.append([short(r.get("date"))[:4], nm, r.get("city") or g.get("place") or "",
                       (gc.get("name") or "").title(), cls_name(r.get("competition_class_id")),
                       "Crew" if "crew" in (r.get("user_role") or "") else "Skipper", r.get("rank")])
         L.sort(key=lambda x: x[0], reverse=True)
