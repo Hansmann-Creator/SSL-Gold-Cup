@@ -1744,3 +1744,17 @@ header.top>.brand .lkp{width:100%;height:auto;max-width:560px;filter:drop-shadow
 .races li.rc.done .rtab span::after{content:"Report";display:block;font-size:8.5px;line-height:1;font-weight:800;letter-spacing:.12em;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg)}
 .races li.rc.done .rtab b{display:none}.races li.rc.done .rtab em{display:none}
 .xi[style*="#e1306c"]{background:radial-gradient(circle at 30% 107%,#fdf497 0,#fd5949 45%,#d6249f 60%,#285aeb 90%)}.xi[style*="#25f4ee"]{background:#111;color:#fff;box-shadow:inset -2px 0 0 #fe2c55,inset 2px 0 0 #25f4ee}
+/* Race Report: just the icon, top right of the race card – gold when there is a report, grey when not */
+.races li.rc.done{padding-inline-end:16px}
+.races li.rc.done .rtab,.races li.rc.done .rtab:not(.inc),.races li.rc.done .rtab.inc{inset-inline-end:8px;top:8px;bottom:auto;width:30px;height:30px;padding:0;border-radius:10px;border:0!important;box-shadow:none!important;background:transparent!important;gap:0}
+.races li.rc.done .rtab span,.races li.rc.done .rtab b,.races li.rc.done .rtab em{display:none!important}
+.races li.rc.done .rtab svg{width:20px!important;height:20px!important}
+.races li.rc.done .rtab:not(.inc),.races li.rc.done .rtab:not(.inc) svg{color:#ffd21f}
+.races li.rc.done .rtab:not(.inc){background:rgba(255,210,31,.14)!important}
+.races li.rc.done .rtab.inc,.races li.rc.done .rtab.inc svg{color:rgba(255,255,255,.32)}
+:root[data-theme=light] .races li.rc.done .rtab:not(.inc),:root[data-theme=light] .races li.rc.done .rtab:not(.inc) svg{color:#a86d00}
+:root[data-theme=light] .races li.rc.done .rtab:not(.inc){background:#fff1c7!important}
+:root[data-theme=light] .races li.rc.done .rtab.inc,:root[data-theme=light] .races li.rc.done .rtab.inc svg{color:#b7c0d2}
+/* countdown strip centred between the buttons and the hero */
+html[data-tabv=home] header.top{padding-bottom:0}
+html[data-tabv=home] header.top>#nxc{margin-top:20px!important}
