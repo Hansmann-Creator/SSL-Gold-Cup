@@ -2007,3 +2007,32 @@ dialog.tmd:has(.kcal)>.th{flex:none}
 #rlb .lbn{flex:1;min-width:0;display:flex;flex-direction:column}#rlb .lbn b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#rlb .lbn small{opacity:.7;font-size:12.5px}
 #rlb .lbv{display:flex;flex-direction:column;align-items:flex-end;font-variant-numeric:tabular-nums}#rlb .lbv b{font-size:16px}#rlb .lbv small{opacity:.6;font-size:11px}#rlb .lbv em{font-style:normal;font-size:12px;color:#ffcf5a}
 #rlb .lbn2{font-size:12px;opacity:.6;margin:0 4px 14px}
+
+/* live card on home (one card while a race is on the water; the header strip is hidden on Home then) */
+html.lvxon[data-tabv=home] #nxc{display:none!important}
+.lvx{display:block;margin:0 0 18px;padding:16px 16px 14px;border-radius:22px;background:rgba(8,22,58,.55);border:1px solid rgba(255,255,255,.14);color:#fff;text-align:start;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .12s}
+.lvx:active{transform:scale(.985)}
+.lvx .lvxt{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.lvx .lvxp{display:inline-flex;align-items:center;gap:7px;font-weight:800;font-size:14.5px;letter-spacing:.06em;padding:5px 12px 5px 10px;border-radius:999px;background:#e5383b;color:#fff;animation:lvxP 1.6s ease-in-out infinite}
+.lvx .lvxp i{width:9px;height:9px;border-radius:50%;background:#fff;animation:lvxD 1.6s ease-in-out infinite}
+@keyframes lvxP{0%,100%{box-shadow:0 0 0 0 rgba(229,56,59,.55)}50%{box-shadow:0 0 0 7px rgba(229,56,59,0)}}
+@keyframes lvxD{50%{opacity:.3}}
+@media (prefers-reduced-motion:reduce){.lvx .lvxp,.lvx .lvxp i{animation:none}}
+.lvx .lvxd{display:inline-flex;align-items:center;gap:4px;font-size:13.5px;font-weight:600;padding:5px 10px 5px 12px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16)}
+.lvx .lvxd b{font-size:17px;line-height:1;margin-top:-1px}
+.lvx .lvxr{margin:12px 0 0;font-size:13px;opacity:.65}
+.lvx .lvxh{font-size:24px;font-weight:700;margin:2px 0 4px;line-height:1.15;color:#fff;border:0;padding:0}
+.lvx .lvxs{font-size:15px;opacity:.9;display:flex;flex-wrap:wrap;align-items:center}
+.lvx .lvxs>span:empty{display:none}.lvx .lvxs>span+span:not(:empty)::before{content:"·";margin:0 8px;opacity:.6}
+.lvx .lvxc{font-variant-numeric:tabular-nums;font-weight:700}
+.lvx .lvxo{margin-top:10px;display:flex;flex-direction:column;gap:5px}
+.lvx .lvxo .fls{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px}
+.lvx .lvxo .flg{width:24px;height:17px}
+.lvx .lvxu{font-size:11.5px;opacity:.55}
+.lvx .lvxb{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.lvx .lvxb>*{display:flex;align-items:center;justify-content:center;gap:8px;height:46px;border-radius:14px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);color:#fff;font:inherit;font-weight:600;font-size:15.5px;text-decoration:none;padding:0}
+.lvx .lvxb>:only-child{grid-column:1/-1}
+.lvx .lvxb svg{width:18px;height:18px}
+.lvx .lvxn{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.12);font-size:14.5px}
+.lvx .lvxn small{display:block;opacity:.65;font-size:13px}.lvx .lvxn b{font-weight:600}.lvx .lvxn em{font-style:normal;font-weight:700;color:#ffcf5a;white-space:nowrap}
+:root[data-theme=light] .lvx{background:#14306b}
