@@ -3064,73 +3064,92 @@ cs:{cmpT:"Porovnání",cmpTeams:"Týmy",cmpSailors:"Jachtaři",cmpChoose:"Vybrat
 uk:{cmpT:"Порівняння",cmpTeams:"Команди",cmpSailors:"Яхтсмени",cmpChoose:"Обрати",cmpSwap:"Поміняти",cmpDuel:"Прямі дуелі",cmpDuelSub:"Попереду суперника в спільних групах",cmpRounds:"Раунд за раундом",cmpSame:"та сама група",cmpSquads:"Склади поруч",cmpHint:"Оберіть дві команди або двох яхтсменів для порівняння.",scRate:"Частка подіумів",scRateMin:"від 5 регат",scMed:"Медалі й титули",scTeamRio:"Команда в Ріо 2026",scNote:"Світовий рейтинг і регати: публічні профілі на worldofsailors.com. Дані Ріо — командні результати, не індивідуальні. Частки — лише від 5 регат.",cmpClear:"Змінити"},
 pl:{cmpT:"Porównanie",cmpTeams:"Drużyny",cmpSailors:"Żeglarze",cmpChoose:"Wybierz",cmpSwap:"Zamień",cmpDuel:"Bezpośrednie pojedynki",cmpDuelSub:"Przed rywalem we wspólnych grupach",cmpRounds:"Runda po rundzie",cmpSame:"ta sama grupa",cmpSquads:"Składy obok siebie",cmpHint:"Wybierz dwie drużyny lub dwóch żeglarzy do porównania.",scRate:"Odsetek podiów",scRateMin:"od 5 regat",scMed:"Medale i tytuły",scTeamRio:"Drużyna w Rio 2026",scNote:"Ranking światowy i regaty: publiczne profile na worldofsailors.com. Dane z Rio to wyniki drużyny, nie indywidualne. Odsetki dopiero od 5 regat.",cmpClear:"Zmień"}};
 for(const l in CMPX)if(S[l])Object.assign(S[l],CMPX[l]);
-var CMPK=null,CMPQ="";
+const CFX={en:["Same group","Same position","All teams",n=>`${n} found`],de:["Gleiche Gruppe","Gleiche Position","Alle Teams",n=>`${n} Treffer`],fr:["Même groupe","Même poste","Toutes les équipes",n=>`${n} résultat${n>1?"s":""}`],es:["Mismo grupo","Mismo puesto","Todos los equipos",n=>`${n} resultado${n==1?"":"s"}`],pt:["Mesmo grupo","Mesma posição","Todas as equipes",n=>`${n} resultado${n==1?"":"s"}`],it:["Stesso gruppo","Stesso ruolo","Tutte le squadre",n=>`${n} risultat${n==1?"o":"i"}`],zh:["同组","同岗位","全部队伍",n=>`${n} 个结果`],ar:["المجموعة نفسها","المركز نفسه","كل الفرق",n=>`${n} نتيجة`],hi:["वही ग्रुप","वही पोज़िशन","सभी टीमें",n=>`${n} परिणाम`],bn:["একই গ্রুপ","একই পজিশন","সব দল",n=>`${n}টি ফল`],ur:["ایک ہی گروپ","ایک ہی پوزیشن","تمام ٹیمیں",n=>`${n} نتائج`],id:["Grup sama","Posisi sama","Semua tim",n=>`${n} hasil`],ms:["Kumpulan sama","Posisi sama","Semua pasukan",n=>`${n} hasil`],ja:["同じグループ","同じポジション","全チーム",n=>`${n}件`],th:["กลุ่มเดียวกัน","ตำแหน่งเดียวกัน","ทุกทีม",n=>`${n} รายการ`],hu:["Azonos csoport","Azonos poszt","Minden csapat",n=>`${n} találat`],cs:["Stejná skupina","Stejná pozice","Všechny týmy",n=>`${n} výsledků`],uk:["Та сама група","Та сама позиція","Усі команди",n=>`${n} результатів`],pl:["Ta sama grupa","Ta sama pozycja","Wszystkie drużyny",n=>`${n} wyników`]};
+for(const l in CFX)if(S[l])Object.assign(S[l],{cfSameG:CFX[l][0],cfSamePos:CFX[l][1],cfTeamAll:CFX[l][2],cfN:CFX[l][3]});
+var CMPK=null,CMPQ="",CMPF={t:"all",s:"all",tm:"",so:"rank"};
+const CONTOF=(()=>{const M={},A={0:"SEY RSA",1:"KOR MAS MYA OMA SGP THA JPN",3:"TAH NZL AUS",4:"COL ANT CUB URU ECU CHI PER BRA CAN ARG USA"};for(const k in A)A[k].split(" ").forEach(c=>M[c]=+k);return c=>c in M?M[c]:2})();
 const cmpP=v=>{const m=String(v||"").match(/^([A-Z]{3})\.(\d+)$/);if(!m)return null;let p=null;try{p=squad(m[1]).ppl[+m[2]]}catch(e){}return p?{c:m[1],p,PF:PROF[m[1]+"|"+p.name]||{}}:null};
 const cmpOk=(e,w)=>e.m=="t"?/^[A-Z]{3}$/.test(e[w]||"")&&isTeam(e[w]):!!cmpP(e[w]);
+const shortN=n=>{const sn=surname(n),g=givenN(n);return (g?g[0]+". ":"")+sn};
+const curGroup=c=>{const TM=teams().find(t=>t.code==c);if(!TM)return null;const s=TM.path[TM.path.length-1];return s?s.r.id+"|"+s.g.id:null};
 function cmpSlot(e,w){const v=e[w],on=CMPK==w?" on":"";
   if(!cmpOk(e,w))return `<button class="cps e${on}" data-cpk="${w}"><span class="cpi">+</span><b>${esc(T("cmpChoose"))}</b></button>`;
-  if(e.m=="t")return `<button class="cps${on}" data-cpk="${w}"><span class="fg">${FL(v)}</span><b>${esc(NM(v))}</b><small>${esc(squad(v).n||T("cmpClear"))}</small></button>`;
-  const P=cmpP(v);return `<button class="cps${on}" data-cpk="${w}">${av(P.p)}<b>${NMH(P.p.name)}</b><small>${FL(P.c)} ${esc(NM(P.c))}</small></button>`}
-function cmpList(e){const w=CMPK,o=e[w=="a"?"b":"a"],q=CMPQ.trim().toLowerCase();
-  if(e.m=="t"){let L=teams().filter(t=>t.code!=o);if(q)L=L.filter(t=>(t.name+" "+t.code+" "+(squad(t.code).n||"")).toLowerCase().includes(q));
-    L.sort((x,y)=>(favs.has(y.code)?1:0)-(favs.has(x.code)?1:0)||x.name.localeCompare(y.name,lang));
-    return L.map(t=>`<button class="rcrow" data-cpv="${esc(t.code)}">${FL(t.code)}<b>${esc(t.name)}${favs.has(t.code)?' <span class="star">★</span>':""}</b><small>${esc(squad(t.code).n||"")}</small></button>`).join("")||`<p class="warn">${esc(T("svNone"))}</p>`}
-  const OP=cmpP(o),ok=OP?(OP.p.ks||[OP.p.k]).filter(Boolean):[];
-  let L=rioRows().map(x=>({...x,v:x.c+"."+x.p.i})).filter(x=>x.v!=o);
-  if(q)L=L.filter(x=>(x.p.name+" "+x.c+" "+NM(x.c)+" "+(x.p.k||"")+" "+(squad(x.c).n||"")).toLowerCase().includes(q));
-  const fv=x=>sfavs.has(x.c+"|"+x.p.name)?0:1,sp=x=>ok.length&&(x.p.ks||[x.p.k]).some(k=>ok.includes(k))?0:1,rk=x=>rioRank(x.PF)||1e9;
-  L.sort((a,b)=>fv(a)-fv(b)||sp(a)-sp(b)||rk(a)-rk(b)||surname(a.p.name).localeCompare(surname(b.p.name),lang));
-  return L.slice(0,q?200:120).map(x=>{const r=rioRank(x.PF);return `<button class="srow3" data-cpv="${esc(x.v)}">${av(x.p,1)}<span class="s3n"><b>${NMH(x.p.name)}${fv(x)?"":' <span class="star">★</span>'}</b><small>${FL(x.c)} ${esc(NM(x.c))}${x.p.k?" · "+esc(T("roles")[x.p.k]||x.p.k):""}</small></span><span class="s3k">${r?"#"+nf0(r):""}</span></button>`}).join("")||`<p class="warn">${esc(T("svNone"))}</p>`}
+  if(e.m=="t"){const TM=teams().find(t=>t.code==v);return `<button class="cps${on}" data-cpk="${w}"><span class="cpf">${FL(v)}</span><b>${esc(NM(v))}</b><small>${esc(squad(v).n||"")}</small><em class="${TM&&TM.out?"o":"i"}">${esc(TM?(TM.out?T("stOut"):T("stIn")):"")}</em></button>`}
+  const P=cmpP(v);return `<button class="cps${on}" data-cpk="${w}">${av(P.p)}<b>${esc(shortN(P.p.name))}</b><small>${FL(P.c)} ${esc(NM(P.c))}</small><em>${esc((P.p.k&&(T("roles")[P.p.k]||P.p.k))||(P.p.cap?T("capTag"):""))}</em></button>`}
+function cmpChips(L,cur,attr){return `<div class="cpch">${L.map(([k,l])=>`<button data-${attr}="${esc(k)}" class="${cur==k?"on":""}">${l}</button>`).join("")}</div>`}
+function cmpFilterBar(e){const o=e[CMPK=="a"?"b":"a"];
+  if(e.m=="t"){const cn=CONT[lang]||CONT.en;const F=[["all",esc(T("allS"))],["in",esc(T("stIn"))],["out",esc(T("stOut"))],["fav","★"]];if(cmpOk(e,CMPK=="a"?"b":"a")&&curGroup(o))F.push(["grp",esc(T("cfSameG"))]);[2,4,1,3,0].forEach(i=>F.push(["c"+i,esc(cn[i])]));
+    return cmpChips(F,CMPF.t,"cpft")+`<div class="cpso">${cmpChips([["rank",esc(T("svSortRank"))],["az",esc(T("svSortAz"))]],CMPF.so=="az"?"az":"rank","cpso")}</div>`}
+  const POS=["Helm","Tactician","Main Trimmer","Trimmer","Grinder","Pit","Mid-Bow","Bow"],F=[["all",esc(T("allS"))],["fav","★"],["cap",esc(T("svCaps"))]];if(cmpP(o))F.splice(1,0,["same",esc(T("cfSamePos"))]);POS.forEach(p=>F.push([p,esc(T("roles")[p]||p)]));
+  const TT=teams().slice().sort((x,y)=>x.name.localeCompare(y.name,lang));
+  return cmpChips(F,CMPF.s,"cpfs")+`<div class="cpso"><select class="cpsel" aria-label="${esc(T("team"))}"><option value="">${esc(T("cfTeamAll"))}</option>${TT.map(t=>`<option value="${t.code}"${CMPF.tm==t.code?" selected":""}>${esc(t.name)}</option>`).join("")}</select>${cmpChips([["rank",esc(T("svSortRank"))],["az",esc(T("svSortAz"))],["team",esc(T("svSortTeam"))]],CMPF.so,"cpso")}</div>`}
+function cmpList(e){const w=CMPK,o=e[w=="a"?"b":"a"],q=CMPQ.trim().toLowerCase();let L,html;
+  if(e.m=="t"){const og=cmpOk(e,w=="a"?"b":"a")?curGroup(o):null,IR=c=>(INFO[c]||{}).rank||999;
+    L=teams().filter(t=>t.code!=o);const f=CMPF.t;
+    L=L.filter(t=>f=="all"||(f=="in"?!t.out:f=="out"?t.out:f=="fav"?favs.has(t.code):f=="grp"?curGroup(t.code)==og:f[0]=="c"?CONTOF(t.code)==+f.slice(1):true));
+    if(q)L=L.filter(t=>(t.name+" "+t.code+" "+(squad(t.code).n||"")).toLowerCase().includes(q));
+    L.sort(CMPF.so=="az"?(x,y)=>x.name.localeCompare(y.name,lang):(x,y)=>IR(x.code)-IR(y.code));
+    html=L.map(t=>`<button class="cpr2" data-cpv="${esc(t.code)}"><span class="cpf s">${FL(t.code)}</span><span class="cpn"><b>${esc(t.name)}${favs.has(t.code)?' <span class="star">★</span>':""}</b><small>${esc([squad(t.code).n,t.out?T("stOut"):T("stIn")].filter(Boolean).join(" · "))}</small></span><span class="cprk">${(INFO[t.code]||{}).rank?"#"+INFO[t.code].rank:""}</span></button>`).join("")}
+  else{const OP=cmpP(o),ok=OP?(OP.p.ks||[OP.p.k]).filter(Boolean):[],f=CMPF.s;
+    L=rioRows().map(x=>({...x,v:x.c+"."+x.p.i})).filter(x=>x.v!=o);
+    L=L.filter(x=>{const ks=(x.p.ks||[x.p.k]).filter(Boolean);return (f=="all"||(f=="fav"?sfavs.has(x.c+"|"+x.p.name):f=="cap"?x.p.cap:f=="same"?ks.some(k=>ok.includes(k)):ks.includes(f)))&&(!CMPF.tm||x.c==CMPF.tm)});
+    if(q)L=L.filter(x=>(x.p.name+" "+x.c+" "+NM(x.c)+" "+(x.p.k||"")+" "+(T("roles")[x.p.k]||"")+" "+(squad(x.c).n||"")).toLowerCase().includes(q));
+    const rk=x=>rioRank(x.PF)||1e9;
+    L.sort(CMPF.so=="az"?(a,b)=>surname(a.p.name).localeCompare(surname(b.p.name),lang):CMPF.so=="team"?(a,b)=>NM(a.c).localeCompare(NM(b.c),lang)||(+a.p.no||99)-(+b.p.no||99):(a,b)=>rk(a)-rk(b)||surname(a.p.name).localeCompare(surname(b.p.name),lang));
+    html=L.slice(0,q||f!="all"||CMPF.tm?300:150).map(x=>{const r=rioRank(x.PF);return `<button class="cpr2" data-cpv="${esc(x.v)}">${av(x.p,1)}<span class="cpn"><b>${NMH(x.p.name)}${sfavs.has(x.c+"|"+x.p.name)?' <span class="star">★</span>':""}</b><small>${FL(x.c)} ${esc(NM(x.c))}${x.p.k?" · "+esc(T("roles")[x.p.k]||x.p.k):""}</small></span><span class="cprk">${r?"#"+nf0(r):""}</span></button>`}).join("")}
+  return `<p class="cpcnt">${esc(T("cfN")(L.length))}</p><div class="cpl2">${html||`<p class="warn">${esc(T("svNone"))}</p>`}</div>`}
+/* metric row with a two-sided bar; low = lower is better */
+function cmpBar(l,a,b,o={}){const ok=a!=null&&b!=null&&a!==""&&b!=="";let pa=.5,w=0;
+  if(ok&&o.cmp!==false){const va=o.low?(a>0?1/a:0):+a,vb=o.low?(b>0?1/b:0):+b;if(va+vb>0)pa=va/(va+vb);w=va>vb?1:vb>va?-1:0}
+  const f=o.fmt||(v=>v==null||v===""?"–":nf0(v)),pc=Math.round(pa*100);
+  return `<div class="cbr"><div class="cbt"><b class="${w>0?"win":""}">${f(a)}</b><span>${esc(l)}${o.sub?`<i>${esc(o.sub)}</i>`:""}</span><b class="${w<0?"win":""}">${f(b)}</b></div>${o.cmp===false||!ok?"":`<div class="cbb"><i class="${w>0?"win":""}" style="width:${pc}%"></i><i class="${w<0?"win":""}" style="width:${100-pc}%"></i></div>`}</div>`}
 function cmpTeamsH(a,b){const all=teams(),TA=all.find(t=>t.code==a),TB=all.find(t=>t.code==b),IA=INFO[a]||{},IB=INFO[b]||{},SA=tStats(TA),SB=tStats(TB),H=h2h(a,b);
-  const fmt=v=>v==null?"–":(Math.round(v*10)/10).toLocaleString(LOC());
-  const row=(l,va,vb,w)=>`<div class="cmr"><span class="${w>0?"cw":""}">${va}</span><small>${esc(l)}</small><span class="${w<0?"cw":""}">${vb}</span></div>`;
-  const cmp=(x,y,lowGood)=>x==null||y==null||x===y?0:(lowGood?(x<y?1:-1):(x>y?1:-1));
-  const st=TM=>TM?(TM.out?T("stOut"):T("stIn")):"–",ent=TM=>TM?esc(RNm(TM.path[0].r)):"–";
+  const f1=v=>v==null?"–":(Math.round(v*10)/10).toLocaleString(LOC());
   let GA=0,GB=0;D.rounds.forEach(r=>r.groups.forEach(g=>{if(gState(g,r)!="done")return;const ia=g.rows.findIndex(z=>z.team==a),ib=g.rows.findIndex(z=>z.team==b);if(ia<0||ib<0)return;ia<ib?GA++:GB++}));
-  let h=GA+GB?`<div class="cpduel"><b class="${GA>GB?"cw":""}">${GA}</b><span><em>${esc(T("cmpDuel"))}</em><small>${esc(T("cmpDuelSub"))}</small></span><b class="${GB>GA?"cw":""}">${GB}</b></div>`:"";
-  h+=`<div class="grp cmp">${row(T("status"),esc(st(TA)),esc(st(TB)),cmp(TA&&!TA.out?1:0,TB&&!TB.out?1:0))}${row(T("ranking"),IA.rank?"#"+IA.rank:"–",IB.rank?"#"+IB.rank:"–",cmp(IA.rank,IB.rank,true))}${row(T("entered"),ent(TA),ent(TB),0)}${row(T("stRaces"),SA.races,SB.races,0)}${row(T("stWins"),SA.wins,SB.wins,cmp(SA.wins,SB.wins))}${row(T("stAvg"),fmt(SA.avg),fmt(SB.avg),cmp(SA.avg,SB.avg,true))}${row(T("stPts"),SA.pts,SB.pts,0)}${row(T("gc23"),esc(T("g23")[IA.gc23||"none"]),esc(T("g23")[IB.gc23||"none"]),0)}</div>`;
+  let h="";
+  if(GA+GB||H.A+H.B)h+=`<div class="cpduel2">${GA+GB?`<div><b class="${GA>GB?"win":""}">${GA}</b><span><em>${esc(T("cmpDuel"))}</em><small>${esc(T("cmpDuelSub"))}</small></span><b class="${GB>GA?"win":""}">${GB}</b></div>`:""}${H.A+H.B?`<div><b class="${H.A>H.B?"win":""}">${H.A}</b><span><em>${esc(T("h2hT"))}</em><small>${esc(T("h2hSub"))}</small></span><b class="${H.B>H.A?"win":""}">${H.B}</b></div>`:""}</div>`;
+  h+=`<h3>Rio 2026</h3><div class="grp cbg">${cmpBar(T("ranking"),IA.rank,IB.rank,{low:1,fmt:v=>v?"#"+v:"–"})}${cmpBar(T("stWins"),SA.wins,SB.wins)}${cmpBar(T("stAvg"),SA.avg,SB.avg,{low:1,fmt:f1})}${cmpBar(T("stRaces"),SA.races,SB.races,{cmp:false})}${cmpBar(T("stPts"),SA.pts,SB.pts,{cmp:false})}
+  <div class="cbr cbt2"><span class="cpt ${TA&&TA.out?"o":"i"}">${esc(TA?(TA.out?T("stOut"):T("stIn")):"–")}</span><small>${esc(T("status"))}</small><span class="cpt ${TB&&TB.out?"o":"i"}">${esc(TB?(TB.out?T("stOut"):T("stIn")):"–")}</span></div>
+  <div class="cbr cbt2"><span>${TA?esc(RNm(TA.path[0].r)):"–"}</span><small>${esc(T("entered"))}</small><span>${TB?esc(RNm(TB.path[0].r)):"–"}</span></div>
+  <div class="cbr cbt2"><span>${esc(T("g23")[IA.gc23||"none"])}</span><small>${esc(T("gc23"))}</small><span>${esc(T("g23")[IB.gc23||"none"])}</span></div></div>`;
   const RR=D.rounds.map(r=>{const sa=TA&&TA.path.find(s=>s.r.id==r.id),sb=TB&&TB.path.find(s=>s.r.id==r.id);if(!sa&&!sb)return"";
     const multi=r.groups.length>1,same=sa&&sb&&sa.g.id==sb.g.id;
-    const cell=s=>s?`<span class="cpc ${s.o?(s.o[0]=="w"?"w":"o"):"u"}">${multi?`${esc(T("group"))} ${esc(s.g.id)}`:""}${s.done?`${multi?" · ":""}<b>${esc(ord(s.pos))}</b>`:multi?"":"…"}</span>`:`<span class="cpc n">–</span>`;
-    return `<div class="cmr cpr">${cell(sa)}<small>${esc(RNm(r))}${same?`<i>⚔ ${esc(T("cmpSame"))}</i>`:""}</small>${cell(sb)}</div>`}).join("");
-  if(RR)h+=`<h3>${esc(T("cmpRounds"))}</h3><div class="grp cmp">${RR}</div>`;
-  h+=`<h3>${T("h2hT")}</h3>${H.A+H.B?`<div class="h2h"><b class="${H.A>H.B?"cw":""}">${H.A}</b><span>${esc(T("h2hSub"))}</span><b class="${H.B>H.A?"cw":""}">${H.B}</b></div>`:`<p class="warn">${esc(T("h2hNone"))}</p>`}`;
-  const QA=squad(a).ppl,QB=squad(b).ppl,nm=(c,p)=>`<button data-cpgo="${esc(c)}.${p.i}">${esc(p.name)}${p.cap?` <span class="ctag">${esc(T("capTag"))}</span>`:""}</button>`;
-  const SR=[...ROLES.map(k=>[k,QA.filter(p=>p.k==k),QB.filter(p=>p.k==k)]),["",QA.filter(p=>!p.k&&p.cap),QB.filter(p=>!p.k&&p.cap)]].filter(x=>x[1].length||x[2].length)
-    .map(([k,la,lb])=>`<div class="cmr cpq"><span>${la.map(p=>nm(a,p)).join("")||"–"}</span><small>${esc(k?T("roles")[k]||k:T("capTag"))}</small><span>${lb.map(p=>nm(b,p)).join("")||"–"}</span></div>`).join("");
-  if(SR)h+=`<h3>${esc(T("cmpSquads"))}</h3><div class="grp cmp">${SR}</div>`;
+    const cell=s=>s?`<span class="cpc2 ${s.o?(s.o[0]=="w"?"w":"o"):"u"}">${multi?`<small>${esc(T("group"))} ${esc(s.g.id)}</small>`:""}${s.done?`<b>${esc(ord(s.pos))}</b>`:multi?"":"<b>–</b>"}</span>`:`<span class="cpc2 n">–</span>`;
+    return `<div class="cpr3">${cell(sa)}<span class="cprn">${esc(RNm(r))}${same?`<i>⚔ ${esc(T("cmpSame"))}</i>`:""}</span>${cell(sb)}</div>`}).join("");
+  if(RR)h+=`<h3>${esc(T("cmpRounds"))}</h3><div class="grp cpr3g">${RR}</div>`;
+  const QA=squad(a).ppl,QB=squad(b).ppl,nm=(c,p)=>`<button class="cpq2" data-cpgo="${esc(c)}.${p.i}">${av(p,1)}<span>${esc(shortN(p.name))}${p.cap?` <i class="ctag">C</i>`:""}</span></button>`;
+  const SR=[...ROLES.map(k=>[k,QA.filter(p=>p.k==k),QB.filter(p=>p.k==k)]),["",QA.filter(p=>!p.k),QB.filter(p=>!p.k)]].filter(x=>x[1].length||x[2].length)
+    .map(([k,la,lb])=>`<div class="cpsq"><div class="cpsa">${la.map(p=>nm(a,p)).join("")||'<span class="cpn0">–</span>'}</div><span class="cprole">${esc(k?T("roles")[k]||k:"+")}</span><div class="cpsb">${lb.map(p=>nm(b,p)).join("")||'<span class="cpn0">–</span>'}</div></div>`).join("");
+  if(SR)h+=`<h3>${esc(T("cmpSquads"))}</h3><div class="grp cpsqg"><div class="cpsqh"><span>${FL(a)} ${esc(a)}</span><span></span><span>${esc(b)} ${FL(b)}</span></div>${SR}</div>`;
   return h+`<p class="warn">${esc(T("cmpNote"))}</p>`}
 function cmpRk(PF){const k=PF.rk||{};if(k.s&&k.c)return k.s[0]<=k.c[0]?["s",k.s]:["c",k.c];if(k.s)return["s",k.s];if(k.c)return["c",k.c];return PF.rank?["",[PF.rank,PF.pts]]:null}
 function cmpSailH(va,vb){const A=cmpP(va),B=cmpP(vb),RA=cmpRk(A.PF),RB=cmpRk(B.PF),SA=A.PF.st||{},SB=B.PF.st||{};
-  const row=(l,x,y,w,sub)=>`<div class="cmr"><span class="${w>0?"cw":""}">${x}</span><small>${esc(l)}${sub?`<i>${esc(sub)}</i>`:""}</small><span class="${w<0?"cw":""}">${y}</span></div>`;
-  const cmp=(x,y,lowGood)=>x==null||y==null||x===y?0:(lowGood?(x<y?1:-1):(x>y?1:-1));
+  const best=R=>R&&R[1][4]?R[1][4][0]:null,med=PF=>(PF.ach2||[]).reduce((s,a)=>s+(+a[2]||0),0)||null,rate=s=>s.ev>=5?Math.round((s.pod||0)/s.ev*100):null;
   const pos=p=>(p.ks&&p.ks.length?p.ks:p.k?[p.k]:[]).map(k=>T("roles")[k]||k).join(" / ")||(p.cap?T("capTag"):"–");
-  const rk=R=>R?`#${nf0(R[1][0])}${R[0]?` <small>${esc(R[0]=="c"?T("svCr"):T("svSk"))}</small>`:""}`:"–";
-  const best=R=>R&&R[1][4]?R[1][4][0]:null,med=PF=>(PF.ach2||[]).reduce((s,a)=>s+(+a[2]||0),0)||null;
-  const rate=s=>s.ev>=5?Math.round((s.pod||0)/s.ev*100):null,pc=v=>v==null?"–":v+" %";
-  const v=(x)=>x==null||x===""?"–":nf0(x);
-  let h=`<div class="grp cmp">${row(T("team"),`${FL(A.c)} ${esc(A.c)}`,`${FL(B.c)} ${esc(B.c)}`,0)}${row(T("position"),esc(pos(A.p)),esc(pos(B.p)),0)}
-  ${row(T("stRank"),rk(RA),rk(RB),cmp(RA&&RA[1][0],RB&&RB[1][0],true))}${row(T("stPtsT"),v(RA&&RA[1][1]),v(RB&&RB[1][1]),cmp(RA&&RA[1][1],RB&&RB[1][1]))}
-  ${row(T("stBest"),best(RA)?"#"+nf0(best(RA)):"–",best(RB)?"#"+nf0(best(RB)):"–",cmp(best(RA),best(RB),true))}
-  ${row(T("stEv"),v(SA.ev),v(SB.ev),0)}${row(T("winsN"),v(SA.win),v(SB.win),cmp(SA.win,SB.win))}${row(T("podN"),v(SA.pod),v(SB.pod),cmp(SA.pod,SB.pod))}
-  ${row(T("scRate"),pc(rate(SA)),pc(rate(SB)),cmp(rate(SA),rate(SB)),T("scRateMin"))}${row(T("scMed"),v(med(A.PF)),v(med(B.PF)),cmp(med(A.PF),med(B.PF)))}${row(T("recT"),v(A.PF.recn),v(B.PF.recn),0)}</div>`;
-  const all=teams(),TA=all.find(t=>t.code==A.c),TB=all.find(t=>t.code==B.c),XA=tStats(TA),XB=tStats(TB),fmt=x=>x==null?"–":(Math.round(x*10)/10).toLocaleString(LOC());
-  h+=`<h3>${esc(T("scTeamRio"))}</h3><div class="grp cmp">${row(T("team"),esc(NM(A.c)),esc(NM(B.c)),0)}${row(T("status"),esc(TA?(TA.out?T("stOut"):T("stIn")):"–"),esc(TB?(TB.out?T("stOut"):T("stIn")):"–"),0)}${A.c!=B.c?row(T("stWins"),XA.wins,XB.wins,cmp(XA.wins,XB.wins))+row(T("stAvg"),fmt(XA.avg),fmt(XB.avg),cmp(XA.avg,XB.avg,true)):""}</div>`;
+  let h=`<div class="grp cbg"><div class="cbr cbt2"><span>${FL(A.c)} ${esc(NM(A.c))}</span><small>${esc(T("team"))}</small><span>${FL(B.c)} ${esc(NM(B.c))}</span></div><div class="cbr cbt2"><span>${esc(pos(A.p))}</span><small>${esc(T("position"))}</small><span>${esc(pos(B.p))}</span></div></div>`;
+  h+=`<h3>${esc(T("stRank"))} · worldofsailors.com</h3><div class="grp cbg">${cmpBar(T("stRank"),RA&&RA[1][0],RB&&RB[1][0],{low:1,fmt:v=>v?"#"+nf0(v):"–",sub:[RA,RB].some(R=>R&&R[0])?[RA,RB].map(R=>R&&R[0]?(R[0]=="c"?T("svCr"):T("svSk")):"–").join(" / "):""})}${cmpBar(T("stPtsT"),RA&&RA[1][1],RB&&RB[1][1])}${cmpBar(T("stBest"),best(RA),best(RB),{low:1,fmt:v=>v?"#"+nf0(v):"–"})}${cmpBar(T("stEv"),SA.ev,SB.ev,{cmp:false})}${cmpBar(T("winsN"),SA.win,SB.win)}${cmpBar(T("podN"),SA.pod,SB.pod)}${cmpBar(T("scRate"),rate(SA),rate(SB),{fmt:v=>v==null?"–":v+" %",sub:T("scRateMin")})}${cmpBar(T("scMed"),med(A.PF),med(B.PF))}${cmpBar(T("recT"),A.PF.recn,B.PF.recn,{cmp:false})}</div>`;
+  const all=teams(),TA=all.find(t=>t.code==A.c),TB=all.find(t=>t.code==B.c),XA=tStats(TA),XB=tStats(TB),f1=x=>x==null?"–":(Math.round(x*10)/10).toLocaleString(LOC());
+  h+=`<h3>${esc(T("scTeamRio"))}</h3><div class="grp cbg"><div class="cbr cbt2"><span class="cpt ${TA&&TA.out?"o":"i"}">${esc(TA?(TA.out?T("stOut"):T("stIn")):"–")}</span><small>${esc(T("status"))}</small><span class="cpt ${TB&&TB.out?"o":"i"}">${esc(TB?(TB.out?T("stOut"):T("stIn")):"–")}</span></div>${A.c!=B.c?cmpBar(T("stWins"),XA.wins,XB.wins)+cmpBar(T("stAvg"),XA.avg,XB.avg,{low:1,fmt:f1}):""}</div>`;
   return h+`<p class="warn">${esc(T("scNote"))}</p>`}
 function pCmp(e){const d=$("#pg");if(e.m!="s")e.m="t";if(!CMPK&&!e.cl)CMPK=!cmpOk(e,"a")?"a":!cmpOk(e,"b")?"b":null;
   let h=`<div class="th"><button class="bk">${T("back")}</button><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb cmpg"><h2 class="fvh">${esc(T("cmpT"))}</h2>`;
   h+=`<div class="sseg" role="tablist">${[["t",T("cmpTeams")],["s",T("cmpSailors")]].map(([k,l])=>`<button role="tab" data-cpm="${k}" class="${e.m==k?"on":""}" aria-selected="${e.m==k}">${esc(l)}</button>`).join("")}</div>`;
-  h+=`<div class="cpss">${cmpSlot(e,"a")}<button class="cpsw" data-cpsw="1" aria-label="${esc(T("cmpSwap"))}" title="${esc(T("cmpSwap"))}"${cmpOk(e,"a")&&cmpOk(e,"b")?"":" disabled"}>⇄</button>${cmpSlot(e,"b")}</div>`;
-  if(CMPK)h+=`<div class="tools stools"><input id="cpq" type="search" placeholder="${esc(e.m=="t"?T("cmpPick"):T("sSearch"))}" value="${esc(CMPQ)}" aria-label="${esc(T("sSearch"))}"></div><div class="${e.m=="t"?"grp rcl":"slist3"} cpl">${cmpList(e)}</div>`;
+  h+=`<div class="cpm">${cmpSlot(e,"a")}<div class="cpvs"><span>VS</span><button class="cpsw" data-cpsw="1" aria-label="${esc(T("cmpSwap"))}" title="${esc(T("cmpSwap"))}"${cmpOk(e,"a")&&cmpOk(e,"b")?"":" disabled"}><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h12l-3-3M17 17H5l3 3"/></svg></button></div>${cmpSlot(e,"b")}</div>`;
+  if(CMPK)h+=`<div class="cpk"><div class="tools stools"><input id="cpq" type="search" placeholder="${esc(e.m=="t"?T("cmpPick"):T("sSearch"))}" value="${esc(CMPQ)}" aria-label="${esc(T("sSearch"))}"></div>${cmpFilterBar(e)}<div class="cpout">${cmpList(e)}</div></div>`;
   else if(cmpOk(e,"a")&&cmpOk(e,"b"))h+=e.m=="t"?cmpTeamsH(e.a,e.b):cmpSailH(e.a,e.b);
   else h+=`<p class="warn">${esc(T("cmpHint"))}</p>`;
   d.innerHTML=h+`</div>`;
-  d.querySelectorAll("[data-cpm]").forEach(b=>b.onclick=()=>{if(b.dataset.cpm==e.m)return;CMPK=null;CMPQ="";pgGo({t:"cmp",m:b.dataset.cpm},true)});
+  const re=()=>{const y=d.scrollTop;pCmp({...e,cl:1});d.scrollTop=y};
+  d.querySelectorAll("[data-cpm]").forEach(b=>b.onclick=()=>{if(b.dataset.cpm==e.m)return;CMPK=null;CMPQ="";CMPF={t:"all",s:"all",tm:"",so:"rank"};pgGo({t:"cmp",m:b.dataset.cpm},true)});
   d.querySelectorAll("[data-cpk]").forEach(b=>b.onclick=()=>{const w=b.dataset.cpk;CMPK=CMPK==w?null:w;CMPQ="";pCmp({...e,cl:CMPK?0:1})});
   const sw=d.querySelector("[data-cpsw]");if(sw)sw.onclick=()=>{CMPK=null;pgGo({t:"cmp",m:e.m,a:e.b,b:e.a},true)};
+  d.querySelectorAll("[data-cpft]").forEach(b=>b.onclick=()=>{CMPF.t=b.dataset.cpft;re()});
+  d.querySelectorAll("[data-cpfs]").forEach(b=>b.onclick=()=>{CMPF.s=b.dataset.cpfs;re()});
+  d.querySelectorAll("[data-cpso]").forEach(b=>b.onclick=()=>{CMPF.so=b.dataset.cpso;re()});
+  const sel=d.querySelector(".cpsel");if(sel)sel.onchange=()=>{CMPF.tm=sel.value;re()};
   const wire=()=>d.querySelectorAll("[data-cpv]").forEach(b=>b.onclick=()=>{const n={t:"cmp",m:e.m,a:e.a,b:e.b};n[CMPK]=b.dataset.cpv;CMPQ="";CMPK=null;
     if(cmpOk(n,"a")&&cmpOk(n,"b"))gcEvent(e.m=="t"?"compare-team":"compare-sailor");pgGo(n,true)});wire();
-  const q=d.querySelector("#cpq");if(q)q.oninput=()=>{CMPQ=q.value;const L=d.querySelector(".cpl");if(L){L.innerHTML=cmpList(e);wire()}};
+  const q=d.querySelector("#cpq");if(q)q.oninput=()=>{CMPQ=q.value;const L=d.querySelector(".cpout");if(L){L.innerHTML=cmpList(e);wire()}};
   d.querySelectorAll("[data-cpgo]").forEach(b=>b.onclick=()=>{const m=b.dataset.cpgo.split(".");openSailor(m[0],+m[1])});
   pgShow(d)}
 function openCompare(m,a){CMPK=null;CMPQ="";PGPUSHED=true;pgGo({t:"cmp",m,a})}
