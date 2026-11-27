@@ -1670,3 +1670,8 @@ dialog.tmd.full:has(.ig) .oblang{border-radius:99px;padding:8px 14px}
 .snh .sn.fitn{display:inline-block;vertical-align:bottom}
 .strip figcaption .fitn{text-overflow:clip}
 .strip figcaption .fitn{line-height:15px;min-height:15px}
+.xp>span:first-child{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}
+.xp .xps{flex:none}
+.xp .xps{display:flex;flex-direction:row;gap:0}.xp .xps>span{width:36px;height:36px;box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 30%,var(--card))}
+.xp>span.xps:nth-child(2){flex:none;display:flex;flex-direction:row;gap:0;min-width:0}
+.xpk{font-style:normal;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffd21f}:root[data-theme=light] .xpk{color:var(--gold)}
