@@ -1,1 +1,34 @@
-{"_doc":"Manual corrections – the daily update never overwrites these. set: {\"CODE|Name\": {\"pos\":\"Helm\",\"no\":8,\"ks\":[\"Helm\"]}}, keep: {\"CODE\":[names never removed]}, drop: {\"CODE\":[names never shown]}","set":{},"keep":{},"drop":{}}
+{
+ "_doc": "Manual corrections – the daily update never overwrites these. set: {\"CODE|Name\": {\"pos\":\"Helm\",\"no\":8,\"ks\":[\"Helm\"]}}, keep: {\"CODE\":[names never removed]}, drop: {\"CODE\":[names never shown]}",
+ "set": {},
+ "keep": {},
+ "drop": {},
+ "spfix": {
+  "_doc": "worldofsailors.com mixes up namesakes: drop [year, class] entries per sailor slug",
+  "john-bertrand": {
+   "drop": [
+    [
+     "1984",
+     "Finn"
+    ]
+   ],
+   "why": "1984 Olympic Finn silver was John Bertrand of the USA, not the Australian America's Cup skipper"
+  },
+  "roy-heiner": {
+   "noach": [
+    [
+     "2000",
+     "Soling"
+    ]
+   ],
+   "rank": [
+    [
+     "2000",
+     "Soling",
+     4
+    ]
+   ],
+   "why": "Sydney 2000 Soling: 4th, no medal (Olympedia)"
+  }
+ }
+}

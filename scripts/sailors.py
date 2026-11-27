@@ -181,6 +181,8 @@ def profile(slug):
             if r.get("competition_class_id"): classes.add(r["competition_class_id"])
         rows.sort(key=lambda x: x[0], reverse=True)
         res[typ] = rows[:80]; allres += rows
+    res, _, _ = sp_fix(slug, res, [], [])
+    allres = sp_fix(slug, {"a": allres}, [], [])[0]["a"]
     if allres:
         pos = [x[6] for x in allres if isinstance(x[6], int)]
         p["st"] = {"ev": len(allres), "win": sum(1 for x in pos if x == 1), "pod": sum(1 for x in pos if x <= 3),
@@ -207,6 +209,9 @@ def profile(slug):
         if L: rec.append([t.get("name") or "", L])
     rec = fix_gc_rec(rec)
     if rg.get("total") is not None: p["recn"] = rg.get("total")
+    res, ach, rec = sp_fix(slug, res, ach, rec)
+    if ach: p["ach2"] = [[a[0], a[1], len(a[2])] for a in ach]
+    else: p.pop("ach2", None)
     det = {"p": p, "res": res, "hist": hist, "ach": ach, "rec": rec}
     return p, det
 
@@ -251,6 +256,23 @@ def fix_gc_rec(rec):
         if L: out.append([t, L])
     return out
 
+
+def sp_fix(slug, res, ach, rec):
+    """Hand corrections from overrides.json "spfix": {slug: {...}} for data worldofsailors.com gets wrong
+    (namesakes, wrong medals). Keys: "drop" [[year, class]] removes results/achievements/records,
+    "noach" [[year, class]] removes only the medal badge, "rank" [[year, class, rank]] sets the placing."""
+    try: F = (json.load(open("overrides.json")).get("spfix") or {}).get(slug) or {}
+    except Exception: F = {}
+    D = {(str(y), c) for y, c in F.get("drop") or []}
+    NA = D | {(str(y), c) for y, c in F.get("noach") or []}
+    RK = {(str(y), c): r for y, c, r in F.get("rank") or []}
+    if not (D or NA or RK): return res, ach, rec
+    res = {k: [r[:6] + [RK.get((r[0][:4], r[4]), r[6])] + r[7:] for r in L if (r[0][:4], r[4]) not in D] for k, L in res.items()}
+    ach = [[n, c, [e for e in L if (e[1], e[2]) not in NA]] for n, c, L in ach]
+    ach = [a for a in ach if a[2]]
+    rec = [[t, [r[:6] + [RK.get((r[0], r[4]), r[6])] for r in L if (r[0], r[4]) not in D]] for t, L in rec]
+    rec = [r for r in rec if r[1]]
+    return res, ach, rec
 
 def name_ok(p, name):
     a = norm(name); b = norm(p["first"] + " " + p["last"])
