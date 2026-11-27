@@ -1889,3 +1889,24 @@ dialog.tmd:has(.kcal)>.th{flex:none}
 .lvbtn .lvi{background:color-mix(in srgb,currentColor 14%,transparent)}
 .lvbtn.on{background:linear-gradient(135deg,#e53935,#b71c1c);color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(229,57,53,.35)}
 .lvbtn.on .lvi{background:rgba(255,255,255,.2)}
+
+/* race page v2: matchday header (design A) */
+.rhero{position:relative;overflow:hidden;text-align:center;border-radius:20px;padding:16px 14px 14px;margin:2px 0 12px;color:#fff;background:linear-gradient(150deg,#1d4f97 0%,#0b5b8f 55%,#0c6870 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.rhero::after{content:"";position:absolute;inset:auto -30% -55% -30%;height:70%;background:radial-gradient(closest-side,rgba(255,210,31,.16),transparent);pointer-events:none}
+.rhero.now{background:linear-gradient(150deg,#b71c1c,#e53935)}
+.rhlab{display:flex;align-items:center;justify-content:center;gap:7px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#ffd21f}
+.rhero.now .rhlab{color:#fff}
+.rhcd{font-size:44px;font-weight:800;line-height:1.1;margin:4px 0 2px;letter-spacing:.01em;font-variant-numeric:tabular-nums;direction:ltr}
+.rhsub{font-size:13px;opacity:.85}
+.rhdl{display:inline-block;margin-top:8px;padding:4px 10px;border-radius:99px;background:rgba(255,159,67,.25);color:#ffd9b0;font-size:12.5px;font-weight:600}
+.rhpl{display:flex;justify-content:center;gap:8px;margin-top:10px;flex-wrap:wrap}
+.rhp{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.14);font-size:13px;font-weight:600}
+.rhp .wa{display:inline-block;font-style:normal}
+.rhteams{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 14px}
+.rht{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0;padding:12px 12px 11px;border-radius:16px;border:var(--bd);background:var(--card);color:var(--ink);font:inherit;text-align:start;cursor:pointer;transition:transform .12s}
+.rht:active{transform:scale(.97)}
+.rht .flg{width:34px;height:auto;border-radius:4px;margin-bottom:5px;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.rht b{font-size:16px;line-height:1.2;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rht small{font-size:12px;color:var(--mute);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rht em{font-style:normal;font-size:12px;font-weight:700;color:var(--gold,#ffd21f)}
+.rht.ph{opacity:.7;justify-content:center;min-height:64px}
