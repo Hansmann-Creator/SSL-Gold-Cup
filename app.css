@@ -2042,3 +2042,9 @@ html.lvxon[data-tabv=home] #nxc{display:none!important}
 .lvx .lvxo .fpB{gap:6px}.lvx .lvxo .fpB small{font-size:15px}.lvx .lvxo .fpB .flg,.lvx .lvxo .fls>.flg{width:32px!important;height:23px!important;border-radius:4px}
 .lvx .lvxo .fpB.w{padding:4px 10px 4px 8px}
 .lvx .lvxn{cursor:pointer;border-radius:0}.lvx .lvxn em b{margin-inline-start:6px;font-size:18px;line-height:1;opacity:.8}
+
+/* race counter of the day on each race card ("3/6"), sitting on the card's top edge */
+.races li.rc>.rcn{position:absolute;top:-8px;inset-inline-end:18px;font-style:normal;font-size:11px;font-weight:700;letter-spacing:.04em;line-height:1;padding:3px 7px;border-radius:99px;background:#183a74;border:1px solid rgba(255,255,255,.22);color:rgba(255,255,255,.75);font-variant-numeric:tabular-nums;pointer-events:none}
+.races li.rc.now>.rcn{background:#7a1f2a;border-color:rgba(255,120,120,.5);color:#fff}
+:root[data-theme=light] .races li.rc>.rcn{background:#fff;color:#3a4a6b;border-color:#c9d3e6}
+.races li.rc+li.rc{margin-top:12px}
