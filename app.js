@@ -3708,8 +3708,8 @@ function estDay(){const n=nowMs();if(ESTC&&ESTC.D===D&&ESTC.F===FLG&&ESTC.T===TI
     const plan=gp&&Math.abs(gp-t)<6*36e5?gp:(x.ap&&end?0:t);
     if(gs||o.s=="racing"){st=gs||o.since||Math.max(plan,nb);end=Math.max(st+RDUR,n+3*60e3);endB=Math.max(st+DMIN,n+60e3)}
     /* the race office sets the next start in Georacing once the prior race is over (27 Nov: C2 set to 12:15, started 12:15:08):
-       then that time wins over the learned average changeover, as long as it is not shorter than the fastest changeover seen */
-    else if(pdone&&gp&&end&&gp>=end+GMIN-60e3&&Math.abs(gp-t)<6*36e5){st=sb=Math.max(gp,nb,n>=gp?n+3*60e3:0);end=st+RDUR;endB=sb+DMIN;if(gp-t>5*60e3)SURE[k]=1}
+       then that time wins over the learned changeover (27 Nov B2: set 16:37 after A2 finished 16:09, i.e. 27 min, shorter than any changeover seen before); only a start less than 10 min after the finish is ignored */
+    else if(pdone&&gp&&end&&gp>=end+10*60e3&&Math.abs(gp-t)<6*36e5){st=sb=Math.max(gp,nb,n>=gp?n+3*60e3:0);end=st+RDUR;endB=sb+DMIN;if(gp-t>5*60e3)SURE[k]=1}
     else{st=Math.max(plan,nb,end?end+RGAP:0,n>=plan?n+3*60e3:0);end=st+RDUR;sb=Math.max(plan,nb,endB?endB+GMIN:0,n>=t?n:0);endB=sb+DMIN;
       /* certain: the operator moved the start, or even the fastest race + changeover seen so far cannot make the planned time */
       if(plan-t>5*60e3||sb-t>5*60e3)SURE[k]=1}
