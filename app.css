@@ -1722,3 +1722,12 @@ button.ch2.chgl{border:0;font:inherit;cursor:pointer}button.ch2.chgl::after{cont
 .hch{flex-wrap:nowrap}.hch button{flex:0 1 auto;min-width:0;max-width:62%}.hch button:last-child{max-width:48%}
 .hch .fitn{min-width:0}
 .dchips button b{font-size:15px}.dchips button{padding-block:10px}
+/* Race Report tab per theme – wave: sand-gold glass that sits in the sea gradient */
+.races li.rc.done .rtab:not(.inc){background:linear-gradient(180deg,rgba(255,226,140,.34),rgba(245,184,0,.14));color:#ffe7a0;border-inline-start:1px solid rgba(255,210,31,.42);box-shadow:inset 1px 0 0 rgba(255,255,255,.08)}
+.races li.rc.done .rtab:not(.inc) svg{color:#ffd21f}
+:root[data-theme=dark] .races li.rc.done .rtab:not(.inc){background:linear-gradient(180deg,rgba(255,210,31,.2),rgba(255,210,31,.06));color:#ffd21f;border-inline-start-color:rgba(255,210,31,.3)}
+:root[data-theme=light] .races li.rc.done .rtab:not(.inc){background:linear-gradient(180deg,#fff4cf,#f7e3a1);color:#6e4d00;border-inline-start:1px solid #ecd27c;box-shadow:none}
+:root[data-theme=light] .races li.rc.done .rtab:not(.inc) svg{color:#a86d00}
+.races li.rc.done .rtab:not(.inc){background:linear-gradient(180deg,rgba(255,236,186,.2),rgba(255,255,255,.05) 70%);color:#ffe08a;border-inline-start:2px solid rgba(255,210,31,.65);box-shadow:none}
+:root[data-theme=dark] .races li.rc.done .rtab:not(.inc){background:linear-gradient(180deg,rgba(255,210,31,.16),rgba(255,210,31,.03) 70%);color:#ffd21f;border-inline-start:2px solid rgba(255,210,31,.55)}
+:root[data-theme=light] .races li.rc.done .rtab:not(.inc){background:linear-gradient(180deg,#fff3c9,#fdf8ea 75%);color:#7a5600;border-inline-start:2px solid #e9c24a}
