@@ -3701,8 +3701,8 @@ const NXP={en:"Probably delayed",de:"Wohl verspätet",fr:"Retard probable",es:"R
 let ESTC=null;
 function estDay(){const n=nowMs();if(ESTC&&ESTC.D===D&&ESTC.F===FLG&&ESTC.T===TIM&&n-ESTC.at<5e3)return ESTC.E;
   const RDUR=((TIM&&TIM.dur)||45)*60e3,RGAP=((TIM&&TIM.gap)||35)*60e3,DMIN=((TIM&&TIM.dmin)||Math.max(20,((TIM&&TIM.dur)||45)-8))*60e3,GMIN=((TIM&&TIM.gmin)||Math.max(15,((TIM&&TIM.gap)||35)-8))*60e3;
-  const TR=(TIM&&TIM.races)||{},day=today(),E={},SURE={};let end=0,endB=0,pdone=0;
-  for(const x of SCH.filter(y=>y.d==day).sort((a,b)=>at(a)-at(b))){const k=raceKey(x),t=at(x),o=RST[k]||{},g=TR[k]||{},gs=g.s?Date.parse(g.s):0,gf=g.f?Date.parse(g.f):0,gp=g.plan?Date.parse(g.plan):0;
+  const TR=(TIM&&TIM.races)||{},day=today(),E={},SURE={},OP={};let end=0,endB=0,pdone=0;
+  for(const x of SCH.filter(y=>y.d==day).sort((a,b)=>at(a)-at(b))){const k=raceKey(x),t=at(x),o=RST[k]||{},g=TR[k]||{},gs=g.s?Date.parse(g.s):0,gf=g.f?Date.parse(g.f):0,gpa=g.pa?Date.parse(g.pa):0,gp0=g.plan?Date.parse(g.plan):0,gp=gp0&&!(x.ap&&end&&gpa&&gpa<end-5*60e3)?gp0:0;
     if(gf||raceDone(x)||o.s=="done"){end=gf||(o.doneAt&&n-o.doneAt<3*36e5?o.doneAt:0)||(gs?gs+RDUR:0);endB=gf||(gs?gs+DMIN:0)||end;pdone=!!end;continue}
     const f=FLG&&FLG.races&&FLG.races[k],nb=f&&f.pd&&f.nb&&(!f.until||n<Date.parse(f.until))?Date.parse(f.nb):0;let st,sb;
     const plan=gp&&Math.abs(gp-t)<6*36e5?gp:(x.ap&&end?0:t);
@@ -3713,11 +3713,11 @@ function estDay(){const n=nowMs();if(ESTC&&ESTC.D===D&&ESTC.F===FLG&&ESTC.T===TI
     else{st=Math.max(plan,nb,end?end+RGAP:0,n>=plan?n+3*60e3:0);end=st+RDUR;sb=Math.max(plan,nb,endB?endB+GMIN:0,n>=t?n:0);endB=sb+DMIN;
       /* certain: the operator moved the start, or even the fastest race + changeover seen so far cannot make the planned time */
       if(plan-t>5*60e3||sb-t>5*60e3)SURE[k]=1}
-    E[k]=st;pdone=0}
-  ESTC={at:n,E,SURE,D,F:FLG,T:TIM};return E}
+    if(gp&&st==gp)OP[k]=1;E[k]=st;pdone=0}
+  ESTC={at:n,E,SURE,OP,D,F:FLG,T:TIM};return E}
 const estSure=x=>{estDay();return!!(ESTC&&ESTC.SURE&&ESTC.SURE[raceKey(x)])};
 const timOf=x=>(TIM&&TIM.races&&TIM.races[raceKey(x)])||{};
-const estOf=x=>{const e=estDay()[raceKey(x)],n=nowMs();return e&&(x.ap?Math.abs(e-at(x))>=60e3:e-at(x)>=10*60e3)&&e>n+4*60e3?e:0};
+const estOf=x=>{const k=raceKey(x),e=estDay()[k],n=nowMs(),op=ESTC&&ESTC.OP&&ESTC.OP[k];return e&&(x.ap||op?Math.abs(e-at(x))>=60e3:e-at(x)>=10*60e3)&&e>n+4*60e3?e:0};
 var FLG={},TIM=null;async function pullFlags(){try{const r=await fetch("timing.json?t="+Date.now(),{cache:"no-store"});if(r.ok){const j=await r.json(),ch=JSON.stringify(j)!==JSON.stringify(TIM);TIM=j;ESTC=null;if(ch)try{render(true)}catch(e){}}}catch(e){}try{const r=await fetch("flags.json?t="+Date.now(),{cache:"no-store"});if(r.ok){const j=await r.json(),ch=JSON.stringify(j)!==JSON.stringify(FLG);FLG=j;if(ch)try{render(true)}catch(e){}}}catch(e){}}
 pullFlags();setInterval(()=>{if(!document.hidden)pullFlags()},60000);
 /* race status from Georacing's live feed (CORS-open): waiting = boats on the water, none past the start; racing = someone past the start */

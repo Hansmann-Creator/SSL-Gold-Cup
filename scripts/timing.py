@@ -8,6 +8,8 @@ RM = [("1/32", "r32"), ("1/16", "r16"), ("1/8", "r8"), ("1/4", "r4"), ("Quarter"
 P = lambda s: datetime.datetime.fromisoformat(s.replace("Z", "+00:00")) if s else None
 Z = lambda d: d.astimezone(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ") if d else None
 out, rows = {}, []
+try: OLD = json.load(open(os.path.join(os.path.dirname(__file__), "..", "timing.json"))).get("races") or {}
+except Exception: OLD = {}
 try:
     for e in get("https://player.georacing.com/datas/applications/app_46.json").get("events", []):
         if "2026" not in e.get("name", "") or "Qualif" in e.get("name", ""): continue
@@ -27,8 +29,15 @@ try:
             st = min(sp["start"]) if sp.get("start") else None
             fin = sp.get("finish") or []
             o = {"plan": Z(P(r.get("start_time"))), "s": Z(st), "f": Z(max(fin)) if fin and len(fin) >= max(na, 1) else None, "nf": len(fin), "na": na}
+            prev = OLD.get(key) or {}
+            # when the race office last changed the start time in Georacing (a time set before the prior race
+            # finished is the morning schedule, not a decision)
+            o["pa"] = prev.get("pa") if prev.get("plan") == o["plan"] and prev.get("pa") else datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+            # Georacing sometimes clears a finished race (27 Nov D1: start/finish vanished after 40 min): keep what we saw
+            if not o["s"] and prev.get("s"): o["s"] = prev["s"]
+            if not o["f"] and prev.get("f") and o["s"] == prev.get("s"): o["f"] = prev["f"]; o["nf"] = max(o["nf"], prev.get("nf") or 0)
             out[key] = o
-            if st and o["f"]: rows.append((st, P(o["f"])))
+            if o["s"] and o["f"]: rows.append((P(o["s"]), P(o["f"])))
 except Exception as ex:
     print("timing:", ex); sys.exit(1)
 rows.sort()
