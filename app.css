@@ -1758,3 +1758,7 @@ header.top>.brand .lkp{width:100%;height:auto;max-width:560px;filter:drop-shadow
 /* countdown strip centred between the buttons and the hero */
 html[data-tabv=home] header.top{padding-bottom:0}
 html[data-tabv=home] header.top>#nxc{margin-top:20px!important}
+/* highlight film plays inline on the race page */
+.hlc>button.hlth{width:100%;padding:0;border:0;margin:0;cursor:pointer;font:inherit;color:inherit}
+.hlth.hlon iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.hlb a{text-decoration:none;align-self:flex-start}
