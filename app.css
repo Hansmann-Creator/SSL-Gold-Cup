@@ -1987,3 +1987,4 @@ dialog.tmd:has(.kcal)>.th{flex:none}
 .rcg>.lvbtn b{font-size:16px}.rcg>.lvbtn small{font-size:12px}
 .rcg>button svg{flex:none}
 .rcg>button:only-child,.rcg>button:last-child:nth-child(odd){grid-column:1/-1}
+#cbar img.cbssl{margin-inline-start:0;margin-inline-end:2px}

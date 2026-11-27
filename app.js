@@ -3755,7 +3755,7 @@ $("#setb").onclick=()=>openQuick();
 /* app icon badge while a race is on the water (installed app, Badging API) */
 {const bd=()=>{try{if(!("setAppBadge"in navigator))return;const on=SCH.some(x=>rState2(x)=="now");on?navigator.setAppBadge(1).catch(()=>{}):navigator.clearAppBadge().catch(()=>{})}catch(e){}};setTimeout(bd,4000);setInterval(bd,60000)}
 (function(){const c=document.createElement("div");c.id="cbar";c.setAttribute("aria-hidden","true");
-  c.innerHTML=`<img src="brand/lockup.webp" alt=""><i></i><button type="button" data-cbi hidden tabindex="-1">${QDL}</button><button type="button" data-cbs tabindex="-1">${$("#setb").querySelector("svg").outerHTML}</button><img class="cbssl" src="brand/ssl.png" alt="SSL">`;
+  c.innerHTML=`<img src="brand/lockup.webp" alt=""><i></i><button type="button" data-cbi hidden tabindex="-1">${QDL}</button><img class="cbssl" src="brand/ssl.png" alt="SSL"><button type="button" data-cbs tabindex="-1">${$("#setb").querySelector("svg").outerHTML}</button>`;
   document.body.appendChild(c);c.querySelector("[data-cbi]").onclick=()=>doInstall();c.querySelector("[data-cbs]").onclick=()=>openQuick();
   const br=$("header.top>.brand");let away=false,up=false,ly=scrollY;const set=()=>{const on=away&&up;document.documentElement.classList.toggle("cbon",on);c.setAttribute("aria-hidden",on?"false":"true");c.querySelectorAll("button").forEach(b=>b.tabIndex=on?0:-1)};
   if(br&&"IntersectionObserver"in window)new IntersectionObserver(es=>{away=!es[0].isIntersecting;if(!away)up=false;set()}).observe(br);
