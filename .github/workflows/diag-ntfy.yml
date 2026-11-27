@@ -1,0 +1,9 @@
+name: diag ntfy
+on: {push: {branches: [diag-ntfy]}}
+jobs:
+  t:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "--- preflight"; curl -s -i -X OPTIONS "https://ntfy.sh/sslgc-tk-ef9ee70e0b09ad13" -H "Origin: https://hansmann-creator.github.io" -H "Access-Control-Request-Method: POST" | head -20
+          echo "--- simple POST with email"; curl -s -i -X POST "https://ntfy.sh/sslgc-tk-ef9ee70e0b09ad13?title=SSL%20App%20Ticket%20TEST&email=th.hansmann%40googlemail.com&cache=no&tags=ticket" -H "Origin: https://hansmann-creator.github.io" -H "Content-Type: text/plain" --data-binary $'Testticket aus der SSL-App-Einrichtung (Claude).\nWenn diese Mail ankommt, funktioniert der Ticket-Versand.' | head -30
