@@ -1977,3 +1977,13 @@ dialog.tmd:has(.kcal)>.th{flex:none}
 .vtr.rc{font-size:14px;color:var(--ink)}.vtr.rc time{font-weight:700;opacity:.85}.vtr.rc i{font-style:normal;opacity:.5}
 .vtrl{border-top:1px solid var(--line)}
 .vtdn{margin:0;padding:10px 14px;font-size:13px;color:var(--mute);border-top:1px solid var(--line)}
+
+/* race page (before/during race): one even 2-column button grid */
+.rcbtns.rcg{grid-template-columns:1fr 1fr;gap:10px;margin:0 0 12px}
+.rcg>button{min-height:64px;margin:0;width:100%;border-radius:16px;padding:10px 12px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:16px}
+.rcg>.rcb.fc2{background:var(--card);color:var(--ink);border:var(--bd)}
+.rcg>.lvbtn{justify-content:center}
+.rcg>.lvbtn .lvi{width:30px;height:30px}
+.rcg>.lvbtn b{font-size:16px}.rcg>.lvbtn small{font-size:12px}
+.rcg>button svg{flex:none}
+.rcg>button:only-child,.rcg>button:last-child:nth-child(odd){grid-column:1/-1}
