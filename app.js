@@ -1974,7 +1974,7 @@ let PGS=null,NOBACK=false;
 const pgHash=e=>e.t=="set"?"settings":e.t=="chg"?"changes":e.t=="rank"?"ranking":e.t=="fav"?"favorites":e.t=="tk"?"ticket":e.t=="bn"?"bonus":e.t=="cmp"?"compare"+(e.m?"-"+e.m+(e.a||e.b?"-"+(e.a||"_"):"")+(e.b?"-"+e.b:""):""):e.t=="team"?`team-${e.a}`:e.t=="sailor"?`sailor-${e.a}-${e.i}`:e.t=="sx"?`sailorx-${e.s}`:`race-${e.k.replace(/\|/g,"-")}`;
 function pgParse(h){let m;if(h=="settings")return{t:"set"};if(h=="changes")return{t:"chg"};if(h=="ranking")return{t:"rank"};if(h=="favorites")return{t:"fav"};if(h=="ticket")return{t:"tk"};if(h=="bonus")return{t:"bn"};if(m=h.match(/^compare(?:-(t|s)(?:-([A-Z]{3}(?:\.\d+)?|_))?(?:-([A-Z]{3}(?:\.\d+)?))?)?$/))return{t:"cmp",m:m[1]||"t",a:m[2]&&m[2]!="_"?m[2]:undefined,b:m[3]};if(m=h.match(/^team-([A-Z]{3})$/))return{t:"team",a:m[1]};if(m=h.match(/^sailor-([A-Z]{3})-(\d+)$/))return{t:"sailor",a:m[1],i:+m[2]};if(m=h.match(/^sailorx-([a-z0-9-]+)$/))return{t:"sx",s:m[1]};if(m=h.match(/^race-(\w+)-([A-D])-(\d+)$/))return{t:"race",k:`${m[1]}|${m[2]}|${m[3]}`};return null}
 /* bottom tab follows what is on screen: team page -> Teams, sailor -> Sailors, race -> Competition */
-function tabSync(){const COMP=["board","bracket","qualifying","gc2023","results"].includes(view),P=$("#pg"),pg=P&&!P.hidden&&PGS?PGS.t:"";
+function tabSync(){document.documentElement.dataset.tabv=view;const COMP=["board","bracket","qualifying","gc2023","results"].includes(view),P=$("#pg"),pg=P&&!P.hidden&&PGS?PGS.t:"";
   const want=pg=="team"||pg=="rank"?"teams":pg=="sailor"||pg=="sx"?"sailors":pg=="race"?"comp":pg=="set"||pg=="chg"||pg=="fav"||pg=="cmp"||pg=="tk"||pg=="bn"?"more":COMP?"comp":view;
   document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.v==want))}
 function pgRender(e){PGS=e;if(e.t!="bn")bnStopCam();setTimeout(tabSync,0);if(e.t=="set")pSettings();else if(e.t=="chg")pChanges();else if(e.t=="rank")pRank();else if(e.t=="fav")pFav();else if(e.t=="cmp")pCmp(e);else if(e.t=="tk")pTicket();else if(e.t=="bn")pBonus();else if(e.t=="team")pTeam(e.a);else if(e.t=="sailor")pSailor(e.a,e.i);else if(e.t=="sx")pSailorX(e.s);else{const x=raceBy(e.k);if(x)pRace(x);else pgHide()}}
@@ -3236,7 +3236,7 @@ function nxState(x){const t=at(x),n=nowMs(),f=FLG&&FLG.races&&FLG.races[raceKey(
   if(n<t-5*60e3)return fl?{k:"prob",to:t,nb:0}:{k:"ok",to:t};
   if(n<t)return fl?{k:"prob",to:t,nb:0}:{k:"soon",to:t};
   return st=="racing"?{k:"racing"}:{k:"live"}}
-function nxcPaint(){let b=$("#nxc");const n=nowMs();
+function nxcPaint(){let b=$("#nxc");const n=nowMs();if(document.documentElement.dataset.tabv!=view)document.documentElement.dataset.tabv=view;
   const cand=SCH.filter(x=>!raceDone(x)&&at(x)>n-150*60e3&&!dayOver(x.d)).sort((a,b)=>at(a)-at(b));let x=null,S0=null;
   let cur=null,CS=null;
   for(const c of cand){const s=nxState(c);if(s.k=="done")continue;if(s.k=="live"||s.k=="racing"){if(!cur){cur=c;CS=s}continue}x=c;S0=s;break}
