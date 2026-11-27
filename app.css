@@ -1716,7 +1716,7 @@ dialog.tmd.full:has(.ig) .oblang{border-radius:99px;padding:8px 14px}
 .glr b{font-size:16px}.glr b small{font-weight:500;font-size:12.5px;color:var(--mute)}.glr p{margin:4px 0 6px;font-size:14.5px;line-height:1.45}.glr em{font-style:normal;font-size:11px;font-weight:700;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
 .glr.hl{border-color:#ffd21f;box-shadow:0 0 0 2px color-mix(in srgb,#ffd21f 50%,transparent);animation:glhl 2s ease-out}
 @keyframes glhl{0%{background:color-mix(in srgb,#ffd21f 30%,var(--card))}100%{background:var(--card)}}
-button.ch2.chgl{border:0;font:inherit;cursor:pointer}button.ch2.chgl::after{content:" ?";opacity:.6;font-size:.85em}
+button.ch2.chgl{border:0;font:inherit;cursor:pointer}button.ch2.chgl::after{content:"";display:inline-block;width:.78em;height:.78em;margin-inline-start:.4em;vertical-align:-.04em;background:currentColor;opacity:.55;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4.6a1.4 1.4 0 1 1 0 2.8 1.4 1.4 0 0 1 0-2.8zM13.4 18h-2.8v-7.2h2.8z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4.6a1.4 1.4 0 1 1 0 2.8 1.4 1.4 0 0 1 0-2.8zM13.4 18h-2.8v-7.2h2.8z'/%3E%3C/svg%3E") center/contain no-repeat}
 .s3gl{cursor:pointer}.glin{display:inline-grid;place-items:center;width:14px;height:14px;border-radius:50%;background:var(--card2);font-style:normal;font-size:9px;font-weight:800;margin-inline-start:3px}
 /* hero chips always side by side; day chips one word */
 .hch{flex-wrap:nowrap}.hch button{flex:0 1 auto;min-width:0;max-width:62%}.hch button:last-child{max-width:48%}
@@ -1880,3 +1880,6 @@ dialog.tmd:has(.kcal)>.th{flex:none}
 /* school drawings: geometry is left-to-right, also in Arabic/Urdu (text anchors would flip otherwise) */
 .schsvg{direction:ltr;unicode-bidi:isolate}
 .schsvg text{unicode-bidi:plaintext}
+
+/* info marker instead of "?" on glossary links */
+.glin{background:none!important;width:auto!important;height:auto!important}.glin::after{content:"";display:inline-block;width:12px;height:12px;vertical-align:-1px;background:currentColor;opacity:.6;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4.6a1.4 1.4 0 1 1 0 2.8 1.4 1.4 0 0 1 0-2.8zM13.4 18h-2.8v-7.2h2.8z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4.6a1.4 1.4 0 1 1 0 2.8 1.4 1.4 0 0 1 0-2.8zM13.4 18h-2.8v-7.2h2.8z'/%3E%3C/svg%3E") center/contain no-repeat}
