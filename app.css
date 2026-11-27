@@ -1731,3 +1731,15 @@ button.ch2.chgl{border:0;font:inherit;cursor:pointer}button.ch2.chgl::after{cont
 .races li.rc.done .rtab:not(.inc){background:linear-gradient(180deg,rgba(255,236,186,.2),rgba(255,255,255,.05) 70%);color:#ffe08a;border-inline-start:2px solid rgba(255,210,31,.65);box-shadow:none}
 :root[data-theme=dark] .races li.rc.done .rtab:not(.inc){background:linear-gradient(180deg,rgba(255,210,31,.16),rgba(255,210,31,.03) 70%);color:#ffd21f;border-inline-start:2px solid rgba(255,210,31,.55)}
 :root[data-theme=light] .races li.rc.done .rtab:not(.inc){background:linear-gradient(180deg,#fff3c9,#fdf8ea 75%);color:#7a5600;border-inline-start:2px solid #e9c24a}
+/* header v3 (variant B): no SSL mark, Rio lockup full width on a light arc */
+.brand .sslg{display:none}
+header.top>.brand{justify-content:center;margin:calc(-18px - env(safe-area-inset-top)) calc(-1*var(--pad)) 16px;padding:calc(16px + env(safe-area-inset-top)) calc(var(--pad) + 6px) 20px;background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,.07));border-bottom:1px solid rgba(255,255,255,.26);border-radius:0 0 50% 50% / 0 0 34px 34px;box-shadow:0 14px 30px rgba(0,20,60,.22)}
+header.top>.brand .lkp{width:100%;height:auto;max-width:560px;filter:drop-shadow(0 8px 22px rgba(0,0,0,.3))}
+:root[data-theme=dark] header.top>.brand{background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.03));border-bottom-color:rgba(255,255,255,.14)}
+/* Race Report tab: slim strip – icon + vertical label */
+.races li.rc.done{padding-inline-end:48px}
+.races li.rc.done .rtab{width:34px;gap:6px;padding:8px 0}
+.races li.rc.done .rtab svg{width:15px;height:15px}
+.races li.rc.done .rtab span{font-size:0;line-height:0}
+.races li.rc.done .rtab span::after{content:"Report";display:block;font-size:8.5px;line-height:1;font-weight:800;letter-spacing:.12em;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg)}
+.races li.rc.done .rtab b{display:none}.races li.rc.done .rtab em{display:none}

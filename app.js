@@ -1905,7 +1905,7 @@ function heroA(){const w=String(T("welcome")).split(" · "),dt=String(T("dates")
   return `<section class="hero2"><small>${esc(w.length>1?w[0]:"Final Series")}</small><h2>${esc(w[w.length-1])}</h2><div class="hch"><button data-kcal="1">${svg('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>')}<span class="fitn">${esc((()=>{try{return new Intl.DateTimeFormat(LOC(),{day:"numeric",month:"short",timeZone:"UTC"}).formatRange(new Date("2026-11-19T12:00:00Z"),new Date("2026-12-13T12:00:00Z"))}catch(e){return dt[0]}})())}</span></button><button data-more="venue">${svg('<path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>')}<span class="fitn">${esc(dt[1]||"Marina da Glória")}</span></button></div></section>`}
 function home(){let h=liveBar()+delayBanner()+champ()+heroA();
   h+=`<div class="prog" aria-label="${esc(T("progress"))}">${D.rounds.filter(r=>r.id!="pf").map(r=>{const s=rState(r);return `<button data-go="round-${r.id}" class="${s}${r.id==current()?" cur":""}"><i></i><span>${esc(RS[r.id]||r.short)}</span></button>`}).join("")}</div>`;
-  h+=favCard()+todayCard();
+  h+=todayCard()+favCard();
   const lr=latestRound();
   if(lr)h+=`<h3 class="sec">${T("latest")} · ${esc(RNm(lr))}</h3><div class="lat">${lr.groups.map(g=>mbox(lr,g,{go:"round-"+lr.id,nob:1})).join("")}</div><p class="more1"><a href="#round-${lr.id}">${T("showRound")}</a></p>`;
   h+=videosHome();
