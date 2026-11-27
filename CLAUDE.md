@@ -42,6 +42,7 @@ Read this first in any new session. Everything needed to keep developing the app
 
 ## Conventions
 - Commit as `Hansi (via Claude) <hansmann-creator@users.noreply.github.com>`; push with `git pull -q --rebase --depth=20 origin main && git -c push.negotiate=true push -q origin main`.
+- Start-time estimates: after a race day run `python3 scripts/replay_estimates.py YYYY-MM-DD` (server on :8011) – shows what the app displayed 20/10/5 min before each real start.
 - Test locally: `python3 -m http.server 8011` + Playwright (Chrome at `/usr/bin/google-chrome`); run `python3 scripts/smoke.py` before pushing.
 - The Claude container cannot reach sslgoldcup.com / worldofsailors.com / Georacing / YouTube → fetch those inside a temporary GitHub Actions workflow and push the result to an orphan branch, then remove the workflow.
 - Never commit secrets. OneSignal REST key only as repo secret `ONESIGNAL_REST_KEY` (set by Hansi).
