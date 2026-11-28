@@ -1,457 +1,627 @@
 [
- {
-  "t": "BRA",
-  "m": "scheidt",
-  "rank": 55,
-  "slug": "robert-scheidt",
-  "b": {
-   "en": [
-    "Five Olympic medals: gold 1996 & 2004 (Laser), silver 2000 (Laser) & 2008 (Star), bronze 2012 (Star)",
-    "9× Laser World Champion, 3× Star World Champion (2007, 2011, 2012)"
-   ],
-   "de": [
-    "Fünf Olympiamedaillen: Gold 1996 & 2004 (Laser), Silber 2000 (Laser) & 2008 (Star), Bronze 2012 (Star)",
-    "9× Laser-Weltmeister, 3× Star-Weltmeister (2007, 2011, 2012)"
-   ],
-   "fr": [
-    "Cinq médailles olympiques : or 1996 et 2004 (Laser), argent 2000 (Laser) et 2008 (Star), bronze 2012 (Star)",
-    "9 fois champion du monde de Laser, 3 fois champion du monde de Star (2007, 2011, 2012)"
-   ],
-   "es": [
-    "Cinco medallas olímpicas: oro 1996 y 2004 (Laser), plata 2000 (Laser) y 2008 (Star), bronce 2012 (Star)",
-    "9 veces campeón del mundo de Laser, 3 veces de Star (2007, 2011, 2012)"
-   ],
-   "pt": [
-    "Cinco medalhas olímpicas: ouro em 1996 e 2004 (Laser), prata em 2000 (Laser) e 2008 (Star), bronze em 2012 (Star)",
-    "9× campeão mundial de Laser, 3× campeão mundial de Star (2007, 2011, 2012)"
-   ],
-   "zh": [
-    "五枚奥运奖牌：1996 和 2004 年金牌（激光级），2000 年（激光级）和 2008 年（星级）银牌，2012 年铜牌（星级）",
-    "9 次 Laser 世界冠军，3 次 Star 世界冠军（2007、2011、2012）"
-   ],
-   "ar": [
-    "خمس ميداليات أولمبية: ذهبية 1996 و2004 (ليزر)، فضية 2000 (ليزر) و2008 (ستار)، برونزية 2012 (ستار)",
-    "بطل العالم 9 مرات في فئة ليزر و3 مرات في فئة ستار (2007، 2011، 2012)"
-   ]
-  }
- },
- {
-  "t": "USA",
-  "m": "cayard",
-  "rank": 28,
-  "slug": "paul-cayard",
-  "b": {
-   "en": [
-    "Star World Champion 2025 (with Frithjof Kleen)",
-    "Etchells World Champion 2026",
-    "5th in the Star at the 2004 Olympics"
-   ],
-   "de": [
-    "Star-Weltmeister 2025 (mit Frithjof Kleen)",
-    "Etchells-Weltmeister 2026",
-    "Platz 5 im Star bei Olympia 2004"
-   ],
-   "fr": [
-    "Champion du monde de Star 2025 (avec Frithjof Kleen)",
-    "Champion du monde d'Etchells 2026",
-    "5e en Star aux JO 2004"
-   ],
-   "es": [
-    "Campeón del mundo de Star 2025 (con Frithjof Kleen)",
-    "Campeón del mundo de Etchells 2026",
-    "5.º en Star en los JJ. OO. de 2004"
-   ],
-   "pt": [
-    "Campeão mundial da classe Star 2025 (com Frithjof Kleen)",
-    "Campeão mundial de Etchells 2026",
-    "5º na classe Star nos Jogos Olímpicos de 2004"
-   ],
-   "zh": [
-    "2025 年星级世界冠军（与 Frithjof Kleen 搭档）",
-    "2026 年 Etchells 级世界冠军",
-    "2004 年奥运会星级第5名"
-   ],
-   "ar": [
-    "بطل العالم في فئة ستار 2025 (مع فريتيوف كلين)",
-    "بطل العالم في فئة إتشلز 2026",
-    "المركز الخامس في فئة ستار في أولمبياد 2004"
-   ]
-  }
- },
- {
-  "t": "POL",
-  "m": "kusznierewicz",
-  "rank": 33,
-  "slug": "mateusz-kusznierewicz",
-  "b": {
-   "en": [
-    "Olympic gold 1996 and bronze 2004 (Finn)",
-    "Star World Champion 2019, 5.5 Metre World Champion 2023"
-   ],
-   "de": [
-    "Olympiagold 1996 und Bronze 2004 (Finn)",
-    "Star-Weltmeister 2019, 5.5-m-Weltmeister 2023"
-   ],
-   "fr": [
-    "Or olympique 1996 et bronze 2004 (Finn)",
-    "Champion du monde de Star 2019 et de 5.5 m 2023"
-   ],
-   "es": [
-    "Oro olímpico 1996 y bronce 2004 (Finn)",
-    "Campeón del mundo de Star 2019 y de 5.5 m 2023"
-   ],
-   "pt": [
-    "Ouro olímpico em 1996 e bronze em 2004 (Finn)",
-    "Campeão mundial de Star 2019, campeão mundial de 5.5 Metre 2023"
-   ],
-   "zh": [
-    "1996 年奥运金牌、2004 年铜牌（芬兰人级）",
-    "2019 年星级世界冠军，2023 年 5.5 米级世界冠军"
-   ],
-   "ar": [
-    "ذهبية أولمبية 1996 وبرونزية 2004 (فين)",
-    "بطل العالم في فئة ستار 2019، وبطل العالم في فئة 5.5 متر 2023"
-   ]
-  }
- },
- {
-  "t": "GBR",
-  "m": "williams",
-  "rank": 62,
-  "slug": "ian-williams",
-  "b": {
-   "en": [
-    "Nine-time Match Racing World Champion – a record"
-   ],
-   "de": [
-    "Neunfacher Match-Race-Weltmeister – Rekord"
-   ],
-   "fr": [
-    "Neuf fois champion du monde de match racing – un record"
-   ],
-   "es": [
-    "Nueve veces campeón del mundo de match race, un récord"
-   ],
-   "pt": [
-    "Nove vezes campeão mundial de match race – um recorde"
-   ],
-   "zh": [
-    "九次对抗赛世界冠军，创纪录"
-   ],
-   "ar": [
-    "بطل العالم في سباقات المواجهة تسع مرات – رقم قياسي"
-   ]
-  }
- },
- {
-  "t": "HUN",
-  "m": "berecz",
-  "slug": "zsombor-berecz",
-  "b": {
-   "en": [
-    "Olympic silver, Finn, Tokyo 2020",
-    "Finn World Champion 2018",
-    "Captained Hungary to the 2023 Gold Cup title"
-   ],
-   "de": [
-    "Olympia-Silber im Finn, Tokio 2020",
-    "Finn-Weltmeister 2018",
-    "Führte Ungarn als Kapitän zum Gold-Cup-Titel 2023"
-   ],
-   "fr": [
-    "Argent olympique en Finn, Tokyo 2020",
-    "Champion du monde de Finn 2018",
-    "Capitaine de la Hongrie, championne de la Gold Cup 2023"
-   ],
-   "es": [
-    "Plata olímpica en Finn, Tokio 2020",
-    "Campeón del mundo de Finn 2018",
-    "Capitán de Hungría, campeona de la Gold Cup 2023"
-   ],
-   "pt": [
-    "Prata olímpica, Finn, Tóquio 2020",
-    "Campeão mundial de Finn 2018",
-    "Capitão da Hungria no título da Gold Cup 2023"
-   ],
-   "zh": [
-    "2020 东京奥运会芬兰人级银牌",
-    "2018 年芬兰人级世界冠军",
-    "作为队长带领匈牙利夺得 2023 年金杯冠军"
-   ],
-   "ar": [
-    "فضية أولمبية، فئة فين، طوكيو 2020",
-    "بطل العالم في فئة فين 2018",
-    "قاد المجر بصفته قائدًا إلى لقب Gold Cup 2023"
-   ]
-  }
- },
- {
-  "t": "HUN",
-  "m": "majthenyi",
-  "b": {
-   "en": [
-    "15-time Flying Dutchman World Champion with András Domokos – a record"
-   ],
-   "de": [
-    "15-facher Flying-Dutchman-Weltmeister mit András Domokos – Rekord"
-   ],
-   "fr": [
-    "15 fois champion du monde de Flying Dutchman avec András Domokos – un record"
-   ],
-   "es": [
-    "15 veces campeón del mundo de Flying Dutchman con András Domokos, un récord"
-   ],
-   "pt": [
-    "15 vezes campeão mundial de Flying Dutchman com András Domokos – um recorde"
-   ],
-   "zh": [
-    "与 András Domokos 搭档 15 次夺得 Flying Dutchman 世界冠军，创纪录"
-   ],
-   "ar": [
-    "بطل العالم في فئة فلاينغ داتشمان 15 مرة مع أندراش دوموكوش – رقم قياسي"
-   ]
-  }
- },
- {
-  "t": "GER",
-  "m": "kleen",
-  "b": {
-   "en": [
-    "Star World Champion 2014 (with Robert Stanjek) and 2025 (with Paul Cayard)",
-    "6th in the Star at the 2012 Olympics"
-   ],
-   "de": [
-    "Star-Weltmeister 2014 (mit Robert Stanjek) und 2025 (mit Paul Cayard)",
-    "Platz 6 im Star bei Olympia 2012"
-   ],
-   "fr": [
-    "Champion du monde de Star 2014 (avec Robert Stanjek) et 2025 (avec Paul Cayard)",
-    "6e en Star aux JO 2012"
-   ],
-   "es": [
-    "Campeón del mundo de Star 2014 (con Robert Stanjek) y 2025 (con Paul Cayard)",
-    "6.º en Star en los JJ. OO. de 2012"
-   ],
-   "pt": [
-    "Campeão mundial de Star em 2014 (com Robert Stanjek) e 2025 (com Paul Cayard)",
-    "6º na classe Star nos Jogos Olímpicos de 2012"
-   ],
-   "zh": [
-    "2014 年（与 Robert Stanjek）和 2025 年（与 Paul Cayard）星级世界冠军",
-    "2012 年奥运会星级第6名"
-   ],
-   "ar": [
-    "بطل العالم في فئة ستار 2014 (مع روبرت ستانييك) و2025 (مع بول كايارد)",
-    "المركز السادس في فئة ستار في أولمبياد 2012"
-   ]
-  }
- },
- {
-  "t": "ITA",
-  "m": "vascotto",
-  "slug": "vasco-vascotto",
-  "b": {
-   "en": [
-    "About 25 world titles – believed to be the most of any sailor",
-    "Skipper and tactician for Mascalzone Latino in the 2007 Louis Vuitton Cup"
-   ],
-   "de": [
-    "Rund 25 WM-Titel – vermutlich mehr als jeder andere Segler",
-    "Skipper und Taktiker bei Mascalzone Latino im Louis Vuitton Cup 2007"
-   ],
-   "fr": [
-    "Environ 25 titres mondiaux – sans doute le record",
-    "Skipper et tacticien de Mascalzone Latino lors de la Louis Vuitton Cup 2007"
-   ],
-   "es": [
-    "Unos 25 títulos mundiales: probablemente el récord",
-    "Patrón y táctico de Mascalzone Latino en la Louis Vuitton Cup 2007"
-   ],
-   "pt": [
-    "Cerca de 25 títulos mundiais – considerado o maior número entre todos os velejadores",
-    "Comandante e tático do Mascalzone Latino na Louis Vuitton Cup de 2007"
-   ],
-   "zh": [
-    "约 25 个世界冠军头衔——被认为是所有帆船运动员中最多的",
-    "2007 年路易威登杯担任 Mascalzone Latino 的船长兼战术师"
-   ],
-   "ar": [
-    "نحو 25 لقبًا عالميًا – يُعتقد أنه الأكثر بين جميع البحّارة",
-    "ربان وتكتيكي فريق ماسكالزوني لاتينو في كأس لويس فويتون 2007"
-   ]
-  }
- },
- {
-  "t": "AUS",
-  "m": "bertrand",
-  "slug": "john-bertrand",
-  "b": {
-   "en": [
-    "Skipper of Australia II, winner of the 1983 America's Cup",
-    "Olympic bronze 1976 (Finn)",
-    "Etchells World Champion 2010 and 2016"
-   ],
-   "de": [
-    "Skipper der Australia II, Sieger des America's Cup 1983",
-    "Olympia-Bronze 1976 (Finn)",
-    "Etchells-Weltmeister 2010 und 2016"
-   ],
-   "fr": [
-    "Skipper d'Australia II, vainqueur de la Coupe de l'America 1983",
-    "Bronze olympique 1976 (Finn)",
-    "Champion du monde d'Etchells 2010 et 2016"
-   ],
-   "es": [
-    "Patrón del Australia II, ganador de la Copa América 1983",
-    "Bronce olímpico 1976 (Finn)",
-    "Campeón del mundo de Etchells 2010 y 2016"
-   ],
-   "pt": [
-    "Comandante do Australia II, vencedor da America's Cup de 1983",
-    "Bronze olímpico em 1976 (Finn)",
-    "Campeão mundial de Etchells em 2010 e 2016"
-   ],
-   "zh": [
-    "1983 年美洲杯冠军 Australia II 的船长",
-    "1976 年奥运铜牌（芬兰人级）",
-    "2010 和 2016 年 Etchells 级世界冠军"
-   ],
-   "ar": [
-    "ربّان أستراليا II الفائز بكأس أمريكا 1983",
-    "برونزية أولمبية 1976 (فين)",
-    "بطل العالم في فئة إتشلز 2010 و2016"
-   ]
-  }
- },
- {
-  "t": "ARG",
-  "m": "lange",
-  "b": {
-   "en": [
-    "Olympic gold 2016 (Nacra 17), bronze 2004 and 2008 (Tornado)",
-    "World Sailing Sailor of the Year 2016"
-   ],
-   "de": [
-    "Olympiagold 2016 (Nacra 17), Bronze 2004 und 2008 (Tornado)",
-    "World Sailing Segler des Jahres 2016"
-   ],
-   "fr": [
-    "Or olympique 2016 (Nacra 17), bronze 2004 et 2008 (Tornado)",
-    "Marin de l'année World Sailing 2016"
-   ],
-   "es": [
-    "Oro olímpico 2016 (Nacra 17), bronce 2004 y 2008 (Tornado)",
-    "Regatista del año de World Sailing 2016"
-   ],
-   "pt": [
-    "Ouro olímpico 2016 (Nacra 17), bronze 2004 e 2008 (Tornado)",
-    "Velejador do Ano da World Sailing 2016"
-   ],
-   "zh": [
-    "2016 年奥运金牌（Nacra 17），2004 和 2008 年铜牌（Tornado）",
-    "2016 年世界帆联年度最佳帆船运动员"
-   ],
-   "ar": [
-    "ذهبية أولمبية 2016 (ناكرا 17) وبرونزيتان 2004 و2008 (تورنادو)",
-    "بحّار العام من World Sailing 2016"
-   ]
-  }
- },
- {
-  "t": "FRA",
-  "m": "peyron",
-  "b": {
-   "en": [
-    "Three-time winner of the solo Transat (OSTAR)",
-    "Ocean-racing legend and America's Cup sailor"
-   ],
-   "de": [
-    "Dreifacher Sieger der Solo-Transat (OSTAR)",
-    "Hochsee-Legende und America's-Cup-Segler"
-   ],
-   "fr": [
-    "Triple vainqueur de la Transat anglaise en solitaire",
-    "Légende de la course au large, marin de la Coupe de l'America"
-   ],
-   "es": [
-    "Tres veces ganador de la Transat en solitario (OSTAR)",
-    "Leyenda de la vela oceánica y de la Copa América"
-   ],
-   "pt": [
-    "Três vezes vencedor da Transat em solitário (OSTAR)",
-    "Lenda das regatas oceânicas e velejador da America's Cup"
-   ],
-   "zh": [
-    "三次赢得单人横渡大西洋赛（OSTAR）",
-    "远洋赛传奇、美洲杯帆船手"
-   ],
-   "ar": [
-    "فاز ثلاث مرات بسباق العبور الأطلسي الفردي (OSTAR)",
-    "أسطورة سباقات المحيطات وبحّار في كأس أمريكا"
-   ]
-  }
- },
- {
-  "t": "COL",
-  "m": "gomez",
-  "rank": 8,
-  "slug": "simon-gomez-ortiz-1",
-  "b": {}
- },
- {
-  "t": "AUS",
-  "m": "wearn",
-  "rank": 1,
-  "slug": "matthew-wearn",
-  "b": {}
- },
- {
-  "t": "ESP",
-  "m": "xammar",
-  "rank": 3,
-  "slug": "jordi-xammar-hernandez",
-  "b": {}
- },
- {
-  "t": "ESP",
-  "m": "botin",
-  "rank": 18,
-  "slug": "diego-botin-le-chever",
-  "b": {}
- },
- {
-  "t": "SWE",
-  "m": "jarudd",
-  "rank": 17,
-  "slug": "emil-jarudd",
-  "b": {}
- },
- {
-  "t": "NED",
-  "m": "lambriex",
-  "rank": 29,
-  "slug": "bart-lambriex",
-  "b": {}
- },
- {
-  "t": "ARG",
-  "m": "majdalani",
-  "rank": 27,
-  "slug": "mateo-majdalani",
-  "b": {}
- },
- {
-  "t": "USA",
-  "m": "poole",
-  "rank": 35,
-  "slug": "christopher-poole",
-  "b": {}
- },
- {
-  "t": "PER",
-  "m": "trazegnies",
-  "rank": 30,
-  "slug": "jean-paul-de-trazegnies-valdez",
-  "b": {}
- }
+{
+"t": "BRA",
+"m": "scheidt",
+"rank": 55,
+"slug": "robert-scheidt",
+"b": {
+"en": [
+"Five Olympic medals: gold 1996 & 2004 (Laser), silver 2000 (Laser) & 2008 (Star), bronze 2012 (Star)",
+"9× Laser World Champion, 3× Star World Champion (2007, 2011, 2012)"
+],
+"de": [
+"Fünf Olympiamedaillen: Gold 1996 & 2004 (Laser), Silber 2000 (Laser) & 2008 (Star), Bronze 2012 (Star)",
+"9× Laser-Weltmeister, 3× Star-Weltmeister (2007, 2011, 2012)"
+],
+"fr": [
+"Cinq médailles olympiques : or 1996 et 2004 (Laser), argent 2000 (Laser) et 2008 (Star), bronze 2012 (Star)",
+"9 fois champion du monde de Laser, 3 fois champion du monde de Star (2007, 2011, 2012)"
+],
+"es": [
+"Cinco medallas olímpicas: oro 1996 y 2004 (Laser), plata 2000 (Laser) y 2008 (Star), bronce 2012 (Star)",
+"9 veces campeón del mundo de Laser, 3 veces de Star (2007, 2011, 2012)"
+],
+"pt": [
+"Cinco medalhas olímpicas: ouro em 1996 e 2004 (Laser), prata em 2000 (Laser) e 2008 (Star), bronze em 2012 (Star)",
+"9× campeão mundial de Laser, 3× campeão mundial de Star (2007, 2011, 2012)"
+],
+"zh": [
+"五枚奥运奖牌：1996 和 2004 年金牌（激光级），2000 年（激光级）和 2008 年（星级）银牌，2012 年铜牌（星级）",
+"9 次 Laser 世界冠军，3 次 Star 世界冠军（2007、2011、2012）"
+],
+"ar": [
+"خمس ميداليات أولمبية: ذهبية 1996 و2004 (ليزر)، فضية 2000 (ليزر) و2008 (ستار)، برونزية 2012 (ستار)",
+"بطل العالم 9 مرات في فئة ليزر و3 مرات في فئة ستار (2007، 2011، 2012)"
+]
+}
+},
+{
+"t": "USA",
+"m": "cayard",
+"rank": 28,
+"slug": "paul-cayard",
+"b": {
+"en": [
+"Star World Champion 2025 (with Frithjof Kleen)",
+"Etchells World Champion 2026",
+"5th in the Star at the 2004 Olympics"
+],
+"de": [
+"Star-Weltmeister 2025 (mit Frithjof Kleen)",
+"Etchells-Weltmeister 2026",
+"Platz 5 im Star bei Olympia 2004"
+],
+"fr": [
+"Champion du monde de Star 2025 (avec Frithjof Kleen)",
+"Champion du monde d'Etchells 2026",
+"5e en Star aux JO 2004"
+],
+"es": [
+"Campeón del mundo de Star 2025 (con Frithjof Kleen)",
+"Campeón del mundo de Etchells 2026",
+"5.º en Star en los JJ. OO. de 2004"
+],
+"pt": [
+"Campeão mundial da classe Star 2025 (com Frithjof Kleen)",
+"Campeão mundial de Etchells 2026",
+"5º na classe Star nos Jogos Olímpicos de 2004"
+],
+"zh": [
+"2025 年星级世界冠军（与 Frithjof Kleen 搭档）",
+"2026 年 Etchells 级世界冠军",
+"2004 年奥运会星级第5名"
+],
+"ar": [
+"بطل العالم في فئة ستار 2025 (مع فريتيوف كلين)",
+"بطل العالم في فئة إتشلز 2026",
+"المركز الخامس في فئة ستار في أولمبياد 2004"
+]
+}
+},
+{
+"t": "POL",
+"m": "kusznierewicz",
+"rank": 33,
+"slug": "mateusz-kusznierewicz",
+"b": {
+"en": [
+"Olympic gold 1996 and bronze 2004 (Finn)",
+"Star World Champion 2019, 5.5 Metre World Champion 2023"
+],
+"de": [
+"Olympiagold 1996 und Bronze 2004 (Finn)",
+"Star-Weltmeister 2019, 5.5-m-Weltmeister 2023"
+],
+"fr": [
+"Or olympique 1996 et bronze 2004 (Finn)",
+"Champion du monde de Star 2019 et de 5.5 m 2023"
+],
+"es": [
+"Oro olímpico 1996 y bronce 2004 (Finn)",
+"Campeón del mundo de Star 2019 y de 5.5 m 2023"
+],
+"pt": [
+"Ouro olímpico em 1996 e bronze em 2004 (Finn)",
+"Campeão mundial de Star 2019, campeão mundial de 5.5 Metre 2023"
+],
+"zh": [
+"1996 年奥运金牌、2004 年铜牌（芬兰人级）",
+"2019 年星级世界冠军，2023 年 5.5 米级世界冠军"
+],
+"ar": [
+"ذهبية أولمبية 1996 وبرونزية 2004 (فين)",
+"بطل العالم في فئة ستار 2019، وبطل العالم في فئة 5.5 متر 2023"
+]
+}
+},
+{
+"t": "GBR",
+"m": "williams",
+"rank": 62,
+"slug": "ian-williams",
+"b": {
+"en": [
+"Nine-time Match Racing World Champion – a record"
+],
+"de": [
+"Neunfacher Match-Race-Weltmeister – Rekord"
+],
+"fr": [
+"Neuf fois champion du monde de match racing – un record"
+],
+"es": [
+"Nueve veces campeón del mundo de match race, un récord"
+],
+"pt": [
+"Nove vezes campeão mundial de match race – um recorde"
+],
+"zh": [
+"九次对抗赛世界冠军，创纪录"
+],
+"ar": [
+"بطل العالم في سباقات المواجهة تسع مرات – رقم قياسي"
+]
+}
+},
+{
+"t": "HUN",
+"m": "berecz",
+"slug": "zsombor-berecz",
+"b": {
+"en": [
+"Olympic silver, Finn, Tokyo 2020",
+"Finn World Champion 2018",
+"Captained Hungary to the 2023 Gold Cup title"
+],
+"de": [
+"Olympia-Silber im Finn, Tokio 2020",
+"Finn-Weltmeister 2018",
+"Führte Ungarn als Kapitän zum Gold-Cup-Titel 2023"
+],
+"fr": [
+"Argent olympique en Finn, Tokyo 2020",
+"Champion du monde de Finn 2018",
+"Capitaine de la Hongrie, championne de la Gold Cup 2023"
+],
+"es": [
+"Plata olímpica en Finn, Tokio 2020",
+"Campeón del mundo de Finn 2018",
+"Capitán de Hungría, campeona de la Gold Cup 2023"
+],
+"pt": [
+"Prata olímpica, Finn, Tóquio 2020",
+"Campeão mundial de Finn 2018",
+"Capitão da Hungria no título da Gold Cup 2023"
+],
+"zh": [
+"2020 东京奥运会芬兰人级银牌",
+"2018 年芬兰人级世界冠军",
+"作为队长带领匈牙利夺得 2023 年金杯冠军"
+],
+"ar": [
+"فضية أولمبية، فئة فين، طوكيو 2020",
+"بطل العالم في فئة فين 2018",
+"قاد المجر بصفته قائدًا إلى لقب Gold Cup 2023"
+]
+}
+},
+{
+"t": "HUN",
+"m": "majthenyi",
+"b": {
+"en": [
+"15-time Flying Dutchman World Champion with András Domokos – a record"
+],
+"de": [
+"15-facher Flying-Dutchman-Weltmeister mit András Domokos – Rekord"
+],
+"fr": [
+"15 fois champion du monde de Flying Dutchman avec András Domokos – un record"
+],
+"es": [
+"15 veces campeón del mundo de Flying Dutchman con András Domokos, un récord"
+],
+"pt": [
+"15 vezes campeão mundial de Flying Dutchman com András Domokos – um recorde"
+],
+"zh": [
+"与 András Domokos 搭档 15 次夺得 Flying Dutchman 世界冠军，创纪录"
+],
+"ar": [
+"بطل العالم في فئة فلاينغ داتشمان 15 مرة مع أندراش دوموكوش – رقم قياسي"
+]
+}
+},
+{
+"t": "GER",
+"m": "kleen",
+"b": {
+"en": [
+"Star World Champion 2014 (with Robert Stanjek) and 2025 (with Paul Cayard)",
+"6th in the Star at the 2012 Olympics"
+],
+"de": [
+"Star-Weltmeister 2014 (mit Robert Stanjek) und 2025 (mit Paul Cayard)",
+"Platz 6 im Star bei Olympia 2012"
+],
+"fr": [
+"Champion du monde de Star 2014 (avec Robert Stanjek) et 2025 (avec Paul Cayard)",
+"6e en Star aux JO 2012"
+],
+"es": [
+"Campeón del mundo de Star 2014 (con Robert Stanjek) y 2025 (con Paul Cayard)",
+"6.º en Star en los JJ. OO. de 2012"
+],
+"pt": [
+"Campeão mundial de Star em 2014 (com Robert Stanjek) e 2025 (com Paul Cayard)",
+"6º na classe Star nos Jogos Olímpicos de 2012"
+],
+"zh": [
+"2014 年（与 Robert Stanjek）和 2025 年（与 Paul Cayard）星级世界冠军",
+"2012 年奥运会星级第6名"
+],
+"ar": [
+"بطل العالم في فئة ستار 2014 (مع روبرت ستانييك) و2025 (مع بول كايارد)",
+"المركز السادس في فئة ستار في أولمبياد 2012"
+]
+}
+},
+{
+"t": "ITA",
+"m": "vascotto",
+"slug": "vasco-vascotto",
+"b": {
+"en": [
+"About 25 world titles – believed to be the most of any sailor",
+"Skipper and tactician for Mascalzone Latino in the 2007 Louis Vuitton Cup"
+],
+"de": [
+"Rund 25 WM-Titel – vermutlich mehr als jeder andere Segler",
+"Skipper und Taktiker bei Mascalzone Latino im Louis Vuitton Cup 2007"
+],
+"fr": [
+"Environ 25 titres mondiaux – sans doute le record",
+"Skipper et tacticien de Mascalzone Latino lors de la Louis Vuitton Cup 2007"
+],
+"es": [
+"Unos 25 títulos mundiales: probablemente el récord",
+"Patrón y táctico de Mascalzone Latino en la Louis Vuitton Cup 2007"
+],
+"pt": [
+"Cerca de 25 títulos mundiais – considerado o maior número entre todos os velejadores",
+"Comandante e tático do Mascalzone Latino na Louis Vuitton Cup de 2007"
+],
+"zh": [
+"约 25 个世界冠军头衔——被认为是所有帆船运动员中最多的",
+"2007 年路易威登杯担任 Mascalzone Latino 的船长兼战术师"
+],
+"ar": [
+"نحو 25 لقبًا عالميًا – يُعتقد أنه الأكثر بين جميع البحّارة",
+"ربان وتكتيكي فريق ماسكالزوني لاتينو في كأس لويس فويتون 2007"
+]
+}
+},
+{
+"t": "AUS",
+"m": "bertrand",
+"slug": "john-bertrand",
+"b": {
+"en": [
+"Skipper of Australia II, winner of the 1983 America's Cup",
+"Olympic bronze 1976 (Finn)",
+"Etchells World Champion 2010 and 2016"
+],
+"de": [
+"Skipper der Australia II, Sieger des America's Cup 1983",
+"Olympia-Bronze 1976 (Finn)",
+"Etchells-Weltmeister 2010 und 2016"
+],
+"fr": [
+"Skipper d'Australia II, vainqueur de la Coupe de l'America 1983",
+"Bronze olympique 1976 (Finn)",
+"Champion du monde d'Etchells 2010 et 2016"
+],
+"es": [
+"Patrón del Australia II, ganador de la Copa América 1983",
+"Bronce olímpico 1976 (Finn)",
+"Campeón del mundo de Etchells 2010 y 2016"
+],
+"pt": [
+"Comandante do Australia II, vencedor da America's Cup de 1983",
+"Bronze olímpico em 1976 (Finn)",
+"Campeão mundial de Etchells em 2010 e 2016"
+],
+"zh": [
+"1983 年美洲杯冠军 Australia II 的船长",
+"1976 年奥运铜牌（芬兰人级）",
+"2010 和 2016 年 Etchells 级世界冠军"
+],
+"ar": [
+"ربّان أستراليا II الفائز بكأس أمريكا 1983",
+"برونزية أولمبية 1976 (فين)",
+"بطل العالم في فئة إتشلز 2010 و2016"
+]
+}
+},
+{
+"t": "ARG",
+"m": "lange",
+"b": {
+"en": [
+"Olympic gold 2016 (Nacra 17), bronze 2004 and 2008 (Tornado)",
+"World Sailing Sailor of the Year 2016"
+],
+"de": [
+"Olympiagold 2016 (Nacra 17), Bronze 2004 und 2008 (Tornado)",
+"World Sailing Segler des Jahres 2016"
+],
+"fr": [
+"Or olympique 2016 (Nacra 17), bronze 2004 et 2008 (Tornado)",
+"Marin de l'année World Sailing 2016"
+],
+"es": [
+"Oro olímpico 2016 (Nacra 17), bronce 2004 y 2008 (Tornado)",
+"Regatista del año de World Sailing 2016"
+],
+"pt": [
+"Ouro olímpico 2016 (Nacra 17), bronze 2004 e 2008 (Tornado)",
+"Velejador do Ano da World Sailing 2016"
+],
+"zh": [
+"2016 年奥运金牌（Nacra 17），2004 和 2008 年铜牌（Tornado）",
+"2016 年世界帆联年度最佳帆船运动员"
+],
+"ar": [
+"ذهبية أولمبية 2016 (ناكرا 17) وبرونزيتان 2004 و2008 (تورنادو)",
+"بحّار العام من World Sailing 2016"
+]
+}
+},
+{
+"t": "FRA",
+"m": "peyron",
+"b": {
+"en": [
+"Three-time winner of the solo Transat (OSTAR)",
+"Ocean-racing legend and America's Cup sailor"
+],
+"de": [
+"Dreifacher Sieger der Solo-Transat (OSTAR)",
+"Hochsee-Legende und America's-Cup-Segler"
+],
+"fr": [
+"Triple vainqueur de la Transat anglaise en solitaire",
+"Légende de la course au large, marin de la Coupe de l'America"
+],
+"es": [
+"Tres veces ganador de la Transat en solitario (OSTAR)",
+"Leyenda de la vela oceánica y de la Copa América"
+],
+"pt": [
+"Três vezes vencedor da Transat em solitário (OSTAR)",
+"Lenda das regatas oceânicas e velejador da America's Cup"
+],
+"zh": [
+"三次赢得单人横渡大西洋赛（OSTAR）",
+"远洋赛传奇、美洲杯帆船手"
+],
+"ar": [
+"فاز ثلاث مرات بسباق العبور الأطلسي الفردي (OSTAR)",
+"أسطورة سباقات المحيطات وبحّار في كأس أمريكا"
+]
+}
+},
+{
+"t": "COL",
+"m": "gomez",
+"rank": 8,
+"slug": "simon-gomez-ortiz-1",
+"b": {}
+},
+{
+"t": "AUS",
+"m": "wearn",
+"rank": 1,
+"slug": "matthew-wearn",
+"b": {}
+},
+{
+"t": "ESP",
+"m": "xammar",
+"rank": 3,
+"slug": "jordi-xammar-hernandez",
+"b": {}
+},
+{
+"t": "ESP",
+"m": "botin",
+"rank": 18,
+"slug": "diego-botin-le-chever",
+"b": {}
+},
+{
+"t": "SWE",
+"m": "jarudd",
+"rank": 17,
+"slug": "emil-jarudd",
+"b": {}
+},
+{
+"t": "NED",
+"m": "lambriex",
+"rank": 29,
+"slug": "bart-lambriex",
+"b": {}
+},
+{
+"t": "ARG",
+"m": "majdalani",
+"rank": 27,
+"slug": "mateo-majdalani",
+"b": {}
+},
+{
+"t": "USA",
+"m": "poole",
+"rank": 35,
+"slug": "christopher-poole",
+"b": {}
+},
+{
+"t": "PER",
+"m": "trazegnies",
+"rank": 30,
+"slug": "jean-paul-de-trazegnies-valdez",
+"b": {}
+},
+{
+"t": "AUS",
+"m": "ryan",
+"b": {
+"en": [
+"Olympic gold 2020 Tokyo and silver 2016 Rio in the 470, both with Mathew Belcher",
+"Five-time 470 World Champion with Belcher; Medal of the Order of Australia (2022)"
+],
+"de": [
+"Olympia-Gold 2020 in Tokio und Silber 2016 in Rio im 470er, beide Male mit Mathew Belcher",
+"Fünfmal 470er-Weltmeister mit Belcher; Medal of the Order of Australia (2022)"
+],
+"es": [
+"Oro olímpico en Tokio 2020 y plata en Río 2016 en 470, ambas con Mathew Belcher",
+"Cinco veces campeón del mundo de 470 con Belcher; Medalla de la Orden de Australia (2022)"
+],
+"pt": [
+"Ouro olímpico em Tóquio 2020 e prata no Rio 2016 na classe 470, ambas com Mathew Belcher",
+"Cinco vezes campeão mundial de 470 com Belcher; Medalha da Ordem da Austrália (2022)"
+],
+"fr": [
+"Or olympique à Tokyo 2020 et argent à Rio 2016 en 470, les deux avec Mathew Belcher",
+"Cinq fois champion du monde de 470 avec Belcher ; Médaille de l'ordre d'Australie (2022)"
+],
+"it": [
+"Oro olimpico a Tokyo 2020 e argento a Rio 2016 nel 470, entrambi con Mathew Belcher",
+"Cinque volte campione del mondo 470 con Belcher; Medaglia dell'Ordine d'Australia (2022)"
+]
+},
+"src": [
+"https://en.wikipedia.org/wiki/Will_Ryan_(sailor)",
+"https://www.olympedia.org/athletes/132543"
+]
+},
+{
+"t": "ESP",
+"m": "trujillo",
+"b": {
+"en": [
+"Olympic silver in the Finn at Athens 2004; four Olympic Games (2000 Star, 2004–2012 Finn)",
+"Won the Finn Gold Cup 2007 in Cascais; inducted into the Finn Class Hall of Fame in 2026"
+],
+"de": [
+"Olympia-Silber im Finn 2004 in Athen; vier Olympische Spiele (2000 Star, 2004–2012 Finn)",
+"Gewann den Finn Gold Cup 2007 in Cascais; 2026 in die Hall of Fame der Finn-Klasse aufgenommen"
+],
+"es": [
+"Plata olímpica en Finn en Atenas 2004; cuatro Juegos Olímpicos (2000 Star, 2004–2012 Finn)",
+"Ganó la Finn Gold Cup 2007 en Cascais; en 2026 entró en el Salón de la Fama de la clase Finn"
+],
+"pt": [
+"Prata olímpica na Finn em Atenas 2004; quatro Jogos Olímpicos (2000 Star, 2004–2012 Finn)",
+"Venceu a Finn Gold Cup 2007 em Cascais; entrou para o Hall da Fama da classe Finn em 2026"
+],
+"fr": [
+"Médaille d'argent olympique en Finn à Athènes 2004 ; quatre Jeux olympiques (2000 Star, 2004–2012 Finn)",
+"Vainqueur de la Finn Gold Cup 2007 à Cascais ; intronisé au Hall of Fame de la série Finn en 2026"
+],
+"it": [
+"Argento olimpico nel Finn ad Atene 2004; quattro Olimpiadi (2000 Star, 2004–2012 Finn)",
+"Ha vinto la Finn Gold Cup 2007 a Cascais; nel 2026 entrato nella Hall of Fame della classe Finn"
+]
+},
+"src": [
+"https://en.wikipedia.org/wiki/Rafael_Trujillo_(sailor)",
+"https://finnclass.org/news/1775-rafa-trujillo-inducted-into-the-finn-class-hall-of-fame"
+]
+},
+{
+"t": "JPN",
+"m": "okada",
+"b": {
+"en": [
+"Olympic silver in the mixed 470 at Paris 2024 with Miho Yoshioka – Japan's first Olympic sailing medal in 20 years",
+"Mixed 470 World Champion and Asian Games gold (Hangzhou) in 2023; 7th in the 470 at Tokyo 2020"
+],
+"de": [
+"Olympia-Silber im Mixed-470er 2024 in Paris mit Miho Yoshioka – Japans erste olympische Segelmedaille seit 20 Jahren",
+"2023 Weltmeister im Mixed-470er und Gold bei den Asienspielen (Hangzhou); 2020 in Tokio Siebter im 470er"
+],
+"es": [
+"Plata olímpica en 470 mixto en París 2024 con Miho Yoshioka, la primera medalla olímpica de vela de Japón en 20 años",
+"Campeón del mundo de 470 mixto y oro en los Juegos Asiáticos (Hangzhou) en 2023; 7.º en 470 en Tokio 2020"
+],
+"pt": [
+"Prata olímpica na 470 mista em Paris 2024 com Miho Yoshioka – a primeira medalha olímpica do Japão na vela em 20 anos",
+"Campeão mundial de 470 mista e ouro nos Jogos Asiáticos (Hangzhou) em 2023; 7º na 470 em Tóquio 2020"
+],
+"fr": [
+"Argent olympique en 470 mixte à Paris 2024 avec Miho Yoshioka, première médaille olympique du Japon en voile depuis 20 ans",
+"Champion du monde de 470 mixte et or aux Jeux asiatiques (Hangzhou) en 2023 ; 7e en 470 à Tokyo 2020"
+],
+"it": [
+"Argento olimpico nel 470 misto a Parigi 2024 con Miho Yoshioka, prima medaglia olimpica del Giappone nella vela dopo 20 anni",
+"Campione del mondo 470 misto e oro ai Giochi asiatici (Hangzhou) nel 2023; 7° nel 470 a Tokyo 2020"
+]
+},
+"src": [
+"https://www.olympedia.org/athletes/144691",
+"https://www.waseda.jp/top/en/news/82705"
+]
+},
+{
+"t": "SUI",
+"m": "trub",
+"b": {
+"en": [
+"Sailed with Alinghi Red Bull Racing in the 2024 America's Cup campaign in Barcelona",
+"Came to sailing late and straight into keelboats – a former top junior handball player from Winterthur"
+],
+"de": [
+"Segelte mit Alinghi Red Bull Racing in der America's-Cup-Kampagne 2024 in Barcelona",
+"Kam spät und direkt über Kielboote zum Segeln – früher Nachwuchs-Handballer in Winterthur"
+],
+"es": [
+"Navegó con Alinghi Red Bull Racing en la campaña de la America's Cup 2024 en Barcelona",
+"Llegó tarde a la vela y directamente a los barcos de quilla; antes fue jugador juvenil de balonmano en Winterthur"
+],
+"pt": [
+"Velejou pela Alinghi Red Bull Racing na campanha da America's Cup 2024 em Barcelona",
+"Chegou tarde à vela e direto aos barcos de quilha – antes foi jogador de handebol nas categorias de base em Winterthur"
+],
+"fr": [
+"A navigué avec Alinghi Red Bull Racing lors de la campagne de l'America's Cup 2024 à Barcelone",
+"Venu tard à la voile, directement par le quillard – auparavant handballeur espoir à Winterthour"
+],
+"it": [
+"Ha navigato con Alinghi Red Bull Racing nella campagna dell'America's Cup 2024 a Barcellona",
+"Arrivato tardi alla vela e subito sulle derive a chiglia – prima giovane promessa della pallamano a Winterthur"
+]
+},
+"src": [
+"https://www.alinghi.com/crew/25_FlorianTrb",
+"https://www.blick.ch/sport/mehr_sport/alinghi-segler-florian-trueb-ein-handballer-traeumt-vom-americas-cup-triumph-id17629353.html"
+]
+},
+{
+"t": "PER",
+"m": "olcese",
+"b": {
+"en": [
+"Olympian: sailed the Laser for Peru at the 2000 Games in Sydney",
+"Won the 2010 Sunfish South, Central & Caribbean Championship in Paracas, qualifying Peru for the 2011 Pan American Games"
+],
+"de": [
+"Olympionike: segelte 2000 in Sydney für Peru im Laser",
+"Gewann 2010 die Sunfish-Meisterschaft für Süd- und Mittelamerika und die Karibik in Paracas und qualifizierte Peru für die Panamerikanischen Spiele 2011"
+],
+"es": [
+"Olímpico: navegó en Laser por Perú en los Juegos de Sídney 2000",
+"Ganó en 2010 el Campeonato Sunfish de Sudamérica, Centroamérica y el Caribe en Paracas y clasificó a Perú a los Panamericanos 2011"
+],
+"pt": [
+"Olímpico: velejou de Laser pelo Peru nos Jogos de Sydney 2000",
+"Venceu em 2010 o Campeonato Sunfish da América do Sul, Central e Caribe em Paracas, classificando o Peru para o Pan 2011"
+],
+"fr": [
+"Olympien : a couru en Laser pour le Pérou aux Jeux de Sydney 2000",
+"Vainqueur en 2010 du championnat Sunfish d'Amérique du Sud, centrale et des Caraïbes à Paracas, qualifiant le Pérou pour les Jeux panaméricains 2011"
+],
+"it": [
+"Olimpionico: ha regatato in Laser per il Perù ai Giochi di Sydney 2000",
+"Nel 2010 ha vinto il campionato Sunfish di Sud e Centro America e Caraibi a Paracas, qualificando il Perù ai Giochi panamericani 2011"
+]
+},
+"src": [
+"https://www.olympedia.org/athletes/92922",
+"https://www.sailing.org/2010/11/30/luis-olcese-wins-2010-sunfish-south-central-and-caribbean-championnship"
+]
+}
 ]

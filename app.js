@@ -3293,6 +3293,7 @@ const tpRes=()=>`<h3>${T("tpBest")}</h3><div class="grp">${TPx.res.map(r=>`<div 
   if(STAB=="ov"){
     if(achs)h+=`<h3>${T("achT")}</h3><div class="grp">${achs}</div>`;else{const top=C.code?profHtml(C.code,C.name,"top"):"";if(top)h+=top}
     h+=olyHtml(E);
+    if(!achs&&!res.length&&C.hl&&C.hl.length)h+=`<h3>${T("highlights")}</h3><div class="grp"><ul class="hl">${C.hl.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
     if(!res.length&&TPx.res&&TPx.res.length)h+=tpRes();
     if(res.length)h+=`<h3 class="s3hh"><span>${T("lastRegs")}</span>${res.length>3?`<button class="s3more" data-stab="res">${esc(T("allN")(res.length))}</button>`:""}</h3><div class="grp">${res.slice(0,3).map(resRow).join("")}</div>`;
     const f=(k,v)=>v?`<div><small>${esc(k)}</small><b>${v}</b></div>`:"";
