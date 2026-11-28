@@ -1899,8 +1899,8 @@ function sections(list){const cur=current(),G=[];const add=(title,arr)=>{if(arr.
   now.forEach(t=>{const l=t.path[t.path.length-1],tot=String(l.g.rows[l.pos-1].total||"").trim();t.short=l.done?t.txt:`${RNm(l.r)} · ${T("group")} ${l.g.id}${tot?` · ${ord(l.pos)} · ${tot} ${T("pts")}`:""}`});add(T("secNow"),now);
   D.rounds.forEach(r=>{const a=inn.filter(t=>!now.includes(t)&&t.path[0].r.id==r.id).sort(by);a.forEach(t=>t.short=`${T("group")} ${t.path[0].g.id} · ${fmtD(r.start)}`);add(T("secSeeded")(RNm(r)),a)});
   add(T("secOut"),list.filter(t=>t.out).sort((a,b)=>b.lvl-a.lvl||by(a,b)));return G.join("")||`<p>${T("noTeam")}</p>`}
-function card(t){{const img=capPhoto(t.code),nick=squad(t.code).n;
-    return `<button class="tm ${t.out?"out":""}" data-t="${esc(t.code)}"><span class="avt">${img?`<img src="${esc(img)}" alt="" loading="lazy">`:t.flag}</span><span><b>${img?t.flag+" ":""}${esc(t.name)}${favs.has(t.code)?` <span class="star">★</span>`:""}</b>${nick?`<span class="nk">${esc(nick)}</span>`:""}<small>${esc(t.short||t.txt)}</small></span>${t.I.rank?`<span class="rk"><small>${T("rank")}</small>#${t.I.rank}</span>`:""}</button>`}}
+function card(t){{const nick=squad(t.code).n;
+    return `<button class="tm ${t.out?"out":""}" data-t="${esc(t.code)}"><span class="avt avf">${iso(t.code)?`<img class="flg" src="img/fl/hd/${iso(t.code).toLowerCase()}.webp" alt="" loading="lazy">`:t.flag}</span><span><b>${esc(t.name)}${favs.has(t.code)?` <span class="star">★</span>`:""}</b>${nick?`<span class="nk">${esc(nick)}</span>`:""}<small>${esc(t.short||t.txt)}</small></span>${t.I.rank?`<span class="rk"><small>${T("rank")}</small>#${t.I.rank}</span>`:""}</button>`}}
 
 /* ---------- home ---------- */
 const TI={board:'<path d="M4 6h16M4 12h16M4 18h10"/>',bracket:'<rect x="2.5" y="3.5" width="6" height="5" rx="1"/><rect x="2.5" y="15.5" width="6" height="5" rx="1"/><rect x="15.5" y="9.5" width="6" height="5" rx="1"/><path d="M8.5 6H12v12H8.5M12 12h3.5"/>',teams:'<path d="M5 21V3.5M5 4h12l-2.5 4.5L17 13H5"/>',sailors:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>',qualifying:'<path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.5 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/>',gc2023:'<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 01-10 0zM7 6H4v2a3 3 0 003 3M17 6h3v2a3 3 0 01-3 3"/>'};
@@ -3995,7 +3995,7 @@ $("#setb").onclick=()=>openQuick();
 (function(){const c=document.createElement("div");c.id="cbar";c.setAttribute("aria-hidden","true");
   c.innerHTML=`<img src="brand/lockup.webp" alt=""><i></i><button type="button" data-cbi hidden tabindex="-1">${QDL}</button><img class="cbssl" src="brand/ssl.png" alt="SSL"><button type="button" data-cbs tabindex="-1">${$("#setb").querySelector("svg").outerHTML}</button>`;
   document.body.appendChild(c);c.querySelector("[data-cbi]").onclick=()=>doInstall();c.querySelector("[data-cbs]").onclick=()=>openQuick();
-  const br=$("header.top>.brand");let away=false,up=false,ly=scrollY;const set=()=>{const on=away&&up;document.documentElement.classList.toggle("cbon",on);c.setAttribute("aria-hidden",on?"false":"true");c.querySelectorAll("button").forEach(b=>b.tabIndex=on?0:-1)};
+  const br=$("header.top>.brand");let away=false,up=false,ly=scrollY;const set=()=>{const on=away&&up;document.documentElement.classList.toggle("cbon",on);if(on)document.documentElement.style.setProperty("--cbh",c.offsetHeight+"px");c.setAttribute("aria-hidden",on?"false":"true");c.querySelectorAll("button").forEach(b=>b.tabIndex=on?0:-1)};
   if(br&&"IntersectionObserver"in window)new IntersectionObserver(es=>{away=!es[0].isIntersecting;if(!away)up=false;set()}).observe(br);
   addEventListener("scroll",()=>{const y=scrollY,dy=y-ly;if(Math.abs(dy)>6){const u=dy<0;if(u!=up){up=u;set()}ly=y}},{passive:true})})();
 $("#thm").onclick=()=>{theme={auto:"light",light:"dark",dark:"auto"}[theme];LS.set("theme",theme);applyTheme();chrome();{const tl=T("theme")[theme];toast(tl.slice(tl.indexOf(" ")+1))}};
