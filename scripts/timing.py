@@ -33,8 +33,12 @@ try:
             # when the race office last changed the start time in Georacing (a time set before the prior race
             # finished is the morning schedule, not a decision)
             o["pa"] = prev.get("pa") if prev.get("plan") == o["plan"] and prev.get("pa") else datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+            # a 'start' before the operator's current start time = recalled/abandoned/postponed start (28 Nov A3: two boats
+            # crossed at 14:44, the race office then set 15:12) – not the real start
+            ok = lambda t: not (t and o["plan"] and (P(o["plan"]) - P(t)).total_seconds() > 60)
+            if not ok(o["s"]): o["s"], o["f"], o["nf"] = None, None, 0
             # Georacing sometimes clears a finished race (27 Nov D1: start/finish vanished after 40 min): keep what we saw
-            if not o["s"] and prev.get("s"): o["s"] = prev["s"]
+            if not o["s"] and prev.get("s") and ok(prev["s"]): o["s"] = prev["s"]
             if not o["f"] and prev.get("f") and o["s"] == prev.get("s"): o["f"] = prev["f"]; o["nf"] = max(o["nf"], prev.get("nf") or 0)
             out[key] = o
             if o["s"] and o["f"]: rows.append((P(o["s"]), P(o["f"])))

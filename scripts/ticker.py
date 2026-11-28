@@ -37,8 +37,11 @@ def build(a, st):
     laps = None
     if course and (m := re.search(r"(\d+)\s*lap", course.get("name") or "", re.I)): laps = int(m.group(1))
     marks = []
+    # crossings before the operator's current start time belong to a recalled/abandoned/postponed start (28 Nov A3)
+    pl = P(r["start_time"]) - datetime.timedelta(seconds=60) if r.get("start_time") else None
     for sp in a.get("splittimes") or []:
-        rows = sorted([t for t in sp.get("splittimes") or [] if t.get("time") and str(t.get("actor_id")) in act], key=lambda t: t["time"])
+        rows = sorted([t for t in sp.get("splittimes") or [] if t.get("time") and str(t.get("actor_id")) in act
+                       and not (pl and P(t["time"]) < pl)], key=lambda t: t["time"])
         if rows: marks.append({"n": sp.get("name"), "r": sp.get("role") or "none", "t": [[act[str(t["actor_id"])], t["time"]] for t in rows]})
     s0 = P(marks[0]["t"][0][1]) if marks else None
     s1 = P(marks[-1]["t"][-1][1]) if marks else None
@@ -63,6 +66,10 @@ def save(key, o):
     os.makedirs(OUT, exist_ok=True)
     p = os.path.join(OUT, key.replace("|", "_") + ".json")
     old = json.load(open(p)) if os.path.exists(p) else None
+    raw = json.dumps(old, separators=(",", ":"), sort_keys=True) if old is not None else None
+    if old and o.get("plan"):   # drop what an earlier run saved from a start that was later recalled/postponed
+        pl = P(o["plan"]) - datetime.timedelta(seconds=60)
+        old["m"] = [m for m in ({**m, "t": [x for x in m["t"] if P(x[1]) >= pl]} for m in old.get("m") or []) if m["t"]]
     n = lambda x: sum(len(m["t"]) for m in (x or {}).get("m") or [])
     if old and n(o) < n(old):          # Georacing cleared (part of) the race: keep what we had
         o["m"] = old["m"]; o["w"] = o["w"] or old.get("w")
@@ -70,7 +77,7 @@ def save(key, o):
     if not o["m"] and not old: return False
     o["k"] = key
     new = json.dumps(o, separators=(",", ":"), sort_keys=True)
-    if old is not None and json.dumps(old, separators=(",", ":"), sort_keys=True) == new: return False
+    if raw == new: return False
     open(p, "w").write(new)
     return True
 

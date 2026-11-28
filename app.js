@@ -1692,8 +1692,11 @@ const rnd=id=>D.rounds.find(r=>r.id==id);
 function raceDone(x){const r=rnd(x.rid),g=r&&r.groups.find(y=>y.id==x.g);if(!g)return false;const i=x.n-1;return g.rows.every(z=>String(z.r[i]??"").trim()!=="")}
 function rState2(x){if(raceDone(x))return"done";const t=at(x),n=nowMs();
   /* Georacing start/finish wins over the planned time: a race that started early (27 Nov A2: planned ~16:20, started 15:35) is on the water now */
-  {const g=(typeof TIM!="undefined"&&TIM&&TIM.races&&TIM.races[raceKey(x)])||{},gs=g.s?Date.parse(g.s):0,gf=g.f?Date.parse(g.f):0;
-   if(gs&&gs<=n&&gs>t-6*36e5){if(n<(gf?gf+60*60e3:gs+150*60e3))return"now";return"past"}}if(n>=t-5*60e3&&n<t+75*60e3)return"now";if(n>=t+75*60e3)return"past";return"up"}
+  {const g=tmClean((typeof TIM!="undefined"&&TIM&&TIM.races&&TIM.races[raceKey(x)])||{}),gs=g.s?Date.parse(g.s):0,gf=g.f?Date.parse(g.f):0;
+   if(gs&&gs<=n&&gs>t-6*36e5){if(n<(gf?gf+60*60e3:gs+150*60e3))return"now";return"past"}
+   /* no start in Georacing yet: the race office's current start time (plan) wins over the schedule – a postponed race is not 'on the water' */
+   const gp=g.plan?Date.parse(g.plan):0;if(gp&&gp>t&&gp-t<6*36e5){if(n<gp-60e3)return"up";if(n<gp+75*60e3)return"now";return"past"}}
+  if(n>=t-5*60e3&&n<t+75*60e3)return"now";if(n>=t+75*60e3)return"past";return"up"}
 function nextFor(rid,gid){return SCH.filter(x=>x.rid==rid&&x.g==gid&&!raceDone(x)&&rState2(x)!="past").sort((a,b)=>at(a)-at(b))[0]}
 const mono=t=>String(t).replace(/\d/g,d=>`<i class="dg">${d}</i>`);
 function cdTxt(t){const d=Math.max(0,Math.round((t-nowMs())/1000)),h=Math.floor(d/3600),m=Math.floor(d%3600/60),sec=d%60,p=n=>String(n).padStart(2,"0");return (h?`${h}:${p(m)}`:`${m}`)+`:${p(sec)}`}
@@ -3098,7 +3101,7 @@ function provTxt(g){return (g.prov||[]).map(i=>`R${i+1}: ${PRVT[lang]||PRVT.en}`
 function provSet(k,ord){if(!ord||!ord.length||JSON.stringify(PROV[k])==JSON.stringify(ord))return;PROV[k]=ord;setD(RAWD);try{render(true);pgRefresh()}catch(e){}}
 /* every 15 s while a race is finishing: Georacing live feed (finish time per boat), fallback tk/ (finish rounding) */
 async function provPoll(){if(document.hidden)return;const n=nowMs();
-  for(const x of SCH){const k=raceKey(x),g=(TIM&&TIM.races&&TIM.races[k])||{};if(!g.s||rawDone(x))continue;const s0=Date.parse(g.s);if(n<s0+15*6e4||n>s0+5*36e5)continue;
+  for(const x of SCH){const k=raceKey(x),g=tmClean((TIM&&TIM.races&&TIM.races[k])||{});if(!g.s||rawDone(x))continue;const s0=Date.parse(g.s);if(n<s0+15*6e4||n>s0+5*36e5)continue;
     const r=RAWD.rounds.find(y=>y.id==x.rid),grp=r&&r.groups.find(y=>y.id==x.g);if(!grp)continue;const tm=grp.rows.map(z=>z.team).filter(isTeam);if(tm.length<2)continue;
     let ord=null;const u=trkUrl(x);
     try{if(u){const q=new URL(u).searchParams,ev=q.get("event"),rc=q.get("race");
@@ -3127,7 +3130,7 @@ function liveBar(){const n0=nowMs(),L=SCH.filter(x=>!dayOver(x.d)&&(rState2(x)==
   const nT=N?(estOf(N)||at(N)):0,nA=N&&(N.ap||estOf(N));
   lvtStart(x);
   return `<div class="lvx" data-race="${esc(k)}" role="button" tabindex="0" aria-label="${esc(ttl(x))} · ${esc(W[5])}">
-  <div class="lvxt"><span class="lvxp"><i></i>LIVE</span><span class="lvxd">${esc(W[5])}<b aria-hidden="true">›</b></span></div>
+  <div class="lvxt">${lvStart(x).go?`<span class="lvxp"><i></i>LIVE</span>`:`<span class="lvxp pre">${esc(T("nextRace"))}</span>`}<span class="lvxd">${esc(W[5])}<b aria-hidden="true">›</b></span></div>
   <div class="lvxr">${esc(RNm(rnd(x.rid)))}</div><h3 class="lvxh">${esc(ttl(x))}</h3>
   <div class="lvxs"><span data-lvleg>${lvtLeg()}</span><span data-lvrun data-k="${esc(k)}">${lvtRun(x)}</span></div>
   <div class="lvxo" data-lvord>${lvtOrd(x)}</div>
@@ -4000,7 +4003,7 @@ const NXP={en:"Probably delayed",de:"Wohl verspätet",fr:"Retard probable",es:"R
 let ESTC=null;
 function estDay(){const n=nowMs();if(ESTC&&ESTC.D===D&&ESTC.F===FLG&&ESTC.T===TIM&&n-ESTC.at<5e3)return ESTC.E;
   const RDUR=((TIM&&TIM.dur)||45)*60e3,RGAP=((TIM&&TIM.gap)||35)*60e3,DMIN=((TIM&&TIM.dmin)||Math.max(20,((TIM&&TIM.dur)||45)-8))*60e3,GMIN=((TIM&&TIM.gmin)||Math.max(15,((TIM&&TIM.gap)||35)-8))*60e3;
-  const TR=(TIM&&TIM.races)||{},day=today(),E={},SURE={},OP={};let end=0,endB=0,pdone=0;
+  const TR=Object.fromEntries(Object.entries((TIM&&TIM.races)||{}).map(([k,v])=>[k,tmClean(v)])),day=today(),E={},SURE={},OP={};let end=0,endB=0,pdone=0;
   for(const x of SCH.filter(y=>y.d==day).sort((a,b)=>at(a)-at(b))){const k=raceKey(x),t=at(x),o=RST[k]||{},g=TR[k]||{},gs=g.s?Date.parse(g.s):0,gf=g.f?Date.parse(g.f):0,gpa=g.pa?Date.parse(g.pa):0,gp0=g.plan?Date.parse(g.plan):0,gp=gp0&&!(x.ap&&end&&gpa&&gpa<end-5*60e3)?gp0:0;
     if(gf||raceDone(x)||o.s=="done"){end=gf||(o.doneAt&&n-o.doneAt<3*36e5?o.doneAt:0)||(gs?gs+RDUR:0);endB=gf||(gs?gs+DMIN:0)||end;pdone=!!end;continue}
     const f=FLG&&FLG.races&&FLG.races[k],nb=f&&f.pd&&f.nb&&(!f.until||n<Date.parse(f.until))?Date.parse(f.nb):0;let st,sb;
@@ -4015,7 +4018,10 @@ function estDay(){const n=nowMs();if(ESTC&&ESTC.D===D&&ESTC.F===FLG&&ESTC.T===TI
     if(gp&&st==gp)OP[k]=1;E[k]=st;pdone=0}
   ESTC={at:n,E,SURE,OP,D,F:FLG,T:TIM};return E}
 const estSure=x=>{estDay();return!!(ESTC&&ESTC.SURE&&ESTC.SURE[raceKey(x)])};
-const timOf=x=>(TIM&&TIM.races&&TIM.races[raceKey(x)])||{};
+const timOf=x=>tmClean((TIM&&TIM.races&&TIM.races[raceKey(x)])||{});
+/* a Georacing 'start' earlier than the operator's current start time is a recalled/abandoned/postponed start
+   (28 Nov A3: two boats crossed at 14:44, the race office then set 15:12) – not a race on the water */
+function tmClean(g){if(g.s&&g.plan&&Date.parse(g.plan)-Date.parse(g.s)>60e3)return{...g,s:null,f:null};return g}
 const estOf=x=>{const k=raceKey(x),e=estDay()[k],n=nowMs(),op=ESTC&&ESTC.OP&&ESTC.OP[k];return e&&(x.ap||op?Math.abs(e-at(x))>=60e3:e-at(x)>=10*60e3)&&e>n+4*60e3?e:0};
 var FLG={},TIM=null;async function pullFlags(){try{const r=await fetch("timing.json?t="+Date.now(),{cache:"no-store"});if(r.ok){const j=await r.json(),ch=JSON.stringify(j)!==JSON.stringify(TIM);TIM=j;ESTC=null;if(ch)try{render(true)}catch(e){}}}catch(e){}try{const r=await fetch("flags.json?t="+Date.now(),{cache:"no-store"});if(r.ok){const j=await r.json(),ch=JSON.stringify(j)!==JSON.stringify(FLG);FLG=j;if(ch)try{render(true)}catch(e){}}}catch(e){}}
 pullFlags();setInterval(()=>{if(!document.hidden)pullFlags()},60000);
@@ -4235,7 +4241,7 @@ document.addEventListener("keydown",e=>{if(e.target.matches("input,select,textar
 setInterval(()=>{stand();if((view=="board"||view=="home")&&!$("#tmd").open&&!document.hidden&&!(document.activeElement&&document.activeElement.matches("input,select")))render(true)},60000);
 /* results: every minute; every 20 s while a race is about to finish or its result is due (learned timing) */
 let LASTPULL=Date.now();
-function hotNow(){try{const n=nowMs(),d=((TIM&&TIM.dur)||45)*60e3;return Object.entries((TIM&&TIM.races)||{}).some(([k,o])=>{const x=SCH.find(y=>raceKey(y)==k);if(!x||rawDone(x)||!o.s)return false;const s=Date.parse(o.s),f=o.f?Date.parse(o.f):0;return f?n-f<30*6e4:n>=s+d-8*6e4&&n<=s+d+60*6e4})}catch(e){return false}}
+function hotNow(){try{const n=nowMs(),d=((TIM&&TIM.dur)||45)*60e3;return Object.entries((TIM&&TIM.races)||{}).some(([k,o])=>{const x=SCH.find(y=>raceKey(y)==k);o=tmClean(o);if(!x||rawDone(x)||!o.s)return false;const s=Date.parse(o.s),f=o.f?Date.parse(o.f):0;return f?n-f<30*6e4:n>=s+d-8*6e4&&n<=s+d+60*6e4})}catch(e){return false}}
 setInterval(async()=>{if(document.hidden)return;const n=Date.now();if(n-LASTPULL<55e3&&!hotNow())return;LASTPULL=n;if(await pullFile()){render(true);pgRefresh()}else stand()},20000);
 document.addEventListener("visibilitychange",async()=>{if(!document.hidden&&await pullFile())render(true)});
 await pullFile();live=true;loadWx();setInterval(loadWx,30*6e4);
