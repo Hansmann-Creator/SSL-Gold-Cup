@@ -1,0 +1,19 @@
+name: Photo probe (temporary)
+on:
+  push:
+    paths: [".github/workflows/photoprobe.yml"]
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install -q pillow
+      - run: python tools/photos/probe.py
+      - run: |
+          git config user.name "results-bot"; git config user.email "results-bot@users.noreply.github.com"
+          mv probe /tmp/probe; git checkout -q --orphan photo-probe; git rm -rqf . ; cp -r /tmp/probe/* .
+          git add -A; git commit -qm "photo probe $(date -u +%FT%TZ)"; git push -qf origin photo-probe
