@@ -13,13 +13,11 @@ const LOC=()=>({ar:"ar-u-nu-latn",zh:"zh-CN",pt:"pt-BR",it:"it-IT",hi:"hi-IN-u-n
 let lang=LS.get("lang",null);if(!LANGS[lang])lang=["de","fr","es","pt","it","zh","ar","hi","bn","ur","id","ms","ja","th","hu","cs","uk","pl"].find(l=>(navigator.language||"").toLowerCase().startsWith(l))||"en";
 let UNW=LS.get("unw","kn"),UNT=LS.get("unt","c"),TLOC=LS.get("tloc","auto"),LVL=LS.get("lvl","auto"),theme=["auto","light","dark"].includes(LS.get("theme","auto"))?LS.get("theme","auto"):"auto",favs=new Set(LS.get("favs",[])),sfavs=new Set(LS.get("sfavs",[]));
 
-let TRK={};try{const r=await fetch("tracking.json",{cache:"no-cache"});if(r.ok)TRK=await r.json()}catch(e){}
-let INFO={};try{INFO=await (await fetch("teaminfo.json",{cache:"no-cache"})).json()}catch(e){}
-let PEOPLE=[];try{PEOPLE=await (await fetch("people.json",{cache:"no-cache"})).json()}catch(e){}
-let SOV={};try{SOV=await (await fetch("sched.json?t="+Math.floor(Date.now()/3e5),{cache:"no-cache"})).json()}catch(e){}
+/* boot data in parallel (one round trip instead of six on venue 4G); pf.json: "CODE|Name" -> mirrored official SSL platform portrait (img/pf/, img/hd/pf/), used when no Rio portrait exists */
+const bootJ=(u,d)=>fetch(u,{cache:"no-cache"}).then(r=>r.ok?r.json():d).catch(()=>d);
+let [TRK,INFO,PEOPLE,PFM,SOV,RO]=await Promise.all([bootJ("tracking.json",{}),bootJ("teaminfo.json",{}),bootJ("people.json",[]),bootJ("pf.json",{}),bootJ("sched.json?t="+Math.floor(Date.now()/3e5),{}),bootJ("roster.json",{})]);
 const okData=d=>{try{return d&&Array.isArray(d.rounds)&&d.rounds.length>=5&&d.rounds.every(r=>r&&r.id&&r.start&&r.end&&Array.isArray(r.groups)&&r.groups.length&&r.groups.every(g=>g&&g.id&&Array.isArray(g.rows)&&g.rows.length&&g.rows.every(x=>x&&typeof x.team=="string"&&Array.isArray(x.r))))}catch(e){return false}};
 async function pullFile(){try{const r=await fetch("results.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)return false;const d=await r.json();if(okData(d)&&(!RAWD.updatedAt||Date.parse(d.updatedAt)>=Date.parse(RAWD.updatedAt))){const ch=JSON.stringify(d.rounds)!==JSON.stringify(RAWD.rounds);setD(d);if(d.checkedAt)checkedAt=d.checkedAt;return ch}}catch(e){}return false}
-let RO={};try{RO=await (await fetch("roster.json",{cache:"no-cache"})).json()}catch(e){}
 let D=JSON.parse($("#snap").textContent),checkedAt=null,view="board",round=null,sel=null,filt="all",sortBy="status",q="",live=false,stale=false,jump=false;
 
 /* ---------- strings ---------- */
@@ -1652,6 +1650,8 @@ const tc=n=>String(n).split(" ").map(w=>w.length>1&&w==w.toUpperCase()&&/[A-ZÀ-
 const ini=n=>{const w=tc(n).replace(/["“”].*?["“”]/g,"").split(/[\s-]+/).filter(Boolean);return w.length?(w[0][0]+(w.length>1?w[w.length-1][0]:"")).toUpperCase():"?"};
 const STOP=new Set(["mohd","muhamad","muhammad","mohamed","mohamad","bin","binti","de","la","del","da","dos","al","nur","abdul","van","von","the"]);
 const tok=s=>String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z ]/g," ").split(/\s+/).filter(w=>w.length>2&&!STOP.has(w));
+/* typo-tolerant name match for portrait file names ("Domimique Knüppel" = "Dominique Knupell"): edit distance <= 2 on words of 5+ letters */
+const near=(a,b)=>{if(a==b)return true;if(a.length<5||b.length<5||Math.abs(a.length-b.length)>2)return false;let p=Array.from({length:b.length+1},(_,j)=>j);for(let i=1;i<=a.length;i++){const q=[i];for(let j=1;j<=b.length;j++)q[j]=Math.min(p[j]+1,q[j-1]+1,p[j-1]+(a[i-1]==b[j-1]?0:1));p=q}return p[b.length]<=2};
 const SQ={};
 function squad(code){if(SQ[code])return SQ[code];const t=RO[code],I=INFO[code]||{},crew=(I.crew||[]).map(c=>({...c,t:tok(c.name),used:false}));
   const out=[],seen={};const C=code;
@@ -1659,8 +1659,9 @@ function squad(code){if(SQ[code])return SQ[code];const t=RO[code],I=INFO[code]||
     if(seen[k]){if(!seen[k].k&&o.k)Object.assign(seen[k],o);return}seen[k]=o;out.push(o)});
   const capn=tc(t?t.c:(I.captain||"")).toLowerCase();out.forEach(p=>{if(p.name.toLowerCase()==capn)p.cap=true});
   out.forEach(p=>{const pt=tok(p.name);let best=null,bs=0;
-    crew.forEach(c=>{if(c.used)return;let s=c.t.filter(w=>pt.includes(w)).length*2;if(s&&String(c.no)==p.no)s+=1;if(s>bs){bs=s;best=c}});
+    crew.forEach(c=>{if(c.used)return;let s=c.t.filter(w=>pt.includes(w)).length*2;if(!s){const f=c.t.filter(w=>pt.some(v=>near(v,w))).length;if(f>=2||(f&&String(c.no)==p.no))s=f*2}if(s&&String(c.no)==p.no)s+=1;if(s>bs){bs=s;best=c}});
     if(best){best.used=true;p.img=best.img;if(!/^\d+$/.test(p.no))p.no=String(best.no)}});
+  out.forEach(p=>{if(!p.img){const f=PFM[C+"|"+p.name];if(f){p.img="img/pf/"+f+".webp";p.pf=1}}});
   crew.filter(c=>!c.used).forEach(c=>out.push({name:c.name,no:String(c.no),img:c.img,cap:false,k:null,extra:true}));
   out.forEach((p,i)=>{p.i=i;p.code=C});
   return SQ[code]={n:(t&&t.n)||I.nick||"",c:t?tc(t.c):(I.captain||""),ppl:out}}
@@ -3273,7 +3274,7 @@ function pronHtml(key){const P=PRON[key];if(!P||(!P.ph&&!P.audio))return "";
 function sBody(C){/* C: {key,name,iso,flag,country,nick,code,chips,img,hd,PF,D,mates} */
   const E=extOf(C.key);if(!EXT&&C.key&&C.rerender)extLoad().then(()=>{if(extOf(C.key))C.rerender(true)});
   const PF=C.PF||{},LD=C.D===null,D=C.D||null,p=D&&D.p||PF,rk=p.rk||(PF.rank?{s:[PF.rank,PF.pts,null]}:{}),rkT=rk.s?"s":rk.c?"c":null,R=rkT?rk[rkT]:null,st=p.st||{};
-  const GAL=[];if(C.img)GAL.push({s:C.hd||C.img,f:C.img,sq:1});{const w=D&&D.p&&D.p.img;if(w&&w!=C.img)GAL.push({s:w,f:w,sq:1})}
+  const GAL=[];if(C.img)GAL.push({s:C.hd||C.img,f:C.img,sq:1});{const w=D&&D.p&&D.p.img;if(w&&w!=C.img&&!C.pf)GAL.push({s:w,f:w,sq:1})}
   let h=`<div class="s3hero">${C.img?`<span class="s3phw"><img class="s3ph" src="${esc(C.img)}" alt="${esc(C.name)}" data-zoom="${esc(GAL[0].s)}" data-cap="${esc(C.name)}" data-zg="${esc(JSON.stringify(GAL))}" role="button" tabindex="0">${GAL.length>1?`<i class="s3pn" aria-hidden="true">+${GAL.length-1}</i>`:""}</span>`:`<span class="s3ph big">${esc(ini(C.name))}</span>`}<div class="s3h2"><div class="cty">${C.flag}<span>${esc(C.country)}</span></div>${C.nick?`<span class="nk2">${esc(C.nick)}</span>`:""}${(()=>{const pp=pronHtml(C.key);return pp?`<div class="snw"><h2 class="snh hasp" data-pronbtn="1" role="button" tabindex="0" aria-expanded="false" title="${esc(T("pronT"))}">${NMH(C.name).replace('class="sn"','class="sn fitn"')}<span class="pri" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 010 7"/></svg></span></h2><div class="sprpop" hidden>${pp}</div></div>`:`<h2 class="snh">${NMH(C.name).replace('class="sn"','class="sn fitn"')}</h2>`})()}${C.chips?`<div class="chips2">${C.chips}</div>`:""}</div></div>`;
   const tile=(k,v,e)=>`<div class="s3t"><small>${esc(k)}</small><b>${v}</b>${e?`<em>${e}</em>`:""}</div>`;
   h+=`<div class="s3ts">${tile(T("stRank"),R?"#"+nf0(R[0]):"–",R?trendH(R[0],R[2])+(rkT=="c"?" "+esc(T("svCr")):""):"")}${tile(T("stPtsT"),R?nf0(R[1]):"–")}${tile(T("stBest"),R&&R[4]?"#"+nf0(R[4][0]):"–",R&&R[4]?esc(String(R[4][1]).slice(0,4)):"")}${tile(T("stEv"),st.ev||"–",st.pod?esc(T("stPod")(st.pod)):"")}</div>`;
@@ -3321,7 +3322,7 @@ function pSailor(code,i,keep){const d=$("#pg"),sq=squad(code),p=sq.ppl[i];if(!p)
   const TM=teams().find(x=>x.code==code);
   const facts=`<button class="s3tm" data-tm="1"><small>${T("team")}</small><b>${FL(code)} ${esc(NM(code))}</b><em>${esc(TM?TM.txt:"")}</em></button>${p.k?`<div class="s3gl" data-glo="${esc(posSlug(p.k))}" role="button" tabindex="0"><small>${esc(T("position"))} <i class="glin" aria-hidden="true"></i></small><b>${esc(posL(p))}</b><em>${esc(p.ks&&p.ks.length>1?p.ks.map(k=>T("roles")[k]).join(" / "):T("roles")[p.k]||"")}</em></div>`:""}${/^\d+$/.test(p.no)?`<div><small>${esc(T("jersey"))}</small><b>#${esc(p.no)}</b></div>`:""}`;
   const extra=`<div class="tact"><button class="tbtn" data-scmp="1">${esc(T("cmpBtn"))}</button></div><h3>${T("mates")}</h3><div class="grp mates">${sq.ppl.filter(x=>x.i!=i).map(x=>`<button data-pi="${x.i}">${av(x,1)}<span>${NMH(x.name)}</span></button>`).join("")}</div>`;
-  const C={key,name:p.name,flag:FL(code),country:NM(code),nick:sq.n,code,chips,img:p.img,hd:p.img&&p.img.replace(/^img\//,"img/hd/"),PF,D:slug?D:false,facts,extra,hl:PE&&PE.b&&(PE.b[lang]||PE.b.en),rerender:t=>sKeepTabs(d,()=>pSailor(code,i,1))};
+  const C={key,name:p.name,flag:FL(code),country:NM(code),nick:sq.n,code,chips,img:p.img,hd:p.img&&p.img.replace(/^img\//,"img/hd/"),pf:!!p.pf,PF,D:slug?D:false,facts,extra,hl:PE&&PE.b&&(PE.b[lang]||PE.b.en),rerender:t=>sKeepTabs(d,()=>pSailor(code,i,1))};
   if(!p.img&&D&&D.p&&D.p.img)C.img=D.p.img;
   let h=`<div class="th"><button class="bk">${T("back")}</button><div class="thb"><button class="fv ${sfavs.has(key)?"on":""}" data-sfv="1" aria-pressed="${sfavs.has(key)}" title="${esc(T("sFavHint"))}">${sfavs.has(key)?"★":"☆"}</button><button class="pv" aria-label="previous">‹</button><button class="nx2" aria-label="next">›</button><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb s3">`;
   d.innerHTML=h+sBody(C)+`</div>`;
