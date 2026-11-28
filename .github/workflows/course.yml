@@ -1,0 +1,23 @@
+name: Course pictures (crs/)
+# Mark positions, boat tracks and own top speed per race from Georacing's position files (scripts/course.py).
+# Today's races also run in the live loop; this workflow (manual) rebuilds all past races.
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  crs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: |
+          python scripts/course.py all
+          git config user.name "results-bot"; git config user.email "results-bot@users.noreply.github.com"
+          git add crs
+          if ! git diff --cached --quiet; then git commit -qm "course pictures $(date -u +%FT%TZ)"
+            for i in 1 2 3; do git pull -q --rebase origin main && git push -q origin main && break; sleep 5; done
+            gh workflow run deploy.yml --ref main || true; fi
+        env:
+          GH_TOKEN: ${{ github.token }}
