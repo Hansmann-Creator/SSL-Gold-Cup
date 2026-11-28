@@ -1992,9 +1992,10 @@ function pgGo(e,replace){const d=$("#tmd");if(d.open){NOBACK=true;replace=replac
   try{const P0=$("#pg");if(!replace&&!same&&P0&&!P0.hidden&&PGS){const H0=history.state||{};history.replaceState({...H0,pg:H0.pg||PGS,d:H0.d||0,sc:P0.scrollTop},"")}}catch(x){}
   try{const H=history.state||{},cd=H.d||0;if(replace||same)history.replaceState({pg:e,d:H.sheet?Math.max(1,cd):cd},"","#"+pgHash(e));else history.pushState({pg:e,d:cd+1},"","#"+pgHash(e))}catch(x){}
   pgRender(e);if(!same)$("#pg").scrollTop=0}
-function pgShow(d){const first=d.hidden;d.hidden=false;lockScroll();document.documentElement.classList.add("pgon");
-  const th=d.querySelector(".th");if(th){th.querySelectorAll(".x,.bk").forEach(b=>b.remove());const b=document.createElement("button");b.className="pgb";b.setAttribute("aria-label",T("back").replace(/[‹\s]/g,"")||"Back");b.innerHTML='<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';b.onclick=pgBack;th.prepend(b)}
+function pgShow(d){const first=d.hidden;d.hidden=false;lockScroll();document.documentElement.classList.add("pgon");pgHead(d);
   if(first){d.classList.remove("pgin");void d.offsetWidth;d.classList.add("pgin")}}
+function pgHead(d){const th=d.querySelector(".th");if(th){th.querySelectorAll(".x,.bk").forEach(b=>b.remove());const b=document.createElement("button");b.className="pgb";b.setAttribute("aria-label",T("back").replace(/[‹\s]/g,"")||"Back");b.innerHTML='<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';b.onclick=pgBack;th.prepend(b)}}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#pg .th .bk,#pg .th .x");if(b&&!b.onclick){e.preventDefault();pgBack()}});
 function pgBack(){if(history.state&&history.state.pg&&history.state.d>0)history.back();else{pgHide();try{history.replaceState(null,"","#"+(LS.get("view","")||"home"))}catch(e){}route()}}
 let PGPUSHED=false;
 function pgHide(){const d=$("#pg");bnStopCam();if(d.hidden)return;d.hidden=true;d.innerHTML="";PGS=null;openCode=null;document.documentElement.classList.remove("pgon");unlockScroll();tabSync()}
@@ -3321,7 +3322,7 @@ function pSailor(code,i,keep){const d=$("#pg"),sq=squad(code),p=sq.ppl[i];if(!p)
   d.querySelector(".pv").onclick=()=>openSailor(code,(i-1+n)%n,1);d.querySelector(".nx2").onclick=()=>openSailor(code,(i+1)%n,1);
   d.querySelectorAll("[data-pi]").forEach(el=>el.onclick=()=>openSailor(code,+el.dataset.pi));
   d.onkeydown=e=>{if(!d.querySelector(".s3hero"))return;if(e.key=="ArrowLeft")openSailor(code,(i-1+n)%n,1);if(e.key=="ArrowRight")openSailor(code,(i+1)%n,1)};
-  if(!keep)pgShow(d);
+  if(!keep)pgShow(d);else pgHead(d);
   if(slug&&SPD[slug]===undefined)spLoad(slug).then(()=>{if(PGS&&PGS.t=="sailor"&&PGS.a==code&&PGS.i==i&&!$("#pg").hidden)sKeepTabs(d,()=>pSailor(code,i,1))})}
 function pSailorX(slug,keep){const d=$("#pg");if(!keep){STAB="ov";STT=null}const D=SPD[slug];
   if(D===undefined){d.innerHTML=`<div class="th"><button class="bk">${T("back")}</button><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb"><p class="warn">${esc(T("svLoad"))}</p></div>`;pgShow(d);spLoad(slug).then(()=>{if(PGS&&PGS.t=="sx"&&PGS.s==slug)pSailorX(slug,1)});return}
