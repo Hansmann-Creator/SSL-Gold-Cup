@@ -4,16 +4,33 @@ on:
     paths: [".github/workflows/photoprobe.yml"]
 permissions:
   contents: write
+concurrency: { group: profiles, cancel-in-progress: false }
 jobs:
-  probe:
+  dl:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: "3.12"}
       - run: pip install -q pillow
-      - run: python tools/photos/probe.py
+      - run: python tools/photos/dl.py
       - run: |
           git config user.name "results-bot"; git config user.email "results-bot@users.noreply.github.com"
-          mv probe /tmp/probe; git checkout -q --orphan photo-probe; git rm -rqf . ; cp -r /tmp/probe/* .
-          git add -A; git commit -qm "photo probe $(date -u +%FT%TZ)"; git push -qf origin photo-probe
+          mv dl /tmp/dl; git checkout -q --orphan photo-dl; git rm -rqf . ; cp -r /tmp/dl/* .
+          git add -A; git commit -qm "photo dl $(date -u +%FT%TZ)"; git push -qf origin photo-dl
+  profiles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SAIL_RETRY_MISS: "1"
+      SAIL_BUDGET_MIN: "70"
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/sailors.py profiles 100
+      - run: |
+          git config user.name "results-bot"; git config user.email "results-bot@users.noreply.github.com"
+          git add profiles.json sp
+          if ! git diff --cached --quiet; then git commit -qm "profiles: retry sailors missed this week $(date -u +%F)"
+            for i in 1 2 3; do git pull -q --rebase origin main && git push -q origin main && break; sleep 5; done
+            gh workflow run deploy.yml --ref main || true; fi
