@@ -1,0 +1,16 @@
+name: course probe
+on: {push: {branches: [course-probe]}}
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: |
+          python scripts/course.py one 'r16|C|1'
+          python scripts/course.py one 'r32|C|4'
+          python scripts/course.py all
+          ls -la crs | head -80; du -sh crs
+      - uses: actions/upload-artifact@v4
+        with: {name: crs, path: crs}
