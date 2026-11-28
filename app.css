@@ -2162,3 +2162,13 @@ html.lvxon[data-tabv=home] #nxc{display:none!important}
 .lvx .lvxkx b{font-weight:700}
 :root[data-theme=light] .lvx .lvxk{background:rgba(25,37,80,.06)}
 .lvx .lvxs>span:empty+span::before{content:none!important;margin:0}
+/* empty state (v29e) */
+.empt{text-align:center;padding:36px 12px 20px}
+.empi{width:72px;height:72px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center;font-size:34px;color:var(--gold,#ffd21f);background:var(--card);border:var(--bd)}
+.empt p{color:var(--mute);max-width:300px;margin:0 auto 18px}
+.empb{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.empb button{font:inherit;font-weight:600;padding:10px 18px;border-radius:999px;background:var(--card2);color:var(--ink);border:var(--bd);cursor:pointer}
+.resr .rp.rpw{width:auto;min-width:34px;padding:0 12px;border-radius:999px}.resgap .tbd{font-style:italic;opacity:.8}
+.rktb.nof .rkr{grid-template-columns:42px 40px 1fr 16px}.rktb.nof .rkr>.rkn,.rktb.nof .rkh>span:first-child{display:none}
+.noimg{background:linear-gradient(135deg,#17407e,#0b5e86 60%,#0e6d6a)!important}
+.extl{display:inline-block;padding:8px 10px;margin:-8px -6px;min-width:32px;text-align:center}
