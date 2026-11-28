@@ -1,4 +1,4 @@
-name: Georacing probe (temporary) 3
+name: Georacing probe (temporary) 4
 on:
   push:
     paths: [".github/workflows/geoprobe.yml"]
