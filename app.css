@@ -2260,3 +2260,7 @@ html.cbon:not(.pgon) .stk{top:var(--cbh,51px)}
 :root[data-theme=light] .lvx .lvxu{color:var(--mute)}
 .lvx .lvxd{font-size:14.5px;font-weight:800;padding:5px 12px 5px 14px}
 .lvx .lvxd b{font-size:18px}
+
+/* provisional result (from tracking finish times, until the official result is online) */
+td.pv{font-style:italic;color:var(--gold)}
+.pvnote{margin:6px 4px 0;font-size:12.5px;color:var(--gold);font-style:italic}
