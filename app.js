@@ -3260,6 +3260,12 @@ const EXX={"en": ["Olympic Games", "From Wikipedia", "Text: Wikipedia, CC BY-SA 
 for(const l in EXX)if(S[l])Object.assign(S[l],{exOly:EXX[l][0],exWp:EXX[l][1],exWpLic:EXX[l][2],exAw:EXX[l][3],exOlyS:EXX[l][4],exOlySrc:EXX[l][5]});
 var EXT=null,EXTL=false;
 async function extLoad(){if(EXT||EXTL)return EXT;EXTL=true;try{const r=await fetch("ext.json",{cache:"no-cache"});if(r.ok)EXT=await r.json()}catch(e){}if(!EXT)EXT={};EXTL=false;return EXT}
+/* tp.json: facts from the official SSL team sites (xxx.sslgoldcup.com/athlete/…) – height, weight, bio, best results – for sailors whose SSL platform profile is thin or missing */
+let TPJ=null,TPL=false;
+async function tpLoad(){if(TPJ||TPL)return TPJ;TPL=true;try{const r=await fetch("tp.json",{cache:"no-cache"});if(r.ok)TPJ=await r.json()}catch(e){}if(!TPJ)TPJ={};TPL=false;return TPJ}
+const tpOf=key=>TPJ&&key?TPJ[key]||null:null;
+const TPS={en:["Best results","From the official SSL team page","Team page"],de:["Beste Ergebnisse","Von der offiziellen SSL-Teamseite","Teamseite"],fr:["Meilleurs résultats","Depuis la page officielle de l'équipe SSL","Page de l'équipe"],es:["Mejores resultados","De la página oficial del equipo SSL","Página del equipo"],pt:["Melhores resultados","Da página oficial da equipe SSL","Página da equipe"],it:["Migliori risultati","Dalla pagina ufficiale della squadra SSL","Pagina della squadra"],zh:["最佳成绩","来自 SSL 官方队伍页面","队伍页面"],ar:["أفضل النتائج","من صفحة الفريق الرسمية في SSL","صفحة الفريق"],hi:["सर्वश्रेष्ठ परिणाम","आधिकारिक SSL टीम पेज से","टीम पेज"],bn:["সেরা ফলাফল","অফিসিয়াল SSL দলের পেজ থেকে","দলের পেজ"],ur:["بہترین نتائج","SSL ٹیم کے سرکاری صفحے سے","ٹیم کا صفحہ"],id:["Hasil terbaik","Dari halaman resmi tim SSL","Halaman tim"],ms:["Keputusan terbaik","Daripada halaman rasmi pasukan SSL","Halaman pasukan"],ja:["主な成績","SSL公式チームページより","チームページ"],th:["ผลงานที่ดีที่สุด","จากหน้าทีมทางการของ SSL","หน้าทีม"],hu:["Legjobb eredmények","A hivatalos SSL-csapatoldalról","Csapatoldal"],cs:["Nejlepší výsledky","Z oficiální stránky týmu SSL","Stránka týmu"],uk:["Найкращі результати","З офіційної сторінки команди SSL","Сторінка команди"],pl:["Najlepsze wyniki","Z oficjalnej strony drużyny SSL","Strona drużyny"]};
+for(const l in TPS)if(S[l])Object.assign(S[l],{tpBest:TPS[l][0],srcTeam:TPS[l][1],teamPg:TPS[l][2]});
 function extOf(key){return EXT&&key?EXT[key]||null:null}
 function olyMed(m){return /gold/i.test(m)?"🥇":/silver/i.test(m)?"🥈":/bronze/i.test(m)?"🥉":""}
 function olyHtml(E){const L=(E&&E.ol||[]).filter(r=>r[2]&&!/^sailing$/i.test(r[2]));if(!L.length)return"";
@@ -3272,30 +3278,32 @@ function extLinks(E){return (E&&E.ln||[]).map(l=>`<a class="s3l" href="${esc(l[1
 function pronHtml(key){const P=PRON[key];if(!P||(!P.ph&&!P.audio))return "";
   return `<div class="spron">${P.audio?`<button class="sprb" data-pron="${esc(P.audio)}" aria-label="${esc(T("pronPlay"))}">🔊</button>`:`<span class="spri" aria-hidden="true">🗣</span>`}<span><small>${esc(T("pronT"))}${P.ok?"":` · ${esc(T("pronUnv"))}`}</small><b>${esc(P.ph||"")}</b></span></div>`}
 function sBody(C){/* C: {key,name,iso,flag,country,nick,code,chips,img,hd,PF,D,mates} */
-  const E=extOf(C.key);if(!EXT&&C.key&&C.rerender)extLoad().then(()=>{if(extOf(C.key))C.rerender(true)});
+  const E=extOf(C.key);if(!EXT&&C.key&&C.rerender)extLoad().then(()=>{if(extOf(C.key))C.rerender(true)});const TPx=tpOf(C.key)||{};if(!TPJ&&C.key&&C.rerender)tpLoad().then(()=>{if(tpOf(C.key))C.rerender(true)});
   const PF=C.PF||{},LD=C.D===null,D=C.D||null,p=D&&D.p||PF,rk=p.rk||(PF.rank?{s:[PF.rank,PF.pts,null]}:{}),rkT=rk.s?"s":rk.c?"c":null,R=rkT?rk[rkT]:null,st=p.st||{};
   const GAL=[];if(C.img)GAL.push({s:C.hd||C.img,f:C.img,sq:1});{const w=D&&D.p&&D.p.img;if(w&&w!=C.img&&!C.pf)GAL.push({s:w,f:w,sq:1})}
   let h=`<div class="s3hero">${C.img?`<span class="s3phw"><img class="s3ph" src="${esc(C.img)}" alt="${esc(C.name)}" data-zoom="${esc(GAL[0].s)}" data-cap="${esc(C.name)}" data-zg="${esc(JSON.stringify(GAL))}" role="button" tabindex="0">${GAL.length>1?`<i class="s3pn" aria-hidden="true">+${GAL.length-1}</i>`:""}</span>`:`<span class="s3ph big">${esc(ini(C.name))}</span>`}<div class="s3h2"><div class="cty">${C.flag}<span>${esc(C.country)}</span></div>${C.nick?`<span class="nk2">${esc(C.nick)}</span>`:""}${(()=>{const pp=pronHtml(C.key);return pp?`<div class="snw"><h2 class="snh hasp" data-pronbtn="1" role="button" tabindex="0" aria-expanded="false" title="${esc(T("pronT"))}">${NMH(C.name).replace('class="sn"','class="sn fitn"')}<span class="pri" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 010 7"/></svg></span></h2><div class="sprpop" hidden>${pp}</div></div>`:`<h2 class="snh">${NMH(C.name).replace('class="sn"','class="sn fitn"')}</h2>`})()}${C.chips?`<div class="chips2">${C.chips}</div>`:""}</div></div>`;
   const tile=(k,v,e)=>`<div class="s3t"><small>${esc(k)}</small><b>${v}</b>${e?`<em>${e}</em>`:""}</div>`;
-  h+=`<div class="s3ts">${tile(T("stRank"),R?"#"+nf0(R[0]):"–",R?trendH(R[0],R[2])+(rkT=="c"?" "+esc(T("svCr")):""):"")}${tile(T("stPtsT"),R?nf0(R[1]):"–")}${tile(T("stBest"),R&&R[4]?"#"+nf0(R[4][0]):"–",R&&R[4]?esc(String(R[4][1]).slice(0,4)):"")}${tile(T("stEv"),st.ev||"–",st.pod?esc(T("stPod")(st.pod)):"")}</div>`;
+  if(R||st.ev||LD)h+=`<div class="s3ts">${tile(T("stRank"),R?"#"+nf0(R[0]):"–",R?trendH(R[0],R[2])+(rkT=="c"?" "+esc(T("svCr")):""):"")}${tile(T("stPtsT"),R?nf0(R[1]):"–")}${tile(T("stBest"),R&&R[4]?"#"+nf0(R[4][0]):"–",R&&R[4]?esc(String(R[4][1]).slice(0,4)):"")}${tile(T("stEv"),st.ev||"–",st.pod?esc(T("stPod")(st.pod)):"")}</div>`;
   const TB=[["ov",T("tOv")],["res",T("tRes")],["rank",T("tRank")],["bio",T("tBio")]];
   h+=`<div class="s3tabs" role="tablist">${TB.map(([k,l])=>`<button role="tab" data-stab="${k}" class="${STAB==k?"on":""}" aria-selected="${STAB==k}">${esc(l)}</button>`).join("")}</div><div class="s3pane">`;
   const res=D?[...(D.res.s||[]).map(r=>[...r,"s"]),...(D.res.c||[]).map(r=>[...r,"c"])].sort((a,b)=>a[0]<b[0]?1:-1):[];
   const resRow=r=>`<div class="s3r">${rankPill(r[6]??"–")}<span><b>${esc(r[1])}</b><small>${esc([String(r[0]).slice(0,4),r[2],r[4],r[7]?T("boatsN")(r[7]):""].filter(Boolean).join(" · "))}</small></span><span class="s3rp"><em>${esc(catL(r[5]))}</em><small>${r[8]?nf0(r[8])+" "+esc(T("ptsS")):""}</small></span></div>`;
   const achs=D&&D.ach&&D.ach.length?D.ach.map(a=>a[0]=="SSL Gold Cup Winner"&&a[2].every(x=>x[1]=="2026")?["SSL Gold Cup Qualifier","q",[["","2026",""]]]:a).map(a=>`<div class="s3a"><span class="s3ai">${achIco(a[0],a[1])}</span><span><b>${esc(achName(a[0]))}${a[2].length>1?` <em>×${a[2].length}</em>`:""}</b><small>${esc(a[2].map(x=>(x[0]+" "+x[1]).trim()).join(" · "))}</small></span></div>`).join(""):"";
+const tpRes=()=>`<h3>${T("tpBest")}</h3><div class="grp">${TPx.res.map(r=>`<div class="s3r">${rankPill(r[0])}<span><b>${esc(r[1])}</b><small>${esc([r[4],r[2],r[3]].filter(Boolean).join(" · "))}</small></span></div>`).join("")}</div><p class="s3src">${esc(T("srcTeam"))}</p>`;
   if(STAB=="ov"){
     if(achs)h+=`<h3>${T("achT")}</h3><div class="grp">${achs}</div>`;else{const top=C.code?profHtml(C.code,C.name,"top"):"";if(top)h+=top}
     h+=olyHtml(E);
+    if(!res.length&&TPx.res&&TPx.res.length)h+=tpRes();
     if(res.length)h+=`<h3 class="s3hh"><span>${T("lastRegs")}</span>${res.length>3?`<button class="s3more" data-stab="res">${esc(T("allN")(res.length))}</button>`:""}</h3><div class="grp">${res.slice(0,3).map(resRow).join("")}</div>`;
     const f=(k,v)=>v?`<div><small>${esc(k)}</small><b>${v}</b></div>`:"";
-    h+=`<h3>${T("factsT")}</h3><div class="s3f">${C.facts||""}${f(T("heightT"),p.cm&&"\u2066"+p.cm+" cm\u2069")}${f(T("weightT"),p.kg&&"\u2066"+p.kg+" kg\u2069")}${f(T("clubT"),p.club&&esc(p.club))}${f(T("classesT"),(p.cls||[]).length&&esc(p.cls.slice(0,4).join(", ")))}${f(T("exOlyS"),olyYears(E)&&esc(olyYears(E)))}</div>`;
+    h+=`<h3>${T("factsT")}</h3><div class="s3f">${C.facts||""}${f(T("heightT"),(p.cm||TPx.cm)&&"\u2066"+(p.cm||TPx.cm)+" cm\u2069")}${f(T("weightT"),(p.kg||TPx.kg)&&"\u2066"+(p.kg||TPx.kg)+" kg\u2069")}${f(T("clubT"),p.club&&esc(p.club))}${f(T("classesT"),(p.cls||[]).length&&esc(p.cls.slice(0,4).join(", ")))}${f(T("exOlyS"),olyYears(E)&&esc(olyYears(E)))}</div>`;
     const so=p.soc||{},lab={instagram:"Instagram",facebook:"Facebook",x:"X",youtube:"YouTube",tiktok:"TikTok",linkedin:"LinkedIn",website:"Web"};
-    const links=Object.keys(so).filter(k=>k!="website"||so.website!=so.instagram).map(k=>`<a class="s3l" href="${esc(so[k])}" target="_blank" rel="noopener">${lab[k]||k} ↗</a>`).join("")+(p.slug?`<a class="s3l ssl" href="https://worldofsailors.com/sailor/${esc(p.slug)}" target="_blank" rel="noopener">${esc(T("sslProf"))} ↗</a>`:"")+extLinks(E);
+    const links=Object.keys(so).filter(k=>k!="website"||so.website!=so.instagram).map(k=>`<a class="s3l" href="${esc(so[k])}" target="_blank" rel="noopener">${lab[k]||k} ↗</a>`).join("")+(p.slug?`<a class="s3l ssl" href="https://worldofsailors.com/sailor/${esc(p.slug)}" target="_blank" rel="noopener">${esc(T("sslProf"))} ↗</a>`:"")+(TPx.url&&/^https:\/\/[a-z]{3}\.sslgoldcup\.com\//.test(TPx.url)?`<a class="s3l" href="${esc(TPx.url)}" target="_blank" rel="noopener">${esc(T("teamPg"))} ↗</a>`:"")+extLinks(E);
     if(links)h+=`<h3>${T("linksT")}</h3><div class="s3ls">${links}</div>`;
     if(C.extra)h+=C.extra}
   else if(STAB=="res"){
     if(D&&D.rec&&D.rec.length)for(const [t,L] of D.rec){const lab=SECK[t]?T(SECK[t]):t;h+=`<h3>${esc(lab)}</h3><div class="grp">${L.map(r=>`<div class="s3r">${rankPill(r[6])}<span><b>${esc(r[0])}${r[2]?" · "+esc(r[2]):""}</b><small>${esc([r[1],r[4],r[5]].filter(Boolean).join(" · "))}</small></span></div>`).join("")}</div>`}
-    h+=`<h3>${T("tRes")}${res.length?` <small class="s3cnt">${res.length}</small>`:""}</h3>`+(res.length?`<div class="grp">${res.map(resRow).join("")}</div>`:LD?`${LDR(T("svLoad"))}`:`<p class="warn">${esc(T("noRes"))}</p>`)}
+    if(!res.length&&TPx.res&&TPx.res.length&&!LD)h+=tpRes();else h+=`<h3>${T("tRes")}${res.length?` <small class="s3cnt">${res.length}</small>`:""}</h3>`+(res.length?`<div class="grp">${res.map(resRow).join("")}</div>`:LD?`${LDR(T("svLoad"))}`:`<p class="warn">${esc(T("noRes"))}</p>`)}
   else if(STAB=="rank"){
     const types=["s","c"].filter(k=>rk[k]);if(!STT||!types.includes(STT))STT=types[0]||"s";const r=rk[STT];
     if(!types.length)h+=`<p class="warn">${esc(T("svNoRank"))}</p>`;
@@ -3308,6 +3316,7 @@ function sBody(C){/* C: {key,name,iso,flag,country,nick,code,chips,img,hd,PF,D,m
       if(!IND)indLoad().then(()=>{if(STAB=="rank"&&C.rerender)C.rerender()})}}
   else{const bt=p.bio?bioClean(p.bio):"",own=/(^|[\s(])(I|I'm|I’m|I've|my|My|me)\b/.test(bt);
     if(bt)h+=`<div class="grp pbio"><p>${esc(bt).replace(/\n/g,"</p><p>")}</p><small>${esc(own?T("ownW"):T("srcSSL"))}${lang!="en"?" · English":""}</small></div>`;
+    if(!bt&&TPx.bio)h+=`<div class="grp pbio"><p>${esc(TPx.bio)}</p><small>${esc(T("srcTeam"))}${lang!="en"?" · English":""}</small></div>`;
     if(C.hl&&C.hl.length)h+=`<h3>${T("highlights")}</h3><div class="grp"><ul class="hl">${C.hl.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
     const wp=wpHtml(E),aw=awHtml(E);h+=wp+aw;
     if(!bt&&!(C.hl&&C.hl.length)&&!wp&&!aw)h+=`<p class="warn">${esc(T("noInfo"))}</p>`}
