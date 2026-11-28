@@ -2214,3 +2214,19 @@ html.cbon:not(.pgon) .stk{top:var(--cbh,51px)}
 .lvx .lvxc{display:inline-block;font-size:17px;font-weight:800;letter-spacing:.02em;padding:2px 9px;border-radius:8px;background:rgba(255,255,255,.14);margin-inline-start:4px;min-width:3.6em;text-align:center}
 .lvx .lvxcl{opacity:.85}
 :root[data-theme=light] .lvx .lvxc{background:rgba(25,37,80,.08)}
+/* live card: ticker as a small feed with timeline (variant B, v29g) – newest at the bottom, older ones slide up */
+.lvx .lvxk.lvxf{display:block;-webkit-line-clamp:unset;position:relative;height:122px;overflow:hidden;padding:0 10px;-webkit-mask:linear-gradient(180deg,transparent,#000 24px);mask:linear-gradient(180deg,transparent,#000 24px)}
+.lvx .lvxk.lvxf[hidden]{display:none}
+.lvfl{position:absolute;left:20px;top:0;bottom:0;width:2px;background:rgba(255,255,255,.16)}
+.lvfr{position:absolute;left:10px;right:10px;bottom:8px;display:flex;flex-direction:column;gap:6px}
+.lvfe{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.32;opacity:.5;transition:opacity .5s}
+.lvfe.cur{opacity:1}
+.lvfd{flex:none;width:10px;height:10px;border-radius:50%;margin:4px 0 0 6px;background:rgba(255,255,255,.45);box-shadow:0 0 0 3px var(--lvxbg,#0d2c5c)}
+.lvfe.cur .lvfd{background:#ffd21f;animation:lvfp 2.4s ease-in-out infinite}
+@keyframes lvfp{0%,100%{box-shadow:0 0 0 3px var(--lvxbg,#0d2c5c),0 0 0 3px rgba(255,210,31,.35)}50%{box-shadow:0 0 0 3px var(--lvxbg,#0d2c5c),0 0 0 7px rgba(255,210,31,0)}}
+.lvfe.in{animation:lvfin .55s cubic-bezier(.2,.9,.3,1)}@keyframes lvfin{from{opacity:0}to{opacity:1}}
+.lvfe.cur .lvft{background:linear-gradient(90deg,rgba(255,210,31,.14),transparent 85%);border-radius:6px;padding:2px 6px;margin:-2px -6px}
+.lvft b{font-weight:700}.lvft bdi{white-space:nowrap}
+:root[data-theme=light] .lvfl{background:rgba(25,37,80,.15)}:root[data-theme=light] .lvfd{background:rgba(25,37,80,.3)}
+@media (prefers-reduced-motion:reduce){.lvfe.cur .lvfd{animation:none}}
+.lvx .lvxf{--lvxbg:#0c2a55}:root[data-theme=light] .lvx .lvxf{--lvxbg:#142f68}
