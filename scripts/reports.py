@@ -86,6 +86,10 @@ SEC = [(re.compile(r"^(?:group|gruppe|grupo|groupe)\s*([A-D])\s*[,·:-]?\s*(?:ra
        (re.compile(r"^(petit\s*final)\s*(?:[-–—:]\s*(.*))?$", re.I), "pf"), (re.compile(r"^(?:grand\s*)?(final)\s*(?:[-–—:]\s*(.*))?$", re.I), "f"),
        (re.compile(r"^semi[- ]?final\s*([AB])\s*(?:[-–—:]\s*(.*))?$", re.I), "sf")]
 P = lambda t: f"<p>{H.escape(t)}</p>"
+DONE = re.compile(r"\(\s*done\s*\)\s*\.?\s*$", re.I)
+def undone(t):
+    """('text without the marker', had_marker)"""
+    return (DONE.sub("", t).strip(), True) if DONE.search(t) else (t, False)
 def split_report(paras, rid):
     """Day report: title + intro, then one section per race ('Group A, Race 1 - headline'). -> {key: entry}"""
     secs, cur, intro, title = {}, None, [], ""
@@ -98,7 +102,11 @@ def split_report(paras, rid):
                 elif kind == "sf": hit = (f"sf|{m.group(1).upper()}|1", m.group(2) or "")
                 else: hit = (f"{kind}|A|1", m.group(2) or "")
                 break
-        if hit: cur = hit[0]; secs[cur] = {"head": hit[1].strip(), "p": []}; continue
+        if hit:
+            cur = hit[0]; h, dn = undone(hit[1].strip()); secs[cur] = {"head": h, "p": [], "done": dn}; continue
+        t, dn = undone(t)
+        if dn and cur: secs[cur]["done"] = True
+        if not t: continue
         if cur: secs[cur]["p"].append(t)
         elif hd and not title: title = t
         else: intro.append(t)
@@ -108,15 +116,26 @@ def round_of(name, today):
     return next((r for p, r in ROUNDS if re.search(p, n)), None) or current_round(today)
 def apply(store, paras, fname, fid, today):
     base = re.sub(r"\.(pdf|docx?|txt|md)$", "", fname, flags=re.I)
+    # Reports are written live in the folder: only take what the author has marked '(done)' at its end.
+    # Whole file ends with '(done)' -> everything in it; otherwise a race section counts once it ends with '(done)'.
+    last = next((t for t, _ in reversed(paras) if t.strip()), "")
+    alldone = bool(DONE.search(last))
     secs, title, intro = split_report(paras, round_of(base, today))
     if secs:
+        ready = {k: v for k, v in secs.items() if alldone or v.get("done")}
+        for k in secs:
+            if k not in ready: print("wait (no '(done)' yet):", fname, k)
+        secs = ready
+        if not secs: return
         day = {"t": title, "intro": "".join(P(t) for t in intro[:4])}
         for k, v in secs.items():
+            if not v["p"] and (store.get(k) or {}).get("html"): print("keep (new section empty):", k); continue
             store[k] = {"head": v["head"], "html": "".join(P(t) for t in v["p"])[:60000], "day": day, "file": fname, "src": fid}
             print("report", k, "<-", fname, "|", v["head"])
         return
     k = key_of(base, today)
     if not k: print("skip (no race sections, name not understood):", fname); return
+    if not alldone: print("wait (no '(done)' yet):", fname); return
     store[k] = {"head": title, "html": "".join(P(t) for t in intro)[:60000], "file": fname, "src": fid}; print("report", k, "<-", fname)
 def main():
     today = (datetime.datetime.utcnow() - datetime.timedelta(hours=3)).strftime("%Y-%m-%d")

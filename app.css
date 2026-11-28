@@ -2234,3 +2234,8 @@ html.cbon:not(.pgon) .stk{top:var(--cbh,51px)}
 .races li.rc{grid-template-columns:3.5em 1fr auto}
 .races li.rc:has(.s .apt),.races li.rc:has(.s .dlyt){grid-template-columns:3.5em 1fr}
 @media(max-width:380px){.races li.rc{grid-template-columns:3.5em 1fr}}
+/* v29h: race card status once the race has actually started (Georacing) */
+.rcgt{color:#7fd3ff;font-weight:800;white-space:nowrap}
+.races li.rc:has(.s .rcgt){grid-template-columns:3.5em 1fr;grid-template-areas:"ti gt" "ti s" "ti meta"}
+.races li.rc .s:has(.rcgt){justify-self:start;text-align:start}
+.races li.rc .ti .cdn{white-space:nowrap}
