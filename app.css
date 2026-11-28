@@ -2101,3 +2101,35 @@ html.lvxon[data-tabv=home] #nxc{display:none!important}
 :root[data-theme=light] .rnx .rnxk{background:rgba(16,32,63,.05)}
 
 .rnx .rtkr.rnxr>span:first-child{padding-inline-end:6px}
+
+/* race page: date / start / weather line under the result, small */
+.rcmeta{display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px;margin:8px 6px 18px;font-size:12.5px;line-height:1.4;color:var(--mute)}
+.rcmeta .wxs,.rcmeta>span{font-size:12.5px}
+
+/* race in numbers: chart switch, team cards, course */
+.rnx .rnxsw{display:inline-flex;border-radius:99px;background:rgba(255,255,255,.08);padding:2px}
+.rnx .rnxsw button{border:0;background:none;color:var(--mute);font:inherit;font-size:12px;font-weight:600;padding:4px 10px;border-radius:99px}
+.rnx .rnxsw button.on{background:rgba(255,255,255,.16);color:var(--ink)}
+.rnx .rnxc[hidden]{display:none}
+.rnx .rnxcards{border-top:1px solid var(--line)}
+.rnx .rnxcd{display:block;width:100%;text-align:start;border:0;background:none;color:var(--ink);font:inherit;padding:11px 14px;border-bottom:1px solid var(--line)}
+.rnx .rnxct{display:flex;align-items:center;gap:8px}.rnx .rnxct .rcp{width:22px;height:22px;font-size:12px;flex:none}.rnx .rnxct .flg{width:22px;height:16px;border-radius:2px;flex:none}
+.rnx .rnxct b{font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rnx .rnxct em{margin-inline-start:auto;font-style:normal;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rnx .rnxch{display:flex;flex-wrap:wrap;gap:4px 14px;margin:6px 0 0 30px;font-size:12.5px;color:var(--mute)}.rnx .rnxch b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+[dir=rtl] .rnx .rnxch,[dir=rtl] .rnx .rnxpa{margin:6px 30px 0 0}
+.rnx .rnxpa{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin:6px 0 0 30px;font-size:12px;color:var(--mute)}.rnx .rnxpa small{margin-inline-end:4px}
+.rnx .rnxpa b{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.12);color:var(--ink);font-size:11px}.rnx .rnxpa b.w{background:#f5b800;color:#10203f}.rnx .rnxpa i{font-style:normal;opacity:.5}
+.rnx .rnxcrs{padding:6px 10px 4px}
+.rnx .rnxlg{display:flex;flex-wrap:wrap;gap:6px 14px;padding:6px 4px 8px;font-size:12px;font-weight:700}.rnx .rnxlg span{display:inline-flex;align-items:center;gap:5px}.rnx .rnxlg i{width:14px;height:3px;border-radius:2px}.rnx .rnxlg .flg{width:18px;height:13px;border-radius:2px}
+
+/* numbers table as one grid: every column as wide as its longest word, headers never split inside a word */
+.rnx .rnxt{display:grid;grid-template-columns:max-content repeat(4,minmax(min-content,1fr));column-gap:10px;padding:0 14px}
+.rnx .rnxt>.rtkr{display:contents}
+.rnx .rnxt>.rtkr>span{padding:9px 0;border-top:1px solid var(--line);text-align:end;font-variant-numeric:tabular-nums;font-size:13.5px}
+.rnx .rnxt>.rtkr>span:first-child{text-align:start;display:flex;align-items:center;gap:6px}
+.rnx .rnxt>.rtkr0>span{font-size:10.5px;font-weight:700;letter-spacing:.01em;text-transform:none;color:var(--mute);line-height:1.2;align-self:end;white-space:normal;overflow-wrap:normal;word-break:normal;hyphens:manual;padding:6px 0 7px}
+.rnx .rnxt>.rtkr:not(.rtkr0){cursor:pointer}
+
+.rnx .rnxt:lang(ja)>.rtkr0>span,.rnx .rnxt:lang(zh)>.rtkr0>span,.rnx .rnxt:lang(th)>.rtkr0>span{white-space:nowrap}
+
+.rnx .rnxt{column-gap:0}.rnx .rnxt>.rtkr>span:not(:first-child){padding-inline-start:10px}
