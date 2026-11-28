@@ -56,6 +56,9 @@ Read this first in any new session. Everything needed to keep developing the app
 - **New UI text**: add it to every language (the smoke test checks this) – follow `i18n/glossary.json`.
 - **New language**: add to `LANGS`, `LOC`, lang auto-detect list, `ORD`, `OSL`, `<select id="lang">`, a full `S.<lang>` block (copy the `cs` block), SSET, SOW, CP, WXF, ALSO, FIX; plus `scripts/notify.py` (LANGS, RN, W, spoiler text) and `scripts/push_extra.py`; add to `scripts/smoke.py`.
 
+## Open items
+- Race in numbers (`rnxHtml` in app.js, data `tk/`): top speed currently = Georacing `max_speed`, shown only when plausible (≤25 kn, ≤1.35× race median, ≥ own avg speed). TODO: compute top speed ourselves from the position bins (best ~10 s average, outlier filter). Then, only once verified on several races against replay/video, remind Hansi and add: tacks vs gybes separately, VMG upwind/downwind, speed upwind/downwind, start (seconds after the signal – the 27 Nov C1 'JPN ±0 s' looks like an artefact), time-in-lead computed ourselves (Georacing's % starts later than the start), side of the course / tack share, manoeuvre speed loss.
+
 ## Open items (waiting for Hansi)
 - OneSignal App ID (+ secret `ONESIGNAL_REST_KEY`) → push notifications go live.
 - Feedback: Google Form link (prefilled link with entry IDs) from Hansi → in-app "Wunsch melden".
