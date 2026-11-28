@@ -1,0 +1,38 @@
+name: probe ticker data
+on:
+  push:
+    branches: [probe-ticker]
+    paths: [.github/workflows/probe.yml]
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: fetch
+        run: |
+          python3 - <<'PY'
+          import json, urllib.request, os
+          H={"User-Agent":"Mozilla/5.0 Chrome/131","Referer":"https://player.georacing.com/"}
+          def get(u):
+              try: return json.load(urllib.request.urlopen(urllib.request.Request(u,headers=H),timeout=30))
+              except Exception as e: return {"_err":str(e)}
+          os.makedirs("out",exist_ok=True)
+          app=get("https://player.georacing.com/datas/applications/app_46.json")
+          idx=[]
+          for e in app.get("events",[]):
+              if "2026" not in e.get("name","") or "Qualif" in e.get("name",""): continue
+              races=get(f"https://player.georacing.com/datas/{e['id']}/races.json")
+              for x in races if isinstance(races,list) else []:
+                  for f in ["all","stats"]:
+                      d=get(f"https://player.georacing.com/datas/{e['id']}/{x['id']}/{f}.json")
+                      json.dump(d,open(f"out/{x['id']}_{f}.json","w"))
+                  idx.append({"ev":e["id"],"evname":e["name"],"race":x["id"],"name":x.get("name"),"start":x.get("start_time")})
+          json.dump(idx,open("out/index.json","w"),indent=1)
+          print(len(idx),"races")
+          PY
+      - name: push
+        run: |
+          git config user.name "Hansi (via Claude)"; git config user.email "hansmann-creator@users.noreply.github.com"
+          git add out && git commit -qm "probe data" && git push -q origin HEAD:probe-ticker
