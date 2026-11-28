@@ -5,6 +5,8 @@ const $=s=>document.querySelector(s);
 ["gesturestart","gesturechange"].forEach(t=>document.addEventListener(t,e=>{if(!(e.target.closest&&e.target.closest(".leaflet-container")))e.preventDefault()},{passive:false}));
 document.addEventListener("touchmove",e=>{if(e.touches.length>1&&!(e.target.closest&&e.target.closest(".leaflet-container")))e.preventDefault()},{passive:false});
 const LS={get(k,d){try{const v=localStorage.getItem("gcmb_"+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem("gcmb_"+k,JSON.stringify(v))}catch(e){}}};
+const LDRC={de:"NOSW",fr:"NESO",es:"NESO",it:"NESO",pt:"NLSO",id:"UTSB",ms:"UTSB",hu:["É","K","D","Ny"],cs:"SVJZ",zh:"北东南西",ja:"北東南西"};
+function LDR(t,big){const c=LDRC[lang]||"NESW";return `<div class="ldr${big?" ldr-boot":""}" role="status" aria-label="${esc(t||T("svLoad"))}"><svg class="ldrc" viewBox="-100 -100 200 200" aria-hidden="true"><circle r="94" class="rim"/><g class="tk">${Array.from({length:36},(_,i)=>`<line x1="0" y1="-86" x2="0" y2="${i%3?-80:-74}" transform="rotate(${i*10})"/>`).join("")}</g><g class="card"><circle r="66" class="cd"/><g class="lbl"><text y="-45">${c[0]}</text><text x="50" y="5.5">${c[1]}</text><text y="56">${c[2]}</text><text x="-50" y="5.5">${c[3]}</text></g><path class="ndN" d="M0 -34 L8 0 L-8 0Z"/><path class="ndS" d="M0 34 L8 0 L-8 0Z"/></g><circle r="7" class="cap"/><path class="lub" d="M0 -99 L6 -91 L-6 -91Z"/></svg></div>`}
 const LANGS={en:"English",de:"Deutsch",fr:"Français",es:"Español",pt:"Português",it:"Italiano",zh:"中文",ar:"العربية",hi:"हिन्दी",bn:"বাংলা",ur:"اردو",id:"Bahasa Indonesia",ms:"Bahasa Melayu",ja:"日本語",th:"ไทย",hu:"Magyar",cs:"Čeština",uk:"Українська",pl:"Polski"};
 const RTL=l=>l=="ar"||l=="ur";
 const LOC=()=>({ar:"ar-u-nu-latn",zh:"zh-CN",pt:"pt-BR",it:"it-IT",hi:"hi-IN-u-nu-latn",bn:"bn-BD-u-nu-latn",ur:"ur-PK-u-nu-latn",id:"id-ID",ms:"ms-MY",ja:"ja-JP",th:"th-TH-u-nu-latn",hu:"hu-HU",cs:"cs-CZ",uk:"uk-UA",pl:"pl-PL"})[lang]||lang;
@@ -2307,7 +2309,7 @@ function rkSailor(code,first,last){if(!INFO[code])return null;try{const sq=squad
 function rkPeople(code,L){return `<div class="rkpl">${L.map(([pos,pts,f,l,sl,img])=>{const p=rkSailor(code,f,l);const ph=img?`<img src="https://platform.worldofsailors.com/storage/${esc(img)}" alt="" loading="lazy" onerror="this.remove()">`:"";return `<${p?`button data-sc="${esc(code)}" data-si="${p.i}"`:"div"} class="rkp"><span class="rkav">${ph}<b>${esc(ini(f+" "+l))}</b></span><span class="rkpn"><small>${esc(f)}</small><b>${esc(l)}</b></span><span class="rkpr"><small>${esc(T("rkInd"))}</small><b>#${pos}</b></span>${p?`<i>›</i>`:""}</${p?"button":"div"}>`}).join("")}</div>`}
 function rkTrend(r){const p=r[0],b=r[2];if(!b||b==p)return `<span class="rktr eq" aria-hidden="true">•</span>`;return b>p?`<span class="rktr up" title="${esc(T("rkWas")(b))}">▲${b-p}</span>`:`<span class="rktr dn" title="${esc(T("rkWas")(b))}">▼${p-b}</span>`}
 function pRank(){const d=$("#pg");openCode=null;
-  d.innerHTML=`<div class="th"><div><div class="nick">Star Sailors League</div><h2>${esc(T("rkT"))}</h2></div></div><div class="tb rk"><p class="warn">${esc(T("rkLoad"))}</p></div>`;pgShow(d);
+  d.innerHTML=`<div class="th"><div><div class="nick">Star Sailors League</div><h2>${esc(T("rkT"))}</h2></div></div><div class="tb rk">${LDR(T("rkLoad"))}</div>`;pgShow(d);
   rkIdx().then(ix=>{if(!ix){d.querySelector(".tb").innerHTML=`<p class="warn">${esc(T("rkFail"))}</p>`;return}const w=RKST.w&&ix.weeks.includes(RKST.w)?RKST.w:ix.date;return rkWeek(w).then(W=>{if(!PGS||PGS.t!="rank")return;if(!W){d.querySelector(".tb").innerHTML=`<p class="warn">${esc(T("rkFail"))}</p>`;return}rkPaint(d,ix,W)})})}
 function rkPaint(d,ix,W){const tb=d.querySelector(".tb"),y=d.scrollTop,cn=CONT[lang]||CONT.en,fmt=s=>{try{return new Date(s+"T12:00:00").toLocaleDateString(LOC(),{day:"numeric",month:"short",year:"numeric"})}catch(e){return s}};
   const cid=RKST.c?(ix.continents.find(c=>c.slug==RKST.c)||{}).id:null,q=RKST.q.trim().normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
@@ -2820,7 +2822,7 @@ function rnxHtml(x,d,fm,nf,crs){const W=RNX[lang]||RNX.en,L=TKR[lang]||TKR.en,f=
         ${pl.some(Boolean)?`<div class="rnxpa"><small>${esc(W.pos)}</small>${pl.map((p,i)=>`${i?"<i>›</i>":""}<b class="${p==1?"w":""}" title="${esc(mk(M[i]))}">${p||"–"}</b>`).join("")}</div>`:""}</button>`}).join("")}</div>`}
   if(crs&&crs.tr&&Object.keys(crs.tr).length)try{h+=rnxCourse(crs,T,CO,d.w,W,mk)}catch(e){}
   return h+`<p class="rnxn">${esc(W.def)}${own?` · ${esc(W.tsd)}`:""}</p></div>`}
-function tkHtml(x,d){const L=TKR[lang]||TKR.en,live=rState2(x)=="now",nf=new Intl.NumberFormat(LOC(),{maximumFractionDigits:1,minimumFractionDigits:1});
+function tkEv(x,d){const L=TKR[lang]||TKR.en,nf=new Intl.NumberFormat(LOC(),{maximumFractionDigits:1,minimumFractionDigits:1});
   const gp0=s=>{s=Math.round(s*10)/10;return s<60?`${nf.format(s)} s`:`${Math.floor(s/60)}:${String(Math.round(s%60)).padStart(2,"0")}`},gp=s=>`<bdi dir="ltr">${gp0(s)}</bdi>`,nm=c=>`<b>${esc(NM(c))}</b>`;
   const mkName=m=>{if(m.r=="start")return L.st;if(m.r=="finish")return L.fi;const q=/(mark|gate)\s*(\d+)/i.exec(m.n||"");return q?`${q[1].toLowerCase()=="gate"?L.gt:L.mk} ${q[2]}`:String(m.n||"")};
   const ev=[];let prev=null;
@@ -2833,7 +2835,9 @@ function tkHtml(x,d){const L=TKR[lang]||TKR.en,live=rState2(x)=="now",nf=new Int
     else txt=B?L.r1(nm(A),nm(B.c),gb):L.r0(nm(A));
     const chips=m.r=="start"?"":`<div class="rtkch">${o.map((p,i)=>{const mv=pi&&pi.has(p.c)?pi.get(p.c)-i:0;return `<button class="rtkc" data-tm="${esc(p.c)}">${FL(p.c)}<b>${esc(p.c)}</b>${i?`<small dir="ltr">+${gp0((p.t-t0)/1e3)}</small>`:""}${mv?`<i class="${mv>0?"up":"dn"}">${mv>0?"▲":"▼"}${Math.abs(mv)}</i>`:""}</button>`}).join("")}</div>`;
     ev.push({t:t0,k:lc&&m.r!="finish"?`${L.lc} · ${mkName(m)}`:mkName(m),txt,chips,cls,dot:m.r=="start"?"▶":m.r=="finish"?"🏁":lc?"★":"⚑"});prev=o}
-  if(live)ev.reverse();
+  return ev}
+function tkHtml(x,d){const L=TKR[lang]||TKR.en,live=rState2(x)=="now",nf=new Intl.NumberFormat(LOC(),{maximumFractionDigits:1,minimumFractionDigits:1});
+  const ev=tkEv(x,d);if(live)ev.reverse();
   // official result vs tracking
   const r=rnd(x.rid),g=r&&r.groups.find(y=>y.id==x.g),i=x.n-1,fm=d.m[d.m.length-1];let note=live?L.lv:L.uo,nc="";
   if(!live&&g&&fm.r=="finish"){const V=new Map(g.rows.map(z=>[z.team,String(z.r[i]??"").trim()]));
@@ -2985,7 +2989,7 @@ function spoilSet(on,cut){SPOIL=on;if(cut!=null)SPCUT=cut;LS.set("spoil",on?1:0)
   try{if(osP&&pSet.size)osP.then(O=>{on?O.User.addTag("spoiler","1"):O.User.removeTag("spoiler")}).catch(()=>{})}catch(e){}
   render(true);pgRefresh()}
 const todayStart=()=>Date.parse(today()+"T00:00:00-03:00");
-function spoilBanner(){if(!SPOIL)return"";const when=new Date(SPCUT).toLocaleString(LOC(),{timeZone:"America/Sao_Paulo",weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
+function spoilBanner(){if(!SPOIL)return"";const when=new Date(SPCUT).toLocaleString(LOC(),{timeZone:"America/Sao_Paulo",weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit",hourCycle:"h23"});
   return `<div class="spb"><span>🙈 <b>${esc(T("spT"))}</b><small>${esc(anyHidden()?T("spUntil")(when):T("spNone"))}</small></span>${anyHidden()?`<button data-spall="1">${esc(T("spShow"))}</button>`:""}<button class="spoff" data-spoff="1" aria-label="${esc(T("spOff"))}">${esc(T("spOff"))}</button></div>`}
 /* ---------- live-now card (home): one card for the race on the water ---------- */
 const LVX={"en": ["Running for", "Leg {a} of {b}", "Live order from tracking", "Next", "approx.", "Details", "Finished after"], "de": ["Läuft seit", "Schenkel {a} von {b}", "Live-Reihenfolge laut Tracking", "Danach", "ca.", "Details", "Im Ziel nach"], "fr": ["En course depuis", "Bord {a} sur {b}", "Ordre en direct selon le tracking", "Ensuite", "vers", "Détails", "Arrivée après"], "es": ["En regata desde hace", "Tramo {a} de {b}", "Orden en vivo según el tracking", "Después", "aprox.", "Detalles", "Llegada tras"], "pt": ["Em regata há", "Perna {a} de {b}", "Ordem ao vivo pelo rastreamento", "Depois", "aprox.", "Detalhes", "Chegada após"], "it": ["In regata da", "Lato {a} di {b}", "Ordine live dal tracking", "Poi", "circa", "Dettagli", "Arrivo dopo"], "zh": ["已进行", "第 {a}/{b} 航段", "实时追踪顺序", "下一场", "约", "详情", "完赛用时"], "ar": ["جارٍ منذ", "الضلع {a} من {b}", "الترتيب المباشر من التتبع", "بعده", "نحو", "التفاصيل", "الوصول بعد"], "hi": ["चल रही है", "लेग {a} / {b}", "ट्रैकिंग से लाइव क्रम", "इसके बाद", "लगभग", "विवरण", "पूरी हुई"], "bn": ["চলছে", "লেগ {a} / {b}", "ট্র্যাকিং অনুযায়ী লাইভ ক্রম", "এরপর", "প্রায়", "বিস্তারিত", "শেষ হলো"], "ur": ["جاری ہے", "لیگ {a} از {b}", "ٹریکنگ کے مطابق لائیو ترتیب", "اس کے بعد", "تقریباً", "تفصیل", "ختم ہوئی"], "id": ["Berlangsung", "Leg {a} dari {b}", "Urutan langsung dari pelacakan", "Berikutnya", "sekitar", "Detail", "Selesai setelah"], "ms": ["Berlangsung", "Leg {a} daripada {b}", "Susunan langsung dari penjejakan", "Seterusnya", "kira-kira", "Butiran", "Tamat selepas"], "ja": ["経過", "レグ {a}/{b}", "トラッキングによるライブ順位", "次", "約", "詳細", "フィニッシュまで"], "th": ["แข่งมาแล้ว", "เลก {a} จาก {b}", "ลำดับสดจากการติดตาม", "ถัดไป", "ประมาณ", "รายละเอียด", "เข้าเส้นชัยหลัง"], "hu": ["Fut", "{a}. szakasz / {b}", "Élő sorrend a követés alapján", "Utána", "kb.", "Részletek", "Célba ért"], "cs": ["Běží", "Úsek {a} z {b}", "Živé pořadí podle sledování", "Potom", "asi", "Detaily", "V cíli po"], "uk": ["Триває", "Етап {a} з {b}", "Живий порядок за відстеженням", "Далі", "бл.", "Деталі", "Фініш через"], "pl": ["Trwa od", "Odcinek {a} z {b}", "Kolejność na żywo z trackingu", "Następnie", "ok.", "Szczegóły", "Meta po"]};
@@ -3001,6 +3005,7 @@ function liveBar(){const L=SCH.filter(x=>rState2(x)=="now"&&!dayOver(x.d)).sort(
   <div class="lvxr">${esc(RNm(rnd(x.rid)))}</div><h3 class="lvxh">${esc(ttl(x))}</h3>
   <div class="lvxs"><span data-lvleg>${lvtLeg()}</span><span data-lvrun data-t0="${t0}">${lvtRun(t0)}</span></div>
   <div class="lvxo" data-lvord>${lvtOrd(x)}</div>
+  <div class="lvxk" data-lvtk${LVT&&LVT.k==k&&LVT.tkh?"":" hidden"}>${LVT&&LVT.k==k&&LVT.tkh||""}</div>
   <div class="lvxb"><button type="button" data-live="1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>Livestream</button>${u?`<a data-trk="${esc(k)}" href="${esc(u)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>${esc(T("trk"))}</a>`:""}</div>
   ${N?`<div class="lvxn" data-race="${esc(raceKey(N))}" role="button" tabindex="0"><span><small>${esc(W[3])}</small><b>${esc(ttl(N))}</b></span><em>${nA?esc(W[4])+" ":""}${esc(rioHM(nT))}<b aria-hidden="true">›</b></em></div>`:""}</div>`}
 /* live order + leg for the home card: Georacing live feed, every 5 s while the card is on screen */
@@ -3008,7 +3013,9 @@ var LVT=null;
 function lvtStart(x){const k=raceKey(x);if(LVT&&LVT.k==k)return;const u=trkUrl(x);let ev,rc;try{const q=new URL(u).searchParams;ev=q.get("event");rc=q.get("race")}catch(e){}
   LVT={k,ev,rc,act:null,legs:0,P:new Map(),fin:new Map()};if(!ev||!rc)return;const me=LVT;
   geoJ(`trk/${rc}.json?t=${Math.floor(Date.now()/6e4)}`).then(a=>{if(LVT!==me)return;me.act=new Map((a.actors||[]).map(z=>[+z.id,(z.short_name||"").toUpperCase()]));const c=(a.courses||[]).find(z=>+z.active)||(a.courses||[])[0];me.legs=c?(c.course_objects||[]).filter(o=>+o.order>0).length-1:0;lvtTick()}).catch(()=>{})}
-async function lvtTick(){const me=LVT;if(!me||!me.act||document.hidden||!document.querySelector(".lvx"))return;
+function lvtTk(me){const x=raceBy(me.k);if(!x)return;if(!(SPOIL&&at(x)>SPCUT)&&nowMs()-(me.tkt||0)>6e4){me.tkt=nowMs();geoJ(`tk/${me.k.replace(/\|/g,"_")}.json?t=${Math.floor(Date.now()/6e4)}`).then(dd=>{if(LVT!==me||!dd||!(dd.m||[]).length)return;const ev=tkEv(x,dd),e=ev[ev.length-1];if(!e)return;
+    me.tkh=`<span class="lvxkt">${esc(rioHM(e.t))}</span><span class="lvxkk">${esc(e.k)}</span><span class="lvxkx">${e.txt}</span>`;const el=document.querySelector(".lvx [data-lvtk]");if(el){el.innerHTML=me.tkh;el.hidden=false}}).catch(()=>{})}}
+async function lvtTick(){const me=LVT;if(me&&!document.hidden&&document.querySelector(".lvx"))lvtTk(me);if(!me||!me.act||document.hidden||!document.querySelector(".lvx"))return;
   try{const j=await geoJ(`${GEOL}${me.ev}/${me.rc}/live.json`);(Array.isArray(j)?j:[]).forEach(sn=>{const tt=Date.parse(sn.time);(sn.positions||[]).forEach(p=>{const id=+p.id,o=me.P.get(id);if(me.act.has(id)&&(!o||o.t<=tt)){me.P.set(id,{...p,t:tt});const ft=p.ftime&&Date.parse(p.ftime);if(ft)me.fin.set(id,ft)}})})}catch(e){return}
   if(LVT!==me)return;const x=raceBy(me.k);if(!x)return;
   const o=document.querySelector(".lvx [data-lvord]");if(o)o.innerHTML=lvtOrd(x);const l=document.querySelector(".lvx [data-lvleg]");if(l)l.innerHTML=lvtLeg();const rn=document.querySelector(".lvx [data-lvrun]");if(rn)rn.innerHTML=lvtRun(+rn.dataset.t0)}
@@ -3141,7 +3148,7 @@ async function wxDay(d){if(WXC[d])return WXC[d];const base=`timezone=America%2FS
 const CMP={de:"N NNO NO ONO O OSO SO SSO S SSW SW WSW W WNW NW NNW",fr:"N NNE NE ENE E ESE SE SSE S SSO SO OSO O ONO NO NNO",es:"N NNE NE ENE E ESE SE SSE S SSO SO OSO O ONO NO NNO",pt:"N NNE NE ENE L ESE SE SSE S SSO SO OSO O ONO NO NNO"};
 const cmp16=deg=>(CMP[lang]||"N NNE NE ENE E ESE SE SSE S SSW SW WSW W WNW NW NNW").split(" ")[Math.round(((deg%360)+360)%360/22.5)%16];
 const arr=(deg,go)=>`<i class="wa" style="transform:rotate(${(deg+(go?180:0))%360}deg)">↓</i>`;
-async function openWx(x){const d=sheetWrap(`${T("wxH")} · Marina da Glória`,`${wday(x.d)} · ${x.t} ${T("rioT")}`,`<p class="warn">${esc(T("wxLoad"))}</p>`);const tb=d.querySelector(".tb");gcEvent("weather");
+async function openWx(x){const d=sheetWrap(`${T("wxH")} · Marina da Glória`,`${wday(x.d)} · ${x.t} ${T("rioT")}`,`${LDR(T("wxLoad"))}`);const tb=d.querySelector(".tb");gcEvent("weather");
   const W=await wxDay(x.d);if(!d.open)return;if(!W){tb.innerHTML=`<p>${esc(T("wxFail"))}</p>${wxLinks()}`;return}
   const H=wxConv(W.a.hourly),M=W.m&&W.m.hourly,ix=t=>H.time.indexOf(`${x.d}T${t}`),st=ix(x.t.slice(0,2)+":00");
   const r1=n=>Math.round(n),f1=n=>(Math.round(n*10)/10).toLocaleString(LOC());
@@ -3229,7 +3236,7 @@ function sailorsView(){
   if(!L.length)return h+`<p class="warn">${esc(T("svNone"))}</p>`;
   return h+`<div class="slist3">${L.map(({c,p,PF})=>{const r=rioRank(PF);return `<button class="srow3" data-sc="${esc(c)}" data-si="${p.i}">${av(p,1)}<span class="s3n"><b>${NMH(p.name)}${sfavs.has(c+"|"+p.name)?' <span class="star">★</span>':""}</b><small>${FL(c)}<span>${esc(squad(c).n||NM(c))}${p.k?" · "+esc(posL(p)):""}</span>${p.cap?`<em class="s3c">C</em>`:""}</small></span>${medEm(PF)?`<span class="s3m">${medEm(PF)}</span>`:""}<span class="s3k">${r?`<b>#${nf0(r)}</b><small>SSL</small>`:`<small>${esc(T("svNoRank"))}</small>`}</span></button>`}).join("")}</div>`}
 function rioSlugs(){const m={};Object.keys(INFO).forEach(c=>{try{squad(c).ppl.forEach(p=>{const s=(PROF[c+"|"+p.name]||{}).slug;if(s)m[s]={c,p}})}catch(e){}});return m}
-function indList(g){if(!IND){indLoad().then(()=>{if(view=="sailors")render(true)});return `<p class="warn">${esc(T("svLoad"))}</p>`}
+function indList(g){if(!IND){indLoad().then(()=>{if(view=="sailors")render(true)});return `${LDR(T("svLoad"))}`}
   const R=IND[g]||{},rows=(SVT=="c"?R.c:R.s)||[],tot=SVT=="c"?R.tc:R.ts,rs=rioSlugs(),qq=sq3.trim().toLowerCase();
   let h=`<div class="sseg sm">${[["s",T("svSk")],["c",T("svCr")]].map(([k,l])=>`<button data-svt="${k}" class="${SVT==k?"on":""}">${esc(l)}</button>`).join("")}</div><p class="smeta">${esc(T("svAsOf")(dfmt(IND.date),nf0(tot||rows.length),SVT=="c"?T("svCr"):T("svSk")))}</p>`;
   h+=`<div class="tools stools"><input id="q3" type="search" placeholder="${esc(T("svSearchR"))}" value="${esc(sq3)}" aria-label="${esc(T("svSearchR"))}"></div>`;
@@ -3285,13 +3292,13 @@ function sBody(C){/* C: {key,name,iso,flag,country,nick,code,chips,img,hd,PF,D,m
     if(C.extra)h+=C.extra}
   else if(STAB=="res"){
     if(D&&D.rec&&D.rec.length)for(const [t,L] of D.rec){const lab=SECK[t]?T(SECK[t]):t;h+=`<h3>${esc(lab)}</h3><div class="grp">${L.map(r=>`<div class="s3r">${rankPill(r[6])}<span><b>${esc(r[0])}${r[2]?" · "+esc(r[2]):""}</b><small>${esc([r[1],r[4],r[5]].filter(Boolean).join(" · "))}</small></span></div>`).join("")}</div>`}
-    h+=`<h3>${T("tRes")}${res.length?` <small class="s3cnt">${res.length}</small>`:""}</h3>`+(res.length?`<div class="grp">${res.map(resRow).join("")}</div>`:LD?`<p class="warn">${esc(T("svLoad"))}</p>`:`<p class="warn">${esc(T("noRes"))}</p>`)}
+    h+=`<h3>${T("tRes")}${res.length?` <small class="s3cnt">${res.length}</small>`:""}</h3>`+(res.length?`<div class="grp">${res.map(resRow).join("")}</div>`:LD?`${LDR(T("svLoad"))}`:`<p class="warn">${esc(T("noRes"))}</p>`)}
   else if(STAB=="rank"){
     const types=["s","c"].filter(k=>rk[k]);if(!STT||!types.includes(STT))STT=types[0]||"s";const r=rk[STT];
     if(!types.length)h+=`<p class="warn">${esc(T("svNoRank"))}</p>`;
     else{h+=`${types.length>1?`<div class="sseg sm">${types.map(k=>`<button data-stt="${k}" class="${STT==k?"on":""}">${esc(k=="c"?T("svCr"):T("svSk"))}</button>`).join("")}</div>`:""}
       <div class="s3rk"><div class="s3rkt"><div><small>${esc(T("rkHistT"))} · ${esc(T("rkTwoY"))}</small><b>#${nf0(r[0])} ${trendH(r[0],r[2])}</b></div><div class="s3rkp"><small>${esc(T("stPtsT"))}</small><b>${nf0(r[1])}</b></div></div>
-      ${D&&D.hist&&D.hist[STT]?rkChart(D.hist[STT]):LD?`<p class="warn">${esc(T("svLoad"))}</p>`:""}
+      ${D&&D.hist&&D.hist[STT]?rkChart(D.hist[STT]):LD?`${LDR(T("svLoad"))}`:""}
       <div class="s3lg">${r[4]?`<span><i class="d1"></i>${esc(T("bestDot")(nf0(r[4][0])))} (${esc(String(r[4][1]).slice(0,4))})</span>`:""}<span><i class="d2"></i>${esc(T("nowDot")(nf0(r[0])))}</span></div></div>`;
       if(IND&&p.slug)for(const g of ["men","women"]){const L=(IND[g]||{})[STT]||[],ix=L.findIndex(x=>x[5]==p.slug);if(ix>=0)h+=`<p class="s3in">${esc(T("inList")(g,STT,ix+1))}</p>`}
       if(st.ev)h+=`<div class="s3ts s3st">${tile(T("stEv"),st.ev)}${tile(T("winsN"),st.win??"–")}${tile(T("podN"),st.pod??"–")}${tile(T("bestR"),st.best?(st.best<=3?["","🥇","🥈","🥉"][st.best]:"#"+st.best):"–")}</div>`;
@@ -3325,7 +3332,7 @@ function pSailor(code,i,keep){const d=$("#pg"),sq=squad(code),p=sq.ppl[i];if(!p)
   if(!keep)pgShow(d);else pgHead(d);
   if(slug&&SPD[slug]===undefined)spLoad(slug).then(()=>{if(PGS&&PGS.t=="sailor"&&PGS.a==code&&PGS.i==i&&!$("#pg").hidden)sKeepTabs(d,()=>pSailor(code,i,1))})}
 function pSailorX(slug,keep){const d=$("#pg");if(!keep){STAB="ov";STT=null}const D=SPD[slug];
-  if(D===undefined){d.innerHTML=`<div class="th"><button class="bk">${T("back")}</button><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb"><p class="warn">${esc(T("svLoad"))}</p></div>`;pgShow(d);spLoad(slug).then(()=>{if(PGS&&PGS.t=="sx"&&PGS.s==slug)pSailorX(slug,1)});return}
+  if(D===undefined){d.innerHTML=`<div class="th"><button class="bk">${T("back")}</button><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div><div class="tb">${LDR(T("svLoad"))}</div>`;pgShow(d);spLoad(slug).then(()=>{if(PGS&&PGS.t=="sx"&&PGS.s==slug)pSailorX(slug,1)});return}
   if(!IND&&!keep)indLoad().then(()=>{if(PGS&&PGS.t=="sx"&&PGS.s==slug)pSailorX(slug,1)});
   let row=null,rt="s";if(IND)for(const g of ["men","women"])for(const t of ["s","c"]){const r=((IND[g]||{})[t]||[]).find(x=>x[5]==slug);if(r&&!row){row=r;rt=t}}
   const p=D&&D.p||{},name=((p.first||(row&&row[3])||"")+" "+(p.last||(row&&row[4])||"")).trim()||slug,iso=p.iso||(row&&row[7])||"";
@@ -3721,7 +3728,7 @@ function schSvg(k,GL){const t=id=>{const g=GL&&GL.find(x=>x.id==id);return g?esc
     case"points":{const A=[4,3,2,1],B=[8,6,4,2];return W(150,`${A.map((v,i)=>`<rect x="${30+i*34}" y="${118-v*11}" width="24" height="${v*11}" rx="4" fill="#4ec3ff"/><text x="${42+i*34}" y="${112-v*11}" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">${v}</text><text x="${42+i*34}" y="136" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.75)">${i+1}.</text>`).join("")}${B.map((v,i)=>`<rect x="${180+i*34}" y="${118-v*11}" width="24" height="${v*11}" rx="4" fill="${Y}"/><text x="${192+i*34}" y="${112-v*11}" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">${v}</text><text x="${192+i*34}" y="136" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.75)">${i+1}.</text>`).join("")}<text x="232" y="20" text-anchor="middle" font-size="10" fill="${Y}">×2</text>`)}}
   return""}
 function schBack(){return `<div class="th"><button class="bk">${T("back")}</button><div class="thb"><button class="x" aria-label="${T("close")}">✕</button></div></div>`}
-function schWait(d,fn){d.innerHTML=schBack()+`<div class="tb"><p class="warn">${esc(T("svLoad"))}</p></div>`;pgShow(d);schLoad().then(()=>{if(PGS&&(PGS.t=="sch"||PGS.t=="schc"||PGS.t=="gl"))fn()})}
+function schWait(d,fn){d.innerHTML=schBack()+`<div class="tb">${LDR(T("svLoad"))}</div>`;pgShow(d);schLoad().then(()=>{if(PGS&&(PGS.t=="sch"||PGS.t=="schc"||PGS.t=="gl"))fn()})}
 function pSchool(){const d=$("#pg"),S0=schCur();if(!S0)return schWait(d,pSchool);const done=schDone(),fb=!SCHL.includes(lang);
   let h=schBack()+`<div class="tb sch"><div class="schhero"><div class="schhi">${schIcon("course")}</div><small>SSL GOLD CUP · RIO 2026</small><h2>Sailing School</h2><p>${esc(T("schSub"))}</p><div class="schprog"><i style="width:${Math.round(Object.keys(done).length/S0.chapters.length*100)}%"></i></div><em>${Object.keys(done).length} / ${S0.chapters.length}</em></div>`;
   if(fb)h+=`<p class="schfb">🌐 ${esc(T("schFb"))}</p>`;
@@ -3824,7 +3831,7 @@ function pickLive(){if(!LIVES.length)return null;const pool=LIVES.some(x=>x.live
 pullLive();setInterval(()=>{if(!document.hidden)pullLive()},60000);
 const wvc=v=>v==null?v:UNW=="kmh"?v*1.852:v,tvc=v=>v==null?v:UNT=="f"?v*9/5+32:v,uW=()=>UNW=="kmh"?"km/h":"kn",uT=()=>UNT=="f"?"°F":"°C";
 function wxConv(H){if(UNW=="kn"&&UNT=="c")return H;const o={...H};["wind_speed_10m","wind_gusts_10m"].forEach(k=>{if(o[k])o[k]=o[k].map(wvc)});if(o.temperature_2m)o.temperature_2m=o.temperature_2m.map(tvc);return o}
-function rioClock(ms){try{return new Date(ms).toLocaleTimeString(LOC(lang)||"en",{hour:"2-digit",minute:"2-digit",timeZone:"America/Sao_Paulo"})}catch(e){return ""}}
+function rioClock(ms){try{return new Date(ms).toLocaleTimeString(LOC(lang)||"en",{hour:"2-digit",minute:"2-digit",timeZone:"America/Sao_Paulo",hourCycle:"h23"})}catch(e){return ""}}
 function openLive(x){const d=$("#tmd");openCode=null;const id=LIVEV&&LIVEV.id?LIVEV.id:null;
   const src=id?`https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0`:"";
   const pre=id&&!LIVEV.live&&LIVEV.start&&LIVEV.start*1000>nowMs()?LIVEV.start*1000:0;
@@ -3867,7 +3874,7 @@ const RST={};
 function rsPoll(x){const k=raceKey(x),o=RST[k]||(RST[k]={s:"",at:0,busy:false}),n=nowMs();if(o.busy||n-o.at<30e3)return o;const u=trkUrl(x);if(!u)return o;let ev,rc;try{const q=new URL(u).searchParams;ev=q.get("event");rc=q.get("race")}catch(e){return o}
   o.busy=true;geoJ(`${GEOL}${ev}/${rc}/live.json`).then(j=>{const P=[];(Array.isArray(j)?j:[]).forEach(s=>(s.positions||[]).forEach(p=>P.push(+p.cl||0)));
     o.s=!P.length?"":P.every(c=>c==255)?"done":P.some(c=>c>=2&&c!=255)||P.some(c=>c==255)?"racing":"waiting";if(o.s=="racing"&&!o.since)o.since=nowMs();if(o.s=="done"&&!o.doneAt&&o.seenOpen)o.doneAt=nowMs();if(o.s&&o.s!="done")o.seenOpen=1}).catch(()=>{o.s=""}).finally(()=>{o.at=nowMs();o.busy=false});return o}
-function rioHM(ms){try{return new Date(ms).toLocaleTimeString(LOC(),{hour:"2-digit",minute:"2-digit",timeZone:"America/Sao_Paulo"})}catch(e){return""}}
+function rioHM(ms){try{return new Date(ms).toLocaleTimeString(LOC(),{hour:"2-digit",minute:"2-digit",timeZone:"America/Sao_Paulo",hourCycle:"h23"})}catch(e){return""}}
 function nxState(x){const t=at(x),n=nowMs(),f=FLG&&FLG.races&&FLG.races[raceKey(x)],nb=f&&f.nb?Date.parse(f.nb):0,fl=f&&f.pd&&(!f.until||n<Date.parse(f.until));
   const o=n>t-10*60e3&&n<t+150*60e3?rsPoll(x):RST[raceKey(x)]||{},g=timOf(x),st=g.f?"done":g.s&&n>=Date.parse(g.s)?"racing":o.s;
   if(st=="done")return{k:"done"};
@@ -3985,7 +3992,7 @@ function chrome(){insBtn();{const ci=document.querySelector("#cbar [data-cbi]");
   [T("home"),T("comp"),T("teams"),T("sailors"),T("more")].forEach((l,i)=>{if(tb[i])tb[i].innerHTML=ICN[i]+`<span>${esc(l)}</span>`});
   $("#off").textContent=T("official");const F=$("#foot");const op=F.querySelector("details")?.open;F.innerHTML=`<details class="how"${op?" open":""}><summary>${esc(T("howT"))}</summary><ul>${T("how").map(x=>`<li>${esc(x)}</li>`).join("")}</ul></details><p>${esc(T("foot"))}</p>`;$("#tmd").setAttribute("aria-label",T("teams"));stand()}
 function stand(){const u=new Date(checkedAt&&Date.parse(checkedAt)>Date.parse(D.updatedAt)?checkedAt:D.updatedAt);if(isNaN(u)){$("#stand").textContent="–";return}
-  const m=Math.max(0,Math.round((Date.now()-u)/6e4)),abs=u.toLocaleString(LOC(),{timeZone:"America/Sao_Paulo",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
+  const m=Math.max(0,Math.round((Date.now()-u)/6e4)),abs=u.toLocaleString(LOC(),{timeZone:"America/Sao_Paulo",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit",hourCycle:"h23"});
   const n=nowMs(),td=SCH.filter(x=>x.d==today()).map(at),fast=td.length&&n>=Math.min(...td)-60*6e4&&n<=Math.max(...td)+150*6e4;
   const el=$("#stand");if(!fast||m>15||stale){el.hidden=true;el.innerHTML="";return}el.hidden=false;
   el.innerHTML=`<i class="ldot2"></i>${T("updated")} ${esc(abs.replace(/^.*?(\d{1,2}:\d{2}.*)$/,"$1"))}`}
