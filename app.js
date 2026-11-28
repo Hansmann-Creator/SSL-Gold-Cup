@@ -3165,7 +3165,9 @@ function lvtRows(){const me=LVT;if(!me||!me.act||!me.P.size)return null;
   return [...me.act].map(([id,code])=>({code,p:me.P.get(id),f:me.fin.get(id)})).filter(o=>o.p||o.f).sort((a,c)=>(a.f||Infinity)-(c.f||Infinity)||((a.p&&a.p.r)||99)-((c.p&&c.p.r)||99)||((c.p&&c.p.d)||0)-((a.p&&a.p.d)||0))}
 function lvtRun(x){const W=LVX[lang]||LVX.en,R=lvtRows(),S0=lvStart(x),t0=S0.t;
   if(!S0.go){const d=t0-nowMs();return d>0?`<span class="lvxcl">${esc(W[7]||LVX.en[7])}</span> <b class="lvxc" data-cd="${t0}">${upFmt(d)}</b>`:`<span class="lvxcl">${esc((NXS[lang]||NXS.en)[1])}</span>`}
-  if(R&&R.length&&R.every(o=>o.f)){const w=Math.min(...R.map(o=>o.f));return `✓ ${esc(W[6])} <b class="lvxc">${upFmt(w-t0)}</b>`}
+  /* race time stops with the first boat across the finish (winner's time) – from the live feed, else from timing.json (f1);
+     waiting for all boats kept it running when one never finished (28 Nov A3: EST penalised, no finish) */
+  {const F=R?R.filter(o=>o.f).map(o=>o.f):[],g=timOf(x),f1=F.length?Math.min(...F):g.f1?Date.parse(g.f1):0;if(f1&&f1>t0)return `✓ ${esc(W[6])} <b class="lvxc">${upFmt(f1-t0)}</b>`}
   const e=nowMs()-t0;return `<span class="lvxcl">${esc(W[0])}</span> <b class="lvxc${e>=36e5?" h":""}" data-up="${t0}">${upFmt(e)}</b>`}
 function lvtLeg(){const R=lvtRows();if(!R)return"";const p=R[0].p,W=LVX[lang]||LVX.en;if(R.every(o=>o.f))return "";const cl=p&&p.cl!=null&&p.cl!=255&&p.cl>0?p.cl:0;return cl?esc(W[1].replace("{a}",cl).replace("{b}",LVT.legs||"?")):""}
 function lvtOrd(x){const R=lvtRows(),W=LVX[lang]||LVX.en;

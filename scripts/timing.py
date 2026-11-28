@@ -28,7 +28,12 @@ try:
             na = len(a.get("actors") or [])
             st = min(sp["start"]) if sp.get("start") else None
             fin = sp.get("finish") or []
-            o = {"plan": Z(P(r.get("start_time"))), "s": Z(st), "f": Z(max(fin)) if fin and len(fin) >= max(na, 1) else None, "nf": len(fin), "na": na}
+            o = {"plan": Z(P(r.get("start_time"))), "s": Z(st), "f": Z(max(fin)) if fin and len(fin) >= max(na, 1) else None, "nf": len(fin), "na": na,
+                 "f1": Z(min(fin)) if fin else None}
+            # a boat that never finishes (penalty, OCS, retired – 28 Nov A3 EST) must not keep the race 'on the water':
+            # 10 min after the last finish the race counts as over
+            if fin and not o["f"] and (datetime.datetime.now(datetime.timezone.utc) - max(fin)).total_seconds() > 600:
+                o["f"] = Z(max(fin))
             prev = OLD.get(key) or {}
             # when the race office last changed the start time in Georacing (a time set before the prior race
             # finished is the morning schedule, not a decision)
@@ -36,10 +41,11 @@ try:
             # a 'start' before the operator's current start time = recalled/abandoned/postponed start (28 Nov A3: two boats
             # crossed at 14:44, the race office then set 15:12) – not the real start
             ok = lambda t: not (t and o["plan"] and (P(o["plan"]) - P(t)).total_seconds() > 60)
-            if not ok(o["s"]): o["s"], o["f"], o["nf"] = None, None, 0
+            if not ok(o["s"]): o["s"], o["f"], o["nf"], o["f1"] = None, None, 0, None
             # Georacing sometimes clears a finished race (27 Nov D1: start/finish vanished after 40 min): keep what we saw
             if not o["s"] and prev.get("s") and ok(prev["s"]): o["s"] = prev["s"]
             if not o["f"] and prev.get("f") and o["s"] == prev.get("s"): o["f"] = prev["f"]; o["nf"] = max(o["nf"], prev.get("nf") or 0)
+            if not o.get("f1") and prev.get("f1") and o["s"] == prev.get("s"): o["f1"] = prev["f1"]
             out[key] = o
             if o["s"] and o["f"]: rows.append((P(o["s"]), P(o["f"])))
 except Exception as ex:
