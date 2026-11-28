@@ -2252,3 +2252,11 @@ html.cbon:not(.pgon) .stk{top:var(--cbh,51px)}
 .rlvl .ldot{flex:0 0 auto;margin-inline-start:2px}
 #rxm .rxmw{padding:0 10px 10px}
 .tb .rlive~.rcbtns{margin-top:16px}
+
+/* home live card: 'Updated hh:mm' below the buttons, above the 'Next' divider; 'Details' as big as LIVE */
+.lvx .lvxu{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;font-size:13px;color:rgba(255,255,255,.72);font-variant-numeric:tabular-nums}
+.lvx .lvxu[hidden]{display:none}
+.lvx .lvxu .ldot2{animation:none;width:6px;height:6px;margin:0}
+:root[data-theme=light] .lvx .lvxu{color:var(--mute)}
+.lvx .lvxd{font-size:14.5px;font-weight:800;padding:5px 12px 5px 14px}
+.lvx .lvxd b{font-size:18px}

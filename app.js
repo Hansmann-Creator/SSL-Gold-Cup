@@ -3102,6 +3102,7 @@ function liveBar(){const n0=nowMs(),L=SCH.filter(x=>!dayOver(x.d)&&(rState2(x)==
   <div class="lvxo" data-lvord>${lvtOrd(x)}</div>
   <div class="lvxk lvxf" data-lvtk${LVT&&LVT.k==k&&LVT.tkh?"":" hidden"}>${LVT&&LVT.k==k&&LVT.tkh||""}</div>
   <div class="lvxb"><button type="button" data-live="1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>Livestream</button>${u?`<a data-trk="${esc(k)}" href="${esc(u)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>${esc(T("trk"))}</a>`:""}</div>
+  <div class="lvxu" data-lvupd hidden></div>
   ${N?`<div class="lvxn" data-race="${esc(raceKey(N))}" role="button" tabindex="0"><span><small>${esc(W[3])}</small><b>${esc(ttl(N))}</b></span><em>${nA?esc(W[4])+" ":""}${esc(rioHM(nT))}<b aria-hidden="true">›</b></em></div>`:""}</div>`}
 /* live order + leg for the home card: Georacing live feed, every 5 s while the card is on screen */
 var LVT=null;
@@ -3120,8 +3121,12 @@ function lvtFeed(ev,anim){return `<div class="lvfl"></div><div class="lvfr">${ev
 async function lvtTick(){const me=LVT;if(me&&!document.hidden&&document.querySelector(".lvx"))lvtTk(me);if(!me||!me.act||document.hidden||!document.querySelector(".lvx"))return;
   try{const j=await geoJ(`${GEOL}${me.ev}/${me.rc}/live.json`);(Array.isArray(j)?j:[]).forEach(sn=>{const tt=Date.parse(sn.time);(sn.positions||[]).forEach(p=>{const id=+p.id,o=me.P.get(id);if(me.act.has(id)&&(!o||o.t<=tt)){me.P.set(id,{...p,t:tt});const ft=p.ftime&&Date.parse(p.ftime);if(ft)me.fin.set(id,ft)}})})}catch(e){return}
   if(LVT!==me)return;const x=raceBy(me.k);if(!x)return;
-  const o=document.querySelector(".lvx [data-lvord]");if(o)o.innerHTML=lvtOrd(x);const l=document.querySelector(".lvx [data-lvleg]");if(l)l.innerHTML=lvtLeg();const rn=document.querySelector(".lvx [data-lvrun]");if(rn)rn.innerHTML=lvtRun(raceBy(rn.dataset.k)||x)}
+  const o=document.querySelector(".lvx [data-lvord]");if(o)o.innerHTML=lvtOrd(x);const l=document.querySelector(".lvx [data-lvleg]");if(l)l.innerHTML=lvtLeg();const rn=document.querySelector(".lvx [data-lvrun]");if(rn)rn.innerHTML=lvtRun(raceBy(rn.dataset.k)||x);
+  const up=document.querySelector(".lvx [data-lvupd]"),ut=lvtUpd();if(up&&ut&&up.innerHTML!=ut){up.innerHTML=ut;up.hidden=false}}
 setInterval(lvtTick,5000);
+/* 'Updated hh:mm' in the live card while racing: newest live tracking position (refreshes every minute), only if fresh */
+function lvtUpd(){const me=LVT;if(!me||!me.P.size)return"";const t=Math.max(...[...me.P.values()].map(p=>p.t||0));if(!t||nowMs()-t>5*6e4)return"";
+  return `<i class="ldot2"></i>${T("updated")} ${esc(rioHM(t))}`}
 function lvtRows(){const me=LVT;if(!me||!me.act||!me.P.size)return null;
   return [...me.act].map(([id,code])=>({code,p:me.P.get(id),f:me.fin.get(id)})).filter(o=>o.p||o.f).sort((a,c)=>(a.f||Infinity)-(c.f||Infinity)||((a.p&&a.p.r)||99)-((c.p&&c.p.r)||99)||((c.p&&c.p.d)||0)-((a.p&&a.p.d)||0))}
 function lvtRun(x){const W=LVX[lang]||LVX.en,R=lvtRows(),S0=lvStart(x),t0=S0.t;
@@ -4115,13 +4120,15 @@ function chrome(){insBtn();{const ci=document.querySelector("#cbar [data-cbi]");
 function stand(){const u=new Date(checkedAt&&Date.parse(checkedAt)>Date.parse(D.updatedAt)?checkedAt:D.updatedAt);if(isNaN(u)){$("#stand").textContent="–";return}
   const m=Math.max(0,Math.round((Date.now()-u)/6e4)),abs=u.toLocaleString(LOC(),{timeZone:"America/Sao_Paulo",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit",hourCycle:"h23"});
   const n=nowMs(),td=SCH.filter(x=>x.d==today()).map(at),fast=td.length&&n>=Math.min(...td)-60*6e4&&n<=Math.max(...td)+150*6e4;
-  const el=$("#stand");if(!fast||m>15||stale){el.hidden=true;el.innerHTML="";return}el.hidden=false;
-  el.innerHTML=`<i class="ldot2"></i>${T("updated")} ${esc(abs.replace(/^.*?(\d{1,2}:\d{2}.*)$/,"$1"))}`}
+  const el=$("#stand"),txt=!fast||m>15||stale?"":`<i class="ldot2"></i>${T("updated")} ${esc(abs.replace(/^.*?(\d{1,2}:\d{2}.*)$/,"$1"))}`;
+  /* with the live card on Home the stamp sits inside the card (above the 'Next' line), not top right */
+  const lc=document.querySelector(".lvx [data-lvupd]");if(lc){const lt=lvtUpd();const t2=lt||txt;lc.innerHTML=t2;lc.hidden=!t2;el.hidden=true;el.innerHTML="";return}
+  if(!txt){el.hidden=true;el.innerHTML="";return}el.hidden=false;el.innerHTML=txt}
 applyTheme();
 
 /* ---------- render & routing ---------- */
 let GOOD=null;
-function render(keepScroll){try{render0(keepScroll);GOOD=D;const F=$("#foot");if(F)F.hidden=!["board","bracket"].includes(view)}catch(e){console.error(e);if(GOOD&&GOOD!==D){D=GOOD;try{render0(keepScroll)}catch(e2){}}}}
+function render(keepScroll){try{render0(keepScroll);try{stand()}catch(e){}GOOD=D;const F=$("#foot");if(F)F.hidden=!["board","bracket"].includes(view)}catch(e){console.error(e);if(GOOD&&GOOD!==D){D=GOOD;try{render0(keepScroll)}catch(e2){}}}}
 function render0(keepScroll){const y=scrollY;chrome();
   const COMP=["board","bracket","qualifying","gc2023","results"].includes(view);
   tabSync();
