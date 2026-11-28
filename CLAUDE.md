@@ -22,6 +22,8 @@ Read this first in any new session. Everything needed to keep developing the app
 | `sp/` | One JSON per sailor (worldofsailors.com public profile: results, ranking history, records, achievements, socials); `rank/ind.json` men/women individual rankings (top 500 skipper + crew). No e-mail/phone/birth data. |
 | `pron.json` | Name pronunciation per sailor (`ph` phonetic, `audio` → `audio/names/…`, `ok` verified). Shown on the sailor page. |
 | `people.json` | Hand-written highlight bullets for famous sailors. |
+| `pf.json` + `img/pf/`, `img/hd/pf/` | Mirrored official SSL portraits for sailors without a Rio RAID portrait: `"CODE|Name": "CODE-name-slug"` → 320 px / 600 px webp. Sources: SSL platform profile photos (platform.worldofsailors.com) and athlete pages of the official team sites (xxx.sslgoldcup.com/athlete/…). RAID portraits always win (squad() uses pf only when no crew img). Rebuild via `tools/photos/` (probe.py → dl.py, run in Actions). |
+| `tp.json` | Facts from the athlete pages of the official team sites: `"CODE|Name": {cm,kg,bio,res:[[rank,event,city,class,year]],url}`; ages stripped. Shown on sailor pages only where the SSL profile is thin or missing (Overview "Best results", facts, Bio, link "Team page"). |
 | `img/` | Sailor portraits 320×320 webp, `CODE-NO-name-slug.webp`; `img/fl/` flags. |
 | `live.json` | Live-stream state (written by `live.yml`). |
 | `rank/` | SSL Nations Ranking mirror (`scripts/ranking.py`, workflow `ranking.yml`): `index.json` (weeks, continents) + one file per week. Shown in-app at `#ranking`; never link out to worldofsailors.com. |
@@ -50,9 +52,11 @@ Read this first in any new session. Everything needed to keep developing the app
 - Never commit secrets. OneSignal REST key only as repo secret `ONESIGNAL_REST_KEY` (set by Hansi).
 - RAID production folders are read-only: never modify or delete there.
 - New features → add an entry to the changelog (`CHL`/`CHT` in app.js, bump version `v`).
+- Loading states: use `LDR(text)` (compass loader), never a bare "Loading …" text. Page headers: every #pg page has kicker + title in `.th`.
 
 ## Recurring jobs
 - **New portraits** (`/Volumes/data/26_GOLD_CUP_RIO/05_Footage_Graphic/SAILOR_PHOTOS/<TEAM>/`): official RAID photos always win and may overwrite older ones. Prefer the clean files in the team folder root (600×600 PNG, transparent) → 320 px webp in `img/` **and** 600 px webp with the same name in `img/hd/` (tap-to-zoom on the sailor page), add/update `teaminfo.json` crew `{no,name,img}`.
+- **Photo/facts refresh**: `tools/photos/probe.py` (Actions, writes an orphan branch) mirrors platform portraits, fetches all team-site athlete pages; match locally (typo-tolerant, same team), then `dl.py` for new photos; update `pf.json`/`tp.json`. 174 sailors still without any photo (28 Nov) – RAID portraits needed.
 - **Positions**: run audit in Actions → `python tools/positions/rebuild.py audit.json tools/positions/xls.json` → review `positions_report.json` (conflicts, added/removed sailors).
 - **New UI text**: add it to every language (the smoke test checks this) – follow `i18n/glossary.json`.
 - **New language**: add to `LANGS`, `LOC`, lang auto-detect list, `ORD`, `OSL`, `<select id="lang">`, a full `S.<lang>` block (copy the `cs` block), SSET, SOW, CP, WXF, ALSO, FIX; plus `scripts/notify.py` (LANGS, RN, W, spoiler text) and `scripts/push_extra.py`; add to `scripts/smoke.py`.
