@@ -2239,3 +2239,16 @@ html.cbon:not(.pgon) .stk{top:var(--cbh,51px)}
 .races li.rc:has(.s .rcgt){grid-template-columns:3.5em 1fr;grid-template-areas:"ti gt" "ti s" "ti meta"}
 .races li.rc .s:has(.rcgt){justify-self:start;text-align:start}
 .races li.rc .ti .cdn{white-space:nowrap}
+
+/* race page while on the water: slim status line instead of the big hero; map in its own box */
+.rlive{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:2px 0 12px;padding:9px 12px;border-radius:14px;background:var(--card);border:var(--bd)}
+.rlvl{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:var(--live)}
+.rlvw{display:inline-flex;gap:6px;flex-wrap:wrap}
+.rlive .rhp{background:var(--qbg);color:var(--ink);padding:4px 10px}
+#rxm:empty{display:none}
+#rxm .rxmw{margin:12px 0 4px;padding-bottom:10px}
+#rxm .rxh{margin-top:12px}
+#rlb+.rcbtns,#rxl+.rcbtns{margin-top:14px}
+.rlvl .ldot{flex:0 0 auto;margin-inline-start:2px}
+#rxm .rxmw{padding:0 10px 10px}
+.tb .rlive~.rcbtns{margin-top:16px}

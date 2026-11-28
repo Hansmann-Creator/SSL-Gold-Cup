@@ -2676,13 +2676,17 @@ function pRace(x){if(!x)return;const d=$("#pg"),r=rnd(x.rid),g=r&&r.groups.find(
   if(!PRE){}
   else{const FG=(FLG&&FLG.races&&FLG.races[raceKey(x)])||null,NB0=FG&&FG.pd&&FG.nb&&(!FG.until||nowMs()<Date.parse(FG.until))?Date.parse(FG.nb):0,EST=!NB0&&st=="up"&&!timOf(x).s?estOf(x):0,tgt=Math.max(at(x),NB0||0,EST||0);
     const dl=NB0&&NB0>at(x)?(NXS[lang]||NXS.en)[5](rioHM(NB0)):EST&&EST>at(x)+6e4?`${NXP[lang]||NXP.en} ~${rioHM(EST)}`:"";
-    let wp="";if(WX){const k=`${x.d}T${x.t.slice(0,2)}:00`,i=WX.time.indexOf(k);if(i>=0){const w=Math.round(wvc(WX.wind_speed_10m[i])),gu=Math.round(wvc(WX.wind_gusts_10m[i])),dir=WX.wind_direction_10m[i];if(isFinite(w))wp=`<div class="rhpl"><span class="rhp"><i class="wa" style="transform:rotate(${dir}deg)">↓</i>${w} ${uW()}</span>${isFinite(gu)?`<span class="rhp">${esc(T("wxGust"))} ${gu}</span>`:""}</div>`}}
-    h+=`<div class="rhero${st=="now"?" now":""}"><div class="rhlab">${st=="now"?`<i class="ldot"></i>${esc(T("onWater"))}`:esc(HRO[lang]||HRO.en)}</div>${st=="now"?`<div class="rhcd">${AS0?esc(rioHM(AS0)):esc(x.t)}</div>`:`<div class="rhcd" data-lat="${tgt}">${mono(cdLong(tgt))}</div>`}<div class="rhsub">${when}</div>${dl?`<div class="rhdl">${esc(dl)}</div>`:""}${wp}</div>`;
+    let wp="",wpi="";if(WX){const k=`${x.d}T${x.t.slice(0,2)}:00`,i=WX.time.indexOf(k);if(i>=0){const w=Math.round(wvc(WX.wind_speed_10m[i])),gu=Math.round(wvc(WX.wind_gusts_10m[i])),dir=WX.wind_direction_10m[i];if(isFinite(w)){wpi=`<span class="rhp"><i class="wa" style="transform:rotate(${dir}deg)">↓</i>${w} ${uW()}</span>${isFinite(gu)?`<span class="rhp">${esc(T("wxGust"))} ${gu}</span>`:""}`;wp=`<div class="rhpl">${wpi}</div>`}}}
+    /* on the water: one slim line (status + wind), then leaderboard, map, ticker, numbers; buttons at the end */
+    if(st=="now")h+=`<div class="rlive"><span class="rlvl"><i class="ldot"></i>${esc(T("onWater"))}</span>${wpi?`<span class="rlvw">${wpi}</span>`:""}</div>`;
+    else h+=`<div class="rhero${st=="now"?" now":""}"><div class="rhlab">${st=="now"?`<i class="ldot"></i>${esc(T("onWater"))}`:esc(HRO[lang]||HRO.en)}</div>${st=="now"?`<div class="rhcd">${AS0?esc(rioHM(AS0)):esc(x.t)}</div>`:`<div class="rhcd" data-lat="${tgt}">${mono(cdLong(tgt))}</div>`}<div class="rhsub">${when}</div>${dl?`<div class="rhdl">${esc(dl)}</div>`:""}${wp}</div>`;
     if(g&&st=="now"&&u)h+=`<div id="rlb" data-k="${esc(raceKey(x))}">`;
     if(g){const rows=g.rows;h+=`<div class="rhteams">${rows.map(z=>{if(!isTeam(z.team))return `<div class="rht ph"><b>${esc(ph(z.team)||z.team)}</b></div>`;const I=INFO[z.team]||{},nk=(squad(z.team).n||I.nick||"").replace(/^The\s+/i,""),tot=String(z.total??"").trim();return `<button class="rht" data-tm="${esc(z.team)}">${FL(z.team)}<b>${esc(NM(z.team))}</b><small>${esc([nk,I.rank?"#"+I.rank:""].filter(Boolean).join(" · "))}</small>${tot!==""?`<em>${esc(tot)} ${esc(T("rcPts"))}</em>`:""}</button>`}).join("")}</div>`}
     if(g&&st=="now"&&u)h+=`</div>`}
-  {const fc=at(x)>nowMs()-36e5*12&&at(x)-nowMs()<15*864e5;h+=`<div class="rcbtns${PRE?" rcg":""}">${u?`<button class="rcb trk2" data-trkin="1">${svg('<path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>')}<b>${esc(T(st=="done"||st=="past"?"trkReplayS":"trkLive"))}</b></button>`:""}${st=="done"?`<button class="rcb rrep${REPS[raceKey(x)]?"":" inc"}"${REPS[raceKey(x)]?` data-rrep="${esc(raceKey(x))}"`:" disabled aria-disabled=\"true\""}>${svg('<path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>')}<b>Race Report</b>${REPS[raceKey(x)]?`<span class="rra">›</span>`:`<i class="rrinc">${esc(RINC[lang]||RINC.en)}</i>`}</button>`:fc?`<button class="rcb fc2" data-wxo="1">${svg('<path d="M3 8h10.5a3 3 0 1 0-3-3"/><path d="M3 12h15.5a3 3 0 1 1-3 3"/><path d="M3 16h7"/>')}<b>${esc(T("fcBtn"))}</b></button>`:""}${PRE?`${lvBtnHtml()}<button class="rcb" data-go="round-${esc(x.rid)}">${svg('<path d="M4 5h5v5H4zM4 14h5v5H4zM15 9.5h5v5h-5z"/><path d="M9 7.5h3v9H9M12 12h3"/>')}<b>${esc(T("bracket"))}</b></button>`:""}</div>${u?"":`<p class="warn">${esc(T("trkNone"))}</p>`}`;}
-  h+=rxlSlot(x,st)+tkSlot(x,st,true);
+  let BTN="";{const fc=at(x)>nowMs()-36e5*12&&at(x)-nowMs()<15*864e5;BTN=`<div class="rcbtns${PRE?" rcg":""}">${u?`<button class="rcb trk2" data-trkin="1">${svg('<path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>')}<b>${esc(T(st=="done"||st=="past"?"trkReplayS":"trkLive"))}</b></button>`:""}${st=="done"?`<button class="rcb rrep${REPS[raceKey(x)]?"":" inc"}"${REPS[raceKey(x)]?` data-rrep="${esc(raceKey(x))}"`:" disabled aria-disabled=\"true\""}>${svg('<path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>')}<b>Race Report</b>${REPS[raceKey(x)]?`<span class="rra">›</span>`:`<i class="rrinc">${esc(RINC[lang]||RINC.en)}</i>`}</button>`:fc?`<button class="rcb fc2" data-wxo="1">${svg('<path d="M3 8h10.5a3 3 0 1 0-3-3"/><path d="M3 12h15.5a3 3 0 1 1-3 3"/><path d="M3 16h7"/>')}<b>${esc(T("fcBtn"))}</b></button>`:""}${PRE?`${lvBtnHtml()}<button class="rcb" data-go="round-${esc(x.rid)}">${svg('<path d="M4 5h5v5H4zM4 14h5v5H4zM15 9.5h5v5h-5z"/><path d="M9 7.5h3v9H9M12 12h3"/>')}<b>${esc(T("bracket"))}</b></button>`:""}</div>${u?"":`<p class="warn">${esc(T("trkNone"))}</p>`}`;}
+  const LIVE=st=="now";
+  if(LIVE){const rx=rxlSlot(x,st);h+=(rx?`<div id="rxm" data-k="${esc(raceKey(x))}"></div>`:"")+tkSlot(x,st,true)+rx}
+  else h+=BTN+rxlSlot(x,st)+tkSlot(x,st,true);
   if(hiddenRace(x))h+=`<div class="sprc"><b>🙈 ${esc(T("spRace"))}</b><button data-sprv="1">${esc(T("spReveal"))}</button></div>`;
   if(g){const rows=g.rows,i=x.n-1,known=rows.filter(z=>isTeam(z.team));
     if(st=="done"){const ord2=[...rows].sort((a,b)=>num(b.r[i])-num(a.r[i]));
@@ -2691,6 +2695,7 @@ function pRace(x){if(!x)return;const d=$("#pg"),r=rnd(x.rid),g=r&&r.groups.find(
     if(rows.some(z=>z.r.some(v=>String(v).trim()!==""))){STAND=`<h3>${T("rcStand")}</h3><div class="grp rt">${gtable(r,g,false)}</div>`;try{STAND+=needBox(r,g)}catch(e){}}}
   else if(!PRE)h+=META;
   h+=tkSlot(x,st,false)+STAND;
+  if(LIVE)h+=BTN;
   {const L=st=="now",PD=st=="done"||st=="past";h+=PRE?`${PD&&!hiddenRace(x)?hlCard(x):""}</div>`:`<div class="rcact">${PD?`<button class="rcb" data-go="round-${esc(x.rid)}">${svg('<path d="M4 6h16M4 12h16M4 18h10"/>')}<b>${esc(T("rounds"))}</b></button><button class="rcb" data-go="bracket">${svg('<path d="M4 5h5v5H4zM4 14h5v5H4zM15 9.5h5v5h-5z"/><path d="M9 7.5h3v9H9M12 12h3"/>')}<b>${esc(T("bracket"))}</b></button>`:`${lvBtnHtml()}<button class="rcb" data-go="round-${esc(x.rid)}">${svg('<path d="M4 5h5v5H4zM4 14h5v5H4zM15 9.5h5v5h-5z"/><path d="M9 7.5h3v9H9M12 12h3"/>')}<b>${esc(T("bracket"))}</b></button>`}</div>${PD&&!hiddenRace(x)?hlCard(x):""}</div>`}
   d.innerHTML=h;
   const tb=d.querySelector("[data-trkin]");if(tb)tb.onclick=()=>openTrack(x);
@@ -2733,6 +2738,7 @@ const RXLS={"en": {"t": "Race in numbers", "tl": ["Leading", "Race status", "Fas
    tiles + speed/VMG/gap table (variant A), live course map with trails + gap bars with 2-minute trend (variant B), automatically detected moments (C).
    crs/<key>.json (every 5 min) gives marks and the earlier part of the tracks, tk/<key>.json (every 2 min) wind and mark roundings. Unofficial. */
 let RXL=null;
+let RXLMAPH="";
 function rxlSlot(x,st){if(st!="now"||hiddenRace(x)||(SPOIL&&at(x)>SPCUT))return"";return `<div id="rxl" data-k="${esc(raceKey(x))}"></div>`}
 function rxlFeed(x,ACT,legs,S0,P,fin){const k=raceKey(x),b=document.getElementById("rxl");if(!b||b.dataset.k!=k)return;
   if(!RXL||RXL.k!=k)RXL={k,H:new Map(),TR:new Map(),MX:new Map(),LD:[],crs:null,crsAt:0,tk:null,tkAt:0,ord:null};
@@ -2745,7 +2751,8 @@ function rxlFeed(x,ACT,legs,S0,P,fin){const k=raceKey(x),b=document.getElementBy
     if(p.lt!=null&&p.lg!=null&&p.lt&&p.lg){let tr=R.TR.get(id);if(!tr)R.TR.set(id,tr=[]);const q=tr[tr.length-1];if(!q||Math.hypot((p.lt-q[0])*111e3,(p.lg-q[1])*102e3)<400)tr.push([p.lt,p.lg,p.t])}
     const av=rxlAvg(a,p.t,1e4,"s");if(av!=null&&av<=30&&!fin.has(id)){const m=R.MX.get(id);if(!m||av>m.v+.05)R.MX.set(id,{v:av,t:p.t,first:!m})}}
   const lead=[...P].filter(([id,p])=>ACT.has(id)&&p&&+p.r==1).map(([id])=>id)[0];if(lead!=null&&(!R.LD.length||R.LD[R.LD.length-1].id!=lead))R.LD.push({id:lead,t:now});
-  b.innerHTML=rxlHtml(x,ACT,legs,S0,P,fin);
+  RXLMAPH="";b.innerHTML=rxlHtml(x,ACT,legs,S0,P,fin);
+  {const mp=document.getElementById("rxm");if(mp&&mp.dataset.k==k)mp.innerHTML=RXLMAPH?`<div class="grp rtkn rnx rxl rxmw">${RXLMAPH}</div>`:""}
   b.querySelectorAll("[data-tm]").forEach(e=>e.onclick=()=>{if(isTeam(e.dataset.tm))openTeam(e.dataset.tm)})}
 function rxlAvg(a,t,win,key){const v=a.filter(z=>z.t>=t-win&&z[key]!=null).map(z=>z[key]);return v.length?v.reduce((s,y)=>s+y,0)/v.length:null}
 function rxlAt(a,t){let best=null;for(const z of a){if(z.t<=t&&z.g!=null)best=z}return best}
@@ -2774,7 +2781,7 @@ function rxlHtml(x,ACT,legs,S0,P,fin){const W=RXLS[lang]||RXLS.en,R=RXL,now=Math
   /* table: speed and VMG now (10 s average), gap */
   h+=`<div class="rxtb"><div class="rxth"><span>#</span><span></span><span>${esc(W.hd[0])}</span><span>${esc(W.hd[1])}</span><span>${esc(W.hd[2])}</span></div>${rows.map(o=>`<button class="rxtr" data-tm="${esc(o.code)}"><span class="rxp">${o.pos}</span><span class="rxn">${FL(o.code)}<b>${esc(o.code)}</b></span><span>${o.f?"✓":sp(o.s10)}</span><span>${o.f?"":o.v10!=null?sp(Math.abs(o.v10)):"–"}</span><span>${topOf(o)?sp(topOf(o)):"–"}</span></button>`).join("")}</div>`;
   /* live map */
-  h+=rxlMap(rows,CO,W);
+  if(document.getElementById("rxm"))RXLMAPH=rxlMap(rows,CO,W);else h+=rxlMap(rows,CO,W);
   /* gap bars with trend */
   const gmax=Math.max(30,...rows.map(o=>o.gap||0));
   h+=`<h4 class="rxh">${esc(W.gap)}</h4><div class="rxbars">${rows.map(o=>{const tr=o.dg!=null&&Math.abs(o.dg)>=1?`<em class="${o.dg<0?"up":"dn"}">${o.dg<0?"−":"+"}${gs(o.dg)}</em>`:"<em></em>";
