@@ -2084,3 +2084,6 @@ html.lvxon[data-tabv=home] #nxc{display:none!important}
 .rtknote{font-size:12px;color:var(--mute);margin:8px 4px 0}
 .rtknote.ok{color:var(--green)}.rtknote.ok:before{content:"✓ "}
 .rtknote.df{color:var(--gold)}.rtknote.df:before{content:"! "}
+/* race in numbers: every row (header included) uses the same fixed columns, so long headers wrap instead of pushing into the next column */
+.rtkr{grid-template-columns:minmax(0,.85fr) minmax(0,1fr) minmax(0,1.15fr) minmax(0,1.1fr)!important;column-gap:10px!important}
+.rtkr0 span{white-space:normal;overflow-wrap:break-word;hyphens:auto;line-height:1.25;align-self:end;letter-spacing:.02em;font-size:10.5px}
