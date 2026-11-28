@@ -2230,3 +2230,7 @@ html.cbon:not(.pgon) .stk{top:var(--cbh,51px)}
 :root[data-theme=light] .lvfl{background:rgba(25,37,80,.15)}:root[data-theme=light] .lvfd{background:rgba(25,37,80,.3)}
 @media (prefers-reduced-motion:reduce){.lvfe.cur .lvfd{animation:none}}
 .lvx .lvxf{--lvxbg:#0c2a55}:root[data-theme=light] .lvx .lvxf{--lvxbg:#142f68}
+/* v29h: same time-column width on every race card, so flags and names line up (was 5.4em vs auto) */
+.races li.rc{grid-template-columns:3.5em 1fr auto}
+.races li.rc:has(.s .apt),.races li.rc:has(.s .dlyt){grid-template-columns:3.5em 1fr}
+@media(max-width:380px){.races li.rc{grid-template-columns:3.5em 1fr}}
