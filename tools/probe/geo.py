@@ -1,7 +1,7 @@
 import json, os, urllib.request
 os.makedirs("out", exist_ok=True)
 def get(u):
-    with urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0"}), timeout=30) as r: return json.loads(r.read())
+    with urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0 Chrome/131", "Referer": "https://player.georacing.com/"}), timeout=30) as r: return json.loads(r.read())
 ev = 102235
 races = get(f"https://player.georacing.com/datas/applications/app_46.json")
 ids = []
