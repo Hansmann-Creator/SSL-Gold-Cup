@@ -1988,6 +1988,8 @@ function tabSync(){document.documentElement.dataset.tabv=view;const COMP=["board
 function pgRender(e){PGS=e;if(e.t!="bn")bnStopCam();setTimeout(tabSync,0);if(e.t=="set")pSettings();else if(e.t=="chg")pChanges();else if(e.t=="rank")pRank();else if(e.t=="fav")pFav();else if(e.t=="cmp")pCmp(e);else if(e.t=="tk")pTicket();else if(e.t=="bn")pBonus();else if(e.t=="sch")pSchool();else if(e.t=="schc")pSchoolCh(e.id);else if(e.t=="gl")pGloss(e.id);else if(e.t=="team")pTeam(e.a);else if(e.t=="sailor")pSailor(e.a,e.i);else if(e.t=="sx")pSailorX(e.s);else{const x=raceBy(e.k);if(x)pRace(x);else pgHide()}}
 function pgGo(e,replace){const d=$("#tmd");if(d.open){NOBACK=true;replace=replace||!!(history.state&&history.state.sheet);d.close()}
   const same=PGS&&!$("#pg").hidden&&pgHash(PGS)==pgHash(e);
+  /* remember where the current page was scrolled, so Back returns to exactly that spot */
+  try{const P0=$("#pg");if(!replace&&!same&&P0&&!P0.hidden&&PGS){const H0=history.state||{};history.replaceState({...H0,pg:H0.pg||PGS,d:H0.d||0,sc:P0.scrollTop},"")}}catch(x){}
   try{const H=history.state||{},cd=H.d||0;if(replace||same)history.replaceState({pg:e,d:H.sheet?Math.max(1,cd):cd},"","#"+pgHash(e));else history.pushState({pg:e,d:cd+1},"","#"+pgHash(e))}catch(x){}
   pgRender(e);if(!same)$("#pg").scrollTop=0}
 function pgShow(d){const first=d.hidden;d.hidden=false;lockScroll();document.documentElement.classList.add("pgon");
@@ -4056,7 +4058,9 @@ for(const root of [$("#pg"),$("#tmd")])root.addEventListener("click",e=>{if(e.de
 $("#main").addEventListener("toggle",e=>{const dd=e.target;if(!dd.matches||!dd.matches("details[data-sq]"))return;dd.open?sOpen.add(dd.dataset.sq):sOpen.delete(dd.dataset.sq);LS.set("sOpen",[...sOpen])},true);
 $("#main").addEventListener("keydown",e=>{if(e.key!="Enter"&&e.key!=" ")return;const rc=e.target.closest&&e.target.closest("[data-race]");if(rc&&e.target===rc){e.preventDefault();openRace(raceBy(rc.dataset.race))}});
 $("#tmd").addEventListener("close",()=>{trkStop();unlockScroll();$("#tmd").querySelectorAll("iframe,video,audio").forEach(f=>f.remove());openCode=null;if($("#tmd").querySelector(".ob"))LS.set("onb",1);$("#tmd").classList.remove("full");try{if(!NOBACK&&history.state&&history.state.sheet)history.back()}catch(e){}NOBACK=false});
-window.addEventListener("popstate",e=>{const d=$("#tmd");if(d.open){NOBACK=true;d.close();return}const pe=pgParse(location.hash.slice(1));if(pe&&!(PGS&&!$("#pg").hidden&&pgHash(PGS)==pgHash(pe)))pgRender(pe)});
+/* restore a page's scroll position after Back; content that loads later (ticker, charts) can grow the page, so retry briefly */
+function pgRestore(y){const P=$("#pg");if(!P)return;y=+y||0;let n=0;const f=()=>{if(P.hidden)return;P.scrollTop=y;if(Math.abs(P.scrollTop-y)>2&&n++<25)setTimeout(f,80)};f()}
+window.addEventListener("popstate",e=>{const d=$("#tmd");if(d.open){NOBACK=true;d.close();return}const pe=pgParse(location.hash.slice(1));if(pe&&!(PGS&&!$("#pg").hidden&&pgHash(PGS)==pgHash(pe))){pgRender(pe);pgRestore(e.state&&e.state.sc)}});
 window.addEventListener("hashchange",route);
 document.addEventListener("keydown",e=>{if(e.target.matches("input,select,textarea")||$("#tmd").open)return;
   if(e.key=="/"){const i=$("#q");if(i){e.preventDefault();i.focus()}}
