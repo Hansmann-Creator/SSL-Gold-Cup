@@ -81,6 +81,11 @@ jobs:
             if [ $(( $(date +%s) / 60 % 2 )) -eq 1 ] || [ "$(timeout 10 python scripts/hot.py)" = "hot" ]; then
               if timeout 90 python scripts/timing.py | grep -q '^changed'; then git add timing.json; git commit -qm "timing $(date -u +%H:%M)" && { git push -q origin main && gh workflow run deploy.yml --ref main || git reset -q --hard origin/main; }; fi
             fi
+            # race ticker (mark roundings, lead changes, finish, Georacing race stats → tk/*.json), every 2 min, every minute while a race finishes
+            if [ $(( $(date +%s) / 60 % 2 )) -eq 0 ] || [ "$(timeout 10 python scripts/hot.py)" = "hot" ]; then
+              if timeout 90 python scripts/ticker.py | tee /tmp/tk.txt | grep -q '^changed'; then git add tk; git commit -qm "ticker $(date -u +%H:%M)" && { git push -q origin main && gh workflow run deploy.yml --ref main || git reset -q --hard origin/main; }; fi
+              cat /tmp/tk.txt
+            fi
             # race reports from the Google Drive folder 02_Race-Reports, every 5 min
             if [ $(( $(date +%s) / 60 % 5 )) -eq 2 ]; then
               if timeout 120 python scripts/reports.py | tee /tmp/rep.txt | grep -q '^changed'; then git add reports.json; git commit -qm "race report $(date -u +%H:%M)" && { git push -q origin main && gh workflow run deploy.yml --ref main || git reset -q --hard origin/main; }; fi
