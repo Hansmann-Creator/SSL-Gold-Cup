@@ -2210,3 +2210,7 @@ html.cbon:not(.pgon) .stk{top:var(--cbh,51px)}
 .rxm b{display:block;font-size:14px}.rxm small{color:var(--mute);font-size:12.5px}
 .rxm small b{display:inline;font-size:inherit}
 .lvxkx bdi,.rtkb bdi,.rxm bdi{white-space:nowrap}
+/* live card: race clock ticking every second (v29g) */
+.lvx .lvxc{display:inline-block;font-size:17px;font-weight:800;letter-spacing:.02em;padding:2px 9px;border-radius:8px;background:rgba(255,255,255,.14);margin-inline-start:4px;min-width:3.6em;text-align:center}
+.lvx .lvxcl{opacity:.85}
+:root[data-theme=light] .lvx .lvxc{background:rgba(25,37,80,.08)}
