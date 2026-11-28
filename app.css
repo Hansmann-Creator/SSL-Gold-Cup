@@ -2265,3 +2265,12 @@ html.cbon:not(.pgon) .stk{top:var(--cbh,51px)}
 td.pv{font-style:italic;color:var(--gold)}
 .pvnote{margin:6px 4px 0;font-size:12.5px;color:var(--gold);font-style:italic}
 .lvx .lvxp.pre{background:rgba(255,255,255,.14);color:#fff;animation:none;letter-spacing:.02em;font-weight:700}
+
+/* race list: finished races quieter (no green frame, dimmed time/title), finish time instead of 'started' */
+.races li.rc.done{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08)}
+.races li.rc.done .ti,.races li.rc.done .gt{opacity:.62}
+.races li.rc.done .s{opacity:.8}
+.races li.rc .ti .tfs{display:block;font-size:11px;font-weight:600;color:var(--mute);font-variant-numeric:tabular-nums;margin-bottom:1px}
+.races li.rc .ti .tfl{color:var(--green)}
+:root[data-theme=light] .races li.rc.done{background:#f4f6f9;border-color:#e6eaf0}
+:root[data-theme=dark] .races li.rc.done{background:rgba(255,255,255,.025);border-color:rgba(255,255,255,.06)}
