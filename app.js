@@ -3292,7 +3292,7 @@ function sBody(C){/* C: {key,name,iso,flag,country,nick,code,chips,img,hd,PF,D,m
   const res=D?[...(D.res.s||[]).map(r=>[...r,"s"]),...(D.res.c||[]).map(r=>[...r,"c"])].sort((a,b)=>a[0]<b[0]?1:-1):[];
   const resRow=r=>`<div class="s3r">${rankPill(r[6]??"–")}<span><b>${esc(r[1])}</b><small>${esc([String(r[0]).slice(0,4),r[2],r[4],r[7]?T("boatsN")(r[7]):""].filter(Boolean).join(" · "))}</small></span><span class="s3rp"><em>${esc(catL(r[5]))}</em><small>${r[8]?nf0(r[8])+" "+esc(T("ptsS")):""}</small></span></div>`;
   const achs=D&&D.ach&&D.ach.length?D.ach.map(a=>a[0]=="SSL Gold Cup Winner"&&a[2].every(x=>x[1]=="2026")?["SSL Gold Cup Qualifier","q",[["","2026",""]]]:a).map(a=>`<div class="s3a"><span class="s3ai">${achIco(a[0],a[1])}</span><span><b>${esc(achName(a[0]))}${a[2].length>1?` <em>×${a[2].length}</em>`:""}</b><small>${esc(a[2].map(x=>(x[0]+" "+x[1]).trim()).join(" · "))}</small></span></div>`).join(""):"";
-const tpRes=()=>`<h3>${T("tpBest")}</h3><div class="grp">${TPx.res.map(r=>`<div class="s3r">${rankPill(r[0])}<span><b>${esc(r[1])}</b><small>${esc([r[4],r[2],r[3]].filter(Boolean).join(" · "))}</small></span></div>`).join("")}</div><p class="s3src">${esc(T("srcTeam"))}</p>`;
+const tpRes=()=>`<h3>${T("tpBest")}</h3><div class="grp">${TPx.res.map(r=>`<div class="s3r">${rankPill(r[0])}<span><b>${esc(r[1])}</b><small>${esc([r[4],r[2],r[3]].filter(Boolean).join(" · "))}</small></span></div>`).join("")}</div><p class="s3src">${esc(TPx.s=="w"?"Star Sailors League":T("srcTeam"))}</p>`;
   if(STAB=="ov"){
     if(achs)h+=`<h3>${T("achT")}</h3><div class="grp">${achs}</div>`;else{const top=C.code?profHtml(C.code,C.name,"top"):"";if(top)h+=top}
     h+=olyHtml(E);
@@ -3300,9 +3300,9 @@ const tpRes=()=>`<h3>${T("tpBest")}</h3><div class="grp">${TPx.res.map(r=>`<div 
     if(!res.length&&TPx.res&&TPx.res.length)h+=tpRes();
     if(res.length)h+=`<h3 class="s3hh"><span>${T("lastRegs")}</span>${res.length>3?`<button class="s3more" data-stab="res">${esc(T("allN")(res.length))}</button>`:""}</h3><div class="grp">${res.slice(0,3).map(resRow).join("")}</div>`;
     const f=(k,v)=>v?`<div><small>${esc(k)}</small><b>${v}</b></div>`:"";
-    h+=`<h3>${T("factsT")}</h3><div class="s3f">${C.facts||""}${f(T("heightT"),(p.cm||TPx.cm)&&"\u2066"+(p.cm||TPx.cm)+" cm\u2069")}${f(T("weightT"),(p.kg||TPx.kg)&&"\u2066"+(p.kg||TPx.kg)+" kg\u2069")}${f(T("clubT"),p.club&&esc(p.club))}${f(T("classesT"),(p.cls||[]).length&&esc(p.cls.slice(0,4).join(", ")))}${f(T("exOlyS"),olyYears(E)&&esc(olyYears(E)))}</div>`;
+    h+=`<h3>${T("factsT")}</h3><div class="s3f">${C.facts||""}${f(T("heightT"),(p.cm||TPx.cm)&&"\u2066"+(p.cm||TPx.cm)+" cm\u2069")}${f(T("weightT"),(p.kg||TPx.kg)&&"\u2066"+(p.kg||TPx.kg)+" kg\u2069")}${f(T("clubT"),(p.club||TPx.club)&&esc(p.club||TPx.club))}${f(T("classesT"),(p.cls||[]).length&&esc(p.cls.slice(0,4).join(", ")))}${f(T("exOlyS"),olyYears(E)&&esc(olyYears(E)))}</div>`;
     const so=p.soc||{},lab={instagram:"Instagram",facebook:"Facebook",x:"X",youtube:"YouTube",tiktok:"TikTok",linkedin:"LinkedIn",website:"Web"};
-    const links=Object.keys(so).filter(k=>k!="website"||so.website!=so.instagram).map(k=>`<a class="s3l" href="${esc(so[k])}" target="_blank" rel="noopener">${lab[k]||k} ↗</a>`).join("")+(p.slug?`<a class="s3l ssl" href="https://worldofsailors.com/sailor/${esc(p.slug)}" target="_blank" rel="noopener">${esc(T("sslProf"))} ↗</a>`:"")+(TPx.url&&/^https:\/\/[a-z]{3}\.sslgoldcup\.com\//.test(TPx.url)?`<a class="s3l" href="${esc(TPx.url)}" target="_blank" rel="noopener">${esc(T("teamPg"))} ↗</a>`:"")+extLinks(E);
+    const links=Object.keys(so).filter(k=>k!="website"||so.website!=so.instagram).map(k=>`<a class="s3l" href="${esc(so[k])}" target="_blank" rel="noopener">${lab[k]||k} ↗</a>`).join("")+(p.slug?`<a class="s3l ssl" href="https://worldofsailors.com/sailor/${esc(p.slug)}" target="_blank" rel="noopener">${esc(T("sslProf"))} ↗</a>`:"")+(TPx.url&&!p.slug&&/^https:\/\/([a-z]{3}\.sslgoldcup\.com|worldofsailors\.com\/sailor)\//.test(TPx.url)?`<a class="s3l${TPx.s=="w"?" ssl":""}" href="${esc(TPx.url)}" target="_blank" rel="noopener">${esc(TPx.s=="w"?T("sslProf"):T("teamPg"))} ↗</a>`:"")+extLinks(E);
     if(links)h+=`<h3>${T("linksT")}</h3><div class="s3ls">${links}</div>`;
     if(C.extra)h+=C.extra}
   else if(STAB=="res"){
@@ -3320,7 +3320,7 @@ const tpRes=()=>`<h3>${T("tpBest")}</h3><div class="grp">${TPx.res.map(r=>`<div 
       if(!IND)indLoad().then(()=>{if(STAB=="rank"&&C.rerender)C.rerender()})}}
   else{const bt=p.bio?bioClean(p.bio):"",own=/(^|[\s(])(I|I'm|I’m|I've|my|My|me)\b/.test(bt);
     if(bt)h+=`<div class="grp pbio"><p>${esc(bt).replace(/\n/g,"</p><p>")}</p><small>${esc(own?T("ownW"):T("srcSSL"))}${lang!="en"?" · English":""}</small></div>`;
-    if(!bt&&TPx.bio)h+=`<div class="grp pbio"><p>${esc(TPx.bio)}</p><small>${esc(T("srcTeam"))}${lang!="en"?" · English":""}</small></div>`;
+    if(!bt&&TPx.bio)h+=`<div class="grp pbio"><p>${esc(TPx.bio)}</p><small>${esc(TPx.s=="w"?T("srcSSL"):T("srcTeam"))}${lang!="en"?" · English":""}</small></div>`;
     if(C.hl&&C.hl.length)h+=`<h3>${T("highlights")}</h3><div class="grp"><ul class="hl">${C.hl.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
     const wp=wpHtml(E),aw=awHtml(E);h+=wp+aw;
     if(!bt&&!(C.hl&&C.hl.length)&&!wp&&!aw)h+=`<p class="warn">${esc(T("noInfo"))}</p>`}
